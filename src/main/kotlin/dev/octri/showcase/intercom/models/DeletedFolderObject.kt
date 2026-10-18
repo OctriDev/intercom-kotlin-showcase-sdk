@@ -3,20 +3,13 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Response returned when a folder is deleted
- */
+/** Response returned when a folder is deleted */
 data class DeletedFolderObject(
-    /**
-     * The unique identifier for the deleted folder
-     */
+    /** The unique identifier for the deleted folder */
     val id: String? = null,
-    /**
-     * The type of object - `folder`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedFolderObjectObjectEnum? = null,
-    /**
-     * Whether the folder was successfully deleted.
-     */
-    val deleted: Boolean? = null
+    /** The type of object - `folder`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedFolderObjectObjectEnum? = null,
+    /** Whether the folder was successfully deleted. */
+    val deleted: Boolean? = null,
 )

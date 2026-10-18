@@ -27,625 +27,430 @@ import dev.octri.showcase.intercom.models.DataConnectorVersionTypeEnum
 import java.time.OffsetDateTime
 
 /**
- * A data connector allows you to make HTTP requests to external APIs from Intercom workflows and AI agents.
+ * A data connector allows you to make HTTP requests to external APIs from Intercom workflows and AI
+ * agents.
  */
 data class DataConnector(
-    /**
-     * The type of object - `data_connector`.
-     */
+    /** The type of object - `data_connector`. */
     val type: DataConnectorTypeEnum? = null,
-    /**
-     * The unique identifier for the data connector.
-     */
+    /** The unique identifier for the data connector. */
     val id: String? = null,
-    /**
-     * The name of the data connector.
-     */
+    /** The name of the data connector. */
     val name: String? = null,
-    /**
-     * A description of what this data connector does.
-     */
+    /** A description of what this data connector does. */
     val description: String? = null,
-    /**
-     * The current state of the data connector.
-     */
+    /** The current state of the data connector. */
     val state: DataConnectorStateEnum? = null,
-    /**
-     * The HTTP method used by the data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_method") val httpMethod: DataConnectorHttpMethodEnum? = null,
-    /**
-     * Whether this data connector is assigned to Fin for direct usage.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage") val directFinUsage: Boolean? = null,
-    /**
-     * The ID of the admin who created this data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_admin_id") val createdByAdminId: String? = null,
-    /**
-     * The ID of the admin who last updated this data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_admin_id") val updatedByAdminId: String? = null,
-    /**
-     * The time the data connector was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * The time the data connector was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * The URL path to fetch execution results for this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("execution_results_url") val executionResultsUrl: String? = null
+    /** The HTTP method used by the data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_method")
+    val httpMethod: DataConnectorHttpMethodEnum? = null,
+    /** Whether this data connector is assigned to Fin for direct usage. */
+    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage")
+    val directFinUsage: Boolean? = null,
+    /** The ID of the admin who created this data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_admin_id")
+    val createdByAdminId: String? = null,
+    /** The ID of the admin who last updated this data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_admin_id")
+    val updatedByAdminId: String? = null,
+    /** The time the data connector was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** The time the data connector was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** The URL path to fetch execution results for this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("execution_results_url")
+    val executionResultsUrl: String? = null,
 )
 
-/**
- * Required object value serialized in the `headers[]` wire field.
- */
+/** Required object value serialized in the `headers[]` wire field. */
 data class DataConnectorDetailHeadersItem(
-    /**
-     * The header name.
-     */
+    /** The header name. */
     val name: String? = null,
-    /**
-     * Always `"****"` in responses.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
+    /** Always `"****"` in responses. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
 )
 
-/**
- * Required object value serialized in the `data_inputs[]` wire field.
- */
+/** Required object value serialized in the `data_inputs[]` wire field. */
 data class DataConnectorDetailDataInputsItem(
-    /**
-     * The name of the input parameter.
-     */
+    /** The name of the input parameter. */
     val name: String? = null,
-    /**
-     * The data type of the input.
-     */
+    /** The data type of the input. */
     val type: DataConnectorDetailDataInputsItemTypeEnum? = null,
-    /**
-     * A description of the input parameter.
-     */
+    /** A description of the input parameter. */
     val description: String? = null,
-    /**
-     * Whether this input is required.
-     */
+    /** Whether this input is required. */
     val required: Boolean? = null,
-    /**
-     * The default value for this input, if any.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: String? = null
+    /** The default value for this input, if any. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value")
+    val defaultValue: String? = null,
 )
 
-/**
- * Required object value serialized in the `response_fields[]` wire field.
- */
+/** Required object value serialized in the `response_fields[]` wire field. */
 data class DataConnectorDetailResponseFieldsItem(
-    /**
-     * The JSON path of the response field.
-     */
+    /** The JSON path of the response field. */
     val path: String? = null,
-    /**
-     * The data type of the response field.
-     */
+    /** The data type of the response field. */
     val type: DataConnectorDetailResponseFieldsItemTypeEnum? = null,
-    /**
-     * An example value for this field.
-     */
+    /** An example value for this field. */
     @com.fasterxml.jackson.annotation.JsonProperty("example_value") val exampleValue: Any? = null,
-    /**
-     * Whether this field is redacted in logs.
-     */
-    val redacted: Boolean? = null
+    /** Whether this field is redacted in logs. */
+    val redacted: Boolean? = null,
 )
 
-/**
- * Required object value serialized in the `attribute_mappings[]` wire field.
- */
+/** Required object value serialized in the `attribute_mappings[]` wire field. */
 data class DataConnectorDetailObjectMappingsItemAttributeMappingsItem(
-    /**
-     * Optional `string` value serialized in the `response_attribute_path` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_attribute_path") val responseAttributePath: String? = null,
-    /**
-     * Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier") val intercomAttributeIdentifier: String? = null,
-    /**
-     * Optional enumerated value serialized in the `mapping_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("mapping_type") val mappingType: DataConnectorDetailObjectMappingsItemAttributeMappingsItemMapX1453fe1b09? = null
+    /** Optional `string` value serialized in the `response_attribute_path` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_attribute_path")
+    val responseAttributePath: String? = null,
+    /** Optional `string` value serialized in the `intercom_attribute_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier")
+    val intercomAttributeIdentifier: String? = null,
+    /** Optional enumerated value serialized in the `mapping_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("mapping_type")
+    val mappingType: DataConnectorDetailObjectMappingsItemAttributeMappingsItemMapX1453fe1b09? =
+        null,
 )
 
-/**
- * Required object value serialized in the `reference_mappings[]` wire field.
- */
+/** Required object value serialized in the `reference_mappings[]` wire field. */
 data class DataConnectorDetailObjectMappingsItemReferenceMappingsItem(
-    /**
-     * Optional enumerated value serialized in the `intercom_object_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type") val intercomObjectType: DataConnectorDetailObjectMappingsItemReferenceMappingsItemIntX192851a6c2? = null,
-    /**
-     * Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier") val intercomAttributeIdentifier: String? = null
+    /** Optional enumerated value serialized in the `intercom_object_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type")
+    val intercomObjectType:
+        DataConnectorDetailObjectMappingsItemReferenceMappingsItemIntX192851a6c2? =
+        null,
+    /** Optional `string` value serialized in the `intercom_attribute_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier")
+    val intercomAttributeIdentifier: String? = null,
 )
 
-/**
- * Required object value serialized in the `object_mappings[]` wire field.
- */
+/** Required object value serialized in the `object_mappings[]` wire field. */
 data class DataConnectorDetailObjectMappingsItem(
-    /**
-     * Optional `string` value serialized in the `response_object_path` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_object_path") val responseObjectPath: String? = null,
-    /**
-     * Optional enumerated value serialized in the `intercom_object_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type") val intercomObjectType: DataConnectorDetailObjectMappingsItemIntercomObjectTypeEnum? = null,
-    /**
-     * Optional array value serialized in the `attribute_mappings` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mappings") val attributeMappings: List<DataConnectorDetailObjectMappingsItemAttributeMappingsItem>? = null,
-    /**
-     * Optional array value serialized in the `reference_mappings` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reference_mappings") val referenceMappings: List<DataConnectorDetailObjectMappingsItemReferenceMappingsItem>? = null
+    /** Optional `string` value serialized in the `response_object_path` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_object_path")
+    val responseObjectPath: String? = null,
+    /** Optional enumerated value serialized in the `intercom_object_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type")
+    val intercomObjectType: DataConnectorDetailObjectMappingsItemIntercomObjectTypeEnum? = null,
+    /** Optional array value serialized in the `attribute_mappings` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mappings")
+    val attributeMappings: List<DataConnectorDetailObjectMappingsItemAttributeMappingsItem>? = null,
+    /** Optional array value serialized in the `reference_mappings` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reference_mappings")
+    val referenceMappings: List<DataConnectorDetailObjectMappingsItemReferenceMappingsItem>? = null,
 )
 
 /**
- * Full detail view of a data connector, returned by `GET /data_connectors/{id}`. Includes configuration, data inputs, response fields, and object mappings.
+ * Full detail view of a data connector, returned by `GET /data_connectors/{id}`. Includes
+ * configuration, data inputs, response fields, and object mappings.
  */
 data class DataConnectorDetail(
-    /**
-     * The type of object - `data_connector`.
-     */
+    /** The type of object - `data_connector`. */
     val type: DataConnectorDetailTypeEnum? = null,
-    /**
-     * The unique identifier for the data connector.
-     */
+    /** The unique identifier for the data connector. */
     val id: String? = null,
-    /**
-     * The name of the data connector.
-     */
+    /** The name of the data connector. */
     val name: String? = null,
-    /**
-     * A description of what this data connector does.
-     */
+    /** A description of what this data connector does. */
     val description: String? = null,
-    /**
-     * The current state of the data connector.
-     */
+    /** The current state of the data connector. */
     val state: DataConnectorDetailStateEnum? = null,
-    /**
-     * The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
-     */
+    /** The URL of the external API endpoint. Supports template variables like `{{order_id}}`. */
     val url: String? = null,
-    /**
-     * The request body template. Supports template variables.
-     */
+    /** The request body template. Supports template variables. */
     val body: String? = null,
-    /**
-     * HTTP headers for the request. Header values are always redacted as `"****"` in responses.
-     */
+    /** HTTP headers for the request. Header values are always redacted as `"****"` in responses. */
     val headers: List<DataConnectorDetailHeadersItem>? = null,
-    /**
-     * The HTTP method used by the data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_method") val httpMethod: DataConnectorDetailHttpMethodEnum? = null,
-    /**
-     * Whether this connector is used directly by Fin.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage") val directFinUsage: Boolean? = null,
-    /**
-     * The audience types this connector targets.
-     */
+    /** The HTTP method used by the data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_method")
+    val httpMethod: DataConnectorDetailHttpMethodEnum? = null,
+    /** Whether this connector is used directly by Fin. */
+    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage")
+    val directFinUsage: Boolean? = null,
+    /** The audience types this connector targets. */
     val audiences: List<DataConnectorDetailAudiencesItemEnum>? = null,
-    /**
-     * How the connector executes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("execution_type") val executionType: DataConnectorDetailExecutionTypeEnum? = null,
-    /**
-     * The expected response format from the connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("configuration_response_type") val configurationResponseType: DataConnectorDetailConfigurationResponseTypeEnum? = null,
-    /**
-     * The type of data transformation applied to the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_transformation_type") val dataTransformationType: DataConnectorDetailDataTransformationTypeEnum? = null,
-    /**
-     * The name of the client-side function, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_function_name") val clientFunctionName: String? = null,
-    /**
-     * Timeout in milliseconds for the client function, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_function_timeout_ms") val clientFunctionTimeoutMs: Long? = null,
-    /**
-     * The input parameters accepted by this data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs") val dataInputs: List<DataConnectorDetailDataInputsItem>? = null,
-    /**
-     * The fields returned in the connector response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_fields") val responseFields: List<DataConnectorDetailResponseFieldsItem>? = null,
-    /**
-     * Mappings from connector response objects to Intercom objects.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object_mappings") val objectMappings: List<DataConnectorDetailObjectMappingsItem>? = null,
-    /**
-     * IDs of authentication tokens associated with this connector.
-     */
+    /** How the connector executes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("execution_type")
+    val executionType: DataConnectorDetailExecutionTypeEnum? = null,
+    /** The expected response format from the connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("configuration_response_type")
+    val configurationResponseType: DataConnectorDetailConfigurationResponseTypeEnum? = null,
+    /** The type of data transformation applied to the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_transformation_type")
+    val dataTransformationType: DataConnectorDetailDataTransformationTypeEnum? = null,
+    /** The name of the client-side function, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_function_name")
+    val clientFunctionName: String? = null,
+    /** Timeout in milliseconds for the client function, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_function_timeout_ms")
+    val clientFunctionTimeoutMs: Long? = null,
+    /** The input parameters accepted by this data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs")
+    val dataInputs: List<DataConnectorDetailDataInputsItem>? = null,
+    /** The fields returned in the connector response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_fields")
+    val responseFields: List<DataConnectorDetailResponseFieldsItem>? = null,
+    /** Mappings from connector response objects to Intercom objects. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object_mappings")
+    val objectMappings: List<DataConnectorDetailObjectMappingsItem>? = null,
+    /** IDs of authentication tokens associated with this connector. */
     @com.fasterxml.jackson.annotation.JsonProperty("token_ids") val tokenIds: List<String>? = null,
-    /**
-     * Whether OTP authentication is enabled for this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication") val customerAuthentication: Boolean? = null,
-    /**
-     * Whether authentication is bypassed for this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication") val bypassAuthentication: Boolean? = null,
-    /**
-     * Whether to validate missing attributes before execution.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes") val validateMissingAttributes: Boolean? = null,
-    /**
-     * The ID of the admin who created this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_by_admin_id") val createdByAdminId: String? = null,
-    /**
-     * The ID of the admin who last updated this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_admin_id") val updatedByAdminId: String? = null,
-    /**
-     * The time the data connector was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * The time the data connector was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * The URL path to fetch execution results for this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("execution_results_url") val executionResultsUrl: String? = null
+    /** Whether OTP authentication is enabled for this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication")
+    val customerAuthentication: Boolean? = null,
+    /** Whether authentication is bypassed for this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication")
+    val bypassAuthentication: Boolean? = null,
+    /** Whether to validate missing attributes before execution. */
+    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes")
+    val validateMissingAttributes: Boolean? = null,
+    /** The ID of the admin who created this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_by_admin_id")
+    val createdByAdminId: String? = null,
+    /** The ID of the admin who last updated this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_admin_id")
+    val updatedByAdminId: String? = null,
+    /** The time the data connector was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** The time the data connector was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** The URL path to fetch execution results for this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("execution_results_url")
+    val executionResultsUrl: String? = null,
 )
 
-/**
- * An execution result from a data connector HTTP request.
- */
+/** An execution result from a data connector HTTP request. */
 data class DataConnectorExecutionResult(
-    /**
-     * The type of object - `data_connector.execution`.
-     */
+    /** The type of object - `data_connector.execution`. */
     val type: DataConnectorExecutionResultTypeEnum? = null,
-    /**
-     * The unique identifier for the execution result.
-     */
+    /** The unique identifier for the execution result. */
     val id: String? = null,
-    /**
-     * The unique identifier of the data connector that produced this result.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_connector_id") val dataConnectorId: String? = null,
-    /**
-     * Whether the execution was successful.
-     */
+    /** The unique identifier of the data connector that produced this result. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_connector_id")
+    val dataConnectorId: String? = null,
+    /** Whether the execution was successful. */
     val success: Boolean? = null,
-    /**
-     * The HTTP status code returned by the external API.
-     */
+    /** The HTTP status code returned by the external API. */
     @com.fasterxml.jackson.annotation.JsonProperty("http_status") val httpStatus: Long? = null,
+    /** The HTTP method used for the request. */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_method")
+    val httpMethod: DataConnectorExecutionResultHttpMethodEnum? = null,
+    /** The type of error that occurred, if any. */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_type")
+    val errorType: DataConnectorExecutionResultErrorTypeEnum? = null,
     /**
-     * The HTTP method used for the request.
+     * A human-readable error message. Query parameters, userinfo, and fragments in URLs are
+     * redacted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_method") val httpMethod: DataConnectorExecutionResultHttpMethodEnum? = null,
-    /**
-     * The type of error that occurred, if any.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_type") val errorType: DataConnectorExecutionResultErrorTypeEnum? = null,
-    /**
-     * A human-readable error message. Query parameters, userinfo, and fragments in URLs are redacted.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("error_message") val errorMessage: String? = null,
-    /**
-     * The execution time in milliseconds.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("execution_time_ms") val executionTimeMs: Long? = null,
-    /**
-     * The type of source that triggered this execution.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_type") val sourceType: DataConnectorExecutionResultSourceTypeEnum? = null,
-    /**
-     * The identifier of the source that triggered this execution.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("error_message")
+    val errorMessage: String? = null,
+    /** The execution time in milliseconds. */
+    @com.fasterxml.jackson.annotation.JsonProperty("execution_time_ms")
+    val executionTimeMs: Long? = null,
+    /** The type of source that triggered this execution. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_type")
+    val sourceType: DataConnectorExecutionResultSourceTypeEnum? = null,
+    /** The identifier of the source that triggered this execution. */
     @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String? = null,
-    /**
-     * The conversation associated with this execution, if any.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The time the execution occurred.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * The request URL. Query parameters, userinfo, and fragments are redacted.
-     */
+    /** The conversation associated with this execution, if any. */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+    val conversationId: String? = null,
+    /** The time the execution occurred. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** The request URL. Query parameters, userinfo, and fragments are redacted. */
     @com.fasterxml.jackson.annotation.JsonProperty("request_url") val requestUrl: String? = null,
-    /**
-     * The request body sent to the external API.
-     */
+    /** The request body sent to the external API. */
     @com.fasterxml.jackson.annotation.JsonProperty("request_body") val requestBody: String? = null,
-    /**
-     * The response body from the external API.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_body") val responseBody: String? = null,
-    /**
-     * The raw (unmapped) response body.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("raw_response_body") val rawResponseBody: String? = null
+    /** The response body from the external API. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_body")
+    val responseBody: String? = null,
+    /** The raw (unmapped) response body. */
+    @com.fasterxml.jackson.annotation.JsonProperty("raw_response_body")
+    val rawResponseBody: String? = null,
 )
 
-/**
- * The teammate who created this version.
- */
+/** The teammate who created this version. */
 data class DataConnectorVersionAuthor(
-    /**
-     * The unique identifier of the teammate.
-     */
+    /** The unique identifier of the teammate. */
     val id: Long? = null,
-    /**
-     * The name of the teammate.
-     */
-    val name: String? = null
+    /** The name of the teammate. */
+    val name: String? = null,
 )
 
-/**
- * Required object value serialized in the `headers[]` wire field.
- */
+/** Required object value serialized in the `headers[]` wire field. */
 data class DataConnectorVersionDefinitionHeadersItem(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Always `"****"` in responses.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
+    /** Always `"****"` in responses. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
 )
 
-/**
- * Required object value serialized in the `data_inputs[]` wire field.
- */
+/** Required object value serialized in the `data_inputs[]` wire field. */
 data class DataConnectorVersionDefinitionDataInputsItem(
-    /**
-     * Optional `string` value serialized in the `name` wire field.
-     */
+    /** Optional `string` value serialized in the `name` wire field. */
     val name: String? = null,
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
-    /**
-     * Optional `string` value serialized in the `description` wire field.
-     */
+    /** Optional `string` value serialized in the `description` wire field. */
     val description: String? = null,
-    /**
-     * Optional `boolean` value serialized in the `required` wire field.
-     */
+    /** Optional `boolean` value serialized in the `required` wire field. */
     val required: Boolean? = null,
-    /**
-     * Optional API value serialized in the `default_value` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: Any? = null
+    /** Optional API value serialized in the `default_value` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: Any? = null,
 )
 
-/**
- * Required object value serialized in the `response_fields[]` wire field.
- */
+/** Required object value serialized in the `response_fields[]` wire field. */
 data class DataConnectorVersionDefinitionResponseFieldsItem(
-    /**
-     * Optional `string` value serialized in the `path` wire field.
-     */
+    /** Optional `string` value serialized in the `path` wire field. */
     val path: String? = null,
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
-    /**
-     * Optional API value serialized in the `example_value` wire field.
-     */
+    /** Optional API value serialized in the `example_value` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("example_value") val exampleValue: Any? = null,
-    /**
-     * Optional `boolean` value serialized in the `redacted` wire field.
-     */
-    val redacted: Boolean? = null
+    /** Optional `boolean` value serialized in the `redacted` wire field. */
+    val redacted: Boolean? = null,
 )
 
-/**
- * Required object value serialized in the `attribute_mappings[]` wire field.
- */
+/** Required object value serialized in the `attribute_mappings[]` wire field. */
 data class DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem(
-    /**
-     * Optional `string` value serialized in the `response_attribute_path` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_attribute_path") val responseAttributePath: String? = null,
-    /**
-     * Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier") val intercomAttributeIdentifier: String? = null,
-    /**
-     * Optional `string` value serialized in the `mapping_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("mapping_type") val mappingType: String? = null
+    /** Optional `string` value serialized in the `response_attribute_path` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_attribute_path")
+    val responseAttributePath: String? = null,
+    /** Optional `string` value serialized in the `intercom_attribute_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier")
+    val intercomAttributeIdentifier: String? = null,
+    /** Optional `string` value serialized in the `mapping_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("mapping_type") val mappingType: String? = null,
 )
 
-/**
- * Required object value serialized in the `reference_mappings[]` wire field.
- */
+/** Required object value serialized in the `reference_mappings[]` wire field. */
 data class DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem(
-    /**
-     * Optional `string` value serialized in the `intercom_object_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type") val intercomObjectType: String? = null,
-    /**
-     * Optional `string` value serialized in the `intercom_attribute_identifier` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier") val intercomAttributeIdentifier: String? = null
+    /** Optional `string` value serialized in the `intercom_object_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type")
+    val intercomObjectType: String? = null,
+    /** Optional `string` value serialized in the `intercom_attribute_identifier` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_attribute_identifier")
+    val intercomAttributeIdentifier: String? = null,
 )
 
-/**
- * Required object value serialized in the `object_mappings[]` wire field.
- */
+/** Required object value serialized in the `object_mappings[]` wire field. */
 data class DataConnectorVersionDefinitionObjectMappingsItem(
-    /**
-     * Optional `string` value serialized in the `response_object_path` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_object_path") val responseObjectPath: String? = null,
-    /**
-     * Optional `string` value serialized in the `intercom_object_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type") val intercomObjectType: String? = null,
-    /**
-     * Optional array value serialized in the `attribute_mappings` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mappings") val attributeMappings: List<DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem>? = null,
-    /**
-     * Optional array value serialized in the `reference_mappings` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reference_mappings") val referenceMappings: List<DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem>? = null
+    /** Optional `string` value serialized in the `response_object_path` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_object_path")
+    val responseObjectPath: String? = null,
+    /** Optional `string` value serialized in the `intercom_object_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_object_type")
+    val intercomObjectType: String? = null,
+    /** Optional array value serialized in the `attribute_mappings` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("attribute_mappings")
+    val attributeMappings:
+        List<DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem>? =
+        null,
+    /** Optional array value serialized in the `reference_mappings` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reference_mappings")
+    val referenceMappings:
+        List<DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem>? =
+        null,
 )
 
 /**
- * The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
+ * The data connector's configuration at this version. `null` if the snapshot is no longer
+ * available. Mirrors the response of Retrieve a data connector, without `id`, `type`,
+ * `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url`
+ * and `transform_code_block`.
  */
 data class DataConnectorVersionDefinition(
-    /**
-     * The name of the data connector.
-     */
+    /** The name of the data connector. */
     val name: String? = null,
-    /**
-     * A description of what this data connector does.
-     */
+    /** A description of what this data connector does. */
     val description: String? = null,
-    /**
-     * The internal description of the data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("internal_description") val internalDescription: String? = null,
-    /**
-     * The state of the data connector at this version.
-     */
+    /** The internal description of the data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("internal_description")
+    val internalDescription: String? = null,
+    /** The state of the data connector at this version. */
     val state: String? = null,
-    /**
-     * The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
-     */
+    /** The URL of the external API endpoint. Supports template variables like `{{order_id}}`. */
     val url: String? = null,
-    /**
-     * The request body template. Supports template variables.
-     */
+    /** The request body template. Supports template variables. */
     val body: String? = null,
-    /**
-     * HTTP headers for the request. Header values are always redacted as `"****"`.
-     */
+    /** HTTP headers for the request. Header values are always redacted as `"****"`. */
     val headers: List<DataConnectorVersionDefinitionHeadersItem>? = null,
-    /**
-     * The HTTP method used by the data connector.
-     */
+    /** The HTTP method used by the data connector. */
     @com.fasterxml.jackson.annotation.JsonProperty("http_method") val httpMethod: String? = null,
-    /**
-     * Whether this connector is used directly by Fin.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage") val directFinUsage: Boolean? = null,
-    /**
-     * The audience types this connector targets.
-     */
+    /** Whether this connector is used directly by Fin. */
+    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage")
+    val directFinUsage: Boolean? = null,
+    /** The audience types this connector targets. */
     val audiences: List<String>? = null,
-    /**
-     * How the connector executes, for example `server_side` or `client_side`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("execution_type") val executionType: String? = null,
-    /**
-     * The expected response format from the connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("configuration_response_type") val configurationResponseType: String? = null,
-    /**
-     * The type of data transformation applied to the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_transformation_type") val dataTransformationType: String? = null,
-    /**
-     * The name of the client-side function, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_function_name") val clientFunctionName: String? = null,
-    /**
-     * Timeout in milliseconds for the client function, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_function_timeout_ms") val clientFunctionTimeoutMs: Long? = null,
-    /**
-     * The input parameters accepted by this data connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs") val dataInputs: List<DataConnectorVersionDefinitionDataInputsItem>? = null,
-    /**
-     * The fields returned in the connector response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_fields") val responseFields: List<DataConnectorVersionDefinitionResponseFieldsItem>? = null,
-    /**
-     * Mappings from connector response objects to Intercom objects.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object_mappings") val objectMappings: List<DataConnectorVersionDefinitionObjectMappingsItem>? = null,
-    /**
-     * IDs of authentication tokens associated with this connector.
-     */
+    /** How the connector executes, for example `server_side` or `client_side`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("execution_type")
+    val executionType: String? = null,
+    /** The expected response format from the connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("configuration_response_type")
+    val configurationResponseType: String? = null,
+    /** The type of data transformation applied to the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_transformation_type")
+    val dataTransformationType: String? = null,
+    /** The name of the client-side function, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_function_name")
+    val clientFunctionName: String? = null,
+    /** Timeout in milliseconds for the client function, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("client_function_timeout_ms")
+    val clientFunctionTimeoutMs: Long? = null,
+    /** The input parameters accepted by this data connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs")
+    val dataInputs: List<DataConnectorVersionDefinitionDataInputsItem>? = null,
+    /** The fields returned in the connector response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_fields")
+    val responseFields: List<DataConnectorVersionDefinitionResponseFieldsItem>? = null,
+    /** Mappings from connector response objects to Intercom objects. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object_mappings")
+    val objectMappings: List<DataConnectorVersionDefinitionObjectMappingsItem>? = null,
+    /** IDs of authentication tokens associated with this connector. */
     @com.fasterxml.jackson.annotation.JsonProperty("token_ids") val tokenIds: List<String>? = null,
-    /**
-     * Whether OTP authentication is enabled for this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication") val customerAuthentication: Boolean? = null,
-    /**
-     * Whether authentication is bypassed for this connector.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication") val bypassAuthentication: Boolean? = null,
-    /**
-     * Whether authentication is enforced for this connector.
-     */
+    /** Whether OTP authentication is enabled for this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication")
+    val customerAuthentication: Boolean? = null,
+    /** Whether authentication is bypassed for this connector. */
+    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication")
+    val bypassAuthentication: Boolean? = null,
+    /** Whether authentication is enforced for this connector. */
     @com.fasterxml.jackson.annotation.JsonProperty("enforce_auth") val enforceAuth: Boolean? = null,
-    /**
-     * Whether to validate missing attributes before execution.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes") val validateMissingAttributes: Boolean? = null
+    /** Whether to validate missing attributes before execution. */
+    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes")
+    val validateMissingAttributes: Boolean? = null,
 )
 
 /**
- * A point-in-time snapshot of a data connector's configuration, with the version's status and an optional note.
+ * A point-in-time snapshot of a data connector's configuration, with the version's status and an
+ * optional note.
  */
 data class DataConnectorVersion(
-    /**
-     * The type of object - `data_connector_version`.
-     */
+    /** The type of object - `data_connector_version`. */
     val type: DataConnectorVersionTypeEnum? = null,
-    /**
-     * The status of this version today.
-     */
+    /** The status of this version today. */
     val status: DataConnectorVersionStatusEnum? = null,
-    /**
-     * A note describing this version, if one has been set.
-     */
+    /** A note describing this version, if one has been set. */
     val note: String? = null,
-    /**
-     * The teammate who created this version.
-     */
+    /** The teammate who created this version. */
     val author: DataConnectorVersionAuthor? = null,
-    /**
-     * The time this version was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /** The time this version was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
     /**
      * The identifier of this version. Use it as `version_id` when retrieving or updating a version.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("entity_version_id") val entityVersionId: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("entity_version_id")
+    val entityVersionId: Long? = null,
     /**
-     * The data connector's configuration at this version. `null` if the snapshot is no longer available. Mirrors the response of Retrieve a data connector, without `id`, `type`, `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`, `execution_results_url` and `transform_code_block`.
+     * The data connector's configuration at this version. `null` if the snapshot is no longer
+     * available. Mirrors the response of Retrieve a data connector, without `id`, `type`,
+     * `created_by_admin_id`, `updated_by_admin_id`, `created_at`, `updated_at`,
+     * `execution_results_url` and `transform_code_block`.
      */
-    val definition: DataConnectorVersionDefinition? = null
+    val definition: DataConnectorVersionDefinition? = null,
 )

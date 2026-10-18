@@ -7,35 +7,25 @@ import dev.octri.showcase.intercom.models.JobsStatusEnum
 import dev.octri.showcase.intercom.models.JobsTypeEnum
 
 /**
- * Jobs are tasks that are processed asynchronously by the Intercom system after being enqueued via the API. This allows for efficient handling of operations that may take time to complete, such as data imports or exports. You can check the status of your jobs to monitor their progress and ensure they are completed successfully.
+ * Jobs are tasks that are processed asynchronously by the Intercom system after being enqueued via
+ * the API. This allows for efficient handling of operations that may take time to complete, such as
+ * data imports or exports. You can check the status of your jobs to monitor their progress and
+ * ensure they are completed successfully.
  */
 data class Jobs(
-    /**
-     * The id of the job that's currently being processed or has completed.
-     */
+    /** The id of the job that's currently being processed or has completed. */
     val id: String,
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: JobsTypeEnum? = null,
-    /**
-     * API endpoint URL to check the job status.
-     */
+    /** API endpoint URL to check the job status. */
     val url: String? = null,
-    /**
-     * The status of the job execution.
-     */
+    /** The status of the job execution. */
     val status: JobsStatusEnum? = null,
-    /**
-     * The type of resource created during job execution.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_type") val resourceType: String? = null,
-    /**
-     * The id of the resource created during job execution (e.g. ticket id)
-     */
+    /** The type of resource created during job execution. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_type")
+    val resourceType: String? = null,
+    /** The id of the resource created during job execution (e.g. ticket id) */
     @com.fasterxml.jackson.annotation.JsonProperty("resource_id") val resourceId: String? = null,
-    /**
-     * The url of the resource created during job exeuction. Use this url to fetch the resource.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resource_url") val resourceUrl: String? = null
+    /** The url of the resource created during job exeuction. Use this url to fetch the resource. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resource_url") val resourceUrl: String? = null,
 )

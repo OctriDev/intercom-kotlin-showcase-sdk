@@ -13,278 +13,196 @@ import dev.octri.showcase.intercom.models.ContactsBulkJobTasksItemStateEnum
 import dev.octri.showcase.intercom.models.ContactsBulkJobTypeEnum
 import dev.octri.showcase.intercom.models.MergeHistoryItem
 
-/**
- * Optional object value serialized in the `avatar` wire field.
- */
+/** Optional object value serialized in the `avatar` wire field. */
 data class ContactAvatar(
-    /**
-     * The type of object
-     */
+    /** The type of object */
     val type: String? = null,
-    /**
-     * An image URL containing the avatar of a contact.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null
+    /** An image URL containing the avatar of a contact. */
+    @com.fasterxml.jackson.annotation.JsonProperty("image_url") val imageUrl: String? = null,
 )
 
-/**
- * Contacts represent your leads and users in Intercom.
- */
+/** Contacts represent your leads and users in Intercom. */
 class Contact(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     val type: String? = null,
-    /**
-     * The unique identifier for the contact which is given by Intercom.
-     */
+    /** The unique identifier for the contact which is given by Intercom. */
     val id: String? = null,
-    /**
-     * The unique identifier for the contact which is provided by the Client.
-     */
+    /** The unique identifier for the contact which is provided by the Client. */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /**
-     * The id of the workspace which the contact belongs to.
-     */
+    /** The id of the workspace which the contact belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("workspace_id") val workspaceId: String? = null,
-    /**
-     * The role of the contact.
-     */
+    /** The role of the contact. */
     val role: String? = null,
-    /**
-     * The contact's email.
-     */
+    /** The contact's email. */
     val email: String? = null,
-    /**
-     * The contact's email domain.
-     */
+    /** The contact's email domain. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_domain") val emailDomain: String? = null,
     /**
-     * Whether the contact has proved they own their current email address. `true` only when this address was marked verified through the Contacts API (`email_verified: true` on create or update) and has not changed since; it becomes `false` again if the contact's email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead.
+     * Whether the contact has proved they own their current email address. `true` only when this
+     * address was marked verified through the Contacts API (`email_verified: true` on create or
+     * update) and has not changed since; it becomes `false` again if the contact's email changes,
+     * until the new address is verified. Intercom reuses a lead with a verified email when it later
+     * matches an inbound email, or an outbound conversation or ticket, to that address, instead of
+     * creating a new lead.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_verified") val emailVerified: Boolean? = null,
-    /**
-     * The contacts phone.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_verified")
+    val emailVerified: Boolean? = null,
+    /** The contacts phone. */
     val phone: String? = null,
-    /**
-     * The contacts name.
-     */
+    /** The contacts name. */
     val name: String? = null,
-    /**
-     * The id of an admin that has been assigned account ownership of the contact.
-     */
+    /** The id of an admin that has been assigned account ownership of the contact. */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: String? = null,
-    /**
-     * Whether the contact has had an email sent to them hard bounce.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_hard_bounced") val hasHardBounced: Boolean? = null,
-    /**
-     * Whether the contact has marked an email sent to them as spam.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("marked_email_as_spam") val markedEmailAsSpam: Boolean? = null,
-    /**
-     * Whether the contact is unsubscribed from emails.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails") val unsubscribedFromEmails: Boolean? = null,
-    /**
-     * (Unix timestamp in seconds) The time when the contact was created.
-     */
+    /** Whether the contact has had an email sent to them hard bounce. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_hard_bounced")
+    val hasHardBounced: Boolean? = null,
+    /** Whether the contact has marked an email sent to them as spam. */
+    @com.fasterxml.jackson.annotation.JsonProperty("marked_email_as_spam")
+    val markedEmailAsSpam: Boolean? = null,
+    /** Whether the contact is unsubscribed from emails. */
+    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails")
+    val unsubscribedFromEmails: Boolean? = null,
+    /** (Unix timestamp in seconds) The time when the contact was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * (Unix timestamp in seconds) The time when the contact was last updated.
-     */
+    /** (Unix timestamp in seconds) The time when the contact was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /**
-     * (Unix timestamp in seconds) The time specified for when a contact signed up.
-     */
+    /** (Unix timestamp in seconds) The time specified for when a contact signed up. */
     @com.fasterxml.jackson.annotation.JsonProperty("signed_up_at") val signedUpAt: Long? = null,
     /**
-     * (Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).
+     * (Unix timestamp in seconds) The time when the contact was last seen (either where the
+     * Intercom Messenger was installed or when specified manually).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("last_seen_at") val lastSeenAt: Long? = null,
+    /** (Unix timestamp in seconds) The time when the contact last messaged in. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_replied_at")
+    val lastRepliedAt: Long? = null,
+    /** (Unix timestamp in seconds) The time when the contact was last messaged. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_contacted_at")
+    val lastContactedAt: Long? = null,
+    /** (Unix timestamp in seconds) The time when the contact last opened an email. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_email_opened_at")
+    val lastEmailOpenedAt: Long? = null,
+    /** (Unix timestamp in seconds) The time when the contact last clicked a link in an email. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_email_clicked_at")
+    val lastEmailClickedAt: Long? = null,
     /**
-     * (Unix timestamp in seconds) The time when the contact last messaged in.
+     * A preferred language setting for the contact, used by the Intercom Messenger even if their
+     * browser settings change.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_replied_at") val lastRepliedAt: Long? = null,
-    /**
-     * (Unix timestamp in seconds) The time when the contact was last messaged.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_contacted_at") val lastContactedAt: Long? = null,
-    /**
-     * (Unix timestamp in seconds) The time when the contact last opened an email.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_email_opened_at") val lastEmailOpenedAt: Long? = null,
-    /**
-     * (Unix timestamp in seconds) The time when the contact last clicked a link in an email.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_email_clicked_at") val lastEmailClickedAt: Long? = null,
-    /**
-     * A preferred language setting for the contact, used by the Intercom Messenger even if their browser settings change.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("language_override") val languageOverride: String? = null,
-    /**
-     * The name of the browser which the contact is using.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("language_override")
+    val languageOverride: String? = null,
+    /** The name of the browser which the contact is using. */
     val browser: String? = null,
-    /**
-     * The version of the browser which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("browser_version") val browserVersion: String? = null,
-    /**
-     * The language set by the browser which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("browser_language") val browserLanguage: String? = null,
-    /**
-     * The operating system which the contact is using.
-     */
+    /** The version of the browser which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("browser_version")
+    val browserVersion: String? = null,
+    /** The language set by the browser which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("browser_language")
+    val browserLanguage: String? = null,
+    /** The operating system which the contact is using. */
     val os: String? = null,
-    /**
-     * The name of the Android app which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("android_app_name") val androidAppName: String? = null,
-    /**
-     * The version of the Android app which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("android_app_version") val androidAppVersion: String? = null,
-    /**
-     * The Android device which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("android_device") val androidDevice: String? = null,
-    /**
-     * The version of the Android OS which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("android_os_version") val androidOsVersion: String? = null,
-    /**
-     * The version of the Android SDK which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("android_sdk_version") val androidSdkVersion: String? = null,
-    /**
-     * (Unix timestamp in seconds) The time when the contact was last seen on an Android device.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("android_last_seen_at") val androidLastSeenAt: Long? = null,
-    /**
-     * The name of the iOS app which the contact is using.
-     */
+    /** The name of the Android app which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("android_app_name")
+    val androidAppName: String? = null,
+    /** The version of the Android app which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("android_app_version")
+    val androidAppVersion: String? = null,
+    /** The Android device which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("android_device")
+    val androidDevice: String? = null,
+    /** The version of the Android OS which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("android_os_version")
+    val androidOsVersion: String? = null,
+    /** The version of the Android SDK which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("android_sdk_version")
+    val androidSdkVersion: String? = null,
+    /** (Unix timestamp in seconds) The time when the contact was last seen on an Android device. */
+    @com.fasterxml.jackson.annotation.JsonProperty("android_last_seen_at")
+    val androidLastSeenAt: Long? = null,
+    /** The name of the iOS app which the contact is using. */
     @com.fasterxml.jackson.annotation.JsonProperty("ios_app_name") val iosAppName: String? = null,
-    /**
-     * The version of the iOS app which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ios_app_version") val iosAppVersion: String? = null,
-    /**
-     * The iOS device which the contact is using.
-     */
+    /** The version of the iOS app which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ios_app_version")
+    val iosAppVersion: String? = null,
+    /** The iOS device which the contact is using. */
     @com.fasterxml.jackson.annotation.JsonProperty("ios_device") val iosDevice: String? = null,
-    /**
-     * The version of iOS which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ios_os_version") val iosOsVersion: String? = null,
-    /**
-     * The version of the iOS SDK which the contact is using.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ios_sdk_version") val iosSdkVersion: String? = null,
-    /**
-     * (Unix timestamp in seconds) The last time the contact used the iOS app.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ios_last_seen_at") val iosLastSeenAt: Long? = null,
-    /**
-     * The custom attributes which are set for the contact.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, Any>? = null,
-    /**
-     * Optional object value serialized in the `avatar` wire field.
-     */
+    /** The version of iOS which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ios_os_version")
+    val iosOsVersion: String? = null,
+    /** The version of the iOS SDK which the contact is using. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ios_sdk_version")
+    val iosSdkVersion: String? = null,
+    /** (Unix timestamp in seconds) The last time the contact used the iOS app. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ios_last_seen_at")
+    val iosLastSeenAt: Long? = null,
+    /** The custom attributes which are set for the contact. */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: Map<String, Any>? = null,
+    /** Optional object value serialized in the `avatar` wire field. */
     val avatar: ContactAvatar? = null,
     /**
-     * An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.
+     * An object containing tags meta data about the tags that a contact has. Up to 10 will be
+     * displayed here. Use the url to get more.
      */
     val tags: ContactTags? = null,
     /**
-     * An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.
+     * An object containing notes meta data about the notes that a contact has. Up to 10 will be
+     * displayed here. Use the url to get more.
      */
     val notes: ContactNotes? = null,
     /**
-     * An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.
+     * An object with metadata about companies attached to a contact . Up to 10 will be displayed
+     * here. Use the url to get more.
      */
     val companies: ContactCompanies? = null,
-    /**
-     * An object containing location meta data about a Intercom contact.
-     */
+    /** An object containing location meta data about a Intercom contact. */
     val location: ContactLocation? = null,
+    /** An object containing social profiles that a contact has. */
+    @com.fasterxml.jackson.annotation.JsonProperty("social_profiles")
+    val socialProfiles: ContactSocialProfiles? = null,
     /**
-     * An object containing social profiles that a contact has.
+     * A list of contacts that were merged into this contact. Only included in the response when
+     * `include_merge_history=true` is passed as a query parameter. Only available for contacts with
+     * a `user` role.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("social_profiles") val socialProfiles: ContactSocialProfiles? = null,
-    /**
-     * A list of contacts that were merged into this contact. Only included in the response when `include_merge_history=true` is passed as a query parameter. Only available for contacts with a `user` role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("merge_history") val mergeHistory: List<MergeHistoryItem>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("merge_history")
+    val mergeHistory: List<MergeHistoryItem>? = null,
 )
 
-/**
- * Required object value serialized in the `tasks[]` wire field.
- */
+/** Required object value serialized in the `tasks[]` wire field. */
 data class ContactsBulkJobTasksItem(
-    /**
-     * The unique identifier for the task.
-     */
+    /** The unique identifier for the task. */
     val id: String? = null,
-    /**
-     * The number of items in this task.
-     */
+    /** The number of items in this task. */
     @com.fasterxml.jackson.annotation.JsonProperty("item_count") val itemCount: Long? = null,
-    /**
-     * The current state of the task.
-     */
+    /** The current state of the task. */
     val state: ContactsBulkJobTasksItemStateEnum? = null,
-    /**
-     * The time the task was created as a Unix timestamp.
-     */
+    /** The time the task was created as a Unix timestamp. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The time the task started as a Unix timestamp. Null if not yet started.
-     */
+    /** The time the task started as a Unix timestamp. Null if not yet started. */
     @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: Long? = null,
-    /**
-     * The time the task completed as a Unix timestamp. Null if not yet completed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: Long? = null
+    /** The time the task completed as a Unix timestamp. Null if not yet completed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: Long? = null,
 )
 
 /**
  * A bulk job for updating contacts asynchronously. Track the job status using the `state` field.
  */
 data class ContactsBulkJob(
-    /**
-     * The unique identifier for the bulk job.
-     */
+    /** The unique identifier for the bulk job. */
     val id: String? = null,
-    /**
-     * The type of the object.
-     */
+    /** The type of the object. */
     val type: ContactsBulkJobTypeEnum? = null,
-    /**
-     * The current state of the job.
-     */
+    /** The current state of the job. */
     val state: ContactsBulkJobStateEnum? = null,
-    /**
-     * The time the job was created as a Unix timestamp.
-     */
+    /** The time the job was created as a Unix timestamp. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The time the job was last updated as a Unix timestamp.
-     */
+    /** The time the job was last updated as a Unix timestamp. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /**
-     * The time the job completed as a Unix timestamp. Null if not yet completed.
-     */
+    /** The time the job completed as a Unix timestamp. Null if not yet completed. */
     @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: Long? = null,
-    /**
-     * The tasks that make up this bulk job.
-     */
+    /** The tasks that make up this bulk job. */
     val tasks: List<ContactsBulkJobTasksItem>? = null,
-    /**
-     * The URL to check the job status.
-     */
-    val url: String? = null
+    /** The URL to check the job status. */
+    val url: String? = null,
 )

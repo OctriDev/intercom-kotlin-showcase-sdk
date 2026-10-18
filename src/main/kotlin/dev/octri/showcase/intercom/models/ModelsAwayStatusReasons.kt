@@ -3,54 +3,31 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Typed representation of the `AwayStatusReason` API schema.
- */
+/** Typed representation of the `AwayStatusReason` API schema. */
 data class AwayStatusReason(
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
-    /**
-     * The unique identifier for the away status reason
-     */
+    /** The unique identifier for the away status reason */
     val id: String? = null,
-    /**
-     * The display text for the away status reason
-     */
+    /** The display text for the away status reason */
     val label: String? = null,
-    /**
-     * The emoji associated with the status reason
-     */
+    /** The emoji associated with the status reason */
     val emoji: String? = null,
-    /**
-     * The display order of the status reason
-     */
+    /** The display order of the status reason */
     val order: Long? = null,
-    /**
-     * Whether the status reason has been soft deleted
-     */
+    /** Whether the status reason has been soft deleted */
     val deleted: Boolean? = null,
-    /**
-     * The Unix timestamp when the status reason was created
-     */
+    /** The Unix timestamp when the status reason was created */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The Unix timestamp when the status reason was last updated
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
+    /** The Unix timestamp when the status reason was last updated */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
 )
 
-/**
- * A list of away status reasons.
- */
+/** A list of away status reasons. */
 data class AwayStatusReasonList(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: AwayStatusReasonListTypeEnum? = null,
-    /**
-     * A list of away status reason objects.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<AwayStatusReason>? = null
+    /** A list of away status reason objects. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<AwayStatusReason>? = null,
 )

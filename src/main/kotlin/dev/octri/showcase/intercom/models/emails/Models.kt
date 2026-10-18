@@ -3,62 +3,36 @@
 
 package dev.octri.showcase.intercom.models.emails
 
-/**
- * A list of email settings
- */
+/** A list of email settings */
 data class EmailList(
-    /**
-     * The type of object
-     */
+    /** The type of object */
     val type: String? = null,
-    /**
-     * Optional array value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<EmailSetting>? = null
+    /** Optional array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<EmailSetting>? = null,
 )
 
-/**
- * Represents a sender email address configuration
- */
+/** Represents a sender email address configuration */
 data class EmailSetting(
-    /**
-     * The type of object
-     */
+    /** The type of object */
     val type: String? = null,
-    /**
-     * Unique email setting identifier
-     */
+    /** Unique email setting identifier */
     val id: String? = null,
-    /**
-     * Full sender email address
-     */
+    /** Full sender email address */
     val email: String? = null,
-    /**
-     * Whether the email address has been verified
-     */
+    /** Whether the email address has been verified */
     val verified: Boolean? = null,
-    /**
-     * Domain portion of the email address
-     */
+    /** Domain portion of the email address */
     val domain: String? = null,
-    /**
-     * Associated brand identifier
-     */
+    /** Associated brand identifier */
     @com.fasterxml.jackson.annotation.JsonProperty("brand_id") val brandId: String? = null,
-    /**
-     * Whether email forwarding is active
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_enabled") val forwardingEnabled: Boolean? = null,
-    /**
-     * Unix timestamp of last forwarded email received (null if never)
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("forwarded_email_last_received_at") val forwardedEmailLastReceivedAt: Long? = null,
-    /**
-     * Unix timestamp of creation
-     */
+    /** Whether email forwarding is active */
+    @com.fasterxml.jackson.annotation.JsonProperty("forwarding_enabled")
+    val forwardingEnabled: Boolean? = null,
+    /** Unix timestamp of last forwarded email received (null if never) */
+    @com.fasterxml.jackson.annotation.JsonProperty("forwarded_email_last_received_at")
+    val forwardedEmailLastReceivedAt: Long? = null,
+    /** Unix timestamp of creation */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * Unix timestamp of last modification
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
+    /** Unix timestamp of last modification */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
 )

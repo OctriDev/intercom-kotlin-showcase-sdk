@@ -7,129 +7,83 @@ import dev.octri.showcase.intercom.models.subscriptiontypes.SubscriptionType
 import dev.octri.showcase.intercom.models.tags.Tag
 
 /**
- * A Social Profile allows you to label your contacts, companies, and conversations and list them using that Social Profile.
+ * A Social Profile allows you to label your contacts, companies, and conversations and list them
+ * using that Social Profile.
  */
 data class SocialProfile(
-    /**
-     * value is "social_profile"
-     */
+    /** value is "social_profile" */
     val type: String? = null,
-    /**
-     * The name of the Social media profile
-     */
+    /** The name of the Social media profile */
     val name: String? = null,
-    /**
-     * The name of the Social media profile
-     */
-    val url: String? = null
+    /** The name of the Social media profile */
+    val url: String? = null,
 )
 
-/**
- * Contains metadata if the message was sent as an email
- */
+/** Contains metadata if the message was sent as an email */
 data class SourceEmailMessageMetadata(
-    /**
-     * The unique identifier for the email message as specified in the Message-ID header
-     */
+    /** The unique identifier for the email message as specified in the Message-ID header */
     @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String? = null,
-    /**
-     * The subject of the email
-     */
+    /** The subject of the email */
     val subject: String? = null,
-    /**
-     * A list of an email address headers.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_address_headers") val emailAddressHeaders: List<EmailAddressHeader>? = null,
+    /** A list of an email address headers. */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_address_headers")
+    val emailAddressHeaders: List<EmailAddressHeader>? = null,
     /**
      * The HTML content of any quoted or forwarded email history from the initial inbound message
      */
-    val history: String? = null
+    val history: String? = null,
 )
 
-/**
- * Typed representation of the `StartingAfterPaging` API schema.
- */
+/** Typed representation of the `StartingAfterPaging` API schema. */
 data class StartingAfterPaging(
-    /**
-     * The number of results to fetch per page.
-     */
+    /** The number of results to fetch per page. */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /**
-     * The cursor to use in the next request to get the next page of results.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("starting_after") val startingAfter: String? = null
+    /** The cursor to use in the next request to get the next page of results. */
+    @com.fasterxml.jackson.annotation.JsonProperty("starting_after")
+    val startingAfter: String? = null,
 )
 
-/**
- * A list of subscription type objects.
- */
+/** A list of subscription type objects. */
 data class SubscriptionTypeList(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: SubscriptionTypeListTypeEnum? = null,
-    /**
-     * A list of subscription type objects associated with the workspace .
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<SubscriptionType>? = null
+    /** A list of subscription type objects associated with the workspace . */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<SubscriptionType>? = null,
 )
 
-/**
- * A list of tags objects in the workspace.
- */
+/** A list of tags objects in the workspace. */
 data class TagList(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: TagListTypeEnum? = null,
-    /**
-     * A list of tags objects associated with the workspace .
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Tag>? = null
+    /** A list of tags objects associated with the workspace . */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Tag>? = null,
 )
 
-/**
- * A list of tags objects associated with a conversation
- */
+/** A list of tags objects associated with a conversation */
 data class Tags(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: TagsTypeEnum? = null,
-    /**
-     * A list of tags objects associated with the conversation.
-     */
-    val tags: List<Tag>? = null
+    /** A list of tags objects associated with the conversation. */
+    val tags: List<Tag>? = null,
 )
 
-/**
- * Admin priority levels for teams
- */
+/** Admin priority levels for teams */
 data class TeamPriorityLevel(
-    /**
-     * The primary team ids for the team
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("primary_team_ids") val primaryTeamIds: List<Long>? = null,
-    /**
-     * The secondary team ids for the team
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("secondary_team_ids") val secondaryTeamIds: List<Long>? = null
+    /** The primary team ids for the team */
+    @com.fasterxml.jackson.annotation.JsonProperty("primary_team_ids")
+    val primaryTeamIds: List<Long>? = null,
+    /** The secondary team ids for the team */
+    @com.fasterxml.jackson.annotation.JsonProperty("secondary_team_ids")
+    val secondaryTeamIds: List<Long>? = null,
 )
 
-/**
- * A translation object contains the localised details of a subscription type.
- */
+/** A translation object contains the localised details of a subscription type. */
 data class Translation(
-    /**
-     * The localised name of the subscription type.
-     */
+    /** The localised name of the subscription type. */
     val name: String? = null,
-    /**
-     * The localised description of the subscription type.
-     */
+    /** The localised description of the subscription type. */
     val description: String? = null,
-    /**
-     * The two character identifier for the language of the translation object.
-     */
-    val locale: String? = null
+    /** The two character identifier for the language of the translation object. */
+    val locale: String? = null,
 )

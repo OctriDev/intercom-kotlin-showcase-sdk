@@ -3,24 +3,18 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Search using Intercoms Search APIs.
- */
+/** Search using Intercoms Search APIs. */
 data class SearchRequest(
-    /**
-     * Required API value serialized in the `query` wire field.
-     */
+    /** Required API value serialized in the `query` wire field. */
     val query: SearchRequestQuery,
-    /**
-     * Optional object value serialized in the `pagination` wire field.
-     */
-    val pagination: StartingAfterPaging? = null
+    /** Optional object value serialized in the `pagination` wire field. */
+    val pagination: StartingAfterPaging? = null,
 )
 
-/**
- * Required API value serialized in the `query` wire field.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = SearchRequestQuery.Deserializer::class)
+/** Required API value serialized in the `query` wire field. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = SearchRequestQuery.Deserializer::class
+)
 sealed interface SearchRequestQuery {
     /** Chooses the branch this payload is shaped like. */
     class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<SearchRequestQuery>() {
@@ -30,7 +24,9 @@ sealed interface SearchRequestQuery {
         ): SearchRequestQuery {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = SearchRequestQueryOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                SearchRequestQueryOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }
+                    ?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -38,16 +34,25 @@ sealed interface SearchRequestQuery {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out SearchRequestQuery>> = listOf(SingleFilterSearchRequest::class.java, MultipleFilterSearchRequest::class.java)
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out SearchRequestQuery>> =
+                listOf(
+                    SingleFilterSearchRequest::class.java,
+                    MultipleFilterSearchRequest::class.java,
+                )
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, SearchRequestQuery::class.java, "no SearchRequestQuery branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        SearchRequestQuery::class.java,
+                        "no SearchRequestQuery branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val SearchRequestQueryOwnedTypes: List<Pair<List<String>, Class<out SearchRequestQuery>>> = listOf(
-    listOf("field") to SingleFilterSearchRequest::class.java,
-)
+internal val SearchRequestQueryOwnedTypes: List<Pair<List<String>, Class<out SearchRequestQuery>>> =
+    listOf(listOf("field") to SingleFilterSearchRequest::class.java)

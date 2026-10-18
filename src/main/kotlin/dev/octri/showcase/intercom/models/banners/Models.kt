@@ -3,114 +3,84 @@
 
 package dev.octri.showcase.intercom.models.banners
 
-/**
- * Required object value serialized in the `reaction_set[]` wire field.
- */
+/** Required object value serialized in the `reaction_set[]` wire field. */
 data class BannerActionReactionSetItem(
-    /**
-     * The reaction's position in the set.
-     */
+    /** The reaction's position in the set. */
     val index: Long? = null,
-    /**
-     * The reaction's unicode emoji.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("unicode_emoticon") val unicodeEmoticon: String? = null
+    /** The reaction's unicode emoji. */
+    @com.fasterxml.jackson.annotation.JsonProperty("unicode_emoticon")
+    val unicodeEmoticon: String? = null,
 )
 
 /**
- * The action a contact can take on the banner, or `null` when the banner has no action. The fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`), `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
+ * The action a contact can take on the banner, or `null` when the banner has no action. The fields
+ * present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`),
+ * `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
  */
 data class BannerAction(
-    /**
-     * The kind of action. One of `url`, `reaction`, `email_collector`, or `product_tour`.
-     */
+    /** The kind of action. One of `url`, `reaction`, `email_collector`, or `product_tour`. */
     val type: String? = null,
-    /**
-     * For `url` actions, the label shown on the action link or button.
-     */
+    /** For `url` actions, the label shown on the action link or button. */
     val label: String? = null,
-    /**
-     * For `url` actions, the URL the contact is sent to.
-     */
+    /** For `url` actions, the URL the contact is sent to. */
     val target: String? = null,
-    /**
-     * For `reaction` actions, the reactions a contact can choose from.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reaction_set") val reactionSet: List<BannerActionReactionSetItem>? = null,
-    /**
-     * For `product_tour` actions, the id of the product tour to launch.
-     */
+    /** For `reaction` actions, the reactions a contact can choose from. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reaction_set")
+    val reactionSet: List<BannerActionReactionSetItem>? = null,
+    /** For `product_tour` actions, the id of the product tour to launch. */
     @com.fasterxml.jackson.annotation.JsonProperty("tour_id") val tourId: String? = null,
-    /**
-     * For `product_tour` actions, the URL that launches the product tour.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tour_url") val tourUrl: String? = null
+    /** For `product_tour` actions, the URL that launches the product tour. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tour_url") val tourUrl: String? = null,
 )
 
 /**
- * A banner the contact currently matches, with the content and view identifier needed to display and dismiss it.
+ * A banner the contact currently matches, with the content and view identifier needed to display
+ * and dismiss it.
  */
 data class Banner(
-    /**
-     * String representing the object's type. Always has the value `banner`.
-     */
+    /** String representing the object's type. Always has the value `banner`. */
     val type: String? = null,
-    /**
-     * The id of the banner.
-     */
+    /** The id of the banner. */
     val id: String? = null,
     /**
-     * The id of the contact's view of this banner. Pass this to the dismiss endpoint to record a dismissal.
+     * The id of the contact's view of this banner. Pass this to the dismiss endpoint to record a
+     * dismissal.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("view_id") val viewId: String? = null,
-    /**
-     * The banner's title. `null` when the banner has no title.
-     */
+    /** The banner's title. `null` when the banner has no title. */
     val title: String? = null,
-    /**
-     * The banner's body content as HTML.
-     */
+    /** The banner's body content as HTML. */
     val body: String? = null,
-    /**
-     * How the banner is displayed.
-     */
+    /** How the banner is displayed. */
     val style: String? = null,
-    /**
-     * Where the banner is positioned.
-     */
+    /** Where the banner is positioned. */
     val position: String? = null,
+    /** Whether the banner should display a dismiss control. */
+    @com.fasterxml.jackson.annotation.JsonProperty("show_dismiss_button")
+    val showDismissButton: Boolean? = null,
     /**
-     * Whether the banner should display a dismiss control.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("show_dismiss_button") val showDismissButton: Boolean? = null,
-    /**
-     * The action a contact can take on the banner, or `null` when the banner has no action. The fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`), `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
+     * The action a contact can take on the banner, or `null` when the banner has no action. The
+     * fields present depend on `type`: `url` (`label`, `target`), `reaction` (`reaction_set`),
+     * `email_collector`, or `product_tour` (`tour_id`, `tour_url`).
      */
     val action: BannerAction? = null,
     /**
-     * Reserved for future use. Always `null` in the current version — banners that depend on client-side targeting rules (such as page URL or time on page) are not returned by this endpoint.
+     * Reserved for future use. Always `null` in the current version — banners that depend on
+     * client-side targeting rules (such as page URL or time on page) are not returned by this
+     * endpoint.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("client_targeting") val clientTargeting: List<Map<String, Any>>? = null,
-    /**
-     * The time the contact's view of this banner was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("client_targeting")
+    val clientTargeting: List<Map<String, Any>>? = null,
+    /** The time the contact's view of this banner was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
 )
 
-/**
- * The result of dismissing a banner for a contact.
- */
+/** The result of dismissing a banner for a contact. */
 data class BannerDismiss(
-    /**
-     * String representing the object's type. Always has the value `banner_dismiss`.
-     */
+    /** String representing the object's type. Always has the value `banner_dismiss`. */
     val type: String? = null,
-    /**
-     * The id of the dismissed banner view.
-     */
+    /** The id of the dismissed banner view. */
     @com.fasterxml.jackson.annotation.JsonProperty("view_id") val viewId: String? = null,
-    /**
-     * Whether the banner view is dismissed.
-     */
-    val dismissed: Boolean? = null
+    /** Whether the banner view is dismissed. */
+    val dismissed: Boolean? = null,
 )

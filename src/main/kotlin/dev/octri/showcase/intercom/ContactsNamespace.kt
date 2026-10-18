@@ -3,222 +3,614 @@
 
 package dev.octri.showcase.intercom
 
-
 class ContactsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the companies associated with a specific contact. Use the contact identifier to retrieve its attached companies; the response includes pagination metadata.
+     * Lists the companies associated with a specific contact. Use the contact identifier to
+     * retrieve its attached companies; the response includes pagination metadata.
      *
      * You can fetch a list of companies that are associated to a contact.
      */
-    fun listCompanies(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactAttachedCompanies {
-        return dev.octri.showcase.intercom.methods.Contacts.listContactsCompanies(clientConfig, contactId, intercomVersion, options)
+    fun listCompanies(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactAttachedCompanies {
+        return dev.octri.showcase.intercom.methods.Contacts.listContactsCompanies(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the segments associated with a contact. Use the `contact_id` path parameter to identify the contact whose segment associations you want to retrieve.
+     * Lists the segments associated with a contact. Use the `contact_id` path parameter to identify
+     * the contact whose segment associations you want to retrieve.
      *
      * You can fetch a list of segments that are associated to a contact.
      */
-    fun listSegments(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactSegments {
-        return dev.octri.showcase.intercom.methods.Contacts.listContactsSegments(clientConfig, contactId, intercomVersion, options)
+    fun listSegments(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactSegments {
+        return dev.octri.showcase.intercom.methods.Contacts.listContactsSegments(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the subscription types associated with a contact where the contact has explicitly set a preference. Use this endpoint to retrieve both opt-in and opt-out choices; subscription types in their default state are not included.
+     * Lists the subscription types associated with a contact where the contact has explicitly set a
+     * preference. Use this endpoint to retrieve both opt-in and opt-out choices; subscription types
+     * in their default state are not included.
      *
-     * You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has 'opted-in' to or has 'opted-out' from, depending on the subscription type. This will return a list of Subscription Type objects that the contact is associated with. The data property will show a combined list of: 1.Opt-out subscription types that the user has opted-out from. 2.Opt-in subscription types that the user has opted-in to receiving. **Note:** This…
+     * You can fetch a list of subscription types that are attached to a contact. These can be
+     * subscriptions that a user has 'opted-in' to or has 'opted-out' from, depending on the
+     * subscription type. This will return a list of Subscription Type objects that the contact is
+     * associated with. The data property will show a combined list of: 1.Opt-out subscription types
+     * that the user has opted-out from. 2.Opt-in subscription types that the user has opted-in to
+     * receiving. **Note:** This…
      */
-    fun listSubscriptions(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionTypeList {
-        return dev.octri.showcase.intercom.methods.Contacts.listContactsSubscriptions(clientConfig, contactId, intercomVersion, options)
+    fun listSubscriptions(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionTypeList {
+        return dev.octri.showcase.intercom.methods.Contacts.listContactsSubscriptions(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the tags attached to a contact. Use the `contact_id` path parameter to retrieve the contact's tag associations.
+     * Lists the tags attached to a contact. Use the `contact_id` path parameter to retrieve the
+     * contact's tag associations.
      *
      * You can fetch a list of all tags that are attached to a specific contact.
      */
-    fun listTags(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TagList {
-        return dev.octri.showcase.intercom.methods.Contacts.listContactsTags(clientConfig, contactId, intercomVersion, options)
+    fun listTags(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TagList {
+        return dev.octri.showcase.intercom.methods.Contacts.listContactsTags(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists contacts in the workspace that are no longer active, including their status and identifiers that can help you locate them for recovery or deletion. Use `page` and `per_page` to paginate the results.
+     * Lists contacts in the workspace that are no longer active, including their status and
+     * identifiers that can help you locate them for recovery or deletion. Use `page` and `per_page`
+     * to paginate the results.
      *
-     * Fetch a paginated list of the contacts in your workspace that are no longer active, so you can recover ones whose `id`, `email`, or `external_id` you no longer have and then permanently delete them. Each entry carries a `status` describing why the contact is inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`. `merged_into_id` is present only when `status` is `merged`, and `external_id` and `email` are `null` for `permanently_deleted`…
+     * Fetch a paginated list of the contacts in your workspace that are no longer active, so you
+     * can recover ones whose `id`, `email`, or `external_id` you no longer have and then
+     * permanently delete them. Each entry carries a `status` describing why the contact is
+     * inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.
+     * `merged_into_id` is present only when `status` is `merged`, and `external_id` and `email` are
+     * `null` for `permanently_deleted`…
      */
-    fun listDeleted(perPage: Long? = null, page: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedContactList {
-        return dev.octri.showcase.intercom.methods.Contacts.listDeletedContacts(clientConfig, perPage, page, intercomVersion, options)
+    fun listDeleted(
+        perPage: Long? = null,
+        page: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedContactList {
+        return dev.octri.showcase.intercom.methods.Contacts.listDeletedContacts(
+            clientConfig,
+            perPage,
+            page,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Replaces the supplied fields on an existing contact, including a user or lead, and can update custom object associations. Send only the fields you want to change; when setting `email_verified`, include `email` in the same request. Use `include_merge_history` to request merge history for contacts with a `user` role.
+     * Replaces the supplied fields on an existing contact, including a user or lead, and can update
+     * custom object associations. Send only the fields you want to change; when setting
+     * `email_verified`, include `email` in the same request. Use `include_merge_history` to request
+     * merge history for contacts with a `user` role.
      *
-     * You can update an existing contact (ie. user or lead). {% admonition type="info" %} This endpoint handles both **contact updates** and **custom object associations**. See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format. {% /admonition %}
+     * You can update an existing contact (ie. user or lead). {% admonition type="info" %} This
+     * endpoint handles both **contact updates** and **custom object associations**. See _`update a
+     * contact with an association to a custom object instance`_ in the request/response examples to
+     * see the custom object association format. {% /admonition %}
      */
-    fun update(contactId: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, body: UpdateContactRequest? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.Contacts.UpdateContactResponse {
-        return dev.octri.showcase.intercom.methods.Contacts.updateContact(clientConfig, contactId, includeMergeHistory, intercomVersion, body, options)
+    fun update(
+        contactId: String,
+        includeMergeHistory: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        body: UpdateContactRequest? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.Contacts.UpdateContactResponse {
+        return dev.octri.showcase.intercom.methods.Contacts.updateContact(
+            clientConfig,
+            contactId,
+            includeMergeHistory,
+            intercomVersion,
+            body,
+            options,
+        )
     }
 
     /**
-     * Retrieves a contact by its unique contact ID. Use `include_merge_history` to request merge history for contacts with a `user` role; merged contacts return a canonical-contact link instead of the original record.
+     * Retrieves a contact by its unique contact ID. Use `include_merge_history` to request merge
+     * history for contacts with a `user` role; merged contacts return a canonical-contact link
+     * instead of the original record.
      *
-     * You can fetch the details of a single contact. {% admonition type="info" name="Merged contacts return 410 Gone" %} If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. **Response headers:** ``` Link: </contacts/{canonical_id}>; rel="canonical" ``` **Response body:** ```json { "type": "error.list",…
+     * You can fetch the details of a single contact. {% admonition type="info" name="Merged
+     * contacts return 410 Gone" %} If a contact has been merged into another contact via the Merge
+     * endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410
+     * Gone** with a `Link` header pointing to the canonical (merged-into) contact. **Response
+     * headers:** ``` Link: </contacts/{canonical_id}>; rel="canonical" ``` **Response
+     * body:** ```json { "type": "error.list",…
      */
-    fun show(contactId: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.Contacts.ShowContactResponse {
-        return dev.octri.showcase.intercom.methods.Contacts.showContact(clientConfig, contactId, includeMergeHistory, intercomVersion, options)
+    fun show(
+        contactId: String,
+        includeMergeHistory: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.Contacts.ShowContactResponse {
+        return dev.octri.showcase.intercom.methods.Contacts.showContact(
+            clientConfig,
+            contactId,
+            includeMergeHistory,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Deletes a single contact from the workspace. Use the contact's ID to identify the record to remove. The response includes a contact reference and indicates whether the contact was deleted.
+     * Deletes a single contact from the workspace. Use the contact's ID to identify the record to
+     * remove. The response includes a contact reference and indicates whether the contact was
+     * deleted.
      *
      * You can delete a single contact.
      */
-    fun delete(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactDeleted {
-        return dev.octri.showcase.intercom.methods.Contacts.deleteContact(clientConfig, contactId, intercomVersion, options)
+    fun delete(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactDeleted {
+        return dev.octri.showcase.intercom.methods.Contacts.deleteContact(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Merges a contact with the `lead` role into a contact with the `user` role. Supply the source contact in `from` and the destination contact in `into`; set `skip_duplicate_validation` to true to merge contacts without a shared email or phone. The source contact is removed from the active contact list after the merge, so update stored IDs to the destination contact's ID.
+     * Merges a contact with the `lead` role into a contact with the `user` role. Supply the source
+     * contact in `from` and the destination contact in `into`; set `skip_duplicate_validation` to
+     * true to merge contacts without a shared email or phone. The source contact is removed from
+     * the active contact list after the merge, so update stored IDs to the destination contact's
+     * ID.
      *
-     * You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`. {% admonition type="warning" name="Merged contacts are not retrievable via the API" %} Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means: - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error. - **POST /contacts/search** — The source contact will not appear in…
+     * You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`. {%
+     * admonition type="warning" name="Merged contacts are not retrievable via the API" %} Once a
+     * merge is completed, the source contact (`from`) is permanently removed from the active
+     * contact list. This means: - **GET /contacts/{id}** — Requesting the source contact by its
+     * original ID will return a `404 Not Found` error. - **POST /contacts/search** — The source
+     * contact will not appear in…
      */
-    fun merge(from: String, into: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, skipDuplicateValidation: Boolean? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.Contacts.MergeContactResponse {
-        return dev.octri.showcase.intercom.methods.Contacts.mergeContact(clientConfig, from, into, includeMergeHistory, intercomVersion, skipDuplicateValidation, options)
+    fun merge(
+        from: String,
+        into: String,
+        includeMergeHistory: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        skipDuplicateValidation: Boolean? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.Contacts.MergeContactResponse {
+        return dev.octri.showcase.intercom.methods.Contacts.mergeContact(
+            clientConfig,
+            from,
+            into,
+            includeMergeHistory,
+            intercomVersion,
+            skipDuplicateValidation,
+            options,
+        )
     }
 
     /**
-     * Previews a contact merge without changing any contact data. Supply the source and destination IDs in `from` and `into`, and optionally set `custom_attribute_names` to include selected custom attributes in the preview. The result reports whether the merge is allowed and provides either a summary of changes or reasons it is not allowed.
+     * Previews a contact merge without changing any contact data. Supply the source and destination
+     * IDs in `from` and `into`, and optionally set `custom_attribute_names` to include selected
+     * custom attributes in the preview. The result reports whether the merge is allowed and
+     * provides either a summary of changes or reasons it is not allowed.
      *
-     * Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**. Send the same `from` and `into` contact IDs you would pass to Merge two contacts. You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`. You can optionally pass `custom_attribute_names` to include specific custom attributes…
+     * Preview the result of merging one contact into another without applying the merge. This is a
+     * read-only dry run: it reports whether the merge is allowed and, if so, exactly what would
+     * change, **without modifying any data**. Send the same `from` and `into` contact IDs you would
+     * pass to Merge two contacts. You can merge a contact with a `role` of `lead` into a contact
+     * with a `role` of `user`. You can optionally pass `custom_attribute_names` to include specific
+     * custom attributes…
      */
-    fun previewMerge(from: String, into: String, intercomVersion: IntercomVersion? = null, skipDuplicateValidation: Boolean? = null, customAttributeNames: List<String>? = null, options: RequestOptions? = null): MergePreviewResponse {
-        return dev.octri.showcase.intercom.methods.Contacts.previewMergeContact(clientConfig, from, into, intercomVersion, skipDuplicateValidation, customAttributeNames, options)
+    fun previewMerge(
+        from: String,
+        into: String,
+        intercomVersion: IntercomVersion? = null,
+        skipDuplicateValidation: Boolean? = null,
+        customAttributeNames: List<String>? = null,
+        options: RequestOptions? = null,
+    ): MergePreviewResponse {
+        return dev.octri.showcase.intercom.methods.Contacts.previewMergeContact(
+            clientConfig,
+            from,
+            into,
+            intercomVersion,
+            skipDuplicateValidation,
+            customAttributeNames,
+            options,
+        )
     }
 
     /**
-     * Searches contacts by matching their attributes against filters in the request body. Use `query` to define a single filter or combine filters with `AND` and `OR`, and use `pagination` to retrieve results in pages. Timestamp and date filters are evaluated by calendar day in the workspace's timezone, and recently created contacts may take a few minutes to appear.
+     * Searches contacts by matching their attributes against filters in the request body. Use
+     * `query` to define a single filter or combine filters with `AND` and `OR`, and use
+     * `pagination` to retrieve results in pages. Timestamp and date filters are evaluated by
+     * calendar day in the workspace's timezone, and recently created contacts may take a few
+     * minutes to appear.
      *
-     * You can search for multiple contacts by the value of their attributes in order to fetch exactly who you want. To search for contacts, you need to send a `POST` request to `api.intercom.io This will accept a query object in the body which will define your filters in order to search for contacts. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your search. Use the `AND` and `OR`…
+     * You can search for multiple contacts by the value of their attributes in order to fetch
+     * exactly who you want. To search for contacts, you need to send a `POST` request to
+     * `api.intercom.io This will accept a query object in the body which will define your filters
+     * in order to search for contacts. {% admonition type="warning" name="Optimizing search
+     * queries" %} Search queries can be complex, so optimizing them can help the performance of
+     * your search. Use the `AND` and `OR`…
      */
-    fun search(query: ContactSearchRequestQuery, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, sort: dev.octri.showcase.intercom.methods.Contacts.ContactSearchRequestSort? = null, options: RequestOptions? = null): ContactList {
-        return dev.octri.showcase.intercom.methods.Contacts.searchContacts(clientConfig, query, includeMergeHistory, intercomVersion, pagination, sort, options)
+    fun search(
+        query: ContactSearchRequestQuery,
+        includeMergeHistory: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        sort: dev.octri.showcase.intercom.methods.Contacts.ContactSearchRequestSort? = null,
+        options: RequestOptions? = null,
+    ): ContactList {
+        return dev.octri.showcase.intercom.methods.Contacts.searchContacts(
+            clientConfig,
+            query,
+            includeMergeHistory,
+            intercomVersion,
+            pagination,
+            sort,
+            options,
+        )
     }
 
     /**
-     * Lists contact activity events for the workspace, including contact creation, role updates, merges, and deletions. Results are ordered from oldest to newest. Use `starting_after` to continue from a previous page and `per_page` to control the page size, from 1 to 150.
+     * Lists contact activity events for the workspace, including contact creation, role updates,
+     * merges, and deletions. Results are ordered from oldest to newest. Use `starting_after` to
+     * continue from a previous page and `per_page` to control the page size, from 1 to 150.
      *
-     * You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first. {% admonition type="warning" name="Pagination" %} You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`. See the pagination section for more details on how to use the `starting_after` param. {% /admonition %}
+     * You can fetch a list of contact activity events for your workspace, such as when contacts are
+     * created, role updated, merged, or deleted. Events are returned oldest first. {% admonition
+     * type="warning" name="Pagination" %} You can use pagination to limit the number of results
+     * returned. The default is `50` results per page, with a maximum of `150`. See the pagination
+     * section for more details on how to use the `starting_after` param. {% /admonition %}
      */
-    fun listActivities(perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactActivityList {
-        return dev.octri.showcase.intercom.methods.Contacts.listContactActivities(clientConfig, perPage, startingAfter, intercomVersion, options)
+    fun listActivities(
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactActivityList {
+        return dev.octri.showcase.intercom.methods.Contacts.listContactActivities(
+            clientConfig,
+            perPage,
+            startingAfter,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists contacts in the workspace, including users and leads. Contacts merged into other contacts are excluded; only the destination contact remains in the list. Results are paginated, with 10 contacts per page by default and a maximum of 150 per page.
+     * Lists contacts in the workspace, including users and leads. Contacts merged into other
+     * contacts are excluded; only the destination contact remains in the list. Results are
+     * paginated, with 10 contacts per page by default and a maximum of 150 per page.
      *
-     * You can fetch a list of all contacts (ie. users or leads) in your workspace. {% admonition type="info" name="Merged contacts" %} Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible. {% /admonition %} {% admonition type="warning" name="Pagination" %} You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`. See…
+     * You can fetch a list of all contacts (ie. users or leads) in your workspace. {% admonition
+     * type="info" name="Merged contacts" %} Contacts that have been merged (via POST
+     * /contacts/merge) will not appear in list results. Only the target contact from the merge
+     * remains accessible. {% /admonition %} {% admonition type="warning" name="Pagination" %} You
+     * can use pagination to limit the number of results returned. The default is `10` results per
+     * page, with a maximum of `150`. See…
      */
-    fun list(includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactList {
-        return dev.octri.showcase.intercom.methods.Contacts.listContacts(clientConfig, includeMergeHistory, intercomVersion, options)
+    fun list(
+        includeMergeHistory: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactList {
+        return dev.octri.showcase.intercom.methods.Contacts.listContacts(
+            clientConfig,
+            includeMergeHistory,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Creates a new contact, such as a user or lead. Provide at least one of `email`, `external_id`, or `role` to identify the contact, and include `email` whenever you set `email_verified`. The response contains the created contact object.
+     * Creates a new contact, such as a user or lead. Provide at least one of `email`,
+     * `external_id`, or `role` to identify the contact, and include `email` whenever you set
+     * `email_verified`. The response contains the created contact object.
      *
      * You can create a new contact (ie. user or lead).
      */
-    fun create(intercomVersion: IntercomVersion? = null, body: CreateContactRequest? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.Contacts.CreateContactResponse {
-        return dev.octri.showcase.intercom.methods.Contacts.createContact(clientConfig, intercomVersion, body, options)
+    fun create(
+        intercomVersion: IntercomVersion? = null,
+        body: CreateContactRequest? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.Contacts.CreateContactResponse {
+        return dev.octri.showcase.intercom.methods.Contacts.createContact(
+            clientConfig,
+            intercomVersion,
+            body,
+            options,
+        )
     }
 
     /**
-     * Retrieves a user contact by its external ID; this lookup does not support leads. Set `include_merge_history` to request merge history for the contact. If the contact has been merged, the response provides a link to the canonical contact.
+     * Retrieves a user contact by its external ID; this lookup does not support leads. Set
+     * `include_merge_history` to request merge history for the contact. If the contact has been
+     * merged, the response provides a link to the canonical contact.
      *
-     * You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads. {% admonition type="info" name="Merged contacts return 410 Gone" %} If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format. {% /admonition %}
+     * You can fetch the details of a single contact by external ID. Note that this endpoint only
+     * supports users and not leads. {% admonition type="info" name="Merged contacts return 410
+     * Gone" %} If the contact with this external ID has been merged into another contact, the API
+     * returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into)
+     * contact. See `GET /contacts/{id}` for details on the response format. {% /admonition %}
      */
-    fun showByExternalId(externalId: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.Contacts.ShowContactByExternalIdResponse {
-        return dev.octri.showcase.intercom.methods.Contacts.showContactByExternalId(clientConfig, externalId, includeMergeHistory, intercomVersion, options)
+    fun showByExternalId(
+        externalId: String,
+        includeMergeHistory: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.Contacts.ShowContactByExternalIdResponse {
+        return dev.octri.showcase.intercom.methods.Contacts.showContactByExternalId(
+            clientConfig,
+            externalId,
+            includeMergeHistory,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Archives a single contact. Supply the `contact_id` of the contact to archive. The response includes the contact reference and an `archived` flag.
+     * Archives a single contact. Supply the `contact_id` of the contact to archive. The response
+     * includes the contact reference and an `archived` flag.
      *
      * You can archive a single contact.
      */
-    fun archive(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactArchived {
-        return dev.octri.showcase.intercom.methods.Contacts.archiveContact(clientConfig, contactId, intercomVersion, options)
+    fun archive(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactArchived {
+        return dev.octri.showcase.intercom.methods.Contacts.archiveContact(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Unarchives a single contact. Supply the `contact_id` of the contact to restore from the archived state. The response includes the contact reference and an `archived` flag.
+     * Unarchives a single contact. Supply the `contact_id` of the contact to restore from the
+     * archived state. The response includes the contact reference and an `archived` flag.
      *
      * You can unarchive a single contact.
      */
-    fun unarchive(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactUnarchived {
-        return dev.octri.showcase.intercom.methods.Contacts.unarchiveContact(clientConfig, contactId, intercomVersion, options)
+    fun unarchive(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactUnarchived {
+        return dev.octri.showcase.intercom.methods.Contacts.unarchiveContact(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Blocks a single contact. Supply the `contact_id` of the contact to block. Blocking the contact also archives the contact's conversations.
+     * Blocks a single contact. Supply the `contact_id` of the contact to block. Blocking the
+     * contact also archives the contact's conversations.
      *
-     * Block a single contact. **Note:** conversations of the contact will also be archived during the process. More details in FAQ How do I block Inbox spam?
+     * Block a single contact. **Note:** conversations of the contact will also be archived during
+     * the process. More details in FAQ How do I block Inbox spam?
      */
-    fun block(contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactBlocked {
-        return dev.octri.showcase.intercom.methods.Contacts.blockContact(clientConfig, contactId, intercomVersion, options)
+    fun block(
+        contactId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactBlocked {
+        return dev.octri.showcase.intercom.methods.Contacts.blockContact(
+            clientConfig,
+            contactId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor` to continue from a previous response and `per_page` and `order` to control the results. Merge history is available only for contacts with the `user` role.
+     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor`
+     * to continue from a previous response and `per_page` and `order` to control the results. Merge
+     * history is available only for contacts with the `user` role.
      *
-     * Retrieve the paginated list of contacts that have been merged into a given contact. Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
+     * Retrieve the paginated list of contacts that have been merged into a given contact. Only
+     * available for contacts with a `user` role. Returns a `404` if the contact is not found or has
+     * a `lead` role.
      */
-    fun listMergeHistory(id: String, cursor: String? = null, perPage: Long? = null, order: ListContactMergeHistoryParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): MergeHistoryList {
-        return dev.octri.showcase.intercom.methods.Contacts.listContactMergeHistory(clientConfig, id, cursor, perPage, order, intercomVersion, options)
+    fun listMergeHistory(
+        id: String,
+        cursor: String? = null,
+        perPage: Long? = null,
+        order: ListContactMergeHistoryParameterEnum? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): MergeHistoryList {
+        return dev.octri.showcase.intercom.methods.Contacts.listContactMergeHistory(
+            clientConfig,
+            id,
+            cursor,
+            perPage,
+            order,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor` to continue from a previous response and `per_page` and `order` to control the results. Merge history is available only for contacts with the `user` role.
+     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor`
+     * to continue from a previous response and `per_page` and `order` to control the results. Merge
+     * history is available only for contacts with the `user` role.
      *
-     * Retrieve the paginated list of contacts that have been merged into a given contact. Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
+     * Retrieve the paginated list of contacts that have been merged into a given contact. Only
+     * available for contacts with a `user` role. Returns a `404` if the contact is not found or has
+     * a `lead` role.
      */
-    fun listMergeHistoryPaginated(id: String, cursor: String? = null, perPage: Long? = null, order: ListContactMergeHistoryParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldFn: (MergeHistoryItem) -> Boolean) {
-        dev.octri.showcase.intercom.methods.Contacts.listContactMergeHistoryPaginated(clientConfig, id, cursor, perPage, order, intercomVersion, options, yieldFn)
+    fun listMergeHistoryPaginated(
+        id: String,
+        cursor: String? = null,
+        perPage: Long? = null,
+        order: ListContactMergeHistoryParameterEnum? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+        yieldFn: (MergeHistoryItem) -> Boolean,
+    ) {
+        dev.octri.showcase.intercom.methods.Contacts.listContactMergeHistoryPaginated(
+            clientConfig,
+            id,
+            cursor,
+            perPage,
+            order,
+            intercomVersion,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates contacts in bulk using an asynchronous job; this is a strict create operation and does not update existing contacts. Supply up to 100 contact objects in `contacts`; items that match an existing contact by `external_id` or `email` are rejected while other items can still be created. Use the returned job ID with GET /contacts/bulk/{id} to check progress and identify whether items were rejected.
+     * Creates contacts in bulk using an asynchronous job; this is a strict create operation and
+     * does not update existing contacts. Supply up to 100 contact objects in `contacts`; items that
+     * match an existing contact by `external_id` or `email` are rejected while other items can
+     * still be created. Use the returned job ID with GET /contacts/bulk/{id} to check progress and
+     * identify whether items were rejected.
      *
-     * You can bulk create contacts by submitting an array of contact objects. This is a **strict create** and never updates an existing contact. The endpoint creates an async job that processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status. Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored. {% admonition type="info" name="Handling existing contacts" %} If a…
+     * You can bulk create contacts by submitting an array of contact objects. This is a **strict
+     * create** and never updates an existing contact. The endpoint creates an async job that
+     * processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}`
+     * to check the job status. Only the fields listed in the request schema below can be set. Any
+     * other fields in a contact object are ignored. {% admonition type="info" name="Handling
+     * existing contacts" %} If a…
      */
-    fun bulkCreate(contacts: List<dev.octri.showcase.intercom.methods.Contacts.BulkCreateContactsRequestContactsItem>, intercomVersion: IntercomVersion? = null, job: dev.octri.showcase.intercom.methods.Contacts.BulkCreateContactsRequestJob? = null, options: RequestOptions? = null): ContactsBulkJob {
-        return dev.octri.showcase.intercom.methods.Contacts.bulkCreateContacts(clientConfig, contacts, intercomVersion, job, options)
+    fun bulkCreate(
+        contacts:
+            List<
+                dev.octri.showcase.intercom.methods.Contacts.BulkCreateContactsRequestContactsItem
+            >,
+        intercomVersion: IntercomVersion? = null,
+        job: dev.octri.showcase.intercom.methods.Contacts.BulkCreateContactsRequestJob? = null,
+        options: RequestOptions? = null,
+    ): ContactsBulkJob {
+        return dev.octri.showcase.intercom.methods.Contacts.bulkCreateContacts(
+            clientConfig,
+            contacts,
+            intercomVersion,
+            job,
+            options,
+        )
     }
 
     /**
-     * Updates multiple contacts in an asynchronous job by applying the supplied fields to each identified contact. Include an `id` and the fields to change in each contact object, with no more than 100 objects in `contacts`. Use the returned job ID with GET /contacts/bulk/{id} to monitor progress; tag application is best-effort.
+     * Updates multiple contacts in an asynchronous job by applying the supplied fields to each
+     * identified contact. Include an `id` and the fields to change in each contact object, with no
+     * more than 100 objects in `contacts`. Use the returned job ID with GET /contacts/bulk/{id} to
+     * monitor progress; tag application is best-effort.
      *
-     * You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update. You can also add or remove tags on each contact by including a `tags` object. Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored. The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET…
+     * You can bulk update contacts by submitting an array of contact objects with the fields to
+     * update. Each contact must include an `id` field identifying the contact to update. You can
+     * also add or remove tags on each contact by including a `tags` object. Only the fields listed
+     * in the request schema below can be set. Any other fields in a contact object are ignored. The
+     * endpoint creates an async job that processes the updates in the background. Use the returned
+     * job ID with `GET…
      */
-    fun bulkUpdate(contacts: List<dev.octri.showcase.intercom.methods.Contacts.BulkUpdateContactsRequestContactsItem>, intercomVersion: IntercomVersion? = null, job: dev.octri.showcase.intercom.methods.Contacts.BulkUpdateContactsRequestJob? = null, options: RequestOptions? = null): ContactsBulkJob {
-        return dev.octri.showcase.intercom.methods.Contacts.bulkUpdateContacts(clientConfig, contacts, intercomVersion, job, options)
+    fun bulkUpdate(
+        contacts:
+            List<
+                dev.octri.showcase.intercom.methods.Contacts.BulkUpdateContactsRequestContactsItem
+            >,
+        intercomVersion: IntercomVersion? = null,
+        job: dev.octri.showcase.intercom.methods.Contacts.BulkUpdateContactsRequestJob? = null,
+        options: RequestOptions? = null,
+    ): ContactsBulkJob {
+        return dev.octri.showcase.intercom.methods.Contacts.bulkUpdateContacts(
+            clientConfig,
+            contacts,
+            intercomVersion,
+            job,
+            options,
+        )
     }
 
     /**
-     * Deletes multiple contacts permanently through an asynchronous job. Include up to 100 contact identifiers in `contacts`; an item that cannot be deleted fails independently, while the job continues processing other items. Use the returned job ID with GET /contacts/bulk/{id} to monitor the job and check for item failures.
+     * Deletes multiple contacts permanently through an asynchronous job. Include up to 100 contact
+     * identifiers in `contacts`; an item that cannot be deleted fails independently, while the job
+     * continues processing other items. Use the returned job ID with GET /contacts/bulk/{id} to
+     * monitor the job and check for item failures.
      *
-     * You can delete contacts in bulk by submitting an array of contact `id`s. The endpoint creates an async job that processes the deletes in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status. {% admonition type="warning" name="Permanent deletion" %} A contact that doesn't exist, or can't be deleted, fails that item and the job's `state` ends as `completed_with_errors` (visible via `GET /contacts/bulk/{id}`) without failing the rest of…
+     * You can delete contacts in bulk by submitting an array of contact `id`s. The endpoint creates
+     * an async job that processes the deletes in the background. Use the returned job ID with `GET
+     * /contacts/bulk/{id}` to check the job status. {% admonition type="warning" name="Permanent
+     * deletion" %} A contact that doesn't exist, or can't be deleted, fails that item and the job's
+     * `state` ends as `completed_with_errors` (visible via `GET /contacts/bulk/{id}`) without
+     * failing the rest of…
      */
-    fun bulkDelete(contacts: List<dev.octri.showcase.intercom.methods.Contacts.BulkDeleteContactsRequestContactsItem>, intercomVersion: IntercomVersion? = null, job: dev.octri.showcase.intercom.methods.Contacts.BulkDeleteContactsRequestJob? = null, options: RequestOptions? = null): ContactsBulkJob {
-        return dev.octri.showcase.intercom.methods.Contacts.bulkDeleteContacts(clientConfig, contacts, intercomVersion, job, options)
+    fun bulkDelete(
+        contacts:
+            List<
+                dev.octri.showcase.intercom.methods.Contacts.BulkDeleteContactsRequestContactsItem
+            >,
+        intercomVersion: IntercomVersion? = null,
+        job: dev.octri.showcase.intercom.methods.Contacts.BulkDeleteContactsRequestJob? = null,
+        options: RequestOptions? = null,
+    ): ContactsBulkJob {
+        return dev.octri.showcase.intercom.methods.Contacts.bulkDeleteContacts(
+            clientConfig,
+            contacts,
+            intercomVersion,
+            job,
+            options,
+        )
     }
 
     /**
-     * Retrieves the status of an asynchronous bulk contact job. Supply the job's `id` to view its overall state, task details, and timestamps. Use the state to determine whether processing is pending, running, completed, or completed with errors.
+     * Retrieves the status of an asynchronous bulk contact job. Supply the job's `id` to view its
+     * overall state, task details, and timestamps. Use the state to determine whether processing is
+     * pending, running, completed, or completed with errors.
      *
-     * You can check the status of a bulk contact update job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
+     * You can check the status of a bulk contact update job. The `state` field indicates the
+     * overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
      */
-    fun showBulkUpdateJob(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactsBulkJob {
-        return dev.octri.showcase.intercom.methods.Contacts.showBulkUpdateContactsJob(clientConfig, id, intercomVersion, options)
+    fun showBulkUpdateJob(
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContactsBulkJob {
+        return dev.octri.showcase.intercom.methods.Contacts.showBulkUpdateContactsJob(
+            clientConfig,
+            id,
+            intercomVersion,
+            options,
+        )
     }
-
 }

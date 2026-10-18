@@ -3,42 +3,38 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Payload to create or update a Custom Object instance
- */
+/** Payload to create or update a Custom Object instance */
 data class CreateOrUpdateCustomObjectInstanceRequest(
     /**
      * A unique identifier for the Custom Object instance in the external system it originated from.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
     /**
-     * The time when the Custom Object instance was created in the external system it originated from.
+     * The time when the Custom Object instance was created in the external system it originated
+     * from.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_created_at") val externalCreatedAt: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("external_created_at")
+    val externalCreatedAt: Long? = null,
     /**
-     * The time when the Custom Object instance was last updated in the external system it originated from.
+     * The time when the Custom Object instance was last updated in the external system it
+     * originated from.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_updated_at") val externalUpdatedAt: Long? = null,
-    /**
-     * The custom attributes which are set for the Custom Object instance.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("external_updated_at")
+    val externalUpdatedAt: Long? = null,
+    /** The custom attributes which are set for the Custom Object instance. */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: Map<String, String>? = null,
 )
 
-/**
- * deleted custom object instance object
- */
+/** deleted custom object instance object */
 data class CustomObjectInstanceDeleted(
     /**
-     * The unique identifier of the Custom Object type that defines the structure of the Custom Object instance.
+     * The unique identifier of the Custom Object type that defines the structure of the Custom
+     * Object instance.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The Intercom defined id representing the Custom Object instance.
-     */
+    /** The Intercom defined id representing the Custom Object instance. */
     val id: String? = null,
-    /**
-     * Whether the Custom Object instance is deleted or not.
-     */
-    val deleted: Boolean? = null
+    /** Whether the Custom Object instance is deleted or not. */
+    val deleted: Boolean? = null,
 )
