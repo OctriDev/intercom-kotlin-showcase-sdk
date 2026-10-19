@@ -18,7 +18,8 @@ data class CreateContentImportSourceRequest(
      * The unique identifiers for the audiences to associate with this content import source. Can be
      * a single integer or an array of integers.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
+    val audienceIds: List<Long>? = null,
 )
 
 /** You can add an External Page to your Fin Content Library. */
@@ -90,7 +91,8 @@ data class UpdateContentImportSourceRequest(
      * a single integer or an array of integers. Set to null or an empty array to remove all
      * audiences.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
+    val audienceIds: List<Long>? = null,
     /**
      * When true, the audience will be applied to all existing external pages belonging to this
      * content import source.

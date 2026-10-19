@@ -34,7 +34,7 @@ class AiContentNamespace(private val clientConfig: ClientConfig) {
         url: String,
         intercomVersion: IntercomVersion? = null,
         status: CreateContentImportSourceRequestStatusEnum? = null,
-        audienceIds: SdkClient.SdkOptional<Any?>? = null,
+        audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
         options: RequestOptions? = null,
     ): ContentImportSource {
         return dev.octri.showcase.intercom.methods.AiContent.createContentImportSource(
