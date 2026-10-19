@@ -71,7 +71,7 @@ object AiContent {
         url: String,
         intercomVersion: IntercomVersion? = null,
         status: CreateContentImportSourceRequestStatusEnum? = null,
-        audienceIds: SdkClient.SdkOptional<Any?>? = null,
+        audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
         options: RequestOptions? = null,
     ): ContentImportSource {
         return SdkClient.request<ContentImportSource>(
@@ -171,7 +171,7 @@ object AiContent {
         val url: String,
         val intercomVersion: IntercomVersion? = null,
         val status: UpdateContentImportSourceRequestStatusEnum? = null,
-        val audienceIds: SdkClient.SdkOptional<Any?>? = null,
+        val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
         val applyAudienceToExistingContent: Boolean? = null,
     )
 
