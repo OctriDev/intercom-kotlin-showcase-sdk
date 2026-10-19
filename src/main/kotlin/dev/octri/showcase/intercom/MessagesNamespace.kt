@@ -3,33 +3,77 @@
 
 package dev.octri.showcase.intercom
 
-
 class MessagesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a message initiated by an admin as an in-app message, email, or WhatsApp message. Choose a `message_type` and provide the fields required for that type, including a sender and recipient. Set `from.type` to `admin`; using a user or lead as the sender instead creates a contact-initiated conversation and causes `to`, `cc`, and `bcc` to be ignored.
+     * Creates a message initiated by an admin as an in-app message, email, or WhatsApp message.
+     * Choose a `message_type` and provide the fields required for that type, including a sender and
+     * recipient. Set `from.type` to `admin`; using a user or lead as the sender instead creates a
+     * contact-initiated conversation and causes `to`, `cc`, and `bcc` to be ignored.
      *
-     * You can create a message that has been initiated by an admin. The conversation can be either an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case. This will return the Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is a message, there…
+     * You can create a message that has been initiated by an admin. The conversation can be either
+     * an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short
+     * delay between when a contact is created and when a contact becomes available to be messaged
+     * through the API. A 404 Not Found error will be returned in this case. This will return the
+     * Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is
+     * a message, there…
      */
-    fun create(request: dev.octri.showcase.intercom.methods.Messages.CreateMessageParams, options: RequestOptions? = null): Message {
-        return dev.octri.showcase.intercom.methods.Messages.createMessage(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.intercom.methods.Messages.CreateMessageParams,
+        options: RequestOptions? = null,
+    ): Message {
+        return dev.octri.showcase.intercom.methods.Messages.createMessage(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves the delivery status and conversation details for a specific WhatsApp message. Supply the message's `message_id` to check whether it was sent, delivered, read, or failed. The response includes error details when delivery fails.
+     * Retrieves the delivery status and conversation details for a specific WhatsApp message.
+     * Supply the message's `message_id` to check whether it was sent, delivered, read, or failed.
+     * The response includes error details when delivery fails.
      *
-     * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the current status, conversation details, and any error information if the message failed to deliver.
+     * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the
+     * current status, conversation details, and any error information if the message failed to
+     * deliver.
      */
-    fun retrieveWhatsAppStatus(messageId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WhatsappMessageStatus {
-        return dev.octri.showcase.intercom.methods.Messages.retrieveWhatsAppMessageStatus(clientConfig, messageId, intercomVersion, options)
+    fun retrieveWhatsAppStatus(
+        messageId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WhatsappMessageStatus {
+        return dev.octri.showcase.intercom.methods.Messages.retrieveWhatsAppMessageStatus(
+            clientConfig,
+            messageId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists paginated status events for WhatsApp messages sent through the Outbound module. Use `ruleset_id` to select the set of messages and `per_page` and `starting_after` to paginate the results. The API plan must allow access to this operation.
+     * Lists paginated status events for WhatsApp messages sent through the Outbound module. Use
+     * `ruleset_id` to select the set of messages and `per_page` and `starting_after` to paginate
+     * the results. The API plan must allow access to this operation.
      *
-     * Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providing information about delivery state and related message details.
+     * Retrieves statuses of messages sent from the Outbound module. Currently, this API only
+     * supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp
+     * messages sent via the Outbound module, providing information about delivery state and related
+     * message details.
      */
-    fun getWhatsAppStatus(rulesetId: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WhatsappMessageStatusList {
-        return dev.octri.showcase.intercom.methods.Messages.getWhatsAppMessageStatus(clientConfig, rulesetId, perPage, startingAfter, intercomVersion, options)
+    fun getWhatsAppStatus(
+        rulesetId: String,
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WhatsappMessageStatusList {
+        return dev.octri.showcase.intercom.methods.Messages.getWhatsAppMessageStatus(
+            clientConfig,
+            rulesetId,
+            perPage,
+            startingAfter,
+            intercomVersion,
+            options,
+        )
     }
-
 }

@@ -3,24 +3,42 @@
 
 package dev.octri.showcase.intercom
 
-
 class TicketTypeAttributesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an attribute for a ticket type to define a data field captured on tickets. Supply `name`, `description`, and `data_type`; `data_type` must be one of the supported values. Use the remaining fields to configure the attribute's visibility and input options.
+     * Creates an attribute for a ticket type to define a data field captured on tickets. Supply
+     * `name`, `description`, and `data_type`; `data_type` must be one of the supported values. Use
+     * the remaining fields to configure the attribute's visibility and input options.
      *
      * You can create a new attribute for a ticket type.
      */
-    fun create(request: dev.octri.showcase.intercom.methods.TicketTypeAttributes.CreateTicketTypeAttributeParams, options: RequestOptions? = null): TicketTypeAttribute {
-        return dev.octri.showcase.intercom.methods.TicketTypeAttributes.createTicketTypeAttribute(clientConfig, request, options)
+    fun create(
+        request:
+            dev.octri.showcase.intercom.methods.TicketTypeAttributes.CreateTicketTypeAttributeParams,
+        options: RequestOptions? = null,
+    ): TicketTypeAttribute {
+        return dev.octri.showcase.intercom.methods.TicketTypeAttributes.createTicketTypeAttribute(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Updates the configuration of an existing ticket type attribute. Use the `ticket_type_id` and `attribute_id` path parameters to identify the attribute; provide only the fields you want to change.
+     * Updates the configuration of an existing ticket type attribute. Use the `ticket_type_id` and
+     * `attribute_id` path parameters to identify the attribute; provide only the fields you want to
+     * change.
      *
      * You can update an existing attribute for a ticket type.
      */
-    fun update(request: dev.octri.showcase.intercom.methods.TicketTypeAttributes.UpdateTicketTypeAttributeParams, options: RequestOptions? = null): TicketTypeAttribute {
-        return dev.octri.showcase.intercom.methods.TicketTypeAttributes.updateTicketTypeAttribute(clientConfig, request, options)
+    fun update(
+        request:
+            dev.octri.showcase.intercom.methods.TicketTypeAttributes.UpdateTicketTypeAttributeParams,
+        options: RequestOptions? = null,
+    ): TicketTypeAttribute {
+        return dev.octri.showcase.intercom.methods.TicketTypeAttributes.updateTicketTypeAttribute(
+            clientConfig,
+            request,
+            options,
+        )
     }
-
 }

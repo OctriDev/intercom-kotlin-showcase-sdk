@@ -26,220 +26,197 @@ import java.time.OffsetDateTime
 
 object FinAgent {
 
-data class StartFinConversationResponse(
-    /**
-     * The ID of the conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The internal Intercom conversation ID, useful for matching this Agent API session to the conversation in Intercom.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id") val intercomConversationId: String? = null,
-    /**
-     * The ID of the user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * Fin's current status in the conversation workflow.
-     */
-    val status: StartFinConversationResponseStatusEnum? = null,
-    /**
-     * The timestamp the response was created at, with millisecond precision.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime? = null,
-    /**
-     * Contains error details if any user or conversation attribute updates failed.
-     */
-    val errors: FinAgentAttributeErrors? = null,
-    /**
-     * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url") val sseSubscriptionUrl: String? = null
-)
+    data class StartFinConversationResponse(
+        /** The ID of the conversation. */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String? = null,
+        /**
+         * The internal Intercom conversation ID, useful for matching this Agent API session to the
+         * conversation in Intercom.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id")
+        val intercomConversationId: String? = null,
+        /** The ID of the user. */
+        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+        /** Fin's current status in the conversation workflow. */
+        val status: StartFinConversationResponseStatusEnum? = null,
+        /** The timestamp the response was created at, with millisecond precision. */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms")
+        val createdAtMs: OffsetDateTime? = null,
+        /** Contains error details if any user or conversation attribute updates failed. */
+        val errors: FinAgentAttributeErrors? = null,
+        /**
+         * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is
+         * enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin
+         * sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and
+         * a survey will follow the resolution, `complete` revocation is deferred until the
+         * `csat_requested` event is delivered or the token expires.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url")
+        val sseSubscriptionUrl: String? = null,
+    )
 
-data class ReplyToFinResponse(
-    /**
-     * The ID of the conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The internal Intercom conversation ID, useful for matching this Agent API session to the conversation in Intercom.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id") val intercomConversationId: String? = null,
-    /**
-     * The ID of the user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * Fin's current status in the conversation workflow.
-     */
-    val status: ReplyToFinResponseStatusEnum? = null,
-    /**
-     * The timestamp the response was created at, with millisecond precision.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime? = null,
-    /**
-     * Contains error details if any user or conversation attribute updates failed.
-     */
-    val errors: FinAgentAttributeErrors? = null,
-    /**
-     * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url") val sseSubscriptionUrl: String? = null
-)
+    data class ReplyToFinResponse(
+        /** The ID of the conversation. */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String? = null,
+        /**
+         * The internal Intercom conversation ID, useful for matching this Agent API session to the
+         * conversation in Intercom.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id")
+        val intercomConversationId: String? = null,
+        /** The ID of the user. */
+        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+        /** Fin's current status in the conversation workflow. */
+        val status: ReplyToFinResponseStatusEnum? = null,
+        /** The timestamp the response was created at, with millisecond precision. */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms")
+        val createdAtMs: OffsetDateTime? = null,
+        /** Contains error details if any user or conversation attribute updates failed. */
+        val errors: FinAgentAttributeErrors? = null,
+        /**
+         * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is
+         * enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin
+         * sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and
+         * a survey will follow the resolution, `complete` revocation is deferred until the
+         * `csat_requested` event is delivered or the token expires.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url")
+        val sseSubscriptionUrl: String? = null,
+    )
 
+    data class SubmitFinCsatResponse(
+        /** The external ID of the rated conversation. */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String? = null,
+        /** The rating now recorded on the conversation. */
+        val rating: SubmitFinCsatResponseRatingEnum? = null,
+        /** The result of the submission. */
+        val status: SubmitFinCsatResponseStatusEnum? = null,
+    )
 
+    data class ListFinCapabilitiesResponseCapabilitiesItem(
+        /**
+         * The kind of capability — `procedure` for a runnable procedure, or a static action such as
+         * `reply`, `ask`, or `escalate`.
+         */
+        val type: String? = null,
+        /** The procedure ID. Present only when `type` is `procedure`. */
+        val id: String? = null,
+        /** The procedure name. Present only when `type` is `procedure`. */
+        val name: String? = null,
+        /** A human-readable description of the capability. */
+        val description: String? = null,
+        /** The endpoint path to call to use this capability. */
+        val endpoint: String? = null,
+        /** The HTTP method to use. */
+        val method: String? = null,
+    )
 
+    data class ListFinCapabilitiesResponse(
+        /** The API version the capabilities document was generated for. */
+        val version: String? = null,
+        /** The list of capabilities available to this user. */
+        val capabilities: List<ListFinCapabilitiesResponseCapabilitiesItem>? = null,
+    )
 
+    data class AskFinResponse(
+        /** The external ID of the conversation. */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String? = null,
+        /**
+         * The internal Intercom conversation ID, useful for matching this Agent API session to the
+         * conversation in Intercom.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id")
+        val intercomConversationId: String? = null,
+        /** The ID of the user. */
+        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+        /** Fin's current status in the conversation workflow. */
+        val status: AskFinResponseStatusEnum? = null,
+        /** The timestamp the response was created at, with millisecond precision. */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms")
+        val createdAtMs: OffsetDateTime? = null,
+        /** Contains error details if any user or conversation attribute updates failed. */
+        val errors: FinAgentAttributeErrors? = null,
+        /**
+         * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is
+         * enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin
+         * sets the conversation to complete status. When CSAT is enabled and a survey will follow
+         * the resolution, `complete` revocation is deferred until the `csat_requested` event is
+         * delivered or the token expires.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url")
+        val sseSubscriptionUrl: String? = null,
+    )
 
-data class SubmitFinCsatResponse(
-    /**
-     * The external ID of the rated conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The rating now recorded on the conversation.
-     */
-    val rating: SubmitFinCsatResponseRatingEnum? = null,
-    /**
-     * The result of the submission.
-     */
-    val status: SubmitFinCsatResponseStatusEnum? = null
-)
+    /** Metadata about the conversation. Only attributes are accepted (no history). */
+    data class RunFinProcedureConversationMetadata(
+        /** A hash of conversation attributes. Limit to 20 attributes. */
+        val attributes: Map<String, Any>? = null
+    )
 
-data class ListFinCapabilitiesResponseCapabilitiesItem(
-    /**
-     * The kind of capability — `procedure` for a runnable procedure, or a static action such as `reply`, `ask`, or `escalate`.
-     */
-    val type: String? = null,
-    /**
-     * The procedure ID. Present only when `type` is `procedure`.
-     */
-    val id: String? = null,
-    /**
-     * The procedure name. Present only when `type` is `procedure`.
-     */
-    val name: String? = null,
-    /**
-     * A human-readable description of the capability.
-     */
-    val description: String? = null,
-    /**
-     * The endpoint path to call to use this capability.
-     */
-    val endpoint: String? = null,
-    /**
-     * The HTTP method to use.
-     */
-    val method: String? = null
-)
+    data class RunFinProcedureResponse(
+        /** The ID of the conversation. */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String? = null,
+        /**
+         * The internal Intercom conversation ID, useful for matching this Agent API session to the
+         * conversation in Intercom.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id")
+        val intercomConversationId: String? = null,
+        /** The ID of the user. */
+        @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+        /** The ID of the procedure that was run. */
+        @com.fasterxml.jackson.annotation.JsonProperty("procedure_id")
+        val procedureId: String? = null,
+        /** Fin's current status in the conversation workflow. */
+        val status: RunFinProcedureResponseStatusEnum? = null,
+        /** The timestamp the response was created at, with millisecond precision. */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms")
+        val createdAtMs: OffsetDateTime? = null,
+        /** Contains error details if any user or conversation attribute updates failed. */
+        val errors: FinAgentAttributeErrors? = null,
+        /**
+         * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is
+         * enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin
+         * sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and
+         * a survey will follow the resolution, `complete` revocation is deferred until the
+         * `csat_requested` event is delivered or the token expires.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url")
+        val sseSubscriptionUrl: String? = null,
+    )
 
-data class ListFinCapabilitiesResponse(
-    /**
-     * The API version the capabilities document was generated for.
-     */
-    val version: String? = null,
-    /**
-     * The list of capabilities available to this user.
-     */
-    val capabilities: List<ListFinCapabilitiesResponseCapabilitiesItem>? = null
-)
-
-data class AskFinResponse(
-    /**
-     * The external ID of the conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The internal Intercom conversation ID, useful for matching this Agent API session to the conversation in Intercom.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id") val intercomConversationId: String? = null,
-    /**
-     * The ID of the user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * Fin's current status in the conversation workflow.
-     */
-    val status: AskFinResponseStatusEnum? = null,
-    /**
-     * The timestamp the response was created at, with millisecond precision.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime? = null,
-    /**
-     * Contains error details if any user or conversation attribute updates failed.
-     */
-    val errors: FinAgentAttributeErrors? = null,
-    /**
-     * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url") val sseSubscriptionUrl: String? = null
-)
-
-/**
- * Metadata about the conversation. Only attributes are accepted (no history).
- */
-data class RunFinProcedureConversationMetadata(
-    /**
-     * A hash of conversation attributes. Limit to 20 attributes.
-     */
-    val attributes: Map<String, Any>? = null
-)
-
-data class RunFinProcedureResponse(
-    /**
-     * The ID of the conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The internal Intercom conversation ID, useful for matching this Agent API session to the conversation in Intercom.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id") val intercomConversationId: String? = null,
-    /**
-     * The ID of the user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /**
-     * The ID of the procedure that was run.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("procedure_id") val procedureId: String? = null,
-    /**
-     * Fin's current status in the conversation workflow.
-     */
-    val status: RunFinProcedureResponseStatusEnum? = null,
-    /**
-     * The timestamp the response was created at, with millisecond precision.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime? = null,
-    /**
-     * Contains error details if any user or conversation attribute updates failed.
-     */
-    val errors: FinAgentAttributeErrors? = null,
-    /**
-     * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url") val sseSubscriptionUrl: String? = null
-)
-
-data class EscalateFinConversationResponse(
-    /**
-     * The external ID of the conversation. Returned when you escalate an existing conversation by `conversation_id` (echoed back). When you escalate a `user`, a new conversation is created and only `intercom_conversation_id` is returned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
-    /**
-     * The internal Intercom conversation ID. Returned when a new conversation was created for the escalation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id") val intercomConversationId: String? = null,
-    /**
-     * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires. Includes a `rewind` window so a subscriber that connects after the escalation is processed can…
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url") val sseSubscriptionUrl: String? = null,
-    /**
-     * The resulting status of the conversation.
-     */
-    val status: EscalateFinConversationResponseStatusEnum? = null
-)
-
+    data class EscalateFinConversationResponse(
+        /**
+         * The external ID of the conversation. Returned when you escalate an existing conversation
+         * by `conversation_id` (echoed back). When you escalate a `user`, a new conversation is
+         * created and only `intercom_conversation_id` is returned.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String? = null,
+        /**
+         * The internal Intercom conversation ID. Returned when a new conversation was created for
+         * the escalation.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("intercom_conversation_id")
+        val intercomConversationId: String? = null,
+        /**
+         * Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is
+         * enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin
+         * sets the conversation to complete status. When CSAT is enabled and a survey will follow
+         * the resolution, `complete` revocation is deferred until the `csat_requested` event is
+         * delivered or the token expires. Includes a `rewind` window so a subscriber that connects
+         * after the escalation is processed can…
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("sse_subscription_url")
+        val sseSubscriptionUrl: String? = null,
+        /** The resulting status of the conversation. */
+        val status: EscalateFinConversationResponseStatusEnum? = null,
+    )
 
     /** Parameters for [startFinConversation]. */
     data class StartFinConversationRequest(
@@ -249,113 +226,225 @@ data class EscalateFinConversationResponse(
         val intercomVersion: IntercomVersion? = null,
         val attachments: List<FinAgentAttachment>? = null,
         val conversationMetadata: FinAgentConversationMetadata? = null,
-        val environment: String? = null
+        val environment: String? = null,
     )
 
     /**
-     * Starts a Fin conversation using the user's message, user details, and any supplied conversation context. Include the conversation ID, message, and user; Fin processes the conversation asynchronously and signals completion through a webhook.
+     * Starts a Fin conversation using the user's message, user details, and any supplied
+     * conversation context. Include the conversation ID, message, and user; Fin processes the
+     * conversation asynchronously and signals completion through a webhook.
      *
-     * Initialize Fin by passing it the user's message along with conversation history and user details. These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {%…
+     * Initialize Fin by passing it the user's message along with conversation history and user
+     * details. These additional pieces of context will be used by Fin to provide a better and more
+     * contextual answer to the user. {% admonition type="warning" %} To request access to the Fin
+     * Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us
+     * about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent >
+     * Deploy**. {%…
      *
-     * @param conversationId The ID of the conversation that is calling Fin via this
-     *   API.
+     * @param conversationId The ID of the conversation that is calling Fin via this API.
      * @param message A message exchanged within a Fin Agent conversation.
      * @param user A user object representing the user in a Fin Agent conversation.
-     * @param attachments An array of attachments to include with the message.
-     *   Maximum of 10 attachments.
-     * @param conversationMetadata Metadata about the conversation, including history
-     *   and attributes.
-     * @param environment The identifier of the environment to start the conversation
-     *   in, if your Fin for Platforms workspace has environments. Use the same value
-     *   as `messenger_environment` in your Messenger installation. Defaults to the
-     *   workspace's default environment; an identifier that matches no environment is
-     *   rejected.
+     * @param attachments An array of attachments to include with the message. Maximum of 10
+     *   attachments.
+     * @param conversationMetadata Metadata about the conversation, including history and
+     *   attributes.
+     * @param environment The identifier of the environment to start the conversation in, if your
+     *   Fin for Platforms workspace has environments. Use the same value as `messenger_environment`
+     *   in your Messenger installation. Defaults to the workspace's default environment; an
+     *   identifier that matches no environment is rejected.
      */
-    fun startFinConversation(clientConfig: ClientConfig, request: StartFinConversationRequest, options: RequestOptions? = null): StartFinConversationResponse {
+    fun startFinConversation(
+        clientConfig: ClientConfig,
+        request: StartFinConversationRequest,
+        options: RequestOptions? = null,
+    ): StartFinConversationResponse {
         validateStartFinConversationRequest(request)
 
-        return SdkClient.request<StartFinConversationResponse>(SdkClient.RequestSpec("POST", "/fin/start", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (request.conversationId), "message" to (request.message), "user" to (request.user), "attachments" to (SdkClient.omitIfNull(request.attachments)), "conversation_metadata" to
-    (SdkClient.omitIfNull(request.conversationMetadata)), "environment" to (SdkClient.omitIfNull(request.environment))), operationId = "startFinConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
+        return SdkClient.request<StartFinConversationResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/start",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "conversation_id" to (request.conversationId),
+                            "message" to (request.message),
+                            "user" to (request.user),
+                            "attachments" to (SdkClient.omitIfNull(request.attachments)),
+                            "conversation_metadata" to
+                                (SdkClient.omitIfNull(request.conversationMetadata)),
+                            "environment" to (SdkClient.omitIfNull(request.environment)),
+                        ),
+                    operationId = "startFinConversation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to
+                                SdkClient.headerValue(request.intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
 
     private fun validateStartFinConversationRequest(request: StartFinConversationRequest) {
         if (request.attachments != null) {
-            Validation.validateItems("attachments", request.attachments, Validation.LengthOpts(max = 10))
-}
+            Validation.validateItems(
+                "attachments",
+                request.attachments,
+                Validation.LengthOpts(max = 10),
+            )
+        }
     }
 
-
-
-
-
-
     /**
-     * Sends a user's reply to Fin after Fin has returned a response and the conversation is awaiting a user reply. Include the conversation ID, message, and user details so Fin can continue the conversation.
+     * Sends a user's reply to Fin after Fin has returned a response and the conversation is
+     * awaiting a user reply. Include the conversation ID, message, and user details so Fin can
+     * continue the conversation.
      *
-     * Once Fin has returned a response to a user's message, its status will be `awaiting_user_reply`. If a user replies, use this endpoint to send this response to Fin. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {% /admonition %}
+     * Once Fin has returned a response to a user's message, its status will be
+     * `awaiting_user_reply`. If a user replies, use this endpoint to send this response to Fin. {%
+     * admonition type="warning" %} To request access to the Fin Agent API, go to **Settings >
+     * Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access
+     * is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {% /admonition %}
      *
      * @param conversationId The ID of the conversation.
      * @param message A message exchanged within a Fin Agent conversation.
      * @param user A user object representing the user in a Fin Agent conversation.
-     * @param attachments An array of attachments to include with the message.
-     *   Maximum of 10 attachments.
+     * @param attachments An array of attachments to include with the message. Maximum of 10
+     *   attachments.
      */
-    fun replyToFin(clientConfig: ClientConfig, conversationId: String, message: FinAgentMessage, user: FinAgentUser, intercomVersion: IntercomVersion? = null, attachments: List<FinAgentAttachment>? = null, options: RequestOptions? = null): ReplyToFinResponse {
+    fun replyToFin(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        message: FinAgentMessage,
+        user: FinAgentUser,
+        intercomVersion: IntercomVersion? = null,
+        attachments: List<FinAgentAttachment>? = null,
+        options: RequestOptions? = null,
+    ): ReplyToFinResponse {
         if (attachments != null) {
             Validation.validateItems("attachments", attachments, Validation.LengthOpts(max = 10))
-}
+        }
 
-        return SdkClient.request<ReplyToFinResponse>(SdkClient.RequestSpec("POST", "/fin/reply", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (conversationId), "message" to (message), "user" to (user), "attachments" to (SdkClient.omitIfNull(attachments))), operationId = "replyToFin", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
+        return SdkClient.request<ReplyToFinResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/reply",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "conversation_id" to (conversationId),
+                            "message" to (message),
+                            "user" to (user),
+                            "attachments" to (SdkClient.omitIfNull(attachments)),
+                        ),
+                    operationId = "replyToFin",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Submits a customer's satisfaction rating for a conversation, with an optional free-text remark. Use the rating option provided in Fin's `csat_requested` event; submitting a remark locks the rating against further changes.
+     * Submits a customer's satisfaction rating for a conversation, with an optional free-text
+     * remark. Use the rating option provided in Fin's `csat_requested` event; submitting a remark
+     * locks the rating against further changes.
      *
-     * Record a customer's satisfaction rating for a conversation, with an optional free-text remark. Fin decides *when* to ask for a rating — this reuses the CSAT settings on your Fin workflow, not this API. When Fin asks, it fires a `csat_requested` event over webhooks or SSE carrying the rating options to show the user. Present those options, then submit the user's choice here. Submitting the same rating again, with no new remark, is a no-op and stays successful, so an…
+     * Record a customer's satisfaction rating for a conversation, with an optional free-text
+     * remark. Fin decides *when* to ask for a rating — this reuses the CSAT settings on your Fin
+     * workflow, not this API. When Fin asks, it fires a `csat_requested` event over webhooks or SSE
+     * carrying the rating options to show the user. Present those options, then submit the user's
+     * choice here. Submitting the same rating again, with no new remark, is a no-op and stays
+     * successful, so an…
      *
-     * @param conversationId Your external conversation ID — the same ID you started
-     *   the conversation with, and the one echoed on the `csat_requested` event.
+     * @param conversationId Your external conversation ID — the same ID you started the
+     *   conversation with, and the one echoed on the `csat_requested` event.
      * @param rating The rating the user selected — one of the `key` values from the
      *   `csat_requested` event's options.
-     * @param remark Optional free-text comment the user left alongside the rating.
-     *   Can be added to an already-rated survey, but only once — the rating locks
-     *   after a remark is recorded.
+     * @param remark Optional free-text comment the user left alongside the rating. Can be added to
+     *   an already-rated survey, but only once — the rating locks after a remark is recorded.
      */
-    fun submitFinCsat(clientConfig: ClientConfig, conversationId: String, rating: SubmitFinCsatRatingEnum, intercomVersion: IntercomVersion? = null, remark: String? = null, options: RequestOptions? = null): SubmitFinCsatResponse {
-        return SdkClient.request<SubmitFinCsatResponse>(SdkClient.RequestSpec("POST", "/fin/csat", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (conversationId), "rating" to (rating), "remark" to (SdkClient.omitIfNull(remark))), operationId = "submitFinCsat", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    fun submitFinCsat(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        rating: SubmitFinCsatRatingEnum,
+        intercomVersion: IntercomVersion? = null,
+        remark: String? = null,
+        options: RequestOptions? = null,
+    ): SubmitFinCsatResponse {
+        return SdkClient.request<SubmitFinCsatResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/csat",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "conversation_id" to (conversationId),
+                            "rating" to (rating),
+                            "remark" to (SdkClient.omitIfNull(remark)),
+                        ),
+                    operationId = "submitFinCsat",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Lists the Fin capabilities available for a supplied user so an orchestrating agent can choose which action to call. Include the user's ID; if that user does not exist, Fin creates a user from the supplied details, and updates the email and attributes of an existing user.
+     * Lists the Fin capabilities available for a supplied user so an orchestrating agent can choose
+     * which action to call. Include the user's ID; if that user does not exist, Fin creates a user
+     * from the supplied details, and updates the email and attributes of an existing user.
      *
-     * Return a machine-readable, per-user list of what Fin can do for a given end user, so an orchestrating agent can decide which endpoint to call. The response is audience-matched to the supplied user: each live, API-triggerable procedure is checked against that user before being included, alongside the static `reply` and `ask` actions. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and…
+     * Return a machine-readable, per-user list of what Fin can do for a given end user, so an
+     * orchestrating agent can decide which endpoint to call. The response is audience-matched to
+     * the supplied user: each live, API-triggerable procedure is checked against that user before
+     * being included, alongside the static `reply` and `ask` actions. {% admonition type="warning"
+     * %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API**
+     * in your workspace and…
      *
-     * @param user The user to list capabilities for. If no user exists for the id,
-     *   one is created from the supplied details; if the user already exists, the
-     *   supplied email and attributes update it.
+     * @param user The user to list capabilities for. If no user exists for the id, one is created
+     *   from the supplied details; if the user already exists, the supplied email and attributes
+     *   update it.
      */
-    fun listFinCapabilities(clientConfig: ClientConfig, user: FinAgentUser, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ListFinCapabilitiesResponse {
-        return SdkClient.request<ListFinCapabilitiesResponse>(SdkClient.RequestSpec("POST", "/fin/capabilities", config = clientConfig, body = SdkClient.bodyMap("user" to (user)), operationId = "listFinCapabilities", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
+    fun listFinCapabilities(
+        clientConfig: ClientConfig,
+        user: FinAgentUser,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ListFinCapabilitiesResponse {
+        return SdkClient.request<ListFinCapabilitiesResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/capabilities",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("user" to (user)),
+                    operationId = "listFinCapabilities",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /** Parameters for [askFin]. */
     data class AskFinRequest(
@@ -365,47 +454,79 @@ data class EscalateFinConversationResponse(
         val intercomVersion: IntercomVersion? = null,
         val conversationMetadata: FinAgentConversationMetadata? = null,
         val attachments: List<FinAgentAttachment>? = null,
-        val environment: String? = null
+        val environment: String? = null,
     )
 
     /**
-     * Submits a single, self-contained question to Fin and starts a non-conversational request. Fin returns its answer asynchronously through the `fin_replied` event and completes the conversation without an `awaiting_user_reply` cycle.
+     * Submits a single, self-contained question to Fin and starts a non-conversational request. Fin
+     * returns its answer asynchronously through the `fin_replied` event and completes the
+     * conversation without an `awaiting_user_reply` cycle.
      *
-     * Ask Fin a single, self-contained question and receive one informational answer. Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up questions, will not run procedures, and will not escalate to a human on its own. You can still escalate one yourself with `POST /fin/escalate`; the ask conversation is already closed after its one-shot answer, and escalation leaves it closed while routing the handoff separately. Fin's answer is delivered…
+     * Ask Fin a single, self-contained question and receive one informational answer. Unlike a
+     * conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up questions, will
+     * not run procedures, and will not escalate to a human on its own. You can still escalate one
+     * yourself with `POST /fin/escalate`; the ask conversation is already closed after its one-shot
+     * answer, and escalation leaves it closed while routing the handoff separately. Fin's answer is
+     * delivered…
      *
-     * @param conversationId Your external conversation ID. Fin creates a
-     *   conversation for this ID. If a conversation already exists for it, use
-     *   `/fin/reply` instead.
+     * @param conversationId Your external conversation ID. Fin creates a conversation for this ID.
+     *   If a conversation already exists for it, use `/fin/reply` instead.
      * @param message A message exchanged within a Fin Agent conversation.
      * @param user A user object representing the user in a Fin Agent conversation.
-     * @param conversationMetadata Metadata about the conversation, including history
-     *   and attributes.
-     * @param attachments An array of attachments to include with the message.
-     *   Maximum of 10 attachments.
-     * @param environment The identifier of the environment to start the conversation
-     *   in, if your Fin for Platforms workspace has environments. Use the same value
-     *   as `messenger_environment` in your Messenger installation. Defaults to the
-     *   workspace's default environment; an identifier that matches no environment is
-     *   rejected.
+     * @param conversationMetadata Metadata about the conversation, including history and
+     *   attributes.
+     * @param attachments An array of attachments to include with the message. Maximum of 10
+     *   attachments.
+     * @param environment The identifier of the environment to start the conversation in, if your
+     *   Fin for Platforms workspace has environments. Use the same value as `messenger_environment`
+     *   in your Messenger installation. Defaults to the workspace's default environment; an
+     *   identifier that matches no environment is rejected.
      */
-    fun askFin(clientConfig: ClientConfig, request: AskFinRequest, options: RequestOptions? = null): AskFinResponse {
+    fun askFin(
+        clientConfig: ClientConfig,
+        request: AskFinRequest,
+        options: RequestOptions? = null,
+    ): AskFinResponse {
         validateAskFinRequest(request)
 
-        return SdkClient.request<AskFinResponse>(SdkClient.RequestSpec("POST", "/fin/ask", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (request.conversationId), "message" to (request.message), "user" to (request.user), "conversation_metadata" to
-    (SdkClient.omitIfNull(request.conversationMetadata)), "attachments" to (SdkClient.omitIfNull(request.attachments)), "environment" to (SdkClient.omitIfNull(request.environment))), operationId = "askFin", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
+        return SdkClient.request<AskFinResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/ask",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "conversation_id" to (request.conversationId),
+                            "message" to (request.message),
+                            "user" to (request.user),
+                            "conversation_metadata" to
+                                (SdkClient.omitIfNull(request.conversationMetadata)),
+                            "attachments" to (SdkClient.omitIfNull(request.attachments)),
+                            "environment" to (SdkClient.omitIfNull(request.environment)),
+                        ),
+                    operationId = "askFin",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to
+                                SdkClient.headerValue(request.intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
 
     private fun validateAskFinRequest(request: AskFinRequest) {
         if (request.attachments != null) {
-            Validation.validateItems("attachments", request.attachments, Validation.LengthOpts(max = 10))
-}
+            Validation.validateItems(
+                "attachments",
+                request.attachments,
+                Validation.LengthOpts(max = 10),
+            )
+        }
     }
-
-
-
-
-
 
     /** Parameters for [runFinProcedure]. */
     data class RunFinProcedureRequest(
@@ -415,67 +536,121 @@ data class EscalateFinConversationResponse(
         val intercomVersion: IntercomVersion? = null,
         val message: FinAgentMessage? = null,
         val conversationMetadata: RunFinProcedureConversationMetadata? = null,
-        val environment: String? = null
+        val environment: String? = null,
     )
 
     /**
-     * Runs the specified Fin procedure deterministically on a new conversation. Fin reports progress asynchronously through events or Server-Sent Events; if the procedure pauses for user input, send the reply using the Fin reply operation.
+     * Runs the specified Fin procedure deterministically on a new conversation. Fin reports
+     * progress asynchronously through events or Server-Sent Events; if the procedure pauses for
+     * user input, send the reply using the Fin reply operation.
      *
-     * Deterministically run a specific procedure on a new conversation. Calling this endpoint guarantees that the named procedure runs — there is no non-deterministic routing. Fin's progress is delivered asynchronously via events or Server-Sent Events. If the procedure pauses for user input, the conversation status becomes `awaiting_user_reply` — send the user's response with `/fin/reply`. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings >…
+     * Deterministically run a specific procedure on a new conversation. Calling this endpoint
+     * guarantees that the named procedure runs — there is no non-deterministic routing. Fin's
+     * progress is delivered asynchronously via events or Server-Sent Events. If the procedure
+     * pauses for user input, the conversation status becomes `awaiting_user_reply` — send the
+     * user's response with `/fin/reply`. {% admonition type="warning" %} To request access to the
+     * Fin Agent API, go to **Settings >…
      *
      * @param procedureId The ID of the procedure to run.
-     * @param conversationId Your external conversation ID. Fin creates a
-     *   conversation for this ID. If a conversation already exists for it, use
-     *   `/fin/reply` instead.
+     * @param conversationId Your external conversation ID. Fin creates a conversation for this ID.
+     *   If a conversation already exists for it, use `/fin/reply` instead.
      * @param user A user object representing the user in a Fin Agent conversation.
      * @param message A message exchanged within a Fin Agent conversation.
-     * @param conversationMetadata Metadata about the conversation. Only attributes
-     *   are accepted (no history).
-     * @param environment The identifier of the environment to start the conversation
-     *   in, if your Fin for Platforms workspace has environments. Use the same value
-     *   as `messenger_environment` in your Messenger installation. Defaults to the
-     *   workspace's default environment; an identifier that matches no environment is
-     *   rejected.
+     * @param conversationMetadata Metadata about the conversation. Only attributes are accepted (no
+     *   history).
+     * @param environment The identifier of the environment to start the conversation in, if your
+     *   Fin for Platforms workspace has environments. Use the same value as `messenger_environment`
+     *   in your Messenger installation. Defaults to the workspace's default environment; an
+     *   identifier that matches no environment is rejected.
      */
-    fun runFinProcedure(clientConfig: ClientConfig, request: RunFinProcedureRequest, options: RequestOptions? = null): RunFinProcedureResponse {
-        return SdkClient.request<RunFinProcedureResponse>(SdkClient.RequestSpec("POST", "/fin/procedures/${SdkClient.encodePathSegment(request.procedureId)}/run", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (request.conversationId), "user" to (request.user), "message" to (SdkClient.omitIfNull(request.message)), "conversation_metadata" to
-    (SdkClient.omitIfNull(request.conversationMetadata)), "environment" to (SdkClient.omitIfNull(request.environment))), operationId = "runFinProcedure", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
+    fun runFinProcedure(
+        clientConfig: ClientConfig,
+        request: RunFinProcedureRequest,
+        options: RequestOptions? = null,
+    ): RunFinProcedureResponse {
+        return SdkClient.request<RunFinProcedureResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/procedures/${SdkClient.encodePathSegment(request.procedureId)}/run",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "conversation_id" to (request.conversationId),
+                            "user" to (request.user),
+                            "message" to (SdkClient.omitIfNull(request.message)),
+                            "conversation_metadata" to
+                                (SdkClient.omitIfNull(request.conversationMetadata)),
+                            "environment" to (SdkClient.omitIfNull(request.environment)),
+                        ),
+                    operationId = "runFinProcedure",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to
+                                SdkClient.headerValue(request.intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Escalates an existing Fin conversation or a user without a prior agent conversation to a human teammate. Provide either `conversation_id` or `user`; the conversation remains open after Fin signals that the handoff is complete.
+     * Escalates an existing Fin conversation or a user without a prior agent conversation to a
+     * human teammate. Provide either `conversation_id` or `user`; the conversation remains open
+     * after Fin signals that the handoff is complete.
      *
-     * Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the handoff lands in your team inbox. Provide either `conversation_id` or `user`: - `conversation_id` — escalate an existing agent conversation, including one started with `/fin/ask`. On the Intercom Helpdesk, Fin by default summarises the conversation and opens a new Helpdesk conversation that carries the summary as an internal note. Escalation does not change the original agent conversation's…
+     * Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the handoff
+     * lands in your team inbox. Provide either `conversation_id` or `user`: - `conversation_id` —
+     * escalate an existing agent conversation, including one started with `/fin/ask`. On the
+     * Intercom Helpdesk, Fin by default summarises the conversation and opens a new Helpdesk
+     * conversation that carries the summary as an internal note. Escalation does not change the
+     * original agent conversation's…
      *
-     * @param conversationId The external ID of the conversation to escalate. Provide
-     *   this or `user`. Required on Fin for Platforms, where `user` is not supported.
-     * @param user The user to escalate on behalf of, creating a new conversation.
-     *   Provide this or `conversation_id`. Not supported on Fin for Platforms.
-     * @param context Optional background for the receiving teammate, valid with
-     *   either `conversation_id` or `user`. On the Intercom Helpdesk, it appears above
-     *   the summary in the internal note of the new conversation the teammate picks
-     *   up, and is never shown to the end user. Not surfaced on Fin for Platforms.
-     *   Avoid including credentials or unnecessary personal data — it is visible to
-     *   any teammate with access to the conversation.
+     * @param conversationId The external ID of the conversation to escalate. Provide this or
+     *   `user`. Required on Fin for Platforms, where `user` is not supported.
+     * @param user The user to escalate on behalf of, creating a new conversation. Provide this or
+     *   `conversation_id`. Not supported on Fin for Platforms.
+     * @param context Optional background for the receiving teammate, valid with either
+     *   `conversation_id` or `user`. On the Intercom Helpdesk, it appears above the summary in the
+     *   internal note of the new conversation the teammate picks up, and is never shown to the end
+     *   user. Not surfaced on Fin for Platforms. Avoid including credentials or unnecessary
+     *   personal data — it is visible to any teammate with access to the conversation.
      */
-    fun escalateFinConversation(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, conversationId: String? = null, user: FinAgentUser? = null, context: String? = null, options: RequestOptions? = null): EscalateFinConversationResponse {
+    fun escalateFinConversation(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        conversationId: String? = null,
+        user: FinAgentUser? = null,
+        context: String? = null,
+        options: RequestOptions? = null,
+    ): EscalateFinConversationResponse {
         if (context != null) {
             Validation.validateLength("context", context, Validation.LengthOpts(max = 10000))
-}
+        }
 
-        return SdkClient.request<EscalateFinConversationResponse>(SdkClient.RequestSpec("POST", "/fin/escalate", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (SdkClient.omitIfNull(conversationId)), "user" to (SdkClient.omitIfNull(user)), "context" to (SdkClient.omitIfNull(context))), operationId = "escalateFinConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
+        return SdkClient.request<EscalateFinConversationResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/fin/escalate",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "conversation_id" to (SdkClient.omitIfNull(conversationId)),
+                            "user" to (SdkClient.omitIfNull(user)),
+                            "context" to (SdkClient.omitIfNull(context)),
+                        ),
+                    operationId = "escalateFinConversation",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

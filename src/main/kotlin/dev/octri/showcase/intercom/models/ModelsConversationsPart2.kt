@@ -4,352 +4,302 @@
 package dev.octri.showcase.intercom.models
 
 /**
- * Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.
+ * Fields specific to this event. Which are present depends on `event_type` — see the endpoint
+ * description for the full mapping.
  */
 data class HitlEventData(
-    /**
-     * The channel the conversation was on when Fin consulted a teammate.
-     */
+    /** The channel the conversation was on when Fin consulted a teammate. */
     val channel: HitlEventDataChannelEnum? = null,
+    /** The confidence threshold the rule required, as a percentage. */
+    @com.fasterxml.jackson.annotation.JsonProperty("rule_threshold_percent")
+    val ruleThresholdPercent: Long? = null,
     /**
-     * The confidence threshold the rule required, as a percentage.
+     * How confident Fin was in its answer, as a percentage. Compare against
+     * `rule_threshold_percent`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("rule_threshold_percent") val ruleThresholdPercent: Long? = null,
-    /**
-     * How confident Fin was in its answer, as a percentage. Compare against `rule_threshold_percent`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("confidence_percent") val confidencePercent: Long? = null,
-    /**
-     * The question Fin put to the teammate.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("confidence_percent")
+    val confidencePercent: Long? = null,
+    /** The question Fin put to the teammate. */
     @com.fasterxml.jackson.annotation.JsonProperty("sharp_ask") val sharpAsk: String? = null,
-    /**
-     * Why Fin needed to ask.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ask_rationale") val askRationale: String? = null,
-    /**
-     * Fin's summary of what the customer needs.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("issue_summary") val issueSummary: String? = null,
-    /**
-     * The customer's message that prompted the consultation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("customer_question") val customerQuestion: String? = null,
-    /**
-     * The reply Fin proposed to the teammate.
-     */
+    /** Why Fin needed to ask. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ask_rationale")
+    val askRationale: String? = null,
+    /** Fin's summary of what the customer needs. */
+    @com.fasterxml.jackson.annotation.JsonProperty("issue_summary")
+    val issueSummary: String? = null,
+    /** The customer's message that prompted the consultation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("customer_question")
+    val customerQuestion: String? = null,
+    /** The reply Fin proposed to the teammate. */
     val draft: String? = null,
-    /**
-     * Which round of teammate feedback this event belongs to, starting at 1.
-     */
+    /** Which round of teammate feedback this event belongs to, starting at 1. */
     @com.fasterxml.jackson.annotation.JsonProperty("round_index") val roundIndex: Long? = null,
+    /** The feedback the teammate gave Fin. */
+    @com.fasterxml.jackson.annotation.JsonProperty("teammate_input")
+    val teammateInput: String? = null,
     /**
-     * The feedback the teammate gave Fin.
+     * The teammate involved in this event — who gave the feedback, or who approved the draft or
+     * took over.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("teammate_input") val teammateInput: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reviewer_admin_id")
+    val reviewerAdminId: String? = null,
     /**
-     * The teammate involved in this event — who gave the feedback, or who approved the draft or took over.
+     * How Fin responded to the feedback. `answer` means it produced a revised draft, and is the
+     * only value accompanied by a `fin_draft_revised` event. `no_answer` means it had nothing to
+     * send, `failed` that regeneration failed, `consult_teammate` that it asked the teammate again,
+     * and `pending` that the consultation ended before Fin responded.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reviewer_admin_id") val reviewerAdminId: String? = null,
-    /**
-     * How Fin responded to the feedback. `answer` means it produced a revised draft, and is the only value accompanied by a `fin_draft_revised` event. `no_answer` means it had nothing to send, `failed` that regeneration failed, `consult_teammate` that it asked the teammate again, and `pending` that the consultation ended before Fin responded.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("regeneration_outcome") val regenerationOutcome: String? = null,
-    /**
-     * The reply Fin produced after the teammate's feedback.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("revised_draft") val revisedDraft: String? = null,
-    /**
-     * How the consultation ended.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("regeneration_outcome")
+    val regenerationOutcome: String? = null,
+    /** The reply Fin produced after the teammate's feedback. */
+    @com.fasterxml.jackson.annotation.JsonProperty("revised_draft")
+    val revisedDraft: String? = null,
+    /** How the consultation ended. */
     val outcome: HitlEventDataOutcomeEnum? = null,
     /**
-     * Whether the teammate approved Fin's original draft or the one it revised after their feedback.
+     * Whether the teammate approved Fin's original draft or the one it revised after their
+     * feedback.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("approved_draft_type") val approvedDraftType: HitlEventDataApprovedDraftTypeEnum? = null,
-    /**
-     * The reply as it stood when the consultation ended.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("approved_draft_type")
+    val approvedDraftType: HitlEventDataApprovedDraftTypeEnum? = null,
+    /** The reply as it stood when the consultation ended. */
     @com.fasterxml.jackson.annotation.JsonProperty("final_draft") val finalDraft: String? = null,
-    /**
-     * What was sent to the customer. Null when nothing was sent.
-     */
+    /** What was sent to the customer. Null when nothing was sent. */
     @com.fasterxml.jackson.annotation.JsonProperty("sent_text") val sentText: String? = null,
+    /** How long the consultation took, in seconds. */
+    @com.fasterxml.jackson.annotation.JsonProperty("duration_seconds")
+    val durationSeconds: Long? = null,
     /**
-     * How long the consultation took, in seconds.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("duration_seconds") val durationSeconds: Long? = null,
-    /**
-     * How many rounds of teammate feedback the consultation had. Only the ten most recent are returned as events, so this can exceed the number of `fin_teammate_input_received` events.
+     * How many rounds of teammate feedback the consultation had. Only the ten most recent are
+     * returned as events, so this can exceed the number of `fin_teammate_input_received` events.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("rounds_count") val roundsCount: Long? = null,
-    /**
-     * Whether any text on this consultation was too long to store in full and was cut.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("payload_truncated") val payloadTruncated: Boolean? = null
+    /** Whether any text on this consultation was too long to store in full and was cut. */
+    @com.fasterxml.jackson.annotation.JsonProperty("payload_truncated")
+    val payloadTruncated: Boolean? = null,
 )
 
-/**
- * A single event in a Fin human-in-the-loop consultation on a conversation.
- */
+/** A single event in a Fin human-in-the-loop consultation on a conversation. */
 data class HitlEvent(
     /**
-     * Identifies the consultation this event belongs to. The same on every event of one consultation, so it is not unique per event.
+     * Identifies the consultation this event belongs to. The same on every event of one
+     * consultation, so it is not unique per event.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("hitl_cycle_id") val hitlCycleId: String? = null,
+    /** What happened. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_type")
+    val eventType: HitlEventEventTypeEnum? = null,
+    /** The conversation part this event relates to, where one exists. */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_part_id")
+    val conversationPartId: String? = null,
     /**
-     * What happened.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_type") val eventType: HitlEventEventTypeEnum? = null,
-    /**
-     * The conversation part this event relates to, where one exists.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_part_id") val conversationPartId: String? = null,
-    /**
-     * The escalation rule that triggered the consultation, as recorded when it began. Null if no rule triggered it.
+     * The escalation rule that triggered the consultation, as recorded when it began. Null if no
+     * rule triggered it.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("rule_id") val ruleId: String? = null,
     /**
-     * The rule's name as recorded when the consultation began, which may differ from its current name.
+     * The rule's name as recorded when the consultation began, which may differ from its current
+     * name.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("rule_name") val ruleName: String? = null,
-    /**
-     * Unix timestamp for when the event occurred. Approximate on `fin_draft_proposed`.
-     */
+    /** Unix timestamp for when the event occurred. Approximate on `fin_draft_proposed`. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
     /**
-     * Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.
+     * Fields specific to this event. Which are present depends on `event_type` — see the endpoint
+     * description for the full mapping.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: HitlEventData? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: HitlEventData? = null,
 )
 
-/**
- * A list of human-in-the-loop events for a conversation, oldest first.
- */
+/** A list of human-in-the-loop events for a conversation, oldest first. */
 data class HitlEventList(
-    /**
-     * The type of the object.
-     */
+    /** The type of the object. */
     val type: HitlEventListTypeEnum? = null,
-    /**
-     * An array of HITL event objects.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<HitlEvent>? = null
+    /** An array of HITL event objects. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<HitlEvent>? = null,
 )
 
-/**
- * Payload of the request to open a conversation
- */
+/** Payload of the request to open a conversation */
 data class OpenConversationRequest(
-    /**
-     * Required enumerated value serialized in the `message_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: OpenConversationRequestMessageTypeEnum,
-    /**
-     * The id of the admin who is performing the action.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String
+    /** Required enumerated value serialized in the `message_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
+    val messageType: OpenConversationRequestMessageTypeEnum,
+    /** The id of the admin who is performing the action. */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
 )
 
-/**
- * Typed representation of the `QuickReplyOption` API schema.
- */
+/** Typed representation of the `QuickReplyOption` API schema. */
 data class QuickReplyOption(
-    /**
-     * The text to display in this quick reply option.
-     */
+    /** The text to display in this quick reply option. */
     val text: String,
     /**
-     * A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
+     * A unique identifier for this quick reply option. This value will be available within the
+     * metadata of the comment conversation part that is created when a user clicks on this reply
+     * option.
      */
-    val uuid: String
+    val uuid: String,
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RedactConversationRequestVariant0(
-    /**
-     * The type of resource being redacted.
-     */
+    /** The type of resource being redacted. */
     val type: RedactConversationRequestVariant0TypeEnum,
-    /**
-     * The id of the conversation.
-     */
+    /** The id of the conversation. */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /**
-     * The id of the conversation_part.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_part_id") val conversationPartId: String
+    /** The id of the conversation_part. */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_part_id")
+    val conversationPartId: String,
 ) : RedactConversationRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RedactConversationRequestVariant1(
-    /**
-     * The type of resource being redacted.
-     */
+    /** The type of resource being redacted. */
     val type: RedactConversationRequestVariant1TypeEnum,
-    /**
-     * The id of the conversation.
-     */
+    /** The id of the conversation. */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /**
-     * The id of the source.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String
+    /** The id of the source. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String,
 ) : RedactConversationRequest
 
-/**
- * Typed representation of the `RedactConversationRequest` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+/** Typed representation of the `RedactConversationRequest` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RedactConversationRequestVariant0::class, name = "conversation_part"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RedactConversationRequestVariant1::class, name = "source")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RedactConversationRequestVariant0::class,
+        name = "conversation_part",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RedactConversationRequestVariant1::class,
+        name = "source",
+    ),
 )
 sealed interface RedactConversationRequest
 
-/**
- * Typed representation of the `ReplyConversationRequest` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ReplyConversationRequest.Deserializer::class)
+/** Typed representation of the `ReplyConversationRequest` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = ReplyConversationRequest.Deserializer::class
+)
 sealed interface ReplyConversationRequest {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ReplyConversationRequest>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<ReplyConversationRequest>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): ReplyConversationRequest {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out ReplyConversationRequest>> = listOf(AdminReplyConversationRequest::class.java, ContactReplyConversationRequest::class.java)
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out ReplyConversationRequest>> =
+                listOf(
+                    AdminReplyConversationRequest::class.java,
+                    ContactReplyConversationRequest::class.java,
+                )
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, ReplyConversationRequest::class.java, "no ReplyConversationRequest branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        ReplyConversationRequest::class.java,
+                        "no ReplyConversationRequest branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-/**
- * Pagination metadata.
- */
+/** Pagination metadata. */
 data class SideConversationListPages(
-    /**
-     * Optional enumerated value serialized in the `type` wire field.
-     */
+    /** Optional enumerated value serialized in the `type` wire field. */
     val type: SideConversationListPagesTypeEnum? = null,
-    /**
-     * The current page number.
-     */
+    /** The current page number. */
     val page: Long? = null,
-    /**
-     * The number of results per page.
-     */
+    /** The number of results per page. */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /**
-     * The total number of pages.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null
+    /** The total number of pages. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null,
 )
 
-/**
- * A paginated list of side conversations for a conversation.
- */
+/** A paginated list of side conversations for a conversation. */
 data class SideConversationList(
-    /**
-     * The type of the response object.
-     */
+    /** The type of the response object. */
     val type: SideConversationListTypeEnum? = null,
-    /**
-     * An array of side conversation objects.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("side_conversations") val sideConversations: List<SideConversationSummary>? = null,
-    /**
-     * The total number of side conversations.
-     */
+    /** An array of side conversation objects. */
+    @com.fasterxml.jackson.annotation.JsonProperty("side_conversations")
+    val sideConversations: List<SideConversationSummary>? = null,
+    /** The total number of side conversations. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * Pagination metadata.
-     */
-    val pages: SideConversationListPages? = null
+    /** Pagination metadata. */
+    val pages: SideConversationListPages? = null,
 )
 
-/**
- * A side conversation with its conversation parts.
- */
+/** A side conversation with its conversation parts. */
 data class SideConversationSummary(
-    /**
-     * The unique identifier for the side conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("side_conversation_id") val sideConversationId: String? = null,
-    /**
-     * The conversation parts (messages) in this side conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts") val conversationParts: List<ConversationPart>? = null,
-    /**
-     * The total number of conversation parts in this side conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null
+    /** The unique identifier for the side conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("side_conversation_id")
+    val sideConversationId: String? = null,
+    /** The conversation parts (messages) in this side conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts")
+    val conversationParts: List<ConversationPart>? = null,
+    /** The total number of conversation parts in this side conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
 )
 
-/**
- * Payload of the request to snooze a conversation
- */
+/** Payload of the request to snooze a conversation */
 data class SnoozeConversationRequest(
-    /**
-     * Required enumerated value serialized in the `message_type` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: SnoozeConversationRequestMessageTypeEnum,
-    /**
-     * The id of the admin who is performing the action.
-     */
+    /** Required enumerated value serialized in the `message_type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
+    val messageType: SnoozeConversationRequestMessageTypeEnum,
+    /** The id of the admin who is performing the action. */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
-    /**
-     * The time you want the conversation to reopen.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("snoozed_until") val snoozedUntil: Long
+    /** The time you want the conversation to reopen. */
+    @com.fasterxml.jackson.annotation.JsonProperty("snoozed_until") val snoozedUntil: Long,
 )
 
-/**
- * A reference to a teammate
- */
+/** A reference to a teammate */
 data class TeammateReference(
-    /**
-     * The type of teammate
-     */
+    /** The type of teammate */
     val type: TeammateReferenceTypeEnum,
-    /**
-     * The unique identifier of the teammate
-     */
+    /** The unique identifier of the teammate */
     val id: Long,
-    /**
-     * The display name of the teammate
-     */
+    /** The display name of the teammate */
     val name: String,
-    /**
-     * The email address of the teammate (optional for teams/bots)
-     */
-    val email: String? = null
+    /** The email address of the teammate (optional for teams/bots) */
+    val email: String? = null,
 )
 
-/**
- * Payload of the request to update a conversation
- */
+/** Payload of the request to update a conversation */
 data class UpdateConversationRequest(
-    /**
-     * Mark a conversation as read within Intercom.
-     */
+    /** Mark a conversation as read within Intercom. */
     val read: Boolean? = null,
-    /**
-     * The title given to the conversation
-     */
+    /** The title given to the conversation */
     val title: String? = null,
     /**
-     * The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here — attributes Intercom generates are returned in responses only.
+     * The custom attributes which are set on this object, as key-value pairs. For relationship
+     * attributes the value should be a list of custom object instance models. Only attributes a
+     * caller may set are accepted here — attributes Intercom generates are returned in responses
+     * only.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: CustomAttributesRequest? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: CustomAttributesRequest? = null,
     /**
-     * The ID of the company that the conversation is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.
+     * The ID of the company that the conversation is associated with. The unique identifier for the
+     * company which is given by Intercom. Set to nil to remove company.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
 )

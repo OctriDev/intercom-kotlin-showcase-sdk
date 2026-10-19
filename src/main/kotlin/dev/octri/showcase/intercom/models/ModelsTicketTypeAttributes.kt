@@ -3,39 +3,33 @@
 
 package dev.octri.showcase.intercom.models
 
-
-/**
- * You can create a Ticket Type Attribute
- */
+/** You can create a Ticket Type Attribute */
 data class CreateTicketTypeAttributeRequest(
-    /**
-     * The name of the ticket type attribute
-     */
+    /** The name of the ticket type attribute */
     val name: String,
-    /**
-     * The description of the attribute presented to the teammate or contact
-     */
+    /** The description of the attribute presented to the teammate or contact */
     val description: String,
+    /** The data type of the attribute */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_type")
+    val dataType: CreateTicketTypeAttributeRequestDataTypeEnum,
     /**
-     * The data type of the attribute
+     * Whether the attribute is required to be filled in when teammates are creating the ticket in
+     * Inbox.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_type") val dataType: CreateTicketTypeAttributeRequestDataTypeEnum,
+    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create")
+    val requiredToCreate: Boolean? = null,
     /**
-     * Whether the attribute is required to be filled in when teammates are creating the ticket in Inbox.
+     * Whether the attribute is required to be filled in when contacts are creating the ticket in
+     * Messenger.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create") val requiredToCreate: Boolean? = null,
-    /**
-     * Whether the attribute is required to be filled in when contacts are creating the ticket in Messenger.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create_for_contacts") val requiredToCreateForContacts: Boolean? = null,
-    /**
-     * Whether the attribute is visible to teammates when creating a ticket in Inbox.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_on_create") val visibleOnCreate: Boolean? = null,
-    /**
-     * Whether the attribute is visible to contacts when creating a ticket in Messenger.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_contacts") val visibleToContacts: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create_for_contacts")
+    val requiredToCreateForContacts: Boolean? = null,
+    /** Whether the attribute is visible to teammates when creating a ticket in Inbox. */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_on_create")
+    val visibleOnCreate: Boolean? = null,
+    /** Whether the attribute is visible to contacts when creating a ticket in Messenger. */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_contacts")
+    val visibleToContacts: Boolean? = null,
     /**
      * Whether the attribute allows multiple lines of text (only applicable to string attributes)
      */
@@ -45,39 +39,37 @@ data class CreateTicketTypeAttributeRequest(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("list_items") val listItems: String? = null,
     /**
-     * Whether the attribute allows multiple files to be attached to it (only applicable to file attributes)
+     * Whether the attribute allows multiple files to be attached to it (only applicable to file
+     * attributes)
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_multiple_values") val allowMultipleValues: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_multiple_values")
+    val allowMultipleValues: Boolean? = null,
 )
 
-/**
- * You can update a Ticket Type Attribute
- */
+/** You can update a Ticket Type Attribute */
 data class UpdateTicketTypeAttributeRequest(
-    /**
-     * The name of the ticket type attribute
-     */
+    /** The name of the ticket type attribute */
     val name: String? = null,
-    /**
-     * The description of the attribute presented to the teammate or contact
-     */
+    /** The description of the attribute presented to the teammate or contact */
     val description: String? = null,
     /**
-     * Whether the attribute is required to be filled in when teammates are creating the ticket in Inbox.
+     * Whether the attribute is required to be filled in when teammates are creating the ticket in
+     * Inbox.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create") val requiredToCreate: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create")
+    val requiredToCreate: Boolean? = null,
     /**
-     * Whether the attribute is required to be filled in when contacts are creating the ticket in Messenger.
+     * Whether the attribute is required to be filled in when contacts are creating the ticket in
+     * Messenger.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create_for_contacts") val requiredToCreateForContacts: Boolean? = null,
-    /**
-     * Whether the attribute is visible to teammates when creating a ticket in Inbox.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_on_create") val visibleOnCreate: Boolean? = null,
-    /**
-     * Whether the attribute is visible to contacts when creating a ticket in Messenger.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_contacts") val visibleToContacts: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create_for_contacts")
+    val requiredToCreateForContacts: Boolean? = null,
+    /** Whether the attribute is visible to teammates when creating a ticket in Inbox. */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_on_create")
+    val visibleOnCreate: Boolean? = null,
+    /** Whether the attribute is visible to contacts when creating a ticket in Messenger. */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_contacts")
+    val visibleToContacts: Boolean? = null,
     /**
      * Whether the attribute allows multiple lines of text (only applicable to string attributes)
      */
@@ -87,11 +79,14 @@ data class UpdateTicketTypeAttributeRequest(
      */
     @com.fasterxml.jackson.annotation.JsonProperty("list_items") val listItems: String? = null,
     /**
-     * Whether the attribute allows multiple files to be attached to it (only applicable to file attributes)
+     * Whether the attribute allows multiple files to be attached to it (only applicable to file
+     * attributes)
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("allow_multiple_values") val allowMultipleValues: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("allow_multiple_values")
+    val allowMultipleValues: Boolean? = null,
     /**
-     * Whether the attribute should be archived and not shown during creation of the ticket (it will still be present on previously created tickets)
+     * Whether the attribute should be archived and not shown during creation of the ticket (it will
+     * still be present on previously created tickets)
      */
-    val archived: Boolean? = null
+    val archived: Boolean? = null,
 )

@@ -23,70 +23,55 @@ import dev.octri.showcase.intercom.Validation
 
 object Content {
 
-/**
- * Required object value serialized in the `content_ids[]` wire field.
- */
-data class ContentBulkActionRequestContentIdsItem(
-    /**
-     * Required enumerated value serialized in the `type` wire field.
-     */
-    val type: ContentBulkActionRequestContentIdsItemTypeEnum,
-    /**
-     * Required `string` value serialized in the `id` wire field.
-     */
-    val id: String
-)
+    /** Required object value serialized in the `content_ids[]` wire field. */
+    data class ContentBulkActionRequestContentIdsItem(
+        /** Required enumerated value serialized in the `type` wire field. */
+        val type: ContentBulkActionRequestContentIdsItemTypeEnum,
+        /** Required `string` value serialized in the `id` wire field. */
+        val id: String,
+    )
 
-/**
- * Required when `action` is `set_availability`. Each field is optional — only the properties present in the request are toggled.
- */
-data class ContentBulkActionRequestAvailability(
     /**
-     * Toggle Fin AI Agent availability.
+     * Required when `action` is `set_availability`. Each field is optional — only the properties
+     * present in the request are toggled.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent") val aiAgent: Boolean? = null,
-    /**
-     * Toggle Copilot availability.
-     */
-    val copilot: Boolean? = null,
-    /**
-     * Toggle Sales Agent availability.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent") val salesAgent: Boolean? = null
-)
+    data class ContentBulkActionRequestAvailability(
+        /** Toggle Fin AI Agent availability. */
+        @com.fasterxml.jackson.annotation.JsonProperty("ai_agent") val aiAgent: Boolean? = null,
+        /** Toggle Copilot availability. */
+        val copilot: Boolean? = null,
+        /** Toggle Sales Agent availability. */
+        @com.fasterxml.jackson.annotation.JsonProperty("sales_agent")
+        val salesAgent: Boolean? = null,
+    )
 
-/**
- * Required when `action` is `set_audience`. Manages segment membership.
- */
-data class ContentBulkActionRequestAudience(
-    /**
-     * Segment IDs to assign to the selected content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("add_segment_ids") val addSegmentIds: List<Long>? = null,
-    /**
-     * Segment IDs to remove from the selected content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("remove_segment_ids") val removeSegmentIds: List<Long>? = null,
-    /**
-     * When `true`, removes all segments from the selected content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("remove_all") val removeAll: Boolean? = null
-)
+    /** Required when `action` is `set_audience`. Manages segment membership. */
+    data class ContentBulkActionRequestAudience(
+        /** Segment IDs to assign to the selected content. */
+        @com.fasterxml.jackson.annotation.JsonProperty("add_segment_ids")
+        val addSegmentIds: List<Long>? = null,
+        /** Segment IDs to remove from the selected content. */
+        @com.fasterxml.jackson.annotation.JsonProperty("remove_segment_ids")
+        val removeSegmentIds: List<Long>? = null,
+        /** When `true`, removes all segments from the selected content. */
+        @com.fasterxml.jackson.annotation.JsonProperty("remove_all") val removeAll: Boolean? = null,
+    )
 
-/**
- * Required when `action` is `update_tags`. Applies and/or removes existing tags. Supply at least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may be supplied across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference existing, non-archived tags; exceeding the limit or referencing unknown or archived IDs is rejected with `parameter_invalid` (HTTP 422).
- */
-data class ContentBulkActionRequestTags(
     /**
-     * Tag IDs to apply to the selected content.
+     * Required when `action` is `update_tags`. Applies and/or removes existing tags. Supply at
+     * least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may be supplied
+     * across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference existing,
+     * non-archived tags; exceeding the limit or referencing unknown or archived IDs is rejected
+     * with `parameter_invalid` (HTTP 422).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("add_tag_ids") val addTagIds: List<Long>? = null,
-    /**
-     * Tag IDs to remove from the selected content.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("remove_tag_ids") val removeTagIds: List<Long>? = null
-)
-
+    data class ContentBulkActionRequestTags(
+        /** Tag IDs to apply to the selected content. */
+        @com.fasterxml.jackson.annotation.JsonProperty("add_tag_ids")
+        val addTagIds: List<Long>? = null,
+        /** Tag IDs to remove from the selected content. */
+        @com.fasterxml.jackson.annotation.JsonProperty("remove_tag_ids")
+        val removeTagIds: List<Long>? = null,
+    )
 
     /** Parameters for [bulkContentActions]. */
     data class BulkContentActionsRequest(
@@ -95,49 +80,84 @@ data class ContentBulkActionRequestTags(
         val intercomVersion: IntercomVersion? = null,
         val availability: ContentBulkActionRequestAvailability? = null,
         val audience: ContentBulkActionRequestAudience? = null,
-        val tags: ContentBulkActionRequestTags? = null
+        val tags: ContentBulkActionRequestTags? = null,
     )
 
     /**
-     * Applies an asynchronous bulk action to up to 1,000 Knowledge Hub content items. Choose an action and provide content IDs of supported types; actions can publish, unpublish, delete, change availability or audience, or update tags. The request is enqueued for background processing, and items with unsupported types for the selected action may be silently dropped.
+     * Applies an asynchronous bulk action to up to 1,000 Knowledge Hub content items. Choose an
+     * action and provide content IDs of supported types; actions can publish, unpublish, delete,
+     * change availability or audience, or update tags. The request is enqueued for background
+     * processing, and items with unsupported types for the selected action may be silently dropped.
      *
-     * Asynchronously run a bulk action over up to 1,000 Knowledge Hub content items. Six actions are supported: * `publish` and `unpublish` — apply to `article_content` only. * `delete` — permanently delete content (excludes synced sources and `external_content`). * `set_availability` — toggle Fin AI Agent, Copilot, and Sales Agent availability flags. * `set_audience` — manage segment membership on content. * `update_tags` — apply and/or remove existing tags on content. Unlike the…
+     * Asynchronously run a bulk action over up to 1,000 Knowledge Hub content items. Six actions
+     * are supported: * `publish` and `unpublish` — apply to `article_content` only. * `delete` —
+     * permanently delete content (excludes synced sources and `external_content`). *
+     * `set_availability` — toggle Fin AI Agent, Copilot, and Sales Agent availability flags. *
+     * `set_audience` — manage segment membership on content. * `update_tags` — apply and/or remove
+     * existing tags on content. Unlike the…
      *
-     * @param action The bulk action to perform. Allowed `content_ids[].type` values
-     *   vary per action: * `publish`, `unpublish`: `article_content` * `delete`:
-     *   `article_content`, `content_snippet`, `file_source_content`,
-     *   `internal_article` * `set_availability`, `set_audience`: `article_content`,
-     *   `content_snippet`, `external_content`, `file_source_content`,
-     *   `internal_article` * `update_tags`: `article` (the parent Article id, not
-     *   `article_content`), `content_snippet`, `external_content`,…
+     * @param action The bulk action to perform. Allowed `content_ids[].type` values vary per
+     *   action: * `publish`, `unpublish`: `article_content` * `delete`: `article_content`,
+     *   `content_snippet`, `file_source_content`, `internal_article` * `set_availability`,
+     *   `set_audience`: `article_content`, `content_snippet`, `external_content`,
+     *   `file_source_content`, `internal_article` * `update_tags`: `article` (the parent Article
+     *   id, not `article_content`), `content_snippet`, `external_content`,…
      * @param contentIds Up to 1,000 content items to apply the action to.
-     * @param availability Required when `action` is `set_availability`. Each field
-     *   is optional — only the properties present in the request are toggled.
-     * @param audience Required when `action` is `set_audience`. Manages segment
-     *   membership.
-     * @param tags Required when `action` is `update_tags`. Applies and/or removes
-     *   existing tags. Supply at least one of `add_tag_ids` / `remove_tag_ids`. At
-     *   most 100 distinct tag IDs may be supplied across `add_tag_ids` and
-     *   `remove_tag_ids` combined. Tag IDs must reference existing, non-archived tags;
-     *   exceeding the limit or referencing unknown or archived IDs is rejected with
-     *   `parameter_invalid` (HTTP 422).
+     * @param availability Required when `action` is `set_availability`. Each field is optional —
+     *   only the properties present in the request are toggled.
+     * @param audience Required when `action` is `set_audience`. Manages segment membership.
+     * @param tags Required when `action` is `update_tags`. Applies and/or removes existing tags.
+     *   Supply at least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may
+     *   be supplied across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference
+     *   existing, non-archived tags; exceeding the limit or referencing unknown or archived IDs is
+     *   rejected with `parameter_invalid` (HTTP 422).
      */
-    fun bulkContentActions(clientConfig: ClientConfig, request: BulkContentActionsRequest, options: RequestOptions? = null): ContentBulkActionResponse {
+    fun bulkContentActions(
+        clientConfig: ClientConfig,
+        request: BulkContentActionsRequest,
+        options: RequestOptions? = null,
+    ): ContentBulkActionResponse {
         validateBulkContentActionsRequest(request)
 
-        return SdkClient.request<ContentBulkActionResponse>(SdkClient.RequestSpec("POST", "/content/bulk_actions", config = clientConfig, body = SdkClient.bodyMap("action" to (request.action), "content_ids" to (request.contentIds), "availability" to
-    (SdkClient.omitIfNull(request.availability)), "audience" to (SdkClient.omitIfNull(request.audience)), "tags" to (SdkClient.omitIfNull(request.tags))), operationId = "bulkContentActions", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "422" to Error2::class.java))).data
+        return SdkClient.request<ContentBulkActionResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/content/bulk_actions",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "action" to (request.action),
+                            "content_ids" to (request.contentIds),
+                            "availability" to (SdkClient.omitIfNull(request.availability)),
+                            "audience" to (SdkClient.omitIfNull(request.audience)),
+                            "tags" to (SdkClient.omitIfNull(request.tags)),
+                        ),
+                    operationId = "bulkContentActions",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to
+                                SdkClient.headerValue(request.intercomVersion, false)
+                        ),
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "403" to Error2::class.java,
+                            "422" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
 
     private fun validateBulkContentActionsRequest(request: BulkContentActionsRequest) {
-        Validation.validateItems("content_ids", request.contentIds, Validation.LengthOpts(max = 1000))
+        Validation.validateItems(
+            "content_ids",
+            request.contentIds,
+            Validation.LengthOpts(max = 1000),
+        )
     }
-
-
-
-
-
 
     /** Parameters for [searchContent]. */
     data class SearchContentRequest(
@@ -161,76 +181,100 @@ data class ContentBulkActionRequestTags(
         val createdAtBefore: Long? = null,
         val updatedAtAfter: Long? = null,
         val updatedAtBefore: Long? = null,
-        val intercomVersion: IntercomVersion? = null
+        val intercomVersion: IntercomVersion? = null,
     )
 
     /**
-     * Searches Knowledge Hub content, including articles, snippets, external pages, uploaded files, and internal articles. Supply `query` to search titles and body text, or omit it to retrieve the most recent content items; use the filters to narrow the results. Use `page` and `per_page` to paginate the results.
+     * Searches Knowledge Hub content, including articles, snippets, external pages, uploaded files,
+     * and internal articles. Supply `query` to search titles and body text, or omit it to retrieve
+     * the most recent content items; use the filters to narrow the results. Use `page` and
+     * `per_page` to paginate the results.
      *
-     * Search the knowledge base contents — articles, snippets, external pages, uploaded files, and internal articles — using a keyword query. Each result row has a `type` discriminator. Most types (`content_snippet`, `external_content`, `file_source_content`, `internal_article`) return a flat `{ type, id, title }` shape. Help center articles return a nested shape with a `contents[]` array, one entry per locale. Requires the `read_content` OAuth scope.
+     * Search the knowledge base contents — articles, snippets, external pages, uploaded files, and
+     * internal articles — using a keyword query. Each result row has a `type` discriminator. Most
+     * types (`content_snippet`, `external_content`, `file_source_content`, `internal_article`)
+     * return a flat `{ type, id, title }` shape. Help center articles return a nested shape with a
+     * `contents[]` array, one entry per locale. Requires the `read_content` OAuth scope.
      *
-     * @param query A free-text search term matched against the title and body of
-     *   each content item. When omitted, returns the most recent content items.
-     * @param page The page number to fetch. Defaults to 1. Values below 1 are
-     *   clamped to 1.
+     * @param query A free-text search term matched against the title and body of each content item.
+     *   When omitted, returns the most recent content items.
+     * @param page The page number to fetch. Defaults to 1. Values below 1 are clamped to 1.
      * @param perPage Number of results per page. Defaults to 10. Maximum 50.
-     * @param states Filter by publication state. Accepts a comma-separated list or
+     * @param states Filter by publication state. Accepts a comma-separated list or repeated params.
+     * @param locales Filter by locale codes (e.g. `en`, `fr`, `de`). Accepts a comma-separated list
+     *   or repeated params.
+     * @param tagIds Filter by tag IDs. Pairs with `tag_operator` to control match semantics.
+     *   Accepts a comma-separated list or repeated params.
+     * @param tagOperator Match operator paired with `tag_ids`. `IN` returns content matching any of
+     *   the given tags; `NIN` excludes content matching any of them.
+     * @param anyTagIds Filter by tag IDs using OR semantics — returns content matching any of the
+     *   given tags. Alternative to `tag_ids` + `tag_operator`. Accepts a comma-separated list or
      *   repeated params.
-     * @param locales Filter by locale codes (e.g. `en`, `fr`, `de`). Accepts a
+     * @param folderIds Filter by folder IDs. Must be sent together with `folder_entity_type`.
+     *   Accepts a comma-separated list or repeated params.
+     * @param folderEntityType Required when `folder_ids` is provided. Identifies the entity type
+     *   the folder IDs refer to.
+     * @param contentTypes Restrict the search to specific content types. When provided, this
+     *   REPLACES the default content type set rather than filtering on top of it. Accepts a
      *   comma-separated list or repeated params.
-     * @param tagIds Filter by tag IDs. Pairs with `tag_operator` to control match
-     *   semantics. Accepts a comma-separated list or repeated params.
-     * @param tagOperator Match operator paired with `tag_ids`. `IN` returns content
-     *   matching any of the given tags; `NIN` excludes content matching any of them.
-     * @param anyTagIds Filter by tag IDs using OR semantics — returns content
-     *   matching any of the given tags. Alternative to `tag_ids` + `tag_operator`.
-     *   Accepts a comma-separated list or repeated params.
-     * @param folderIds Filter by folder IDs. Must be sent together with
-     *   `folder_entity_type`. Accepts a comma-separated list or repeated params.
-     * @param folderEntityType Required when `folder_ids` is provided. Identifies the
-     *   entity type the folder IDs refer to.
-     * @param contentTypes Restrict the search to specific content types. When
-     *   provided, this REPLACES the default content type set rather than filtering on
-     *   top of it. Accepts a comma-separated list or repeated params.
      * @param copilotState Filter by whether the content is enabled for Copilot.
-     * @param finServiceState Filter by whether the content is enabled for Fin AI
-     *   Agent (customer-facing service).
-     * @param finSalesState Filter by whether the content is enabled for Fin Sales
-     *   Agent.
-     * @param createdByIds Filter by the admin IDs that created the content. Accepts
-     *   a comma-separated list or repeated params.
-     * @param lastUpdatedByIds Filter by the admin IDs that last updated the content.
-     *   Accepts a comma-separated list or repeated params.
-     * @param createdAtAfter Return content created at or after this time. Unix epoch
+     * @param finServiceState Filter by whether the content is enabled for Fin AI Agent
+     *   (customer-facing service).
+     * @param finSalesState Filter by whether the content is enabled for Fin Sales Agent.
+     * @param createdByIds Filter by the admin IDs that created the content. Accepts a
+     *   comma-separated list or repeated params.
+     * @param lastUpdatedByIds Filter by the admin IDs that last updated the content. Accepts a
+     *   comma-separated list or repeated params.
+     * @param createdAtAfter Return content created at or after this time. Unix epoch seconds.
+     * @param createdAtBefore Return content created at or before this time. Unix epoch seconds.
+     * @param updatedAtAfter Return content last updated at or after this time. Unix epoch seconds.
+     * @param updatedAtBefore Return content last updated at or before this time. Unix epoch
      *   seconds.
-     * @param createdAtBefore Return content created at or before this time. Unix
-     *   epoch seconds.
-     * @param updatedAtAfter Return content last updated at or after this time. Unix
-     *   epoch seconds.
-     * @param updatedAtBefore Return content last updated at or before this time.
-     *   Unix epoch seconds.
      */
-    fun searchContent(clientConfig: ClientConfig, request: SearchContentRequest, options: RequestOptions? = null): ContentSearchResponse {
+    fun searchContent(
+        clientConfig: ClientConfig,
+        request: SearchContentRequest,
+        options: RequestOptions? = null,
+    ): ContentSearchResponse {
         validateSearchContentRequest(request)
 
-        return SdkClient.request<ContentSearchResponse>(SdkClient.RequestSpec("GET", "/content/search", config = clientConfig, query = buildSearchContentQuery(request), operationId = "searchContent", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java))).data
+        return SdkClient.request<ContentSearchResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/content/search",
+                    config = clientConfig,
+                    query = buildSearchContentQuery(request),
+                    operationId = "searchContent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to
+                                SdkClient.headerValue(request.intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
+                )
+            )
+            .data
     }
-
 
     private fun validateSearchContentRequest(request: SearchContentRequest) {
         if (request.query != null) {
             Validation.validateLength("query", request.query, Validation.LengthOpts(max = 500))
-}
+        }
 
         if (request.page != null) {
             Validation.validateRange("page", request.page, Validation.RangeOpts(min = 1.0))
-}
+        }
 
         if (request.perPage != null) {
-            Validation.validateRange("per_page", request.perPage, Validation.RangeOpts(min = 1.0, max = 50.0))
-}
+            Validation.validateRange(
+                "per_page",
+                request.perPage,
+                Validation.RangeOpts(min = 1.0, max = 50.0),
+            )
+        }
     }
-
 
     private fun buildSearchContentQuery(request: SearchContentRequest): Map<String, Any?> =
         buildMap {
@@ -242,50 +286,27 @@ data class ContentBulkActionRequestTags(
         mapOf(
             "query" to SdkClient.queryValue(request.query, "form", true),
             "page" to SdkClient.queryValue(request.page, "form", true),
-            "per_page" to
-    SdkClient.queryValue(request.perPage, "form", true),
-            "states" to
-    SdkClient.queryValue(request.states, "form", false),
-            "locales" to
-    SdkClient.queryValue(request.locales, "form", false),
-            "tag_ids" to
-    SdkClient.queryValue(request.tagIds, "form", false),
-            "tag_operator" to
-    SdkClient.queryValue(request.tagOperator, "form", true),
-            "any_tag_ids" to
-    SdkClient.queryValue(request.anyTagIds, "form", false),
-            "folder_ids" to
-    SdkClient.queryValue(request.folderIds, "form", false),
-            "folder_entity_type" to
-    SdkClient.queryValue(request.folderEntityType, "form", true),
-            "content_types" to
-    SdkClient.queryValue(request.contentTypes, "form", false),
-            "copilot_state" to
-    SdkClient.queryValue(request.copilotState, "form", true),
+            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
+            "states" to SdkClient.queryValue(request.states, "form", false),
+            "locales" to SdkClient.queryValue(request.locales, "form", false),
+            "tag_ids" to SdkClient.queryValue(request.tagIds, "form", false),
+            "tag_operator" to SdkClient.queryValue(request.tagOperator, "form", true),
+            "any_tag_ids" to SdkClient.queryValue(request.anyTagIds, "form", false),
+            "folder_ids" to SdkClient.queryValue(request.folderIds, "form", false),
+            "folder_entity_type" to SdkClient.queryValue(request.folderEntityType, "form", true),
+            "content_types" to SdkClient.queryValue(request.contentTypes, "form", false),
+            "copilot_state" to SdkClient.queryValue(request.copilotState, "form", true),
         )
 
     private fun buildSearchContentQueryPart2(request: SearchContentRequest): Map<String, Any?> =
         mapOf(
-            "fin_service_state" to
-    SdkClient.queryValue(request.finServiceState, "form", true),
-            "fin_sales_state" to
-    SdkClient.queryValue(request.finSalesState, "form", true),
-            "created_by_ids" to
-    SdkClient.queryValue(request.createdByIds, "form", false),
-            "last_updated_by_ids" to
-    SdkClient.queryValue(request.lastUpdatedByIds, "form", false),
-            "created_at_after" to
-    SdkClient.queryValue(request.createdAtAfter, "form", true),
-            "created_at_before" to
-    SdkClient.queryValue(request.createdAtBefore, "form", true),
-            "updated_at_after" to
-    SdkClient.queryValue(request.updatedAtAfter, "form", true),
-            "updated_at_before" to
-    SdkClient.queryValue(request.updatedAtBefore, "form", true),
+            "fin_service_state" to SdkClient.queryValue(request.finServiceState, "form", true),
+            "fin_sales_state" to SdkClient.queryValue(request.finSalesState, "form", true),
+            "created_by_ids" to SdkClient.queryValue(request.createdByIds, "form", false),
+            "last_updated_by_ids" to SdkClient.queryValue(request.lastUpdatedByIds, "form", false),
+            "created_at_after" to SdkClient.queryValue(request.createdAtAfter, "form", true),
+            "created_at_before" to SdkClient.queryValue(request.createdAtBefore, "form", true),
+            "updated_at_after" to SdkClient.queryValue(request.updatedAtAfter, "form", true),
+            "updated_at_before" to SdkClient.queryValue(request.updatedAtBefore, "form", true),
         )
-
-
-
-
-
 }
