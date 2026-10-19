@@ -17,391 +17,265 @@ import dev.octri.showcase.intercom.Validation
 
 object Calls {
 
-    data class ListCallsWithTranscriptsResponseDataItem(
-        /** String representing the object's type. Always has the value `call`. */
-        val type: String? = null,
-        /** The id of the call. */
-        val id: String? = null,
-        /** The id of the conversation associated with the call, if any. */
-        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
-        val conversationId: String? = null,
-        /** The id of the admin associated with the call, if any. */
-        @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
-        /** The id of the contact associated with the call, if any. */
-        @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
-        /** The current state of the call. */
-        val state: String? = null,
-        /** Optional API value serialized in the `initiated_at` wire field. */
-        @com.fasterxml.jackson.annotation.JsonProperty("initiated_at")
-        val initiatedAt: Datetime? = null,
-        /** Optional API value serialized in the `answered_at` wire field. */
-        @com.fasterxml.jackson.annotation.JsonProperty("answered_at")
-        val answeredAt: Datetime? = null,
-        /** Optional API value serialized in the `ended_at` wire field. */
-        @com.fasterxml.jackson.annotation.JsonProperty("ended_at") val endedAt: Datetime? = null,
-        /** Optional API value serialized in the `created_at` wire field. */
-        @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-        val createdAt: Datetime? = null,
-        /** Optional API value serialized in the `updated_at` wire field. */
-        @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-        val updatedAt: Datetime? = null,
-        /** API URL to download or redirect to the call recording if available. */
-        @com.fasterxml.jackson.annotation.JsonProperty("recording_url")
-        val recordingUrl: String? = null,
-        /** API URL to download or redirect to the call transcript if available. */
-        @com.fasterxml.jackson.annotation.JsonProperty("transcription_url")
-        val transcriptionUrl: String? = null,
-        /** The type of call. */
-        @com.fasterxml.jackson.annotation.JsonProperty("call_type") val callType: String? = null,
-        /** The direction of the call. */
-        val direction: String? = null,
-        /** The reason for the call end, if applicable. */
-        @com.fasterxml.jackson.annotation.JsonProperty("ended_reason")
-        val endedReason: String? = null,
-        /** The phone number involved in the call, in E.164 format. */
-        val phone: String? = null,
-        /** API URL to the AI Agent (Fin) call recording if available. */
-        @com.fasterxml.jackson.annotation.JsonProperty("fin_recording_url")
-        val finRecordingUrl: String? = null,
-        /** API URL to the AI Agent (Fin) call transcript if available. */
-        @com.fasterxml.jackson.annotation.JsonProperty("fin_transcription_url")
-        val finTranscriptionUrl: String? = null,
-        /** The call transcript if available, otherwise an empty array. */
-        val transcript: List<Map<String, Any>>? = null,
-        /** The status of the transcript if available. */
-        @com.fasterxml.jackson.annotation.JsonProperty("transcript_status")
-        val transcriptStatus: String? = null,
-    )
+data class ListCallsWithTranscriptsResponseDataItem(
+    /**
+     * String representing the object's type. Always has the value `call`.
+     */
+    val type: String? = null,
+    /**
+     * The id of the call.
+     */
+    val id: String? = null,
+    /**
+     * The id of the conversation associated with the call, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
+    /**
+     * The id of the admin associated with the call, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
+    /**
+     * The id of the contact associated with the call, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
+    /**
+     * The current state of the call.
+     */
+    val state: String? = null,
+    /**
+     * Optional API value serialized in the `initiated_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("initiated_at") val initiatedAt: Datetime? = null,
+    /**
+     * Optional API value serialized in the `answered_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("answered_at") val answeredAt: Datetime? = null,
+    /**
+     * Optional API value serialized in the `ended_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ended_at") val endedAt: Datetime? = null,
+    /**
+     * Optional API value serialized in the `created_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Datetime? = null,
+    /**
+     * Optional API value serialized in the `updated_at` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Datetime? = null,
+    /**
+     * API URL to download or redirect to the call recording if available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("recording_url") val recordingUrl: String? = null,
+    /**
+     * API URL to download or redirect to the call transcript if available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("transcription_url") val transcriptionUrl: String? = null,
+    /**
+     * The type of call.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("call_type") val callType: String? = null,
+    /**
+     * The direction of the call.
+     */
+    val direction: String? = null,
+    /**
+     * The reason for the call end, if applicable.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ended_reason") val endedReason: String? = null,
+    /**
+     * The phone number involved in the call, in E.164 format.
+     */
+    val phone: String? = null,
+    /**
+     * API URL to the AI Agent (Fin) call recording if available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fin_recording_url") val finRecordingUrl: String? = null,
+    /**
+     * API URL to the AI Agent (Fin) call transcript if available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fin_transcription_url") val finTranscriptionUrl: String? = null,
+    /**
+     * The call transcript if available, otherwise an empty array.
+     */
+    val transcript: List<Map<String, Any>>? = null,
+    /**
+     * The status of the transcript if available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("transcript_status") val transcriptStatus: String? = null
+)
 
-    data class ListCallsWithTranscriptsResponse(
-        val type: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("data")
-        val `data`: List<ListCallsWithTranscriptsResponseDataItem>? = null,
-    )
+data class ListCallsWithTranscriptsResponse(
+    val type: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListCallsWithTranscriptsResponseDataItem>? = null
+)
+
 
     /**
-     * Lists calls in a paginated result set. Use `page` and `per_page` to navigate the results;
-     * `per_page` defaults to 25 and has a maximum of 25.
+     * Lists calls in a paginated result set. Use `page` and `per_page` to navigate the results; `per_page` defaults to 25 and has a maximum of 25.
      *
      * Retrieve a paginated list of calls.
      *
      * @param page The page of results to fetch. Defaults to first page
      * @param perPage How many results to display per page. Defaults to 25. Max 25.
      */
-    fun listCalls(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CallList {
-        return SdkClient.request<CallList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/calls",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "listCalls",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listCalls(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CallList {
+        return SdkClient.request<CallList>(SdkClient.RequestSpec("GET", "/calls", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "listCalls", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a single call by its identifier. Use `call_id` to select the call whose details you
-     * need.
+     * Retrieves a single call by its identifier. Use `call_id` to select the call whose details you need.
      *
      * Retrieve a single call by id.
      *
      * @param callId The id of the call to retrieve
      */
-    fun showCall(
-        clientConfig: ClientConfig,
-        callId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Call {
-        return SdkClient.request<Call>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/calls/${SdkClient.encodePathSegment(callId)}",
-                    config = clientConfig,
-                    operationId = "showCall",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun showCall(clientConfig: ClientConfig, callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Call {
+        return SdkClient.request<Call>(SdkClient.RequestSpec("GET", "/calls/${SdkClient.encodePathSegment(callId)}", config = clientConfig, operationId = "showCall", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a redirect to a signed URL for a call recording when one is available. Use
-     * `call_id` to identify the call whose recording you want to access.
+     * Retrieves a redirect to a signed URL for a call recording when one is available. Use `call_id` to identify the call whose recording you want to access.
      *
      * Redirects to a signed URL for the call's recording if it exists.
      *
      * @param callId The id of the call
      */
-    fun showCallRecording(
-        clientConfig: ClientConfig,
-        callId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Any {
-        return SdkClient.request<Any>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/calls/${SdkClient.encodePathSegment(callId)}/recording",
-                    config = clientConfig,
-                    operationId = "showCallRecording",
-                    decoder = SdkClient.ResponseDecoder.EMPTY,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun showCallRecording(clientConfig: ClientConfig, callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Any {
+        return SdkClient.request<Any>(SdkClient.RequestSpec("GET", "/calls/${SdkClient.encodePathSegment(callId)}/recording", config = clientConfig, operationId = "showCallRecording", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves the transcript for a call as a downloadable text file. Use `call_id` to identify
-     * the call whose transcript you need.
+     * Retrieves the transcript for a call as a downloadable text file. Use `call_id` to identify the call whose transcript you need.
      *
      * Returns the transcript for the specified call as a downloadable text file.
      *
      * @param callId The id of the call
      */
-    fun showCallTranscript(
-        clientConfig: ClientConfig,
-        callId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): String {
-        return SdkClient.request<String>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/calls/${SdkClient.encodePathSegment(callId)}/transcript",
-                    config = clientConfig,
-                    operationId = "showCallTranscript",
-                    decoder = SdkClient.ResponseDecoder.TEXT,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java),
-                )
-            )
-            .data
+    fun showCallTranscript(clientConfig: ClientConfig, callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): String {
+        return SdkClient.request<String>(SdkClient.RequestSpec("GET", "/calls/${SdkClient.encodePathSegment(callId)}/transcript", config = clientConfig, operationId = "showCallTranscript", decoder = SdkClient.ResponseDecoder.TEXT, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists calls associated with the specified conversation IDs and includes transcripts when
-     * available. Supply between 1 and 20 IDs in `conversation_ids` to retrieve the matching calls.
-     * Use this endpoint when you need call details and transcript availability for a set of
-     * conversations.
+     * Lists calls associated with the specified conversation IDs and includes transcripts when available. Supply between 1 and 20 IDs in `conversation_ids` to retrieve the matching calls. Use this endpoint when you need call details and transcript availability for a set of conversations.
      *
-     * Retrieve calls by a list of conversation ids and include transcripts when available. A
-     * maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are
-     * provided, a 400 error is returned.
+     * Retrieve calls by a list of conversation ids and include transcripts when available. A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.
      *
-     * @param conversationIds A list of conversation ids to fetch calls for. Maximum 20.
+     * @param conversationIds A list of conversation ids to fetch calls for. Maximum
+     *   20.
      */
-    fun listCallsWithTranscripts(
-        clientConfig: ClientConfig,
-        conversationIds: List<String>,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ListCallsWithTranscriptsResponse {
-        Validation.validateItems(
-            "conversation_ids",
-            conversationIds,
-            Validation.LengthOpts(min = 1, max = 20),
-        )
+    fun listCallsWithTranscripts(clientConfig: ClientConfig, conversationIds: List<String>, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ListCallsWithTranscriptsResponse {
+        Validation.validateItems("conversation_ids", conversationIds, Validation.LengthOpts(min = 1, max = 20))
 
-        return SdkClient.request<ListCallsWithTranscriptsResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/calls/search",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("conversation_ids" to (conversationIds)),
-                    operationId = "listCallsWithTranscripts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<ListCallsWithTranscriptsResponse>(SdkClient.RequestSpec("POST", "/calls/search", config = clientConfig, body = SdkClient.bodyMap("conversation_ids" to (conversationIds)), operationId = "listCallsWithTranscripts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Register a Fin Voice call with Intercom. This endpoint creates an external reference that
-     * links an external call identifier to an Intercom call and conversation. The call can be from
-     * different sources: - AWS Connect (default) - Five9 - Zoom Phone
+     * Register a Fin Voice call with Intercom. This endpoint creates an external reference that links an external call identifier to an Intercom call and conversation. The call can be from different sources: - AWS Connect (default) - Five9 - Zoom Phone
      *
      * @param phoneNumber Phone number in E.164 format for the call
      * @param callId External call identifier from the call provider
-     * @param source Source of the call. Can be "five9", "zoom_phone", or defaults to "aws_connect"
+     * @param source Source of the call. Can be "five9", "zoom_phone", or defaults to
+     *   "aws_connect"
      * @param data Additional metadata about the call
      */
-    fun registerFinVoiceCall(
-        clientConfig: ClientConfig,
-        phoneNumber: String,
-        callId: String,
-        source: RegisterFinVoiceCallRequestSourceEnum? = null,
-        data: SdkClient.SdkOptional<Map<String, Any>?>? = null,
-        options: RequestOptions? = null,
-    ): AiCallResponse {
-        return SdkClient.request<AiCallResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/fin_voice/register",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "phone_number" to (phoneNumber),
-                            "call_id" to (callId),
-                            "source" to (SdkClient.omitIfNull(source)),
-                            "data" to (data ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "registerFinVoiceCall",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "409" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun registerFinVoiceCall(clientConfig: ClientConfig, phoneNumber: String, callId: String, source: RegisterFinVoiceCallRequestSourceEnum? = null, data: SdkClient.SdkOptional<Map<String, Any>?>? = null, options: RequestOptions? = null): AiCallResponse {
+        return SdkClient.request<AiCallResponse>(SdkClient.RequestSpec("POST", "/fin_voice/register", config = clientConfig, body = SdkClient.bodyMap("phone_number" to (phoneNumber), "call_id" to (callId), "source" to (SdkClient.omitIfNull(source)), "data" to (data ?: SdkClient.SdkOptional.Omitted)), operationId = "registerFinVoiceCall", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("400" to Error2::class.java, "409" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Retrieve information about a Fin Voice call using the external reference ID.
      *
      * @param id The external reference ID
      */
-    fun collectFinVoiceCallById(
-        clientConfig: ClientConfig,
-        id: Long,
-        options: RequestOptions? = null,
-    ): AiCallResponse {
-        return SdkClient.request<AiCallResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/fin_voice/collect/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "collectFinVoiceCallById",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java, "default" to Error2::class.java),
-                )
-            )
-            .data
+    fun collectFinVoiceCallById(clientConfig: ClientConfig, id: Long, options: RequestOptions? = null): AiCallResponse {
+        return SdkClient.request<AiCallResponse>(SdkClient.RequestSpec("GET", "/fin_voice/collect/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "collectFinVoiceCallById", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
      * Retrieve information about a Fin Voice call using the external call identifier.
      *
      * @param externalId The external call identifier from the call provider
      */
-    fun collectFinVoiceCallByExternalId(
-        clientConfig: ClientConfig,
-        externalId: String,
-        options: RequestOptions? = null,
-    ): AiCallResponse {
-        return SdkClient.request<AiCallResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/fin_voice/external_id/${SdkClient.encodePathSegment(externalId)}",
-                    config = clientConfig,
-                    operationId = "collectFinVoiceCallByExternalId",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java, "default" to Error2::class.java),
-                )
-            )
-            .data
+    fun collectFinVoiceCallByExternalId(clientConfig: ClientConfig, externalId: String, options: RequestOptions? = null): AiCallResponse {
+        return SdkClient.request<AiCallResponse>(SdkClient.RequestSpec("GET", "/fin_voice/external_id/${SdkClient.encodePathSegment(externalId)}", config = clientConfig, operationId = "collectFinVoiceCallByExternalId", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("404" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieve information about a Fin Voice call using the phone number. Returns the most recent
-     * matched call for the given phone number, ordered by creation date.
+     * Retrieve information about a Fin Voice call using the phone number. Returns the most recent matched call for the given phone number, ordered by creation date.
      *
      * @param phoneNumber Phone number in E.164 format
      */
-    fun collectFinVoiceCallByPhoneNumber(
-        clientConfig: ClientConfig,
-        phoneNumber: String,
-        options: RequestOptions? = null,
-    ): AiCallResponse {
-        return SdkClient.request<AiCallResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/fin_voice/phone_number/${SdkClient.encodePathSegment(phoneNumber)}",
-                    config = clientConfig,
-                    operationId = "collectFinVoiceCallByPhoneNumber",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "default" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun collectFinVoiceCallByPhoneNumber(clientConfig: ClientConfig, phoneNumber: String, options: RequestOptions? = null): AiCallResponse {
+        return SdkClient.request<AiCallResponse>(SdkClient.RequestSpec("GET", "/fin_voice/phone_number/${SdkClient.encodePathSegment(phoneNumber)}", config = clientConfig, operationId = "collectFinVoiceCallByPhoneNumber", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "default" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieve information about Fin Voice calls associated with a conversation. Returns all
-     * matched calls for the given conversation ID. A conversation may have multiple associated
-     * calls.
+     * Retrieve information about Fin Voice calls associated with a conversation. Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.
      *
      * @param conversationId The Intercom conversation identifier
      */
-    fun collectFinVoiceCallsByConversationId(
-        clientConfig: ClientConfig,
-        conversationId: String,
-        options: RequestOptions? = null,
-    ): List<AiCallResponse> {
-        return SdkClient.request<List<AiCallResponse>>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/fin_voice/conversation/${SdkClient.encodePathSegment(conversationId)}",
-                    config = clientConfig,
-                    operationId = "collectFinVoiceCallsByConversationId",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "default" to Error2::class.java),
-                )
-            )
-            .data
+    fun collectFinVoiceCallsByConversationId(clientConfig: ClientConfig, conversationId: String, options: RequestOptions? = null): List<AiCallResponse> {
+        return SdkClient.request<List<AiCallResponse>>(SdkClient.RequestSpec("GET", "/fin_voice/conversation/${SdkClient.encodePathSegment(conversationId)}", config = clientConfig, operationId = "collectFinVoiceCallsByConversationId", decoder = SdkClient.ResponseDecoder.JSON, options = options, errors = mapOf("401" to Error2::class.java, "default" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

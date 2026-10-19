@@ -12,36 +12,22 @@ import dev.octri.showcase.intercom.SdkClient
 
 object JobsMethods {
 
+
     /**
-     * Retrieves the execution status and result details for an asynchronous job. Use the `job_id`
-     * provided by Intercom to check whether the job is pending, successful, or failed. When the job
-     * creates a resource, the response can include its type, identifier, and URL.
+     * Retrieves the execution status and result details for an asynchronous job. Use the `job_id` provided by Intercom to check whether the job is pending, successful, or failed. When the job creates a resource, the response can include its type, identifier, and URL.
      *
      * Retrieve the status of job execution.
      *
      * @param jobId The unique identifier for the job which is given by Intercom
      */
-    fun jobsStatus(
-        clientConfig: ClientConfig,
-        jobId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Jobs {
-        return SdkClient.request<Jobs>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/jobs/status/${SdkClient.encodePathSegment(jobId)}",
-                    config = clientConfig,
-                    operationId = "jobsStatus",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun jobsStatus(clientConfig: ClientConfig, jobId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Jobs {
+        return SdkClient.request<Jobs>(SdkClient.RequestSpec("GET", "/jobs/status/${SdkClient.encodePathSegment(jobId)}", config = clientConfig, operationId = "jobsStatus", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

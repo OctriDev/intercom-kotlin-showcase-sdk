@@ -7,248 +7,376 @@ import dev.octri.showcase.intercom.models.dataconnectors.DataConnector
 import dev.octri.showcase.intercom.models.dataconnectors.DataConnectorExecutionResult
 import dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersion
 
-/** Required object value serialized in the `headers[]` wire field. */
+/**
+ * Required object value serialized in the `headers[]` wire field.
+ */
 data class CreateDataConnectorRequestHeadersItem(
-    /** The header name. */
-    val name: String? = null,
-    /** The header value. Supports template variables. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
-)
-
-/** Required object value serialized in the `data_inputs[]` wire field. */
-data class CreateDataConnectorRequestDataInputsItem(
-    /** The parameter name. */
-    val name: String? = null,
-    /** The parameter type. */
-    val type: CreateDataConnectorRequestDataInputsItemTypeEnum? = null,
-    /** A description of the parameter. */
-    val description: String? = null,
-    /** Whether the parameter is required. */
-    val required: Boolean? = null,
-    /** The default value for the parameter. Defaults to an empty string if omitted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_value")
-    val defaultValue: String? = null,
-)
-
-/** You can create a data connector by providing the required parameters. */
-data class CreateDataConnectorRequest(
-    /** The name of the data connector. */
-    val name: String,
-    /** A description of what this data connector does. */
-    val description: String? = null,
-    /** The HTTP method used when calling the external API. */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_method")
-    val httpMethod: CreateDataConnectorRequestHttpMethodEnum? = null,
-    /** The URL of the external API endpoint. Supports template variables like `{{order_id}}`. */
-    val url: String? = null,
-    /** The request body template. Supports template variables. */
-    val body: String? = null,
     /**
-     * Whether the connector is used directly by Fin (true) or only in workflows (false). Defaults
-     * to false.
+     * The header name.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage")
-    val directFinUsage: Boolean? = null,
-    /** The user types this connector is available for. */
-    val audiences: List<CreateDataConnectorRequestAudiencesItemEnum>? = null,
-    /** HTTP headers to include in the request. */
-    val headers: List<CreateDataConnectorRequestHeadersItem>? = null,
-    /** Input parameters accepted by the connector. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs")
-    val dataInputs: List<CreateDataConnectorRequestDataInputsItem>? = null,
-    /**
-     * Whether the connector requires customer authentication before executing. Defaults to false.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication")
-    val customerAuthentication: Boolean? = null,
-    /** Whether authentication is bypassed entirely (public endpoint). Defaults to false. */
-    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication")
-    val bypassAuthentication: Boolean? = null,
-    /** Whether to validate that all required data inputs have values before executing. */
-    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes")
-    val validateMissingAttributes: Boolean? = null,
-    /**
-     * A sample JSON response from the external API. Auto-generates `response_fields` and sets
-     * `configuration_response_type` to `mock_response_type`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("mock_response")
-    val mockResponse: Map<String, Any>? = null,
-    /** IDs of authentication tokens to attach to this data connector. */
-    @com.fasterxml.jackson.annotation.JsonProperty("token_ids") val tokenIds: List<String>? = null,
-)
-
-/** Cursor for the next page of results. */
-data class DataConnectorExecutionResultListPagesNext(
-    /** The cursor value to use for the next page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("starting_after")
-    val startingAfter: String? = null
-)
-
-/** Pagination information. */
-data class DataConnectorExecutionResultListPages(
-    /** Optional enumerated value serialized in the `type` wire field. */
-    val type: DataConnectorExecutionResultListPagesTypeEnum? = null,
-    /** The number of results per page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** Cursor for the next page of results. */
-    val next: DataConnectorExecutionResultListPagesNext? = null,
-)
-
-/** A paginated list of data connector execution results. */
-data class DataConnectorExecutionResultList(
-    /** The type of object - `list`. */
-    val type: DataConnectorExecutionResultListTypeEnum? = null,
-    /** An array of execution result objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<DataConnectorExecutionResult>? = null,
-    /** Pagination information. */
-    val pages: DataConnectorExecutionResultListPages? = null,
-)
-
-/** Cursor for the next page of results. */
-data class DataConnectorListPagesNext(
-    /** The cursor value to use for the next page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("starting_after")
-    val startingAfter: String? = null
-)
-
-/** Pagination information. */
-data class DataConnectorListPages(
-    /** Optional enumerated value serialized in the `type` wire field. */
-    val type: DataConnectorListPagesTypeEnum? = null,
-    /** The number of results per page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** Cursor for the next page of results. */
-    val next: DataConnectorListPagesNext? = null,
-)
-
-/** A paginated list of data connectors. */
-data class DataConnectorList(
-    /** The type of object - `list`. */
-    val type: DataConnectorListTypeEnum? = null,
-    /** An array of data connector objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DataConnector>? = null,
-    /** Pagination information. */
-    val pages: DataConnectorListPages? = null,
-)
-
-/** Cursor for the next page of results. */
-data class DataConnectorVersionListPagesNext(
-    /** The cursor value to use for the next page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("starting_after")
-    val startingAfter: String? = null
-)
-
-/** Pagination information. `next` is omitted on the last page. */
-data class DataConnectorVersionListPages(
-    /** Optional enumerated value serialized in the `type` wire field. */
-    val type: DataConnectorVersionListPagesTypeEnum? = null,
-    /** The number of results per page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** Cursor for the next page of results. */
-    val next: DataConnectorVersionListPagesNext? = null,
-)
-
-/** A paginated list of data connector versions, newest first. */
-data class DataConnectorVersionList(
-    /** The type of object - `list`. */
-    val type: DataConnectorVersionListTypeEnum? = null,
-    /** An array of data connector version objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<DataConnectorVersion>? = null,
-    /** Pagination information. `next` is omitted on the last page. */
-    val pages: DataConnectorVersionListPages? = null,
-)
-
-/** Response returned when a data connector is deleted. */
-data class DeletedDataConnectorObject(
-    /** The unique identifier for the data connector. */
-    val id: String? = null,
-    /** The type of object which was deleted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeletedDataConnectorObjectObjectEnum? = null,
-    /** Whether the data connector was deleted successfully. */
-    val deleted: Boolean? = null,
-)
-
-/** Required object value serialized in the `headers[]` wire field. */
-data class UpdateDataConnectorRequestHeadersItem(
-    /** The header name. */
     val name: String? = null,
-    /** The header value. Supports template variables. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
-)
-
-/** Required object value serialized in the `data_inputs[]` wire field. */
-data class UpdateDataConnectorRequestDataInputsItem(
-    /** The name of the input parameter. */
-    val name: String? = null,
-    /** The data type of the input. */
-    val type: UpdateDataConnectorRequestDataInputsItemTypeEnum? = null,
-    /** A description of the input parameter. Required for each input. */
-    val description: String? = null,
-    /** Whether this input is required. */
-    val required: Boolean? = null,
-    /** The default value for this input, if any. */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_value")
-    val defaultValue: String? = null,
+    /**
+     * The header value. Supports template variables.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
 )
 
 /**
- * Update an existing data connector. All fields are optional — only provided fields will be
- * updated. Set `state` to `live` or `draft` to change the connector's state.
+ * Required object value serialized in the `data_inputs[]` wire field.
  */
-data class UpdateDataConnectorRequest(
-    /** The name of the data connector. */
+data class CreateDataConnectorRequestDataInputsItem(
+    /**
+     * The parameter name.
+     */
     val name: String? = null,
-    /** A description of what this data connector does. */
+    /**
+     * The parameter type.
+     */
+    val type: CreateDataConnectorRequestDataInputsItemTypeEnum? = null,
+    /**
+     * A description of the parameter.
+     */
     val description: String? = null,
-    /** The desired state of the connector. */
-    val state: UpdateDataConnectorRequestStateEnum? = null,
-    /** The HTTP method used by the data connector. */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_method")
-    val httpMethod: UpdateDataConnectorRequestHttpMethodEnum? = null,
-    /** The URL of the external API endpoint. Supports template variables like `{{order_id}}`. */
-    val url: String? = null,
-    /** The request body template. Supports template variables. */
-    val body: String? = null,
-    /** Whether this connector is used directly by Fin. */
-    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage")
-    val directFinUsage: Boolean? = null,
-    /** The audience types this connector targets. */
-    val audiences: List<UpdateDataConnectorRequestAudiencesItemEnum>? = null,
-    /** HTTP headers to include in the request. */
-    val headers: List<UpdateDataConnectorRequestHeadersItem>? = null,
-    /** The input parameters accepted by this data connector. Replaces all existing inputs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs")
-    val dataInputs: List<UpdateDataConnectorRequestDataInputsItem>? = null,
-    /** Whether OTP authentication is enabled for this connector. */
-    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication")
-    val customerAuthentication: Boolean? = null,
-    /** Whether authentication is bypassed for this connector. */
-    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication")
-    val bypassAuthentication: Boolean? = null,
-    /** Whether to validate missing attributes before execution. */
-    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes")
-    val validateMissingAttributes: Boolean? = null,
     /**
-     * A sample JSON response from the external API. Auto-generates `response_fields` and sets
-     * `configuration_response_type` to `mock_response_type`.
+     * Whether the parameter is required.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("mock_response")
-    val mockResponse: Map<String, Any>? = null,
+    val required: Boolean? = null,
     /**
-     * IDs of authentication tokens to attach to this data connector. An empty array removes all
-     * tokens.
+     * The default value for the parameter. Defaults to an empty string if omitted.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("token_ids") val tokenIds: List<String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: String? = null
 )
 
-/** Payload for updating a data connector version. */
+/**
+ * You can create a data connector by providing the required parameters.
+ */
+data class CreateDataConnectorRequest(
+    /**
+     * The name of the data connector.
+     */
+    val name: String,
+    /**
+     * A description of what this data connector does.
+     */
+    val description: String? = null,
+    /**
+     * The HTTP method used when calling the external API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_method") val httpMethod: CreateDataConnectorRequestHttpMethodEnum? = null,
+    /**
+     * The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
+     */
+    val url: String? = null,
+    /**
+     * The request body template. Supports template variables.
+     */
+    val body: String? = null,
+    /**
+     * Whether the connector is used directly by Fin (true) or only in workflows (false). Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage") val directFinUsage: Boolean? = null,
+    /**
+     * The user types this connector is available for.
+     */
+    val audiences: List<CreateDataConnectorRequestAudiencesItemEnum>? = null,
+    /**
+     * HTTP headers to include in the request.
+     */
+    val headers: List<CreateDataConnectorRequestHeadersItem>? = null,
+    /**
+     * Input parameters accepted by the connector.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs") val dataInputs: List<CreateDataConnectorRequestDataInputsItem>? = null,
+    /**
+     * Whether the connector requires customer authentication before executing. Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication") val customerAuthentication: Boolean? = null,
+    /**
+     * Whether authentication is bypassed entirely (public endpoint). Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication") val bypassAuthentication: Boolean? = null,
+    /**
+     * Whether to validate that all required data inputs have values before executing.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes") val validateMissingAttributes: Boolean? = null,
+    /**
+     * A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("mock_response") val mockResponse: Map<String, Any>? = null,
+    /**
+     * IDs of authentication tokens to attach to this data connector.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("token_ids") val tokenIds: List<String>? = null
+)
+
+/**
+ * Cursor for the next page of results.
+ */
+data class DataConnectorExecutionResultListPagesNext(
+    /**
+     * The cursor value to use for the next page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("starting_after") val startingAfter: String? = null
+)
+
+/**
+ * Pagination information.
+ */
+data class DataConnectorExecutionResultListPages(
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
+    val type: DataConnectorExecutionResultListPagesTypeEnum? = null,
+    /**
+     * The number of results per page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
+    /**
+     * Cursor for the next page of results.
+     */
+    val next: DataConnectorExecutionResultListPagesNext? = null
+)
+
+/**
+ * A paginated list of data connector execution results.
+ */
+data class DataConnectorExecutionResultList(
+    /**
+     * The type of object - `list`.
+     */
+    val type: DataConnectorExecutionResultListTypeEnum? = null,
+    /**
+     * An array of execution result objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DataConnectorExecutionResult>? = null,
+    /**
+     * Pagination information.
+     */
+    val pages: DataConnectorExecutionResultListPages? = null
+)
+
+/**
+ * Cursor for the next page of results.
+ */
+data class DataConnectorListPagesNext(
+    /**
+     * The cursor value to use for the next page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("starting_after") val startingAfter: String? = null
+)
+
+/**
+ * Pagination information.
+ */
+data class DataConnectorListPages(
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
+    val type: DataConnectorListPagesTypeEnum? = null,
+    /**
+     * The number of results per page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
+    /**
+     * Cursor for the next page of results.
+     */
+    val next: DataConnectorListPagesNext? = null
+)
+
+/**
+ * A paginated list of data connectors.
+ */
+data class DataConnectorList(
+    /**
+     * The type of object - `list`.
+     */
+    val type: DataConnectorListTypeEnum? = null,
+    /**
+     * An array of data connector objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DataConnector>? = null,
+    /**
+     * Pagination information.
+     */
+    val pages: DataConnectorListPages? = null
+)
+
+/**
+ * Cursor for the next page of results.
+ */
+data class DataConnectorVersionListPagesNext(
+    /**
+     * The cursor value to use for the next page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("starting_after") val startingAfter: String? = null
+)
+
+/**
+ * Pagination information. `next` is omitted on the last page.
+ */
+data class DataConnectorVersionListPages(
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
+    val type: DataConnectorVersionListPagesTypeEnum? = null,
+    /**
+     * The number of results per page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
+    /**
+     * Cursor for the next page of results.
+     */
+    val next: DataConnectorVersionListPagesNext? = null
+)
+
+/**
+ * A paginated list of data connector versions, newest first.
+ */
+data class DataConnectorVersionList(
+    /**
+     * The type of object - `list`.
+     */
+    val type: DataConnectorVersionListTypeEnum? = null,
+    /**
+     * An array of data connector version objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DataConnectorVersion>? = null,
+    /**
+     * Pagination information. `next` is omitted on the last page.
+     */
+    val pages: DataConnectorVersionListPages? = null
+)
+
+/**
+ * Response returned when a data connector is deleted.
+ */
+data class DeletedDataConnectorObject(
+    /**
+     * The unique identifier for the data connector.
+     */
+    val id: String? = null,
+    /**
+     * The type of object which was deleted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedDataConnectorObjectObjectEnum? = null,
+    /**
+     * Whether the data connector was deleted successfully.
+     */
+    val deleted: Boolean? = null
+)
+
+/**
+ * Required object value serialized in the `headers[]` wire field.
+ */
+data class UpdateDataConnectorRequestHeadersItem(
+    /**
+     * The header name.
+     */
+    val name: String? = null,
+    /**
+     * The header value. Supports template variables.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
+)
+
+/**
+ * Required object value serialized in the `data_inputs[]` wire field.
+ */
+data class UpdateDataConnectorRequestDataInputsItem(
+    /**
+     * The name of the input parameter.
+     */
+    val name: String? = null,
+    /**
+     * The data type of the input.
+     */
+    val type: UpdateDataConnectorRequestDataInputsItemTypeEnum? = null,
+    /**
+     * A description of the input parameter. Required for each input.
+     */
+    val description: String? = null,
+    /**
+     * Whether this input is required.
+     */
+    val required: Boolean? = null,
+    /**
+     * The default value for this input, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: String? = null
+)
+
+/**
+ * Update an existing data connector. All fields are optional — only provided fields will be updated. Set `state` to `live` or `draft` to change the connector's state.
+ */
+data class UpdateDataConnectorRequest(
+    /**
+     * The name of the data connector.
+     */
+    val name: String? = null,
+    /**
+     * A description of what this data connector does.
+     */
+    val description: String? = null,
+    /**
+     * The desired state of the connector.
+     */
+    val state: UpdateDataConnectorRequestStateEnum? = null,
+    /**
+     * The HTTP method used by the data connector.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_method") val httpMethod: UpdateDataConnectorRequestHttpMethodEnum? = null,
+    /**
+     * The URL of the external API endpoint. Supports template variables like `{{order_id}}`.
+     */
+    val url: String? = null,
+    /**
+     * The request body template. Supports template variables.
+     */
+    val body: String? = null,
+    /**
+     * Whether this connector is used directly by Fin.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("direct_fin_usage") val directFinUsage: Boolean? = null,
+    /**
+     * The audience types this connector targets.
+     */
+    val audiences: List<UpdateDataConnectorRequestAudiencesItemEnum>? = null,
+    /**
+     * HTTP headers to include in the request.
+     */
+    val headers: List<UpdateDataConnectorRequestHeadersItem>? = null,
+    /**
+     * The input parameters accepted by this data connector. Replaces all existing inputs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data_inputs") val dataInputs: List<UpdateDataConnectorRequestDataInputsItem>? = null,
+    /**
+     * Whether OTP authentication is enabled for this connector.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("customer_authentication") val customerAuthentication: Boolean? = null,
+    /**
+     * Whether authentication is bypassed for this connector.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("bypass_authentication") val bypassAuthentication: Boolean? = null,
+    /**
+     * Whether to validate missing attributes before execution.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("validate_missing_attributes") val validateMissingAttributes: Boolean? = null,
+    /**
+     * A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("mock_response") val mockResponse: Map<String, Any>? = null,
+    /**
+     * IDs of authentication tokens to attach to this data connector. An empty array removes all tokens.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("token_ids") val tokenIds: List<String>? = null
+)
+
+/**
+ * Payload for updating a data connector version.
+ */
 data class UpdateDataConnectorVersionRequest(
     /**
-     * The new note for the version. Sending `null`, an empty string, or a whitespace-only string
-     * clears the note.
+     * The new note for the version. Sending `null`, an empty string, or a whitespace-only string clears the note.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("note", required = true) val note: String?
 )

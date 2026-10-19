@@ -7,87 +7,132 @@ import dev.octri.showcase.intercom.models.tickets.TicketPart
 
 typealias TicketCustomAttributes = Map<String, Any>
 
-/** The author that wrote or triggered the part. Can be a bot, admin, team or user. */
+/**
+ * The author that wrote or triggered the part. Can be a bot, admin, team or user.
+ */
 data class TicketPartAuthor(
-    /** The type of the author */
+    /**
+     * The type of the author
+     */
     val type: TicketPartAuthorTypeEnum? = null,
-    /** The id of the author */
+    /**
+     * The id of the author
+     */
     val id: String? = null,
-    /** The name of the author */
+    /**
+     * The name of the author
+     */
     val name: String? = null,
-    /** The email of the author */
-    val email: String? = null,
+    /**
+     * The email of the author
+     */
+    val email: String? = null
 )
 
 /**
- * A list of Ticket Part objects for each note and event in the ticket. There is a limit of 500
- * parts.
+ * A list of Ticket Part objects for each note and event in the ticket. There is a limit of 500 parts.
  */
 data class TicketParts(
-    /** Optional enumerated value serialized in the `type` wire field. */
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
     val type: TicketPartsTypeEnum? = null,
-    /** A list of Ticket Part objects for each ticket. There is a limit of 500 parts. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_parts")
-    val ticketParts: List<TicketPart>? = null,
-    /** Optional `integer` value serialized in the `total_count` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+    /**
+     * A list of Ticket Part objects for each ticket. There is a limit of 500 parts.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_parts") val ticketParts: List<TicketPart>? = null,
+    /**
+     * Optional `integer` value serialized in the `total_count` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null
 )
 
 typealias TicketRequestCustomAttributes = Map<String, Any>
 
-/** Ticket type attribute, used to define each data field to be captured in a ticket. */
+/**
+ * Ticket type attribute, used to define each data field to be captured in a ticket.
+ */
 data class TicketTypeAttribute(
-    /** String representing the object's type. Always has the value `ticket_type_attribute`. */
+    /**
+     * String representing the object's type. Always has the value `ticket_type_attribute`.
+     */
     val type: String? = null,
-    /** The id representing the ticket type attribute. */
+    /**
+     * The id representing the ticket type attribute.
+     */
     val id: String? = null,
-    /** The id of the workspace that the ticket type attribute belongs to. */
+    /**
+     * The id of the workspace that the ticket type attribute belongs to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("workspace_id") val workspaceId: String? = null,
-    /** The name of the ticket type attribute */
+    /**
+     * The name of the ticket type attribute
+     */
     val name: String? = null,
-    /** The description of the ticket type attribute */
+    /**
+     * The description of the ticket type attribute
+     */
     val description: String? = null,
     /**
-     * The type of the data attribute (allowed values: "string list integer decimal boolean datetime
-     * files")
+     * The type of the data attribute (allowed values: "string list integer decimal boolean datetime files")
      */
     @com.fasterxml.jackson.annotation.JsonProperty("data_type") val dataType: String? = null,
-    /** Input options for the attribute */
-    @com.fasterxml.jackson.annotation.JsonProperty("input_options")
-    val inputOptions: Map<String, Any>? = null,
-    /** The order of the attribute against other attributes */
+    /**
+     * Input options for the attribute
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("input_options") val inputOptions: Map<String, Any>? = null,
+    /**
+     * The order of the attribute against other attributes
+     */
     val order: Long? = null,
-    /** Whether the attribute is required or not for teammates. */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create")
-    val requiredToCreate: Boolean? = null,
-    /** Whether the attribute is required or not for contacts. */
-    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create_for_contacts")
-    val requiredToCreateForContacts: Boolean? = null,
-    /** Whether the attribute is visible or not to teammates. */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_on_create")
-    val visibleOnCreate: Boolean? = null,
-    /** Whether the attribute is visible or not to contacts. */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_contacts")
-    val visibleToContacts: Boolean? = null,
-    /** Whether the attribute is built in or not. */
+    /**
+     * Whether the attribute is required or not for teammates.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create") val requiredToCreate: Boolean? = null,
+    /**
+     * Whether the attribute is required or not for contacts.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("required_to_create_for_contacts") val requiredToCreateForContacts: Boolean? = null,
+    /**
+     * Whether the attribute is visible or not to teammates.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_on_create") val visibleOnCreate: Boolean? = null,
+    /**
+     * Whether the attribute is visible or not to contacts.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_contacts") val visibleToContacts: Boolean? = null,
+    /**
+     * Whether the attribute is built in or not.
+     */
     val default: Boolean? = null,
-    /** The id of the ticket type that the attribute belongs to. */
+    /**
+     * The id of the ticket type that the attribute belongs to.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_id") val ticketTypeId: Long? = null,
-    /** Whether the ticket type attribute is archived or not. */
+    /**
+     * Whether the ticket type attribute is archived or not.
+     */
     val archived: Boolean? = null,
-    /** The date and time the ticket type attribute was created. */
+    /**
+     * The date and time the ticket type attribute was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The date and time the ticket type attribute was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    /**
+     * The date and time the ticket type attribute was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
 )
 
-/** A list of attributes associated with a given ticket type. */
+/**
+ * A list of attributes associated with a given ticket type.
+ */
 data class TicketTypeAttributeList(
     /**
      * String representing the object's type. Always has the value `ticket_type_attributes.list`.
      */
     val type: String? = null,
-    /** A list of ticket type attributes associated with a given ticket type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_attributes")
-    val ticketTypeAttributes: List<TicketTypeAttribute?>? = null,
+    /**
+     * A list of ticket type attributes associated with a given ticket type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_attributes") val ticketTypeAttributes: List<TicketTypeAttribute?>? = null
 )

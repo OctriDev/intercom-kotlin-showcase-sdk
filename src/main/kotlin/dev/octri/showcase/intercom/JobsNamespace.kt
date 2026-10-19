@@ -3,24 +3,15 @@
 
 package dev.octri.showcase.intercom
 
+
 class JobsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves the execution status and result details for an asynchronous job. Use the `job_id`
-     * provided by Intercom to check whether the job is pending, successful, or failed. When the job
-     * creates a resource, the response can include its type, identifier, and URL.
+     * Retrieves the execution status and result details for an asynchronous job. Use the `job_id` provided by Intercom to check whether the job is pending, successful, or failed. When the job creates a resource, the response can include its type, identifier, and URL.
      *
      * Retrieve the status of job execution.
      */
-    fun status(
-        jobId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Jobs {
-        return dev.octri.showcase.intercom.methods.JobsMethods.jobsStatus(
-            clientConfig,
-            jobId,
-            intercomVersion,
-            options,
-        )
+    fun status(jobId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Jobs {
+        return dev.octri.showcase.intercom.methods.JobsMethods.jobsStatus(clientConfig, jobId, intercomVersion, options)
     }
+
 }

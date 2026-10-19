@@ -3,147 +3,60 @@
 
 package dev.octri.showcase.intercom
 
+
 class DynamicContentNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists dynamic content for a workspace, ordered from most recently updated to least recently
-     * updated. Use `page` and `per_page` to paginate the results; access requires the
-     * `read_dynamic_content` scope.
+     * Lists dynamic content for a workspace, ordered from most recently updated to least recently updated. Use `page` and `per_page` to paginate the results; access requires the `read_dynamic_content` scope.
      *
-     * You can fetch a list of all dynamic content for a workspace, most recently updated first.
-     * Requires the `read_dynamic_content` scope.
+     * You can fetch a list of all dynamic content for a workspace, most recently updated first. Requires the `read_dynamic_content` scope.
      */
-    fun list(
-        page: Long? = null,
-        perPage: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DynamicContentList {
-        return dev.octri.showcase.intercom.methods.DynamicContentMethods.listDynamicContents(
-            clientConfig,
-            page,
-            perPage,
-            intercomVersion,
-            options,
-        )
+    fun list(page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DynamicContentList {
+        return dev.octri.showcase.intercom.methods.DynamicContentMethods.listDynamicContents(clientConfig, page, perPage, intercomVersion, options)
     }
 
     /**
-     * Lists dynamic content for a workspace, ordered from most recently updated to least recently
-     * updated. Use `page` and `per_page` to paginate the results; access requires the
-     * `read_dynamic_content` scope.
+     * Lists dynamic content for a workspace, ordered from most recently updated to least recently updated. Use `page` and `per_page` to paginate the results; access requires the `read_dynamic_content` scope.
      *
-     * You can fetch a list of all dynamic content for a workspace, most recently updated first.
-     * Requires the `read_dynamic_content` scope.
+     * You can fetch a list of all dynamic content for a workspace, most recently updated first. Requires the `read_dynamic_content` scope.
      */
-    fun listPaginated(
-        page: Long? = null,
-        perPage: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-        yieldFn: (DynamicContent) -> Boolean,
-    ) {
-        dev.octri.showcase.intercom.methods.DynamicContentMethods.listDynamicContentsPaginated(
-            clientConfig,
-            page,
-            perPage,
-            intercomVersion,
-            options,
-            yieldFn,
-        )
+    fun listPaginated(page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldFn: (DynamicContent) -> Boolean) {
+        dev.octri.showcase.intercom.methods.DynamicContentMethods.listDynamicContentsPaginated(clientConfig, page, perPage, intercomVersion, options, yieldFn)
     }
 
     /**
-     * Creates reusable dynamic content that you can insert into Help Center articles. Provide a
-     * unique `name`, choose `inline` or `block` for `content_type`, and include at least one
-     * variation with a default-locale variation that applies to all brands. The authenticated user
-     * needs the `read_write_dynamic_content` scope.
+     * Creates reusable dynamic content that you can insert into Help Center articles. Provide a unique `name`, choose `inline` or `block` for `content_type`, and include at least one variation with a default-locale variation that applies to all brands. The authenticated user needs the `read_write_dynamic_content` scope.
      *
      * You can create dynamic content. Requires the `read_write_dynamic_content` scope.
      */
-    fun create(
-        name: String,
-        contentType: DynamicContentCreateRequestContentTypeEnum,
-        defaultLocale: String,
-        variations: List<DynamicContentVariationRequest>,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DynamicContent {
-        return dev.octri.showcase.intercom.methods.DynamicContentMethods.createDynamicContent(
-            clientConfig,
-            name,
-            contentType,
-            defaultLocale,
-            variations,
-            intercomVersion,
-            options,
-        )
+    fun create(name: String, contentType: DynamicContentCreateRequestContentTypeEnum, defaultLocale: String, variations: List<DynamicContentVariationRequest>, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DynamicContent {
+        return dev.octri.showcase.intercom.methods.DynamicContentMethods.createDynamicContent(clientConfig, name, contentType, defaultLocale, variations, intercomVersion, options)
     }
 
     /**
-     * Retrieves a single reusable dynamic content item by its unique identifier. Use the `id` path
-     * parameter to select the item and the `Intercom-Version` header to choose an API version. The
-     * authenticated user needs the `read_dynamic_content` scope.
+     * Retrieves a single reusable dynamic content item by its unique identifier. Use the `id` path parameter to select the item and the `Intercom-Version` header to choose an API version. The authenticated user needs the `read_dynamic_content` scope.
      *
      * You can fetch a single dynamic content by its id. Requires the `read_dynamic_content` scope.
      */
-    fun get(
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DynamicContent {
-        return dev.octri.showcase.intercom.methods.DynamicContentMethods.getDynamicContent(
-            clientConfig,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun get(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DynamicContent {
+        return dev.octri.showcase.intercom.methods.DynamicContentMethods.getDynamicContent(clientConfig, id, intercomVersion, options)
     }
 
     /**
-     * Updates an existing reusable dynamic content item. Provide only the fields you want to
-     * change; if you send `variations`, that array replaces the full set and any omitted existing
-     * variations are deleted. The authenticated user needs the `read_write_dynamic_content` scope.
+     * Updates an existing reusable dynamic content item. Provide only the fields you want to change; if you send `variations`, that array replaces the full set and any omitted existing variations are deleted. The authenticated user needs the `read_write_dynamic_content` scope.
      *
-     * You can update existing dynamic content. Only the fields you provide are changed. Requires
-     * the `read_write_dynamic_content` scope.
+     * You can update existing dynamic content. Only the fields you provide are changed. Requires the `read_write_dynamic_content` scope.
      */
-    fun update(
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        name: String? = null,
-        defaultLocale: String? = null,
-        variations: List<DynamicContentVariationRequest>? = null,
-        options: RequestOptions? = null,
-    ): DynamicContent {
-        return dev.octri.showcase.intercom.methods.DynamicContentMethods.updateDynamicContent(
-            clientConfig,
-            id,
-            intercomVersion,
-            name,
-            defaultLocale,
-            variations,
-            options,
-        )
+    fun update(id: String, intercomVersion: IntercomVersion? = null, name: String? = null, defaultLocale: String? = null, variations: List<DynamicContentVariationRequest>? = null, options: RequestOptions? = null): DynamicContent {
+        return dev.octri.showcase.intercom.methods.DynamicContentMethods.updateDynamicContent(clientConfig, id, intercomVersion, name, defaultLocale, variations, options)
     }
 
     /**
-     * Deletes a reusable dynamic content item by its unique identifier. You cannot delete dynamic
-     * content that is still used in an article, so remove its article references before attempting
-     * deletion. The authenticated user needs the `read_write_dynamic_content` scope.
+     * Deletes a reusable dynamic content item by its unique identifier. You cannot delete dynamic content that is still used in an article, so remove its article references before attempting deletion. The authenticated user needs the `read_write_dynamic_content` scope.
      *
-     * You can delete a single dynamic content by its id. Dynamic content that is still used in an
-     * article can't be deleted. Requires the `read_write_dynamic_content` scope.
+     * You can delete a single dynamic content by its id. Dynamic content that is still used in an article can't be deleted. Requires the `read_write_dynamic_content` scope.
      */
-    fun delete(
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        return dev.octri.showcase.intercom.methods.DynamicContentMethods.deleteDynamicContent(
-            clientConfig,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun delete(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
+        return dev.octri.showcase.intercom.methods.DynamicContentMethods.deleteDynamicContent(clientConfig, id, intercomVersion, options)
     }
+
 }

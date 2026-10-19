@@ -3,30 +3,30 @@
 
 package dev.octri.showcase.intercom.models
 
-/** You can create an phone switch */
+/**
+ * You can create an phone switch
+ */
 data class CreatePhoneSwitchRequest(
     /**
-     * Phone number in E.164 format, that will receive the SMS to continue the conversation in the
-     * Messenger.
+     * Phone number in E.164 format, that will receive the SMS to continue the conversation in the Messenger.
      */
     val phone: String,
     /**
-     * The custom attributes which are set on this object, as key-value pairs. For relationship
-     * attributes the value should be a list of custom object instance models. Only attributes a
-     * caller may set are accepted here — attributes Intercom generates are returned in responses
-     * only.
+     * The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here — attributes Intercom generates are returned in responses only.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: CustomAttributesRequest? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: CustomAttributesRequest? = null
 )
 
-/** Phone Switch Response */
+/**
+ * Phone Switch Response
+ */
 data class PhoneSwitch(
-    /** Optional enumerated value serialized in the `type` wire field. */
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
     val type: PhoneSwitchTypeEnum? = null,
     /**
-     * Phone number in E.164 format, that has received the SMS to continue the conversation in the
-     * Messenger.
+     * Phone number in E.164 format, that has received the SMS to continue the conversation in the Messenger.
      */
-    val phone: String? = null,
+    val phone: String? = null
 )

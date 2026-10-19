@@ -3,51 +3,64 @@
 
 package dev.octri.showcase.intercom.models.contentsnippets
 
-/** A content snippet is a reusable piece of content for your AI agent and Copilot. */
+/**
+ * A content snippet is a reusable piece of content for your AI agent and Copilot.
+ */
 data class ContentSnippet(
-    /** String representing the object's type. Always has the value `content_snippet`. */
+    /**
+     * String representing the object's type. Always has the value `content_snippet`.
+     */
     val type: String? = null,
-    /** The unique identifier for the content snippet. */
+    /**
+     * The unique identifier for the content snippet.
+     */
     val id: String? = null,
-    /** The title of the content snippet. */
+    /**
+     * The title of the content snippet.
+     */
     val title: String? = null,
-    /** The locale of the content snippet. */
+    /**
+     * The locale of the content snippet.
+     */
     val locale: String? = null,
-    /** The content blocks that make up the body of the snippet. */
-    @com.fasterxml.jackson.annotation.JsonProperty("json_blocks")
-    val jsonBlocks: List<Map<String, Any>>? = null,
-    /** The body of the content snippet in markdown. */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
     /**
-     * Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1
-     * = on, 0 = off).
+     * The content blocks that make up the body of the snippet.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("chatbot_availability")
-    val chatbotAvailability: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("json_blocks") val jsonBlocks: List<Map<String, Any>>? = null,
     /**
-     * Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for
-     * Copilot (1 = on, 0 = off).
+     * The body of the content snippet in markdown.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("copilot_availability")
-    val copilotAvailability: Long? = null,
-    /** Whether the content snippet is available for AI Chatbot (Fin). */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
-    /** Whether the content snippet is available for AI Copilot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
-    /** Whether the content snippet is available for AI Sales Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
-    /** The time the snippet was created as a UNIX timestamp. */
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
+    /**
+     * Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1 = on, 0 = off).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("chatbot_availability") val chatbotAvailability: Long? = null,
+    /**
+     * Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for Copilot (1 = on, 0 = off).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("copilot_availability") val copilotAvailability: Long? = null,
+    /**
+     * Whether the content snippet is available for AI Chatbot (Fin).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
+    /**
+     * Whether the content snippet is available for AI Copilot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
+    /**
+     * Whether the content snippet is available for AI Sales Agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null,
+    /**
+     * The time the snippet was created as a UNIX timestamp.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time the snippet was last updated as a UNIX timestamp. */
+    /**
+     * The time the snippet was last updated as a UNIX timestamp.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
     /**
-     * The list of audience IDs this content snippet is targeted to for Fin AI Agent. Empty array
-     * means no audience targeting is set.
+     * The list of audience IDs this content snippet is targeted to for Fin AI Agent. Empty array means no audience targeting is set.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null
 )

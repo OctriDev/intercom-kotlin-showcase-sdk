@@ -21,49 +21,26 @@ import dev.octri.showcase.intercom.SdkClient
 
 object HelpCenterMethods {
 
+
     /**
-     * Lists URL redirects configured for a help center, ordered by most recently updated. Use the
-     * pagination parameters to browse the results; access requires the
-     * `read_help_center_redirects_scope` OAuth scope.
+     * Lists URL redirects configured for a help center, ordered by most recently updated. Use the pagination parameters to browse the results; access requires the `read_help_center_redirects_scope` OAuth scope.
      *
-     * You can fetch a list of all URL redirects for a help center by making a GET request to
-     * `api.intercom.io Redirects are returned in descending order on the `updated_at` attribute.
-     * Requires the `read_help_center_redirects_scope` OAuth scope.
+     * You can fetch a list of all URL redirects for a help center by making a GET request to `api.intercom.io Redirects are returned in descending order on the `updated_at` attribute. Requires the `read_help_center_redirects_scope` OAuth scope.
      *
      * @param helpCenterId The unique identifier for the help center.
      * @param page The page of results to fetch. Defaults to the first page.
-     * @param perPage The number of results to return per page. Defaults to 50, maximum 250.
+     * @param perPage The number of results to return per page. Defaults to 50,
+     *   maximum 250.
      */
-    fun listHelpCenterRedirects(
-        clientConfig: ClientConfig,
-        helpCenterId: String,
-        page: Long? = null,
-        perPage: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): HelpCenterRedirectList {
-        return SdkClient.request<HelpCenterRedirectList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}/redirects",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                        ),
-                    operationId = "listHelpCenterRedirects",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listHelpCenterRedirects(clientConfig: ClientConfig, helpCenterId: String, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenterRedirectList {
+        return SdkClient.request<HelpCenterRedirectList>(SdkClient.RequestSpec("GET", "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}/redirects", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "listHelpCenterRedirects", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createHelpCenterRedirect]. */
     data class CreateHelpCenterRedirectParams(
@@ -72,169 +49,83 @@ object HelpCenterMethods {
         val locale: String,
         val targetType: CreateHelpCenterRedirectRequestTargetTypeEnum,
         val targetId: String,
-        val intercomVersion: IntercomVersion? = null,
+        val intercomVersion: IntercomVersion? = null
     )
 
     /**
-     * Creates a redirect in a help center, mapping a source URL to an article or collection. Supply
-     * `from_url`, `locale`, `target_type`, and `target_id`; the source URL must be absolute and
-     * within the help center's URL space, and the target must belong to that help center. Use the
-     * `read_write_help_center_redirects_scope` OAuth scope to create redirects.
+     * Creates a redirect in a help center, mapping a source URL to an article or collection. Supply `from_url`, `locale`, `target_type`, and `target_id`; the source URL must be absolute and within the help center's URL space, and the target must belong to that help center. Use the `read_write_help_center_redirects_scope` OAuth scope to create redirects.
      *
-     * You can create a new URL redirect by making a POST request to `api.intercom.io Requires the
-     * `read_write_help_center_redirects_scope` OAuth scope.
+     * You can create a new URL redirect by making a POST request to `api.intercom.io Requires the `read_write_help_center_redirects_scope` OAuth scope.
      *
      * @param helpCenterId The unique identifier for the help center.
-     * @param fromUrl The source URL to redirect. Must be an absolute URL within the help center's
-     *   URL space.
-     * @param locale The locale of the target translation (e.g. `en`, `fr`). For article targets
-     *   this selects the ArticleContent variant.
+     * @param fromUrl The source URL to redirect. Must be an absolute URL within the
+     *   help center's URL space.
+     * @param locale The locale of the target translation (e.g. `en`, `fr`). For
+     *   article targets this selects the ArticleContent variant.
      * @param targetType The type of the redirect target.
-     * @param targetId The unique identifier of the target article or collection. The target must be
-     *   a member of the help center.
+     * @param targetId The unique identifier of the target article or collection. The
+     *   target must be a member of the help center.
      */
-    fun createHelpCenterRedirect(
-        clientConfig: ClientConfig,
-        request: CreateHelpCenterRedirectParams,
-        options: RequestOptions? = null,
-    ): HelpCenterRedirect {
-        return SdkClient.request<HelpCenterRedirect>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/help_center/help_centers/${SdkClient.encodePathSegment(request.helpCenterId)}/redirects",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "from_url" to (request.fromUrl),
-                            "locale" to (request.locale),
-                            "target_type" to (request.targetType),
-                            "target_id" to (request.targetId),
-                        ),
-                    operationId = "createHelpCenterRedirect",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "409" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createHelpCenterRedirect(clientConfig: ClientConfig, request: CreateHelpCenterRedirectParams, options: RequestOptions? = null): HelpCenterRedirect {
+        return SdkClient.request<HelpCenterRedirect>(SdkClient.RequestSpec("POST", "/help_center/help_centers/${SdkClient.encodePathSegment(request.helpCenterId)}/redirects", config = clientConfig, body = SdkClient.bodyMap("from_url" to (request.fromUrl), "locale" to (request.locale), "target_type" to (request.targetType), "target_id" to (request.targetId)), operationId = "createHelpCenterRedirect", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "422" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a redirect from a specific help center. Use the help center and redirect
-     * identifiers to fetch the redirect's source URL, locale, and target details. Access requires
-     * the `read_help_center_redirects_scope` OAuth scope.
+     * Retrieves a redirect from a specific help center. Use the help center and redirect identifiers to fetch the redirect's source URL, locale, and target details. Access requires the `read_help_center_redirects_scope` OAuth scope.
      *
-     * You can fetch the details of a single redirect by making a GET request to `api.intercom.io
-     * Requires the `read_help_center_redirects_scope` OAuth scope.
+     * You can fetch the details of a single redirect by making a GET request to `api.intercom.io Requires the `read_help_center_redirects_scope` OAuth scope.
      *
      * @param helpCenterId The unique identifier for the help center.
      * @param id The unique identifier for the redirect.
      */
-    fun retrieveHelpCenterRedirect(
-        clientConfig: ClientConfig,
-        helpCenterId: String,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): HelpCenterRedirect {
-        return SdkClient.request<HelpCenterRedirect>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}/redirects/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "retrieveHelpCenterRedirect",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveHelpCenterRedirect(clientConfig: ClientConfig, helpCenterId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenterRedirect {
+        return SdkClient.request<HelpCenterRedirect>(SdkClient.RequestSpec("GET", "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}/redirects/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveHelpCenterRedirect", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a redirect from a help center. Provide the help center and redirect identifiers to
-     * specify which redirect to remove. Access requires the
-     * `read_write_help_center_redirects_scope` OAuth scope.
+     * Deletes a redirect from a help center. Provide the help center and redirect identifiers to specify which redirect to remove. Access requires the `read_write_help_center_redirects_scope` OAuth scope.
      *
-     * You can delete a single redirect by making a DELETE request to `api.intercom.io Requires the
-     * `read_write_help_center_redirects_scope` OAuth scope.
+     * You can delete a single redirect by making a DELETE request to `api.intercom.io Requires the `read_write_help_center_redirects_scope` OAuth scope.
      *
      * @param helpCenterId The unique identifier for the help center.
      * @param id The unique identifier for the redirect.
      */
-    fun deleteHelpCenterRedirect(
-        clientConfig: ClientConfig,
-        helpCenterId: String,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedHelpCenterRedirectObject {
-        return SdkClient.request<DeletedHelpCenterRedirectObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}/redirects/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "deleteHelpCenterRedirect",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteHelpCenterRedirect(clientConfig: ClientConfig, helpCenterId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedHelpCenterRedirectObject {
+        return SdkClient.request<DeletedHelpCenterRedirectObject>(SdkClient.RequestSpec("DELETE", "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}/redirects/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteHelpCenterRedirect", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists collections in the help center app. Use the results to review collection details,
-     * including their names, descriptions, and parent collections. Collections are ordered by
-     * `updated_at` in descending order, with the most recently updated first.
+     * Lists collections in the help center app. Use the results to review collection details, including their names, descriptions, and parent collections. Collections are ordered by `updated_at` in descending order, with the most recently updated first.
      *
-     * You can fetch a list of all collections by making a GET request to `api.intercom.io
-     * Collections will be returned in descending order on the `updated_at` attribute. This means if
-     * you need to iterate through results then we'll show the most recently updated collections
-     * first.
+     * You can fetch a list of all collections by making a GET request to `api.intercom.io Collections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated collections first.
      */
-    fun listAllCollections(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CollectionList {
-        return SdkClient.request<CollectionList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/help_center/collections",
-                    config = clientConfig,
-                    operationId = "listAllCollections",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listAllCollections(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CollectionList {
+        return SdkClient.request<CollectionList>(SdkClient.RequestSpec("GET", "/help_center/collections", config = clientConfig, operationId = "listAllCollections", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createCollection]. */
     data class CreateCollectionParams(
@@ -243,94 +134,55 @@ object HelpCenterMethods {
         val description: String? = null,
         val translatedContent: SdkClient.SdkOptional<GroupTranslatedContent?>? = null,
         val parentId: SdkClient.SdkOptional<String?>? = null,
-        val helpCenterId: SdkClient.SdkOptional<Long?>? = null,
+        val helpCenterId: SdkClient.SdkOptional<Long?>? = null
     )
 
     /**
-     * Creates a collection in a help center. Supply `name` and optionally provide a description,
-     * translated content, or a parent collection; omitting `help_center_id` creates the collection
-     * in the default help center. Use `parent_id` to place the collection under another collection,
-     * or leave it null to create a top-level collection.
+     * Creates a collection in a help center. Supply `name` and optionally provide a description, translated content, or a parent collection; omitting `help_center_id` creates the collection in the default help center. Use `parent_id` to place the collection under another collection, or leave it null to create a top-level collection.
      *
      * You can create a new collection by making a POST request to `api.intercom.io
      *
-     * @param name The name of the collection. For multilingual collections, this will be the name
-     *   of the default language's content.
-     * @param description The description of the collection. For multilingual collections, this will
-     *   be the description of the default language's content.
-     * @param translatedContent The Translated Content of an Group. The keys are the locale codes
-     *   and the values are the translated content of the Group.
-     * @param parentId The id of the parent collection. If `null` then it will be created as the
-     *   first level collection.
-     * @param helpCenterId The id of the help center where the collection will be created. If `null`
-     *   then it will be created in the default help center.
+     * @param name The name of the collection. For multilingual collections, this
+     *   will be the name of the default language's content.
+     * @param description The description of the collection. For multilingual
+     *   collections, this will be the description of the default language's content.
+     * @param translatedContent The Translated Content of an Group. The keys are the
+     *   locale codes and the values are the translated content of the Group.
+     * @param parentId The id of the parent collection. If `null` then it will be
+     *   created as the first level collection.
+     * @param helpCenterId The id of the help center where the collection will be
+     *   created. If `null` then it will be created in the default help center.
      */
-    fun createCollection(
-        clientConfig: ClientConfig,
-        request: CreateCollectionParams,
-        options: RequestOptions? = null,
-    ): CollectionModel {
-        return SdkClient.request<CollectionModel>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/help_center/collections",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "description" to (SdkClient.omitIfNull(request.description)),
-                            "translated_content" to
-                                (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
-                            "parent_id" to (request.parentId ?: SdkClient.SdkOptional.Omitted),
-                            "help_center_id" to
-                                (request.helpCenterId ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createCollection(clientConfig: ClientConfig, request: CreateCollectionParams, options: RequestOptions? = null): CollectionModel {
+        return SdkClient.request<CollectionModel>(SdkClient.RequestSpec("POST", "/help_center/collections", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "description" to (SdkClient.omitIfNull(request.description)), "translated_content" to
+    (request.translatedContent ?: SdkClient.SdkOptional.Omitted), "parent_id" to
+    (request.parentId ?: SdkClient.SdkOptional.Omitted), "help_center_id" to
+    (request.helpCenterId ?: SdkClient.SdkOptional.Omitted)), operationId = "createCollection", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a collection from the help center. Provide its identifier to get details such as
-     * its name, description, URL, and parent collection. Use the collection identifier assigned by
-     * Intercom.
+     * Retrieves a collection from the help center. Provide its identifier to get details such as its name, description, URL, and parent collection. Use the collection identifier assigned by Intercom.
      *
      * You can fetch the details of a single collection by making a GET request to `api.intercom.io
      *
-     * @param collectionId The unique identifier for the collection which is given by Intercom.
+     * @param collectionId The unique identifier for the collection which is given by
+     *   Intercom.
      */
-    fun retrieveCollection(
-        clientConfig: ClientConfig,
-        collectionId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CollectionModel {
-        return SdkClient.request<CollectionModel>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/help_center/collections/${SdkClient.encodePathSegment(collectionId)}",
-                    config = clientConfig,
-                    operationId = "retrieveCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveCollection(clientConfig: ClientConfig, collectionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CollectionModel {
+        return SdkClient.request<CollectionModel>(SdkClient.RequestSpec("GET", "/help_center/collections/${SdkClient.encodePathSegment(collectionId)}", config = clientConfig, operationId = "retrieveCollection", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateCollection]. */
     data class UpdateCollectionParams(
@@ -339,150 +191,86 @@ object HelpCenterMethods {
         val name: String? = null,
         val description: String? = null,
         val translatedContent: SdkClient.SdkOptional<GroupTranslatedContent?>? = null,
-        val parentId: SdkClient.SdkOptional<String?>? = null,
+        val parentId: SdkClient.SdkOptional<String?>? = null
     )
 
     /**
-     * Replaces collection details for a specified collection. Supply the collection fields you want
-     * to change, such as `name`, `description`, translated content, or parent collection. Use the
-     * collection identifier assigned by Intercom to select the collection.
+     * Replaces collection details for a specified collection. Supply the collection fields you want to change, such as `name`, `description`, translated content, or parent collection. Use the collection identifier assigned by Intercom to select the collection.
      *
      * You can update the details of a single collection by making a PUT request to `api.intercom.io
      *
-     * @param collectionId The unique identifier for the collection which is given by Intercom.
-     * @param name The name of the collection. For multilingual collections, this will be the name
-     *   of the default language's content.
-     * @param description The description of the collection. For multilingual collections, this will
-     *   be the description of the default language's content.
-     * @param translatedContent The Translated Content of an Group. The keys are the locale codes
-     *   and the values are the translated content of the Group.
-     * @param parentId The id of the parent collection. If `null` then it will be updated as the
-     *   first level collection.
+     * @param collectionId The unique identifier for the collection which is given by
+     *   Intercom.
+     * @param name The name of the collection. For multilingual collections, this
+     *   will be the name of the default language's content.
+     * @param description The description of the collection. For multilingual
+     *   collections, this will be the description of the default language's content.
+     * @param translatedContent The Translated Content of an Group. The keys are the
+     *   locale codes and the values are the translated content of the Group.
+     * @param parentId The id of the parent collection. If `null` then it will be
+     *   updated as the first level collection.
      */
-    fun updateCollection(
-        clientConfig: ClientConfig,
-        request: UpdateCollectionParams,
-        options: RequestOptions? = null,
-    ): CollectionModel {
-        return SdkClient.request<CollectionModel>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/help_center/collections/${SdkClient.encodePathSegment(request.collectionId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "description" to (SdkClient.omitIfNull(request.description)),
-                            "translated_content" to
-                                (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
-                            "parent_id" to (request.parentId ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateCollection(clientConfig: ClientConfig, request: UpdateCollectionParams, options: RequestOptions? = null): CollectionModel {
+        return SdkClient.request<CollectionModel>(SdkClient.RequestSpec("PUT", "/help_center/collections/${SdkClient.encodePathSegment(request.collectionId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "description" to (SdkClient.omitIfNull(request.description)), "translated_content" to
+    (request.translatedContent ?: SdkClient.SdkOptional.Omitted), "parent_id" to
+    (request.parentId ?: SdkClient.SdkOptional.Omitted)), operationId = "updateCollection", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a collection from the help center. Provide the collection identifier to specify which
-     * collection to remove. Use this operation when you no longer need the collection.
+     * Deletes a collection from the help center. Provide the collection identifier to specify which collection to remove. Use this operation when you no longer need the collection.
      *
      * You can delete a single collection by making a DELETE request to `api.intercom.io
      *
-     * @param collectionId The unique identifier for the collection which is given by Intercom.
+     * @param collectionId The unique identifier for the collection which is given by
+     *   Intercom.
      */
-    fun deleteCollection(
-        clientConfig: ClientConfig,
-        collectionId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedCollectionObject {
-        return SdkClient.request<DeletedCollectionObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/help_center/collections/${SdkClient.encodePathSegment(collectionId)}",
-                    config = clientConfig,
-                    operationId = "deleteCollection",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteCollection(clientConfig: ClientConfig, collectionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedCollectionObject {
+        return SdkClient.request<DeletedCollectionObject>(SdkClient.RequestSpec("DELETE", "/help_center/collections/${SdkClient.encodePathSegment(collectionId)}", config = clientConfig, operationId = "deleteCollection", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves details for a help center. Provide its identifier to inspect its URL, display name,
-     * availability, and configured locales. Use this operation to view the help center's workspace
-     * and configuration details.
+     * Retrieves details for a help center. Provide its identifier to inspect its URL, display name, availability, and configured locales. Use this operation to view the help center's workspace and configuration details.
      *
      * You can fetch the details of a single Help Center by making a GET request to `api.intercom.io
      *
-     * @param helpCenterId The unique identifier for the collection which is given by Intercom.
+     * @param helpCenterId The unique identifier for the collection which is given by
+     *   Intercom.
      */
-    fun retrieveHelpCenter(
-        clientConfig: ClientConfig,
-        helpCenterId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): HelpCenter {
-        return SdkClient.request<HelpCenter>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}",
-                    config = clientConfig,
-                    operationId = "retrieveHelpCenter",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveHelpCenter(clientConfig: ClientConfig, helpCenterId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenter {
+        return SdkClient.request<HelpCenter>(SdkClient.RequestSpec("GET", "/help_center/help_centers/${SdkClient.encodePathSegment(helpCenterId)}", config = clientConfig, operationId = "retrieveHelpCenter", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the help centers belonging to the app. Use the results to review each help center's
-     * identifier, URL, display name, configured locales, and availability. The response contains a
-     * list of help center objects.
+     * Lists the help centers belonging to the app. Use the results to review each help center's identifier, URL, display name, configured locales, and availability. The response contains a list of help center objects.
      *
      * You can list all Help Centers by making a GET request to `api.intercom.io
      */
-    fun listHelpCenters(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): HelpCenterList {
-        return SdkClient.request<HelpCenterList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/help_center/help_centers",
-                    config = clientConfig,
-                    operationId = "listHelpCenters",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listHelpCenters(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenterList {
+        return SdkClient.request<HelpCenterList>(SdkClient.RequestSpec("GET", "/help_center/help_centers", config = clientConfig, operationId = "listHelpCenters", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

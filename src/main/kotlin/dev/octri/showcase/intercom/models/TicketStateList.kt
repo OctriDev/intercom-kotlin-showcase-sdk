@@ -5,11 +5,16 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.tickets.TicketStateDetailed
 
-/** A list of ticket states associated with a given ticket type. */
+/**
+ * A list of ticket states associated with a given ticket type.
+ */
 data class TicketStateList(
-    /** String representing the object's type. Always has the value `list`. */
+    /**
+     * String representing the object's type. Always has the value `list`.
+     */
     val type: String? = null,
-    /** A list of ticket states associated with a given ticket type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<TicketStateDetailed?>? = null,
+    /**
+     * A list of ticket states associated with a given ticket type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<TicketStateDetailed?>? = null
 )

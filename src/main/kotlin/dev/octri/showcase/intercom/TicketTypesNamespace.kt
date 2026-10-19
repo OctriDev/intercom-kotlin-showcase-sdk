@@ -3,81 +3,42 @@
 
 package dev.octri.showcase.intercom
 
+
 class TicketTypesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the ticket types associated with the workspace. Use the returned ticket type details to
-     * review their attributes, states, and archive status.
+     * Lists the ticket types associated with the workspace. Use the returned ticket type details to review their attributes, states, and archive status.
      *
      * You can get a list of all ticket types for a workspace.
      */
-    fun list(
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): TicketTypeList {
-        return dev.octri.showcase.intercom.methods.TicketTypes.listTicketTypes(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketTypeList {
+        return dev.octri.showcase.intercom.methods.TicketTypes.listTicketTypes(clientConfig, intercomVersion, options)
     }
 
     /**
-     * Creates a new ticket type with its name, description, category, icon, and internal-use
-     * setting. Supply `name`; `category` accepts Customer, Back-office, or Tracker, and omitted
-     * `icon` and `is_internal` values default to 🎟️ and false. The created ticket type includes
-     * the default `_default_title_` and `_default_description_` attributes.
+     * Creates a new ticket type with its name, description, category, icon, and internal-use setting. Supply `name`; `category` accepts Customer, Back-office, or Tracker, and omitted `icon` and `is_internal` values default to 🎟️ and false. The created ticket type includes the default `_default_title_` and `_default_description_` attributes.
      *
-     * You can create a new ticket type. > 📘 Creating ticket types. > > Every ticket type will be
-     * created with two default attributes: _default_title_ and _default_description_. > For the
-     * `icon` propery, use an emoji from Twemoji Cheatsheet
+     * You can create a new ticket type. > 📘 Creating ticket types. > > Every ticket type will be created with two default attributes: _default_title_ and _default_description_. > For the `icon` propery, use an emoji from Twemoji Cheatsheet
      */
-    fun create(
-        request: dev.octri.showcase.intercom.methods.TicketTypes.CreateTicketTypeParams,
-        options: RequestOptions? = null,
-    ): TicketType {
-        return dev.octri.showcase.intercom.methods.TicketTypes.createTicketType(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.intercom.methods.TicketTypes.CreateTicketTypeParams, options: RequestOptions? = null): TicketType {
+        return dev.octri.showcase.intercom.methods.TicketTypes.createTicketType(clientConfig, request, options)
     }
 
     /**
-     * Retrieves a ticket type by its unique identifier. Supply `ticket_type_id` to identify the
-     * ticket type and an API version if you need to override the default version.
+     * Retrieves a ticket type by its unique identifier. Supply `ticket_type_id` to identify the ticket type and an API version if you need to override the default version.
      *
      * You can fetch the details of a single ticket type.
      */
-    fun get(
-        ticketTypeId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): TicketType {
-        return dev.octri.showcase.intercom.methods.TicketTypes.getTicketType(
-            clientConfig,
-            ticketTypeId,
-            intercomVersion,
-            options,
-        )
+    fun get(ticketTypeId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketType {
+        return dev.octri.showcase.intercom.methods.TicketTypes.getTicketType(clientConfig, ticketTypeId, intercomVersion, options)
     }
 
     /**
-     * Replaces the configurable details of an existing ticket type. Supply only the fields you want
-     * to change; `category` accepts Customer, Back-office, or Tracker, and omitted `icon` and
-     * `is_internal` values use their defined defaults when provided. The updated response includes
-     * the ticket type's current details.
+     * Replaces the configurable details of an existing ticket type. Supply only the fields you want to change; `category` accepts Customer, Back-office, or Tracker, and omitted `icon` and `is_internal` values use their defined defaults when provided. The updated response includes the ticket type's current details.
      *
-     * You can update a ticket type. > 📘 Updating a ticket type. > > For the `icon` propery, use an
-     * emoji from Twemoji Cheatsheet
+     * You can update a ticket type. > 📘 Updating a ticket type. > > For the `icon` propery, use an emoji from Twemoji Cheatsheet
      */
-    fun update(
-        request: dev.octri.showcase.intercom.methods.TicketTypes.UpdateTicketTypeParams,
-        options: RequestOptions? = null,
-    ): TicketType {
-        return dev.octri.showcase.intercom.methods.TicketTypes.updateTicketType(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.intercom.methods.TicketTypes.UpdateTicketTypeParams, options: RequestOptions? = null): TicketType {
+        return dev.octri.showcase.intercom.methods.TicketTypes.updateTicketType(clientConfig, request, options)
     }
+
 }

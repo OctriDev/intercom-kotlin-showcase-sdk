@@ -6,117 +6,81 @@ package dev.octri.showcase.intercom.models
 import java.time.OffsetDateTime
 
 /**
- * Optional body for publishing a staged article draft. On a single-language workspace the body can
- * be omitted. On a multilingual workspace, `locales` is required and lists which locales' drafts to
- * publish.
+ * Optional body for publishing a staged article draft. On a single-language workspace the body can be omitted. On a multilingual workspace, `locales` is required and lists which locales' drafts to publish.
  */
 data class PublishArticleDraftRequest(
     /**
-     * The locales whose staged drafts should be published. Required on multilingual workspaces;
-     * each locale must have a pending draft.
+     * The locales whose staged drafts should be published. Required on multilingual workspaces; each locale must have a pending draft.
      */
     val locales: List<String>? = null
 )
 
-/** You can Update an Article */
+/**
+ * You can Update an Article
+ */
 data class UpdateArticleRequestRequest(
     /**
-     * The title of the article.For multilingual articles, this will be the title of the default
-     * language's content.
+     * The title of the article.For multilingual articles, this will be the title of the default language's content.
      */
     val title: String? = null,
     /**
-     * The description of the article. For multilingual articles, this will be the description of
-     * the default language's content.
+     * The description of the article. For multilingual articles, this will be the description of the default language's content.
      */
     val description: String? = null,
     /**
-     * The content of the article in HTML. For multilingual articles, this will be the body of the
-     * default language's content. Mutually exclusive with `body_markdown`.
+     * The content of the article in HTML. For multilingual articles, this will be the body of the default language's content. Mutually exclusive with `body_markdown`.
      */
     val body: String? = null,
     /**
-     * The content of the article in markdown. For multilingual articles, this will be the body of
-     * the default language's content. An alternative to `body` — you can provide content as
-     * markdown instead of HTML. Mutually exclusive with `body`.
+     * The content of the article in markdown. For multilingual articles, this will be the body of the default language's content. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
     /**
-     * The id of the author of the article. For multilingual articles, this will be the id of the
-     * author of the default language's content. Must be a teammate on the help center's workspace.
+     * The id of the author of the article. For multilingual articles, this will be the id of the author of the default language's content. Must be a teammate on the help center's workspace.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("author_id") val authorId: Long? = null,
     /**
-     * Whether the article will be `published` or will be a `draft`. Omitting this field leaves the
-     * publish state unchanged, so a draft stays a draft and an edit to a published article goes
-     * live immediately unless that article already has a pending draft or a scheduled publish time
-     * is set in the same request. The `PUT /articles/{id}/draft` endpoint ignores this field and
-     * always stages a draft. For multilingual articles, this will be the state of the default
-     * language's content.
+     * Whether the article will be `published` or will be a `draft`. Omitting this field leaves the publish state unchanged, so a draft stays a draft and an edit to a published article goes live immediately unless that article already has a pending draft or a scheduled publish time is set in the same request. The `PUT /articles/{id}/draft` endpoint ignores this field and always stages a draft. For multilingual articles, this will be the state of the default language's content.
      */
     val state: UpdateArticleRequestRequestStateEnum? = null,
     /**
-     * The id of the article's parent collection or section. An article without this field stands
-     * alone.
+     * The id of the article's parent collection or section. An article without this field stands alone.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_id") val parentId: String? = null,
-    /** The type of parent, which can either be a `collection` or `section`. */
+    /**
+     * The type of parent, which can either be a `collection` or `section`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_type") val parentType: String? = null,
     /**
-     * The Translated Content of an Article. The keys are the locale codes and the values are the
-     * translated content of the article.
+     * The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("translated_content")
-    val translatedContent: ArticleTranslatedContentRequest? = null,
-    /** The ID of the folder to place this article in, or null to remove it from its folder. */
+    @com.fasterxml.jackson.annotation.JsonProperty("translated_content") val translatedContent: ArticleTranslatedContentRequest? = null,
+    /**
+     * The ID of the folder to place this article in, or null to remove it from its folder.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("folder_id") val folderId: Long? = null,
     /**
-     * The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a
-     * top-level `audience_ids` broadcasts the same set to every locale. Sending `audience_ids: []`
-     * clears all audience memberships from every locale. For per-locale targeting, use
-     * `translated_content.<locale>.audience_ids` instead. Sending both top-level and per-locale in
-     * the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial
-     * commit occurs.
+     * The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. Sending `audience_ids: []` clears all audience memberships from every locale. For per-locale targeting, use `translated_content.<locale>.audience_ids` instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null,
     /**
-     * Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this
-     * sets the default language's availability.
+     * Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this sets the default language's availability.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
     /**
-     * Whether the article should be available for AI Copilot. For multilingual articles, this sets
-     * the default language's availability.
+     * Whether the article should be available for AI Copilot. For multilingual articles, this sets the default language's availability.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
     /**
-     * Whether the article should be available for AI Sales Agent. For multilingual articles, this
-     * sets the default language's availability.
+     * Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language's availability.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null,
     /**
-     * ISO 8601 timestamp at which to schedule a future publish of the article. When set together
-     * with `state: "published"`, the article is scheduled instead of published immediately. Setting
-     * `null` cancels a pending publish schedule. Timestamps in the past or equal to the current
-     * time are rejected with 400 `parameter_invalid` — the value must be strictly in the future.
-     * Combining with `state: "draft"` returns 400 `parameter_invalid`. Sending in the same request
-     * as…
+     * ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: "published"`, the article is scheduled instead of published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Combining with `state: "draft"` returns 400 `parameter_invalid`. Sending in the same request as…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_publish_at")
-    val scheduledPublishAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_publish_at") val scheduledPublishAt: OffsetDateTime? = null,
     /**
-     * ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null`
-     * cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are
-     * rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected
-     * with 400 `parameter_invalid` if the article has never been published. Sending in the same
-     * request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty
-     * string returns 400…
+     * ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_unpublish_at")
-    val scheduledUnpublishAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_unpublish_at") val scheduledUnpublishAt: OffsetDateTime? = null
 )

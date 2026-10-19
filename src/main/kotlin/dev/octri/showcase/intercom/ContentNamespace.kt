@@ -3,51 +3,24 @@
 
 package dev.octri.showcase.intercom
 
+
 class ContentNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Applies an asynchronous bulk action to up to 1,000 Knowledge Hub content items. Choose an
-     * action and provide content IDs of supported types; actions can publish, unpublish, delete,
-     * change availability or audience, or update tags. The request is enqueued for background
-     * processing, and items with unsupported types for the selected action may be silently dropped.
+     * Applies an asynchronous bulk action to up to 1,000 Knowledge Hub content items. Choose an action and provide content IDs of supported types; actions can publish, unpublish, delete, change availability or audience, or update tags. The request is enqueued for background processing, and items with unsupported types for the selected action may be silently dropped.
      *
-     * Asynchronously run a bulk action over up to 1,000 Knowledge Hub content items. Six actions
-     * are supported: * `publish` and `unpublish` — apply to `article_content` only. * `delete` —
-     * permanently delete content (excludes synced sources and `external_content`). *
-     * `set_availability` — toggle Fin AI Agent, Copilot, and Sales Agent availability flags. *
-     * `set_audience` — manage segment membership on content. * `update_tags` — apply and/or remove
-     * existing tags on content. Unlike the…
+     * Asynchronously run a bulk action over up to 1,000 Knowledge Hub content items. Six actions are supported: * `publish` and `unpublish` — apply to `article_content` only. * `delete` — permanently delete content (excludes synced sources and `external_content`). * `set_availability` — toggle Fin AI Agent, Copilot, and Sales Agent availability flags. * `set_audience` — manage segment membership on content. * `update_tags` — apply and/or remove existing tags on content. Unlike the…
      */
-    fun bulkActions(
-        request: dev.octri.showcase.intercom.methods.Content.BulkContentActionsRequest,
-        options: RequestOptions? = null,
-    ): ContentBulkActionResponse {
-        return dev.octri.showcase.intercom.methods.Content.bulkContentActions(
-            clientConfig,
-            request,
-            options,
-        )
+    fun bulkActions(request: dev.octri.showcase.intercom.methods.Content.BulkContentActionsRequest, options: RequestOptions? = null): ContentBulkActionResponse {
+        return dev.octri.showcase.intercom.methods.Content.bulkContentActions(clientConfig, request, options)
     }
 
     /**
-     * Searches Knowledge Hub content, including articles, snippets, external pages, uploaded files,
-     * and internal articles. Supply `query` to search titles and body text, or omit it to retrieve
-     * the most recent content items; use the filters to narrow the results. Use `page` and
-     * `per_page` to paginate the results.
+     * Searches Knowledge Hub content, including articles, snippets, external pages, uploaded files, and internal articles. Supply `query` to search titles and body text, or omit it to retrieve the most recent content items; use the filters to narrow the results. Use `page` and `per_page` to paginate the results.
      *
-     * Search the knowledge base contents — articles, snippets, external pages, uploaded files, and
-     * internal articles — using a keyword query. Each result row has a `type` discriminator. Most
-     * types (`content_snippet`, `external_content`, `file_source_content`, `internal_article`)
-     * return a flat `{ type, id, title }` shape. Help center articles return a nested shape with a
-     * `contents[]` array, one entry per locale. Requires the `read_content` OAuth scope.
+     * Search the knowledge base contents — articles, snippets, external pages, uploaded files, and internal articles — using a keyword query. Each result row has a `type` discriminator. Most types (`content_snippet`, `external_content`, `file_source_content`, `internal_article`) return a flat `{ type, id, title }` shape. Help center articles return a nested shape with a `contents[]` array, one entry per locale. Requires the `read_content` OAuth scope.
      */
-    fun search(
-        request: dev.octri.showcase.intercom.methods.Content.SearchContentRequest,
-        options: RequestOptions? = null,
-    ): ContentSearchResponse {
-        return dev.octri.showcase.intercom.methods.Content.searchContent(
-            clientConfig,
-            request,
-            options,
-        )
+    fun search(request: dev.octri.showcase.intercom.methods.Content.SearchContentRequest, options: RequestOptions? = null): ContentSearchResponse {
+        return dev.octri.showcase.intercom.methods.Content.searchContent(clientConfig, request, options)
     }
+
 }

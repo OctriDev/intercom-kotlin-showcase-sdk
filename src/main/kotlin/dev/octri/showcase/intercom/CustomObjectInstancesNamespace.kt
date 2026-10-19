@@ -3,112 +3,51 @@
 
 package dev.octri.showcase.intercom
 
+
 class CustomObjectInstancesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates or updates an instance of a custom object type. Supply `external_id` to identify the
-     * instance in the external system and `custom_attributes` to set its custom values; the request
-     * body is optional.
+     * Creates or updates an instance of a custom object type. Supply `external_id` to identify the instance in the external system and `custom_attributes` to set its custom values; the request body is optional.
      *
      * Create or update a custom object instance
      */
-    fun create(
-        request:
-            dev.octri.showcase.intercom.methods.CustomObjectInstances.CreateCustomObjectInstancesRequest,
-        options: RequestOptions? = null,
-    ): CustomObjectInstance {
-        return dev.octri.showcase.intercom.methods.CustomObjectInstances
-            .createCustomObjectInstances(clientConfig, request, options)
+    fun create(request: dev.octri.showcase.intercom.methods.CustomObjectInstances.CreateCustomObjectInstancesRequest, options: RequestOptions? = null): CustomObjectInstance {
+        return dev.octri.showcase.intercom.methods.CustomObjectInstances.createCustomObjectInstances(clientConfig, request, options)
     }
 
     /**
-     * Lists instances of a custom object type, optionally filtered by an associated contact or
-     * conversation. Use `references_contact_id` or `references_conversation_id` to filter the
-     * results, or provide `external_id` to retrieve a single matching instance instead of a list.
-     * Use `page` and `per_page` to paginate the results.
+     * Lists instances of a custom object type, optionally filtered by an associated contact or conversation. Use `references_contact_id` or `references_conversation_id` to filter the results, or provide `external_id` to retrieve a single matching instance instead of a list. Use `page` and `per_page` to paginate the results.
      *
-     * List instances of a custom object type. Three modes are supported: - **No filter** — returns
-     * all instances for the type. - **`references_contact_id`** — returns instances associated with
-     * the given contact. - **`references_conversation_id`** — returns instances associated with the
-     * given conversation. When **`external_id`** is provided, returns a single matching instance
-     * (not a list).
+     * List instances of a custom object type. Three modes are supported: - **No filter** — returns all instances for the type. - **`references_contact_id`** — returns instances associated with the given contact. - **`references_conversation_id`** — returns instances associated with the given conversation. When **`external_id`** is provided, returns a single matching instance (not a list).
      */
-    fun list(
-        request:
-            dev.octri.showcase.intercom.methods.CustomObjectInstances.ListCustomObjectInstancesRequest,
-        options: RequestOptions? = null,
-    ): CustomObjectInstancesPaginatedList {
-        return dev.octri.showcase.intercom.methods.CustomObjectInstances.listCustomObjectInstances(
-            clientConfig,
-            request,
-            options,
-        )
+    fun list(request: dev.octri.showcase.intercom.methods.CustomObjectInstances.ListCustomObjectInstancesRequest, options: RequestOptions? = null): CustomObjectInstancesPaginatedList {
+        return dev.octri.showcase.intercom.methods.CustomObjectInstances.listCustomObjectInstances(clientConfig, request, options)
     }
 
     /**
-     * Deletes a custom object instance using its external ID. Supply the custom object type
-     * identifier and the instance's `external_id` to identify the instance to delete.
+     * Deletes a custom object instance using its external ID. Supply the custom object type identifier and the instance's `external_id` to identify the instance to delete.
      *
      * Delete a single Custom Object instance by external_id.
      */
-    fun deleteById(
-        customObjectTypeIdentifier: String,
-        externalId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CustomObjectInstanceDeleted {
-        return dev.octri.showcase.intercom.methods.CustomObjectInstances
-            .deleteCustomObjectInstancesById(
-                clientConfig,
-                customObjectTypeIdentifier,
-                externalId,
-                intercomVersion,
-                options,
-            )
+    fun deleteById(customObjectTypeIdentifier: String, externalId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CustomObjectInstanceDeleted {
+        return dev.octri.showcase.intercom.methods.CustomObjectInstances.deleteCustomObjectInstancesById(clientConfig, customObjectTypeIdentifier, externalId, intercomVersion, options)
     }
 
     /**
-     * Retrieves a custom object instance by its Intercom-defined ID or external ID. Use
-     * `custom_object_type_identifier` to specify the instance type and `custom_object_instance_id`
-     * to identify the instance.
+     * Retrieves a custom object instance by its Intercom-defined ID or external ID. Use `custom_object_type_identifier` to specify the instance type and `custom_object_instance_id` to identify the instance.
      *
      * Fetch a Custom Object Instance by id.
      */
-    fun getById(
-        customObjectTypeIdentifier: String,
-        customObjectInstanceId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CustomObjectInstance {
-        return dev.octri.showcase.intercom.methods.CustomObjectInstances
-            .getCustomObjectInstancesById(
-                clientConfig,
-                customObjectTypeIdentifier,
-                customObjectInstanceId,
-                intercomVersion,
-                options,
-            )
+    fun getById(customObjectTypeIdentifier: String, customObjectInstanceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CustomObjectInstance {
+        return dev.octri.showcase.intercom.methods.CustomObjectInstances.getCustomObjectInstancesById(clientConfig, customObjectTypeIdentifier, customObjectInstanceId, intercomVersion, options)
     }
 
     /**
-     * Deletes a custom object instance using its Intercom-defined ID. Use
-     * `custom_object_type_identifier` and `custom_object_instance_id` to identify the type and
-     * instance to delete.
+     * Deletes a custom object instance using its Intercom-defined ID. Use `custom_object_type_identifier` and `custom_object_instance_id` to identify the type and instance to delete.
      *
      * Delete a single Custom Object instance using the Intercom defined id.
      */
-    fun deleteByExternalId(
-        customObjectTypeIdentifier: String,
-        customObjectInstanceId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CustomObjectInstanceDeleted {
-        return dev.octri.showcase.intercom.methods.CustomObjectInstances
-            .deleteCustomObjectInstancesByExternalId(
-                clientConfig,
-                customObjectTypeIdentifier,
-                customObjectInstanceId,
-                intercomVersion,
-                options,
-            )
+    fun deleteByExternalId(customObjectTypeIdentifier: String, customObjectInstanceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CustomObjectInstanceDeleted {
+        return dev.octri.showcase.intercom.methods.CustomObjectInstances.deleteCustomObjectInstancesByExternalId(clientConfig, customObjectTypeIdentifier, customObjectInstanceId, intercomVersion, options)
     }
+
 }

@@ -15,228 +15,143 @@ import dev.octri.showcase.intercom.SdkClient
 
 object Folders {
 
-    data class ListFoldersResponse(
-        val type: ListFoldersResponseTypeEnum? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Folder>? = null,
-        /** Total number of folders */
-        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-        /**
-         * The majority of list resources in the API are paginated to allow clients to traverse data
-         * over multiple requests. Their responses are likely to contain a pages object that hosts
-         * pagination links which a client can use to paginate through the data without having to
-         * construct a query. The link relations for the pages field are as follows.
-         */
-        val pages: PagesLink? = null,
-    )
+data class ListFoldersResponse(
+    val type: ListFoldersResponseTypeEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Folder>? = null,
+    /**
+     * Total number of folders
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+    /**
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
+     */
+    val pages: PagesLink? = null
+)
 
-    data class CreateFolderFolder(
-        /** The name of the folder */
-        val name: String,
-        /** The description of the folder */
-        val description: String? = null,
-        /** An emoji for the folder */
-        val emoji: String? = null,
-        /** The ID of the parent folder */
-        @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id")
-        val parentFolderId: Long? = null,
-    )
+data class CreateFolderFolder(
+    /**
+     * The name of the folder
+     */
+    val name: String,
+    /**
+     * The description of the folder
+     */
+    val description: String? = null,
+    /**
+     * An emoji for the folder
+     */
+    val emoji: String? = null,
+    /**
+     * The ID of the parent folder
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id") val parentFolderId: Long? = null
+)
 
-    data class UpdateFolderFolder(
-        /** The name of the folder */
-        val name: String? = null,
-        /** The description of the folder */
-        val description: String? = null,
-        /** An emoji for the folder */
-        val emoji: String? = null,
-        /** The ID of the parent folder */
-        @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id")
-        val parentFolderId: Long? = null,
-    )
+data class UpdateFolderFolder(
+    /**
+     * The name of the folder
+     */
+    val name: String? = null,
+    /**
+     * The description of the folder
+     */
+    val description: String? = null,
+    /**
+     * An emoji for the folder
+     */
+    val emoji: String? = null,
+    /**
+     * The ID of the parent folder
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id") val parentFolderId: Long? = null
+)
+
 
     /**
-     * Lists folders used to organize content. Use `parent_folder_id` to list only the direct
-     * children of a specific folder, and use `page` and `per_page` to paginate the results.
+     * Lists folders used to organize content. Use `parent_folder_id` to list only the direct children of a specific folder, and use `page` and `per_page` to paginate the results.
      *
-     * You can fetch a list of all folders for organizing content by making a GET request to
-     * `api.intercom.io
+     * You can fetch a list of all folders for organizing content by making a GET request to `api.intercom.io
      *
      * @param page The page number
      * @param perPage Number of results per page
-     * @param parentFolderId Filter folders by parent folder ID. Use this to list only direct
-     *   children of a specific folder.
+     * @param parentFolderId Filter folders by parent folder ID. Use this to list
+     *   only direct children of a specific folder.
      */
-    fun listFolders(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        parentFolderId: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ListFoldersResponse {
-        return SdkClient.request<ListFoldersResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/folders",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "parent_folder_id" to
-                                SdkClient.queryValue(parentFolderId, "form", true),
-                        ),
-                    operationId = "listFolders",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listFolders(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, parentFolderId: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ListFoldersResponse {
+        return SdkClient.request<ListFoldersResponse>(SdkClient.RequestSpec("GET", "/folders", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "parent_folder_id" to
+    SdkClient.queryValue(parentFolderId, "form", true)), operationId = "listFolders", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a folder for organizing content. Include a `folder` object with a `name`; optionally
-     * provide a description, emoji, or parent folder ID.
+     * Creates a folder for organizing content. Include a `folder` object with a `name`; optionally provide a description, emoji, or parent folder ID.
      *
-     * You can create a new folder for organizing content by making a POST request to
-     * `api.intercom.io
+     * You can create a new folder for organizing content by making a POST request to `api.intercom.io
      */
-    fun createFolder(
-        clientConfig: ClientConfig,
-        folder: CreateFolderFolder,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Folder {
-        return SdkClient.request<Folder>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/folders",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("folder" to (folder)),
-                    operationId = "createFolder",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createFolder(clientConfig: ClientConfig, folder: CreateFolderFolder, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Folder {
+        return SdkClient.request<Folder>(SdkClient.RequestSpec("POST", "/folders", config = clientConfig, body = SdkClient.bodyMap("folder" to (folder)), operationId = "createFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a folder by its unique identifier. Use the `id` path parameter to select the folder
-     * whose details you need.
+     * Retrieves a folder by its unique identifier. Use the `id` path parameter to select the folder whose details you need.
      *
      * You can fetch the details of a single folder by making a GET request to `api.intercom.io
      *
      * @param id The unique identifier for the folder
      */
-    fun retrieveFolder(
-        clientConfig: ClientConfig,
-        id: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Folder {
-        return SdkClient.request<Folder>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/folders/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "retrieveFolder",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveFolder(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Folder {
+        return SdkClient.request<Folder>(SdkClient.RequestSpec("GET", "/folders/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates a folder's details, including its name, description, emoji, or parent folder. Supply
-     * the `folder` object with the properties you want to change; `id` selects the folder to
-     * update.
+     * Updates a folder's details, including its name, description, emoji, or parent folder. Supply the `folder` object with the properties you want to change; `id` selects the folder to update.
      *
      * You can update a folder by making a PUT request to `api.intercom.io
      *
      * @param id The unique identifier for the folder
      */
-    fun updateFolder(
-        clientConfig: ClientConfig,
-        id: Long,
-        folder: UpdateFolderFolder,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Folder {
-        return SdkClient.request<Folder>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/folders/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("folder" to (folder)),
-                    operationId = "updateFolder",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateFolder(clientConfig: ClientConfig, id: Long, folder: UpdateFolderFolder, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Folder {
+        return SdkClient.request<Folder>(SdkClient.RequestSpec("PUT", "/folders/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("folder" to (folder)), operationId = "updateFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a folder that contains no content. Use the `id` path parameter to select the folder;
-     * folders with content cannot be deleted until that content is removed or moved.
+     * Deletes a folder that contains no content. Use the `id` path parameter to select the folder; folders with content cannot be deleted until that content is removed or moved.
      *
-     * You can delete a folder (if it contains no content) by making a DELETE request to
-     * `api.intercom.io
+     * You can delete a folder (if it contains no content) by making a DELETE request to `api.intercom.io
      *
      * @param id The unique identifier for the folder
      */
-    fun deleteFolder(
-        clientConfig: ClientConfig,
-        id: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedFolderObject {
-        return SdkClient.request<DeletedFolderObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/folders/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "deleteFolder",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteFolder(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedFolderObject {
+        return SdkClient.request<DeletedFolderObject>(SdkClient.RequestSpec("DELETE", "/folders/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -11,154 +11,76 @@ import dev.octri.showcase.intercom.SdkClient
 
 object DataExportMethods {
 
-    /**
-     * Creates an asynchronous export job for message delivery and engagement data about outbound
-     * content. Provide `created_at_after` and `created_at_before` as Unix timestamps; the inclusive
-     * date range selects messages by when they were sent, not when they were updated. Only one
-     * export job can be active per workspace.
-     *
-     * To create your export job, you need to send a `POST` request to the export endpoint
-     * `api.intercom.io This endpoint exports **message delivery and engagement data** for outbound
-     * content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data
-     * includes who received each message, when they received it, and how they engaged with it
-     * (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not
-     * export raw message or conversation…
-     *
-     * @param createdAtAfter The start date that you request data for. It must be formatted as a
-     *   unix timestamp.
-     * @param createdAtBefore The end date that you request data for. It must be formatted as a unix
-     *   timestamp.
-     */
-    fun createDataExport(
-        clientConfig: ClientConfig,
-        createdAtAfter: Long,
-        createdAtBefore: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataExport {
-        return SdkClient.request<DataExport>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/export/content/data",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "created_at_after" to (createdAtAfter),
-                            "created_at_before" to (createdAtBefore),
-                        ),
-                    operationId = "createDataExport",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
-    }
 
     /**
-     * Retrieves the status and download details for a content data export job. Use the
-     * `job_identifier` returned when you created the job to check its progress. Completed export
-     * data is available for two days after processing finishes.
+     * Creates an asynchronous export job for message delivery and engagement data about outbound content. Provide `created_at_after` and `created_at_before` as Unix timestamps; the inclusive date range selects messages by when they were sent, not when they were updated. Only one export job can be active per workspace.
      *
-     * You can view the status of your job by sending a `GET` request to the URL `api.intercom.io -
-     * the `{job_identifier}` is the value returned in the response when you first created the
-     * export job. More on it can be seen in the Export Job Model. > 🚧 Jobs expire after two days >
-     * All jobs that have completed processing (and are thus available to download from the provided
-     * URL) will have an expiry limit of two days from when the export ob completed. After this, the
-     * data will no…
+     * To create your export job, you need to send a `POST` request to the export endpoint `api.intercom.io This endpoint exports **message delivery and engagement data** for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not export raw message or conversation…
+     *
+     * @param createdAtAfter The start date that you request data for. It must be
+     *   formatted as a unix timestamp.
+     * @param createdAtBefore The end date that you request data for. It must be
+     *   formatted as a unix timestamp.
+     */
+    fun createDataExport(clientConfig: ClientConfig, createdAtAfter: Long, createdAtBefore: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataExport {
+        return SdkClient.request<DataExport>(SdkClient.RequestSpec("POST", "/export/content/data", config = clientConfig, body = SdkClient.bodyMap("created_at_after" to (createdAtAfter), "created_at_before" to (createdAtBefore)), operationId = "createDataExport", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Retrieves the status and download details for a content data export job. Use the `job_identifier` returned when you created the job to check its progress. Completed export data is available for two days after processing finishes.
+     *
+     * You can view the status of your job by sending a `GET` request to the URL `api.intercom.io - the `{job_identifier}` is the value returned in the response when you first created the export job. More on it can be seen in the Export Job Model. > 🚧 Jobs expire after two days > All jobs that have completed processing (and are thus available to download from the provided URL) will have an expiry limit of two days from when the export ob completed. After this, the data will no…
      *
      * @param jobIdentifier job_identifier
      */
-    fun getDataExport(
-        clientConfig: ClientConfig,
-        jobIdentifier: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataExport {
-        return SdkClient.request<DataExport>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/export/content/data/${SdkClient.encodePathSegment(jobIdentifier)}",
-                    config = clientConfig,
-                    operationId = "getDataExport",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+    fun getDataExport(clientConfig: ClientConfig, jobIdentifier: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataExport {
+        return SdkClient.request<DataExport>(SdkClient.RequestSpec("GET", "/export/content/data/${SdkClient.encodePathSegment(jobIdentifier)}", config = clientConfig, operationId = "getDataExport", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Cancels a content data export job. Use the `job_identifier` returned when you created the job
-     * to identify which export to cancel. You can check the job's status afterward to see its
-     * current state.
+     * Cancels a content data export job. Use the `job_identifier` returned when you created the job to identify which export to cancel. You can check the job's status afterward to see its current state.
      *
      * You can cancel your job
      *
      * @param jobIdentifier job_identifier
      */
-    fun cancelDataExport(
-        clientConfig: ClientConfig,
-        jobIdentifier: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataExport {
-        return SdkClient.request<DataExport>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/export/cancel/${SdkClient.encodePathSegment(jobIdentifier)}",
-                    config = clientConfig,
-                    operationId = "cancelDataExport",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+    fun cancelDataExport(clientConfig: ClientConfig, jobIdentifier: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataExport {
+        return SdkClient.request<DataExport>(SdkClient.RequestSpec("POST", "/export/cancel/${SdkClient.encodePathSegment(jobIdentifier)}", config = clientConfig, operationId = "cancelDataExport", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Downloads the data for a completed content export job as a continuously streamed, gzipped CSV
-     * file. Use the `job_identifier` for a job with a completed status and send the `Accept:
-     * application/octet-stream` header. Download the file within two days of the job completing.
+     * Downloads the data for a completed content export job as a continuously streamed, gzipped CSV file. Use the `job_identifier` for a job with a completed status and send the `Accept: application/octet-stream` header. Download the file within two days of the job completing.
      *
-     * When a job has a status of complete, and thus a filled download_url, you can download your
-     * data by hitting that provided URL, formatted like so: api.intercom.io Your exported message
-     * data will be streamed continuously back down to you in a gzipped CSV format. > 📘 Octet
-     * header required > > You will have to specify the header Accept: `application/octet-stream`
-     * when hitting this endpoint.
+     * When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: api.intercom.io Your exported message data will be streamed continuously back down to you in a gzipped CSV format. > 📘 Octet header required > > You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
      *
      * @param jobIdentifier job_identifier
      */
-    fun downloadDataExport(
-        clientConfig: ClientConfig,
-        jobIdentifier: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "GET",
-                "/download/content/data/${SdkClient.encodePathSegment(jobIdentifier)}",
-                config = clientConfig,
-                operationId = "downloadDataExport",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                extraHeaders =
-                    SdkClient.headers(
-                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                    ),
-                options = options,
-            )
-        )
+    fun downloadDataExport(clientConfig: ClientConfig, jobIdentifier: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("GET", "/download/content/data/${SdkClient.encodePathSegment(jobIdentifier)}", config = clientConfig, operationId = "downloadDataExport", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options))
     }
+
+
+
+
+
+
+
 }

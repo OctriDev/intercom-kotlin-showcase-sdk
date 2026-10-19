@@ -3,23 +3,40 @@
 
 package dev.octri.showcase.intercom.models.folders
 
-/** A folder for organizing content */
+/**
+ * A folder for organizing content
+ */
 data class Folder(
-    /** The unique identifier for the folder */
+    /**
+     * The unique identifier for the folder
+     */
     val id: Long? = null,
-    /** The name of the folder */
+    /**
+     * The name of the folder
+     */
     val name: String? = null,
-    /** The description of the folder */
+    /**
+     * The description of the folder
+     */
     val description: String? = null,
-    /** An emoji associated with the folder */
+    /**
+     * An emoji associated with the folder
+     */
     val emoji: String? = null,
-    /** The ID of the parent folder, or null if this is a root folder */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id")
-    val parentFolderId: Long? = null,
-    /** The number of content items in this folder */
+    /**
+     * The ID of the parent folder, or null if this is a root folder
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id") val parentFolderId: Long? = null,
+    /**
+     * The number of content items in this folder
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_count") val contentCount: Long? = null,
-    /** The time when the folder was created (seconds) */
+    /**
+     * The time when the folder was created (seconds)
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time when the folder was last updated (seconds) */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    /**
+     * The time when the folder was last updated (seconds)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
 )

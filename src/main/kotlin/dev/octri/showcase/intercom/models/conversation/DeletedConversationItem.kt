@@ -7,13 +7,20 @@ package dev.octri.showcase.intercom.models.conversation
  * A deleted conversation record containing its ID, metrics retained status and deletion timestamp.
  */
 data class DeletedConversationItem(
-    /** String representing the object's type. Always has the value `conversation`. */
+    /**
+     * String representing the object's type. Always has the value `conversation`.
+     */
     val type: String? = null,
-    /** The ID of the deleted conversation. */
+    /**
+     * The ID of the deleted conversation.
+     */
     val id: String? = null,
-    /** Whether reporting metrics are retained for this conversation ID */
-    @com.fasterxml.jackson.annotation.JsonProperty("metrics_retained")
-    val metricsRetained: Boolean? = null,
-    /** The time when the conversation was deleted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at") val deletedAt: Long? = null,
+    /**
+     * Whether reporting metrics are retained for this conversation ID
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("metrics_retained") val metricsRetained: Boolean? = null,
+    /**
+     * The time when the conversation was deleted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("deleted_at") val deletedAt: Long? = null
 )

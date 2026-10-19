@@ -3,363 +3,458 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Payload to create a contact */
+/**
+ * Payload to create a contact
+ */
 data class CreateContactRequest(
-    /** The role of the contact. */
+    /**
+     * The role of the contact.
+     */
     val role: String? = null,
-    /** A unique identifier for the contact which is given to Intercom */
+    /**
+     * A unique identifier for the contact which is given to Intercom
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
     /**
-     * Whether the contact has proved they own this email address, for example through a
-     * confirmation link or one-time code you sent. Send it together with `email`. `email_verified`
-     * without `email` is rejected. Changing a contact's email resets it to not verified. Intercom
-     * reuses leads with a verified email when an inbound email, conversation or ticket matches the
-     * address.
+     * Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_verified")
-    val emailVerified: Boolean? = null,
-    /** The contacts email */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_verified") val emailVerified: Boolean? = null,
+    /**
+     * The contacts email
+     */
     val email: String? = null,
-    /** The contacts phone */
+    /**
+     * The contacts phone
+     */
     val phone: String? = null,
-    /** The contacts name */
+    /**
+     * The contacts name
+     */
     val name: String? = null,
-    /** An image URL containing the avatar of a contact */
+    /**
+     * An image URL containing the avatar of a contact
+     */
     val avatar: String? = null,
-    /** (Unix timestamp in seconds) The time specified for when a contact signed up. */
+    /**
+     * (Unix timestamp in seconds) The time specified for when a contact signed up.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("signed_up_at") val signedUpAt: Long? = null,
     /**
-     * (Unix timestamp in seconds) The time when the contact was last seen (either where the
-     * Intercom Messenger was installed or when specified manually).
+     * (Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("last_seen_at") val lastSeenAt: Long? = null,
-    /** The id of an admin that has been assigned account ownership of the contact */
+    /**
+     * The id of an admin that has been assigned account ownership of the contact
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: String? = null,
-    /** Whether the contact is unsubscribed from emails */
-    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails")
-    val unsubscribedFromEmails: Boolean? = null,
-    /** The custom attributes which are set for the contact */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: Map<String, Any>? = null,
+    /**
+     * Whether the contact is unsubscribed from emails
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails") val unsubscribedFromEmails: Boolean? = null,
+    /**
+     * The custom attributes which are set for the contact
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, Any>? = null
 )
 
-/** A contact that is no longer active, returned by the list deleted contacts endpoint. */
+/**
+ * A contact that is no longer active, returned by the list deleted contacts endpoint.
+ */
 data class DeletedContact(
-    /** always contact */
+    /**
+     * always contact
+     */
     val type: DeletedContactTypeEnum? = null,
-    /** The unique identifier for the contact which is given by Intercom. */
+    /**
+     * The unique identifier for the contact which is given by Intercom.
+     */
     val id: String? = null,
     /**
-     * The unique identifier for the contact which is provided by the Client. `null` for permanently
-     * deleted contacts.
+     * The unique identifier for the contact which is provided by the Client. `null` for permanently deleted contacts.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /** The contact's email address. `null` for permanently deleted contacts. */
-    val email: String? = null,
-    /** The role of the contact. */
-    val role: DeletedContactRoleEnum? = null,
-    /** Why the contact is no longer active. */
-    val status: DeletedContactStatusEnum? = null,
-    /** The id of the contact this one was merged into. Present only when `status` is `merged`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("merged_into_id")
-    val mergedIntoId: String? = null,
     /**
-     * The time the contact record was last updated as a UNIX timestamp. This is a last-modified
-     * time, not a deletion time.
+     * The contact's email address. `null` for permanently deleted contacts.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    val email: String? = null,
+    /**
+     * The role of the contact.
+     */
+    val role: DeletedContactRoleEnum? = null,
+    /**
+     * Why the contact is no longer active.
+     */
+    val status: DeletedContactStatusEnum? = null,
+    /**
+     * The id of the contact this one was merged into. Present only when `status` is `merged`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("merged_into_id") val mergedIntoId: String? = null,
+    /**
+     * The time the contact record was last updated as a UNIX timestamp. This is a last-modified time, not a deletion time.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
 )
 
-/** Offset-based pagination metadata. */
+/**
+ * Offset-based pagination metadata.
+ */
 data class DeletedContactListPages(
-    /** Optional enumerated value serialized in the `type` wire field. */
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
     val type: DeletedContactListPagesTypeEnum? = null,
-    /** Optional `integer` value serialized in the `page` wire field. */
+    /**
+     * Optional `integer` value serialized in the `page` wire field.
+     */
     val page: Long? = null,
-    /** Optional `integer` value serialized in the `per_page` wire field. */
+    /**
+     * Optional `integer` value serialized in the `per_page` wire field.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** Optional `integer` value serialized in the `total_pages` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null,
+    /**
+     * Optional `integer` value serialized in the `total_pages` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null
 )
 
-/** A paginated list of deleted contacts. */
+/**
+ * A paginated list of deleted contacts.
+ */
 data class DeletedContactList(
-    /** Always list */
+    /**
+     * Always list
+     */
     val type: DeletedContactListTypeEnum? = null,
-    /** The list of deleted contact objects. */
+    /**
+     * The list of deleted contact objects.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DeletedContact>? = null,
-    /** A count of the total number of deleted contacts. */
+    /**
+     * A count of the total number of deleted contacts.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** Offset-based pagination metadata. */
-    val pages: DeletedContactListPages? = null,
+    /**
+     * Offset-based pagination metadata.
+     */
+    val pages: DeletedContactListPages? = null
 )
 
-/** Merge contact data. */
+/**
+ * Merge contact data.
+ */
 data class MergeContactsRequest(
-    /** The unique identifier for the contact to merge away from. Must be a lead. */
+    /**
+     * The unique identifier for the contact to merge away from. Must be a lead.
+     */
     val from: String,
-    /** The unique identifier for the contact to merge into. Must be a user. */
+    /**
+     * The unique identifier for the contact to merge into. Must be a user.
+     */
     val into: String,
     /**
-     * Set to `true` to merge two contacts that are not duplicates (they share no matching email or
-     * phone).
+     * Set to `true` to merge two contacts that are not duplicates (they share no matching email or phone).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_duplicate_validation")
-    val skipDuplicateValidation: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_duplicate_validation") val skipDuplicateValidation: Boolean? = null
 )
 
-/** A paginated list of merge history entries for a contact. */
+/**
+ * A paginated list of merge history entries for a contact.
+ */
 data class MergeHistoryList(
-    /** The type of object. */
-    val type: MergeHistoryListTypeEnum? = null,
-    /** An array of merge history entries. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<MergeHistoryItem>? = null,
     /**
-     * A cursor to pass as the `cursor` query parameter to fetch the next page of results. Absent
-     * when there are no more pages.
+     * The type of object.
+     */
+    val type: MergeHistoryListTypeEnum? = null,
+    /**
+     * An array of merge history entries.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<MergeHistoryItem>? = null,
+    /**
+     * A cursor to pass as the `cursor` query parameter to fetch the next page of results. Absent when there are no more pages.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("next_cursor") val nextCursor: String? = null,
-    /** Whether there are more results to fetch. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Whether there are more results to fetch.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null
 )
 
-/** Returned when the merge is allowed. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Returned when the merge is allowed.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class MergePreviewAllowed(
-    /** Always true. The merge is allowed. */
+    /**
+     * Always true. The merge is allowed.
+     */
     val allowed: Boolean? = null,
-    /** A summary of the changes the merge would make to the surviving contact. */
-    val summary: MergePreviewSummary? = null,
+    /**
+     * A summary of the changes the merge would make to the surviving contact.
+     */
+    val summary: MergePreviewSummary? = null
 ) : MergePreviewResponse
 
-/** A single attribute change on the surviving contact. */
+/**
+ * A single attribute change on the surviving contact.
+ */
 data class MergePreviewAttributeChange(
-    /** The contact field that would change. */
+    /**
+     * The contact field that would change.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String? = null,
     /**
-     * How the value is resolved. adopted = the source's value is taken; discarded = the source's
-     * value is dropped and the target's kept; merged = the two values are combined.
+     * How the value is resolved. adopted = the source's value is taken; discarded = the source's value is dropped and the target's kept; merged = the two values are combined.
      */
     val outcome: MergePreviewAttributeChangeOutcomeEnum? = null,
     /**
-     * The source contact's value. Omitted when null. May be a string, array, or object depending on
-     * the field.
+     * The source contact's value. Omitted when null. May be a string, array, or object depending on the field.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("from_value") val fromValue: Any? = null,
     /**
-     * The target contact's value. Omitted when null. May be a string, array, or object depending on
-     * the field.
+     * The target contact's value. Omitted when null. May be a string, array, or object depending on the field.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("into_value") val intoValue: Any? = null,
     /**
-     * The resulting value on the surviving contact. Always present; may be null. May be a string,
-     * array, or object depending on the field.
+     * The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("new_into_value") val newIntoValue: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("new_into_value") val newIntoValue: Any? = null
 )
 
-/** The attribute changes the merge would make to the surviving contact. */
+/**
+ * The attribute changes the merge would make to the surviving contact.
+ */
 data class MergePreviewAttributeChanges(
     /**
-     * The individual attribute changes. Capped at 50 items; total_count reflects the full number of
-     * changes.
+     * The individual attribute changes. Capped at 50 items; total_count reflects the full number of changes.
      */
     val attributes: List<MergePreviewAttributeChange>? = null,
     /**
-     * The total number of attribute changes detected, which may exceed the number of items in
-     * attributes.
+     * The total number of attribute changes detected, which may exceed the number of items in attributes.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-)
-
-/** Returned when the merge is not allowed. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class MergePreviewBlocked(
-    /** Always false. The merge is not allowed. */
-    val allowed: Boolean? = null,
-    /** One or more reasons the merge is not allowed. */
-    val reasons: List<MergePreviewReason>? = null,
-) : MergePreviewResponse
-
-/** A reason a merge is not allowed. */
-data class MergePreviewReason(
-    /** A stable code identifying the reason. Branch on this value. */
-    val code: MergePreviewReasonCodeEnum? = null,
-    /**
-     * A human-readable explanation. Display this to people; do not match on it, as the wording may
-     * change.
-     */
-    val message: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null
 )
 
 /**
- * Distinct non-ticket conversations, counting both conversations the contact owns and conversations
- * it participates in. Tickets are excluded here and reported separately under `tickets`.
+ * Returned when the merge is not allowed.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class MergePreviewBlocked(
+    /**
+     * Always false. The merge is not allowed.
+     */
+    val allowed: Boolean? = null,
+    /**
+     * One or more reasons the merge is not allowed.
+     */
+    val reasons: List<MergePreviewReason>? = null
+) : MergePreviewResponse
+
+/**
+ * A reason a merge is not allowed.
+ */
+data class MergePreviewReason(
+    /**
+     * A stable code identifying the reason. Branch on this value.
+     */
+    val code: MergePreviewReasonCodeEnum? = null,
+    /**
+     * A human-readable explanation. Display this to people; do not match on it, as the wording may change.
+     */
+    val message: String? = null
+)
+
+/**
+ * Distinct non-ticket conversations, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.
  */
 data class MergePreviewReassignmentsConversations(
     /**
-     * The number of non-ticket conversations on the lead that would be reassigned to the surviving
-     * contact.
+     * The number of non-ticket conversations on the lead that would be reassigned to the surviving contact.
      */
     val from: Long,
-    /** The number of non-ticket conversations the surviving contact already has. */
-    val into: Long,
+    /**
+     * The number of non-ticket conversations the surviving contact already has.
+     */
+    val into: Long
 )
 
 /**
- * Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so a
- * single conversation is never counted twice.
+ * Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so a single conversation is never counted twice.
  */
 data class MergePreviewReassignmentsTickets(
-    /** The number of tickets on the lead that would be reassigned to the surviving contact. */
+    /**
+     * The number of tickets on the lead that would be reassigned to the surviving contact.
+     */
     val from: Long,
-    /** The number of tickets the surviving contact already has. */
-    val into: Long,
-)
-
-/** Phone calls. Present only for phone-lead merges. */
-data class MergePreviewReassignmentsPhoneCalls(
-    /** The number of phone calls on the lead that would be reassigned to the surviving contact. */
-    val from: Long,
-    /** The number of phone calls the surviving contact already has. */
-    val into: Long,
-)
-
-/** Tags. `from` counts only tags the surviving contact does not already have. */
-data class MergePreviewReassignmentsTags(
-    /** The number of tags on the lead that would be added to the surviving contact. */
-    val from: Long,
-    /** The number of tags the surviving contact already has. */
-    val into: Long,
-)
-
-/** Notes attached to the contact. */
-data class MergePreviewReassignmentsNotes(
-    /** The number of notes on the lead that would be reassigned to the surviving contact. */
-    val from: Long,
-    /** The number of notes the surviving contact already has. */
-    val into: Long,
+    /**
+     * The number of tickets the surviving contact already has.
+     */
+    val into: Long
 )
 
 /**
- * Two counts per object type — `from`, how many are on the lead and would move to the surviving
- * contact, and `into`, how many the surviving contact already has. Only types with reassignments
- * are included, and both counts are always present on a type that is included.
+ * Phone calls. Present only for phone-lead merges.
+ */
+data class MergePreviewReassignmentsPhoneCalls(
+    /**
+     * The number of phone calls on the lead that would be reassigned to the surviving contact.
+     */
+    val from: Long,
+    /**
+     * The number of phone calls the surviving contact already has.
+     */
+    val into: Long
+)
+
+/**
+ * Tags. `from` counts only tags the surviving contact does not already have.
+ */
+data class MergePreviewReassignmentsTags(
+    /**
+     * The number of tags on the lead that would be added to the surviving contact.
+     */
+    val from: Long,
+    /**
+     * The number of tags the surviving contact already has.
+     */
+    val into: Long
+)
+
+/**
+ * Notes attached to the contact.
+ */
+data class MergePreviewReassignmentsNotes(
+    /**
+     * The number of notes on the lead that would be reassigned to the surviving contact.
+     */
+    val from: Long,
+    /**
+     * The number of notes the surviving contact already has.
+     */
+    val into: Long
+)
+
+/**
+ * Two counts per object type — `from`, how many are on the lead and would move to the surviving contact, and `into`, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included.
  */
 data class MergePreviewReassignments(
     /**
-     * Distinct non-ticket conversations, counting both conversations the contact owns and
-     * conversations it participates in. Tickets are excluded here and reported separately under
-     * `tickets`.
+     * Distinct non-ticket conversations, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.
      */
     val conversations: MergePreviewReassignmentsConversations? = null,
     /**
-     * Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so
-     * a single conversation is never counted twice.
+     * Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so a single conversation is never counted twice.
      */
     val tickets: MergePreviewReassignmentsTickets? = null,
-    /** Phone calls. Present only for phone-lead merges. */
-    @com.fasterxml.jackson.annotation.JsonProperty("phone_calls")
-    val phoneCalls: MergePreviewReassignmentsPhoneCalls? = null,
-    /** Tags. `from` counts only tags the surviving contact does not already have. */
+    /**
+     * Phone calls. Present only for phone-lead merges.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("phone_calls") val phoneCalls: MergePreviewReassignmentsPhoneCalls? = null,
+    /**
+     * Tags. `from` counts only tags the surviving contact does not already have.
+     */
     val tags: MergePreviewReassignmentsTags? = null,
-    /** Notes attached to the contact. */
-    val notes: MergePreviewReassignmentsNotes? = null,
-)
-
-/** Preview a contact merge. */
-data class MergePreviewRequest(
-    /** The unique identifier for the contact to merge away from (the source contact). */
-    val from: String,
     /**
-     * The unique identifier for the contact to merge into (the destination contact). Must have a
-     * `role` of `user`.
+     * Notes attached to the contact.
      */
-    val into: String,
-    /**
-     * When `true`, previews the merge even if the contacts don't share a common identifier. Must be
-     * a JSON boolean; the string `"true"` does not bypass the check. Defaults to false.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_duplicate_validation")
-    val skipDuplicateValidation: Boolean? = null,
-    /** Custom attribute names to include in the previewed attribute changes. */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attribute_names")
-    val customAttributeNames: List<String>? = null,
+    val notes: MergePreviewReassignmentsNotes? = null
 )
 
 /**
- * The result of a merge preview. Either the merge is allowed (with a summary of the changes) or it
- * is not (with reasons).
+ * Preview a contact merge.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
+data class MergePreviewRequest(
+    /**
+     * The unique identifier for the contact to merge away from (the source contact).
+     */
+    val from: String,
+    /**
+     * The unique identifier for the contact to merge into (the destination contact). Must have a `role` of `user`.
+     */
+    val into: String,
+    /**
+     * When `true`, previews the merge even if the contacts don't share a common identifier. Must be a JSON boolean; the string `"true"` does not bypass the check. Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_duplicate_validation") val skipDuplicateValidation: Boolean? = null,
+    /**
+     * Custom attribute names to include in the previewed attribute changes.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attribute_names") val customAttributeNames: List<String>? = null
 )
+
+/**
+ * The result of a merge preview. Either the merge is allowed (with a summary of the changes) or it is not (with reasons).
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MergePreviewAllowed::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MergePreviewBlocked::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = MergePreviewBlocked::class)
 )
 sealed interface MergePreviewResponse
 
-/** A summary of the changes the merge would make to the surviving contact. */
+/**
+ * A summary of the changes the merge would make to the surviving contact.
+ */
 data class MergePreviewSummary(
-    /** The attribute changes the merge would make to the surviving contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attribute_changes")
-    val attributeChanges: MergePreviewAttributeChanges? = null,
     /**
-     * Two counts per object type — `from`, how many are on the lead and would move to the surviving
-     * contact, and `into`, how many the surviving contact already has. Only types with
-     * reassignments are included, and both counts are always present on a type that is included.
+     * The attribute changes the merge would make to the surviving contact.
      */
-    val reassignments: MergePreviewReassignments? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("attribute_changes") val attributeChanges: MergePreviewAttributeChanges? = null,
+    /**
+     * Two counts per object type — `from`, how many are on the lead and would move to the surviving contact, and `into`, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included.
+     */
+    val reassignments: MergePreviewReassignments? = null
 )
 
-/** You can update a contact */
+/**
+ * You can update a contact
+ */
 data class UpdateContactRequest(
-    /** The role of the contact. */
+    /**
+     * The role of the contact.
+     */
     val role: String? = null,
-    /** A unique identifier for the contact which is given to Intercom */
+    /**
+     * A unique identifier for the contact which is given to Intercom
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /** The contacts email */
+    /**
+     * The contacts email
+     */
     val email: String? = null,
     /**
-     * Whether the contact has proved they own this email address, for example through a
-     * confirmation link or one-time code you sent. Send it together with `email`. `email_verified`
-     * without `email` is rejected. Changing a contact's email resets it to not verified. Intercom
-     * reuses leads with a verified email when an inbound email, conversation or ticket matches the
-     * address.
+     * Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_verified")
-    val emailVerified: Boolean? = null,
-    /** The contacts phone */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_verified") val emailVerified: Boolean? = null,
+    /**
+     * The contacts phone
+     */
     val phone: String? = null,
-    /** The contacts name */
+    /**
+     * The contacts name
+     */
     val name: String? = null,
-    /** An image URL containing the avatar of a contact */
+    /**
+     * An image URL containing the avatar of a contact
+     */
     val avatar: String? = null,
-    /** (Unix timestamp in seconds) The time specified for when a contact signed up. */
+    /**
+     * (Unix timestamp in seconds) The time specified for when a contact signed up.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("signed_up_at") val signedUpAt: Long? = null,
     /**
-     * (Unix timestamp in seconds) The time when the contact was last seen (either where the
-     * Intercom Messenger was installed or when specified manually).
+     * (Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("last_seen_at") val lastSeenAt: Long? = null,
-    /** The id of an admin that has been assigned account ownership of the contact */
+    /**
+     * The id of an admin that has been assigned account ownership of the contact
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: String? = null,
-    /** Whether the contact is unsubscribed from emails */
-    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails")
-    val unsubscribedFromEmails: Boolean? = null,
-    /** The custom attributes which are set for the contact */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: Map<String, Any>? = null,
+    /**
+     * Whether the contact is unsubscribed from emails
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails") val unsubscribedFromEmails: Boolean? = null,
+    /**
+     * The custom attributes which are set for the contact
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, Any>? = null
 )

@@ -7,45 +7,31 @@ import dev.octri.showcase.intercom.ClientConfig
 import dev.octri.showcase.intercom.DeletedObject
 import dev.octri.showcase.intercom.Error2
 import dev.octri.showcase.intercom.IntercomVersion
-import dev.octri.showcase.intercom.NewsItem
-import dev.octri.showcase.intercom.NewsItemRequestStateEnum
 import dev.octri.showcase.intercom.Newsfeed
 import dev.octri.showcase.intercom.NewsfeedAssignment
+import dev.octri.showcase.intercom.NewsItem
+import dev.octri.showcase.intercom.NewsItemRequestStateEnum
 import dev.octri.showcase.intercom.PaginatedResponse
 import dev.octri.showcase.intercom.RequestOptions
 import dev.octri.showcase.intercom.SdkClient
 
 object News {
 
+
     /**
-     * Lists news items across the workspace in a paginated response. Use the cursor-based page
-     * metadata to navigate through the results. Each response includes a total count and an array
-     * of news item objects.
+     * Lists news items across the workspace in a paginated response. Use the cursor-based page metadata to navigate through the results. Each response includes a total count and an array of news item objects.
      *
      * You can fetch a list of all news items
      */
-    fun listNewsItems(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): PaginatedResponse {
-        return SdkClient.request<PaginatedResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/news/news_items",
-                    config = clientConfig,
-                    operationId = "listNewsItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listNewsItems(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): PaginatedResponse {
+        return SdkClient.request<PaginatedResponse>(SdkClient.RequestSpec("GET", "/news/news_items", config = clientConfig, operationId = "listNewsItems", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createNewsItem]. */
     data class CreateNewsItemRequest(
@@ -57,96 +43,57 @@ object News {
         val deliverSilently: Boolean? = null,
         val labels: List<String>? = null,
         val reactions: List<String?>? = null,
-        val newsfeedAssignments: List<NewsfeedAssignment>? = null,
+        val newsfeedAssignments: List<NewsfeedAssignment>? = null
     )
 
     /**
-     * Creates a news item that can announce updates, company news, promotions, or events. Supply
-     * `title` and `sender_id`; the sender must be a teammate, and `state` can be set to draft or
-     * live. Assign the item to newsfeeds with `newsfeed_assignments`.
+     * Creates a news item that can announce updates, company news, promotions, or events. Supply `title` and `sender_id`; the sender must be a teammate, and `state` can be set to draft or live. Assign the item to newsfeeds with `newsfeed_assignments`.
      *
      * You can create a news item
      *
      * @param title The title of the news item.
-     * @param senderId The id of the sender of the news item. Must be a teammate on the workspace.
+     * @param senderId The id of the sender of the news item. Must be a teammate on
+     *   the workspace.
      * @param body The news item body, which may contain HTML.
-     * @param state News items will not be visible to your users in the assigned newsfeeds until
-     *   they are set live.
-     * @param deliverSilently When set to `true`, the news item will appear in the messenger
-     *   newsfeed without showing a notification badge.
+     * @param state News items will not be visible to your users in the assigned
+     *   newsfeeds until they are set live.
+     * @param deliverSilently When set to `true`, the news item will appear in the
+     *   messenger newsfeed without showing a notification badge.
      * @param labels Label names displayed to users to categorize the news item.
-     * @param reactions Ordered list of emoji reactions to the news item. When empty, reactions are
-     *   disabled.
-     * @param newsfeedAssignments A list of newsfeed_assignments to assign to the specified
-     *   newsfeed.
+     * @param reactions Ordered list of emoji reactions to the news item. When empty,
+     *   reactions are disabled.
+     * @param newsfeedAssignments A list of newsfeed_assignments to assign to the
+     *   specified newsfeed.
      */
-    fun createNewsItem(
-        clientConfig: ClientConfig,
-        request: CreateNewsItemRequest,
-        options: RequestOptions? = null,
-    ): NewsItem {
-        return SdkClient.request<NewsItem>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/news/news_items",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "title" to (request.title),
-                            "sender_id" to (request.senderId),
-                            "body" to (SdkClient.omitIfNull(request.body)),
-                            "state" to (SdkClient.omitIfNull(request.state)),
-                            "deliver_silently" to (SdkClient.omitIfNull(request.deliverSilently)),
-                            "labels" to (SdkClient.omitIfNull(request.labels)),
-                            "reactions" to (SdkClient.omitIfNull(request.reactions)),
-                            "newsfeed_assignments" to
-                                (SdkClient.omitIfNull(request.newsfeedAssignments)),
-                        ),
-                    operationId = "createNewsItem",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createNewsItem(clientConfig: ClientConfig, request: CreateNewsItemRequest, options: RequestOptions? = null): NewsItem {
+        return SdkClient.request<NewsItem>(SdkClient.RequestSpec("POST", "/news/news_items", config = clientConfig, body = SdkClient.bodyMap("title" to (request.title), "sender_id" to (request.senderId), "body" to (SdkClient.omitIfNull(request.body)), "state" to (SdkClient.omitIfNull(request.state)), "deliver_silently" to
+    (SdkClient.omitIfNull(request.deliverSilently)), "labels" to (SdkClient.omitIfNull(request.labels)), "reactions" to (SdkClient.omitIfNull(request.reactions)), "newsfeed_assignments" to
+    (SdkClient.omitIfNull(request.newsfeedAssignments))), operationId = "createNewsItem", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves the details of a single news item. Use its unique `news_item_id` to identify the
-     * item. The response includes the item's content, state, newsfeed assignments, and timestamps.
+     * Retrieves the details of a single news item. Use its unique `news_item_id` to identify the item. The response includes the item's content, state, newsfeed assignments, and timestamps.
      *
      * You can fetch the details of a single news item.
      *
-     * @param newsItemId The unique identifier for the news item which is given by Intercom.
+     * @param newsItemId The unique identifier for the news item which is given by
+     *   Intercom.
      */
-    fun retrieveNewsItem(
-        clientConfig: ClientConfig,
-        newsItemId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): NewsItem {
-        return SdkClient.request<NewsItem>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/news/news_items/${SdkClient.encodePathSegment(newsItemId)}",
-                    config = clientConfig,
-                    operationId = "retrieveNewsItem",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveNewsItem(clientConfig: ClientConfig, newsItemId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): NewsItem {
+        return SdkClient.request<NewsItem>(SdkClient.RequestSpec("GET", "/news/news_items/${SdkClient.encodePathSegment(newsItemId)}", config = clientConfig, operationId = "retrieveNewsItem", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateNewsItem]. */
     data class UpdateNewsItemRequest(
@@ -159,188 +106,107 @@ object News {
         val deliverSilently: Boolean? = null,
         val labels: List<String>? = null,
         val reactions: List<String?>? = null,
-        val newsfeedAssignments: List<NewsfeedAssignment>? = null,
+        val newsfeedAssignments: List<NewsfeedAssignment>? = null
     )
 
     /**
-     * Replaces the details of an existing news item. Provide the item identifier in `news_item_id`
-     * and submit the news item fields you want set. When you provide a body, include `title` and
-     * `sender_id`.
+     * Replaces the details of an existing news item. Provide the item identifier in `news_item_id` and submit the news item fields you want set. When you provide a body, include `title` and `sender_id`.
      *
-     * @param newsItemId The unique identifier for the news item which is given by Intercom.
+     * @param newsItemId The unique identifier for the news item which is given by
+     *   Intercom.
      * @param title The title of the news item.
-     * @param senderId The id of the sender of the news item. Must be a teammate on the workspace.
+     * @param senderId The id of the sender of the news item. Must be a teammate on
+     *   the workspace.
      * @param body The news item body, which may contain HTML.
-     * @param state News items will not be visible to your users in the assigned newsfeeds until
-     *   they are set live.
-     * @param deliverSilently When set to `true`, the news item will appear in the messenger
-     *   newsfeed without showing a notification badge.
+     * @param state News items will not be visible to your users in the assigned
+     *   newsfeeds until they are set live.
+     * @param deliverSilently When set to `true`, the news item will appear in the
+     *   messenger newsfeed without showing a notification badge.
      * @param labels Label names displayed to users to categorize the news item.
-     * @param reactions Ordered list of emoji reactions to the news item. When empty, reactions are
-     *   disabled.
-     * @param newsfeedAssignments A list of newsfeed_assignments to assign to the specified
-     *   newsfeed.
+     * @param reactions Ordered list of emoji reactions to the news item. When empty,
+     *   reactions are disabled.
+     * @param newsfeedAssignments A list of newsfeed_assignments to assign to the
+     *   specified newsfeed.
      */
-    fun updateNewsItem(
-        clientConfig: ClientConfig,
-        request: UpdateNewsItemRequest,
-        options: RequestOptions? = null,
-    ): NewsItem {
-        return SdkClient.request<NewsItem>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/news/news_items/${SdkClient.encodePathSegment(request.newsItemId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "title" to (request.title),
-                            "sender_id" to (request.senderId),
-                            "body" to (SdkClient.omitIfNull(request.body)),
-                            "state" to (SdkClient.omitIfNull(request.state)),
-                            "deliver_silently" to (SdkClient.omitIfNull(request.deliverSilently)),
-                            "labels" to (SdkClient.omitIfNull(request.labels)),
-                            "reactions" to (SdkClient.omitIfNull(request.reactions)),
-                            "newsfeed_assignments" to
-                                (SdkClient.omitIfNull(request.newsfeedAssignments)),
-                        ),
-                    operationId = "updateNewsItem",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateNewsItem(clientConfig: ClientConfig, request: UpdateNewsItemRequest, options: RequestOptions? = null): NewsItem {
+        return SdkClient.request<NewsItem>(SdkClient.RequestSpec("PUT", "/news/news_items/${SdkClient.encodePathSegment(request.newsItemId)}", config = clientConfig, body = SdkClient.bodyMap("title" to (request.title), "sender_id" to (request.senderId), "body" to (SdkClient.omitIfNull(request.body)), "state" to (SdkClient.omitIfNull(request.state)), "deliver_silently" to
+    (SdkClient.omitIfNull(request.deliverSilently)), "labels" to (SdkClient.omitIfNull(request.labels)), "reactions" to (SdkClient.omitIfNull(request.reactions)), "newsfeed_assignments" to
+    (SdkClient.omitIfNull(request.newsfeedAssignments))), operationId = "updateNewsItem", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a single news item. Use `news_item_id` to identify the item to remove. The response
-     * confirms whether the item was deleted and identifies the deleted object.
+     * Deletes a single news item. Use `news_item_id` to identify the item to remove. The response confirms whether the item was deleted and identifies the deleted object.
      *
      * You can delete a single news item.
      *
-     * @param newsItemId The unique identifier for the news item which is given by Intercom.
+     * @param newsItemId The unique identifier for the news item which is given by
+     *   Intercom.
      */
-    fun deleteNewsItem(
-        clientConfig: ClientConfig,
-        newsItemId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return SdkClient.request<DeletedObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/news/news_items/${SdkClient.encodePathSegment(newsItemId)}",
-                    config = clientConfig,
-                    operationId = "deleteNewsItem",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteNewsItem(clientConfig: ClientConfig, newsItemId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedObject {
+        return SdkClient.request<DeletedObject>(SdkClient.RequestSpec("DELETE", "/news/news_items/${SdkClient.encodePathSegment(newsItemId)}", config = clientConfig, operationId = "deleteNewsItem", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the live news items assigned to a specific newsfeed. Supply `newsfeed_id` to select the
-     * feed whose items you want to retrieve. The response includes cursor-based page metadata and a
-     * total count.
+     * Lists the live news items assigned to a specific newsfeed. Supply `newsfeed_id` to select the feed whose items you want to retrieve. The response includes cursor-based page metadata and a total count.
      *
      * You can fetch a list of all news items that are live on a given newsfeed
      *
-     * @param newsfeedId The unique identifier for the news feed item which is given by Intercom.
+     * @param newsfeedId The unique identifier for the news feed item which is given
+     *   by Intercom.
      */
-    fun listLiveNewsfeedItems(
-        clientConfig: ClientConfig,
-        newsfeedId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): PaginatedResponse {
-        return SdkClient.request<PaginatedResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/news/newsfeeds/${SdkClient.encodePathSegment(newsfeedId)}/items",
-                    config = clientConfig,
-                    operationId = "listLiveNewsfeedItems",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listLiveNewsfeedItems(clientConfig: ClientConfig, newsfeedId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): PaginatedResponse {
+        return SdkClient.request<PaginatedResponse>(SdkClient.RequestSpec("GET", "/news/newsfeeds/${SdkClient.encodePathSegment(newsfeedId)}/items", config = clientConfig, operationId = "listLiveNewsfeedItems", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the newsfeeds available in the workspace. Use the cursor-based page metadata to
-     * navigate through the results. The response includes a total count and an array of newsfeed
-     * objects.
+     * Lists the newsfeeds available in the workspace. Use the cursor-based page metadata to navigate through the results. The response includes a total count and an array of newsfeed objects.
      *
      * You can fetch a list of all newsfeeds
      */
-    fun listNewsfeeds(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): PaginatedResponse {
-        return SdkClient.request<PaginatedResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/news/newsfeeds",
-                    config = clientConfig,
-                    operationId = "listNewsfeeds",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listNewsfeeds(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): PaginatedResponse {
+        return SdkClient.request<PaginatedResponse>(SdkClient.RequestSpec("GET", "/news/newsfeeds", config = clientConfig, operationId = "listNewsfeeds", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves the details of a single newsfeed. Use `newsfeed_id` to identify the feed. Newsfeeds
-     * cannot be edited through the API.
+     * Retrieves the details of a single newsfeed. Use `newsfeed_id` to identify the feed. Newsfeeds cannot be edited through the API.
      *
      * You can fetch the details of a single newsfeed
      *
-     * @param newsfeedId The unique identifier for the news feed item which is given by Intercom.
+     * @param newsfeedId The unique identifier for the news feed item which is given
+     *   by Intercom.
      */
-    fun retrieveNewsfeed(
-        clientConfig: ClientConfig,
-        newsfeedId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Newsfeed {
-        return SdkClient.request<Newsfeed>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/news/newsfeeds/${SdkClient.encodePathSegment(newsfeedId)}",
-                    config = clientConfig,
-                    operationId = "retrieveNewsfeed",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveNewsfeed(clientConfig: ClientConfig, newsfeedId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Newsfeed {
+        return SdkClient.request<Newsfeed>(SdkClient.RequestSpec("GET", "/news/newsfeeds/${SdkClient.encodePathSegment(newsfeedId)}", config = clientConfig, operationId = "retrieveNewsfeed", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

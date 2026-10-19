@@ -15,34 +15,21 @@ import dev.octri.showcase.intercom.UpdateTicketTypeRequestCategoryEnum
 
 object TicketTypes {
 
+
     /**
-     * Lists the ticket types associated with the workspace. Use the returned ticket type details to
-     * review their attributes, states, and archive status.
+     * Lists the ticket types associated with the workspace. Use the returned ticket type details to review their attributes, states, and archive status.
      *
      * You can get a list of all ticket types for a workspace.
      */
-    fun listTicketTypes(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): TicketTypeList {
-        return SdkClient.request<TicketTypeList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ticket_types",
-                    config = clientConfig,
-                    operationId = "listTicketTypes",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listTicketTypes(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketTypeList {
+        return SdkClient.request<TicketTypeList>(SdkClient.RequestSpec("GET", "/ticket_types", config = clientConfig, operationId = "listTicketTypes", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createTicketType]. */
     data class CreateTicketTypeParams(
@@ -51,89 +38,49 @@ object TicketTypes {
         val description: String? = null,
         val category: CreateTicketTypeRequestCategoryEnum? = null,
         val icon: String? = null,
-        val isInternal: Boolean? = null,
+        val isInternal: Boolean? = null
     )
 
     /**
-     * Creates a new ticket type with its name, description, category, icon, and internal-use
-     * setting. Supply `name`; `category` accepts Customer, Back-office, or Tracker, and omitted
-     * `icon` and `is_internal` values default to 🎟️ and false. The created ticket type includes
-     * the default `_default_title_` and `_default_description_` attributes.
+     * Creates a new ticket type with its name, description, category, icon, and internal-use setting. Supply `name`; `category` accepts Customer, Back-office, or Tracker, and omitted `icon` and `is_internal` values default to 🎟️ and false. The created ticket type includes the default `_default_title_` and `_default_description_` attributes.
      *
-     * You can create a new ticket type. > 📘 Creating ticket types. > > Every ticket type will be
-     * created with two default attributes: _default_title_ and _default_description_. > For the
-     * `icon` propery, use an emoji from Twemoji Cheatsheet
+     * You can create a new ticket type. > 📘 Creating ticket types. > > Every ticket type will be created with two default attributes: _default_title_ and _default_description_. > For the `icon` propery, use an emoji from Twemoji Cheatsheet
      *
      * @param name The name of the ticket type.
      * @param description The description of the ticket type.
      * @param category Category of the Ticket Type.
      * @param icon The icon of the ticket type.
-     * @param isInternal Whether the tickets associated with this ticket type are intended for
-     *   internal use only or will be shared with customers. This is currently a limited attribute.
+     * @param isInternal Whether the tickets associated with this ticket type are
+     *   intended for internal use only or will be shared with customers. This is
+     *   currently a limited attribute.
      */
-    fun createTicketType(
-        clientConfig: ClientConfig,
-        request: CreateTicketTypeParams,
-        options: RequestOptions? = null,
-    ): TicketType {
-        return SdkClient.request<TicketType>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/ticket_types",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "description" to (SdkClient.omitIfNull(request.description)),
-                            "category" to (SdkClient.omitIfNull(request.category)),
-                            "icon" to (SdkClient.omitIfNull(request.icon)),
-                            "is_internal" to (SdkClient.omitIfNull(request.isInternal)),
-                        ),
-                    operationId = "createTicketType",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createTicketType(clientConfig: ClientConfig, request: CreateTicketTypeParams, options: RequestOptions? = null): TicketType {
+        return SdkClient.request<TicketType>(SdkClient.RequestSpec("POST", "/ticket_types", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "description" to (SdkClient.omitIfNull(request.description)), "category" to (SdkClient.omitIfNull(request.category)), "icon" to (SdkClient.omitIfNull(request.icon)), "is_internal" to (SdkClient.omitIfNull(request.isInternal))), operationId = "createTicketType", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a ticket type by its unique identifier. Supply `ticket_type_id` to identify the
-     * ticket type and an API version if you need to override the default version.
+     * Retrieves a ticket type by its unique identifier. Supply `ticket_type_id` to identify the ticket type and an API version if you need to override the default version.
      *
      * You can fetch the details of a single ticket type.
      *
-     * @param ticketTypeId The unique identifier for the ticket type which is given by Intercom.
+     * @param ticketTypeId The unique identifier for the ticket type which is given
+     *   by Intercom.
      */
-    fun getTicketType(
-        clientConfig: ClientConfig,
-        ticketTypeId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): TicketType {
-        return SdkClient.request<TicketType>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ticket_types/${SdkClient.encodePathSegment(ticketTypeId)}",
-                    config = clientConfig,
-                    operationId = "getTicketType",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun getTicketType(clientConfig: ClientConfig, ticketTypeId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketType {
+        return SdkClient.request<TicketType>(SdkClient.RequestSpec("GET", "/ticket_types/${SdkClient.encodePathSegment(ticketTypeId)}", config = clientConfig, operationId = "getTicketType", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateTicketType]. */
     data class UpdateTicketTypeParams(
@@ -144,57 +91,33 @@ object TicketTypes {
         val category: UpdateTicketTypeRequestCategoryEnum? = null,
         val icon: String? = null,
         val archived: Boolean? = null,
-        val isInternal: Boolean? = null,
+        val isInternal: Boolean? = null
     )
 
     /**
-     * Replaces the configurable details of an existing ticket type. Supply only the fields you want
-     * to change; `category` accepts Customer, Back-office, or Tracker, and omitted `icon` and
-     * `is_internal` values use their defined defaults when provided. The updated response includes
-     * the ticket type's current details.
+     * Replaces the configurable details of an existing ticket type. Supply only the fields you want to change; `category` accepts Customer, Back-office, or Tracker, and omitted `icon` and `is_internal` values use their defined defaults when provided. The updated response includes the ticket type's current details.
      *
-     * You can update a ticket type. > 📘 Updating a ticket type. > > For the `icon` propery, use an
-     * emoji from Twemoji Cheatsheet
+     * You can update a ticket type. > 📘 Updating a ticket type. > > For the `icon` propery, use an emoji from Twemoji Cheatsheet
      *
-     * @param ticketTypeId The unique identifier for the ticket type which is given by Intercom.
+     * @param ticketTypeId The unique identifier for the ticket type which is given
+     *   by Intercom.
      * @param name The name of the ticket type.
      * @param description The description of the ticket type.
      * @param category Category of the Ticket Type.
      * @param icon The icon of the ticket type.
      * @param archived The archived status of the ticket type.
-     * @param isInternal Whether the tickets associated with this ticket type are intended for
-     *   internal use only or will be shared with customers. This is currently a limited attribute.
+     * @param isInternal Whether the tickets associated with this ticket type are
+     *   intended for internal use only or will be shared with customers. This is
+     *   currently a limited attribute.
      */
-    fun updateTicketType(
-        clientConfig: ClientConfig,
-        request: UpdateTicketTypeParams,
-        options: RequestOptions? = null,
-    ): TicketType {
-        return SdkClient.request<TicketType>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/ticket_types/${SdkClient.encodePathSegment(request.ticketTypeId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "description" to (SdkClient.omitIfNull(request.description)),
-                            "category" to (SdkClient.omitIfNull(request.category)),
-                            "icon" to (SdkClient.omitIfNull(request.icon)),
-                            "archived" to (SdkClient.omitIfNull(request.archived)),
-                            "is_internal" to (SdkClient.omitIfNull(request.isInternal)),
-                        ),
-                    operationId = "updateTicketType",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateTicketType(clientConfig: ClientConfig, request: UpdateTicketTypeParams, options: RequestOptions? = null): TicketType {
+        return SdkClient.request<TicketType>(SdkClient.RequestSpec("PUT", "/ticket_types/${SdkClient.encodePathSegment(request.ticketTypeId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "description" to (SdkClient.omitIfNull(request.description)), "category" to (SdkClient.omitIfNull(request.category)), "icon" to (SdkClient.omitIfNull(request.icon)), "archived" to (SdkClient.omitIfNull(request.archived)), "is_internal" to (SdkClient.omitIfNull(request.isInternal))), operationId = "updateTicketType", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

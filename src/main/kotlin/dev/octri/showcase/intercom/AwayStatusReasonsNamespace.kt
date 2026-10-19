@@ -3,23 +3,15 @@
 
 package dev.octri.showcase.intercom
 
+
 class AwayStatusReasonsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the away status reasons configured for the workspace, including reasons marked as
-     * deleted. Use this endpoint to retrieve reason labels and their associated identifiers,
-     * ordering, and status information.
+     * Lists the away status reasons configured for the workspace, including reasons marked as deleted. Use this endpoint to retrieve reason labels and their associated identifiers, ordering, and status information.
      *
-     * Returns a list of all away status reasons configured for the workspace, including deleted
-     * ones.
+     * Returns a list of all away status reasons configured for the workspace, including deleted ones.
      */
-    fun list(
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): AwayStatusReasonList {
-        return dev.octri.showcase.intercom.methods.AwayStatusReasons.listAwayStatusReasons(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): AwayStatusReasonList {
+        return dev.octri.showcase.intercom.methods.AwayStatusReasons.listAwayStatusReasons(clientConfig, intercomVersion, options)
     }
+
 }

@@ -6,21 +6,36 @@ package dev.octri.showcase.intercom.models.audiences
 import dev.octri.showcase.intercom.models.AudienceTypeEnum
 import dev.octri.showcase.intercom.models.Predicate
 
-/** An audience represents a group of contacts that can be targeted by Fin. */
+/**
+ * An audience represents a group of contacts that can be targeted by Fin.
+ */
 data class Audience(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     val type: AudienceTypeEnum? = null,
-    /** The unique identifier representing the audience. */
+    /**
+     * The unique identifier representing the audience.
+     */
     val id: String? = null,
-    /** The name of the audience. */
+    /**
+     * The name of the audience.
+     */
     val name: String? = null,
-    /** The predicates that define which contacts belong to the audience. */
+    /**
+     * The predicates that define which contacts belong to the audience.
+     */
     val predicates: List<Predicate>? = null,
-    /** Role-based predicates that further filter audience membership by contact role. */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_predicates")
-    val rolePredicates: List<Predicate>? = null,
-    /** The time the audience was created as a Unix timestamp. */
+    /**
+     * Role-based predicates that further filter audience membership by contact role.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_predicates") val rolePredicates: List<Predicate>? = null,
+    /**
+     * The time the audience was created as a Unix timestamp.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time the audience was last updated as a Unix timestamp. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    /**
+     * The time the audience was last updated as a Unix timestamp.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
 )

@@ -5,222 +5,253 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.tickets.Ticket
 
-/** You can change the type of a Ticket */
+/**
+ * You can change the type of a Ticket
+ */
 data class ChangeTicketTypeRequest(
-    /** The ID of the new ticket type. Must be in the same category as the current type. */
+    /**
+     * The ID of the new ticket type. Must be in the same category as the current type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_id") val ticketTypeId: String,
-    /** The ID of the ticket state for the new ticket type. */
+    /**
+     * The ID of the ticket state for the new ticket type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ticket_state_id") val ticketStateId: String,
     /**
-     * The attributes to set on the ticket for the new type. Attributes matching by name and type
-     * are transferred automatically from the old type; values provided here override the
-     * transferred values.
+     * The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_attributes")
-    val ticketAttributes: Map<String, Any>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_attributes") val ticketAttributes: Map<String, Any>? = null
 )
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyTicketEmailRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of a contact using their `email` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of a contact using their `email`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContactReplyTicketEmailRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyTicketEmailRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyTicketEmailRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ContactReplyTicketEmailRequestTypeEnum,
-    /** The text body of the comment. */
+    /**
+     * The text body of the comment.
+     */
     val body: String,
-    /** The email you have defined for the user. */
+    /**
+     * The email you have defined for the user.
+     */
     val email: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * The time the reply was created. If not provided, the current time will be used.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyTicketEmailRequestReplyOptionsItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyTicketEmailRequestReplyOptionsItem>? = null
 ) : ContactReplyTicketRequest
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyTicketIntercomUserIdRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of a contact using their `intercom_user_id` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of a contact using their `intercom_user_id`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContactReplyTicketIntercomUserIdRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyTicketIntercomUserIdRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyTicketIntercomUserIdRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ContactReplyTicketIntercomUserIdRequestTypeEnum,
-    /** The text body of the comment. */
+    /**
+     * The text body of the comment.
+     */
     val body: String,
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * The time the reply was created. If not provided, the current time will be used.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyTicketIntercomUserIdRequestReplyOptionsItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyTicketIntercomUserIdRequestReplyOptionsItem>? = null
 ) : ContactReplyTicketRequest
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyTicketUserIdRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of a contact using their `user_id` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of a contact using their `user_id`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContactReplyTicketUserIdRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyTicketUserIdRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: ContactReplyTicketUserIdRequestTypeEnum,
-    /** The text body of the comment. */
-    val body: String,
-    /** The external_id you have defined for the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * Required enumerated value serialized in the `message_type` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyTicketUserIdRequestReplyOptionsItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyTicketUserIdRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ContactReplyTicketUserIdRequestTypeEnum,
+    /**
+     * The text body of the comment.
+     */
+    val body: String,
+    /**
+     * The external_id you have defined for the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyTicketUserIdRequestReplyOptionsItem>? = null
 ) : ContactReplyTicketRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTicketRequestContactsItemVariant0(
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     val id: String
 ) : CreateTicketRequestContactsItem
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTicketRequestContactsItemVariant1(
-    /** The external_id you have defined for the contact who is being added as a participant. */
+    /**
+     * The external_id you have defined for the contact who is being added as a participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String
 ) : CreateTicketRequestContactsItem
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CreateTicketRequestContactsItemVariant2(
     /**
-     * The email you have defined for the contact who is being added as a participant. If a contact
-     * with this email does not exist, one will be created.
+     * The email you have defined for the contact who is being added as a participant. If a contact with this email does not exist, one will be created.
      */
     val email: String
 ) : CreateTicketRequestContactsItem
 
-/** Required object value serialized in the `contacts[]` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Required object value serialized in the `contacts[]` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateTicketRequestContactsItemVariant0::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateTicketRequestContactsItemVariant1::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = CreateTicketRequestContactsItemVariant2::class
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateTicketRequestContactsItemVariant0::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateTicketRequestContactsItemVariant1::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CreateTicketRequestContactsItemVariant2::class)
 )
 sealed interface CreateTicketRequestContactsItem
 
-/** deleted ticket object */
+/**
+ * deleted ticket object
+ */
 data class TicketDeleted(
-    /** The unique identifier for the ticket. */
-    val id: String? = null,
-    /** always ticket */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: TicketDeletedObjectEnum? = null,
-    /** Whether the ticket is deleted or not. */
-    val deleted: Boolean? = null,
-)
-
-/** Tickets are how you track requests from your users. */
-data class TicketList(
-    /** Always ticket.list */
-    val type: TicketListTypeEnum? = null,
-    /** The list of ticket objects */
-    val tickets: List<Ticket?>? = null,
-    /** A count of the total number of objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
-     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
-     * result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * The unique identifier for the ticket.
      */
-    val pages: CursorPages? = null,
+    val id: String? = null,
+    /**
+     * always ticket
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: TicketDeletedObjectEnum? = null,
+    /**
+     * Whether the ticket is deleted or not.
+     */
+    val deleted: Boolean? = null
 )
 
 /**
- * A map of the reply text keyed by locale code. Backs the `ticket.admin.replied.translated` webhook
- * topic. `original` holds the locale code the reply was written in; every other key holds the reply
- * translated into that locale.
+ * Tickets are how you track requests from your users.
+ */
+data class TicketList(
+    /**
+     * Always ticket.list
+     */
+    val type: TicketListTypeEnum? = null,
+    /**
+     * The list of ticket objects
+     */
+    val tickets: List<Ticket?>? = null,
+    /**
+     * A count of the total number of objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+    /**
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     */
+    val pages: CursorPages? = null
+)
+
+/**
+ * A map of the reply text keyed by locale code. Backs the `ticket.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
  */
 data class TicketReplyTranslations(
-    /** The locale code identifying the language the reply was originally written in. */
+    /**
+     * The locale code identifying the language the reply was originally written in.
+     */
     val original: String
 ) {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
@@ -228,31 +259,48 @@ data class TicketReplyTranslations(
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/** A Ticket Part representing a note, comment, or quick_reply on a ticket */
+/**
+ * A Ticket Part representing a note, comment, or quick_reply on a ticket
+ */
 data class TicketReply(
-    /** Always ticket_part */
+    /**
+     * Always ticket_part
+     */
     val type: TicketReplyTypeEnum? = null,
-    /** The id representing the part. */
+    /**
+     * The id representing the part.
+     */
     val id: String? = null,
-    /** Type of the part */
-    @com.fasterxml.jackson.annotation.JsonProperty("part_type")
-    val partType: TicketReplyPartTypeEnum? = null,
-    /** The message body, which may contain HTML. */
+    /**
+     * Type of the part
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("part_type") val partType: TicketReplyPartTypeEnum? = null,
+    /**
+     * The message body, which may contain HTML.
+     */
     val body: String? = null,
-    /** The time the note was created. */
+    /**
+     * The time the note was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The last time the note was updated. */
+    /**
+     * The last time the note was updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /** The author that wrote or triggered the part. Can be a bot, admin, team or user. */
+    /**
+     * The author that wrote or triggered the part. Can be a bot, admin, team or user.
+     */
     val author: TicketPartAuthor? = null,
-    /** A list of attachments for the part. */
+    /**
+     * A list of attachments for the part.
+     */
     val attachments: List<PartAttachment>? = null,
-    /** Whether or not the ticket part has been redacted. */
+    /**
+     * Whether or not the ticket part has been redacted.
+     */
     val redacted: Boolean? = null,
     /**
-     * A map of the reply text keyed by locale code. Backs the `ticket.admin.replied.translated`
-     * webhook topic. `original` holds the locale code the reply was written in; every other key
-     * holds the reply translated into that locale.
+     * A map of the reply text keyed by locale code. Backs the `ticket.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
      */
-    val translations: TicketReplyTranslations? = null,
+    val translations: TicketReplyTranslations? = null
 )

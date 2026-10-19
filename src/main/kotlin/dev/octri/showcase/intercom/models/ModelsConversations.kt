@@ -7,462 +7,553 @@ import dev.octri.showcase.intercom.models.conversation.DeletedConversationItem
 import dev.octri.showcase.intercom.models.conversations.ConversationListItem
 import java.time.OffsetDateTime
 
-/** Payload of the request to reply on behalf of an admin */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of an admin
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AdminReplyConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: AdminReplyConversationRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: AdminReplyConversationRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AdminReplyConversationRequestTypeEnum,
-    /** The id of the admin who is authoring the comment. */
+    /**
+     * The id of the admin who is authoring the comment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * The text body of the reply. Notes accept some HTML formatting. Must be present for comment
-     * and note message types.
+     * The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.
      */
     val body: String? = null,
-    /** The time the reply was created. If not provided, the current time will be used. */
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
     /**
-     * The quick reply options to display to the end user. Must be present for quick_reply message
-     * types.
+     * The quick reply options to display to the end user. Must be present for quick_reply message types.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<QuickReplyOption>? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
-    /** A list of files that will be added as attachments. You can include up to 10 files */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
-    /** Option to disable notifications when replying to a conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_notifications")
-    val skipNotifications: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<QuickReplyOption>? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * A list of files that will be added as attachments. You can include up to 10 files
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    /**
+     * Option to disable notifications when replying to a conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_notifications") val skipNotifications: Boolean? = null
 ) : ReplyConversationRequest
 
-/** Payload of the request to assign a conversation */
+/**
+ * Payload of the request to assign a conversation
+ */
 data class AssignConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: AssignConversationRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: AssignConversationRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AssignConversationRequestTypeEnum,
-    /** The id of the admin who is performing the action. */
+    /**
+     * The id of the admin who is performing the action.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can
-     * be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team
-     * (ie. Unassigned).
+     * The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team (ie. Unassigned).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("assignee_id") val assigneeId: String,
-    /** Optionally you can send a response in the conversation when it is assigned. */
+    /**
+     * Optionally you can send a response in the conversation when it is assigned.
+     */
     val body: String? = null,
     /**
-     * When true, assigning a closed conversation leaves it closed instead of reopening it. No
-     * reopen event is recorded, so the conversation keeps its original close timestamp and the
-     * assignment does not count as a new closure in reporting.
+     * When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_reopen") val skipReopen: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_reopen") val skipReopen: Boolean? = null
 )
 
-/** Payload of the request to assign a conversation */
+/**
+ * Payload of the request to assign a conversation
+ */
 data class AttachContactToConversationRequest(
-    /** The `id` of the admin who is adding the new participant. */
+    /**
+     * The `id` of the admin who is adding the new participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: AttachContactToConversationRequestCustomer? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: AttachContactToConversationRequestCustomer? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AttachContactToConversationRequestCustomerVariant0(
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: CustomerRequest? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: CustomerRequest? = null
 ) : AttachContactToConversationRequestCustomer
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AttachContactToConversationRequestCustomerVariant1(
-    /** The external_id you have defined for the contact who is being added as a participant. */
+    /**
+     * The external_id you have defined for the contact who is being added as a participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: CustomerRequest? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: CustomerRequest? = null
 ) : AttachContactToConversationRequestCustomer
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AttachContactToConversationRequestCustomerVariant2(
-    /** The email you have defined for the contact who is being added as a participant. */
+    /**
+     * The email you have defined for the contact who is being added as a participant.
+     */
     val email: String,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: CustomerRequest? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: CustomerRequest? = null
 ) : AttachContactToConversationRequestCustomer
 
-/** Optional object value serialized in the `customer` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Optional object value serialized in the `customer` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AttachContactToConversationRequestCustomerVariant0::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AttachContactToConversationRequestCustomerVariant1::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AttachContactToConversationRequestCustomerVariant2::class
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AttachContactToConversationRequestCustomerVariant0::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AttachContactToConversationRequestCustomerVariant1::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AttachContactToConversationRequestCustomerVariant2::class)
 )
 sealed interface AttachContactToConversationRequestCustomer
 
-/** Payload of the request to close a conversation */
+/**
+ * Payload of the request to close a conversation
+ */
 data class CloseConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: CloseConversationRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: CloseConversationRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: CloseConversationRequestTypeEnum,
-    /** The id of the admin who is performing the action. */
+    /**
+     * The id of the admin who is performing the action.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * Optionally you can leave a message in the conversation to provide additional context to the
-     * user and other teammates.
+     * Optionally you can leave a message in the conversation to provide additional context to the user and other teammates.
      */
-    val body: String? = null,
+    val body: String? = null
 )
 
-/** Typed representation of the `ContactReplyConversationRequest` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Typed representation of the `ContactReplyConversationRequest` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContactReplyIntercomUserIdRequest::class
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyIntercomUserIdRequest::class),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyEmailRequest::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyUserIdRequest::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyUserIdRequest::class)
 )
 sealed interface ContactReplyConversationRequest : ReplyConversationRequest
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyEmailRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
-    val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
-)
-
-/** Payload of the request to reply on behalf of a contact using their `email` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContactReplyEmailRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyEmailRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: ContactReplyEmailRequestTypeEnum,
-    /** The text body of the comment. */
-    val body: String,
-    /** The email you have defined for the user. */
-    val email: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * The text of the chosen reply option.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyEmailRequestReplyOptionsItem>? = null,
-    /** A list of files that will be added as attachments. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
-) : ContactReplyConversationRequest
-
-/** Required object value serialized in the `reply_options[]` wire field. */
-data class ContactReplyIntercomUserIdRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
-)
-
-/** Payload of the request to reply on behalf of a contact using their `intercom_user_id` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContactReplyIntercomUserIdRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyIntercomUserIdRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: ContactReplyIntercomUserIdRequestTypeEnum,
-    /** The text body of the comment. */
-    val body: String,
-    /** The identifier for the contact as given by Intercom. */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * The unique identifier for the quick reply option selected.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyIntercomUserIdRequestReplyOptionsItem>? = null,
-    /** A list of files that will be added as attachments. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
-) : ContactReplyConversationRequest
-
-/** Required object value serialized in the `reply_options[]` wire field. */
-data class ContactReplyUserIdRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
-    val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
-)
-
-/** Payload of the request to reply on behalf of a contact using their `user_id` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class ContactReplyUserIdRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyUserIdRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: ContactReplyUserIdRequestTypeEnum,
-    /** The text body of the comment. */
-    val body: String,
-    /** The external_id you have defined for the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
-    /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyUserIdRequestReplyOptionsItem>? = null,
-    /** A list of files that will be added as attachments. You can include up to 10 files. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
-) : ContactReplyConversationRequest
-
-/** deleted conversation object */
-data class ConversationDeleted(
-    /** The unique identifier for the conversation. */
-    val id: String? = null,
-    /** always conversation */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ConversationDeletedObjectEnum? = null,
-    /** Whether the conversation is deleted or not. */
-    val deleted: Boolean? = null,
+    val uuid: String
 )
 
 /**
- * Conversations are how you can communicate with users in Intercom. They are created when a contact
- * replies to an outbound message, or when one admin directly sends a message to a single contact.
+ * Payload of the request to reply on behalf of a contact using their `email`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ContactReplyEmailRequest(
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyEmailRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ContactReplyEmailRequestTypeEnum,
+    /**
+     * The text body of the comment.
+     */
+    val body: String,
+    /**
+     * The email you have defined for the user.
+     */
+    val email: String,
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyEmailRequestReplyOptionsItem>? = null,
+    /**
+     * A list of files that will be added as attachments.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null
+) : ContactReplyConversationRequest
+
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
+data class ContactReplyIntercomUserIdRequestReplyOptionsItem(
+    /**
+     * The text of the chosen reply option.
+     */
+    val text: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
+)
+
+/**
+ * Payload of the request to reply on behalf of a contact using their `intercom_user_id`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ContactReplyIntercomUserIdRequest(
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyIntercomUserIdRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ContactReplyIntercomUserIdRequestTypeEnum,
+    /**
+     * The text body of the comment.
+     */
+    val body: String,
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String,
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyIntercomUserIdRequestReplyOptionsItem>? = null,
+    /**
+     * A list of files that will be added as attachments.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null
+) : ContactReplyConversationRequest
+
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
+data class ContactReplyUserIdRequestReplyOptionsItem(
+    /**
+     * The text of the chosen reply option.
+     */
+    val text: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
+)
+
+/**
+ * Payload of the request to reply on behalf of a contact using their `user_id`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class ContactReplyUserIdRequest(
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyUserIdRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ContactReplyUserIdRequestTypeEnum,
+    /**
+     * The text body of the comment.
+     */
+    val body: String,
+    /**
+     * The external_id you have defined for the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyUserIdRequestReplyOptionsItem>? = null,
+    /**
+     * A list of files that will be added as attachments. You can include up to 10 files.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null
+) : ContactReplyConversationRequest
+
+/**
+ * deleted conversation object
+ */
+data class ConversationDeleted(
+    /**
+     * The unique identifier for the conversation.
+     */
+    val id: String? = null,
+    /**
+     * always conversation
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ConversationDeletedObjectEnum? = null,
+    /**
+     * Whether the conversation is deleted or not.
+     */
+    val deleted: Boolean? = null
+)
+
+/**
+ * Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.
  */
 data class ConversationList(
-    /** Always conversation.list */
+    /**
+     * Always conversation.list
+     */
     val type: ConversationListTypeEnum? = null,
-    /** The list of conversation objects */
+    /**
+     * The list of conversation objects
+     */
     val conversations: List<ConversationListItem>? = null,
-    /** A count of the total number of objects. */
+    /**
+     * A count of the total number of objects.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
-     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
-     * result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
-    val pages: CursorPages? = null,
+    val pages: CursorPages? = null
 )
 
-/** Required object value serialized in the `customers[]` wire field. */
+/**
+ * Required object value serialized in the `customers[]` wire field.
+ */
 data class ConversationParticipantsResponseCustomersItem(
-    /** The role of the participant. Can be "user" or "lead" */
+    /**
+     * The role of the participant. Can be "user" or "lead"
+     */
     val type: String,
-    /** The unique identifier for the participant */
-    val id: String,
+    /**
+     * The unique identifier for the participant
+     */
+    val id: String
 )
 
-/** The participants of the conversation, returned after attaching or detaching a contact */
+/**
+ * The participants of the conversation, returned after attaching or detaching a contact
+ */
 data class ConversationParticipantsResponse(
-    /** The conversation participants after the change */
+    /**
+     * The conversation participants after the change
+     */
     val customers: List<ConversationParticipantsResponseCustomersItem>
 )
 
-/** You can convert a Conversation to a Ticket */
+/**
+ * You can convert a Conversation to a Ticket
+ */
 data class ConvertConversationToTicketRequest(
-    /** The ID of the type of ticket you want to convert the conversation to */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_id") val ticketTypeId: String,
-    /** The ID of the ticket state associated with the ticket type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_state_id")
-    val ticketStateId: String? = null,
     /**
-     * The attributes set on the ticket. When setting the default title and description attributes,
-     * the attribute keys that should be used are `_default_title_` and `_default_description_`.
-     * When setting ticket type attributes of the list attribute type, the key should be the
-     * attribute name and the value of the attribute should be the list item id, obtainable by
-     * \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket type has an
-     * attribute called `priority` of…
+     * The ID of the type of ticket you want to convert the conversation to
      */
-    val attributes: TicketRequestCustomAttributes? = null,
-)
-
-/** Required object value serialized in the `from` wire field. */
-data class CreateConversationRequestFrom(
-    /** The role associated to the contact - user or lead. */
-    val type: CreateConversationRequestFromTypeEnum,
-    /** The identifier for the contact which is given by Intercom. */
-    val id: String,
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_id") val ticketTypeId: String,
+    /**
+     * The ID of the ticket state associated with the ticket type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_state_id") val ticketStateId: String? = null,
+    /**
+     * The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of…
+     */
+    val attributes: TicketRequestCustomAttributes? = null
 )
 
 /**
- * Conversations are how you can communicate with users in Intercom. They are created when a contact
- * replies to an outbound message, or when one admin directly sends a message to a single contact.
+ * Required object value serialized in the `from` wire field.
  */
-data class CreateConversationRequest(
-    /** Required object value serialized in the `from` wire field. */
-    val from: CreateConversationRequestFrom,
-    /** The content of the message. HTML is not supported. */
-    val body: String,
-    /** The title of the email. Only applicable if the message type is email. */
-    val subject: String? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
+data class CreateConversationRequestFrom(
     /**
-     * The time the conversation was created as a UTC Unix timestamp. If not provided, the current
-     * time will be used. This field is only recommneded for migrating past conversations from
-     * another source into Intercom.
+     * The role associated to the contact - user or lead.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The unique identifier of the brand to associate with this conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("brand_id") val brandId: String? = null,
+    val type: CreateConversationRequestFromTypeEnum,
+    /**
+     * The identifier for the contact which is given by Intercom.
+     */
+    val id: String
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+/**
+ * Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.
+ */
+data class CreateConversationRequest(
+    /**
+     * Required object value serialized in the `from` wire field.
+     */
+    val from: CreateConversationRequestFrom,
+    /**
+     * The content of the message. HTML is not supported.
+     */
+    val body: String,
+    /**
+     * The title of the email. Only applicable if the message type is email.
+     */
+    val subject: String? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The time the conversation was created as a UTC Unix timestamp. If not provided, the current time will be used. This field is only recommneded for migrating past conversations from another source into Intercom.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * The unique identifier of the brand to associate with this conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("brand_id") val brandId: String? = null
 )
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CustomerRequestVariant0(
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String
 ) : CustomerRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CustomerRequestVariant1(
-    /** The external_id you have defined for the contact who is being added as a participant. */
+    /**
+     * The external_id you have defined for the contact who is being added as a participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String
 ) : CustomerRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CustomerRequestVariant2(
-    /** The email you have defined for the contact who is being added as a participant. */
+    /**
+     * The email you have defined for the contact who is being added as a participant.
+     */
     val email: String
 ) : CustomerRequest
 
-/** Typed representation of the `CustomerRequest` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Typed representation of the `CustomerRequest` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant0::class),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant1::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant2::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant2::class)
 )
 sealed interface CustomerRequest
 
-/** A paginated list of deleted conversation IDs. */
+/**
+ * A paginated list of deleted conversation IDs.
+ */
 data class DeletedConversationList(
-    /** String representing the object's type. Always has the value `conversations.list`. */
+    /**
+     * String representing the object's type. Always has the value `conversations.list`.
+     */
     val type: String? = null,
-    /** The list of deleted conversation IDs. */
+    /**
+     * The list of deleted conversation IDs.
+     */
     val conversations: List<DeletedConversationItem>? = null,
-    /** Total number of items available. */
+    /**
+     * Total number of items available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data
-     * over multiple requests. Their responses are likely to contain a pages object that hosts
-     * pagination links which a client can use to paginate through the data without having to
-     * construct a query. The link relations for the pages field are as follows.
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
      */
-    val pages: PagesLink? = null,
+    val pages: PagesLink? = null
 )
 
-/** Typed representation of the `DetachContactFromConversationRequest` API schema. */
+/**
+ * Typed representation of the `DetachContactFromConversationRequest` API schema.
+ */
 data class DetachContactFromConversationRequest(
-    /** The `id` of the admin who is performing the action. */
+    /**
+     * The `id` of the admin who is performing the action.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String
 )
 
-/** A pause or resume event for a conversation */
+/**
+ * A pause or resume event for a conversation
+ */
 data class HandlingEvent(
-    /** A reference to a teammate */
+    /**
+     * A reference to a teammate
+     */
     val teammate: TeammateReference,
-    /** The type of handling event */
+    /**
+     * The type of handling event
+     */
     val type: HandlingEventTypeEnum,
-    /** ISO8601 timestamp when the event occurred */
+    /**
+     * ISO8601 timestamp when the event occurred
+     */
     val timestamp: OffsetDateTime,
-    /** Optional reason for the event (e.g., "Paused", "Away") */
-    val reason: String? = null,
+    /**
+     * Optional reason for the event (e.g., "Paused", "Away")
+     */
+    val reason: String? = null
 )
 
-/** A list of handling events for a conversation */
+/**
+ * A list of handling events for a conversation
+ */
 data class HandlingEventList(
-    /** Array of handling events */
-    @com.fasterxml.jackson.annotation.JsonProperty("handling_events")
-    val handlingEvents: List<HandlingEvent>? = null
+    /**
+     * Array of handling events
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("handling_events") val handlingEvents: List<HandlingEvent>? = null
 )

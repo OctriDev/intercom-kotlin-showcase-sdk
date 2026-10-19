@@ -3,215 +3,242 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Required object value serialized in the `content_ids[]` wire field. */
+
+/**
+ * Required object value serialized in the `content_ids[]` wire field.
+ */
 data class ContentBulkActionRequestContentIdsItem(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ContentBulkActionRequestContentIdsItemTypeEnum,
-    /** Required `string` value serialized in the `id` wire field. */
-    val id: String,
+    /**
+     * Required `string` value serialized in the `id` wire field.
+     */
+    val id: String
 )
 
 /**
- * Required when `action` is `set_availability`. Each field is optional — only the properties
- * present in the request are toggled.
+ * Required when `action` is `set_availability`. Each field is optional — only the properties present in the request are toggled.
  */
 data class ContentBulkActionRequestAvailability(
-    /** Toggle Fin AI Agent availability. */
+    /**
+     * Toggle Fin AI Agent availability.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ai_agent") val aiAgent: Boolean? = null,
-    /** Toggle Copilot availability. */
+    /**
+     * Toggle Copilot availability.
+     */
     val copilot: Boolean? = null,
-    /** Toggle Sales Agent availability. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent") val salesAgent: Boolean? = null,
-)
-
-/** Required when `action` is `set_audience`. Manages segment membership. */
-data class ContentBulkActionRequestAudience(
-    /** Segment IDs to assign to the selected content. */
-    @com.fasterxml.jackson.annotation.JsonProperty("add_segment_ids")
-    val addSegmentIds: List<Long>? = null,
-    /** Segment IDs to remove from the selected content. */
-    @com.fasterxml.jackson.annotation.JsonProperty("remove_segment_ids")
-    val removeSegmentIds: List<Long>? = null,
-    /** When `true`, removes all segments from the selected content. */
-    @com.fasterxml.jackson.annotation.JsonProperty("remove_all") val removeAll: Boolean? = null,
+    /**
+     * Toggle Sales Agent availability.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent") val salesAgent: Boolean? = null
 )
 
 /**
- * Required when `action` is `update_tags`. Applies and/or removes existing tags. Supply at least
- * one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may be supplied across
- * `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference existing, non-archived tags;
- * exceeding the limit or referencing unknown or archived IDs is rejected with `parameter_invalid`
- * (HTTP 422).
+ * Required when `action` is `set_audience`. Manages segment membership.
+ */
+data class ContentBulkActionRequestAudience(
+    /**
+     * Segment IDs to assign to the selected content.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("add_segment_ids") val addSegmentIds: List<Long>? = null,
+    /**
+     * Segment IDs to remove from the selected content.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("remove_segment_ids") val removeSegmentIds: List<Long>? = null,
+    /**
+     * When `true`, removes all segments from the selected content.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("remove_all") val removeAll: Boolean? = null
+)
+
+/**
+ * Required when `action` is `update_tags`. Applies and/or removes existing tags. Supply at least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may be supplied across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference existing, non-archived tags; exceeding the limit or referencing unknown or archived IDs is rejected with `parameter_invalid` (HTTP 422).
  */
 data class ContentBulkActionRequestTags(
-    /** Tag IDs to apply to the selected content. */
+    /**
+     * Tag IDs to apply to the selected content.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("add_tag_ids") val addTagIds: List<Long>? = null,
-    /** Tag IDs to remove from the selected content. */
-    @com.fasterxml.jackson.annotation.JsonProperty("remove_tag_ids")
-    val removeTagIds: List<Long>? = null,
+    /**
+     * Tag IDs to remove from the selected content.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("remove_tag_ids") val removeTagIds: List<Long>? = null
 )
 
-/** Typed representation of the `ContentBulkActionRequest` API schema. */
+/**
+ * Typed representation of the `ContentBulkActionRequest` API schema.
+ */
 data class ContentBulkActionRequest(
     /**
-     * The bulk action to perform. Allowed `content_ids[].type` values vary per action: * `publish`,
-     * `unpublish`: `article_content` * `delete`: `article_content`, `content_snippet`,
-     * `file_source_content`, `internal_article` * `set_availability`, `set_audience`:
-     * `article_content`, `content_snippet`, `external_content`, `file_source_content`,
-     * `internal_article` * `update_tags`: `article` (the parent Article id, not `article_content`),
-     * `content_snippet`, `external_content`,…
+     * The bulk action to perform. Allowed `content_ids[].type` values vary per action: * `publish`, `unpublish`: `article_content` * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article` * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article` * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`,…
      */
     val action: ContentBulkActionRequestActionEnum,
-    /** Up to 1,000 content items to apply the action to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_ids")
-    val contentIds: List<ContentBulkActionRequestContentIdsItem>,
     /**
-     * Required when `action` is `set_availability`. Each field is optional — only the properties
-     * present in the request are toggled.
+     * Up to 1,000 content items to apply the action to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_ids") val contentIds: List<ContentBulkActionRequestContentIdsItem>,
+    /**
+     * Required when `action` is `set_availability`. Each field is optional — only the properties present in the request are toggled.
      */
     val availability: ContentBulkActionRequestAvailability? = null,
-    /** Required when `action` is `set_audience`. Manages segment membership. */
+    /**
+     * Required when `action` is `set_audience`. Manages segment membership.
+     */
     val audience: ContentBulkActionRequestAudience? = null,
     /**
-     * Required when `action` is `update_tags`. Applies and/or removes existing tags. Supply at
-     * least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may be supplied
-     * across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference existing,
-     * non-archived tags; exceeding the limit or referencing unknown or archived IDs is rejected
-     * with `parameter_invalid` (HTTP 422).
+     * Required when `action` is `update_tags`. Applies and/or removes existing tags. Supply at least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDs may be supplied across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs must reference existing, non-archived tags; exceeding the limit or referencing unknown or archived IDs is rejected with `parameter_invalid` (HTTP 422).
      */
-    val tags: ContentBulkActionRequestTags? = null,
+    val tags: ContentBulkActionRequestTags? = null
 )
 
 /**
- * Phase 1 envelope returned immediately after the request is enqueued. A future Preview release
- * will replace this with a polling-friendly job resource that surfaces progress and per-item
- * results (updated, unchanged, skipped, failed).
+ * Phase 1 envelope returned immediately after the request is enqueued. A future Preview release will replace this with a polling-friendly job resource that surfaces progress and per-item results (updated, unchanged, skipped, failed).
  */
 data class ContentBulkActionResponse(
-    /** Optional `string` value serialized in the `type` wire field. */
+    /**
+     * Optional `string` value serialized in the `type` wire field.
+     */
     val type: String? = null,
-    /** Optional `string` value serialized in the `status` wire field. */
-    val status: String? = null,
+    /**
+     * Optional `string` value serialized in the `status` wire field.
+     */
+    val status: String? = null
 )
 
-/** A single locale variant of a help center article returned from Knowledge Hub search. */
+/**
+ * A single locale variant of a help center article returned from Knowledge Hub search.
+ */
 data class ContentSearchArticleContentItem(
-    /** Always `article_content`. */
+    /**
+     * Always `article_content`.
+     */
     val type: ContentSearchArticleContentItemTypeEnum? = null,
-    /** The unique identifier of the article content. */
+    /**
+     * The unique identifier of the article content.
+     */
     val id: String? = null,
-    /** The localized title of the article. */
+    /**
+     * The localized title of the article.
+     */
     val title: String? = null,
-    /** The locale of this article content. */
-    val locale: String? = null,
+    /**
+     * The locale of this article content.
+     */
+    val locale: String? = null
 )
 
 /**
- * A help center article result from Knowledge Hub search, with one nested `article_content` entry
- * per locale.
+ * A help center article result from Knowledge Hub search, with one nested `article_content` entry per locale.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContentSearchArticleItem(
-    /** Always `article`. */
+    /**
+     * Always `article`.
+     */
     val type: ContentSearchArticleItemTypeEnum,
-    /** The unique identifier of the article. */
+    /**
+     * The unique identifier of the article.
+     */
     val id: String? = null,
-    /** The article's canonical title. */
+    /**
+     * The article's canonical title.
+     */
     val title: String? = null,
-    /** One entry per locale of the article. */
-    val contents: List<ContentSearchArticleContentItem>? = null,
+    /**
+     * One entry per locale of the article.
+     */
+    val contents: List<ContentSearchArticleContentItem>? = null
 ) : ContentSearchResult
 
 /**
- * The flat result shape returned from Knowledge Hub search for content snippets, external pages,
- * uploaded files, and internal articles.
+ * The flat result shape returned from Knowledge Hub search for content snippets, external pages, uploaded files, and internal articles.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContentSearchDefaultItem(
-    /** The kind of content item. */
+    /**
+     * The kind of content item.
+     */
     val type: ContentSearchDefaultItemTypeEnum,
-    /** The unique identifier of the content item. */
+    /**
+     * The unique identifier of the content item.
+     */
     val id: String? = null,
-    /** The display title of the content item. */
-    val title: String? = null,
+    /**
+     * The display title of the content item.
+     */
+    val title: String? = null
 ) : ContentSearchResult
 
-/** Pagination metadata, including links to neighbouring pages. */
+/**
+ * Pagination metadata, including links to neighbouring pages.
+ */
 data class ContentSearchResponsePages(
-    /** Optional enumerated value serialized in the `type` wire field. */
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
     val type: ContentSearchResponsePagesTypeEnum? = null,
-    /** The current page number. */
+    /**
+     * The current page number.
+     */
     val page: Long? = null,
-    /** Number of results per page. */
+    /**
+     * Number of results per page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** Total number of pages of results. */
+    /**
+     * Total number of pages of results.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null,
-    /** A link to the next page of results, or null when on the last page. */
+    /**
+     * A link to the next page of results, or null when on the last page.
+     */
     val next: String? = null,
-    /** A link to the previous page of results, or null when on the first page. */
-    val prev: String? = null,
-)
-
-/** A paginated list of Knowledge Hub content results matching a search query. */
-data class ContentSearchResponse(
-    /** Always `list`. */
-    val type: ContentSearchResponseTypeEnum? = null,
-    /** Total number of results matching the query. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** Pagination metadata, including links to neighbouring pages. */
-    val pages: ContentSearchResponsePages? = null,
-    /** The list of matched content items. Each item's `type` field determines its shape. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ContentSearchResult>? = null,
+    /**
+     * A link to the previous page of results, or null when on the first page.
+     */
+    val prev: String? = null
 )
 
 /**
- * A single search result. The `type` field discriminates between the flat shape used for snippets,
- * external pages, files, and internal articles, and the nested shape used for help center articles.
+ * A paginated list of Knowledge Hub content results matching a search query.
  */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-    property = "type",
-    visible = true,
-    defaultImpl = UnknownContentSearchResult::class,
+data class ContentSearchResponse(
+    /**
+     * Always `list`.
+     */
+    val type: ContentSearchResponseTypeEnum? = null,
+    /**
+     * Total number of results matching the query.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+    /**
+     * Pagination metadata, including links to neighbouring pages.
+     */
+    val pages: ContentSearchResponsePages? = null,
+    /**
+     * The list of matched content items. Each item's `type` field determines its shape.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContentSearchResult>? = null
 )
+
+/**
+ * A single search result. The `type` field discriminates between the flat shape used for snippets, external pages, files, and internal articles, and the nested shape used for help center articles.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true, defaultImpl = UnknownContentSearchResult::class)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContentSearchDefaultItem::class,
-        names = ["content_snippet", "external_content", "file_source_content", "internal_article"],
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContentSearchArticleItem::class,
-        name = "article",
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContentSearchDefaultItem::class, names = ["content_snippet", "external_content", "file_source_content", "internal_article"]),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContentSearchArticleItem::class, name = "article")
 )
 sealed interface ContentSearchResult
 
 /** A [ContentSearchResult] whose `type` names no branch this SDK knows, kept as received. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
-data class UnknownContentSearchResult
-@com.fasterxml.jackson.annotation.JsonCreator(
-    mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-)
-constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+data class UnknownContentSearchResult @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING) constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val raw: com.fasterxml.jackson.databind.JsonNode,
 ) : ContentSearchResult {
     /** The tag the server sent. */
-    val tag: String
-        get() = raw.path("type").asText()
+    val tag: String get() = raw.path("type").asText()
 }

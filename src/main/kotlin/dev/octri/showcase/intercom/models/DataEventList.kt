@@ -5,20 +5,34 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.dataevents.DataEvent
 
-/** Pagination */
+/**
+ * Pagination
+ */
 data class DataEventListPages(
-    /** Optional `string` value serialized in the `next` wire field. */
+    /**
+     * Optional `string` value serialized in the `next` wire field.
+     */
     val next: String? = null,
-    /** Optional `string` value serialized in the `since` wire field. */
-    val since: String? = null,
+    /**
+     * Optional `string` value serialized in the `since` wire field.
+     */
+    val since: String? = null
 )
 
-/** This will return a list of data events for the App. */
+/**
+ * This will return a list of data events for the App.
+ */
 data class DataEventList(
-    /** The type of the object */
+    /**
+     * The type of the object
+     */
     val type: DataEventListTypeEnum? = null,
-    /** A list of data events */
+    /**
+     * A list of data events
+     */
     val events: List<DataEvent>? = null,
-    /** Pagination */
-    val pages: DataEventListPages? = null,
+    /**
+     * Pagination
+     */
+    val pages: DataEventListPages? = null
 )

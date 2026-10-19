@@ -13,50 +13,28 @@ import dev.octri.showcase.intercom.SdkClient
 
 object Switch {
 
+
     /**
-     * Triggers a phone call redirect by sending an SMS with a Messenger link to the specified phone
-     * number. Supply `phone` in E.164 format; you can also include `custom_attributes` to add
-     * caller-set attributes to the contact or lead. The SMS directs the recipient to continue the
-     * conversation in Messenger.
+     * Triggers a phone call redirect by sending an SMS with a Messenger link to the specified phone number. Supply `phone` in E.164 format; you can also include `custom_attributes` to add caller-set attributes to the contact or lead. The SMS directs the recipient to continue the conversation in Messenger.
      *
-     * You can use the API to deflect phone calls to the Intercom Messenger. Calling this endpoint
-     * will send an SMS with a link to the Messenger to the phone number specified. If custom
-     * attributes are specified, they will be added to the user or lead's custom data attributes.
+     * You can use the API to deflect phone calls to the Intercom Messenger. Calling this endpoint will send an SMS with a link to the Messenger to the phone number specified. If custom attributes are specified, they will be added to the user or lead's custom data attributes.
      *
-     * @param phone Phone number in E.164 format, that will receive the SMS to continue the
-     *   conversation in the Messenger.
-     * @param customAttributes The custom attributes which are set on this object, as key-value
-     *   pairs. For relationship attributes the value should be a list of custom object instance
-     *   models. Only attributes a caller may set are accepted here — attributes Intercom generates
-     *   are returned in responses only.
+     * @param phone Phone number in E.164 format, that will receive the SMS to
+     *   continue the conversation in the Messenger.
+     * @param customAttributes The custom attributes which are set on this object, as
+     *   key-value pairs. For relationship attributes the value should be a list of
+     *   custom object instance models. Only attributes a caller may set are accepted
+     *   here — attributes Intercom generates are returned in responses only.
      */
-    fun createPhoneSwitch(
-        clientConfig: ClientConfig,
-        phone: String,
-        intercomVersion: IntercomVersion? = null,
-        customAttributes: CustomAttributesRequest? = null,
-        options: RequestOptions? = null,
-    ): PhoneSwitch {
-        return SdkClient.request<PhoneSwitch>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/phone_call_redirects",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "phone" to (phone),
-                            "custom_attributes" to (SdkClient.omitIfNull(customAttributes)),
-                        ),
-                    operationId = "createPhoneSwitch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createPhoneSwitch(clientConfig: ClientConfig, phone: String, intercomVersion: IntercomVersion? = null, customAttributes: CustomAttributesRequest? = null, options: RequestOptions? = null): PhoneSwitch {
+        return SdkClient.request<PhoneSwitch>(SdkClient.RequestSpec("POST", "/phone_call_redirects", config = clientConfig, body = SdkClient.bodyMap("phone" to (phone), "custom_attributes" to
+    (SdkClient.omitIfNull(customAttributes))), operationId = "createPhoneSwitch", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

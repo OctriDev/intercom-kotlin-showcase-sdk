@@ -12,119 +12,158 @@ import dev.octri.showcase.intercom.models.ExternalPageTypeEnum
 import dev.octri.showcase.intercom.models.ExternalPagesListTypeEnum
 import dev.octri.showcase.intercom.models.PagesLink
 
-/** An external source for External Pages that you add to your Fin Content Library. */
+/**
+ * An external source for External Pages that you add to your Fin Content Library.
+ */
 data class ContentImportSource(
-    /** Always external_page */
+    /**
+     * Always external_page
+     */
     val type: ContentImportSourceTypeEnum,
-    /** The unique identifier for the content import source which is given by Intercom. */
+    /**
+     * The unique identifier for the content import source which is given by Intercom.
+     */
     val id: Long,
-    /** The time when the content import source was last synced. */
+    /**
+     * The time when the content import source was last synced.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_synced_at") val lastSyncedAt: Long,
     /**
      * If you intend to create or update External Pages via the API, this should be set to `api`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("sync_behavior")
-    val syncBehavior: ContentImportSourceSyncBehaviorEnum,
-    /** The status of the content import source. */
+    @com.fasterxml.jackson.annotation.JsonProperty("sync_behavior") val syncBehavior: ContentImportSourceSyncBehaviorEnum,
+    /**
+     * The status of the content import source.
+     */
     val status: ContentImportSourceStatusEnum,
-    /** The URL of the root of the external source. */
+    /**
+     * The URL of the root of the external source.
+     */
     val url: String,
-    /** The time when the content import source was created. */
+    /**
+     * The time when the content import source was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The time when the content import source was last updated. */
+    /**
+     * The time when the content import source was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /** The unique identifiers for the audiences associated with this content import source. */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
+    /**
+     * The unique identifiers for the audiences associated with this content import source.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null
 )
 
-/** This will return a list of the content import sources for the App. */
+/**
+ * This will return a list of the content import sources for the App.
+ */
 data class ContentImportSourcesList(
-    /** The type of the object - `list`. */
+    /**
+     * The type of the object - `list`.
+     */
     val type: ContentImportSourcesListTypeEnum? = null,
     /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data
-     * over multiple requests. Their responses are likely to contain a pages object that hosts
-     * pagination links which a client can use to paginate through the data without having to
-     * construct a query. The link relations for the pages field are as follows.
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
      */
     val pages: PagesLink? = null,
-    /** A count of the total number of content import sources. */
+    /**
+     * A count of the total number of content import sources.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** An array of Content Import Source objects */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ContentImportSource>? = null,
+    /**
+     * An array of Content Import Source objects
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContentImportSource>? = null
 )
 
-/** External pages that you have added to your Fin Content Library. */
+/**
+ * External pages that you have added to your Fin Content Library.
+ */
 data class ExternalPage(
-    /** Always external_page */
+    /**
+     * Always external_page
+     */
     val type: ExternalPageTypeEnum,
-    /** The unique identifier for the external page which is given by Intercom. */
+    /**
+     * The unique identifier for the external page which is given by Intercom.
+     */
     val id: String,
-    /** The title of the external page. */
+    /**
+     * The title of the external page.
+     */
     val title: String,
-    /** The body of the external page in HTML. */
+    /**
+     * The body of the external page in HTML.
+     */
     val html: String,
-    /** Whether the external page should be used to answer questions by AI Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent_availability")
-    val aiAgentAvailability: Boolean,
-    /** Whether the external page should be used to answer questions by AI Copilot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean,
-    /** Always en */
+    /**
+     * Whether the external page should be used to answer questions by AI Agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent_availability") val aiAgentAvailability: Boolean,
+    /**
+     * Whether the external page should be used to answer questions by AI Copilot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean,
+    /**
+     * Always en
+     */
     val locale: ExternalPageLocaleEnum,
     /**
-     * The unique identifier for the source of the external page which was given by Intercom. Every
-     * external page must be associated with a Content Import Source which represents the place it
-     * comes from and from which it inherits a default audience (configured in the UI). For a new
-     * source, make a POST request to the Content Import Source endpoint and an ID for the source
-     * will be returned in the response.
+     * The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: Long,
     /**
-     * The identifier for the external page which was given by the source. Must be unique for the
-     * source.
+     * The identifier for the external page which was given by the source. Must be unique for the source.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String,
-    /** The time when the external page was created. */
+    /**
+     * The time when the external page was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The time when the external page was last updated. */
+    /**
+     * The time when the external page was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /** The time when the external page was last ingested. */
+    /**
+     * The time when the external page was last ingested.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_ingested_at") val lastIngestedAt: Long,
     /**
-     * The URL of the external page. This will be used by Fin to link end users to the page it based
-     * its answer on.
+     * The URL of the external page. This will be used by Fin to link end users to the page it based its answer on.
      */
     val url: String? = null,
-    /** Whether the external page should be used to answer questions by AI Sales Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
-    /** Deprecated. Use ai_agent_availability and ai_copilot_availability instead. */
-    @com.fasterxml.jackson.annotation.JsonProperty("fin_availability")
-    val finAvailability: Boolean? = null,
     /**
-     * The list of audience IDs that this external page is targeted to for Fin AI Agent. Empty when
-     * the external page has no audience targeting.
+     * Whether the external page should be used to answer questions by AI Sales Agent.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null,
+    /**
+     * Deprecated. Use ai_agent_availability and ai_copilot_availability instead.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fin_availability") val finAvailability: Boolean? = null,
+    /**
+     * The list of audience IDs that this external page is targeted to for Fin AI Agent. Empty when the external page has no audience targeting.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null
 )
 
-/** This will return a list of external pages for the App. */
+/**
+ * This will return a list of external pages for the App.
+ */
 data class ExternalPagesList(
-    /** The type of the object - `list`. */
+    /**
+     * The type of the object - `list`.
+     */
     val type: ExternalPagesListTypeEnum? = null,
     /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data
-     * over multiple requests. Their responses are likely to contain a pages object that hosts
-     * pagination links which a client can use to paginate through the data without having to
-     * construct a query. The link relations for the pages field are as follows.
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
      */
     val pages: PagesLink? = null,
-    /** A count of the total number of external pages. */
+    /**
+     * A count of the total number of external pages.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** An array of External Page objects */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ExternalPage>? = null,
+    /**
+     * An array of External Page objects
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ExternalPage>? = null
 )

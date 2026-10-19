@@ -3,32 +3,54 @@
 
 package dev.octri.showcase.intercom.models.brands
 
-/** Represents a branding configuration for the workspace */
+/**
+ * Represents a branding configuration for the workspace
+ */
 data class Brand(
-    /** The type of object */
+    /**
+     * The type of object
+     */
     val type: String? = null,
-    /** Unique brand identifier. For default brand, matches the workspace ID */
+    /**
+     * Unique brand identifier. For default brand, matches the workspace ID
+     */
     val id: String? = null,
-    /** Display name of the brand */
+    /**
+     * Display name of the brand
+     */
     val name: String? = null,
-    /** Whether this is the workspace's default brand */
+    /**
+     * Whether this is the workspace's default brand
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("is_default") val isDefault: Boolean? = null,
-    /** Unix timestamp of brand creation */
+    /**
+     * Unix timestamp of brand creation
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** Unix timestamp of last modification */
+    /**
+     * Unix timestamp of last modification
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /** Associated help center identifier */
-    @com.fasterxml.jackson.annotation.JsonProperty("help_center_id")
-    val helpCenterId: String? = null,
-    /** Default email settings ID for this brand */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_address_settings_id")
-    val defaultAddressSettingsId: String? = null,
+    /**
+     * Associated help center identifier
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("help_center_id") val helpCenterId: String? = null,
+    /**
+     * Default email settings ID for this brand
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_address_settings_id") val defaultAddressSettingsId: String? = null
 )
 
-/** A list of brands */
+/**
+ * A list of brands
+ */
 data class BrandList(
-    /** The type of object */
+    /**
+     * The type of object
+     */
     val type: String? = null,
-    /** Optional array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Brand>? = null,
+    /**
+     * Optional array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Brand>? = null
 )

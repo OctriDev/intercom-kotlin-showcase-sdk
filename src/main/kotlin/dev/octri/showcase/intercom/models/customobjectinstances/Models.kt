@@ -7,56 +7,61 @@ import dev.octri.showcase.intercom.models.CustomObjectInstancesPaginatedListType
 import dev.octri.showcase.intercom.models.PagesLink
 
 /**
- * A Custom Object Instance represents an instance of a custom object type. This allows you to
- * create and set custom attributes to store data about your customers that is not already captured
- * by Intercom. The parent object includes recommended default attributes and you can add your own
- * custom attributes.
+ * A Custom Object Instance represents an instance of a custom object type. This allows you to create and set custom attributes to store data about your customers that is not already captured by Intercom. The parent object includes recommended default attributes and you can add your own custom attributes.
  */
 data class CustomObjectInstance(
-    /** The Intercom defined id representing the custom object instance. */
+    /**
+     * The Intercom defined id representing the custom object instance.
+     */
     val id: String? = null,
-    /** The id you have defined for the custom object instance. */
+    /**
+     * The id you have defined for the custom object instance.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
     /**
-     * The time when the Custom Object instance was created in the external system it originated
-     * from.
+     * The time when the Custom Object instance was created in the external system it originated from.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_created_at")
-    val externalCreatedAt: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("external_created_at") val externalCreatedAt: Long? = null,
     /**
-     * The time when the Custom Object instance was last updated in the external system it
-     * originated from.
+     * The time when the Custom Object instance was last updated in the external system it originated from.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_updated_at")
-    val externalUpdatedAt: Long? = null,
-    /** The time the attribute was created as a UTC Unix timestamp */
+    @com.fasterxml.jackson.annotation.JsonProperty("external_updated_at") val externalUpdatedAt: Long? = null,
+    /**
+     * The time the attribute was created as a UTC Unix timestamp
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time the attribute was last updated as a UTC Unix timestamp */
+    /**
+     * The time the attribute was last updated as a UTC Unix timestamp
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
     /**
-     * The identifier of the custom object type that defines the structure of the custom object
-     * instance.
+     * The identifier of the custom object type that defines the structure of the custom object instance.
      */
     val type: String? = null,
-    /** The custom attributes you have set on the custom object instance. */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: Map<String, String>? = null,
+    /**
+     * The custom attributes you have set on the custom object instance.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, String>? = null
 )
 
-/** A paginated list of custom object instances. */
+/**
+ * A paginated list of custom object instances.
+ */
 data class CustomObjectInstancesPaginatedList(
-    /** The type of the object - `list`. */
+    /**
+     * The type of the object - `list`.
+     */
     val type: CustomObjectInstancesPaginatedListTypeEnum? = null,
     /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data
-     * over multiple requests. Their responses are likely to contain a pages object that hosts
-     * pagination links which a client can use to paginate through the data without having to
-     * construct a query. The link relations for the pages field are as follows.
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
      */
     val pages: PagesLink? = null,
-    /** A count of the total number of custom object instances. */
+    /**
+     * A count of the total number of custom object instances.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** An array of Custom Object Instance objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<CustomObjectInstance?>? = null,
+    /**
+     * An array of Custom Object Instance objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<CustomObjectInstance?>? = null
 )

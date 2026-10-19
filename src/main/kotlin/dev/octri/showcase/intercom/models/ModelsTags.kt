@@ -3,91 +3,148 @@
 
 package dev.octri.showcase.intercom.models
 
-/** You can create or update an existing tag. */
+/**
+ * You can create or update an existing tag.
+ */
 data class CreateOrUpdateTagRequest(
     /**
-     * The name of the tag, which will be created if not found, or the new name for the tag if this
-     * is an update request. Names are case insensitive.
+     * The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive.
      */
     val name: String,
-    /** The id of tag to updates. */
-    val id: String? = null,
+    /**
+     * The id of tag to updates.
+     */
+    val id: String? = null
 )
 
-/** Required object value serialized in the `companies[]` wire field. */
+/**
+ * Required object value serialized in the `companies[]` wire field.
+ */
 data class TagCompanyRequestCompaniesItem(
-    /** The Intercom defined id representing the company. */
+    /**
+     * The Intercom defined id representing the company.
+     */
     val id: String? = null,
-    /** The company id you have defined for the company. */
-    @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
+    /**
+     * The company id you have defined for the company.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null
 )
 
-/** You can tag a single company or a list of companies. */
+/**
+ * You can tag a single company or a list of companies.
+ */
 data class TagCompanyRequest(
-    /** The name of the tag, which will be created if not found. */
+    /**
+     * The name of the tag, which will be created if not found.
+     */
     val name: String,
-    /** The id or company_id of the company can be passed as input parameters. */
-    val companies: List<TagCompanyRequestCompaniesItem>,
+    /**
+     * The id or company_id of the company can be passed as input parameters.
+     */
+    val companies: List<TagCompanyRequestCompaniesItem>
 )
 
 data class TagCreateResponseVariant1UsersItem(
-    /** The Intercom ID of the user. */
+    /**
+     * The Intercom ID of the user.
+     */
     val id: String? = null,
-    /** Whether the user was tagged (true) or untagged (false). */
-    val tagged: Boolean? = null,
+    /**
+     * Whether the user was tagged (true) or untagged (false).
+     */
+    val tagged: Boolean? = null
 )
 
 data class TagCreateResponseVariant1CompaniesItem(
-    /** The Intercom ID of the company. */
+    /**
+     * The Intercom ID of the company.
+     */
     val id: String? = null,
-    /** Whether the company was tagged (true) or untagged (false). */
-    val tagged: Boolean? = null,
+    /**
+     * Whether the company was tagged (true) or untagged (false).
+     */
+    val tagged: Boolean? = null
 )
 
 /**
  * The response for creating or updating a tag, including the entities that were tagged or untagged.
  */
 data class TagCreateResponse(
-    /** value is "tag" */
+    /**
+     * value is "tag"
+     */
     val type: String? = null,
-    /** The id of the tag */
+    /**
+     * The id of the tag
+     */
     val id: String? = null,
-    /** The name of the tag */
+    /**
+     * The name of the tag
+     */
     val name: String? = null,
-    /** The users that were tagged or untagged. */
+    /**
+     * The users that were tagged or untagged.
+     */
     val users: List<TagCreateResponseVariant1UsersItem>? = null,
-    /** The companies that were tagged or untagged. */
-    val companies: List<TagCreateResponseVariant1CompaniesItem>? = null,
+    /**
+     * The companies that were tagged or untagged.
+     */
+    val companies: List<TagCreateResponseVariant1CompaniesItem>? = null
 )
 
-/** Required object value serialized in the `users[]` wire field. */
+/**
+ * Required object value serialized in the `users[]` wire field.
+ */
 data class TagMultipleUsersRequestUsersItem(
-    /** The Intercom defined id representing the user. */
+    /**
+     * The Intercom defined id representing the user.
+     */
     val id: String? = null
 )
 
-/** You can tag a list of users. */
+/**
+ * You can tag a list of users.
+ */
 data class TagMultipleUsersRequest(
-    /** The name of the tag, which will be created if not found. */
+    /**
+     * The name of the tag, which will be created if not found.
+     */
     val name: String,
-    /** Required array value serialized in the `users` wire field. */
-    val users: List<TagMultipleUsersRequestUsersItem>,
+    /**
+     * Required array value serialized in the `users` wire field.
+     */
+    val users: List<TagMultipleUsersRequestUsersItem>
 )
 
-/** Required object value serialized in the `companies[]` wire field. */
+/**
+ * Required object value serialized in the `companies[]` wire field.
+ */
 data class UntagCompanyRequestCompaniesItem(
-    /** The Intercom defined id representing the company. */
+    /**
+     * The Intercom defined id representing the company.
+     */
     val id: String? = null,
-    /** The company id you have defined for the company. */
+    /**
+     * The company id you have defined for the company.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
-    /** Always set to true */
-    val untag: Boolean? = null,
+    /**
+     * Always set to true
+     */
+    val untag: Boolean? = null
 )
 
-/** You can tag a single company or a list of companies. */
+/**
+ * You can tag a single company or a list of companies.
+ */
 data class UntagCompanyRequest(
-    /** The name of the tag which will be untagged from the company */
+    /**
+     * The name of the tag which will be untagged from the company
+     */
     val name: String,
-    /** The id or company_id of the company can be passed as input parameters. */
-    val companies: List<UntagCompanyRequestCompaniesItem>,
+    /**
+     * The id or company_id of the company can be passed as input parameters.
+     */
+    val companies: List<UntagCompanyRequestCompaniesItem>
 )

@@ -3,153 +3,69 @@
 
 package dev.octri.showcase.intercom
 
+
 class AdminsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Identifies the authenticated admin and returns the associated app object, called a workspace
-     * in legacy terminology. Use this endpoint to identify the admin who is signed in. If you use
-     * it in a custom sign-in flow, do not accept sign-ins from users with unverified email
-     * addresses.
+     * Identifies the authenticated admin and returns the associated app object, called a workspace in legacy terminology. Use this endpoint to identify the admin who is signed in. If you use it in a custom sign-in flow, do not accept sign-ins from users with unverified email addresses.
      *
-     * You can view the currently authorised admin along with the embedded app object (a "workspace"
-     * in legacy terminology). > 🚧 Single Sign On > > If you are building a custom "Log in with
-     * Intercom" flow for your site, and you call the `/me` endpoint to identify the logged-in user,
-     * you should not accept any sign-ins from users with unverified email addresses as it poses a
-     * potential impersonation security risk.
+     * You can view the currently authorised admin along with the embedded app object (a "workspace" in legacy terminology). > 🚧 Single Sign On > > If you are building a custom "Log in with Intercom" flow for your site, and you call the `/me` endpoint to identify the logged-in user, you should not accept any sign-ins from users with unverified email addresses as it poses a potential impersonation security risk.
      */
-    fun identify(
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): AdminWithApp {
-        return dev.octri.showcase.intercom.methods.Admins.identifyAdmin(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun identify(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): AdminWithApp {
+        return dev.octri.showcase.intercom.methods.Admins.identifyAdmin(clientConfig, intercomVersion, options)
     }
 
     /**
-     * Sets an admin's away status for the Inbox and controls whether new conversation replies are
-     * reassigned. Supply `away_mode_enabled` and `away_mode_reassign` in the request body; their
-     * defaults are `true` and `false`, respectively. You can also provide an away status reason
-     * identifier.
+     * Sets an admin's away status for the Inbox and controls whether new conversation replies are reassigned. Supply `away_mode_enabled` and `away_mode_reassign` in the request body; their defaults are `true` and `false`, respectively. You can also provide an away status reason identifier.
      *
      * You can set an Admin as away for the Inbox.
      */
-    fun setAway(
-        adminId: Long,
-        awayModeEnabled: Boolean,
-        awayModeReassign: Boolean,
-        intercomVersion: IntercomVersion? = null,
-        awayStatusReasonId: Long? = null,
-        options: RequestOptions? = null,
-    ): Admin {
-        return dev.octri.showcase.intercom.methods.Admins.setAwayAdmin(
-            clientConfig,
-            adminId,
-            awayModeEnabled,
-            awayModeReassign,
-            intercomVersion,
-            awayStatusReasonId,
-            options,
-        )
+    fun setAway(adminId: Long, awayModeEnabled: Boolean, awayModeReassign: Boolean, intercomVersion: IntercomVersion? = null, awayStatusReasonId: Long? = null, options: RequestOptions? = null): Admin {
+        return dev.octri.showcase.intercom.methods.Admins.setAwayAdmin(clientConfig, adminId, awayModeEnabled, awayModeReassign, intercomVersion, awayStatusReasonId, options)
     }
 
     /**
-     * Lists activity logs for admins in the app within a requested time range. Provide
-     * `created_at_after` as the start of the range and optionally use `created_at_before` to set
-     * its end. Results are paginated.
+     * Lists activity logs for admins in the app within a requested time range. Provide `created_at_after` as the start of the range and optionally use `created_at_before` to set its end. Results are paginated.
      *
      * You can get a log of activities by all admins in an app.
      */
-    fun listActivityLogs(
-        createdAtAfter: String,
-        createdAtBefore: String? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ActivityLogList {
-        return dev.octri.showcase.intercom.methods.Admins.listActivityLogs(
-            clientConfig,
-            createdAtAfter,
-            createdAtBefore,
-            intercomVersion,
-            options,
-        )
+    fun listActivityLogs(createdAtAfter: String, createdAtBefore: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ActivityLogList {
+        return dev.octri.showcase.intercom.methods.Admins.listActivityLogs(clientConfig, createdAtAfter, createdAtBefore, intercomVersion, options)
     }
 
     /**
-     * Searches admin activity logs by time range and optional event type filters. Supply
-     * `created_at_after` and use `event_types` to restrict results to selected event types;
-     * retrieve valid event types from the activity log event types endpoint. Use `page` and
-     * `per_page` to paginate the results.
+     * Searches admin activity logs by time range and optional event type filters. Supply `created_at_after` and use `event_types` to restrict results to selected event types; retrieve valid event types from the activity log event types endpoint. Use `page` and `per_page` to paginate the results.
      *
-     * Search and filter admin activity logs using a POST request with event type filter in the
-     * request body. You can find more details about the available event types in the List all
-     * activity log event types endpoint.
+     * Search and filter admin activity logs using a POST request with event type filter in the request body. You can find more details about the available event types in the List all activity log event types endpoint.
      */
-    fun searchActivityLogs(
-        request: dev.octri.showcase.intercom.methods.Admins.SearchActivityLogsRequest,
-        options: RequestOptions? = null,
-    ): ActivityLogList {
-        return dev.octri.showcase.intercom.methods.Admins.searchActivityLogs(
-            clientConfig,
-            request,
-            options,
-        )
+    fun searchActivityLogs(request: dev.octri.showcase.intercom.methods.Admins.SearchActivityLogsRequest, options: RequestOptions? = null): ActivityLogList {
+        return dev.octri.showcase.intercom.methods.Admins.searchActivityLogs(clientConfig, request, options)
     }
 
     /**
-     * Lists the event type values available for filtering admin activity logs. Use the returned
-     * values with the `event_types` filter when searching activity logs.
+     * Lists the event type values available for filtering admin activity logs. Use the returned values with the `event_types` filter when searching activity logs.
      *
-     * You can get a list of all activity log event types. This is useful for discovering valid
-     * values to use with the `event_types` filter on the List all activity logs endpoint.
+     * You can get a list of all activity log event types. This is useful for discovering valid values to use with the `event_types` filter on the List all activity logs endpoint.
      */
-    fun listActivityLogEventTypes(
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ActivityLogEventTypeList {
-        return dev.octri.showcase.intercom.methods.Admins.listActivityLogEventTypes(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun listActivityLogEventTypes(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ActivityLogEventTypeList {
+        return dev.octri.showcase.intercom.methods.Admins.listActivityLogEventTypes(clientConfig, intercomVersion, options)
     }
 
     /**
-     * Lists the admins associated with the workspace. Set `display_avatar` to `true` to include
-     * each admin's avatar object and image URL; it defaults to `false` when omitted.
+     * Lists the admins associated with the workspace. Set `display_avatar` to `true` to include each admin's avatar object and image URL; it defaults to `false` when omitted.
      *
      * You can fetch a list of admins for a given workspace.
      */
-    fun list(
-        displayAvatar: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): AdminList {
-        return dev.octri.showcase.intercom.methods.Admins.listAdmins(
-            clientConfig,
-            displayAvatar,
-            intercomVersion,
-            options,
-        )
+    fun list(displayAvatar: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): AdminList {
+        return dev.octri.showcase.intercom.methods.Admins.listAdmins(clientConfig, displayAvatar, intercomVersion, options)
     }
 
     /**
-     * Retrieves the details of a specific admin account. Use the admin identifier to view the
-     * admin's profile, away settings, team assignments, and role information when present.
+     * Retrieves the details of a specific admin account. Use the admin identifier to view the admin's profile, away settings, team assignments, and role information when present.
      *
      * You can retrieve the details of a single admin.
      */
-    fun retrieve(
-        adminId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Admin {
-        return dev.octri.showcase.intercom.methods.Admins.retrieveAdmin(
-            clientConfig,
-            adminId,
-            intercomVersion,
-            options,
-        )
+    fun retrieve(adminId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Admin {
+        return dev.octri.showcase.intercom.methods.Admins.retrieveAdmin(clientConfig, adminId, intercomVersion, options)
     }
+
 }

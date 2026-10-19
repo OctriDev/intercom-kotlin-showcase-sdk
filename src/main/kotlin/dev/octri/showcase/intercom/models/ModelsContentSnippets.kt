@@ -6,95 +6,107 @@ package dev.octri.showcase.intercom.models
 import dev.octri.showcase.intercom.models.contentsnippets.ContentSnippet
 
 /**
- * The request payload for creating a content snippet. You must provide either `json_blocks` or
- * `body_markdown` for the snippet content — they are mutually exclusive.
+ * The request payload for creating a content snippet. You must provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive.
  */
 data class ContentSnippetCreateRequest(
-    /** The title of the content snippet. */
+    /**
+     * The title of the content snippet.
+     */
     val title: String,
     /**
-     * The content blocks that make up the body of the snippet. Mutually exclusive with
-     * `body_markdown`.
+     * The content blocks that make up the body of the snippet. Mutually exclusive with `body_markdown`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("json_blocks")
-    val jsonBlocks: List<Map<String, Any>>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("json_blocks") val jsonBlocks: List<Map<String, Any>>? = null,
     /**
-     * The content of the snippet in markdown. An alternative to `json_blocks` — you can provide
-     * content as markdown instead of structured blocks. Mutually exclusive with `json_blocks`.
+     * The content of the snippet in markdown. An alternative to `json_blocks` — you can provide content as markdown instead of structured blocks. Mutually exclusive with `json_blocks`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
-    /** The locale of the content snippet. Defaults to `en`. */
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
+    /**
+     * The locale of the content snippet. Defaults to `en`.
+     */
     val locale: String? = null,
     /**
-     * The list of audience IDs to target this content snippet to for Fin AI Agent. Pass an empty
-     * array or omit the field for no audience targeting. Unknown audience IDs return a `404` error
-     * with no partial commit.
+     * The list of audience IDs to target this content snippet to for Fin AI Agent. Pass an empty array or omit the field for no audience targeting. Unknown audience IDs return a `404` error with no partial commit.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
-    /** Whether the content snippet should be available for AI Chatbot (Fin). Defaults to false. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
-    /** Whether the content snippet should be available for AI Copilot. Defaults to false. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
-    /** Whether the content snippet should be available for AI Sales Agent. Defaults to false. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
-)
-
-/** A paginated list of content snippets. */
-data class ContentSnippetList(
-    /** Optional enumerated value serialized in the `type` wire field. */
-    val type: ContentSnippetListTypeEnum? = null,
-    /** An array of content snippet objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContentSnippet>? = null,
-    /** The total number of content snippets. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** The current page number. */
-    val page: Long? = null,
-    /** The number of results per page. */
-    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** The total number of pages. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null,
+    /**
+     * Whether the content snippet should be available for AI Chatbot (Fin). Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
+    /**
+     * Whether the content snippet should be available for AI Copilot. Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
+    /**
+     * Whether the content snippet should be available for AI Sales Agent. Defaults to false.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null
 )
 
 /**
- * The request payload for updating a content snippet. All fields are optional — only provided
- * fields will be updated. `json_blocks` and `body_markdown` are mutually exclusive.
+ * A paginated list of content snippets.
+ */
+data class ContentSnippetList(
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
+    val type: ContentSnippetListTypeEnum? = null,
+    /**
+     * An array of content snippet objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContentSnippet>? = null,
+    /**
+     * The total number of content snippets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+    /**
+     * The current page number.
+     */
+    val page: Long? = null,
+    /**
+     * The number of results per page.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
+    /**
+     * The total number of pages.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null
+)
+
+/**
+ * The request payload for updating a content snippet. All fields are optional — only provided fields will be updated. `json_blocks` and `body_markdown` are mutually exclusive.
  */
 data class ContentSnippetUpdateRequest(
-    /** The title of the content snippet. */
+    /**
+     * The title of the content snippet.
+     */
     val title: String? = null,
     /**
-     * The content blocks that make up the body of the snippet. Mutually exclusive with
-     * `body_markdown`.
+     * The content blocks that make up the body of the snippet. Mutually exclusive with `body_markdown`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("json_blocks")
-    val jsonBlocks: List<Map<String, Any>>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("json_blocks") val jsonBlocks: List<Map<String, Any>>? = null,
     /**
-     * The content of the snippet in markdown. An alternative to `json_blocks` — you can provide
-     * content as markdown instead of structured blocks. Mutually exclusive with `json_blocks`.
+     * The content of the snippet in markdown. An alternative to `json_blocks` — you can provide content as markdown instead of structured blocks. Mutually exclusive with `json_blocks`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
-    /** The locale of the content snippet. */
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
+    /**
+     * The locale of the content snippet.
+     */
     val locale: String? = null,
     /**
-     * The list of audience IDs to target this content snippet to for Fin AI Agent. Omitting the
-     * field leaves existing audience memberships unchanged (PATCH semantics). Pass `[]` to clear
-     * all audience memberships. Unknown audience IDs return a `404` error with no partial commit.
+     * The list of audience IDs to target this content snippet to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error with no partial commit.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
-    /** Whether the content snippet should be available for AI Chatbot (Fin). */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
-    /** Whether the content snippet should be available for AI Copilot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
-    /** Whether the content snippet should be available for AI Sales Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null,
+    /**
+     * Whether the content snippet should be available for AI Chatbot (Fin).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
+    /**
+     * Whether the content snippet should be available for AI Copilot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
+    /**
+     * Whether the content snippet should be available for AI Sales Agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null
 )

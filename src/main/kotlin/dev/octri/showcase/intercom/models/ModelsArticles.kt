@@ -7,466 +7,644 @@ import dev.octri.showcase.intercom.models.articles.ArticleListItem
 import dev.octri.showcase.intercom.models.articles.ArticleVersionSummary
 import java.time.OffsetDateTime
 
-/** The Content of an Article. */
+/**
+ * The Content of an Article.
+ */
 data class ArticleContent(
-    /** The type of object - `article_content` . */
+    /**
+     * The type of object - `article_content` .
+     */
     val type: ArticleContentTypeEnum? = null,
-    /** The title of the article. */
+    /**
+     * The title of the article.
+     */
     val title: String? = null,
-    /** The description of the article. */
+    /**
+     * The description of the article.
+     */
     val description: String? = null,
-    /** The body of the article in HTML. */
+    /**
+     * The body of the article in HTML.
+     */
     val body: String? = null,
-    /** The body of the article in markdown. */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
-    /** The ID of the author of the article. */
+    /**
+     * The body of the article in markdown.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
+    /**
+     * The ID of the author of the article.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("author_id") val authorId: Long? = null,
-    /** Whether the article is `published` or is a `draft` . */
+    /**
+     * Whether the article is `published` or is a `draft` .
+     */
     val state: ArticleContentStateEnum? = null,
-    /** The time when the article was created (seconds). */
+    /**
+     * The time when the article was created (seconds).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time when the article was last updated (seconds). */
+    /**
+     * The time when the article was last updated (seconds).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
     /**
-     * Whether this locale's published content has unpublished changes staged as a draft on top of
-     * its live content.
+     * Whether this locale's published content has unpublished changes staged as a draft on top of its live content.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_unpublished_changes")
-    val hasUnpublishedChanges: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("has_unpublished_changes") val hasUnpublishedChanges: Boolean? = null,
     /**
-     * The time, in seconds, when this locale's staged draft was last edited, or `null` when there
-     * is no staged draft.
+     * The time, in seconds, when this locale's staged draft was last edited, or `null` when there is no staged draft.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("draft_updated_at")
-    val draftUpdatedAt: Long? = null,
-    /** The URL of the article. */
+    @com.fasterxml.jackson.annotation.JsonProperty("draft_updated_at") val draftUpdatedAt: Long? = null,
+    /**
+     * The URL of the article.
+     */
     val url: String? = null,
     /**
-     * The list of audience IDs this article content is targeted to for Fin AI Agent. On
-     * multilingual help centers this field appears per-locale inside `translated_content`. On
-     * single-language help centers it appears at the article root level. Empty array means no
-     * audience targeting is set.
+     * The list of audience IDs this article content is targeted to for Fin AI Agent. On multilingual help centers this field appears per-locale inside `translated_content`. On single-language help centers it appears at the article root level. Empty array means no audience targeting is set.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
-    /** Whether the article is available for AI Chatbot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
-    /** Whether the article is available for AI Copilot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
-    /** Whether the article is available for AI Sales Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
-    /** The ID of the teammate who created this content version. */
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null,
+    /**
+     * Whether the article is available for AI Chatbot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
+    /**
+     * Whether the article is available for AI Copilot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
+    /**
+     * Whether the article is available for AI Sales Agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null,
+    /**
+     * The ID of the teammate who created this content version.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_by_id") val createdById: Long? = null,
-    /** The ID of the teammate who last updated this content version. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_id") val updatedById: Long? = null,
+    /**
+     * The ID of the teammate who last updated this content version.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_by_id") val updatedById: Long? = null
 )
 
-/** The content of the article in Arabic */
+/**
+ * The content of the article in Arabic
+ */
 data class ArticleContentRequest(
-    /** The type of object - `article_content` . */
+    /**
+     * The type of object - `article_content` .
+     */
     val type: ArticleContentRequestTypeEnum? = null,
-    /** The title of the article. */
+    /**
+     * The title of the article.
+     */
     val title: String? = null,
-    /** The description of the article. */
+    /**
+     * The description of the article.
+     */
     val description: String? = null,
-    /** The body of the article in HTML. */
+    /**
+     * The body of the article in HTML.
+     */
     val body: String? = null,
-    /** The body of the article in markdown. */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
-    /** The ID of the author of the article. */
+    /**
+     * The body of the article in markdown.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
+    /**
+     * The ID of the author of the article.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("author_id") val authorId: Long? = null,
-    /** Whether the article is `published` or is a `draft` . */
+    /**
+     * Whether the article is `published` or is a `draft` .
+     */
     val state: ArticleContentRequestStateEnum? = null,
-    /** The time when the article was created (seconds). */
+    /**
+     * The time when the article was created (seconds).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time when the article was last updated (seconds). */
+    /**
+     * The time when the article was last updated (seconds).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
     /**
-     * Whether this locale's published content has unpublished changes staged as a draft on top of
-     * its live content.
+     * Whether this locale's published content has unpublished changes staged as a draft on top of its live content.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_unpublished_changes")
-    val hasUnpublishedChanges: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("has_unpublished_changes") val hasUnpublishedChanges: Boolean? = null,
     /**
-     * The time, in seconds, when this locale's staged draft was last edited, or `null` when there
-     * is no staged draft.
+     * The time, in seconds, when this locale's staged draft was last edited, or `null` when there is no staged draft.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("draft_updated_at")
-    val draftUpdatedAt: Long? = null,
-    /** The URL of the article. */
+    @com.fasterxml.jackson.annotation.JsonProperty("draft_updated_at") val draftUpdatedAt: Long? = null,
+    /**
+     * The URL of the article.
+     */
     val url: String? = null,
     /**
-     * The list of audience IDs this article content is targeted to for Fin AI Agent. On
-     * multilingual help centers this field appears per-locale inside `translated_content`. On
-     * single-language help centers it appears at the article root level. Empty array means no
-     * audience targeting is set.
+     * The list of audience IDs this article content is targeted to for Fin AI Agent. On multilingual help centers this field appears per-locale inside `translated_content`. On single-language help centers it appears at the article root level. Empty array means no audience targeting is set.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
-    /** Whether the article is available for AI Chatbot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
-    /** Whether the article is available for AI Copilot. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
-    /** Whether the article is available for AI Sales Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null,
+    /**
+     * Whether the article is available for AI Chatbot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
+    /**
+     * Whether the article is available for AI Copilot.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
+    /**
+     * Whether the article is available for AI Sales Agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null
 )
 
-/** This will return a list of articles for the App. */
+/**
+ * This will return a list of articles for the App.
+ */
 data class ArticleList(
-    /** The type of the object - `list`. */
+    /**
+     * The type of the object - `list`.
+     */
     val type: ArticleListTypeEnum? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
-     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
-     * result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
     val pages: CursorPages? = null,
-    /** A count of the total number of articles. */
+    /**
+     * A count of the total number of articles.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** An array of Article objects */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ArticleListItem>? = null,
+    /**
+     * An array of Article objects
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ArticleListItem>? = null
 )
 
-/** The statistics of an article. */
+/**
+ * The statistics of an article.
+ */
 data class ArticleStatistics(
-    /** The type of object - `article_statistics`. */
+    /**
+     * The type of object - `article_statistics`.
+     */
     val type: ArticleStatisticsTypeEnum? = null,
-    /** The number of total views the article has received. */
+    /**
+     * The number of total views the article has received.
+     */
     val views: Long? = null,
-    /** The number of conversations started from the article. */
+    /**
+     * The number of conversations started from the article.
+     */
     val conversions: Long? = null,
-    /** The number of total reactions the article has received. */
+    /**
+     * The number of total reactions the article has received.
+     */
     val reactions: Long? = null,
     /**
      * The percentage of happy reactions the article has received against other types of reaction.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("happy_reaction_percentage")
-    val happyReactionPercentage: Float? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("happy_reaction_percentage") val happyReactionPercentage: Float? = null,
     /**
      * The percentage of neutral reactions the article has received against other types of reaction.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("neutral_reaction_percentage")
-    val neutralReactionPercentage: Float? = null,
-    /** The percentage of sad reactions the article has received against */
-    @com.fasterxml.jackson.annotation.JsonProperty("sad_reaction_percentage")
-    val sadReactionPercentage: Float? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("neutral_reaction_percentage") val neutralReactionPercentage: Float? = null,
     /**
-     * The number of conversations in which Fin AI Agent used this article, summed across all of the
-     * article's locales.
+     * The percentage of sad reactions the article has received against
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("fin_involvements")
-    val finInvolvements: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sad_reaction_percentage") val sadReactionPercentage: Float? = null,
     /**
-     * The number of conversations Fin AI Agent resolved using this article, summed across all of
-     * the article's locales.
+     * The number of conversations in which Fin AI Agent used this article, summed across all of the article's locales.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("fin_resolutions")
-    val finResolutions: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("fin_involvements") val finInvolvements: Long? = null,
     /**
-     * The percentage of Fin AI Agent involvements that resulted in a resolution (fin_resolutions /
-     * fin_involvements * 100).
+     * The number of conversations Fin AI Agent resolved using this article, summed across all of the article's locales.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("fin_resolution_rate")
-    val finResolutionRate: Float? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("fin_resolutions") val finResolutions: Long? = null,
+    /**
+     * The percentage of Fin AI Agent involvements that resulted in a resolution (fin_resolutions / fin_involvements * 100).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("fin_resolution_rate") val finResolutionRate: Float? = null
 )
 
 /**
- * The Translated Content of an Article. The keys are the locale codes and the values are the
- * translated content of the article.
+ * The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
  */
 class ArticleTranslatedContent(
-    /** The type of object - article_translated_content. */
+    /**
+     * The type of object - article_translated_content.
+     */
     val type: ArticleTranslatedContentTypeEnum? = null,
-    /** The content of the article in Arabic */
+    /**
+     * The content of the article in Arabic
+     */
     val ar: ArticleContent? = null,
-    /** The content of the article in Bulgarian */
+    /**
+     * The content of the article in Bulgarian
+     */
     val bg: ArticleContent? = null,
-    /** The content of the article in Bosnian */
+    /**
+     * The content of the article in Bosnian
+     */
     val bs: ArticleContent? = null,
-    /** The content of the article in Catalan */
+    /**
+     * The content of the article in Catalan
+     */
     val ca: ArticleContent? = null,
-    /** The content of the article in Czech */
+    /**
+     * The content of the article in Czech
+     */
     val cs: ArticleContent? = null,
-    /** The content of the article in Danish */
+    /**
+     * The content of the article in Danish
+     */
     val da: ArticleContent? = null,
-    /** The content of the article in German */
+    /**
+     * The content of the article in German
+     */
     val de: ArticleContent? = null,
-    /** The content of the article in Greek */
+    /**
+     * The content of the article in Greek
+     */
     val el: ArticleContent? = null,
-    /** The content of the article in English */
+    /**
+     * The content of the article in English
+     */
     val en: ArticleContent? = null,
-    /** The content of the article in Spanish */
+    /**
+     * The content of the article in Spanish
+     */
     val es: ArticleContent? = null,
-    /** The content of the article in Estonian */
+    /**
+     * The content of the article in Estonian
+     */
     val et: ArticleContent? = null,
-    /** The content of the article in Finnish */
+    /**
+     * The content of the article in Finnish
+     */
     val fi: ArticleContent? = null,
-    /** The content of the article in French */
+    /**
+     * The content of the article in French
+     */
     val fr: ArticleContent? = null,
-    /** The content of the article in Hebrew */
+    /**
+     * The content of the article in Hebrew
+     */
     val he: ArticleContent? = null,
-    /** The content of the article in Croatian */
+    /**
+     * The content of the article in Croatian
+     */
     val hr: ArticleContent? = null,
-    /** The content of the article in Hungarian */
+    /**
+     * The content of the article in Hungarian
+     */
     val hu: ArticleContent? = null,
-    /** The content of the article in Indonesian */
+    /**
+     * The content of the article in Indonesian
+     */
     val id: ArticleContent? = null,
-    /** The content of the article in Italian */
+    /**
+     * The content of the article in Italian
+     */
     val it: ArticleContent? = null,
-    /** The content of the article in Japanese */
+    /**
+     * The content of the article in Japanese
+     */
     val ja: ArticleContent? = null,
-    /** The content of the article in Korean */
+    /**
+     * The content of the article in Korean
+     */
     val ko: ArticleContent? = null,
-    /** The content of the article in Lithuanian */
+    /**
+     * The content of the article in Lithuanian
+     */
     val lt: ArticleContent? = null,
-    /** The content of the article in Latvian */
+    /**
+     * The content of the article in Latvian
+     */
     val lv: ArticleContent? = null,
-    /** The content of the article in Mongolian */
+    /**
+     * The content of the article in Mongolian
+     */
     val mn: ArticleContent? = null,
-    /** The content of the article in Norwegian */
+    /**
+     * The content of the article in Norwegian
+     */
     val nb: ArticleContent? = null,
-    /** The content of the article in Dutch */
+    /**
+     * The content of the article in Dutch
+     */
     val nl: ArticleContent? = null,
-    /** The content of the article in Polish */
+    /**
+     * The content of the article in Polish
+     */
     val pl: ArticleContent? = null,
-    /** The content of the article in Portuguese (Portugal) */
+    /**
+     * The content of the article in Portuguese (Portugal)
+     */
     val pt: ArticleContent? = null,
-    /** The content of the article in Romanian */
+    /**
+     * The content of the article in Romanian
+     */
     val ro: ArticleContent? = null,
-    /** The content of the article in Russian */
+    /**
+     * The content of the article in Russian
+     */
     val ru: ArticleContent? = null,
-    /** The content of the article in Slovenian */
+    /**
+     * The content of the article in Slovenian
+     */
     val sl: ArticleContent? = null,
-    /** The content of the article in Serbian */
+    /**
+     * The content of the article in Serbian
+     */
     val sr: ArticleContent? = null,
-    /** The content of the article in Swedish */
+    /**
+     * The content of the article in Swedish
+     */
     val sv: ArticleContent? = null,
-    /** The content of the article in Turkish */
+    /**
+     * The content of the article in Turkish
+     */
     val tr: ArticleContent? = null,
-    /** The content of the article in Vietnamese */
+    /**
+     * The content of the article in Vietnamese
+     */
     val vi: ArticleContent? = null,
-    /** The content of the article in Portuguese (Brazil) */
+    /**
+     * The content of the article in Portuguese (Brazil)
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("pt-BR") val ptBr: ArticleContent? = null,
-    /** The content of the article in Chinese (China) */
+    /**
+     * The content of the article in Chinese (China)
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("zh-CN") val zhCn: ArticleContent? = null,
-    /** The content of the article in Chinese (Taiwan) */
-    @com.fasterxml.jackson.annotation.JsonProperty("zh-TW") val zhTw: ArticleContent? = null,
+    /**
+     * The content of the article in Chinese (Taiwan)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("zh-TW") val zhTw: ArticleContent? = null
 )
 
 /**
- * The Translated Content of an Article. The keys are the locale codes and the values are the
- * translated content of the article.
+ * The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
  */
 class ArticleTranslatedContentRequest(
-    /** The type of object - article_translated_content. */
+    /**
+     * The type of object - article_translated_content.
+     */
     val type: ArticleTranslatedContentRequestTypeEnum? = null,
-    /** The content of the article in Arabic */
+    /**
+     * The content of the article in Arabic
+     */
     val ar: ArticleContentRequest? = null,
-    /** The content of the article in Bulgarian */
+    /**
+     * The content of the article in Bulgarian
+     */
     val bg: ArticleContent? = null,
-    /** The content of the article in Bosnian */
+    /**
+     * The content of the article in Bosnian
+     */
     val bs: ArticleContent? = null,
-    /** The content of the article in Catalan */
+    /**
+     * The content of the article in Catalan
+     */
     val ca: ArticleContent? = null,
-    /** The content of the article in Czech */
+    /**
+     * The content of the article in Czech
+     */
     val cs: ArticleContent? = null,
-    /** The content of the article in Danish */
+    /**
+     * The content of the article in Danish
+     */
     val da: ArticleContent? = null,
-    /** The content of the article in German */
+    /**
+     * The content of the article in German
+     */
     val de: ArticleContent? = null,
-    /** The content of the article in Greek */
+    /**
+     * The content of the article in Greek
+     */
     val el: ArticleContent? = null,
-    /** The content of the article in English */
+    /**
+     * The content of the article in English
+     */
     val en: ArticleContent? = null,
-    /** The content of the article in Spanish */
+    /**
+     * The content of the article in Spanish
+     */
     val es: ArticleContent? = null,
-    /** The content of the article in Estonian */
+    /**
+     * The content of the article in Estonian
+     */
     val et: ArticleContent? = null,
-    /** The content of the article in Finnish */
+    /**
+     * The content of the article in Finnish
+     */
     val fi: ArticleContent? = null,
-    /** The content of the article in French */
+    /**
+     * The content of the article in French
+     */
     val fr: ArticleContent? = null,
-    /** The content of the article in Hebrew */
+    /**
+     * The content of the article in Hebrew
+     */
     val he: ArticleContent? = null,
-    /** The content of the article in Croatian */
+    /**
+     * The content of the article in Croatian
+     */
     val hr: ArticleContent? = null,
-    /** The content of the article in Hungarian */
+    /**
+     * The content of the article in Hungarian
+     */
     val hu: ArticleContent? = null,
-    /** The content of the article in Indonesian */
+    /**
+     * The content of the article in Indonesian
+     */
     val id: ArticleContent? = null,
-    /** The content of the article in Italian */
+    /**
+     * The content of the article in Italian
+     */
     val it: ArticleContent? = null,
-    /** The content of the article in Japanese */
+    /**
+     * The content of the article in Japanese
+     */
     val ja: ArticleContent? = null,
-    /** The content of the article in Korean */
+    /**
+     * The content of the article in Korean
+     */
     val ko: ArticleContent? = null,
-    /** The content of the article in Lithuanian */
+    /**
+     * The content of the article in Lithuanian
+     */
     val lt: ArticleContent? = null,
-    /** The content of the article in Latvian */
+    /**
+     * The content of the article in Latvian
+     */
     val lv: ArticleContent? = null,
-    /** The content of the article in Mongolian */
+    /**
+     * The content of the article in Mongolian
+     */
     val mn: ArticleContent? = null,
-    /** The content of the article in Norwegian */
+    /**
+     * The content of the article in Norwegian
+     */
     val nb: ArticleContent? = null,
-    /** The content of the article in Dutch */
+    /**
+     * The content of the article in Dutch
+     */
     val nl: ArticleContent? = null,
-    /** The content of the article in Polish */
+    /**
+     * The content of the article in Polish
+     */
     val pl: ArticleContent? = null,
-    /** The content of the article in Portuguese (Portugal) */
+    /**
+     * The content of the article in Portuguese (Portugal)
+     */
     val pt: ArticleContent? = null,
-    /** The content of the article in Romanian */
+    /**
+     * The content of the article in Romanian
+     */
     val ro: ArticleContent? = null,
-    /** The content of the article in Russian */
+    /**
+     * The content of the article in Russian
+     */
     val ru: ArticleContent? = null,
-    /** The content of the article in Slovenian */
+    /**
+     * The content of the article in Slovenian
+     */
     val sl: ArticleContent? = null,
-    /** The content of the article in Serbian */
+    /**
+     * The content of the article in Serbian
+     */
     val sr: ArticleContent? = null,
-    /** The content of the article in Swedish */
+    /**
+     * The content of the article in Swedish
+     */
     val sv: ArticleContent? = null,
-    /** The content of the article in Turkish */
+    /**
+     * The content of the article in Turkish
+     */
     val tr: ArticleContent? = null,
-    /** The content of the article in Vietnamese */
+    /**
+     * The content of the article in Vietnamese
+     */
     val vi: ArticleContent? = null,
-    /** The content of the article in Portuguese (Brazil) */
+    /**
+     * The content of the article in Portuguese (Brazil)
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("pt-BR") val ptBr: ArticleContent? = null,
-    /** The content of the article in Chinese (China) */
+    /**
+     * The content of the article in Chinese (China)
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("zh-CN") val zhCn: ArticleContent? = null,
-    /** The content of the article in Chinese (Taiwan) */
-    @com.fasterxml.jackson.annotation.JsonProperty("zh-TW") val zhTw: ArticleContent? = null,
+    /**
+     * The content of the article in Chinese (Taiwan)
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("zh-TW") val zhTw: ArticleContent? = null
 )
 
-/** A paginated list of versions of an article. */
+/**
+ * A paginated list of versions of an article.
+ */
 data class ArticleVersionList(
-    /** The type of the object - `list`. */
+    /**
+     * The type of the object - `list`.
+     */
     val type: ArticleVersionListTypeEnum? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
-     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
-     * result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
     val pages: CursorPages? = null,
-    /** A count of the total number of versions. */
+    /**
+     * A count of the total number of versions.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** An array of Article version summary objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ArticleVersionSummary>? = null,
+    /**
+     * An array of Article version summary objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ArticleVersionSummary>? = null
 )
 
-/** You can create an Article */
+/**
+ * You can create an Article
+ */
 data class CreateArticleRequestRequest(
     /**
-     * The title of the article.For multilingual articles, this will be the title of the default
-     * language's content.
+     * The title of the article.For multilingual articles, this will be the title of the default language's content.
      */
     val title: String,
     /**
-     * The id of the author of the article. For multilingual articles, this will be the id of the
-     * author of the default language's content. Must be a teammate on the help center's workspace.
+     * The id of the author of the article. For multilingual articles, this will be the id of the author of the default language's content. Must be a teammate on the help center's workspace.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("author_id") val authorId: Long,
     /**
-     * The description of the article. For multilingual articles, this will be the description of
-     * the default language's content.
+     * The description of the article. For multilingual articles, this will be the description of the default language's content.
      */
     val description: String? = null,
     /**
-     * The content of the article in HTML. For multilingual articles, this will be the body of the
-     * default language's content. Mutually exclusive with `body_markdown`.
+     * The content of the article in HTML. For multilingual articles, this will be the body of the default language's content. Mutually exclusive with `body_markdown`.
      */
     val body: String? = null,
     /**
-     * The content of the article in markdown. For multilingual articles, this will be the body of
-     * the default language's content. An alternative to `body` — you can provide content as
-     * markdown instead of HTML. Mutually exclusive with `body`.
+     * The content of the article in markdown. For multilingual articles, this will be the body of the default language's content. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown")
-    val bodyMarkdown: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("body_markdown") val bodyMarkdown: String? = null,
     /**
-     * Whether the article will be `published` or will be a `draft`. Defaults to draft. For
-     * multilingual articles, this will be the state of the default language's content.
+     * Whether the article will be `published` or will be a `draft`. Defaults to draft. For multilingual articles, this will be the state of the default language's content.
      */
     val state: CreateArticleRequestRequestStateEnum? = null,
     /**
-     * The id of the article's parent collection or section. An article without this field stands
-     * alone.
+     * The id of the article's parent collection or section. An article without this field stands alone.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_id") val parentId: Long? = null,
-    /** The type of parent, which can either be a `collection` or `section`. */
+    /**
+     * The type of parent, which can either be a `collection` or `section`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("parent_type") val parentType: String? = null,
     /**
-     * The Translated Content of an Article. The keys are the locale codes and the values are the
-     * translated content of the article.
+     * The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("translated_content")
-    val translatedContent: ArticleTranslatedContentRequest? = null,
-    /** The ID of the folder to place this article in, or null to leave it without a folder. */
+    @com.fasterxml.jackson.annotation.JsonProperty("translated_content") val translatedContent: ArticleTranslatedContentRequest? = null,
+    /**
+     * The ID of the folder to place this article in, or null to leave it without a folder.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("folder_id") val folderId: Long? = null,
     /**
-     * The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a
-     * top-level `audience_ids` broadcasts the same set to every locale. For per-locale targeting,
-     * use `translated_content.<locale>.audience_ids` instead. Sending both top-level and per-locale
-     * in the same request causes top-level to win. Unknown audience IDs return a 404 error. No
-     * partial commit occurs.
+     * The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. For per-locale targeting, use `translated_content.<locale>.audience_ids` instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids")
-    val audienceIds: List<Long>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_ids") val audienceIds: List<Long>? = null,
     /**
-     * Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this
-     * sets the default language's availability.
+     * Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this sets the default language's availability.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability")
-    val aiChatbotAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_chatbot_availability") val aiChatbotAvailability: Boolean? = null,
     /**
-     * Whether the article should be available for AI Copilot. For multilingual articles, this sets
-     * the default language's availability.
+     * Whether the article should be available for AI Copilot. For multilingual articles, this sets the default language's availability.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability")
-    val aiCopilotAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_copilot_availability") val aiCopilotAvailability: Boolean? = null,
     /**
-     * Whether the article should be available for AI Sales Agent. For multilingual articles, this
-     * sets the default language's availability.
+     * Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language's availability.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability")
-    val aiSalesAgentAvailability: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_sales_agent_availability") val aiSalesAgentAvailability: Boolean? = null,
     /**
-     * ISO 8601 timestamp at which to schedule a future publish of the article. When set together
-     * with `state: "published"`, the article is scheduled instead of published immediately. Setting
-     * `null` cancels a pending publish schedule. Timestamps in the past or equal to the current
-     * time are rejected with 400 `parameter_invalid` — the value must be strictly in the future.
-     * Combining with `state: "draft"` returns 400 `parameter_invalid`. Sending in the same request
-     * as…
+     * ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: "published"`, the article is scheduled instead of published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Combining with `state: "draft"` returns 400 `parameter_invalid`. Sending in the same request as…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_publish_at")
-    val scheduledPublishAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_publish_at") val scheduledPublishAt: OffsetDateTime? = null,
     /**
-     * ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null`
-     * cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are
-     * rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected
-     * with 400 `parameter_invalid` if the article has never been published. Sending in the same
-     * request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty
-     * string returns 400…
+     * ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_unpublish_at")
-    val scheduledUnpublishAt: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("scheduled_unpublish_at") val scheduledUnpublishAt: OffsetDateTime? = null
 )
 
-/** Response returned when an object is deleted */
+/**
+ * Response returned when an object is deleted
+ */
 data class DeletedArticleObject(
-    /** The unique identifier for the article which you provided in the URL. */
+    /**
+     * The unique identifier for the article which you provided in the URL.
+     */
     val id: String? = null,
-    /** The type of object which was deleted. - article */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeletedArticleObjectObjectEnum? = null,
-    /** Whether the article was deleted successfully or not. */
-    val deleted: Boolean? = null,
+    /**
+     * The type of object which was deleted. - article
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedArticleObjectObjectEnum? = null,
+    /**
+     * Whether the article was deleted successfully or not.
+     */
+    val deleted: Boolean? = null
 )

@@ -12,217 +12,112 @@ import dev.octri.showcase.intercom.SdkClient
 
 object ReportingDataExport {
 
-    data class CreateEnqueueResponse(
-        @com.fasterxml.jackson.annotation.JsonProperty("job_identifier")
-        val jobIdentifier: String? = null,
-        val status: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("download_url")
-        val downloadUrl: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("download_expires_at")
-        val downloadExpiresAt: String? = null,
-    )
+data class CreateEnqueueResponse(
+    @com.fasterxml.jackson.annotation.JsonProperty("job_identifier") val jobIdentifier: String? = null,
+    val status: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("download_url") val downloadUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("download_expires_at") val downloadExpiresAt: String? = null
+)
 
-    data class GetReportingDataResponse(
-        @com.fasterxml.jackson.annotation.JsonProperty("job_identifier")
-        val jobIdentifier: String? = null,
-        val status: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("download_url")
-        val downloadUrl: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("download_expires_at")
-        val downloadExpiresAt: String? = null,
-    )
+data class GetReportingDataResponse(
+    @com.fasterxml.jackson.annotation.JsonProperty("job_identifier") val jobIdentifier: String? = null,
+    val status: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("download_url") val downloadUrl: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("download_expires_at") val downloadExpiresAt: String? = null
+)
 
-    data class ListGetDatasetsResponseDataItemAttributesItem(
-        /**
-         * The simple attribute identifier. Note that this may be ambiguous if the same name exists
-         * across different attribute types. Use qualified_id when calling the enqueue endpoint.
-         */
-        val id: String? = null,
-        /**
-         * A namespaced identifier that uniquely identifies the attribute across all types. Format
-         * is "prefix.name" (e.g., "people.Brand", "conversation.Brand"). Required when calling the
-         * enqueue endpoint.
-         */
-        @com.fasterxml.jackson.annotation.JsonProperty("qualified_id")
-        val qualifiedId: String? = null,
-        val name: String? = null,
-    )
+data class ListGetDatasetsResponseDataItemAttributesItem(
+    /**
+     * The simple attribute identifier. Note that this may be ambiguous if the same name exists across different attribute types. Use qualified_id when calling the enqueue endpoint.
+     */
+    val id: String? = null,
+    /**
+     * A namespaced identifier that uniquely identifies the attribute across all types. Format is "prefix.name" (e.g., "people.Brand", "conversation.Brand"). Required when calling the enqueue endpoint.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("qualified_id") val qualifiedId: String? = null,
+    val name: String? = null
+)
 
-    data class ListGetDatasetsResponseDataItem(
-        val id: String? = null,
-        val name: String? = null,
-        val description: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("default_time_attribute_id")
-        val defaultTimeAttributeId: String? = null,
-        val attributes: List<ListGetDatasetsResponseDataItemAttributesItem>? = null,
-    )
+data class ListGetDatasetsResponseDataItem(
+    val id: String? = null,
+    val name: String? = null,
+    val description: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("default_time_attribute_id") val defaultTimeAttributeId: String? = null,
+    val attributes: List<ListGetDatasetsResponseDataItemAttributesItem>? = null
+)
 
-    data class ListGetDatasetsResponse(
-        val type: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("data")
-        val `data`: List<ListGetDatasetsResponseDataItem>? = null,
-    )
+data class ListGetDatasetsResponse(
+    val type: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListGetDatasetsResponseDataItem>? = null
+)
+
 
     /**
-     * Enqueues a reporting data export job for a selected dataset, attributes, and time range.
-     * Supply `dataset_id`, `attribute_ids`, `start_time`, and `end_time`; for conversation exports
-     * in the current API version, the export includes conversations that received no user reply.
-     * Use the returned job identifier to check the job status and retrieve its data.
+     * Enqueues a reporting data export job for a selected dataset, attributes, and time range. Supply `dataset_id`, `attribute_ids`, `start_time`, and `end_time`; for conversation exports in the current API version, the export includes conversations that received no user reply. Use the returned job identifier to check the job status and retrieve its data.
      *
-     * For the conversation dataset, from this version onward this export returns all conversations,
-     * including those that never received a user reply. Earlier versions return only conversations
-     * that received at least one user reply. Other datasets are unaffected.
+     * For the conversation dataset, from this version onward this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.
      */
-    fun createEnqueue(
-        clientConfig: ClientConfig,
-        datasetId: String,
-        attributeIds: List<String>,
-        startTime: Long,
-        endTime: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CreateEnqueueResponse {
-        return SdkClient.request<CreateEnqueueResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/export/reporting_data/enqueue",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "dataset_id" to (datasetId),
-                            "attribute_ids" to (attributeIds),
-                            "start_time" to (startTime),
-                            "end_time" to (endTime),
-                        ),
-                    operationId = "createEnqueue",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "429" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun createEnqueue(clientConfig: ClientConfig, datasetId: String, attributeIds: List<String>, startTime: Long, endTime: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CreateEnqueueResponse {
+        return SdkClient.request<CreateEnqueueResponse>(SdkClient.RequestSpec("POST", "/export/reporting_data/enqueue", config = clientConfig, body = SdkClient.bodyMap("dataset_id" to (datasetId), "attribute_ids" to (attributeIds), "start_time" to (startTime), "end_time" to (endTime)), operationId = "createEnqueue", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "429" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves the status and download details for a reporting data export job. Supply the
-     * workspace and client identifiers along with the job identifier to look up the export. Use the
-     * returned status to determine whether the job is ready to download.
+     * Retrieves the status and download details for a reporting data export job. Supply the workspace and client identifiers along with the job identifier to look up the export. Use the returned status to determine whether the job is ready to download.
      *
      * @param jobIdentifier Path segment `job_identifier` of
      *   `/export/reporting_data/{job_identifier}`.
-     * @param appId The Intercom defined code of the workspace the company is associated to.
+     * @param appId The Intercom defined code of the workspace the company is
+     *   associated to.
      * @param jobIdentifier2 Unique identifier of the job.
      */
-    fun getReportingData(
-        clientConfig: ClientConfig,
-        jobIdentifier: String,
-        appId: String,
-        clientId: String,
-        jobIdentifier2: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): GetReportingDataResponse {
-        return SdkClient.request<GetReportingDataResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/export/reporting_data/${SdkClient.encodePathSegment(jobIdentifier)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "app_id" to SdkClient.queryValue(appId, "form", true),
-                            "client_id" to SdkClient.queryValue(clientId, "form", true),
-                            "job_identifier" to SdkClient.queryValue(jobIdentifier2, "form", true),
-                        ),
-                    operationId = "getReportingData",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java),
-                )
-            )
-            .data
+    fun getReportingData(clientConfig: ClientConfig, jobIdentifier: String, appId: String, clientId: String, jobIdentifier2: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): GetReportingDataResponse {
+        return SdkClient.request<GetReportingDataResponse>(SdkClient.RequestSpec("GET", "/export/reporting_data/${SdkClient.encodePathSegment(jobIdentifier)}", config = clientConfig, query = mapOf("app_id" to SdkClient.queryValue(appId, "form", true), "client_id" to SdkClient.queryValue(clientId, "form", true), "job_identifier" to
+    SdkClient.queryValue(jobIdentifier2, "form", true)), operationId = "getReportingData", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the datasets and attributes available for reporting data exports. Use the returned
-     * dataset identifiers and attribute details to determine which data you can include in an
-     * export.
+     * Lists the datasets and attributes available for reporting data exports. Use the returned dataset identifiers and attribute details to determine which data you can include in an export.
      */
-    fun listGetDatasets(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ListGetDatasetsResponse {
-        return SdkClient.request<ListGetDatasetsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/export/reporting_data/get_datasets",
-                    config = clientConfig,
-                    operationId = "listGetDatasets",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+    fun listGetDatasets(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ListGetDatasetsResponse {
+        return SdkClient.request<ListGetDatasetsResponse>(SdkClient.RequestSpec("GET", "/export/reporting_data/get_datasets", config = clientConfig, operationId = "listGetDatasets", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Downloads the data file for a completed reporting data export job. Provide the job identifier
-     * and app ID, and send the required `Accept` header to receive the file as an octet stream.
+     * Downloads the data file for a completed reporting data export job. Provide the job identifier and app ID, and send the required `Accept` header to receive the file as an octet stream.
      *
-     * Download the data from a completed reporting data export job. > Octet header required > > You
-     * will have to specify the header Accept: `application/octet-stream` when hitting this
-     * endpoint.
+     * Download the data from a completed reporting data export job. > Octet header required > > You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
      *
      * @param jobIdentifier Path segment `job_identifier` of
      *   `/download/reporting_data/{job_identifier}`.
      * @param accept Required header for downloading the export file
      */
-    fun getReportingData2(
-        clientConfig: ClientConfig,
-        jobIdentifier: String,
-        appId: String,
-        jobIdentifier2: String,
-        accept: GetReportingData2ParameterEnum,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "GET",
-                "/download/reporting_data/${SdkClient.encodePathSegment(jobIdentifier)}",
-                config = clientConfig,
-                query =
-                    mapOf(
-                        "app_id" to SdkClient.queryValue(appId, "form", true),
-                        "job_identifier" to SdkClient.queryValue(jobIdentifier2, "form", true),
-                    ),
-                operationId = "getReportingData2",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                extraHeaders =
-                    SdkClient.headers(
-                        "Accept" to SdkClient.headerValue(accept, false),
-                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false),
-                    ),
-                options = options,
-                errors = mapOf("404" to Error2::class.java),
-            )
-        )
+    fun getReportingData2(clientConfig: ClientConfig, jobIdentifier: String, appId: String, jobIdentifier2: String, accept: GetReportingData2ParameterEnum, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("GET", "/download/reporting_data/${SdkClient.encodePathSegment(jobIdentifier)}", config = clientConfig, query = mapOf("app_id" to SdkClient.queryValue(appId, "form", true), "job_identifier" to
+    SdkClient.queryValue(jobIdentifier2, "form", true)), operationId = "getReportingData2", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Accept" to SdkClient.headerValue(accept, false), "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java)))
     }
+
+
+
+
+
+
+
 }
