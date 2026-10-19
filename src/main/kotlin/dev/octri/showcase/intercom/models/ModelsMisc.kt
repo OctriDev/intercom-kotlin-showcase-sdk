@@ -3,35 +3,22 @@
 
 package dev.octri.showcase.intercom.models
 
-
-/**
- * Metadata for a conversation part
- */
+/** Metadata for a conversation part */
 data class Metadata(
-    /**
-     * The quick reply options sent by the Admin or bot, presented in this conversation part.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_options") val quickReplyOptions: List<ConversationPartMetadataQuickReplyOptionsItem>? = null,
-    /**
-     * The unique identifier for the quick reply option that was clicked by the end user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_uuid") val quickReplyUuid: String? = null
+    /** The quick reply options sent by the Admin or bot, presented in this conversation part. */
+    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_options")
+    val quickReplyOptions: List<ConversationPartMetadataQuickReplyOptionsItem>? = null,
+    /** The unique identifier for the quick reply option that was clicked by the end user. */
+    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_uuid")
+    val quickReplyUuid: String? = null,
 )
 
-/**
- * Response returned when an object is deleted
- */
+/** Response returned when an object is deleted */
 data class VisitorDeletedObject(
-    /**
-     * The unique identifier for the visitor which is given by Intercom.
-     */
+    /** The unique identifier for the visitor which is given by Intercom. */
     val id: String? = null,
-    /**
-     * The type of object which was deleted
-     */
+    /** The type of object which was deleted */
     val type: VisitorDeletedObjectTypeEnum? = null,
-    /**
-     * Automatically generated identifier for the Visitor.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null
+    /** Automatically generated identifier for the Visitor. */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
 )

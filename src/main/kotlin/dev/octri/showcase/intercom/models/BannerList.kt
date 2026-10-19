@@ -5,16 +5,10 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.banners.Banner
 
-/**
- * A list of banners a contact currently matches.
- */
+/** A list of banners a contact currently matches. */
 data class BannerList(
-    /**
-     * String representing the object's type. Always has the value `list`.
-     */
+    /** String representing the object's type. Always has the value `list`. */
     val type: String? = null,
-    /**
-     * An array of banners.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Banner>? = null
+    /** An array of banners. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Banner>? = null,
 )

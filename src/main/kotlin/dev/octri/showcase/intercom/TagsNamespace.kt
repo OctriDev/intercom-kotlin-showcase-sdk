@@ -3,96 +3,223 @@
 
 package dev.octri.showcase.intercom
 
-
 class TagsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Adds a tag to a contact. Supply the tag's `id` in the request body to identify which tag to apply; the response returns the applied tag.
+     * Adds a tag to a contact. Supply the tag's `id` in the request body to identify which tag to
+     * apply; the response returns the applied tag.
      *
-     * You can tag a specific contact. This will return a tag object for the tag that was added to the contact.
+     * You can tag a specific contact. This will return a tag object for the tag that was added to
+     * the contact.
      */
-    fun attachToContact(contactId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.TagsMethods.attachTagToContact(clientConfig, contactId, id, intercomVersion, options)
+    fun attachToContact(
+        contactId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.TagsMethods.attachTagToContact(
+            clientConfig,
+            contactId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Removes a tag from a contact. Identify the contact and tag with the `contact_id` and `tag_id` path parameters; the response returns the removed tag.
+     * Removes a tag from a contact. Identify the contact and tag with the `contact_id` and `tag_id`
+     * path parameters; the response returns the removed tag.
      *
-     * You can remove tag from a specific contact. This will return a tag object for the tag that was removed from the contact.
+     * You can remove tag from a specific contact. This will return a tag object for the tag that
+     * was removed from the contact.
      */
-    fun detachFromContact(contactId: String, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.TagsMethods.detachTagFromContact(clientConfig, contactId, tagId, intercomVersion, options)
+    fun detachFromContact(
+        contactId: String,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.TagsMethods.detachTagFromContact(
+            clientConfig,
+            contactId,
+            tagId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Adds a tag to a specific conversation. Provide the tag identifier and the admin identifier in the request body to apply the tag. The response includes the tag that was added.
+     * Adds a tag to a specific conversation. Provide the tag identifier and the admin identifier in
+     * the request body to apply the tag. The response includes the tag that was added.
      *
-     * You can tag a specific conversation. This will return a tag object for the tag that was added to the conversation.
+     * You can tag a specific conversation. This will return a tag object for the tag that was added
+     * to the conversation.
      */
-    fun attachToConversation(conversationId: String, id: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.TagsMethods.attachTagToConversation(clientConfig, conversationId, id, adminId, intercomVersion, options)
+    fun attachToConversation(
+        conversationId: String,
+        id: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.TagsMethods.attachTagToConversation(
+            clientConfig,
+            conversationId,
+            id,
+            adminId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Removes a tag from a specific conversation. Identify the conversation and tag in the path, and provide the admin identifier in the request body. The response includes the tag that was removed.
+     * Removes a tag from a specific conversation. Identify the conversation and tag in the path,
+     * and provide the admin identifier in the request body. The response includes the tag that was
+     * removed.
      *
-     * You can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.
+     * You can remove tag from a specific conversation. This will return a tag object for the tag
+     * that was removed from the conversation.
      */
-    fun detachFromConversation(conversationId: String, tagId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.TagsMethods.detachTagFromConversation(clientConfig, conversationId, tagId, adminId, intercomVersion, options)
+    fun detachFromConversation(
+        conversationId: String,
+        tagId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.TagsMethods.detachTagFromConversation(
+            clientConfig,
+            conversationId,
+            tagId,
+            adminId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists tags in the workspace. Use this endpoint to retrieve the tags available for labeling contacts, companies, and conversations.
+     * Lists tags in the workspace. Use this endpoint to retrieve the tags available for labeling
+     * contacts, companies, and conversations.
      *
      * You can fetch a list of all tags for a given workspace.
      */
     fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TagList {
-        return dev.octri.showcase.intercom.methods.TagsMethods.listTags(clientConfig, intercomVersion, options)
+        return dev.octri.showcase.intercom.methods.TagsMethods.listTags(
+            clientConfig,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Creates or updates a tag, or applies or removes a tag from companies or users. Supply the fields for the operation you want to perform; each operation returns a tag object.
+     * Creates or updates a tag, or applies or removes a tag from companies or users. Supply the
+     * fields for the operation you want to perform; each operation returns a tag object.
      *
-     * You can use this endpoint to perform the following operations: **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in "Create or Update Tag Request Payload" described below. **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in "Create or Update Tag Request Payload" described below. **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by…
+     * You can use this endpoint to perform the following operations: **1. Create a new tag:** You
+     * can create a new tag by passing in the tag name as specified in "Create or Update Tag Request
+     * Payload" described below. **2. Update an existing tag:** You can update an existing tag by
+     * passing the id of the tag as specified in "Create or Update Tag Request Payload" described
+     * below. **3. Tag Companies:** You can tag single company or a list of companies. You can tag a
+     * company by…
      */
-    fun create(intercomVersion: IntercomVersion? = null, body: Any? = null, options: RequestOptions? = null): TagCreateResponse {
-        return dev.octri.showcase.intercom.methods.TagsMethods.createTag(clientConfig, intercomVersion, body, options)
+    fun create(
+        intercomVersion: IntercomVersion? = null,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): TagCreateResponse {
+        return dev.octri.showcase.intercom.methods.TagsMethods.createTag(
+            clientConfig,
+            intercomVersion,
+            body,
+            options,
+        )
     }
 
     /**
-     * Retrieves a tag by its identifier from the workspace. Use the `tag_id` path parameter to specify which tag to retrieve.
+     * Retrieves a tag by its identifier from the workspace. Use the `tag_id` path parameter to
+     * specify which tag to retrieve.
      *
-     * You can fetch the details of tags that are on the workspace by their id. This will return a tag object.
+     * You can fetch the details of tags that are on the workspace by their id. This will return a
+     * tag object.
      */
-    fun find(tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TagBasic {
-        return dev.octri.showcase.intercom.methods.TagsMethods.findTag(clientConfig, tagId, intercomVersion, options)
+    fun find(
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TagBasic {
+        return dev.octri.showcase.intercom.methods.TagsMethods.findTag(
+            clientConfig,
+            tagId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Deletes a tag from the workspace. Use the `tag_id` path parameter to identify the tag to delete; a tag with dependent objects cannot be deleted.
+     * Deletes a tag from the workspace. Use the `tag_id` path parameter to identify the tag to
+     * delete; a tag with dependent objects cannot be deleted.
      *
      * You can delete the details of tags that are on the workspace by passing in the id.
      */
-    fun delete(tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.intercom.methods.TagsMethods.deleteTag(clientConfig, tagId, intercomVersion, options)
+    fun delete(
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.intercom.methods.TagsMethods.deleteTag(
+            clientConfig,
+            tagId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Attaches an existing tag to a ticket. Supply the tag's `id` and the `admin_id` of the admin applying it. The response contains the tag object returned for the tagging operation.
+     * Attaches an existing tag to a ticket. Supply the tag's `id` and the `admin_id` of the admin
+     * applying it. The response contains the tag object returned for the tagging operation.
      *
-     * You can tag a specific ticket. This will return a tag object for the tag that was added to the ticket.
+     * You can tag a specific ticket. This will return a tag object for the tag that was added to
+     * the ticket.
      */
-    fun attachToTicket(ticketId: String, id: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.TagsMethods.attachTagToTicket(clientConfig, ticketId, id, adminId, intercomVersion, options)
+    fun attachToTicket(
+        ticketId: String,
+        id: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.TagsMethods.attachTagToTicket(
+            clientConfig,
+            ticketId,
+            id,
+            adminId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Removes a tag from a ticket. Supply the ticket and tag identifiers and the `admin_id` of the admin performing the removal. The response contains the tag object returned for the removal operation.
+     * Removes a tag from a ticket. Supply the ticket and tag identifiers and the `admin_id` of the
+     * admin performing the removal. The response contains the tag object returned for the removal
+     * operation.
      *
-     * You can remove tag from a specific ticket. This will return a tag object for the tag that was removed from the ticket.
+     * You can remove tag from a specific ticket. This will return a tag object for the tag that was
+     * removed from the ticket.
      */
-    fun detachFromTicket(ticketId: String, tagId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.TagsMethods.detachTagFromTicket(clientConfig, ticketId, tagId, adminId, intercomVersion, options)
+    fun detachFromTicket(
+        ticketId: String,
+        tagId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.TagsMethods.detachTagFromTicket(
+            clientConfig,
+            ticketId,
+            tagId,
+            adminId,
+            intercomVersion,
+            options,
+        )
     }
-
 }

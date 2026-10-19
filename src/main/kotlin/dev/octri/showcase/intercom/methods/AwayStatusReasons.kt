@@ -12,20 +12,34 @@ import dev.octri.showcase.intercom.SdkClient
 
 object AwayStatusReasons {
 
-
     /**
-     * Lists the away status reasons configured for the workspace, including reasons marked as deleted. Use this endpoint to retrieve reason labels and their associated identifiers, ordering, and status information.
+     * Lists the away status reasons configured for the workspace, including reasons marked as
+     * deleted. Use this endpoint to retrieve reason labels and their associated identifiers,
+     * ordering, and status information.
      *
-     * Returns a list of all away status reasons configured for the workspace, including deleted ones.
+     * Returns a list of all away status reasons configured for the workspace, including deleted
+     * ones.
      */
-    fun listAwayStatusReasons(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): AwayStatusReasonList {
-        return SdkClient.request<AwayStatusReasonList>(SdkClient.RequestSpec("GET", "/away_status_reasons", config = clientConfig, operationId = "listAwayStatusReasons", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    fun listAwayStatusReasons(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): AwayStatusReasonList {
+        return SdkClient.request<AwayStatusReasonList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/away_status_reasons",
+                    config = clientConfig,
+                    operationId = "listAwayStatusReasons",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

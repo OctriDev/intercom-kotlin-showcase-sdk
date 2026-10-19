@@ -13,41 +13,70 @@ import dev.octri.showcase.intercom.SegmentList
 
 object Segments {
 
-
     /**
-     * Lists segments in the workspace, which group contacts according to configured rules. Set `include_count` to include the number of contacts in each segment. Use `page` and `per_page` to paginate the results.
+     * Lists segments in the workspace, which group contacts according to configured rules. Set
+     * `include_count` to include the number of contacts in each segment. Use `page` and `per_page`
+     * to paginate the results.
      *
      * You can fetch a list of all segments.
      *
-     * @param includeCount It includes the count of contacts that belong to each
-     *   segment.
+     * @param includeCount It includes the count of contacts that belong to each segment.
      */
-    fun listSegments(clientConfig: ClientConfig, includeCount: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SegmentList {
-        return SdkClient.request<SegmentList>(SdkClient.RequestSpec("GET", "/segments", config = clientConfig, query = mapOf("include_count" to
-    SdkClient.queryValue(includeCount, "form", true)), operationId = "listSegments", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    fun listSegments(
+        clientConfig: ClientConfig,
+        includeCount: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SegmentList {
+        return SdkClient.request<SegmentList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/segments",
+                    config = clientConfig,
+                    query =
+                        mapOf("include_count" to SdkClient.queryValue(includeCount, "form", true)),
+                    operationId = "listSegments",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves the details of a segment, a group of contacts defined by its rules. Use `segment_id` to identify the segment you want to retrieve.
+     * Retrieves the details of a segment, a group of contacts defined by its rules. Use
+     * `segment_id` to identify the segment you want to retrieve.
      *
      * You can fetch the details of a single segment.
      *
      * @param segmentId The unique identified of a given segment.
      */
-    fun retrieveSegment(clientConfig: ClientConfig, segmentId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Segment {
-        return SdkClient.request<Segment>(SdkClient.RequestSpec("GET", "/segments/${SdkClient.encodePathSegment(segmentId)}", config = clientConfig, operationId = "retrieveSegment", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
+    fun retrieveSegment(
+        clientConfig: ClientConfig,
+        segmentId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Segment {
+        return SdkClient.request<Segment>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/segments/${SdkClient.encodePathSegment(segmentId)}",
+                    config = clientConfig,
+                    operationId = "retrieveSegment",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

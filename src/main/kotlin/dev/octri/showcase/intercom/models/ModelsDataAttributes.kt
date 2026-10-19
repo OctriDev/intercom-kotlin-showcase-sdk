@@ -9,34 +9,52 @@ data class CreateDataAttributeRequestVariant0OptionsItem(
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateDataAttributeRequestVariant0(
     /**
-     * Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.
+     * Array of objects representing the options of the list, with `value` as the key and the option
+     * as the value. At least two options are required.
      */
     val options: List<CreateDataAttributeRequestVariant0OptionsItem>,
-    @com.fasterxml.jackson.annotation.JsonProperty("data_type") val dataType: CreateDataAttributeRequestVariant0DataTypeEnum? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("data_type")
+    val dataType: CreateDataAttributeRequestVariant0DataTypeEnum? = null,
 ) : CreateDataAttributeRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class CreateDataAttributeRequestVariant1(
-    @com.fasterxml.jackson.annotation.JsonProperty("data_type") val dataType: CreateDataAttributeRequestVariant1DataTypeEnum? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("data_type")
+    val dataType: CreateDataAttributeRequestVariant1DataTypeEnum? = null
 ) : CreateDataAttributeRequest
 
-/**
- * Typed representation of the `CreateDataAttributeRequest` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateDataAttributeRequest.Deserializer::class)
+/** Typed representation of the `CreateDataAttributeRequest` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = CreateDataAttributeRequest.Deserializer::class
+)
 sealed interface CreateDataAttributeRequest {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateDataAttributeRequest>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<CreateDataAttributeRequest>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): CreateDataAttributeRequest {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = CreateDataAttributeRequestOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                CreateDataAttributeRequestOwnedTypes.firstOrNull { (keys, _) ->
+                        keys.any(node::has)
+                    }
+                    ?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -44,60 +62,72 @@ sealed interface CreateDataAttributeRequest {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out CreateDataAttributeRequest>> = listOf(CreateDataAttributeRequestVariant0::class.java, CreateDataAttributeRequestVariant1::class.java)
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out CreateDataAttributeRequest>> =
+                listOf(
+                    CreateDataAttributeRequestVariant0::class.java,
+                    CreateDataAttributeRequestVariant1::class.java,
+                )
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, CreateDataAttributeRequest::class.java, "no CreateDataAttributeRequest branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        CreateDataAttributeRequest::class.java,
+                        "no CreateDataAttributeRequest branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val CreateDataAttributeRequestOwnedTypes: List<Pair<List<String>, Class<out CreateDataAttributeRequest>>> = listOf(
-    listOf("options") to CreateDataAttributeRequestVariant0::class.java,
-)
+internal val CreateDataAttributeRequestOwnedTypes:
+    List<Pair<List<String>, Class<out CreateDataAttributeRequest>>> =
+    listOf(listOf("options") to CreateDataAttributeRequestVariant0::class.java)
 
-/**
- * A list of all data attributes belonging to a workspace for contacts or companies.
- */
+/** A list of all data attributes belonging to a workspace for contacts or companies. */
 data class DataAttributeList(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: DataAttributeListTypeEnum? = null,
-    /**
-     * A list of data attributes
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DataAttribute>? = null
+    /** A list of data attributes */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<DataAttribute>? = null,
 )
 
 data class UpdateDataAttributeRequestVariant0OptionsItem(
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class UpdateDataAttributeRequestVariant0(
     /**
-     * Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.
+     * Array of objects representing the options of the list, with `value` as the key and the option
+     * as the value. At least two options are required.
      */
     val options: List<UpdateDataAttributeRequestVariant0OptionsItem>
 ) : UpdateDataAttributeRequest
 
-/**
- * Typed representation of the `UpdateDataAttributeRequest` API schema.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = UpdateDataAttributeRequest.Deserializer::class)
+/** Typed representation of the `UpdateDataAttributeRequest` API schema. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = UpdateDataAttributeRequest.Deserializer::class
+)
 sealed interface UpdateDataAttributeRequest {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<UpdateDataAttributeRequest>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<UpdateDataAttributeRequest>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): UpdateDataAttributeRequest {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out UpdateDataAttributeRequest>> = listOf(UpdateDataAttributeRequestVariant0::class.java)
+            val objectTypes: List<Class<out UpdateDataAttributeRequest>> =
+                listOf(UpdateDataAttributeRequestVariant0::class.java)
             for (objectType in objectTypes) {
                 try {
                     return mapper.convertValue(node, objectType)
@@ -106,11 +136,24 @@ sealed interface UpdateDataAttributeRequest {
                 }
             }
             return when {
-                else -> ValueUpdateDataAttributeRequest(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
+                else ->
+                    ValueUpdateDataAttributeRequest(
+                        mapper.convertValue(
+                            node,
+                            object : com.fasterxml.jackson.core.type.TypeReference<Any>() {},
+                        )
+                    )
             }
         }
     }
 }
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueUpdateDataAttributeRequest(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : UpdateDataAttributeRequest
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
+data class ValueUpdateDataAttributeRequest(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: Any
+) : UpdateDataAttributeRequest

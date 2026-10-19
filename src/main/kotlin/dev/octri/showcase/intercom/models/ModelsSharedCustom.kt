@@ -10,15 +10,15 @@ typealias CustomAttributes = Map<String, Any>
 typealias CustomAttributesRequest = Map<String, Any>
 
 /**
- * The list of associated custom object instances for a given reference attribute on the parent object.
+ * The list of associated custom object instances for a given reference attribute on the parent
+ * object.
  */
 data class CustomObjectInstanceList(
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
     /**
-     * The list of associated custom object instances for a given reference attribute on the parent object.
+     * The list of associated custom object instances for a given reference attribute on the parent
+     * object.
      */
-    val instances: List<CustomObjectInstance?>? = null
+    val instances: List<CustomObjectInstance?>? = null,
 )

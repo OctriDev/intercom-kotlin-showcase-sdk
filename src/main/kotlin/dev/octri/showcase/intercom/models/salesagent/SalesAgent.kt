@@ -5,20 +5,16 @@ package dev.octri.showcase.intercom.models.salesagent
 
 import dev.octri.showcase.intercom.models.SalesAgentOutcomeEnum
 
-/**
- * Data related to Sales Agent involvement in the conversation.
- */
+/** Data related to Sales Agent involvement in the conversation. */
 data class SalesAgent(
-    /**
-     * The fixed outcome of the sales agent interaction, used for billing and tracking.
-     */
+    /** The fixed outcome of the sales agent interaction, used for billing and tracking. */
     val outcome: SalesAgentOutcomeEnum? = null,
-    /**
-     * The identifier of the user-defined routing outcome selected by the sales agent.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("routing_outcome") val routingOutcome: String? = null,
+    /** The identifier of the user-defined routing outcome selected by the sales agent. */
+    @com.fasterxml.jackson.annotation.JsonProperty("routing_outcome")
+    val routingOutcome: String? = null,
     /**
      * A flat key-value map of memory fields collected by the sales agent during the conversation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("collected_data") val collectedData: Map<String, String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("collected_data")
+    val collectedData: Map<String, String>? = null,
 )

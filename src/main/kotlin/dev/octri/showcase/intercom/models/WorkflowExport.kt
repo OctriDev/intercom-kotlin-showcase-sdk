@@ -5,82 +5,51 @@ package dev.octri.showcase.intercom.models
 
 import java.time.OffsetDateTime
 
-/**
- * The workflow configuration.
- */
+/** The workflow configuration. */
 data class WorkflowExportWorkflow(
-    /**
-     * The unique identifier for the workflow.
-     */
+    /** The unique identifier for the workflow. */
     val id: String? = null,
-    /**
-     * The title of the workflow.
-     */
+    /** The title of the workflow. */
     val title: String? = null,
-    /**
-     * The description of the workflow.
-     */
+    /** The description of the workflow. */
     val description: String? = null,
-    /**
-     * The type of trigger that starts this workflow.
-     */
+    /** The type of trigger that starts this workflow. */
     @com.fasterxml.jackson.annotation.JsonProperty("trigger_type") val triggerType: String? = null,
-    /**
-     * The current state of the workflow.
-     */
+    /** The current state of the workflow. */
     val state: WorkflowExportWorkflowStateEnum? = null,
-    /**
-     * The channels this workflow targets.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("target_channels") val targetChannels: List<String>? = null,
-    /**
-     * The preferred devices for this workflow.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("preferred_devices") val preferredDevices: List<String>? = null,
-    /**
-     * When the workflow was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
-    /**
-     * When the workflow was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
-    /**
-     * The targeting rules for this workflow.
-     */
+    /** The channels this workflow targets. */
+    @com.fasterxml.jackson.annotation.JsonProperty("target_channels")
+    val targetChannels: List<String>? = null,
+    /** The preferred devices for this workflow. */
+    @com.fasterxml.jackson.annotation.JsonProperty("preferred_devices")
+    val preferredDevices: List<String>? = null,
+    /** When the workflow was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
+    val createdAt: OffsetDateTime? = null,
+    /** When the workflow was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
+    val updatedAt: OffsetDateTime? = null,
+    /** The targeting rules for this workflow. */
     val targeting: Map<String, Any>? = null,
-    /**
-     * The current snapshot of workflow steps and configuration.
-     */
+    /** The current snapshot of workflow steps and configuration. */
     val snapshot: Map<String, Any>? = null,
-    /**
-     * Custom attributes defined for this workflow.
-     */
+    /** Custom attributes defined for this workflow. */
     val attributes: List<Map<String, Any>>? = null,
-    /**
-     * Rules embedded within the workflow steps.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("embedded_rules") val embeddedRules: List<Map<String, Any>>? = null
+    /** Rules embedded within the workflow steps. */
+    @com.fasterxml.jackson.annotation.JsonProperty("embedded_rules")
+    val embeddedRules: List<Map<String, Any>>? = null,
 )
 
-/**
- * A workflow export containing the complete workflow configuration.
- */
+/** A workflow export containing the complete workflow configuration. */
 data class WorkflowExport(
-    /**
-     * The version of the export format.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("export_version") val exportVersion: String? = null,
-    /**
-     * The timestamp when the export was generated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exported_at") val exportedAt: OffsetDateTime? = null,
-    /**
-     * The workspace identifier.
-     */
+    /** The version of the export format. */
+    @com.fasterxml.jackson.annotation.JsonProperty("export_version")
+    val exportVersion: String? = null,
+    /** The timestamp when the export was generated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exported_at")
+    val exportedAt: OffsetDateTime? = null,
+    /** The workspace identifier. */
     @com.fasterxml.jackson.annotation.JsonProperty("app_id") val appId: Long? = null,
-    /**
-     * The workflow configuration.
-     */
-    val workflow: WorkflowExportWorkflow? = null
+    /** The workflow configuration. */
+    val workflow: WorkflowExportWorkflow? = null,
 )
