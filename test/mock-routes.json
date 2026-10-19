@@ -3318,8 +3318,8 @@
           },
           {
             "wireName": "audience_ids",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           }
         ],
@@ -12304,8 +12304,8 @@
           },
           {
             "wireName": "audience_ids",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {

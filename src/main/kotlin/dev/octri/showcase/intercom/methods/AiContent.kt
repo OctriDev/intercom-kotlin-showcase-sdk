@@ -49,7 +49,7 @@ object AiContent {
      * @param audienceIds The unique identifiers for the audiences to associate with
      *   this content import source. Can be a single integer or an array of integers.
      */
-    fun createContentImportSource(clientConfig: ClientConfig, syncBehavior: CreateContentImportSourceRequestSyncBehaviorEnum, url: String, intercomVersion: IntercomVersion? = null, status: CreateContentImportSourceRequestStatusEnum? = null, audienceIds: SdkClient.SdkOptional<Any?>? = null, options: RequestOptions? = null): ContentImportSource {
+    fun createContentImportSource(clientConfig: ClientConfig, syncBehavior: CreateContentImportSourceRequestSyncBehaviorEnum, url: String, intercomVersion: IntercomVersion? = null, status: CreateContentImportSourceRequestStatusEnum? = null, audienceIds: SdkClient.SdkOptional<List<Long>?>? = null, options: RequestOptions? = null): ContentImportSource {
         return SdkClient.request<ContentImportSource>(SdkClient.RequestSpec("POST", "/ai/content_import_sources", config = clientConfig, body = SdkClient.bodyMap("sync_behavior" to (syncBehavior), "url" to (url), "status" to (SdkClient.omitIfNull(status)), "audience_ids" to
     (audienceIds ?: SdkClient.SdkOptional.Omitted)), operationId = "createContentImportSource", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
@@ -101,7 +101,7 @@ object AiContent {
         val url: String,
         val intercomVersion: IntercomVersion? = null,
         val status: UpdateContentImportSourceRequestStatusEnum? = null,
-        val audienceIds: SdkClient.SdkOptional<Any?>? = null,
+        val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
         val applyAudienceToExistingContent: Boolean? = null
     )
 

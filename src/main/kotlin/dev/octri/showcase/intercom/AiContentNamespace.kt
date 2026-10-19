@@ -19,7 +19,7 @@ class AiContentNamespace(private val clientConfig: ClientConfig) {
      *
      * You can create a new content import source by sending a POST request to this endpoint.
      */
-    fun createContentImportSource(syncBehavior: CreateContentImportSourceRequestSyncBehaviorEnum, url: String, intercomVersion: IntercomVersion? = null, status: CreateContentImportSourceRequestStatusEnum? = null, audienceIds: SdkClient.SdkOptional<Any?>? = null, options: RequestOptions? = null): ContentImportSource {
+    fun createContentImportSource(syncBehavior: CreateContentImportSourceRequestSyncBehaviorEnum, url: String, intercomVersion: IntercomVersion? = null, status: CreateContentImportSourceRequestStatusEnum? = null, audienceIds: SdkClient.SdkOptional<List<Long>?>? = null, options: RequestOptions? = null): ContentImportSource {
         return dev.octri.showcase.intercom.methods.AiContent.createContentImportSource(clientConfig, syncBehavior, url, intercomVersion, status, audienceIds, options)
     }
 
