@@ -5,91 +5,84 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.tags.TagBasic
 
-/**
- * Properties of the attachment files in a conversation part
- */
+/** Properties of the attachment files in a conversation part */
 data class ConversationAttachmentFiles(
-    /**
-     * The content type of the file
-     */
+    /** The content type of the file */
     @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String? = null,
-    /**
-     * The base64 encoded file data.
-     */
+    /** The base64 encoded file data. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: String? = null,
-    /**
-     * The name of the file.
-     */
-    val name: String? = null
+    /** The name of the file. */
+    val name: String? = null,
 )
 
-/**
- * The channel through which a conversation was originally initiated and its current channel.
- */
+/** The channel through which a conversation was originally initiated and its current channel. */
 data class ConversationChannel(
     /**
-     * The channel through which the conversation was originally initiated. Possible values include `messenger`, `zendesk_sunshine`, `zendesk_ticket`, `twitter`, `email`. Returns `null` if channel data is unavailable.
+     * The channel through which the conversation was originally initiated. Possible values include
+     * `messenger`, `zendesk_sunshine`, `zendesk_ticket`, `twitter`, `email`. Returns `null` if
+     * channel data is unavailable.
      */
     val initial: String? = null,
     /**
-     * The current channel of the conversation. May differ from `initial` if the conversation was migrated between channels. Returns `null` if channel data is unavailable.
+     * The current channel of the conversation. May differ from `initial` if the conversation was
+     * migrated between channels. Returns `null` if channel data is unavailable.
      */
-    val current: String? = null
+    val current: String? = null,
 )
 
 /**
- * The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
+ * The list of contacts (users or leads) involved in this conversation. This will only contain one
+ * customer unless more were added via the group conversation feature.
  */
 data class ConversationContacts(
-    /**
-     * Optional enumerated value serialized in the `type` wire field.
-     */
+    /** Optional enumerated value serialized in the `type` wire field. */
     val type: ConversationContactsTypeEnum? = null,
     /**
-     * The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
+     * The list of contacts (users or leads) involved in this conversation. This will only contain
+     * one customer unless more were added via the group conversation feature.
      */
-    val contacts: List<ContactReference>? = null
+    val contacts: List<ContactReference>? = null,
 )
 
 /**
- * A reference linking a conversation to a record in an external helpdesk or CRM system, surfaced for Fin Standalone workspaces.
+ * A reference linking a conversation to a record in an external helpdesk or CRM system, surfaced
+ * for Fin Standalone workspaces.
  */
 data class ConversationExternalReference(
     /**
-     * The type of external system the reference points to. Possible values include `zendesk_ticket`, `zendesk_sunshine_conversation`, `salesforce_case`, `salesforce_in_app_message_conversation`, `freshdesk_ticket`, `freshchat_conversation`, `hubspot_conversation`, `custom_helpdesk_conversation`, `api_conversation`.
+     * The type of external system the reference points to. Possible values include
+     * `zendesk_ticket`, `zendesk_sunshine_conversation`, `salesforce_case`,
+     * `salesforce_in_app_message_conversation`, `freshdesk_ticket`, `freshchat_conversation`,
+     * `hubspot_conversation`, `custom_helpdesk_conversation`, `api_conversation`.
      */
     val type: String? = null,
     /**
-     * The identifier of the record in the external system. Always serialized as a string, since some external IDs exceed 32-bit integer range.
+     * The identifier of the record in the external system. Always serialized as a string, since
+     * some external IDs exceed 32-bit integer range.
      */
-    val id: String? = null
+    val id: String? = null,
 )
 
 /**
- * An object containing information on the first users message. For a contact initiated message this will represent the users original message.
+ * An object containing information on the first users message. For a contact initiated message this
+ * will represent the users original message.
  */
 data class ConversationFirstContactReply(
-    /**
-     * Optional `date-time`-formatted value serialized in the `created_at` wire field.
-     */
+    /** Optional `date-time`-formatted value serialized in the `created_at` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
-    /**
-     * Optional `string` value serialized in the `url` wire field.
-     */
-    val url: String? = null
+    /** Optional `string` value serialized in the `url` wire field. */
+    val url: String? = null,
 )
 
 /**
- * A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
+ * A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated`
+ * webhook topic. `original` holds the locale code the reply was written in; every other key holds
+ * the reply translated into that locale.
  */
 data class ConversationPartTranslations(
-    /**
-     * The locale code identifying the language the reply was originally written in.
-     */
+    /** The locale code identifying the language the reply was originally written in. */
     val original: String
 ) {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
@@ -97,454 +90,373 @@ data class ConversationPartTranslations(
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/**
- * A Conversation Part represents a message in the conversation.
- */
+/** A Conversation Part represents a message in the conversation. */
 data class ConversationPart(
-    /**
-     * Always conversation_part
-     */
+    /** Always conversation_part */
     val type: String? = null,
-    /**
-     * The id representing the conversation part.
-     */
+    /** The id representing the conversation part. */
     val id: String? = null,
-    /**
-     * The type of conversation part.
-     */
+    /** The type of conversation part. */
     @com.fasterxml.jackson.annotation.JsonProperty("part_type") val partType: String? = null,
     /**
-     * The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
+     * The message body, which may contain HTML. For Twitter, this will show a generic message
+     * regarding why the body is obscured. In webhook payloads for API version 2.15+, this field
+     * returns plain text.
      */
     val body: String? = null,
-    /**
-     * The time the conversation part was created.
-     */
+    /** The time the conversation part was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The last time the conversation part was updated.
-     */
+    /** The last time the conversation part was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /**
-     * The time the user was notified with the conversation part.
-     */
+    /** The time the user was notified with the conversation part. */
     @com.fasterxml.jackson.annotation.JsonProperty("notified_at") val notifiedAt: Long? = null,
     /**
-     * The assignee this conversation_part assigned the conversation to, as a reference whose `type` is `admin`, `team` or `bot`. When the part unassigned the conversation, `type` is `nobody_admin` and `id` is `null`. Null when the part did not change the assignment, or when the assignee has since been deleted.
+     * The assignee this conversation_part assigned the conversation to, as a reference whose `type`
+     * is `admin`, `team` or `bot`. When the part unassigned the conversation, `type` is
+     * `nobody_admin` and `id` is `null`. Null when the part did not change the assignment, or when
+     * the assignee has since been deleted.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("assigned_to") val assignedTo: Reference? = null,
     /**
-     * The id of the teammate that this conversation_part assigned the conversation to, or 0 if the part removed the teammate. Null or absent when the part did not change the teammate, including an unassignment that did not name which assignee it cleared. A bot is reported here, because assignment treats anything that is not a team as a teammate.
+     * The id of the teammate that this conversation_part assigned the conversation to, or 0 if the
+     * part removed the teammate. Null or absent when the part did not change the teammate,
+     * including an unassignment that did not name which assignee it cleared. A bot is reported
+     * here, because assignment treats anything that is not a team as a teammate.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id") val adminAssigneeId: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id")
+    val adminAssigneeId: Long? = null,
     /**
-     * The id of the team that this conversation_part assigned the conversation to, or 0 if the part removed the team. Null or absent when the part did not change the team, including an unassignment that did not name which assignee it cleared. A part can assign a team and a teammate at the same time, for example when the team uses Round Robin distribution and the teammate is resolved inline. In that case assigned_to reports only the teammate, and these two fields report each…
+     * The id of the team that this conversation_part assigned the conversation to, or 0 if the part
+     * removed the team. Null or absent when the part did not change the team, including an
+     * unassignment that did not name which assignee it cleared. A part can assign a team and a
+     * teammate at the same time, for example when the team uses Round Robin distribution and the
+     * teammate is resolved inline. In that case assigned_to reports only the teammate, and these
+     * two fields report each…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id") val teamAssigneeId: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id")
+    val teamAssigneeId: Long? = null,
     /**
-     * The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
+     * The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and
+     * campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
      */
     val author: ConversationPartAuthor? = null,
-    /**
-     * A list of attachments for the part.
-     */
+    /** A list of attachments for the part. */
     val attachments: List<PartAttachment>? = null,
-    /**
-     * The external id of the conversation part
-     */
+    /** The external id of the conversation part */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /**
-     * Whether or not the conversation part has been redacted.
-     */
+    /** Whether or not the conversation part has been redacted. */
     val redacted: Boolean? = null,
-    /**
-     * Contains metadata if the message was sent as an email
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_message_metadata") val emailMessageMetadata: EmailMessageMetadata? = null,
-    /**
-     * Metadata for a conversation part
-     */
+    /** Contains metadata if the message was sent as an email */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_message_metadata")
+    val emailMessageMetadata: EmailMessageMetadata? = null,
+    /** Metadata for a conversation part */
     val metadata: ConversationPartMetadata? = null,
-    /**
-     * Indicates the current state of conversation when the conversation part was created.
-     */
+    /** Indicates the current state of conversation when the conversation part was created. */
     val state: ConversationPartStateEnum? = null,
-    /**
-     * A list of tags objects associated with the conversation part.
-     */
+    /** A list of tags objects associated with the conversation part. */
     val tags: List<TagBasic>? = null,
+    /** Optional object value serialized in the `event_details` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_details")
+    val eventDetails: EventDetails? = null,
     /**
-     * Optional object value serialized in the `event_details` wire field.
+     * The app package code if this part was created via API. null if the part was not created via
+     * API.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_details") val eventDetails: EventDetails? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("app_package_code")
+    val appPackageCode: String? = null,
     /**
-     * The app package code if this part was created via API. null if the part was not created via API.
+     * A map of the reply text keyed by locale code. Backs the
+     * `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the
+     * reply was written in; every other key holds the reply translated into that locale.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("app_package_code") val appPackageCode: String? = null,
-    /**
-     * A map of the reply text keyed by locale code. Backs the `conversation.admin.replied.translated` webhook topic. `original` holds the locale code the reply was written in; every other key holds the reply translated into that locale.
-     */
-    val translations: ConversationPartTranslations? = null
+    val translations: ConversationPartTranslations? = null,
 )
 
 /**
- * The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
+ * The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and
+ * campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.
  */
 data class ConversationPartAuthor(
-    /**
-     * The type of the author
-     */
+    /** The type of the author */
     val type: String? = null,
-    /**
-     * The id of the author
-     */
+    /** The id of the author */
     val id: String? = null,
     /**
-     * The name of the author. `null` if the author is a contact that has since been archived or deleted.
+     * The name of the author. `null` if the author is a contact that has since been archived or
+     * deleted.
      */
     val name: String? = null,
     /**
-     * The email of the author. `null` if the author is a contact that has since been archived or deleted.
+     * The email of the author. `null` if the author is a contact that has since been archived or
+     * deleted.
      */
     val email: String? = null,
-    /**
-     * If this conversation part was sent by the AI Agent
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("from_ai_agent") val fromAiAgent: Boolean? = null,
-    /**
-     * If this conversation part body was generated by the AI Agent
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("is_ai_answer") val isAiAnswer: Boolean? = null
+    /** If this conversation part was sent by the AI Agent */
+    @com.fasterxml.jackson.annotation.JsonProperty("from_ai_agent")
+    val fromAiAgent: Boolean? = null,
+    /** If this conversation part body was generated by the AI Agent */
+    @com.fasterxml.jackson.annotation.JsonProperty("is_ai_answer") val isAiAnswer: Boolean? = null,
 )
 
-/**
- * Required object value serialized in the `quick_reply_options[]` wire field.
- */
+/** Required object value serialized in the `quick_reply_options[]` wire field. */
 data class ConversationPartMetadataQuickReplyOptionsItem(
-    /**
-     * The text to display in this quick reply option.
-     */
+    /** The text to display in this quick reply option. */
     val text: String,
     /**
-     * A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
+     * A unique identifier for this quick reply option. This value will be available within the
+     * metadata of the comment conversation part that is created when a user clicks on this reply
+     * option.
      */
     val uuid: String,
-    /**
-     * The translations for the quick reply option.
-     */
-    val translations: Map<String, Any>? = null
+    /** The translations for the quick reply option. */
+    val translations: Map<String, Any>? = null,
 )
 
-/**
- * Metadata for a conversation part
- */
+/** Metadata for a conversation part */
 data class ConversationPartMetadata(
-    /**
-     * The quick reply options sent by the Admin or bot, presented in this conversation part.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_options") val quickReplyOptions: List<ConversationPartMetadataQuickReplyOptionsItem>? = null,
-    /**
-     * The unique identifier for the quick reply option that was clicked by the end user.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_uuid") val quickReplyUuid: String? = null
+    /** The quick reply options sent by the Admin or bot, presented in this conversation part. */
+    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_options")
+    val quickReplyOptions: List<ConversationPartMetadataQuickReplyOptionsItem>? = null,
+    /** The unique identifier for the quick reply option that was clicked by the end user. */
+    @com.fasterxml.jackson.annotation.JsonProperty("quick_reply_uuid")
+    val quickReplyUuid: String? = null,
 )
 
 /**
- * A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
+ * A list of Conversation Part objects for each part message in the conversation. This is only
+ * returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a
+ * limit of 500 parts.
  */
 data class ConversationParts(
-    /**
-     * Optional enumerated value serialized in the `type` wire field.
-     */
+    /** Optional enumerated value serialized in the `type` wire field. */
     val type: ConversationPartsTypeEnum? = null,
     /**
-     * A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
+     * A list of Conversation Part objects for each part message in the conversation. This is only
+     * returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is
+     * a limit of 500 parts.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts") val conversationParts: List<ConversationPart>? = null,
-    /**
-     * Optional `integer` value serialized in the `total_count` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts")
+    val conversationParts: List<ConversationPart>? = null,
+    /** Optional `integer` value serialized in the `total_count` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
 )
 
-/**
- * The teammate, bot or workflow the rating is attributed to.
- */
+/** The teammate, bot or workflow the rating is attributed to. */
 data class ConversationRatingTeammate(
     /**
-     * The type of the rated actor. `workflow` when a workflow requested the rating and no teammate took part.
+     * The type of the rated actor. `workflow` when a workflow requested the rating and no teammate
+     * took part.
      */
     val type: ConversationRatingTeammateTypeEnum? = null,
-    /**
-     * The unique identifier for the rated actor.
-     */
-    val id: String? = null
+    /** The unique identifier for the rated actor. */
+    val id: String? = null,
 )
 
 /**
- * The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.
+ * The Conversation Rating object which contains information on the rating and/or remark added by a
+ * Contact and the Admin assigned to the conversation.
  */
 data class ConversationRating(
-    /**
-     * The rating, between 1 and 5, for the conversation.
-     */
+    /** The rating, between 1 and 5, for the conversation. */
     val rating: Long? = null,
-    /**
-     * An optional field to add a remark to correspond to the number rating
-     */
+    /** An optional field to add a remark to correspond to the number rating */
     val remark: String? = null,
-    /**
-     * The time the rating was requested in the conversation being rated.
-     */
+    /** The time the rating was requested in the conversation being rated. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The time the rating was last updated.
-     */
+    /** The time the rating was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /**
-     * reference to contact object
-     */
+    /** reference to contact object */
     val contact: ContactReference? = null,
-    /**
-     * The teammate, bot or workflow the rating is attributed to.
-     */
-    val teammate: ConversationRatingTeammate? = null
+    /** The teammate, bot or workflow the rating is attributed to. */
+    val teammate: ConversationRatingTeammate? = null,
 )
 
-/**
- * Details of first response time of assigned team in seconds.
- */
+/** Details of first response time of assigned team in seconds. */
 data class ConversationResponseTime(
-    /**
-     * Id of the assigned team.
-     */
+    /** Id of the assigned team. */
     @com.fasterxml.jackson.annotation.JsonProperty("team_id") val teamId: Long? = null,
     /**
      * Name of the assigned Team, null if team does not exist, Unassigned if no team is assigned.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("team_name") val teamName: String? = null,
-    /**
-     * First response time of assigned team in seconds.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("response_time") val responseTime: Long? = null
+    /** First response time of assigned team in seconds. */
+    @com.fasterxml.jackson.annotation.JsonProperty("response_time") val responseTime: Long? = null,
 )
 
-/**
- * Required object value serialized in the `recipients[]` wire field.
- */
+/** Required object value serialized in the `recipients[]` wire field. */
 data class ConversationSourceRecipientsItem(
-    /**
-     * The recipient type. One of `to`, `cc`, or `bcc`.
-     */
+    /** The recipient type. One of `to`, `cc`, or `bcc`. */
     val type: String? = null,
-    /**
-     * The recipient email address.
-     */
+    /** The recipient email address. */
     val email: String? = null,
-    /**
-     * The reason this recipient was dropped, if applicable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("drop_reason") val dropReason: String? = null
+    /** The reason this recipient was dropped, if applicable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("drop_reason") val dropReason: String? = null,
 )
 
-/**
- * Required object value serialized in the `reply_to[]` wire field.
- */
+/** Required object value serialized in the `reply_to[]` wire field. */
 data class ConversationSourceReplyToItem(
-    /**
-     * The Reply-To email address.
-     */
+    /** The Reply-To email address. */
     val email: String? = null,
-    /**
-     * The display name associated with the Reply-To address.
-     */
-    val name: String? = null
+    /** The display name associated with the Reply-To address. */
+    val name: String? = null,
 )
 
 /**
- * The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
+ * The type of the conversation part that started this conversation. Can be Contact, Admin,
+ * Campaign, Automated or Operator initiated.
  */
 data class ConversationSource(
-    /**
-     * The origin of this conversation.
-     */
+    /** The origin of this conversation. */
     val type: String? = null,
-    /**
-     * The id of the source message.
-     */
+    /** The id of the source message. */
     val id: String? = null,
-    /**
-     * How the conversation was initiated.
-     */
+    /** How the conversation was initiated. */
     @com.fasterxml.jackson.annotation.JsonProperty("delivered_as") val deliveredAs: String? = null,
-    /**
-     * The recipients of the source message. Only present for email conversations.
-     */
+    /** The recipients of the source message. Only present for email conversations. */
     val recipients: List<ConversationSourceRecipientsItem>? = null,
     /**
-     * The Reply-To header addresses of the source message, where a reply will be routed. Can differ from the sender's From address. Only present for email conversations.
+     * The Reply-To header addresses of the source message, where a reply will be routed. Can differ
+     * from the sender's From address. Only present for email conversations.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<ConversationSourceReplyToItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_to")
+    val replyTo: List<ConversationSourceReplyToItem>? = null,
     /**
-     * Optional. The message subject. For Twitter, this will show a generic message regarding why the subject is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
+     * Optional. The message subject. For Twitter, this will show a generic message regarding why
+     * the subject is obscured. In webhook payloads for API version 2.15+, this field returns plain
+     * text.
      */
     val subject: String? = null,
     /**
-     * The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured. In webhook payloads for API version 2.15+, this field returns plain text.
+     * The message body, which may contain HTML. For Twitter, this will show a generic message
+     * regarding why the body is obscured. In webhook payloads for API version 2.15+, this field
+     * returns plain text.
      */
     val body: String? = null,
-    /**
-     * The author who started the conversation. Can be a Contact, Admin, or Bot.
-     */
+    /** The author who started the conversation. Can be a Contact, Admin, or Bot. */
     val author: ConversationSourceAuthor? = null,
-    /**
-     * A list of attachments for the part.
-     */
+    /** A list of attachments for the part. */
     val attachments: List<PartAttachment>? = null,
     /**
      * The URL where the conversation was started. For Twitter, Email, and Bots, this will be blank.
      */
     val url: String? = null,
     /**
-     * Whether or not the source message has been redacted. Only applicable for contact initiated messages.
+     * Whether or not the source message has been redacted. Only applicable for contact initiated
+     * messages.
      */
     val redacted: Boolean? = null,
-    /**
-     * Contains metadata if the message was sent as an email
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_message_metadata") val emailMessageMetadata: SourceEmailMessageMetadata? = null
+    /** Contains metadata if the message was sent as an email */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_message_metadata")
+    val emailMessageMetadata: SourceEmailMessageMetadata? = null,
 )
 
-/**
- * The author who started the conversation. Can be a Contact, Admin, or Bot.
- */
+/** The author who started the conversation. Can be a Contact, Admin, or Bot. */
 data class ConversationSourceAuthor(
-    /**
-     * The type of the author.
-     */
+    /** The type of the author. */
     val type: String? = null,
-    /**
-     * The id of the author.
-     */
+    /** The id of the author. */
     val id: String? = null,
-    /**
-     * The name of the author.
-     */
+    /** The name of the author. */
     val name: String? = null,
-    /**
-     * The email of the author.
-     */
-    val email: String? = null
+    /** The email of the author. */
+    val email: String? = null,
 )
 
 /**
- * A Statistics object containing all information required for reporting, with timestamps and calculated metrics.
+ * A Statistics object containing all information required for reporting, with timestamps and
+ * calculated metrics.
  */
 data class ConversationStatistics(
-    /**
-     * Optional `string` value serialized in the `type` wire field.
-     */
+    /** Optional `string` value serialized in the `type` wire field. */
     val type: String? = null,
+    /** Duration until last assignment before first admin reply. In seconds. */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_to_assignment")
+    val timeToAssignment: Long? = null,
+    /** Duration until first admin reply. Subtracts out of business hours. In seconds. */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_to_admin_reply")
+    val timeToAdminReply: Long? = null,
     /**
-     * Duration until last assignment before first admin reply. In seconds.
+     * Duration until conversation was closed first time. Subtracts out of business hours. In
+     * seconds.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_to_assignment") val timeToAssignment: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("time_to_first_close")
+    val timeToFirstClose: Long? = null,
     /**
-     * Duration until first admin reply. Subtracts out of business hours. In seconds.
+     * Duration until conversation was closed last time. Subtracts out of business hours. In
+     * seconds.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_to_admin_reply") val timeToAdminReply: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("time_to_last_close")
+    val timeToLastClose: Long? = null,
     /**
-     * Duration until conversation was closed first time. Subtracts out of business hours. In seconds.
+     * Median based on all admin replies after a contact reply. Subtracts out of business hours. In
+     * seconds.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_to_first_close") val timeToFirstClose: Long? = null,
-    /**
-     * Duration until conversation was closed last time. Subtracts out of business hours. In seconds.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_to_last_close") val timeToLastClose: Long? = null,
-    /**
-     * Median based on all admin replies after a contact reply. Subtracts out of business hours. In seconds.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("median_time_to_reply") val medianTimeToReply: Long? = null,
-    /**
-     * Time of first text conversation part from a contact.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_contact_reply_at") val firstContactReplyAt: Long? = null,
-    /**
-     * Time of first assignment after first_contact_reply_at.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_assignment_at") val firstAssignmentAt: Long? = null,
-    /**
-     * Time of first admin reply after first_contact_reply_at.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_admin_reply_at") val firstAdminReplyAt: Long? = null,
-    /**
-     * Time of first close after first_contact_reply_at.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("median_time_to_reply")
+    val medianTimeToReply: Long? = null,
+    /** Time of first text conversation part from a contact. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_contact_reply_at")
+    val firstContactReplyAt: Long? = null,
+    /** Time of first assignment after first_contact_reply_at. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_assignment_at")
+    val firstAssignmentAt: Long? = null,
+    /** Time of first admin reply after first_contact_reply_at. */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_admin_reply_at")
+    val firstAdminReplyAt: Long? = null,
+    /** Time of first close after first_contact_reply_at. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_close_at") val firstCloseAt: Long? = null,
-    /**
-     * Time of last assignment after first_contact_reply_at.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_assignment_at") val lastAssignmentAt: Long? = null,
-    /**
-     * Time of first admin reply since most recent assignment.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_assignment_admin_reply_at") val lastAssignmentAdminReplyAt: Long? = null,
-    /**
-     * Time of the last conversation part from a contact.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_contact_reply_at") val lastContactReplyAt: Long? = null,
-    /**
-     * Time of the last conversation part from an admin.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_admin_reply_at") val lastAdminReplyAt: Long? = null,
-    /**
-     * Time of the last conversation close.
-     */
+    /** Time of last assignment after first_contact_reply_at. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_assignment_at")
+    val lastAssignmentAt: Long? = null,
+    /** Time of first admin reply since most recent assignment. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_assignment_admin_reply_at")
+    val lastAssignmentAdminReplyAt: Long? = null,
+    /** Time of the last conversation part from a contact. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_contact_reply_at")
+    val lastContactReplyAt: Long? = null,
+    /** Time of the last conversation part from an admin. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_admin_reply_at")
+    val lastAdminReplyAt: Long? = null,
+    /** Time of the last conversation close. */
     @com.fasterxml.jackson.annotation.JsonProperty("last_close_at") val lastCloseAt: Long? = null,
-    /**
-     * The last admin who closed the conversation. Returns a reference to an Admin object.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_closed_by_id") val lastClosedById: String? = null,
-    /**
-     * Number of reopens after first_contact_reply_at.
-     */
+    /** The last admin who closed the conversation. Returns a reference to an Admin object. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_closed_by_id")
+    val lastClosedById: String? = null,
+    /** Number of reopens after first_contact_reply_at. */
     @com.fasterxml.jackson.annotation.JsonProperty("count_reopens") val countReopens: Long? = null,
-    /**
-     * Number of assignments after first_contact_reply_at.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("count_assignments") val countAssignments: Long? = null,
-    /**
-     * Total number of conversation parts.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("count_conversation_parts") val countConversationParts: Long? = null,
-    /**
-     * An array of conversation response time objects
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("assigned_team_first_response_time") val assignedTeamFirstResponseTime: List<ConversationResponseTime>? = null,
-    /**
-     * An array of conversation response time objects within office hours
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("assigned_team_first_response_time_in_office_hours") val assignedTeamFirstResponseTimeInOfficeHours: List<ConversationResponseTime>? = null,
-    /**
-     * Time from conversation assignment to conversation close in seconds.
-     */
+    /** Number of assignments after first_contact_reply_at. */
+    @com.fasterxml.jackson.annotation.JsonProperty("count_assignments")
+    val countAssignments: Long? = null,
+    /** Total number of conversation parts. */
+    @com.fasterxml.jackson.annotation.JsonProperty("count_conversation_parts")
+    val countConversationParts: Long? = null,
+    /** An array of conversation response time objects */
+    @com.fasterxml.jackson.annotation.JsonProperty("assigned_team_first_response_time")
+    val assignedTeamFirstResponseTime: List<ConversationResponseTime>? = null,
+    /** An array of conversation response time objects within office hours */
+    @com.fasterxml.jackson.annotation.JsonProperty(
+        "assigned_team_first_response_time_in_office_hours"
+    )
+    val assignedTeamFirstResponseTimeInOfficeHours: List<ConversationResponseTime>? = null,
+    /** Time from conversation assignment to conversation close in seconds. */
     @com.fasterxml.jackson.annotation.JsonProperty("handling_time") val handlingTime: Long? = null,
     /**
-     * Adjusted handling time for conversation in seconds. This is the active handling time excluding idle periods when teammates are not actively working on the conversation.
+     * Adjusted handling time for conversation in seconds. This is the active handling time
+     * excluding idle periods when teammates are not actively working on the conversation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("adjusted_handling_time") val adjustedHandlingTime: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("adjusted_handling_time")
+    val adjustedHandlingTime: Long? = null,
 )
 
 /**
- * The list of teammates who participated in the conversation (wrote at least one conversation part).
+ * The list of teammates who participated in the conversation (wrote at least one conversation
+ * part).
  */
 data class ConversationTeammates(
-    /**
-     * The type of the object - `admin.list`.
-     */
+    /** The type of the object - `admin.list`. */
     val type: String? = null,
     /**
-     * The list of teammates who participated in the conversation (wrote at least one conversation part).
+     * The list of teammates who participated in the conversation (wrote at least one conversation
+     * part).
      */
-    val teammates: List<Reference>? = null
+    val teammates: List<Reference>? = null,
 )

@@ -12,28 +12,24 @@ import dev.octri.showcase.intercom.SdkClient
 
 object DataEvents {
 
-/**
- * A list of event summaries for the user. Each event summary should contain the event name, the time the event occurred, and the number of times the event occurred. The event name should be a past tense 'verb-noun' combination, to improve readability, for example `updated-plan`.
- */
-data class CreateDataEventSummariesRequestEventSummaries(
     /**
-     * The name of the event that occurred. A good event name is typically a past tense 'verb-noun' combination, to improve readability, for example `updated-plan`.
+     * A list of event summaries for the user. Each event summary should contain the event name, the
+     * time the event occurred, and the number of times the event occurred. The event name should be
+     * a past tense 'verb-noun' combination, to improve readability, for example `updated-plan`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: String? = null,
-    /**
-     * The number of times the event occurred.
-     */
-    val count: Long? = null,
-    /**
-     * The first time the event was sent
-     */
-    val first: Long? = null,
-    /**
-     * The last time the event was sent
-     */
-    val last: Long? = null
-)
-
+    data class CreateDataEventSummariesRequestEventSummaries(
+        /**
+         * The name of the event that occurred. A good event name is typically a past tense
+         * 'verb-noun' combination, to improve readability, for example `updated-plan`.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: String? = null,
+        /** The number of times the event occurred. */
+        val count: Long? = null,
+        /** The first time the event was sent */
+        val first: Long? = null,
+        /** The last time the event was sent */
+        val last: Long? = null,
+    )
 
     /** Parameters for [createDataEvent]. */
     data class CreateDataEventParams(
@@ -43,73 +39,152 @@ data class CreateDataEventSummariesRequestEventSummaries(
         val userId: String? = null,
         val id: String? = null,
         val email: String? = null,
-        val metadata: Map<String, String>? = null
+        val metadata: Map<String, String>? = null,
     )
 
     /**
-     * Submits an event associated with a user, lead, or visitor for tracking. Include `event_name`, `created_at`, and one contact identifier: `id`, `user_id`, or `email`; event metadata supports up to 10 flat keys. Use an access token with write permissions and send the request as JSON.
+     * Submits an event associated with a user, lead, or visitor for tracking. Include `event_name`,
+     * `created_at`, and one contact identifier: `id`, `user_id`, or `email`; event metadata
+     * supports up to 10 flat keys. Use an access token with write permissions and send the request
+     * as JSON.
      *
-     * You will need an Access Token that has write permissions to send Events. Once you have a key you can submit events via POST to the Events resource, which is located at api.intercom.io or you can send events using one of the client libraries. When working with the HTTP API directly a client should send the event with a `Content-Type` of `application/json`. When using the JavaScript API, adding the code to your app makes the Events API available. Once added, you can submit an…
+     * You will need an Access Token that has write permissions to send Events. Once you have a key
+     * you can submit events via POST to the Events resource, which is located at api.intercom.io or
+     * you can send events using one of the client libraries. When working with the HTTP API
+     * directly a client should send the event with a `Content-Type` of `application/json`. When
+     * using the JavaScript API, adding the code to your app makes the Events API available. Once
+     * added, you can submit an…
      *
-     * @param eventName The name of the event that occurred. This is presented to
-     *   your App's admins when filtering and creating segments - a good event name is
-     *   typically a past tense 'verb-noun' combination, to improve readability, for
-     *   example `updated-plan`.
+     * @param eventName The name of the event that occurred. This is presented to your App's admins
+     *   when filtering and creating segments - a good event name is typically a past tense
+     *   'verb-noun' combination, to improve readability, for example `updated-plan`.
      * @param createdAt The time the event occurred as a UTC Unix timestamp
      * @param userId Your identifier for the user.
-     * @param id The unique identifier for the contact (lead or user) which is given
-     *   by Intercom.
-     * @param email An email address for your user. An email should only be used
-     *   where your application uses email to uniquely identify users.
+     * @param id The unique identifier for the contact (lead or user) which is given by Intercom.
+     * @param email An email address for your user. An email should only be used where your
+     *   application uses email to uniquely identify users.
      * @param metadata Optional metadata about the event.
      */
-    fun createDataEvent(clientConfig: ClientConfig, request: CreateDataEventParams, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/events", config = clientConfig, body = SdkClient.bodyMap("event_name" to (SdkClient.omitIfNull(request.eventName)), "created_at" to (SdkClient.omitIfNull(request.createdAt)), "user_id" to (SdkClient.omitIfNull(request.userId)), "id" to (SdkClient.omitIfNull(request.id)), "email" to (SdkClient.omitIfNull(request.email)), "metadata" to (SdkClient.omitIfNull(request.metadata))), operationId = "createDataEvent", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    fun createDataEvent(
+        clientConfig: ClientConfig,
+        request: CreateDataEventParams,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/events",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "event_name" to (SdkClient.omitIfNull(request.eventName)),
+                        "created_at" to (SdkClient.omitIfNull(request.createdAt)),
+                        "user_id" to (SdkClient.omitIfNull(request.userId)),
+                        "id" to (SdkClient.omitIfNull(request.id)),
+                        "email" to (SdkClient.omitIfNull(request.email)),
+                        "metadata" to (SdkClient.omitIfNull(request.metadata)),
+                    ),
+                operationId = "createDataEvent",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
-
     /**
-     * Lists data events associated with a user or lead, identified by `user_id`, `email`, or `intercom_user_id`. Set `type` to `user` and use `summary` to request a summary response. You can list individual events only when they are less than 90 days old; summaries can include older events.
+     * Lists data events associated with a user or lead, identified by `user_id`, `email`, or
+     * `intercom_user_id`. Set `type` to `user` and use `summary` to request a summary response. You
+     * can list individual events only when they are less than 90 days old; summaries can include
+     * older events.
      *
-     * > 🚧 > > Please note that you can only 'list' events that are less than 90 days old. Event counts and summaries will still include your events older than 90 days but you cannot 'list' these events individually if they are older than 90 days The events belonging to a customer can be listed by sending a GET request to `api.intercom.io with a user or lead identifier along with a `type` parameter. The identifier parameter can be one of `user_id`, `email` or `intercom_user_id`.…
+     * > 🚧 > > Please note that you can only 'list' events that are less than 90 days old. Event
+     * > counts and summaries will still include your events older than 90 days but you cannot
+     * > 'list' these events individually if they are older than 90 days The events belonging to a
+     * > customer can be listed by sending a GET request to `api.intercom.io with a user or lead
+     * > identifier along with a `type` parameter. The identifier parameter can be one of `user_id`,
+     * > `email` or `intercom_user_id`.…
      *
      * @param type The value must be user
      * @param summary summary flag
      */
-    fun listDataEvents(clientConfig: ClientConfig, filter: Map<String, Any>, type: String, summary: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataEventSummary {
-        return SdkClient.request<DataEventSummary>(SdkClient.RequestSpec("GET", "/events", config = clientConfig, query = mapOf("filter" to SdkClient.queryValue(filter, "form", true), "type" to SdkClient.queryValue(type, "form", true), "summary" to SdkClient.queryValue(summary, "form", true)), operationId = "listDataEvents", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    fun listDataEvents(
+        clientConfig: ClientConfig,
+        filter: Map<String, Any>,
+        type: String,
+        summary: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataEventSummary {
+        return SdkClient.request<DataEventSummary>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/events",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "filter" to SdkClient.queryValue(filter, "form", true),
+                            "type" to SdkClient.queryValue(type, "form", true),
+                            "summary" to SdkClient.queryValue(summary, "form", true),
+                        ),
+                    operationId = "listDataEvents",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Creates event summaries that track how often an event occurred and when it first and last occurred for a user. Supply the user's `user_id` and an `event_summaries` object containing event names, counts, and timestamps. Use past-tense verb-noun event names, such as `updated-plan`.
+     * Creates event summaries that track how often an event occurred and when it first and last
+     * occurred for a user. Supply the user's `user_id` and an `event_summaries` object containing
+     * event names, counts, and timestamps. Use past-tense verb-noun event names, such as
+     * `updated-plan`.
      *
-     * Create event summaries for a user. Event summaries are used to track the number of times an event has occurred, the first time it occurred and the last time it occurred.
+     * Create event summaries for a user. Event summaries are used to track the number of times an
+     * event has occurred, the first time it occurred and the last time it occurred.
      *
      * @param userId Your identifier for the user.
-     * @param eventSummaries A list of event summaries for the user. Each event
-     *   summary should contain the event name, the time the event occurred, and the
-     *   number of times the event occurred. The event name should be a past tense
-     *   'verb-noun' combination, to improve readability, for example `updated-plan`.
+     * @param eventSummaries A list of event summaries for the user. Each event summary should
+     *   contain the event name, the time the event occurred, and the number of times the event
+     *   occurred. The event name should be a past tense 'verb-noun' combination, to improve
+     *   readability, for example `updated-plan`.
      */
-    fun dataEventSummaries(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, userId: String? = null, eventSummaries: CreateDataEventSummariesRequestEventSummaries? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("POST", "/events/summaries", config = clientConfig, body = SdkClient.bodyMap("user_id" to (SdkClient.omitIfNull(userId)), "event_summaries" to (SdkClient.omitIfNull(eventSummaries))), operationId = "dataEventSummaries", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    fun dataEventSummaries(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        userId: String? = null,
+        eventSummaries: CreateDataEventSummariesRequestEventSummaries? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/events/summaries",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "user_id" to (SdkClient.omitIfNull(userId)),
+                        "event_summaries" to (SdkClient.omitIfNull(eventSummaries)),
+                    ),
+                operationId = "dataEventSummaries",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

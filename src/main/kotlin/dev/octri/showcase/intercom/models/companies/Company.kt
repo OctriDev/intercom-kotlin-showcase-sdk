@@ -11,148 +11,86 @@ import dev.octri.showcase.intercom.models.notes.CompanyNote
 import dev.octri.showcase.intercom.models.segments.Segment
 import dev.octri.showcase.intercom.models.tags.TagBasic
 
-/**
- * Optional object value serialized in the `plan` wire field.
- */
+/** Optional object value serialized in the `plan` wire field. */
 data class CompanyPlan(
-    /**
-     * Value is always "plan"
-     */
+    /** Value is always "plan" */
     val type: String? = null,
-    /**
-     * The id of the plan
-     */
+    /** The id of the plan */
     val id: String? = null,
-    /**
-     * The name of the plan
-     */
-    val name: String? = null
+    /** The name of the plan */
+    val name: String? = null,
 )
 
-/**
- * The list of tags associated with the company
- */
+/** The list of tags associated with the company */
 data class CompanyTags(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: CompanyTagsTypeEnum? = null,
-    /**
-     * Optional array value serialized in the `tags` wire field.
-     */
-    val tags: List<TagBasic>? = null
+    /** Optional array value serialized in the `tags` wire field. */
+    val tags: List<TagBasic>? = null,
 )
 
-/**
- * The list of segments associated with the company
- */
+/** The list of segments associated with the company */
 data class CompanySegments(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: CompanySegmentsTypeEnum? = null,
-    /**
-     * Optional array value serialized in the `segments` wire field.
-     */
-    val segments: List<Segment>? = null
+    /** Optional array value serialized in the `segments` wire field. */
+    val segments: List<Segment>? = null,
 )
 
-/**
- * The list of notes associated with the company
- */
+/** The list of notes associated with the company */
 data class CompanyNotes(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: CompanyNotesTypeEnum? = null,
-    /**
-     * Optional array value serialized in the `notes` wire field.
-     */
-    val notes: List<CompanyNote>? = null
+    /** Optional array value serialized in the `notes` wire field. */
+    val notes: List<CompanyNote>? = null,
 )
 
 /**
- * Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.
+ * Companies allow you to represent organizations using your product. Each company will have its own
+ * description and be associated with contacts. You can fetch, create, update and list companies.
  */
 data class Company(
-    /**
-     * Value is `company`
-     */
+    /** Value is `company` */
     val type: CompanyTypeEnum? = null,
-    /**
-     * The Intercom defined id representing the company.
-     */
+    /** The Intercom defined id representing the company. */
     val id: String? = null,
-    /**
-     * The name of the company.
-     */
+    /** The name of the company. */
     val name: String? = null,
-    /**
-     * The Intercom defined code of the workspace the company is associated to.
-     */
+    /** The Intercom defined code of the workspace the company is associated to. */
     @com.fasterxml.jackson.annotation.JsonProperty("app_id") val appId: String? = null,
-    /**
-     * Optional object value serialized in the `plan` wire field.
-     */
+    /** Optional object value serialized in the `plan` wire field. */
     val plan: CompanyPlan? = null,
-    /**
-     * The company id you have defined for the company.
-     */
+    /** The company id you have defined for the company. */
     @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
-    /**
-     * The time the company was created by you.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("remote_created_at") val remoteCreatedAt: Long? = null,
-    /**
-     * The time the company was added in Intercom.
-     */
+    /** The time the company was created by you. */
+    @com.fasterxml.jackson.annotation.JsonProperty("remote_created_at")
+    val remoteCreatedAt: Long? = null,
+    /** The time the company was added in Intercom. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The last time the company was updated.
-     */
+    /** The last time the company was updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /**
-     * The time the company last recorded making a request.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_request_at") val lastRequestAt: Long? = null,
-    /**
-     * The number of employees in the company.
-     */
+    /** The time the company last recorded making a request. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_request_at")
+    val lastRequestAt: Long? = null,
+    /** The number of employees in the company. */
     val size: Long? = null,
-    /**
-     * The URL for the company website.
-     */
+    /** The URL for the company website. */
     val website: String? = null,
-    /**
-     * The industry that the company operates in.
-     */
+    /** The industry that the company operates in. */
     val industry: String? = null,
-    /**
-     * How much revenue the company generates for your business.
-     */
+    /** How much revenue the company generates for your business. */
     @com.fasterxml.jackson.annotation.JsonProperty("monthly_spend") val monthlySpend: Long? = null,
-    /**
-     * How many sessions the company has recorded.
-     */
+    /** How many sessions the company has recorded. */
     @com.fasterxml.jackson.annotation.JsonProperty("session_count") val sessionCount: Long? = null,
-    /**
-     * The number of users in the company.
-     */
+    /** The number of users in the company. */
     @com.fasterxml.jackson.annotation.JsonProperty("user_count") val userCount: Long? = null,
-    /**
-     * The custom attributes you have set on the company.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, String>? = null,
-    /**
-     * The list of tags associated with the company
-     */
+    /** The custom attributes you have set on the company. */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: Map<String, String>? = null,
+    /** The list of tags associated with the company */
     val tags: CompanyTags? = null,
-    /**
-     * The list of segments associated with the company
-     */
+    /** The list of segments associated with the company */
     val segments: CompanySegments? = null,
-    /**
-     * The list of notes associated with the company
-     */
-    val notes: CompanyNotes? = null
+    /** The list of notes associated with the company */
+    val notes: CompanyNotes? = null,
 )

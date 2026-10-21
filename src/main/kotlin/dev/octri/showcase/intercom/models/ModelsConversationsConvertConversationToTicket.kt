@@ -3,21 +3,20 @@
 
 package dev.octri.showcase.intercom.models
 
-
-/**
- * You can convert a Conversation to a Ticket
- */
+/** You can convert a Conversation to a Ticket */
 data class ConvertConversationToTicketRequest(
-    /**
-     * The ID of the type of ticket you want to convert the conversation to
-     */
+    /** The ID of the type of ticket you want to convert the conversation to */
     @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_id") val ticketTypeId: String,
+    /** The ID of the ticket state associated with the ticket type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_state_id")
+    val ticketStateId: String? = null,
     /**
-     * The ID of the ticket state associated with the ticket type.
+     * The attributes set on the ticket. When setting the default title and description attributes,
+     * the attribute keys that should be used are `_default_title_` and `_default_description_`.
+     * When setting ticket type attributes of the list attribute type, the key should be the
+     * attribute name and the value of the attribute should be the list item id, obtainable by
+     * \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket type has an
+     * attribute called `priority` of…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_state_id") val ticketStateId: String? = null,
-    /**
-     * The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of…
-     */
-    val attributes: TicketRequestCustomAttributes? = null
+    val attributes: TicketRequestCustomAttributes? = null,
 )

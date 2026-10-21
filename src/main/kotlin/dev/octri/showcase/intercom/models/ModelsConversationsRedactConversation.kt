@@ -3,44 +3,51 @@
 
 package dev.octri.showcase.intercom.models
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RedactConversationRequestVariant0(
-    /**
-     * The type of resource being redacted.
-     */
+    /** The type of resource being redacted. */
     val type: RedactConversationRequestVariant0TypeEnum,
-    /**
-     * The id of the conversation.
-     */
+    /** The id of the conversation. */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /**
-     * The id of the conversation_part.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_part_id") val conversationPartId: String
+    /** The id of the conversation_part. */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_part_id")
+    val conversationPartId: String,
 ) : RedactConversationRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class RedactConversationRequestVariant1(
-    /**
-     * The type of resource being redacted.
-     */
+    /** The type of resource being redacted. */
     val type: RedactConversationRequestVariant1TypeEnum,
-    /**
-     * The id of the conversation.
-     */
+    /** The id of the conversation. */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /**
-     * The id of the source.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String
+    /** The id of the source. */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String,
 ) : RedactConversationRequest
 
-/**
- * Typed representation of the `RedactConversationRequest` API schema.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+/** Typed representation of the `RedactConversationRequest` API schema. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RedactConversationRequestVariant0::class, name = "conversation_part"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = RedactConversationRequestVariant1::class, name = "source")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RedactConversationRequestVariant0::class,
+        name = "conversation_part",
+    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
+        value = RedactConversationRequestVariant1::class,
+        name = "source",
+    ),
 )
 sealed interface RedactConversationRequest

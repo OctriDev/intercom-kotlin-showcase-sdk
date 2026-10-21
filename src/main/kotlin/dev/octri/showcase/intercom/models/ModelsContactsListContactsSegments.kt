@@ -5,16 +5,10 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.segments.Segment
 
-/**
- * A list of segments objects attached to a specific contact.
- */
+/** A list of segments objects attached to a specific contact. */
 data class ContactSegments(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: ContactSegmentsTypeEnum? = null,
-    /**
-     * Segment objects associated with the contact.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Segment>? = null
+    /** Segment objects associated with the contact. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Segment>? = null,
 )

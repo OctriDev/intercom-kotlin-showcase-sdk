@@ -3,78 +3,175 @@
 
 package dev.octri.showcase.intercom
 
-
 class ContentSnippetsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists content snippets in a workspace. Use `page` and `per_page` to paginate the results; each page includes snippet objects and pagination metadata.
+     * Lists content snippets in a workspace. Use `page` and `per_page` to paginate the results;
+     * each page includes snippet objects and pagination metadata.
      *
      * You can fetch a list of all content snippets for a workspace.
      */
-    fun list(page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContentSnippetList {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.listContentSnippets(clientConfig, page, perPage, intercomVersion, options)
+    fun list(
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContentSnippetList {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.listContentSnippets(
+            clientConfig,
+            page,
+            perPage,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists content snippets in a workspace. Use `page` and `per_page` to paginate the results; each page includes snippet objects and pagination metadata.
+     * Lists content snippets in a workspace. Use `page` and `per_page` to paginate the results;
+     * each page includes snippet objects and pagination metadata.
      *
      * You can fetch a list of all content snippets for a workspace.
      */
-    fun listPaginated(page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldFn: (ContentSnippet) -> Boolean) {
-        dev.octri.showcase.intercom.methods.ContentSnippets.listContentSnippetsPaginated(clientConfig, page, perPage, intercomVersion, options, yieldFn)
+    fun listPaginated(
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+        yieldFn: (ContentSnippet) -> Boolean,
+    ) {
+        dev.octri.showcase.intercom.methods.ContentSnippets.listContentSnippetsPaginated(
+            clientConfig,
+            page,
+            perPage,
+            intercomVersion,
+            options,
+            yieldFn,
+        )
     }
 
     /**
-     * Creates a content snippet for reuse by the AI agent and Copilot. Provide a `title` and the snippet content as either `json_blocks` or `body_markdown`; these content formats are mutually exclusive. Audience targeting and availability flags are optional.
+     * Creates a content snippet for reuse by the AI agent and Copilot. Provide a `title` and the
+     * snippet content as either `json_blocks` or `body_markdown`; these content formats are
+     * mutually exclusive. Audience targeting and availability flags are optional.
      *
      * You can create a new content snippet.
      */
-    fun create(request: dev.octri.showcase.intercom.methods.ContentSnippets.CreateContentSnippetRequest, options: RequestOptions? = null): ContentSnippet {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.createContentSnippet(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.intercom.methods.ContentSnippets.CreateContentSnippetRequest,
+        options: RequestOptions? = null,
+    ): ContentSnippet {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.createContentSnippet(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a content snippet by its unique identifier. Use this operation when you need the snippet's content, locale, availability settings, or audience targeting.
+     * Retrieves a content snippet by its unique identifier. Use this operation when you need the
+     * snippet's content, locale, availability settings, or audience targeting.
      *
      * You can fetch a single content snippet by its id.
      */
-    fun get(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContentSnippet {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.getContentSnippet(clientConfig, id, intercomVersion, options)
+    fun get(
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ContentSnippet {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.getContentSnippet(
+            clientConfig,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Replaces the supplied fields on an existing content snippet while leaving omitted fields unchanged. Provide only the fields you want to update, and use either `json_blocks` or `body_markdown` for the content, not both. Pass an empty `audience_ids` array to clear audience targeting.
+     * Replaces the supplied fields on an existing content snippet while leaving omitted fields
+     * unchanged. Provide only the fields you want to update, and use either `json_blocks` or
+     * `body_markdown` for the content, not both. Pass an empty `audience_ids` array to clear
+     * audience targeting.
      *
      * You can update an existing content snippet.
      */
-    fun update(request: dev.octri.showcase.intercom.methods.ContentSnippets.UpdateContentSnippetRequest, options: RequestOptions? = null): ContentSnippet {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.updateContentSnippet(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.intercom.methods.ContentSnippets.UpdateContentSnippetRequest,
+        options: RequestOptions? = null,
+    ): ContentSnippet {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.updateContentSnippet(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes a content snippet by its unique identifier. Use this operation to remove a snippet that is no longer needed; deletion is unavailable while the snippet has procedure dependencies.
+     * Deletes a content snippet by its unique identifier. Use this operation to remove a snippet
+     * that is no longer needed; deletion is unavailable while the snippet has procedure
+     * dependencies.
      *
      * You can delete a single content snippet by its id.
      */
-    fun delete(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.deleteContentSnippet(clientConfig, id, intercomVersion, options)
+    fun delete(
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.deleteContentSnippet(
+            clientConfig,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Applies an existing tag to a content snippet and returns the applied tag. The tag must already exist, and the authenticated user must have the `manage_knowledge_base_content` permission. The request requires the `read_write_content_snippets` OAuth scope.
+     * Applies an existing tag to a content snippet and returns the applied tag. The tag must
+     * already exist, and the authenticated user must have the `manage_knowledge_base_content`
+     * permission. The request requires the `read_write_content_snippets` OAuth scope.
      *
-     * Apply an existing tag to a content snippet. Returns the tag that was applied. The tag must already exist in the workspace (create tags with the Tags API), and the authenticating teammate must have the `manage_knowledge_base_content` permission. Requires the `read_write_content_snippets` OAuth scope.
+     * Apply an existing tag to a content snippet. Returns the tag that was applied. The tag must
+     * already exist in the workspace (create tags with the Tags API), and the authenticating
+     * teammate must have the `manage_knowledge_base_content` permission. Requires the
+     * `read_write_content_snippets` OAuth scope.
      */
-    fun attachTag(contentSnippetId: String, id: String, intercomVersion: IntercomVersion? = null, adminId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.attachContentSnippetsTag(clientConfig, contentSnippetId, id, intercomVersion, adminId, options)
+    fun attachTag(
+        contentSnippetId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.attachContentSnippetsTag(
+            clientConfig,
+            contentSnippetId,
+            id,
+            intercomVersion,
+            adminId,
+            options,
+        )
     }
 
     /**
-     * Removes a tag from a content snippet and returns the removed tag. The authenticated user must have the `manage_knowledge_base_content` permission, and the request requires the `read_write_content_snippets` OAuth scope.
+     * Removes a tag from a content snippet and returns the removed tag. The authenticated user must
+     * have the `manage_knowledge_base_content` permission, and the request requires the
+     * `read_write_content_snippets` OAuth scope.
      *
-     * Remove a tag from a content snippet. Returns the tag that was removed, with null `applied_at` and `applied_by`. The authenticating teammate must have the `manage_knowledge_base_content` permission. Requires the `read_write_content_snippets` OAuth scope.
+     * Remove a tag from a content snippet. Returns the tag that was removed, with null `applied_at`
+     * and `applied_by`. The authenticating teammate must have the `manage_knowledge_base_content`
+     * permission. Requires the `read_write_content_snippets` OAuth scope.
      */
-    fun detachTag(contentSnippetId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return dev.octri.showcase.intercom.methods.ContentSnippets.detachContentSnippetsTag(clientConfig, contentSnippetId, id, intercomVersion, options)
+    fun detachTag(
+        contentSnippetId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return dev.octri.showcase.intercom.methods.ContentSnippets.detachContentSnippetsTag(
+            clientConfig,
+            contentSnippetId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
-
 }

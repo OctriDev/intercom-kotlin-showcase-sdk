@@ -5,24 +5,19 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.articles.ArticleListItem
 
-/**
- * This will return a list of articles for the App.
- */
+/** This will return a list of articles for the App. */
 data class ArticleList(
-    /**
-     * The type of the object - `list`.
-     */
+    /** The type of the object - `list`. */
     val type: ArticleListTypeEnum? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
+     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
+     * result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
     val pages: CursorPages? = null,
-    /**
-     * A count of the total number of articles.
-     */
+    /** A count of the total number of articles. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * An array of Article objects
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ArticleListItem>? = null
+    /** An array of Article objects */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<ArticleListItem>? = null,
 )

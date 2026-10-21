@@ -13,41 +13,80 @@ import dev.octri.showcase.intercom.SdkClient
 
 object Banners {
 
-
     /**
-     * Lists the banners that a contact currently matches so you can display them outside the Messenger. Call this endpoint when you are about to show the banners, because requesting them records an impression for each returned banner. Use each banner's `view_id` with the dismiss endpoint to record a dismissal.
+     * Lists the banners that a contact currently matches so you can display them outside the
+     * Messenger. Call this endpoint when you are about to show the banners, because requesting them
+     * records an impression for each returned banner. Use each banner's `view_id` with the dismiss
+     * endpoint to record a dismissal.
      *
-     * Returns the banners a contact currently matches, so you can display them on surfaces outside the Messenger (native mobile apps, kiosks, embedded tools). Each banner in the response includes a `view_id`. Use it to record a dismissal with the dismiss endpoint. A returned banner is treated as shown: requesting this endpoint records an impression for each banner returned, so call it at the point you are about to display the banners, not speculatively.
+     * Returns the banners a contact currently matches, so you can display them on surfaces outside
+     * the Messenger (native mobile apps, kiosks, embedded tools). Each banner in the response
+     * includes a `view_id`. Use it to record a dismissal with the dismiss endpoint. A returned
+     * banner is treated as shown: requesting this endpoint records an impression for each banner
+     * returned, so call it at the point you are about to display the banners, not speculatively.
      *
      * @param id The unique identifier of a contact.
      */
-    fun listContactBanners(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): BannerList {
-        return SdkClient.request<BannerList>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(id)}/banners", config = clientConfig, operationId = "listContactBanners", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
+    fun listContactBanners(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): BannerList {
+        return SdkClient.request<BannerList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/contacts/${SdkClient.encodePathSegment(id)}/banners",
+                    config = clientConfig,
+                    operationId = "listContactBanners",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("404" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Records that a contact has dismissed a banner, with dismissals shared across surfaces for that contact. Supply the banner's `view_id` from the list banners response. Dismissing a banner that is already dismissed succeeds and returns the same response.
+     * Records that a contact has dismissed a banner, with dismissals shared across surfaces for
+     * that contact. Supply the banner's `view_id` from the list banners response. Dismissing a
+     * banner that is already dismissed succeeds and returns the same response.
      *
-     * Records that a contact has dismissed a banner. Dismissals are shared across surfaces, so a banner dismissed through this endpoint will also stop appearing in the web Messenger for that contact, and vice versa. The request is idempotent: dismissing an already-dismissed banner succeeds and returns the same response.
+     * Records that a contact has dismissed a banner. Dismissals are shared across surfaces, so a
+     * banner dismissed through this endpoint will also stop appearing in the web Messenger for that
+     * contact, and vice versa. The request is idempotent: dismissing an already-dismissed banner
+     * succeeds and returns the same response.
      *
      * @param id The unique identifier of a contact.
-     * @param viewId The `view_id` of the banner to dismiss, as returned by the list
-     *   banners endpoint.
+     * @param viewId The `view_id` of the banner to dismiss, as returned by the list banners
+     *   endpoint.
      */
-    fun dismissContactBanner(clientConfig: ClientConfig, id: String, viewId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): BannerDismiss {
-        return SdkClient.request<BannerDismiss>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(id)}/banners/${SdkClient.encodePathSegment(viewId)}/dismiss", config = clientConfig, operationId = "dismissContactBanner", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
+    fun dismissContactBanner(
+        clientConfig: ClientConfig,
+        id: String,
+        viewId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): BannerDismiss {
+        return SdkClient.request<BannerDismiss>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/contacts/${SdkClient.encodePathSegment(id)}/banners/${SdkClient.encodePathSegment(viewId)}/dismiss",
+                    config = clientConfig,
+                    operationId = "dismissContactBanner",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("404" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

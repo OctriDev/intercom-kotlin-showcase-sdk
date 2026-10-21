@@ -3,24 +3,18 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * A paginated list of merge history entries for a contact.
- */
+/** A paginated list of merge history entries for a contact. */
 data class MergeHistoryList(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     val type: MergeHistoryListTypeEnum? = null,
+    /** An array of merge history entries. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<MergeHistoryItem>? = null,
     /**
-     * An array of merge history entries.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<MergeHistoryItem>? = null,
-    /**
-     * A cursor to pass as the `cursor` query parameter to fetch the next page of results. Absent when there are no more pages.
+     * A cursor to pass as the `cursor` query parameter to fetch the next page of results. Absent
+     * when there are no more pages.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("next_cursor") val nextCursor: String? = null,
-    /**
-     * Whether there are more results to fetch.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null
+    /** Whether there are more results to fetch. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
 )

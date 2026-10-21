@@ -3,15 +3,21 @@
 
 package dev.octri.showcase.intercom
 
-
 class TicketStatesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the ticket states associated with ticket types in the workspace. Use the returned state details to see their labels, categories, and ticket type associations.
+     * Lists the ticket states associated with ticket types in the workspace. Use the returned state
+     * details to see their labels, categories, and ticket type associations.
      *
      * You can get a list of all ticket states for a workspace.
      */
-    fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketStateList {
-        return dev.octri.showcase.intercom.methods.TicketStates.listTicketStates(clientConfig, intercomVersion, options)
+    fun list(
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TicketStateList {
+        return dev.octri.showcase.intercom.methods.TicketStates.listTicketStates(
+            clientConfig,
+            intercomVersion,
+            options,
+        )
     }
-
 }

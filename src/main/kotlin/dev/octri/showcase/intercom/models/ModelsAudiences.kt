@@ -5,90 +5,55 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.audiences.Audience
 
-/**
- * A paginated list of audience objects.
- */
+/** A paginated list of audience objects. */
 data class AudienceList(
-    /**
-     * The type of the object.
-     */
+    /** The type of the object. */
     val type: AudienceListTypeEnum? = null,
-    /**
-     * A list of audience objects.
-     */
+    /** A list of audience objects. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Audience>? = null,
-    /**
-     * The total number of audiences.
-     */
+    /** The total number of audiences. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * The current page number.
-     */
+    /** The current page number. */
     val page: Long? = null,
-    /**
-     * The number of results per page.
-     */
+    /** The number of results per page. */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /**
-     * The total number of pages.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null
+    /** The total number of pages. */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null,
 )
 
-/**
- * The request payload for creating an audience.
- */
+/** The request payload for creating an audience. */
 data class CreateAudienceRequest(
-    /**
-     * The name of the audience.
-     */
+    /** The name of the audience. */
     val name: String,
-    /**
-     * The predicates that define which contacts belong to the audience.
-     */
+    /** The predicates that define which contacts belong to the audience. */
     val predicates: List<Predicate>? = null,
-    /**
-     * Role-based predicates that further filter audience membership by contact role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_predicates") val rolePredicates: List<Predicate>? = null
+    /** Role-based predicates that further filter audience membership by contact role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_predicates")
+    val rolePredicates: List<Predicate>? = null,
 )
 
-/**
- * A condition used to filter contacts in an audience.
- */
+/** A condition used to filter contacts in an audience. */
 data class Predicate(
-    /**
-     * The attribute to filter on.
-     */
+    /** The attribute to filter on. */
     val attribute: String? = null,
-    /**
-     * The type of the attribute.
-     */
+    /** The type of the attribute. */
     val type: String? = null,
-    /**
-     * The comparison operator.
-     */
+    /** The comparison operator. */
     val comparison: String? = null,
-    /**
-     * The value to compare against.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
+    /** The value to compare against. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
 )
 
 /**
- * The request payload for updating an audience. All fields are optional — only provided fields will be updated.
+ * The request payload for updating an audience. All fields are optional — only provided fields will
+ * be updated.
  */
 data class UpdateAudienceRequest(
-    /**
-     * The name of the audience.
-     */
+    /** The name of the audience. */
     val name: String? = null,
-    /**
-     * The predicates that define which contacts belong to the audience.
-     */
+    /** The predicates that define which contacts belong to the audience. */
     val predicates: List<Predicate>? = null,
-    /**
-     * Role-based predicates that further filter audience membership by contact role.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("role_predicates") val rolePredicates: List<Predicate>? = null
+    /** Role-based predicates that further filter audience membership by contact role. */
+    @com.fasterxml.jackson.annotation.JsonProperty("role_predicates")
+    val rolePredicates: List<Predicate>? = null,
 )

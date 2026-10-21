@@ -14,58 +14,113 @@ import dev.octri.showcase.intercom.TeamMetricList
 
 object Teams {
 
-
     /**
-     * Lists the teams in the workspace. Use this endpoint to retrieve team objects and their available team details.
+     * Lists the teams in the workspace. Use this endpoint to retrieve team objects and their
+     * available team details.
      *
      * This will return a list of team objects for the App.
      */
-    fun listTeams(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TeamList {
-        return SdkClient.request<TeamList>(SdkClient.RequestSpec("GET", "/teams", config = clientConfig, operationId = "listTeams", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    fun listTeams(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TeamList {
+        return SdkClient.request<TeamList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/teams",
+                    config = clientConfig,
+                    operationId = "listTeams",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves a team and the admins that belong to it. Use the `team_id` path parameter to specify the team whose details you need.
+     * Retrieves a team and the admins that belong to it. Use the `team_id` path parameter to
+     * specify the team whose details you need.
      *
-     * You can fetch the details of a single team, containing an array of admins that belong to this team.
+     * You can fetch the details of a single team, containing an array of admins that belong to this
+     * team.
      *
      * @param teamId The unique identifier of a given team.
      */
-    fun retrieveTeam(clientConfig: ClientConfig, teamId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Team {
-        return SdkClient.request<Team>(SdkClient.RequestSpec("GET", "/teams/${SdkClient.encodePathSegment(teamId)}", config = clientConfig, operationId = "retrieveTeam", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
+    fun retrieveTeam(
+        clientConfig: ClientConfig,
+        teamId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Team {
+        return SdkClient.request<Team>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/teams/${SdkClient.encodePathSegment(teamId)}",
+                    config = clientConfig,
+                    operationId = "retrieveTeam",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Retrieves real-time activity metrics for admins in a specified team, including counts of open, idle, and snoozed conversations. The `realtime_monitoring` feature must be enabled for the workspace; use `idle_threshold` to set when an open conversation counts as idle.
+     * Retrieves real-time activity metrics for admins in a specified team, including counts of
+     * open, idle, and snoozed conversations. The `realtime_monitoring` feature must be enabled for
+     * the workspace; use `idle_threshold` to set when an open conversation counts as idle.
      *
-     * Returns real-time activity metrics for admins in the specified team. For each admin, the response includes counts of open, idle, and snoozed conversations. This endpoint requires the `realtime_monitoring` feature to be enabled for your workspace.
+     * Returns real-time activity metrics for admins in the specified team. For each admin, the
+     * response includes counts of open, idle, and snoozed conversations. This endpoint requires the
+     * `realtime_monitoring` feature to be enabled for your workspace.
      *
-     * @param teamId The unique identifier of the team to retrieve metrics for. Use
-     *   `GET /teams` to list available team IDs.
-     * @param idleThreshold The number of seconds after which an open conversation is
-     *   considered idle. Clamped to the range 1–86400. Defaults to 1800 (30 minutes).
+     * @param teamId The unique identifier of the team to retrieve metrics for. Use `GET /teams` to
+     *   list available team IDs.
+     * @param idleThreshold The number of seconds after which an open conversation is considered
+     *   idle. Clamped to the range 1–86400. Defaults to 1800 (30 minutes).
      */
-    fun getTeamMetrics(clientConfig: ClientConfig, teamId: String, idleThreshold: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TeamMetricList {
-        return SdkClient.request<TeamMetricList>(SdkClient.RequestSpec("GET", "/teams/${SdkClient.encodePathSegment(teamId)}/metrics", config = clientConfig, query = mapOf("idle_threshold" to
-    SdkClient.queryValue(idleThreshold, "form", true)), operationId = "getTeamMetrics", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java))).data
+    fun getTeamMetrics(
+        clientConfig: ClientConfig,
+        teamId: String,
+        idleThreshold: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TeamMetricList {
+        return SdkClient.request<TeamMetricList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/teams/${SdkClient.encodePathSegment(teamId)}/metrics",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "idle_threshold" to SdkClient.queryValue(idleThreshold, "form", true)
+                        ),
+                    operationId = "getTeamMetrics",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "403" to Error2::class.java,
+                            "404" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

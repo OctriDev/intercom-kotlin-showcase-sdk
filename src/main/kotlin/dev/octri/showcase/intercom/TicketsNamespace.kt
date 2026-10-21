@@ -3,96 +3,238 @@
 
 package dev.octri.showcase.intercom
 
-
 class TicketsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Submits a reply or note on a ticket, either on behalf of an admin or a contact. For an admin reply, set `message_type` and provide the fields required for that reply type; for a contact reply, identify the contact using one of the supported identifiers. Use the ticket object's internal `id`, not the ticket number shown in the Inbox.
+     * Submits a reply or note on a ticket, either on behalf of an admin or a contact. For an admin
+     * reply, set `message_type` and provide the fields required for that reply type; for a contact
+     * reply, identify the contact using one of the supported identifiers. Use the ticket object's
+     * internal `id`, not the ticket number shown in the Inbox.
      *
-     * You can reply to a ticket with a message from an admin or on behalf of a contact, or with a note for admins.
+     * You can reply to a ticket with a message from an admin or on behalf of a contact, or with a
+     * note for admins.
      */
-    fun reply(ticketId: String, intercomVersion: IntercomVersion? = null, skipNotifications: Boolean? = null, options: RequestOptions? = null): TicketReply {
-        return dev.octri.showcase.intercom.methods.Tickets.replyTicket(clientConfig, ticketId, intercomVersion, skipNotifications, options)
+    fun reply(
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        skipNotifications: Boolean? = null,
+        options: RequestOptions? = null,
+    ): TicketReply {
+        return dev.octri.showcase.intercom.methods.Tickets.replyTicket(
+            clientConfig,
+            ticketId,
+            intercomVersion,
+            skipNotifications,
+            options,
+        )
     }
 
     /**
-     * Links a conversation or customer ticket to an existing tracker ticket. Supply the tracker's `ticket_id` and the `conversation_id` to link; the tracker ticket can have up to 2,500 linked conversations. This operation requires the `write_tickets` OAuth scope.
+     * Links a conversation or customer ticket to an existing tracker ticket. Supply the tracker's
+     * `ticket_id` and the `conversation_id` to link; the tracker ticket can have up to 2,500 linked
+     * conversations. This operation requires the `write_tickets` OAuth scope.
      *
-     * Link a conversation to an existing tracker ticket. The conversation can be a regular conversation or one that has been converted into a customer ticket. Use this when related conversations surface after a tracker ticket has already been created. The ticket in the path must be a tracker ticket, and `conversation_id` in the body is the conversation (or customer ticket) to link to it. This returns the linked conversation. A tracker ticket can have up to 2,500 linked…
+     * Link a conversation to an existing tracker ticket. The conversation can be a regular
+     * conversation or one that has been converted into a customer ticket. Use this when related
+     * conversations surface after a tracker ticket has already been created. The ticket in the path
+     * must be a tracker ticket, and `conversation_id` in the body is the conversation (or customer
+     * ticket) to link to it. This returns the linked conversation. A tracker ticket can have up to
+     * 2,500 linked…
      */
-    fun linkConversation(ticketId: String, conversationId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return dev.octri.showcase.intercom.methods.Tickets.linkTicketsConversation(clientConfig, ticketId, conversationId, intercomVersion, options)
+    fun linkConversation(
+        ticketId: String,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return dev.octri.showcase.intercom.methods.Tickets.linkTicketsConversation(
+            clientConfig,
+            ticketId,
+            conversationId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Unlinks a conversation or converted customer ticket from the tracker ticket it is linked to. Supply the tracker ticket identifier and the identifier of the linked conversation or customer ticket. This operation requires the `write_tickets` OAuth scope.
+     * Unlinks a conversation or converted customer ticket from the tracker ticket it is linked to.
+     * Supply the tracker ticket identifier and the identifier of the linked conversation or
+     * customer ticket. This operation requires the `write_tickets` OAuth scope.
      *
-     * Unlink a conversation (or converted customer ticket) from a tracker ticket it is currently linked to. The ticket in the path must be a tracker ticket. This returns the conversation that was unlinked. Requires the `write_tickets` OAuth scope.
+     * Unlink a conversation (or converted customer ticket) from a tracker ticket it is currently
+     * linked to. The ticket in the path must be a tracker ticket. This returns the conversation
+     * that was unlinked. Requires the `write_tickets` OAuth scope.
      */
-    fun unlinkConversation(ticketId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return dev.octri.showcase.intercom.methods.Tickets.unlinkTicketConversation(clientConfig, ticketId, id, intercomVersion, options)
+    fun unlinkConversation(
+        ticketId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return dev.octri.showcase.intercom.methods.Tickets.unlinkTicketConversation(
+            clientConfig,
+            ticketId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Creates a ticket using a ticket type and one or more affected contacts. Supply `ticket_type_id` and `contacts`; you can also provide ticket attributes, assignment details, or a conversation to link. A 200 response returns the created ticket and its current state.
+     * Creates a ticket using a ticket type and one or more affected contacts. Supply
+     * `ticket_type_id` and `contacts`; you can also provide ticket attributes, assignment details,
+     * or a conversation to link. A 200 response returns the created ticket and its current state.
      *
      * You can create a new ticket.
      */
-    fun create(request: dev.octri.showcase.intercom.methods.Tickets.CreateTicketParams, options: RequestOptions? = null): Ticket {
-        return dev.octri.showcase.intercom.methods.Tickets.createTicket(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.intercom.methods.Tickets.CreateTicketParams,
+        options: RequestOptions? = null,
+    ): Ticket {
+        return dev.octri.showcase.intercom.methods.Tickets.createTicket(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Enqueues ticket creation for asynchronous processing after performing best-effort input validation. Supply `ticket_type_id` and `contacts`; invalid inputs are not enqueued. Use the returned job identifier or URL to check the job's progress and retrieve the created ticket when processing completes.
+     * Enqueues ticket creation for asynchronous processing after performing best-effort input
+     * validation. Supply `ticket_type_id` and `contacts`; invalid inputs are not enqueued. Use the
+     * returned job identifier or URL to check the job's progress and retrieve the created ticket
+     * when processing completes.
      *
-     * Enqueues ticket creation for asynchronous processing, returning if the job was enqueued successfully to be processed. We attempt to perform a best-effort validation on inputs before tasks are enqueued. If the given parameters are incorrect, we won't enqueue the job.
+     * Enqueues ticket creation for asynchronous processing, returning if the job was enqueued
+     * successfully to be processed. We attempt to perform a best-effort validation on inputs before
+     * tasks are enqueued. If the given parameters are incorrect, we won't enqueue the job.
      */
-    fun enqueueCreate(request: dev.octri.showcase.intercom.methods.Tickets.EnqueueCreateTicketRequest, options: RequestOptions? = null): Jobs {
-        return dev.octri.showcase.intercom.methods.Tickets.enqueueCreateTicket(clientConfig, request, options)
+    fun enqueueCreate(
+        request: dev.octri.showcase.intercom.methods.Tickets.EnqueueCreateTicketRequest,
+        options: RequestOptions? = null,
+    ): Jobs {
+        return dev.octri.showcase.intercom.methods.Tickets.enqueueCreateTicket(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Updates an existing ticket's attributes, state, company, visibility, assignment, or open and snoozed status. Supply only the ticket properties you want to change, and use `skip_notifications` to control update notifications. A successful response returns the updated ticket.
+     * Updates an existing ticket's attributes, state, company, visibility, assignment, or open and
+     * snoozed status. Supply only the ticket properties you want to change, and use
+     * `skip_notifications` to control update notifications. A successful response returns the
+     * updated ticket.
      *
      * You can update a ticket.
      */
-    fun update(request: dev.octri.showcase.intercom.methods.Tickets.UpdateTicketParams, options: RequestOptions? = null): Ticket {
-        return dev.octri.showcase.intercom.methods.Tickets.updateTicket(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.intercom.methods.Tickets.UpdateTicketParams,
+        options: RequestOptions? = null,
+    ): Ticket {
+        return dev.octri.showcase.intercom.methods.Tickets.updateTicket(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a ticket using its unique API identifier. Use the ticket object's `id` value, not the `ticket_id` displayed in the Inbox. The response includes ticket details such as its attributes, state, type, and assignment.
+     * Retrieves a ticket using its unique API identifier. Use the ticket object's `id` value, not
+     * the `ticket_id` displayed in the Inbox. The response includes ticket details such as its
+     * attributes, state, type, and assignment.
      *
      * You can fetch the details of a single ticket.
      */
-    fun get(ticketId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Ticket {
-        return dev.octri.showcase.intercom.methods.Tickets.getTicket(clientConfig, ticketId, intercomVersion, options)
+    fun get(
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Ticket {
+        return dev.octri.showcase.intercom.methods.Tickets.getTicket(
+            clientConfig,
+            ticketId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Deletes a ticket permanently from the inbox, including its replies, attributes, uploads, and related content. <Callout type="warning">Deleting a ticket is permanent and cannot be reversed.</Callout> The ticket remains in reporting, although some reporting data may be incomplete.
+     * Deletes a ticket permanently from the inbox, including its replies, attributes, uploads, and
+     * related content. <Callout type="warning">Deleting a ticket is permanent and cannot be
+     * reversed.</Callout> The ticket remains in reporting, although some reporting data may be
+     * incomplete.
      *
-     * {% admonition type="warning" name="Irreversible operation" %} Deleting a ticket is permanent and cannot be reversed. {% /admonition %} Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.
+     * {% admonition type="warning" name="Irreversible operation" %} Deleting a ticket is permanent
+     * and cannot be reversed. {% /admonition %} Deleting a ticket permanently removes it from the
+     * inbox. All sensitive data is deleted, including admin and user replies, ticket attributes,
+     * uploads, and related content. The ticket will still appear in reporting, though some data may
+     * be incomplete due to the deletion.
      */
-    fun delete(ticketId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketDeleted {
-        return dev.octri.showcase.intercom.methods.Tickets.deleteTicket(clientConfig, ticketId, intercomVersion, options)
+    fun delete(
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TicketDeleted {
+        return dev.octri.showcase.intercom.methods.Tickets.deleteTicket(
+            clientConfig,
+            ticketId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Changes a ticket to a different ticket type and sets a state for that type. The new ticket type must be in the same category as the current type, and matching attributes transfer automatically. Values supplied in `ticket_attributes` override transferred values.
+     * Changes a ticket to a different ticket type and sets a state for that type. The new ticket
+     * type must be in the same category as the current type, and matching attributes transfer
+     * automatically. Values supplied in `ticket_attributes` override transferred values.
      *
-     * You can change the type of a ticket. The new ticket type must be in the same category as the current type. Attributes matching by name and type are automatically transferred from the old type; values provided in ticket_attributes override transferred values.
+     * You can change the type of a ticket. The new ticket type must be in the same category as the
+     * current type. Attributes matching by name and type are automatically transferred from the old
+     * type; values provided in ticket_attributes override transferred values.
      */
-    fun changeType(ticketId: String, ticketTypeId: String, ticketStateId: String, intercomVersion: IntercomVersion? = null, ticketAttributes: Map<String, Any>? = null, options: RequestOptions? = null): Ticket {
-        return dev.octri.showcase.intercom.methods.Tickets.changeTicketType(clientConfig, ticketId, ticketTypeId, ticketStateId, intercomVersion, ticketAttributes, options)
+    fun changeType(
+        ticketId: String,
+        ticketTypeId: String,
+        ticketStateId: String,
+        intercomVersion: IntercomVersion? = null,
+        ticketAttributes: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): Ticket {
+        return dev.octri.showcase.intercom.methods.Tickets.changeTicketType(
+            clientConfig,
+            ticketId,
+            ticketTypeId,
+            ticketStateId,
+            intercomVersion,
+            ticketAttributes,
+            options,
+        )
     }
 
     /**
-     * Searches tickets using filters on ticket attributes and other searchable fields. Supply a `query` to define a single filter or combine filters, and use `pagination` to control page size and continue through results. Filter values must match the type of the field being searched.
+     * Searches tickets using filters on ticket attributes and other searchable fields. Supply a
+     * `query` to define a single filter or combine filters, and use `pagination` to control page
+     * size and continue through results. Filter values must match the type of the field being
+     * searched.
      *
-     * You can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want. To search for tickets, you send a `POST` request to `api.intercom.io This will accept a query object in the body which will define your filters. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your search. Use the `AND` and `OR` operators to combine multiple filters…
+     * You can search for multiple tickets by the value of their attributes in order to fetch
+     * exactly which ones you want. To search for tickets, you send a `POST` request to
+     * `api.intercom.io This will accept a query object in the body which will define your filters.
+     * {% admonition type="warning" name="Optimizing search queries" %} Search queries can be
+     * complex, so optimizing them can help the performance of your search. Use the `AND` and `OR`
+     * operators to combine multiple filters…
      */
-    fun search(query: SearchRequestQuery, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, options: RequestOptions? = null): TicketList {
-        return dev.octri.showcase.intercom.methods.Tickets.searchTickets(clientConfig, query, intercomVersion, pagination, options)
+    fun search(
+        query: SearchRequestQuery,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        options: RequestOptions? = null,
+    ): TicketList {
+        return dev.octri.showcase.intercom.methods.Tickets.searchTickets(
+            clientConfig,
+            query,
+            intercomVersion,
+            pagination,
+            options,
+        )
     }
-
 }
