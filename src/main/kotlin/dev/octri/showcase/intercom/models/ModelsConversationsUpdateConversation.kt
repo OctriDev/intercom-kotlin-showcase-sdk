@@ -3,24 +3,23 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Payload of the request to update a conversation
- */
+/** Payload of the request to update a conversation */
 data class UpdateConversationRequest(
-    /**
-     * Mark a conversation as read within Intercom.
-     */
+    /** Mark a conversation as read within Intercom. */
     val read: Boolean? = null,
-    /**
-     * The title given to the conversation
-     */
+    /** The title given to the conversation */
     val title: String? = null,
     /**
-     * The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here — attributes Intercom generates are returned in responses only.
+     * The custom attributes which are set on this object, as key-value pairs. For relationship
+     * attributes the value should be a list of custom object instance models. Only attributes a
+     * caller may set are accepted here — attributes Intercom generates are returned in responses
+     * only.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: CustomAttributesRequest? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: CustomAttributesRequest? = null,
     /**
-     * The ID of the company that the conversation is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.
+     * The ID of the company that the conversation is associated with. The unique identifier for the
+     * company which is given by Intercom. Set to nil to remove company.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
 )

@@ -3,105 +3,232 @@
 
 package dev.octri.showcase.intercom
 
-
 class HelpCenterNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists URL redirects configured for a help center, ordered by most recently updated. Use the pagination parameters to browse the results; access requires the `read_help_center_redirects_scope` OAuth scope.
+     * Lists URL redirects configured for a help center, ordered by most recently updated. Use the
+     * pagination parameters to browse the results; access requires the
+     * `read_help_center_redirects_scope` OAuth scope.
      *
-     * You can fetch a list of all URL redirects for a help center by making a GET request to `api.intercom.io Redirects are returned in descending order on the `updated_at` attribute. Requires the `read_help_center_redirects_scope` OAuth scope.
+     * You can fetch a list of all URL redirects for a help center by making a GET request to
+     * `api.intercom.io Redirects are returned in descending order on the `updated_at` attribute.
+     * Requires the `read_help_center_redirects_scope` OAuth scope.
      */
-    fun listRedirects(helpCenterId: String, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenterRedirectList {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.listHelpCenterRedirects(clientConfig, helpCenterId, page, perPage, intercomVersion, options)
+    fun listRedirects(
+        helpCenterId: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): HelpCenterRedirectList {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.listHelpCenterRedirects(
+            clientConfig,
+            helpCenterId,
+            page,
+            perPage,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Creates a redirect in a help center, mapping a source URL to an article or collection. Supply `from_url`, `locale`, `target_type`, and `target_id`; the source URL must be absolute and within the help center's URL space, and the target must belong to that help center. Use the `read_write_help_center_redirects_scope` OAuth scope to create redirects.
+     * Creates a redirect in a help center, mapping a source URL to an article or collection. Supply
+     * `from_url`, `locale`, `target_type`, and `target_id`; the source URL must be absolute and
+     * within the help center's URL space, and the target must belong to that help center. Use the
+     * `read_write_help_center_redirects_scope` OAuth scope to create redirects.
      *
-     * You can create a new URL redirect by making a POST request to `api.intercom.io Requires the `read_write_help_center_redirects_scope` OAuth scope.
+     * You can create a new URL redirect by making a POST request to `api.intercom.io Requires the
+     * `read_write_help_center_redirects_scope` OAuth scope.
      */
-    fun createRedirect(request: dev.octri.showcase.intercom.methods.HelpCenterMethods.CreateHelpCenterRedirectParams, options: RequestOptions? = null): HelpCenterRedirect {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.createHelpCenterRedirect(clientConfig, request, options)
+    fun createRedirect(
+        request:
+            dev.octri.showcase.intercom.methods.HelpCenterMethods.CreateHelpCenterRedirectParams,
+        options: RequestOptions? = null,
+    ): HelpCenterRedirect {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.createHelpCenterRedirect(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a redirect from a specific help center. Use the help center and redirect identifiers to fetch the redirect's source URL, locale, and target details. Access requires the `read_help_center_redirects_scope` OAuth scope.
+     * Retrieves a redirect from a specific help center. Use the help center and redirect
+     * identifiers to fetch the redirect's source URL, locale, and target details. Access requires
+     * the `read_help_center_redirects_scope` OAuth scope.
      *
-     * You can fetch the details of a single redirect by making a GET request to `api.intercom.io Requires the `read_help_center_redirects_scope` OAuth scope.
+     * You can fetch the details of a single redirect by making a GET request to `api.intercom.io
+     * Requires the `read_help_center_redirects_scope` OAuth scope.
      */
-    fun retrieveRedirect(helpCenterId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenterRedirect {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.retrieveHelpCenterRedirect(clientConfig, helpCenterId, id, intercomVersion, options)
+    fun retrieveRedirect(
+        helpCenterId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): HelpCenterRedirect {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.retrieveHelpCenterRedirect(
+            clientConfig,
+            helpCenterId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Deletes a redirect from a help center. Provide the help center and redirect identifiers to specify which redirect to remove. Access requires the `read_write_help_center_redirects_scope` OAuth scope.
+     * Deletes a redirect from a help center. Provide the help center and redirect identifiers to
+     * specify which redirect to remove. Access requires the
+     * `read_write_help_center_redirects_scope` OAuth scope.
      *
-     * You can delete a single redirect by making a DELETE request to `api.intercom.io Requires the `read_write_help_center_redirects_scope` OAuth scope.
+     * You can delete a single redirect by making a DELETE request to `api.intercom.io Requires the
+     * `read_write_help_center_redirects_scope` OAuth scope.
      */
-    fun deleteRedirect(helpCenterId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedHelpCenterRedirectObject {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.deleteHelpCenterRedirect(clientConfig, helpCenterId, id, intercomVersion, options)
+    fun deleteRedirect(
+        helpCenterId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedHelpCenterRedirectObject {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.deleteHelpCenterRedirect(
+            clientConfig,
+            helpCenterId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists collections in the help center app. Use the results to review collection details, including their names, descriptions, and parent collections. Collections are ordered by `updated_at` in descending order, with the most recently updated first.
+     * Lists collections in the help center app. Use the results to review collection details,
+     * including their names, descriptions, and parent collections. Collections are ordered by
+     * `updated_at` in descending order, with the most recently updated first.
      *
-     * You can fetch a list of all collections by making a GET request to `api.intercom.io Collections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated collections first.
+     * You can fetch a list of all collections by making a GET request to `api.intercom.io
+     * Collections will be returned in descending order on the `updated_at` attribute. This means if
+     * you need to iterate through results then we'll show the most recently updated collections
+     * first.
      */
-    fun listAllCollections(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CollectionList {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.listAllCollections(clientConfig, intercomVersion, options)
+    fun listAllCollections(
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CollectionList {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.listAllCollections(
+            clientConfig,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Creates a collection in a help center. Supply `name` and optionally provide a description, translated content, or a parent collection; omitting `help_center_id` creates the collection in the default help center. Use `parent_id` to place the collection under another collection, or leave it null to create a top-level collection.
+     * Creates a collection in a help center. Supply `name` and optionally provide a description,
+     * translated content, or a parent collection; omitting `help_center_id` creates the collection
+     * in the default help center. Use `parent_id` to place the collection under another collection,
+     * or leave it null to create a top-level collection.
      *
      * You can create a new collection by making a POST request to `api.intercom.io
      */
-    fun createCollection(request: dev.octri.showcase.intercom.methods.HelpCenterMethods.CreateCollectionParams, options: RequestOptions? = null): CollectionModel {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.createCollection(clientConfig, request, options)
+    fun createCollection(
+        request: dev.octri.showcase.intercom.methods.HelpCenterMethods.CreateCollectionParams,
+        options: RequestOptions? = null,
+    ): CollectionModel {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.createCollection(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a collection from the help center. Provide its identifier to get details such as its name, description, URL, and parent collection. Use the collection identifier assigned by Intercom.
+     * Retrieves a collection from the help center. Provide its identifier to get details such as
+     * its name, description, URL, and parent collection. Use the collection identifier assigned by
+     * Intercom.
      *
      * You can fetch the details of a single collection by making a GET request to `api.intercom.io
      */
-    fun retrieveCollection(collectionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CollectionModel {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.retrieveCollection(clientConfig, collectionId, intercomVersion, options)
+    fun retrieveCollection(
+        collectionId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CollectionModel {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.retrieveCollection(
+            clientConfig,
+            collectionId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Replaces collection details for a specified collection. Supply the collection fields you want to change, such as `name`, `description`, translated content, or parent collection. Use the collection identifier assigned by Intercom to select the collection.
+     * Replaces collection details for a specified collection. Supply the collection fields you want
+     * to change, such as `name`, `description`, translated content, or parent collection. Use the
+     * collection identifier assigned by Intercom to select the collection.
      *
      * You can update the details of a single collection by making a PUT request to `api.intercom.io
      */
-    fun updateCollection(request: dev.octri.showcase.intercom.methods.HelpCenterMethods.UpdateCollectionParams, options: RequestOptions? = null): CollectionModel {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.updateCollection(clientConfig, request, options)
+    fun updateCollection(
+        request: dev.octri.showcase.intercom.methods.HelpCenterMethods.UpdateCollectionParams,
+        options: RequestOptions? = null,
+    ): CollectionModel {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.updateCollection(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes a collection from the help center. Provide the collection identifier to specify which collection to remove. Use this operation when you no longer need the collection.
+     * Deletes a collection from the help center. Provide the collection identifier to specify which
+     * collection to remove. Use this operation when you no longer need the collection.
      *
      * You can delete a single collection by making a DELETE request to `api.intercom.io
      */
-    fun deleteCollection(collectionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedCollectionObject {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.deleteCollection(clientConfig, collectionId, intercomVersion, options)
+    fun deleteCollection(
+        collectionId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedCollectionObject {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.deleteCollection(
+            clientConfig,
+            collectionId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Retrieves details for a help center. Provide its identifier to inspect its URL, display name, availability, and configured locales. Use this operation to view the help center's workspace and configuration details.
+     * Retrieves details for a help center. Provide its identifier to inspect its URL, display name,
+     * availability, and configured locales. Use this operation to view the help center's workspace
+     * and configuration details.
      *
      * You can fetch the details of a single Help Center by making a GET request to `api.intercom.io
      */
-    fun retrieve(helpCenterId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenter {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.retrieveHelpCenter(clientConfig, helpCenterId, intercomVersion, options)
+    fun retrieve(
+        helpCenterId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): HelpCenter {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.retrieveHelpCenter(
+            clientConfig,
+            helpCenterId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the help centers belonging to the app. Use the results to review each help center's identifier, URL, display name, configured locales, and availability. The response contains a list of help center objects.
+     * Lists the help centers belonging to the app. Use the results to review each help center's
+     * identifier, URL, display name, configured locales, and availability. The response contains a
+     * list of help center objects.
      *
      * You can list all Help Centers by making a GET request to `api.intercom.io
      */
-    fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HelpCenterList {
-        return dev.octri.showcase.intercom.methods.HelpCenterMethods.listHelpCenters(clientConfig, intercomVersion, options)
+    fun list(
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): HelpCenterList {
+        return dev.octri.showcase.intercom.methods.HelpCenterMethods.listHelpCenters(
+            clientConfig,
+            intercomVersion,
+            options,
+        )
     }
-
 }

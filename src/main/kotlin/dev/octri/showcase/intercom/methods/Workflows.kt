@@ -12,22 +12,37 @@ import dev.octri.showcase.intercom.WorkflowExport
 
 object Workflows {
 
-
     /**
-     * Exports the complete configuration for a workflow, including its steps, targeting rules, and attributes. Use this operation to retrieve workflow configuration for EU Data Act compliance.
+     * Exports the complete configuration for a workflow, including its steps, targeting rules, and
+     * attributes. Use this operation to retrieve workflow configuration for EU Data Act compliance.
      *
-     * Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes. This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.
+     * Export a workflow configuration by its ID. This endpoint returns the complete workflow
+     * definition including its steps, targeting rules, and attributes. This endpoint is designed
+     * for EU Data Act compliance, allowing customers to export their workflow configurations.
      *
      * @param id The unique identifier for the workflow
      */
-    fun exportWorkflow(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WorkflowExport {
-        return SdkClient.request<WorkflowExport>(SdkClient.RequestSpec("GET", "/export/workflows/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "exportWorkflow", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("403" to Error2::class.java, "404" to Error2::class.java))).data
+    fun exportWorkflow(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WorkflowExport {
+        return SdkClient.request<WorkflowExport>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/export/workflows/${SdkClient.encodePathSegment(id)}",
+                    config = clientConfig,
+                    operationId = "exportWorkflow",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("403" to Error2::class.java, "404" to Error2::class.java),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

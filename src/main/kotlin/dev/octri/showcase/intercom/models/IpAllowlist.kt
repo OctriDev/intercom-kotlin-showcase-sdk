@@ -3,20 +3,16 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * IP allowlist settings for the workspace.
- */
+/** IP allowlist settings for the workspace. */
 data class IpAllowlist(
-    /**
-     * String representing the object's type. Always has the value `ip_allowlist`.
-     */
+    /** String representing the object's type. Always has the value `ip_allowlist`. */
     val type: String? = null,
-    /**
-     * Whether the IP allowlist is enabled for the workspace.
-     */
+    /** Whether the IP allowlist is enabled for the workspace. */
     val enabled: Boolean? = null,
     /**
-     * List of allowed IP addresses and/or IP ranges in CIDR notation. Examples: - Single IP: `192.168.0.1` - IP range: `192.168.0.1/24` (allows 192.168.0.0 - 192.168.0.255)
+     * List of allowed IP addresses and/or IP ranges in CIDR notation. Examples: - Single IP:
+     * `192.168.0.1` - IP range: `192.168.0.1/24` (allows 192.168.0.0 - 192.168.0.255)
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist") val ipAllowlist: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("ip_allowlist")
+    val ipAllowlist: List<String>? = null,
 )

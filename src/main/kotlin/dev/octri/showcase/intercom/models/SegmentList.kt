@@ -6,19 +6,14 @@ package dev.octri.showcase.intercom.models
 import dev.octri.showcase.intercom.models.segments.Segment
 
 /**
- * This will return a list of Segment Objects. The result may also have a pages object if the response is paginated.
+ * This will return a list of Segment Objects. The result may also have a pages object if the
+ * response is paginated.
  */
 data class SegmentList(
-    /**
-     * The type of the object
-     */
+    /** The type of the object */
     val type: SegmentListTypeEnum? = null,
-    /**
-     * A list of Segment objects
-     */
+    /** A list of Segment objects */
     val segments: List<Segment>? = null,
-    /**
-     * A pagination object, which may be empty, indicating no further pages to fetch.
-     */
-    val pages: Map<String, Any>? = null
+    /** A pagination object, which may be empty, indicating no further pages to fetch. */
+    val pages: Map<String, Any>? = null,
 )

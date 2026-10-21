@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Typed representation of the `DetachContactFromConversationRequest` API schema.
- */
+/** Typed representation of the `DetachContactFromConversationRequest` API schema. */
 data class DetachContactFromConversationRequest(
-    /**
-     * The `id` of the admin who is performing the action.
-     */
+    /** The `id` of the admin who is performing the action. */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String
 )

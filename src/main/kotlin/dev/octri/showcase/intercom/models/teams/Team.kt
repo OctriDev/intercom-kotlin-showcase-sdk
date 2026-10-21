@@ -5,36 +5,26 @@ package dev.octri.showcase.intercom.models.teams
 
 import dev.octri.showcase.intercom.models.AdminPriorityLevel
 
-/**
- * Teams are groups of admins in Intercom.
- */
+/** Teams are groups of admins in Intercom. */
 data class Team(
-    /**
-     * Value is always "team"
-     */
+    /** Value is always "team" */
     val type: String? = null,
-    /**
-     * The id of the team
-     */
+    /** The id of the team */
     val id: String? = null,
-    /**
-     * The name of the team
-     */
+    /** The name of the team */
     val name: String? = null,
-    /**
-     * The list of admin IDs that are a part of the team.
-     */
+    /** The list of admin IDs that are a part of the team. */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_ids") val adminIds: List<Long>? = null,
+    /** Admin priority levels for the team */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_priority_level")
+    val adminPriorityLevel: AdminPriorityLevel? = null,
     /**
-     * Admin priority levels for the team
+     * The assignment limit for the team. This field is only present when the team's distribution
+     * type is load balanced.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_priority_level") val adminPriorityLevel: AdminPriorityLevel? = null,
-    /**
-     * The assignment limit for the team. This field is only present when the team's distribution type is load balanced.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("assignment_limit") val assignmentLimit: Long? = null,
-    /**
-     * Describes how assignments are distributed among the team members
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("distribution_method") val distributionMethod: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("assignment_limit")
+    val assignmentLimit: Long? = null,
+    /** Describes how assignments are distributed among the team members */
+    @com.fasterxml.jackson.annotation.JsonProperty("distribution_method")
+    val distributionMethod: String? = null,
 )

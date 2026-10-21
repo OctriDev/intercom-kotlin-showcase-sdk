@@ -5,180 +5,147 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.news.NewsfeedAssignment
 
-/**
- * Response returned when an object is deleted
- */
+/** Response returned when an object is deleted */
 data class DeletedObject(
-    /**
-     * The unique identifier for the news item which you provided in the URL.
-     */
+    /** The unique identifier for the news item which you provided in the URL. */
     val id: String? = null,
-    /**
-     * The type of object which was deleted - news-item.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedObjectObjectEnum? = null,
-    /**
-     * Whether the news item was deleted successfully or not.
-     */
-    val deleted: Boolean? = null
+    /** The type of object which was deleted - news-item. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedObjectObjectEnum? = null,
+    /** Whether the news item was deleted successfully or not. */
+    val deleted: Boolean? = null,
 )
 
 /**
- * A newsfeed is a collection of news items, targeted to a specific audience. Newsfeeds currently cannot be edited through the API, please refer to this article to set up your newsfeeds in Intercom.
+ * A newsfeed is a collection of news items, targeted to a specific audience. Newsfeeds currently
+ * cannot be edited through the API, please refer to this article to set up your newsfeeds in
+ * Intercom.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class Newsfeed(
-    /**
-     * The unique identifier for the newsfeed which is given by Intercom.
-     */
+    /** The unique identifier for the newsfeed which is given by Intercom. */
     val id: String? = null,
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     val type: NewsfeedTypeEnum? = null,
-    /**
-     * The name of the newsfeed. This name will never be visible to your users.
-     */
+    /** The name of the newsfeed. This name will never be visible to your users. */
     val name: String? = null,
-    /**
-     * Timestamp for when the newsfeed was created.
-     */
+    /** Timestamp for when the newsfeed was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * Timestamp for when the newsfeed was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
+    /** Timestamp for when the newsfeed was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
 ) : PaginatedResponseDataItem
 
 /**
- * A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.
+ * A News Item is a content type in Intercom enabling you to announce product updates, company news,
+ * promotions, events and more with your customers.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class NewsItem(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     val type: NewsItemTypeEnum? = null,
-    /**
-     * The unique identifier for the news item which is given by Intercom.
-     */
+    /** The unique identifier for the news item which is given by Intercom. */
     val id: String? = null,
-    /**
-     * The id of the workspace which the news item belongs to.
-     */
+    /** The id of the workspace which the news item belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("workspace_id") val workspaceId: String? = null,
-    /**
-     * The title of the news item.
-     */
+    /** The title of the news item. */
     val title: String? = null,
-    /**
-     * The news item body, which may contain HTML.
-     */
+    /** The news item body, which may contain HTML. */
     val body: String? = null,
-    /**
-     * The id of the sender of the news item. Must be a teammate on the workspace.
-     */
+    /** The id of the sender of the news item. Must be a teammate on the workspace. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_id") val senderId: Long? = null,
     /**
-     * News items will not be visible to your users in the assigned newsfeeds until they are set live.
+     * News items will not be visible to your users in the assigned newsfeeds until they are set
+     * live.
      */
     val state: NewsItemStateEnum? = null,
-    /**
-     * A list of newsfeed_assignments to assign to the specified newsfeed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("newsfeed_assignments") val newsfeedAssignments: List<NewsfeedAssignment>? = null,
-    /**
-     * Label names displayed to users to categorize the news item.
-     */
+    /** A list of newsfeed_assignments to assign to the specified newsfeed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("newsfeed_assignments")
+    val newsfeedAssignments: List<NewsfeedAssignment>? = null,
+    /** Label names displayed to users to categorize the news item. */
     val labels: List<String?>? = null,
-    /**
-     * URL of the image used as cover. Must have .jpg or .png extension.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("cover_image_url") val coverImageUrl: String? = null,
-    /**
-     * Ordered list of emoji reactions to the news item. When empty, reactions are disabled.
-     */
+    /** URL of the image used as cover. Must have .jpg or .png extension. */
+    @com.fasterxml.jackson.annotation.JsonProperty("cover_image_url")
+    val coverImageUrl: String? = null,
+    /** Ordered list of emoji reactions to the news item. When empty, reactions are disabled. */
     val reactions: List<String?>? = null,
     /**
-     * When set to true, the news item will appear in the messenger newsfeed without showing a notification badge.
+     * When set to true, the news item will appear in the messenger newsfeed without showing a
+     * notification badge.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("deliver_silently") val deliverSilently: Boolean? = null,
-    /**
-     * Timestamp for when the news item was created.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("deliver_silently")
+    val deliverSilently: Boolean? = null,
+    /** Timestamp for when the news item was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * Timestamp for when the news item was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
+    /** Timestamp for when the news item was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
 ) : PaginatedResponseDataItem
 
 /**
- * A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.
+ * A News Item is a content type in Intercom enabling you to announce product updates, company news,
+ * promotions, events and more with your customers.
  */
 data class NewsItemRequest(
-    /**
-     * The title of the news item.
-     */
+    /** The title of the news item. */
     val title: String,
-    /**
-     * The id of the sender of the news item. Must be a teammate on the workspace.
-     */
+    /** The id of the sender of the news item. Must be a teammate on the workspace. */
     @com.fasterxml.jackson.annotation.JsonProperty("sender_id") val senderId: Long,
-    /**
-     * The news item body, which may contain HTML.
-     */
+    /** The news item body, which may contain HTML. */
     val body: String? = null,
     /**
-     * News items will not be visible to your users in the assigned newsfeeds until they are set live.
+     * News items will not be visible to your users in the assigned newsfeeds until they are set
+     * live.
      */
     val state: NewsItemRequestStateEnum? = null,
     /**
-     * When set to `true`, the news item will appear in the messenger newsfeed without showing a notification badge.
+     * When set to `true`, the news item will appear in the messenger newsfeed without showing a
+     * notification badge.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("deliver_silently") val deliverSilently: Boolean? = null,
-    /**
-     * Label names displayed to users to categorize the news item.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("deliver_silently")
+    val deliverSilently: Boolean? = null,
+    /** Label names displayed to users to categorize the news item. */
     val labels: List<String>? = null,
-    /**
-     * Ordered list of emoji reactions to the news item. When empty, reactions are disabled.
-     */
+    /** Ordered list of emoji reactions to the news item. When empty, reactions are disabled. */
     val reactions: List<String?>? = null,
-    /**
-     * A list of newsfeed_assignments to assign to the specified newsfeed.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("newsfeed_assignments") val newsfeedAssignments: List<NewsfeedAssignment>? = null
+    /** A list of newsfeed_assignments to assign to the specified newsfeed. */
+    @com.fasterxml.jackson.annotation.JsonProperty("newsfeed_assignments")
+    val newsfeedAssignments: List<NewsfeedAssignment>? = null,
 )
 
-/**
- * Paginated Response
- */
+/** Paginated Response */
 data class PaginatedResponse(
-    /**
-     * The type of object
-     */
+    /** The type of object */
     val type: PaginatedResponseTypeEnum? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
+     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
+     * result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
     val pages: CursorPages? = null,
-    /**
-     * A count of the total number of objects.
-     */
+    /** A count of the total number of objects. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * An array of Objects
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<PaginatedResponseDataItem>? = null
+    /** An array of Objects */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<PaginatedResponseDataItem>? = null,
 )
 
-/**
- * Required API value serialized in the `data[]` wire field.
- */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property = "type", visible = true)
+/** Required API value serialized in the `data[]` wire field. */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
+    property = "type",
+    visible = true,
+)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = NewsItem::class, name = "news-item"),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Newsfeed::class, name = "newsfeed")
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = Newsfeed::class, name = "newsfeed"),
 )
 sealed interface PaginatedResponseDataItem

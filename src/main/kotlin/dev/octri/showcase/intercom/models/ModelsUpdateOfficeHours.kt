@@ -10,42 +10,37 @@ import java.time.LocalDate
  * The request payload for updating an office hours exception. Only the provided fields are updated.
  */
 data class UpdateOfficeHoursExceptionRequest(
-    /**
-     * The date the exception applies to, in `YYYY-MM-DD` format.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exception_date") val exceptionDate: LocalDate? = null,
-    /**
-     * The type of exception.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("exception_type") val exceptionType: UpdateOfficeHoursExceptionRequestExceptionTypeEnum? = null,
-    /**
-     * An optional name for the exception.
-     */
+    /** The date the exception applies to, in `YYYY-MM-DD` format. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exception_date")
+    val exceptionDate: LocalDate? = null,
+    /** The type of exception. */
+    @com.fasterxml.jackson.annotation.JsonProperty("exception_type")
+    val exceptionType: UpdateOfficeHoursExceptionRequestExceptionTypeEnum? = null,
+    /** An optional name for the exception. */
     val name: String? = null,
     /**
      * The open intervals for the exception date. Required for `custom_hours`; omit for `closed`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals") val timeIntervals: List<OfficeHoursTimeInterval>? = null,
-    /**
-     * Whether the exception repeats every year on the same date.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("recurring_annually") val recurringAnnually: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals")
+    val timeIntervals: List<OfficeHoursTimeInterval>? = null,
+    /** Whether the exception repeats every year on the same date. */
+    @com.fasterxml.jackson.annotation.JsonProperty("recurring_annually")
+    val recurringAnnually: Boolean? = null,
 )
 
 /**
  * The request payload for updating an office hours schedule. Only the provided fields are updated.
  */
 data class UpdateOfficeHoursScheduleRequest(
-    /**
-     * The name of the office hours schedule.
-     */
+    /** The name of the office hours schedule. */
     val name: String? = null,
+    /** The IANA time zone the schedule's hours are evaluated in. */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_zone_name")
+    val timeZoneName: String? = null,
     /**
-     * The IANA time zone the schedule's hours are evaluated in.
+     * The open intervals for the schedule. `start_minute` and `end_minute` must be on a 15-minute
+     * boundary.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_zone_name") val timeZoneName: String? = null,
-    /**
-     * The open intervals for the schedule. `start_minute` and `end_minute` must be on a 15-minute boundary.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals") val timeIntervals: List<OfficeHoursTimeInterval>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals")
+    val timeIntervals: List<OfficeHoursTimeInterval>? = null,
 )

@@ -15,39 +15,66 @@ import dev.octri.showcase.intercom.Validation
 
 object Audiences {
 
-
     /**
-     * Lists audiences configured for the workspace, with pagination metadata. Use `page` and `per_page` to paginate the results, and note that `per_page` is capped at 50.
+     * Lists audiences configured for the workspace, with pagination metadata. Use `page` and
+     * `per_page` to paginate the results, and note that `per_page` is capped at 50.
      *
      * You can fetch a list of all audiences for the workspace.
      *
      * @param page The page of results to fetch. Defaults to first page.
-     * @param perPage The number of results to return per page. Defaults to 50.
-     *   Maximum is 50.
+     * @param perPage The number of results to return per page. Defaults to 50. Maximum is 50.
      */
-    fun listAudiences(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): AudienceList {
+    fun listAudiences(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): AudienceList {
         if (perPage != null) {
             Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 50.0))
-}
+        }
 
-        return SdkClient.request<AudienceList>(SdkClient.RequestSpec("GET", "/audiences", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "listAudiences", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+        return SdkClient.request<AudienceList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/audiences",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "page" to SdkClient.queryValue(page, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        ),
+                    operationId = "listAudiences",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
     /**
-     * Lists audiences configured for the workspace, with pagination metadata. Use `page` and `per_page` to paginate the results, and note that `per_page` is capped at 50.
+     * Lists audiences configured for the workspace, with pagination metadata. Use `page` and
+     * `per_page` to paginate the results, and note that `per_page` is capped at 50.
      *
      * You can fetch a list of all audiences for the workspace.
      *
      * @param page The page of results to fetch. Defaults to first page.
-     * @param perPage The number of results to return per page. Defaults to 50.
-     *   Maximum is 50.
+     * @param perPage The number of results to return per page. Defaults to 50. Maximum is 50.
      */
-    fun listAudiencesPaginated(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldFn: (Audience) -> Boolean) {
+    fun listAudiencesPaginated(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+        yieldFn: (Audience) -> Boolean,
+    ) {
         var pageNumber: Long = page ?: 1
         while (true) {
             val page = listAudiences(clientConfig, pageNumber, perPage, intercomVersion, options)
@@ -67,7 +94,14 @@ object Audiences {
         val hasMore: Boolean,
     )
 
-    fun listAudiencesPages(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldPage: (ListAudiencesPage) -> Boolean) {
+    fun listAudiencesPages(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+        yieldPage: (ListAudiencesPage) -> Boolean,
+    ) {
         var pageNumber: Long = page ?: 1
         while (true) {
             val page = listAudiences(clientConfig, pageNumber, perPage, intercomVersion, options)
@@ -81,83 +115,161 @@ object Audiences {
         }
     }
 
-
-
     /**
-     * Creates an audience that groups contacts for targeting by Fin. Supply a `name` and optionally define membership with `predicates` and role-based filters with `role_predicates`. A 201 response returns the created audience and its generated identifier.
+     * Creates an audience that groups contacts for targeting by Fin. Supply a `name` and optionally
+     * define membership with `predicates` and role-based filters with `role_predicates`. A 201
+     * response returns the created audience and its generated identifier.
      *
      * You can create a new audience by making a POST request to `api.intercom.io
      *
      * @param name The name of the audience.
-     * @param predicates The predicates that define which contacts belong to the
-     *   audience.
-     * @param rolePredicates Role-based predicates that further filter audience
-     *   membership by contact role.
+     * @param predicates The predicates that define which contacts belong to the audience.
+     * @param rolePredicates Role-based predicates that further filter audience membership by
+     *   contact role.
      */
-    fun createAudience(clientConfig: ClientConfig, name: String, intercomVersion: IntercomVersion? = null, predicates: List<Predicate>? = null, rolePredicates: List<Predicate>? = null, options: RequestOptions? = null): Audience {
-        return SdkClient.request<Audience>(SdkClient.RequestSpec("POST", "/audiences", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "predicates" to (SdkClient.omitIfNull(predicates)), "role_predicates" to (SdkClient.omitIfNull(rolePredicates))), operationId = "createAudience", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java))).data
+    fun createAudience(
+        clientConfig: ClientConfig,
+        name: String,
+        intercomVersion: IntercomVersion? = null,
+        predicates: List<Predicate>? = null,
+        rolePredicates: List<Predicate>? = null,
+        options: RequestOptions? = null,
+    ): Audience {
+        return SdkClient.request<Audience>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audiences",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "predicates" to (SdkClient.omitIfNull(predicates)),
+                            "role_predicates" to (SdkClient.omitIfNull(rolePredicates)),
+                        ),
+                    operationId = "createAudience",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves an audience configured for the workspace, including its contact and role-based membership predicates. Use the audience `id` to retrieve the audience details.
+     * Retrieves an audience configured for the workspace, including its contact and role-based
+     * membership predicates. Use the audience `id` to retrieve the audience details.
      *
      * You can fetch the details of a single audience by making a GET request to `api.intercom.io
      *
      * @param id The unique identifier for the audience.
      */
-    fun retrieveAudience(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Audience {
-        return SdkClient.request<Audience>(SdkClient.RequestSpec("GET", "/audiences/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveAudience", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
+    fun retrieveAudience(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Audience {
+        return SdkClient.request<Audience>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/audiences/${SdkClient.encodePathSegment(id)}",
+                    config = clientConfig,
+                    operationId = "retrieveAudience",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Replaces the supplied audience properties while leaving omitted properties unchanged. Send any combination of `name`, `predicates`, and `role_predicates` to update the audience identified by `id`.
+     * Replaces the supplied audience properties while leaving omitted properties unchanged. Send
+     * any combination of `name`, `predicates`, and `role_predicates` to update the audience
+     * identified by `id`.
      *
      * You can update the details of a single audience by making a PUT request to `api.intercom.io
      *
      * @param id The unique identifier for the audience.
      * @param name The name of the audience.
-     * @param predicates The predicates that define which contacts belong to the
-     *   audience.
-     * @param rolePredicates Role-based predicates that further filter audience
-     *   membership by contact role.
+     * @param predicates The predicates that define which contacts belong to the audience.
+     * @param rolePredicates Role-based predicates that further filter audience membership by
+     *   contact role.
      */
-    fun updateAudience(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, name: String? = null, predicates: List<Predicate>? = null, rolePredicates: List<Predicate>? = null, options: RequestOptions? = null): Audience {
-        return SdkClient.request<Audience>(SdkClient.RequestSpec("PUT", "/audiences/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "predicates" to (SdkClient.omitIfNull(predicates)), "role_predicates" to (SdkClient.omitIfNull(rolePredicates))), operationId = "updateAudience", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
+    fun updateAudience(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        name: String? = null,
+        predicates: List<Predicate>? = null,
+        rolePredicates: List<Predicate>? = null,
+        options: RequestOptions? = null,
+    ): Audience {
+        return SdkClient.request<Audience>(
+                SdkClient.RequestSpec(
+                    "PUT",
+                    "/audiences/${SdkClient.encodePathSegment(id)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "predicates" to (SdkClient.omitIfNull(predicates)),
+                            "role_predicates" to (SdkClient.omitIfNull(rolePredicates)),
+                        ),
+                    operationId = "updateAudience",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors =
+                        mapOf(
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                            "422" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes the audience identified by `id` from the workspace. Use this endpoint when the audience is no longer needed; a successful response has no response body.
+     * Deletes the audience identified by `id` from the workspace. Use this endpoint when the
+     * audience is no longer needed; a successful response has no response body.
      *
      * You can delete a single audience by making a DELETE request to `api.intercom.io
      *
      * @param id The unique identifier for the audience.
      */
-    fun deleteAudience(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
-        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/audiences/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteAudience", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    fun deleteAudience(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Unit {
+        SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/audiences/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "deleteAudience",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

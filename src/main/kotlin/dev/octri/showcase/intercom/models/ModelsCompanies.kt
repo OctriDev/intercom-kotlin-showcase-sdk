@@ -7,136 +7,105 @@ import dev.octri.showcase.intercom.models.companies.Company
 import dev.octri.showcase.intercom.models.contacts.Contact
 import dev.octri.showcase.intercom.models.segments.Segment
 
-/**
- * A list of Contact Objects
- */
+/** A list of Contact Objects */
 data class CompanyAttachedContacts(
-    /**
-     * The type of object - `list`
-     */
+    /** The type of object - `list` */
     val type: CompanyAttachedContactsTypeEnum? = null,
-    /**
-     * An array containing Contact Objects
-     */
+    /** An array containing Contact Objects */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Contact>? = null,
-    /**
-     * The total number of contacts
-     */
+    /** The total number of contacts */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
+     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
+     * result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
-    val pages: CursorPages? = null
+    val pages: CursorPages? = null,
 )
 
-/**
- * A list of Segment Objects
- */
+/** A list of Segment Objects */
 data class CompanyAttachedSegments(
-    /**
-     * The type of object - `list`
-     */
+    /** The type of object - `list` */
     val type: CompanyAttachedSegmentsTypeEnum? = null,
-    /**
-     * An array containing Segment Objects
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Segment>? = null
+    /** An array containing Segment Objects */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Segment>? = null,
 )
 
-/**
- * This will return a list of companies for the App.
- */
+/** This will return a list of companies for the App. */
 data class CompanyList(
-    /**
-     * The type of object - `list`.
-     */
+    /** The type of object - `list`. */
     val type: CompanyListTypeEnum? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
+     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
+     * result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
     val pages: CursorPages? = null,
-    /**
-     * The total number of companies.
-     */
+    /** The total number of companies. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * An array containing Company Objects.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Company>? = null
+    /** An array containing Company Objects. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Company>? = null,
 )
 
 /**
- * Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.
+ * Companies allow you to represent organizations using your product. Each company will have its own
+ * description and be associated with contacts. You can fetch, create, update and list companies.
  */
 data class CompanyScroll(
-    /**
-     * The type of object - `list`
-     */
+    /** The type of object - `list` */
     val type: CompanyScrollTypeEnum? = null,
-    /**
-     * Optional array value serialized in the `data` wire field.
-     */
+    /** Optional array value serialized in the `data` wire field. */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Company>? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
+     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
+     * result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
     val pages: CursorPages? = null,
-    /**
-     * The total number of companies
-     */
+    /** The total number of companies */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * The scroll parameter to use in the next request to fetch the next page of results.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("scroll_param") val scrollParam: String? = null
+    /** The scroll parameter to use in the next request to fetch the next page of results. */
+    @com.fasterxml.jackson.annotation.JsonProperty("scroll_param") val scrollParam: String? = null,
 )
 
-/**
- * An optional object to sort the results by.
- */
+/** An optional object to sort the results by. */
 data class CompanySearchRequestSort(
-    /**
-     * The field to sort the results on.
-     */
+    /** The field to sort the results on. */
     @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String? = null,
     /**
-     * The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
+     * The order to sort the results in. Defaults to `descending` when omitted. Values other than
+     * `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
      */
-    val order: CompanySearchRequestSortOrderEnum? = null
+    val order: CompanySearchRequestSortOrderEnum? = null,
 )
 
-/**
- * Search for companies using Intercom's Search API.
- */
+/** Search for companies using Intercom's Search API. */
 data class CompanySearchRequest(
-    /**
-     * Required API value serialized in the `query` wire field.
-     */
+    /** Required API value serialized in the `query` wire field. */
     val query: CompanySearchRequestQuery,
-    /**
-     * Optional object value serialized in the `pagination` wire field.
-     */
+    /** Optional object value serialized in the `pagination` wire field. */
     val pagination: StartingAfterPaging? = null,
-    /**
-     * An optional object to sort the results by.
-     */
-    val sort: CompanySearchRequestSort? = null
+    /** An optional object to sort the results by. */
+    val sort: CompanySearchRequestSort? = null,
 )
 
-/**
- * Required API value serialized in the `query` wire field.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CompanySearchRequestQuery.Deserializer::class)
+/** Required API value serialized in the `query` wire field. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = CompanySearchRequestQuery.Deserializer::class
+)
 sealed interface CompanySearchRequestQuery {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CompanySearchRequestQuery>() {
+    class Deserializer :
+        com.fasterxml.jackson.databind.JsonDeserializer<CompanySearchRequestQuery>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): CompanySearchRequestQuery {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType = CompanySearchRequestQueryOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
+            val ownedType =
+                CompanySearchRequestQueryOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }
+                    ?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -144,148 +113,142 @@ sealed interface CompanySearchRequestQuery {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out CompanySearchRequestQuery>> = listOf(SingleFilterSearchRequest::class.java, MultipleFilterSearchRequest::class.java)
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
+            val objectTypes: List<Class<out CompanySearchRequestQuery>> =
+                listOf(
+                    SingleFilterSearchRequest::class.java,
+                    MultipleFilterSearchRequest::class.java,
+                )
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
+                return it
+            }
             return when {
-                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                    parser, CompanySearchRequestQuery::class.java, "no CompanySearchRequestQuery branch accepts this payload")
+                else ->
+                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                        parser,
+                        CompanySearchRequestQuery::class.java,
+                        "no CompanySearchRequestQuery branch accepts this payload",
+                    )
             }
         }
     }
 }
 
-internal val CompanySearchRequestQueryOwnedTypes: List<Pair<List<String>, Class<out CompanySearchRequestQuery>>> = listOf(
-    listOf("field") to SingleFilterSearchRequest::class.java,
-)
+internal val CompanySearchRequestQueryOwnedTypes:
+    List<Pair<List<String>, Class<out CompanySearchRequestQuery>>> =
+    listOf(listOf("field") to SingleFilterSearchRequest::class.java)
 
-/**
- * You can create or update a Company
- */
+/** You can create or update a Company */
 data class CreateOrUpdateCompanyRequest(
-    /**
-     * The name of the Company
-     */
+    /** The name of the Company */
     val name: String? = null,
-    /**
-     * The company id you have defined for the company. Can't be updated
-     */
+    /** The company id you have defined for the company. Can't be updated */
     @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
-    /**
-     * The name of the plan you have associated with the company.
-     */
+    /** The name of the plan you have associated with the company. */
     val plan: String? = null,
-    /**
-     * The number of employees in this company.
-     */
+    /** The number of employees in this company. */
     val size: Long? = null,
     /**
-     * The URL for this company's website. Please note that the value specified here is not validated. Accepts any string.
+     * The URL for this company's website. Please note that the value specified here is not
+     * validated. Accepts any string.
      */
     val website: String? = null,
-    /**
-     * The industry that this company operates in.
-     */
+    /** The industry that this company operates in. */
     val industry: String? = null,
     /**
-     * A hash of key/value pairs containing any other data about the company you want Intercom to store.
+     * A hash of key/value pairs containing any other data about the company you want Intercom to
+     * store.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: Map<String, String>? = null,
+    /** The time the company was created by you. */
+    @com.fasterxml.jackson.annotation.JsonProperty("remote_created_at")
+    val remoteCreatedAt: Long? = null,
+    /** Set to true to update the company's last seen time to now. */
+    @com.fasterxml.jackson.annotation.JsonProperty("update_last_request_at")
+    val updateLastRequestAt: Boolean? = null,
     /**
-     * The time the company was created by you.
+     * How much revenue the company generates for your business. Note that this will truncate
+     * floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that
+     * this has an upper limit of 2**31-1 or 2147483647..
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("remote_created_at") val remoteCreatedAt: Long? = null,
-    /**
-     * Set to true to update the company's last seen time to now.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("update_last_request_at") val updateLastRequestAt: Boolean? = null,
-    /**
-     * How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("monthly_spend") val monthlySpend: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("monthly_spend") val monthlySpend: Long? = null,
 )
 
-/**
- * Response returned when an object is deleted
- */
+/** Response returned when an object is deleted */
 data class DeletedCompanyObject(
-    /**
-     * The unique identifier for the company which is given by Intercom.
-     */
+    /** The unique identifier for the company which is given by Intercom. */
     val id: String? = null,
-    /**
-     * The type of object which was deleted. - `company`
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedCompanyObjectObjectEnum? = null,
-    /**
-     * Whether the company was deleted successfully or not.
-     */
-    val deleted: Boolean? = null
+    /** The type of object which was deleted. - `company` */
+    @com.fasterxml.jackson.annotation.JsonProperty("object")
+    val `object`: DeletedCompanyObjectObjectEnum? = null,
+    /** Whether the company was deleted successfully or not. */
+    val deleted: Boolean? = null,
 )
 
-/**
- * Search using Intercoms Search APIs with more than one filter.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Search using Intercoms Search APIs with more than one filter. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class MultipleFilterSearchRequest(
-    /**
-     * An operator to allow boolean inspection between multiple fields.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("operator") val `operator`: MultipleFilterSearchRequestOperatorEnum? = null,
-    /**
-     * Optional API value serialized in the `value` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any? = null
+    /** An operator to allow boolean inspection between multiple fields. */
+    @com.fasterxml.jackson.annotation.JsonProperty("operator")
+    val `operator`: MultipleFilterSearchRequestOperatorEnum? = null,
+    /** Optional API value serialized in the `value` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any? = null,
 ) : ContactSearchRequestQuery, SearchRequestQuery, CompanySearchRequestQuery
 
-/**
- * Search using Intercoms Search APIs with a single filter.
- */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
+/** Search using Intercoms Search APIs with a single filter. */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
+    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
+)
+@com.fasterxml.jackson.annotation.JsonTypeInfo(
+    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
+)
 data class SingleFilterSearchRequest(
-    /**
-     * The accepted field that you want to search on.
-     */
+    /** The accepted field that you want to search on. */
     @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String? = null,
     /**
-     * The accepted operators you can use to define how you want to search for the value. Operator support depends on the field's data type. The breakdown below is for Contacts search; the other search endpoints that share this schema accept a different set per field: - `string` fields: `=`, `!=`, `IN`, `NIN`, `~`, `!~`, `^`, `$` - `tag_id`: `=` and `!=` only. Every other operator returns an error. - `boolean` fields: `=`, `!=`, `IN`, `NIN` - `integer` fields: `=`, `!=`, `IN`,…
+     * The accepted operators you can use to define how you want to search for the value. Operator
+     * support depends on the field's data type. The breakdown below is for Contacts search; the
+     * other search endpoints that share this schema accept a different set per field: - `string`
+     * fields: `=`, `!=`, `IN`, `NIN`, `~`, `!~`, `^`, `$` - `tag_id`: `=` and `!=` only. Every
+     * other operator returns an error. - `boolean` fields: `=`, `!=`, `IN`, `NIN` - `integer`
+     * fields: `=`, `!=`, `IN`,…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("operator") val `operator`: SingleFilterSearchRequestOperatorEnum? = null,
-    /**
-     * The value that you want to search on.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("operator")
+    val `operator`: SingleFilterSearchRequestOperatorEnum? = null,
+    /** The value that you want to search on. */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: Any? = null,
 ) : ContactSearchRequestQuery, SearchRequestQuery, CompanySearchRequestQuery
 
-/**
- * You can update a Company
- */
+/** You can update a Company */
 data class UpdateCompanyRequest(
-    /**
-     * The name of the Company
-     */
+    /** The name of the Company */
     val name: String? = null,
-    /**
-     * The name of the plan you have associated with the company.
-     */
+    /** The name of the plan you have associated with the company. */
     val plan: String? = null,
-    /**
-     * The number of employees in this company.
-     */
+    /** The number of employees in this company. */
     val size: Long? = null,
     /**
-     * The URL for this company's website. Please note that the value specified here is not validated. Accepts any string.
+     * The URL for this company's website. Please note that the value specified here is not
+     * validated. Accepts any string.
      */
     val website: String? = null,
-    /**
-     * The industry that this company operates in.
-     */
+    /** The industry that this company operates in. */
     val industry: String? = null,
     /**
-     * A hash of key/value pairs containing any other data about the company you want Intercom to store.
+     * A hash of key/value pairs containing any other data about the company you want Intercom to
+     * store.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, String>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
+    val customAttributes: Map<String, String>? = null,
     /**
-     * How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
+     * How much revenue the company generates for your business. Note that this will truncate
+     * floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that
+     * this has an upper limit of 2**31-1 or 2147483647..
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("monthly_spend") val monthlySpend: Long? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("monthly_spend") val monthlySpend: Long? = null,
 )

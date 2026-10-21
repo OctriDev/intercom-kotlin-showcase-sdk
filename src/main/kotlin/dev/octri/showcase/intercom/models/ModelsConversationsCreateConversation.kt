@@ -3,46 +3,34 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Required object value serialized in the `from` wire field.
- */
+/** Required object value serialized in the `from` wire field. */
 data class CreateConversationRequestFrom(
-    /**
-     * The role associated to the contact - user or lead.
-     */
+    /** The role associated to the contact - user or lead. */
     val type: CreateConversationRequestFromTypeEnum,
-    /**
-     * The identifier for the contact which is given by Intercom.
-     */
-    val id: String
+    /** The identifier for the contact which is given by Intercom. */
+    val id: String,
 )
 
 /**
- * Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.
+ * Conversations are how you can communicate with users in Intercom. They are created when a contact
+ * replies to an outbound message, or when one admin directly sends a message to a single contact.
  */
 data class CreateConversationRequest(
-    /**
-     * Required object value serialized in the `from` wire field.
-     */
+    /** Required object value serialized in the `from` wire field. */
     val from: CreateConversationRequestFrom,
-    /**
-     * The content of the message. HTML is not supported.
-     */
+    /** The content of the message. HTML is not supported. */
     val body: String,
-    /**
-     * The title of the email. Only applicable if the message type is email.
-     */
+    /** The title of the email. Only applicable if the message type is email. */
     val subject: String? = null,
+    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
+    val attachmentUrls: List<String>? = null,
     /**
-     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
-    /**
-     * The time the conversation was created as a UTC Unix timestamp. If not provided, the current time will be used. This field is only recommneded for migrating past conversations from another source into Intercom.
+     * The time the conversation was created as a UTC Unix timestamp. If not provided, the current
+     * time will be used. This field is only recommneded for migrating past conversations from
+     * another source into Intercom.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /**
-     * The unique identifier of the brand to associate with this conversation.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("brand_id") val brandId: String? = null
+    /** The unique identifier of the brand to associate with this conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("brand_id") val brandId: String? = null,
 )

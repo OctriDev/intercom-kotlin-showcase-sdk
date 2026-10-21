@@ -6,47 +6,34 @@ package dev.octri.showcase.intercom.models
 import dev.octri.showcase.intercom.models.conversations.ConversationListItem
 
 /**
- * Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.
+ * Conversations are how you can communicate with users in Intercom. They are created when a contact
+ * replies to an outbound message, or when one admin directly sends a message to a single contact.
  */
 data class ConversationList(
-    /**
-     * Always conversation.list
-     */
+    /** Always conversation.list */
     val type: ConversationListTypeEnum? = null,
-    /**
-     * The list of conversation objects
-     */
+    /** The list of conversation objects */
     val conversations: List<ConversationListItem>? = null,
-    /**
-     * A count of the total number of objects.
-     */
+    /** A count of the total number of objects. */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data. A "cursor" or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or "pages" as needed.
+     * Cursor-based pagination is a technique used in the Intercom API to navigate through large
+     * amounts of data. A "cursor" or pointer is used to keep track of the current position in the
+     * result set, allowing the API to return the data in small chunks or "pages" as needed.
      */
-    val pages: CursorPages? = null
+    val pages: CursorPages? = null,
 )
 
-/**
- * Required object value serialized in the `customers[]` wire field.
- */
+/** Required object value serialized in the `customers[]` wire field. */
 data class ConversationParticipantsResponseCustomersItem(
-    /**
-     * The role of the participant. Can be "user" or "lead"
-     */
+    /** The role of the participant. Can be "user" or "lead" */
     val type: String,
-    /**
-     * The unique identifier for the participant
-     */
-    val id: String
+    /** The unique identifier for the participant */
+    val id: String,
 )
 
-/**
- * The participants of the conversation, returned after attaching or detaching a contact
- */
+/** The participants of the conversation, returned after attaching or detaching a contact */
 data class ConversationParticipantsResponse(
-    /**
-     * The conversation participants after the change
-     */
+    /** The conversation participants after the change */
     val customers: List<ConversationParticipantsResponseCustomersItem>
 )

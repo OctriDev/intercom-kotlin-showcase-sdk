@@ -17,20 +17,13 @@ import dev.octri.showcase.intercom.WhatsappMessageStatusList
 
 object Messages {
 
-/**
- * The sender of the message. If not provided, the default sender will be used.
- */
-data class CreateMessageRequestFrom(
-    /**
-     * Always `admin`.
-     */
-    val type: CreateMessageRequestFromTypeEnum,
-    /**
-     * The identifier for the admin which is given by Intercom.
-     */
-    val id: Long
-)
-
+    /** The sender of the message. If not provided, the default sender will be used. */
+    data class CreateMessageRequestFrom(
+        /** Always `admin`. */
+        val type: CreateMessageRequestFromTypeEnum,
+        /** The identifier for the admin which is given by Intercom. */
+        val id: Long,
+    )
 
     /** Parameters for [createMessage]. */
     data class CreateMessageParams(
@@ -44,86 +37,176 @@ data class CreateMessageRequestFrom(
         val cc: Any? = null,
         val bcc: Any? = null,
         val createdAt: Long? = null,
-        val createConversationWithoutContactReply: Boolean? = null
+        val createConversationWithoutContactReply: Boolean? = null,
     )
 
     /**
-     * Creates a message initiated by an admin as an in-app message, email, or WhatsApp message. Choose a `message_type` and provide the fields required for that type, including a sender and recipient. Set `from.type` to `admin`; using a user or lead as the sender instead creates a contact-initiated conversation and causes `to`, `cc`, and `bcc` to be ignored.
+     * Creates a message initiated by an admin as an in-app message, email, or WhatsApp message.
+     * Choose a `message_type` and provide the fields required for that type, including a sender and
+     * recipient. Set `from.type` to `admin`; using a user or lead as the sender instead creates a
+     * contact-initiated conversation and causes `to`, `cc`, and `bcc` to be ignored.
      *
-     * You can create a message that has been initiated by an admin. The conversation can be either an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case. This will return the Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is a message, there…
+     * You can create a message that has been initiated by an admin. The conversation can be either
+     * an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short
+     * delay between when a contact is created and when a contact becomes available to be messaged
+     * through the API. A 404 Not Found error will be returned in this case. This will return the
+     * Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is
+     * a message, there…
      *
-     * @param messageType The kind of message being created. Values: `in_app`,
-     *   `email` or `whatsapp`.
+     * @param messageType The kind of message being created. Values: `in_app`, `email` or
+     *   `whatsapp`.
      * @param subject The title of the email.
      * @param body The content of the message. HTML and plaintext are supported.
-     * @param template The style of the outgoing message. Possible values `plain` or
-     *   `personal`.
-     * @param from The sender of the message. If not provided, the default sender
-     *   will be used.
+     * @param template The style of the outgoing message. Possible values `plain` or `personal`.
+     * @param from The sender of the message. If not provided, the default sender will be used.
      * @param to Optional API value serialized in the `to` wire field.
      * @param cc Optional API value serialized in the `cc` wire field.
      * @param bcc Optional API value serialized in the `bcc` wire field.
-     * @param createdAt The time the message was created. If not provided, the
-     *   current time will be used.
-     * @param createConversationWithoutContactReply Whether a conversation should be
-     *   opened in the inbox for the message without the contact replying. Defaults to
-     *   false if not provided.
+     * @param createdAt The time the message was created. If not provided, the current time will be
+     *   used.
+     * @param createConversationWithoutContactReply Whether a conversation should be opened in the
+     *   inbox for the message without the contact replying. Defaults to false if not provided.
      */
-    fun createMessage(clientConfig: ClientConfig, request: CreateMessageParams, options: RequestOptions? = null): Message {
-        return SdkClient.request<Message>(SdkClient.RequestSpec("POST", "/messages", config = clientConfig, body = SdkClient.bodyMap("message_type" to
-    (SdkClient.omitIfNull(request.messageType)), "subject" to (SdkClient.omitIfNull(request.subject)), "body" to (SdkClient.omitIfNull(request.body)), "template" to (SdkClient.omitIfNull(request.template)), "from" to (SdkClient.omitIfNull(request.from)), "to" to (SdkClient.omitIfNull(request.to)), "cc" to (SdkClient.omitIfNull(request.cc)), "bcc" to (SdkClient.omitIfNull(request.bcc)), "created_at" to (SdkClient.omitIfNull(request.createdAt)), "create_conversation_without_contact_reply" to
-    (SdkClient.omitIfNull(request.createConversationWithoutContactReply))), operationId = "createMessage", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "422" to Error2::class.java))).data
+    fun createMessage(
+        clientConfig: ClientConfig,
+        request: CreateMessageParams,
+        options: RequestOptions? = null,
+    ): Message {
+        return SdkClient.request<Message>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/messages",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "message_type" to (SdkClient.omitIfNull(request.messageType)),
+                            "subject" to (SdkClient.omitIfNull(request.subject)),
+                            "body" to (SdkClient.omitIfNull(request.body)),
+                            "template" to (SdkClient.omitIfNull(request.template)),
+                            "from" to (SdkClient.omitIfNull(request.from)),
+                            "to" to (SdkClient.omitIfNull(request.to)),
+                            "cc" to (SdkClient.omitIfNull(request.cc)),
+                            "bcc" to (SdkClient.omitIfNull(request.bcc)),
+                            "created_at" to (SdkClient.omitIfNull(request.createdAt)),
+                            "create_conversation_without_contact_reply" to
+                                (SdkClient.omitIfNull(
+                                    request.createConversationWithoutContactReply
+                                )),
+                        ),
+                    operationId = "createMessage",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to
+                                SdkClient.headerValue(request.intercomVersion, false)
+                        ),
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "403" to Error2::class.java,
+                            "422" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Retrieves the delivery status and conversation details for a specific WhatsApp message. Supply the message's `message_id` to check whether it was sent, delivered, read, or failed. The response includes error details when delivery fails.
+     * Retrieves the delivery status and conversation details for a specific WhatsApp message.
+     * Supply the message's `message_id` to check whether it was sent, delivered, read, or failed.
+     * The response includes error details when delivery fails.
      *
-     * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the current status, conversation details, and any error information if the message failed to deliver.
+     * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the
+     * current status, conversation details, and any error information if the message failed to
+     * deliver.
      *
      * @param messageId The WhatsApp message ID to check status for
      */
-    fun retrieveWhatsAppMessageStatus(clientConfig: ClientConfig, messageId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WhatsappMessageStatus {
-        return SdkClient.request<WhatsappMessageStatus>(SdkClient.RequestSpec("GET", "/messages/whatsapp/status", config = clientConfig, query = mapOf("message_id" to
-    SdkClient.queryValue(messageId, "form", true)), operationId = "retrieveWhatsAppMessageStatus", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
+    fun retrieveWhatsAppMessageStatus(
+        clientConfig: ClientConfig,
+        messageId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WhatsappMessageStatus {
+        return SdkClient.request<WhatsappMessageStatus>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/messages/whatsapp/status",
+                    config = clientConfig,
+                    query = mapOf("message_id" to SdkClient.queryValue(messageId, "form", true)),
+                    operationId = "retrieveWhatsAppMessageStatus",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "404" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Lists paginated status events for WhatsApp messages sent through the Outbound module. Use `ruleset_id` to select the set of messages and `per_page` and `starting_after` to paginate the results. The API plan must allow access to this operation.
+     * Lists paginated status events for WhatsApp messages sent through the Outbound module. Use
+     * `ruleset_id` to select the set of messages and `per_page` and `starting_after` to paginate
+     * the results. The API plan must allow access to this operation.
      *
-     * Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providing information about delivery state and related message details.
+     * Retrieves statuses of messages sent from the Outbound module. Currently, this API only
+     * supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp
+     * messages sent via the Outbound module, providing information about delivery state and related
+     * message details.
      *
-     * @param rulesetId The unique identifier for the set of messages to check status
-     *   for
+     * @param rulesetId The unique identifier for the set of messages to check status for
      * @param perPage Number of results per page (default 50, max 100)
-     * @param startingAfter Cursor for pagination, used to fetch the next page of
-     *   results
+     * @param startingAfter Cursor for pagination, used to fetch the next page of results
      */
-    fun getWhatsAppMessageStatus(clientConfig: ClientConfig, rulesetId: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WhatsappMessageStatusList {
+    fun getWhatsAppMessageStatus(
+        clientConfig: ClientConfig,
+        rulesetId: String,
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WhatsappMessageStatusList {
         if (perPage != null) {
             Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 100.0))
-}
+        }
 
-        return SdkClient.request<WhatsappMessageStatusList>(SdkClient.RequestSpec("GET", "/messages/status", config = clientConfig, query = mapOf("ruleset_id" to
-    SdkClient.queryValue(rulesetId, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "starting_after" to
-    SdkClient.queryValue(startingAfter, "form", true)), operationId = "getWhatsAppMessageStatus", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "500" to Error2::class.java))).data
+        return SdkClient.request<WhatsappMessageStatusList>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/messages/status",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "ruleset_id" to SdkClient.queryValue(rulesetId, "form", true),
+                            "per_page" to SdkClient.queryValue(perPage, "form", true),
+                            "starting_after" to SdkClient.queryValue(startingAfter, "form", true),
+                        ),
+                    operationId = "getWhatsAppMessageStatus",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    extraHeaders =
+                        SdkClient.headers(
+                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                        ),
+                    options = options,
+                    errors =
+                        mapOf(
+                            "400" to Error2::class.java,
+                            "401" to Error2::class.java,
+                            "403" to Error2::class.java,
+                            "500" to Error2::class.java,
+                        ),
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }
