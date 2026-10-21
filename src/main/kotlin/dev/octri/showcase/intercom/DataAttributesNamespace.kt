@@ -3,83 +3,33 @@
 
 package dev.octri.showcase.intercom
 
+
 class DataAttributesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists workspace data attributes for contacts or companies. Use `model` to select a model and
-     * `include_archived` to include archived attributes; conversation attributes are available from
-     * `GET /conversations/attributes` instead.
+     * Lists workspace data attributes for contacts or companies. Use `model` to select a model and `include_archived` to include archived attributes; conversation attributes are available from `GET /conversations/attributes` instead.
      *
-     * You can fetch a list of all data attributes belonging to a workspace for contacts or
-     * companies. {% admonition type="warning" %} Conversation attributes are no longer returned by
-     * this endpoint. Calling without a `model` parameter no longer includes them, and
-     * `model=conversation` returns a `422` error. Use `GET /conversations/attributes` instead. {%
-     * /admonition %}
+     * You can fetch a list of all data attributes belonging to a workspace for contacts or companies. {% admonition type="warning" %} Conversation attributes are no longer returned by this endpoint. Calling without a `model` parameter no longer includes them, and `model=conversation` returns a `422` error. Use `GET /conversations/attributes` instead. {% /admonition %}
      */
-    fun list(
-        model: ListDataAttributesParameterEnum? = null,
-        includeArchived: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataAttributeList {
-        return dev.octri.showcase.intercom.methods.DataAttributes.listDataAttributes(
-            clientConfig,
-            model,
-            includeArchived,
-            intercomVersion,
-            options,
-        )
+    fun list(model: ListDataAttributesParameterEnum? = null, includeArchived: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataAttributeList {
+        return dev.octri.showcase.intercom.methods.DataAttributes.listDataAttributes(clientConfig, model, includeArchived, intercomVersion, options)
     }
 
     /**
-     * Creates a data attribute for a contact or company model. Provide `name`, `model`, and
-     * `data_type`; for a list attribute, also supply `options` with at least two entries.
+     * Creates a data attribute for a contact or company model. Provide `name`, `model`, and `data_type`; for a list attribute, also supply `options` with at least two entries.
      *
      * You can create a data attributes for a `contact` or a `company`.
      */
-    fun create(
-        name: String,
-        model: CreateDataAttributeRequestModelEnum,
-        intercomVersion: IntercomVersion? = null,
-        description: String? = null,
-        messengerWritable: Boolean? = null,
-        options: RequestOptions? = null,
-    ): DataAttribute {
-        return dev.octri.showcase.intercom.methods.DataAttributes.createDataAttribute(
-            clientConfig,
-            name,
-            model,
-            intercomVersion,
-            description,
-            messengerWritable,
-            options,
-        )
+    fun create(name: String, model: CreateDataAttributeRequestModelEnum, intercomVersion: IntercomVersion? = null, description: String? = null, messengerWritable: Boolean? = null, options: RequestOptions? = null): DataAttribute {
+        return dev.octri.showcase.intercom.methods.DataAttributes.createDataAttribute(clientConfig, name, model, intercomVersion, description, messengerWritable, options)
     }
 
     /**
-     * Updates a data attribute's archived status, description, Messenger write access, or list
-     * options. You cannot change the attribute's data type through this API; use the UI to change
-     * it.
+     * Updates a data attribute's archived status, description, Messenger write access, or list options. You cannot change the attribute's data type through this API; use the UI to change it.
      *
-     * You can update a data attribute. > 🚧 Updating the data type is not possible > > It is
-     * currently a dangerous action to execute changing a data attribute's type via the API. You
-     * will need to update the type via the UI instead.
+     * You can update a data attribute. > 🚧 Updating the data type is not possible > > It is currently a dangerous action to execute changing a data attribute's type via the API. You will need to update the type via the UI instead.
      */
-    fun update(
-        dataAttributeId: Long,
-        intercomVersion: IntercomVersion? = null,
-        archived: Boolean? = null,
-        description: String? = null,
-        messengerWritable: Boolean? = null,
-        options: RequestOptions? = null,
-    ): DataAttribute {
-        return dev.octri.showcase.intercom.methods.DataAttributes.updateDataAttribute(
-            clientConfig,
-            dataAttributeId,
-            intercomVersion,
-            archived,
-            description,
-            messengerWritable,
-            options,
-        )
+    fun update(dataAttributeId: Long, intercomVersion: IntercomVersion? = null, archived: Boolean? = null, description: String? = null, messengerWritable: Boolean? = null, options: RequestOptions? = null): DataAttribute {
+        return dev.octri.showcase.intercom.methods.DataAttributes.updateDataAttribute(clientConfig, dataAttributeId, intercomVersion, archived, description, messengerWritable, options)
     }
+
 }

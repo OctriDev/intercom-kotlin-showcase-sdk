@@ -3,25 +3,15 @@
 
 package dev.octri.showcase.intercom
 
+
 class WorkflowsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Exports the complete configuration for a workflow, including its steps, targeting rules, and
-     * attributes. Use this operation to retrieve workflow configuration for EU Data Act compliance.
+     * Exports the complete configuration for a workflow, including its steps, targeting rules, and attributes. Use this operation to retrieve workflow configuration for EU Data Act compliance.
      *
-     * Export a workflow configuration by its ID. This endpoint returns the complete workflow
-     * definition including its steps, targeting rules, and attributes. This endpoint is designed
-     * for EU Data Act compliance, allowing customers to export their workflow configurations.
+     * Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes. This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.
      */
-    fun export(
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): WorkflowExport {
-        return dev.octri.showcase.intercom.methods.Workflows.exportWorkflow(
-            clientConfig,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun export(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WorkflowExport {
+        return dev.octri.showcase.intercom.methods.Workflows.exportWorkflow(clientConfig, id, intercomVersion, options)
     }
+
 }

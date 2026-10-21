@@ -14,108 +14,48 @@ import dev.octri.showcase.intercom.Validation
 
 object Macros {
 
+
     /**
-     * Retrieves a single macro (saved reply) by its identifier. The macro is returned only when its
-     * visibility settings allow the authenticated user to view it. The response transforms
-     * placeholders in `body` to an XML-like format and HTML-escapes their default values.
+     * Retrieves a single macro (saved reply) by its identifier. The macro is returned only when its visibility settings allow the authenticated user to view it. The response transforms placeholders in `body` to an XML-like format and HTML-escapes their default values.
      *
-     * You can fetch a single macro (saved reply) by its ID. The macro will only be returned if it
-     * is visible to the authenticated user based on its visibility settings. **Visibility Rules** A
-     * macro is returned based on its `visible_to` setting: - `everyone`: Always visible to all team
-     * members - `specific_teams`: Only visible if the authenticated user belongs to one of the
-     * teams specified in `visible_to_team_ids` If a macro exists but is not visible to the
-     * authenticated user, a 404…
+     * You can fetch a single macro (saved reply) by its ID. The macro will only be returned if it is visible to the authenticated user based on its visibility settings. **Visibility Rules** A macro is returned based on its `visible_to` setting: - `everyone`: Always visible to all team members - `specific_teams`: Only visible if the authenticated user belongs to one of the teams specified in `visible_to_team_ids` If a macro exists but is not visible to the authenticated user, a 404…
      *
      * @param id The unique identifier of the macro
      */
-    fun getMacro(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Macro {
-        return SdkClient.request<Macro>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/macros/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "getMacro",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun getMacro(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Macro {
+        return SdkClient.request<Macro>(SdkClient.RequestSpec("GET", "/macros/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "getMacro", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
-     * Lists macros (saved replies) in the workspace, ordered by most recently updated. Use
-     * `starting_after` to continue from the previous page and `updated_since` to filter by update
-     * time. The `starting_after` cursor is a Base64-encoded JSON array containing the previous
-     * page's last `updated_at` and `id` values.
+     * Lists macros (saved replies) in the workspace, ordered by most recently updated. Use `starting_after` to continue from the previous page and `updated_since` to filter by update time. The `starting_after` cursor is a Base64-encoded JSON array containing the previous page's last `updated_at` and `id` values.
      *
-     * You can fetch a list of all macros (saved replies) in your workspace for use in automating
-     * responses. The macros are returned in descending order by updated_at. **Pagination** This
-     * endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a
-     * Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous
-     * page. **Placeholder Transformation** The API transforms Intercom placeholders to a more
-     * standard XML-like format: -…
+     * You can fetch a list of all macros (saved replies) in your workspace for use in automating responses. The macros are returned in descending order by updated_at. **Pagination** This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page. **Placeholder Transformation** The API transforms Intercom placeholders to a more standard XML-like format: -…
      *
      * @param perPage The number of results per page
-     * @param startingAfter Base64-encoded cursor containing \[updated_at, id\] for pagination
+     * @param startingAfter Base64-encoded cursor containing \[updated_at, id\] for
+     *   pagination
      * @param updatedSince Unix timestamp to filter macros updated after this time
      */
-    fun listMacros(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        startingAfter: String? = null,
-        updatedSince: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): MacroList {
+    fun listMacros(clientConfig: ClientConfig, perPage: Long? = null, startingAfter: String? = null, updatedSince: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): MacroList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 150.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 150.0))
+}
 
-        return SdkClient.request<MacroList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/macros",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "starting_after" to SdkClient.queryValue(startingAfter, "form", true),
-                            "updated_since" to SdkClient.queryValue(updatedSince, "form", true),
-                        ),
-                    operationId = "listMacros",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<MacroList>(SdkClient.RequestSpec("GET", "/macros", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "starting_after" to
+    SdkClient.queryValue(startingAfter, "form", true), "updated_since" to
+    SdkClient.queryValue(updatedSince, "form", true)), operationId = "listMacros", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

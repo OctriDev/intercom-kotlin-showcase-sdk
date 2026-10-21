@@ -14,117 +14,65 @@ import dev.octri.showcase.intercom.SdkClient
 
 object Notes {
 
+
     /**
-     * Lists the notes associated with a specific company. Use the company identifier to retrieve
-     * its notes; the response includes cursor-based pagination metadata.
+     * Lists the notes associated with a specific company. Use the company identifier to retrieve its notes; the response includes cursor-based pagination metadata.
      *
      * You can fetch a list of notes that are associated to a company.
      *
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      */
-    fun listCompanyNotes(
-        clientConfig: ClientConfig,
-        companyId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): NoteList {
-        return SdkClient.request<NoteList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/companies/${SdkClient.encodePathSegment(companyId)}/notes",
-                    config = clientConfig,
-                    operationId = "listCompanyNotes",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listCompanyNotes(clientConfig: ClientConfig, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): NoteList {
+        return SdkClient.request<NoteList>(SdkClient.RequestSpec("GET", "/companies/${SdkClient.encodePathSegment(companyId)}/notes", config = clientConfig, operationId = "listCompanyNotes", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a note associated with a specific company. Include the note text in `body`; you can
-     * optionally specify `admin_id` to set the note's author, otherwise the admin associated with
-     * the access token is used.
+     * Creates a note associated with a specific company. Include the note text in `body`; you can optionally specify `admin_id` to set the note's author, otherwise the admin associated with the access token is used.
      *
      * You can add a note to a single company.
      *
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      * @param body The text of the note.
-     * @param adminId The unique identifier of the admin creating the note. If not provided,
-     *   defaults to the admin associated with the access token.
+     * @param adminId The unique identifier of the admin creating the note. If not
+     *   provided, defaults to the admin associated with the access token.
      */
-    fun createCompanyNote(
-        clientConfig: ClientConfig,
-        companyId: String,
-        body: String,
-        intercomVersion: IntercomVersion? = null,
-        adminId: String? = null,
-        options: RequestOptions? = null,
-    ): Note {
-        return SdkClient.request<Note>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/companies/${SdkClient.encodePathSegment(companyId)}/notes",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "body" to (body),
-                            "admin_id" to (SdkClient.omitIfNull(adminId)),
-                        ),
-                    operationId = "createCompanyNote",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun createCompanyNote(clientConfig: ClientConfig, companyId: String, body: String, intercomVersion: IntercomVersion? = null, adminId: String? = null, options: RequestOptions? = null): Note {
+        return SdkClient.request<Note>(SdkClient.RequestSpec("POST", "/companies/${SdkClient.encodePathSegment(companyId)}/notes", config = clientConfig, body = SdkClient.bodyMap("body" to (body), "admin_id" to (SdkClient.omitIfNull(adminId))), operationId = "createCompanyNote", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists notes associated with a contact. Use the `contact_id` path parameter to identify the
-     * contact; the response includes cursor-based pagination metadata and the total note count.
+     * Lists notes associated with a contact. Use the `contact_id` path parameter to identify the contact; the response includes cursor-based pagination metadata and the total note count.
      *
      * You can fetch a list of notes that are associated to a contact.
      *
      * @param contactId The unique identifier of a contact.
      */
-    fun listNotes(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): NoteList {
-        return SdkClient.request<NoteList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/notes",
-                    config = clientConfig,
-                    operationId = "listNotes",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listNotes(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): NoteList {
+        return SdkClient.request<NoteList>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/notes", config = clientConfig, operationId = "listNotes", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a note for a contact. Supply the required `body` text and optionally specify the
-     * `admin_id` of the admin associated with the note. The response includes the created note and
-     * its contact and author details.
+     * Creates a note for a contact. Supply the required `body` text and optionally specify the `admin_id` of the admin associated with the note. The response includes the created note and its contact and author details.
      *
      * You can add a note to a single contact.
      *
@@ -132,104 +80,48 @@ object Notes {
      * @param body The text of the note.
      * @param adminId The unique identifier of a given admin.
      */
-    fun createNote(
-        clientConfig: ClientConfig,
-        contactId: Long,
-        body: String,
-        intercomVersion: IntercomVersion? = null,
-        adminId: String? = null,
-        options: RequestOptions? = null,
-    ): Note {
-        return SdkClient.request<Note>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/notes",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "body" to (body),
-                            "admin_id" to (SdkClient.omitIfNull(adminId)),
-                        ),
-                    operationId = "createNote",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("404" to Error2::class.java),
-                )
-            )
-            .data
+    fun createNote(clientConfig: ClientConfig, contactId: Long, body: String, intercomVersion: IntercomVersion? = null, adminId: String? = null, options: RequestOptions? = null): Note {
+        return SdkClient.request<Note>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/notes", config = clientConfig, body = SdkClient.bodyMap("body" to (body), "admin_id" to (SdkClient.omitIfNull(adminId))), operationId = "createNote", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a note attached to a contact or company. Supply `note_id` to identify the note. The
-     * response includes the note body, creation time, author, and associated contact or company.
+     * Retrieves a note attached to a contact or company. Supply `note_id` to identify the note. The response includes the note body, creation time, author, and associated contact or company.
      *
      * You can fetch the details of a single note.
      *
      * @param noteId The unique identifier of a given note
      */
-    fun retrieveNote(
-        clientConfig: ClientConfig,
-        noteId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Note {
-        return SdkClient.request<Note>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/notes/${SdkClient.encodePathSegment(noteId)}",
-                    config = clientConfig,
-                    operationId = "retrieveNote",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveNote(clientConfig: ClientConfig, noteId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Note {
+        return SdkClient.request<Note>(SdkClient.RequestSpec("GET", "/notes/${SdkClient.encodePathSegment(noteId)}", config = clientConfig, operationId = "retrieveNote", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a note attached to a contact or company. Use `note_id` to identify the note to
-     * remove. Notes of other kinds cannot be deleted through the API.
+     * Deletes a note attached to a contact or company. Use `note_id` to identify the note to remove. Notes of other kinds cannot be deleted through the API.
      *
-     * You can delete a single contact or company note. Notes of other kinds cannot be deleted
-     * through the API.
+     * You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.
      *
      * @param noteId The unique identifier of a given note
      */
-    fun deleteNote(
-        clientConfig: ClientConfig,
-        noteId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedNoteObject {
-        return SdkClient.request<DeletedNoteObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/notes/${SdkClient.encodePathSegment(noteId)}",
-                    config = clientConfig,
-                    operationId = "deleteNote",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteNote(clientConfig: ClientConfig, noteId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedNoteObject {
+        return SdkClient.request<DeletedNoteObject>(SdkClient.RequestSpec("DELETE", "/notes/${SdkClient.encodePathSegment(noteId)}", config = clientConfig, operationId = "deleteNote", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

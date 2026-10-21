@@ -3,54 +3,24 @@
 
 package dev.octri.showcase.intercom
 
+
 class BannersNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the banners that a contact currently matches so you can display them outside the
-     * Messenger. Call this endpoint when you are about to show the banners, because requesting them
-     * records an impression for each returned banner. Use each banner's `view_id` with the dismiss
-     * endpoint to record a dismissal.
+     * Lists the banners that a contact currently matches so you can display them outside the Messenger. Call this endpoint when you are about to show the banners, because requesting them records an impression for each returned banner. Use each banner's `view_id` with the dismiss endpoint to record a dismissal.
      *
-     * Returns the banners a contact currently matches, so you can display them on surfaces outside
-     * the Messenger (native mobile apps, kiosks, embedded tools). Each banner in the response
-     * includes a `view_id`. Use it to record a dismissal with the dismiss endpoint. A returned
-     * banner is treated as shown: requesting this endpoint records an impression for each banner
-     * returned, so call it at the point you are about to display the banners, not speculatively.
+     * Returns the banners a contact currently matches, so you can display them on surfaces outside the Messenger (native mobile apps, kiosks, embedded tools). Each banner in the response includes a `view_id`. Use it to record a dismissal with the dismiss endpoint. A returned banner is treated as shown: requesting this endpoint records an impression for each banner returned, so call it at the point you are about to display the banners, not speculatively.
      */
-    fun list(
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): BannerList {
-        return dev.octri.showcase.intercom.methods.Banners.listContactBanners(
-            clientConfig,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun list(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): BannerList {
+        return dev.octri.showcase.intercom.methods.Banners.listContactBanners(clientConfig, id, intercomVersion, options)
     }
 
     /**
-     * Records that a contact has dismissed a banner, with dismissals shared across surfaces for
-     * that contact. Supply the banner's `view_id` from the list banners response. Dismissing a
-     * banner that is already dismissed succeeds and returns the same response.
+     * Records that a contact has dismissed a banner, with dismissals shared across surfaces for that contact. Supply the banner's `view_id` from the list banners response. Dismissing a banner that is already dismissed succeeds and returns the same response.
      *
-     * Records that a contact has dismissed a banner. Dismissals are shared across surfaces, so a
-     * banner dismissed through this endpoint will also stop appearing in the web Messenger for that
-     * contact, and vice versa. The request is idempotent: dismissing an already-dismissed banner
-     * succeeds and returns the same response.
+     * Records that a contact has dismissed a banner. Dismissals are shared across surfaces, so a banner dismissed through this endpoint will also stop appearing in the web Messenger for that contact, and vice versa. The request is idempotent: dismissing an already-dismissed banner succeeds and returns the same response.
      */
-    fun dismiss(
-        id: String,
-        viewId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): BannerDismiss {
-        return dev.octri.showcase.intercom.methods.Banners.dismissContactBanner(
-            clientConfig,
-            id,
-            viewId,
-            intercomVersion,
-            options,
-        )
+    fun dismiss(id: String, viewId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): BannerDismiss {
+        return dev.octri.showcase.intercom.methods.Banners.dismissContactBanner(clientConfig, id, viewId, intercomVersion, options)
     }
+
 }

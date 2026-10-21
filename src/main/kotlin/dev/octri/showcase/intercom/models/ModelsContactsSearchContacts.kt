@@ -3,44 +3,52 @@
 
 package dev.octri.showcase.intercom.models
 
-/** An optional object to sort the results by. */
+/**
+ * An optional object to sort the results by.
+ */
 data class ContactSearchRequestSort(
-    /** The field to sort the results on. */
+    /**
+     * The field to sort the results on.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String? = null,
     /**
-     * The order to sort the results in. Defaults to `descending` when omitted. Values other than
-     * `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
+     * The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
      */
-    val order: ContactSearchRequestSortOrderEnum? = null,
+    val order: ContactSearchRequestSortOrderEnum? = null
 )
 
-/** Search for contacts using Intercom's Search API. */
+/**
+ * Search for contacts using Intercom's Search API.
+ */
 data class ContactSearchRequest(
-    /** Required API value serialized in the `query` wire field. */
+    /**
+     * Required API value serialized in the `query` wire field.
+     */
     val query: ContactSearchRequestQuery,
-    /** Optional object value serialized in the `pagination` wire field. */
+    /**
+     * Optional object value serialized in the `pagination` wire field.
+     */
     val pagination: StartingAfterPaging? = null,
-    /** An optional object to sort the results by. */
-    val sort: ContactSearchRequestSort? = null,
+    /**
+     * An optional object to sort the results by.
+     */
+    val sort: ContactSearchRequestSort? = null
 )
 
-/** Required API value serialized in the `query` wire field. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ContactSearchRequestQuery.Deserializer::class
-)
+/**
+ * Required API value serialized in the `query` wire field.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ContactSearchRequestQuery.Deserializer::class)
 sealed interface ContactSearchRequestQuery {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<ContactSearchRequestQuery>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ContactSearchRequestQuery>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): ContactSearchRequestQuery {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val ownedType =
-                ContactSearchRequestQueryOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }
-                    ?.second
+            val ownedType = ContactSearchRequestQueryOwnedTypes.firstOrNull { (keys, _) -> keys.any(node::has) }?.second
             if (ownedType != null) {
                 try {
                     return mapper.convertValue(node, ownedType)
@@ -48,26 +56,16 @@ sealed interface ContactSearchRequestQuery {
                     // Tried with the other branches below.
                 }
             }
-            val objectTypes: List<Class<out ContactSearchRequestQuery>> =
-                listOf(
-                    SingleFilterSearchRequest::class.java,
-                    MultipleFilterSearchRequest::class.java,
-                )
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out ContactSearchRequestQuery>> = listOf(SingleFilterSearchRequest::class.java, MultipleFilterSearchRequest::class.java)
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        ContactSearchRequestQuery::class.java,
-                        "no ContactSearchRequestQuery branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, ContactSearchRequestQuery::class.java, "no ContactSearchRequestQuery branch accepts this payload")
             }
         }
     }
 }
 
-internal val ContactSearchRequestQueryOwnedTypes:
-    List<Pair<List<String>, Class<out ContactSearchRequestQuery>>> =
-    listOf(listOf("field") to SingleFilterSearchRequest::class.java)
+internal val ContactSearchRequestQueryOwnedTypes: List<Pair<List<String>, Class<out ContactSearchRequestQuery>>> = listOf(
+    listOf("field") to SingleFilterSearchRequest::class.java,
+)

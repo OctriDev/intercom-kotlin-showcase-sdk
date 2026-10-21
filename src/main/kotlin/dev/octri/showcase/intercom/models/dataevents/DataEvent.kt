@@ -5,30 +5,40 @@ package dev.octri.showcase.intercom.models.dataevents
 
 import dev.octri.showcase.intercom.models.DataEventTypeEnum
 
-/** Data events are used to notify Intercom of changes to your data. */
+/**
+ * Data events are used to notify Intercom of changes to your data.
+ */
 data class DataEvent(
     /**
-     * The name of the event that occurred. This is presented to your App's admins when filtering
-     * and creating segments - a good event name is typically a past tense 'verb-noun' combination,
-     * to improve readability, for example `updated-plan`.
+     * The name of the event that occurred. This is presented to your App's admins when filtering and creating segments - a good event name is typically a past tense 'verb-noun' combination, to improve readability, for example `updated-plan`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: String,
-    /** The time the event occurred as a UTC Unix timestamp */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The type of the object */
-    val type: DataEventTypeEnum? = null,
-    /** Your identifier for the user. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
-    /** Your identifier for a lead or a user. */
-    val id: String? = null,
-    /** The Intercom identifier for the user. */
-    @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id")
-    val intercomUserId: String? = null,
     /**
-     * An email address for your user. An email should only be used where your application uses
-     * email to uniquely identify users.
+     * The time the event occurred as a UTC Unix timestamp
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+    /**
+     * The type of the object
+     */
+    val type: DataEventTypeEnum? = null,
+    /**
+     * Your identifier for the user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String? = null,
+    /**
+     * Your identifier for a lead or a user.
+     */
+    val id: String? = null,
+    /**
+     * The Intercom identifier for the user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String? = null,
+    /**
+     * An email address for your user. An email should only be used where your application uses email to uniquely identify users.
      */
     val email: String? = null,
-    /** Optional metadata about the event. */
-    val metadata: Map<String, String>? = null,
+    /**
+     * Optional metadata about the event.
+     */
+    val metadata: Map<String, String>? = null
 )

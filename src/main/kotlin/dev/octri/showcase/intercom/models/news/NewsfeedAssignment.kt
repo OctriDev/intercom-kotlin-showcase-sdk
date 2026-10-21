@@ -3,17 +3,16 @@
 
 package dev.octri.showcase.intercom.models.news
 
-/** Assigns a news item to a newsfeed. */
+/**
+ * Assigns a news item to a newsfeed.
+ */
 data class NewsfeedAssignment(
     /**
-     * The unique identifier for the newsfeed which is given by Intercom. Publish dates cannot be in
-     * the future, to schedule news items use the dedicated feature in app (see this article).
+     * The unique identifier for the newsfeed which is given by Intercom. Publish dates cannot be in the future, to schedule news items use the dedicated feature in app (see this article).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("newsfeed_id") val newsfeedId: Long? = null,
     /**
-     * Publish date of the news item on the newsfeed, use this field if you want to set a publish
-     * date in the past (e.g. when importing existing news items). On write, this field will be
-     * ignored if the news item state is "draft".
+     * Publish date of the news item on the newsfeed, use this field if you want to set a publish date in the past (e.g. when importing existing news items). On write, this field will be ignored if the news item state is "draft".
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("published_at") val publishedAt: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("published_at") val publishedAt: Long? = null
 )

@@ -6,24 +6,35 @@ package dev.octri.showcase.intercom.models.messages
 import dev.octri.showcase.intercom.models.MessageMessageTypeEnum
 
 /**
- * Message are how you reach out to contacts in Intercom. They are created when an admin sends an
- * outbound message to a contact.
+ * Message are how you reach out to contacts in Intercom. They are created when an admin sends an outbound message to a contact.
  */
 data class Message(
-    /** The type of the message */
+    /**
+     * The type of the message
+     */
     val type: String,
-    /** The id representing the message. */
+    /**
+     * The id representing the message.
+     */
     val id: String,
-    /** The time the conversation was created. */
+    /**
+     * The time the conversation was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** The message body, which may contain HTML. */
+    /**
+     * The message body, which may contain HTML.
+     */
     val body: String,
-    /** The type of message that was sent. Can be email, inapp, facebook or twitter. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: MessageMessageTypeEnum,
-    /** The subject of the message. Only present if message_type: email. */
+    /**
+     * The type of message that was sent. Can be email, inapp, facebook or twitter.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: MessageMessageTypeEnum,
+    /**
+     * The subject of the message. Only present if message_type: email.
+     */
     val subject: String? = null,
-    /** The associated conversation_id */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
-    val conversationId: String? = null,
+    /**
+     * The associated conversation_id
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null
 )

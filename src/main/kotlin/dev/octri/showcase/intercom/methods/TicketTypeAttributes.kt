@@ -13,6 +13,7 @@ import dev.octri.showcase.intercom.TicketTypeAttribute
 
 object TicketTypeAttributes {
 
+
     /** Parameters for [createTicketTypeAttribute]. */
     data class CreateTicketTypeAttributeParams(
         val ticketTypeId: String,
@@ -26,75 +27,49 @@ object TicketTypeAttributes {
         val visibleToContacts: Boolean? = null,
         val multiline: Boolean? = null,
         val listItems: String? = null,
-        val allowMultipleValues: Boolean? = null,
+        val allowMultipleValues: Boolean? = null
     )
 
     /**
-     * Creates an attribute for a ticket type to define a data field captured on tickets. Supply
-     * `name`, `description`, and `data_type`; `data_type` must be one of the supported values. Use
-     * the remaining fields to configure the attribute's visibility and input options.
+     * Creates an attribute for a ticket type to define a data field captured on tickets. Supply `name`, `description`, and `data_type`; `data_type` must be one of the supported values. Use the remaining fields to configure the attribute's visibility and input options.
      *
      * You can create a new attribute for a ticket type.
      *
-     * @param ticketTypeId The unique identifier for the ticket type which is given by Intercom.
+     * @param ticketTypeId The unique identifier for the ticket type which is given
+     *   by Intercom.
      * @param name The name of the ticket type attribute
-     * @param description The description of the attribute presented to the teammate or contact
+     * @param description The description of the attribute presented to the teammate
+     *   or contact
      * @param dataType The data type of the attribute
-     * @param requiredToCreate Whether the attribute is required to be filled in when teammates are
-     *   creating the ticket in Inbox.
-     * @param requiredToCreateForContacts Whether the attribute is required to be filled in when
-     *   contacts are creating the ticket in Messenger.
-     * @param visibleOnCreate Whether the attribute is visible to teammates when creating a ticket
-     *   in Inbox.
-     * @param visibleToContacts Whether the attribute is visible to contacts when creating a ticket
-     *   in Messenger.
-     * @param multiline Whether the attribute allows multiple lines of text (only applicable to
-     *   string attributes)
-     * @param listItems A comma delimited list of items for the attribute value (only applicable to
-     *   list attributes)
-     * @param allowMultipleValues Whether the attribute allows multiple files to be attached to it
-     *   (only applicable to file attributes)
+     * @param requiredToCreate Whether the attribute is required to be filled in when
+     *   teammates are creating the ticket in Inbox.
+     * @param requiredToCreateForContacts Whether the attribute is required to be
+     *   filled in when contacts are creating the ticket in Messenger.
+     * @param visibleOnCreate Whether the attribute is visible to teammates when
+     *   creating a ticket in Inbox.
+     * @param visibleToContacts Whether the attribute is visible to contacts when
+     *   creating a ticket in Messenger.
+     * @param multiline Whether the attribute allows multiple lines of text (only
+     *   applicable to string attributes)
+     * @param listItems A comma delimited list of items for the attribute value (only
+     *   applicable to list attributes)
+     * @param allowMultipleValues Whether the attribute allows multiple files to be
+     *   attached to it (only applicable to file attributes)
      */
-    fun createTicketTypeAttribute(
-        clientConfig: ClientConfig,
-        request: CreateTicketTypeAttributeParams,
-        options: RequestOptions? = null,
-    ): TicketTypeAttribute {
-        return SdkClient.request<TicketTypeAttribute>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/ticket_types/${SdkClient.encodePathSegment(request.ticketTypeId)}/attributes",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "description" to (request.description),
-                            "data_type" to (request.dataType),
-                            "required_to_create" to
-                                (SdkClient.omitIfNull(request.requiredToCreate)),
-                            "required_to_create_for_contacts" to
-                                (SdkClient.omitIfNull(request.requiredToCreateForContacts)),
-                            "visible_on_create" to (SdkClient.omitIfNull(request.visibleOnCreate)),
-                            "visible_to_contacts" to
-                                (SdkClient.omitIfNull(request.visibleToContacts)),
-                            "multiline" to (SdkClient.omitIfNull(request.multiline)),
-                            "list_items" to (SdkClient.omitIfNull(request.listItems)),
-                            "allow_multiple_values" to
-                                (SdkClient.omitIfNull(request.allowMultipleValues)),
-                        ),
-                    operationId = "createTicketTypeAttribute",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createTicketTypeAttribute(clientConfig: ClientConfig, request: CreateTicketTypeAttributeParams, options: RequestOptions? = null): TicketTypeAttribute {
+        return SdkClient.request<TicketTypeAttribute>(SdkClient.RequestSpec("POST", "/ticket_types/${SdkClient.encodePathSegment(request.ticketTypeId)}/attributes", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "description" to (request.description), "data_type" to (request.dataType), "required_to_create" to
+    (SdkClient.omitIfNull(request.requiredToCreate)), "required_to_create_for_contacts" to
+    (SdkClient.omitIfNull(request.requiredToCreateForContacts)), "visible_on_create" to
+    (SdkClient.omitIfNull(request.visibleOnCreate)), "visible_to_contacts" to
+    (SdkClient.omitIfNull(request.visibleToContacts)), "multiline" to (SdkClient.omitIfNull(request.multiline)), "list_items" to (SdkClient.omitIfNull(request.listItems)), "allow_multiple_values" to
+    (SdkClient.omitIfNull(request.allowMultipleValues))), operationId = "createTicketTypeAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateTicketTypeAttribute]. */
     data class UpdateTicketTypeAttributeParams(
@@ -110,76 +85,52 @@ object TicketTypeAttributes {
         val multiline: Boolean? = null,
         val listItems: String? = null,
         val allowMultipleValues: Boolean? = null,
-        val archived: Boolean? = null,
+        val archived: Boolean? = null
     )
 
     /**
-     * Updates the configuration of an existing ticket type attribute. Use the `ticket_type_id` and
-     * `attribute_id` path parameters to identify the attribute; provide only the fields you want to
-     * change.
+     * Updates the configuration of an existing ticket type attribute. Use the `ticket_type_id` and `attribute_id` path parameters to identify the attribute; provide only the fields you want to change.
      *
      * You can update an existing attribute for a ticket type.
      *
-     * @param ticketTypeId The unique identifier for the ticket type which is given by Intercom.
-     * @param attributeId The unique identifier for the ticket type attribute which is given by
-     *   Intercom.
+     * @param ticketTypeId The unique identifier for the ticket type which is given
+     *   by Intercom.
+     * @param attributeId The unique identifier for the ticket type attribute which
+     *   is given by Intercom.
      * @param name The name of the ticket type attribute
-     * @param description The description of the attribute presented to the teammate or contact
-     * @param requiredToCreate Whether the attribute is required to be filled in when teammates are
-     *   creating the ticket in Inbox.
-     * @param requiredToCreateForContacts Whether the attribute is required to be filled in when
-     *   contacts are creating the ticket in Messenger.
-     * @param visibleOnCreate Whether the attribute is visible to teammates when creating a ticket
-     *   in Inbox.
-     * @param visibleToContacts Whether the attribute is visible to contacts when creating a ticket
-     *   in Messenger.
-     * @param multiline Whether the attribute allows multiple lines of text (only applicable to
-     *   string attributes)
-     * @param listItems A comma delimited list of items for the attribute value (only applicable to
-     *   list attributes)
-     * @param allowMultipleValues Whether the attribute allows multiple files to be attached to it
-     *   (only applicable to file attributes)
-     * @param archived Whether the attribute should be archived and not shown during creation of the
-     *   ticket (it will still be present on previously created tickets)
+     * @param description The description of the attribute presented to the teammate
+     *   or contact
+     * @param requiredToCreate Whether the attribute is required to be filled in when
+     *   teammates are creating the ticket in Inbox.
+     * @param requiredToCreateForContacts Whether the attribute is required to be
+     *   filled in when contacts are creating the ticket in Messenger.
+     * @param visibleOnCreate Whether the attribute is visible to teammates when
+     *   creating a ticket in Inbox.
+     * @param visibleToContacts Whether the attribute is visible to contacts when
+     *   creating a ticket in Messenger.
+     * @param multiline Whether the attribute allows multiple lines of text (only
+     *   applicable to string attributes)
+     * @param listItems A comma delimited list of items for the attribute value (only
+     *   applicable to list attributes)
+     * @param allowMultipleValues Whether the attribute allows multiple files to be
+     *   attached to it (only applicable to file attributes)
+     * @param archived Whether the attribute should be archived and not shown during
+     *   creation of the ticket (it will still be present on previously created
+     *   tickets)
      */
-    fun updateTicketTypeAttribute(
-        clientConfig: ClientConfig,
-        request: UpdateTicketTypeAttributeParams,
-        options: RequestOptions? = null,
-    ): TicketTypeAttribute {
-        return SdkClient.request<TicketTypeAttribute>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/ticket_types/${SdkClient.encodePathSegment(request.ticketTypeId)}/attributes/${SdkClient.encodePathSegment(request.attributeId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "description" to (SdkClient.omitIfNull(request.description)),
-                            "required_to_create" to
-                                (SdkClient.omitIfNull(request.requiredToCreate)),
-                            "required_to_create_for_contacts" to
-                                (SdkClient.omitIfNull(request.requiredToCreateForContacts)),
-                            "visible_on_create" to (SdkClient.omitIfNull(request.visibleOnCreate)),
-                            "visible_to_contacts" to
-                                (SdkClient.omitIfNull(request.visibleToContacts)),
-                            "multiline" to (SdkClient.omitIfNull(request.multiline)),
-                            "list_items" to (SdkClient.omitIfNull(request.listItems)),
-                            "allow_multiple_values" to
-                                (SdkClient.omitIfNull(request.allowMultipleValues)),
-                            "archived" to (SdkClient.omitIfNull(request.archived)),
-                        ),
-                    operationId = "updateTicketTypeAttribute",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateTicketTypeAttribute(clientConfig: ClientConfig, request: UpdateTicketTypeAttributeParams, options: RequestOptions? = null): TicketTypeAttribute {
+        return SdkClient.request<TicketTypeAttribute>(SdkClient.RequestSpec("PUT", "/ticket_types/${SdkClient.encodePathSegment(request.ticketTypeId)}/attributes/${SdkClient.encodePathSegment(request.attributeId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "description" to (SdkClient.omitIfNull(request.description)), "required_to_create" to
+    (SdkClient.omitIfNull(request.requiredToCreate)), "required_to_create_for_contacts" to
+    (SdkClient.omitIfNull(request.requiredToCreateForContacts)), "visible_on_create" to
+    (SdkClient.omitIfNull(request.visibleOnCreate)), "visible_to_contacts" to
+    (SdkClient.omitIfNull(request.visibleToContacts)), "multiline" to (SdkClient.omitIfNull(request.multiline)), "list_items" to (SdkClient.omitIfNull(request.listItems)), "allow_multiple_values" to
+    (SdkClient.omitIfNull(request.allowMultipleValues)), "archived" to (SdkClient.omitIfNull(request.archived))), operationId = "updateTicketTypeAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

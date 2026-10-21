@@ -3,24 +3,36 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Required object value serialized in the `contacts[]` wire field. */
+/**
+ * Required object value serialized in the `contacts[]` wire field.
+ */
 data class BulkDeleteContactsRequestContactsItem(
-    /** The unique identifier for the contact. */
+    /**
+     * The unique identifier for the contact.
+     */
     val id: String
 )
 
-/** Optional. Include to append tasks to an existing job. */
+/**
+ * Optional. Include to append tasks to an existing job.
+ */
 data class BulkDeleteContactsRequestJob(
-    /** The ID of an existing bulk job to append to. */
+    /**
+     * The ID of an existing bulk job to append to.
+     */
     val id: String? = null
 )
 
-/** Request body for permanently bulk deleting contacts. */
+/**
+ * Request body for permanently bulk deleting contacts.
+ */
 data class BulkDeleteContactsRequest(
     /**
      * An array of contacts to delete, each identified by `id`. Maximum 100 contacts per request.
      */
     val contacts: List<BulkDeleteContactsRequestContactsItem>,
-    /** Optional. Include to append tasks to an existing job. */
-    val job: BulkDeleteContactsRequestJob? = null,
+    /**
+     * Optional. Include to append tasks to an existing job.
+     */
+    val job: BulkDeleteContactsRequestJob? = null
 )

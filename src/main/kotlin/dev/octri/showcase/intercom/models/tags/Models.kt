@@ -6,37 +6,45 @@ package dev.octri.showcase.intercom.models.tags
 import dev.octri.showcase.intercom.models.Reference
 
 /**
- * A tag allows you to label your contacts, companies, and conversations and list them using that
- * tag.
+ * A tag allows you to label your contacts, companies, and conversations and list them using that tag.
  */
 data class Tag(
-    /** value is "tag" */
+    /**
+     * value is "tag"
+     */
     val type: String? = null,
-    /** The id of the tag */
+    /**
+     * The id of the tag
+     */
     val id: String? = null,
-    /** The name of the tag */
+    /**
+     * The name of the tag
+     */
     val name: String? = null,
     /**
-     * The time when the tag was applied to the object. Only present when the tag is returned as
-     * part of a tagging operation on a contact, conversation, or ticket.
+     * The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("applied_at") val appliedAt: Long? = null,
     /**
-     * The admin who applied the tag. Only present when the tag is returned as part of a tagging
-     * operation on a contact, conversation, or ticket.
+     * The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("applied_by") val appliedBy: Reference? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("applied_by") val appliedBy: Reference? = null
 )
 
 /**
- * A tag allows you to label your contacts, companies, and conversations and list them using that
- * tag.
+ * A tag allows you to label your contacts, companies, and conversations and list them using that tag.
  */
 data class TagBasic(
-    /** value is "tag" */
+    /**
+     * value is "tag"
+     */
     val type: String? = null,
-    /** The id of the tag */
+    /**
+     * The id of the tag
+     */
     val id: String? = null,
-    /** The name of the tag */
-    val name: String? = null,
+    /**
+     * The name of the tag
+     */
+    val name: String? = null
 )

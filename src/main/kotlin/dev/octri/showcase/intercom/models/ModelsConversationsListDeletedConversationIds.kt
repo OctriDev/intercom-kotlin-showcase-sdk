@@ -5,19 +5,24 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.conversation.DeletedConversationItem
 
-/** A paginated list of deleted conversation IDs. */
+/**
+ * A paginated list of deleted conversation IDs.
+ */
 data class DeletedConversationList(
-    /** String representing the object's type. Always has the value `conversations.list`. */
+    /**
+     * String representing the object's type. Always has the value `conversations.list`.
+     */
     val type: String? = null,
-    /** The list of deleted conversation IDs. */
+    /**
+     * The list of deleted conversation IDs.
+     */
     val conversations: List<DeletedConversationItem>? = null,
-    /** Total number of items available. */
+    /**
+     * Total number of items available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data
-     * over multiple requests. Their responses are likely to contain a pages object that hosts
-     * pagination links which a client can use to paginate through the data without having to
-     * construct a query. The link relations for the pages field are as follows.
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
      */
-    val pages: PagesLink? = null,
+    val pages: PagesLink? = null
 )

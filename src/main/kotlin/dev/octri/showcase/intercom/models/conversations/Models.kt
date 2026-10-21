@@ -31,516 +31,537 @@ import dev.octri.showcase.intercom.models.companies.Company
 import dev.octri.showcase.intercom.models.salesagent.SalesAgent
 
 /**
- * Conversations are how you can communicate with users in Intercom. They are created when a contact
- * replies to an outbound message, or when one admin directly sends a message to a single contact.
+ * Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.
  */
 class Conversation(
-    /** Always conversation. */
+    /**
+     * Always conversation.
+     */
     val type: String? = null,
-    /** The id representing the conversation. */
+    /**
+     * The id representing the conversation.
+     */
     val id: String? = null,
-    /** The title given to the conversation. */
+    /**
+     * The title given to the conversation.
+     */
     val title: String? = null,
-    /** The time the conversation was created. */
+    /**
+     * The time the conversation was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The last time the conversation was updated. */
+    /**
+     * The last time the conversation was updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
     /**
-     * The last time a Contact responded to an Admin. In other words, the time a customer started
-     * waiting for a response. Set to null if last reply is from an Admin.
+     * The last time a Contact responded to an Admin. In other words, the time a customer started waiting for a response. Set to null if last reply is from an Admin.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("waiting_since") val waitingSince: Long? = null,
     /**
-     * If set this is the time in the future when this conversation will be marked as open. i.e. it
-     * will be in a snoozed state until this time. i.e. it will be in a snoozed state until this
-     * time.
+     * If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("snoozed_until") val snoozedUntil: Long? = null,
-    /** Indicates whether a conversation is open (true) or closed (false). */
+    /**
+     * Indicates whether a conversation is open (true) or closed (false).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("open") val `open`: Boolean? = null,
-    /** Can be set to "open", "closed" or "snoozed". */
+    /**
+     * Can be set to "open", "closed" or "snoozed".
+     */
     val state: ConversationStateEnum? = null,
-    /** Indicates whether a conversation has been read. */
+    /**
+     * Indicates whether a conversation has been read.
+     */
     val read: Boolean? = null,
     /**
      * The priority level of the conversation. Returns one of none, low, medium, high, or urgent.
      */
     val priority: ConversationPriorityEnum? = null,
     /**
-     * The id of the admin assigned to the conversation. If it's not assigned to an admin it will
-     * return 0.
+     * The id of the admin assigned to the conversation. If it's not assigned to an admin it will return 0.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id")
-    val adminAssigneeId: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id") val adminAssigneeId: Long? = null,
     /**
-     * The id of the team assigned to the conversation. If it's not assigned to a team it will
-     * return 0.
+     * The id of the team assigned to the conversation. If it's not assigned to a team it will return 0.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id")
-    val teamAssigneeId: Long? = null,
-    /** The company associated with the conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id") val teamAssigneeId: Long? = null,
+    /**
+     * The company associated with the conversation.
+     */
     val company: Company? = null,
-    /** A list of tags objects associated with a conversation */
+    /**
+     * A list of tags objects associated with a conversation
+     */
     val tags: Tags? = null,
     /**
-     * The Conversation Rating object which contains information on the rating and/or remark added
-     * by a Contact and the Admin assigned to the conversation.
+     * The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_rating")
-    val conversationRating: ConversationRating? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_rating") val conversationRating: ConversationRating? = null,
     /**
-     * The type of the conversation part that started this conversation. Can be Contact, Admin,
-     * Campaign, Automated or Operator initiated.
+     * The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
      */
     val source: ConversationSource? = null,
     /**
-     * The list of contacts (users or leads) involved in this conversation. This will only contain
-     * one customer unless more were added via the group conversation feature.
+     * The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
      */
     val contacts: ConversationContacts? = null,
     /**
-     * The list of teammates who participated in the conversation (wrote at least one conversation
-     * part).
+     * The list of teammates who participated in the conversation (wrote at least one conversation part).
      */
     val teammates: ConversationTeammates? = null,
     /**
-     * An object containing the different custom attributes associated to the conversation as
-     * key-value pairs. For relationship attributes the value will be a list of custom object
-     * instance models. Attributes that Intercom generates — such as "CX Score rating", "CX Score
-     * explanation", "AI Topic and Subtopic" and "CX Score reasons" — may also be included. Two of
-     * them, "AI Topic and Subtopic" and "CX Score reasons", carry lists of objects as their values,
-     * and are returned in…
+     * An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. Attributes that Intercom generates — such as "CX Score rating", "CX Score explanation", "AI Topic and Subtopic" and "CX Score reasons" — may also be included. Two of them, "AI Topic and Subtopic" and "CX Score reasons", carry lists of objects as their values, and are returned in…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: CustomAttributes? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: CustomAttributes? = null,
     /**
-     * An object containing information on the first users message. For a contact initiated message
-     * this will represent the users original message.
+     * An object containing information on the first users message. For a contact initiated message this will represent the users original message.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_contact_reply")
-    val firstContactReply: ConversationFirstContactReply? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("first_contact_reply") val firstContactReply: ConversationFirstContactReply? = null,
     /**
-     * The SLA Applied object contains the details for which SLA has been applied to this
-     * conversation. Important: if there are any canceled sla_events for the conversation - meaning
-     * an SLA has been manually removed from a conversation, the sla_status will always be returned
-     * as null.
+     * The SLA Applied object contains the details for which SLA has been applied to this conversation. Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("sla_applied")
-    val slaApplied: SlaApplied? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sla_applied") val slaApplied: SlaApplied? = null,
     /**
-     * A Statistics object containing all information required for reporting, with timestamps and
-     * calculated metrics.
+     * A Statistics object containing all information required for reporting, with timestamps and calculated metrics.
      */
     val statistics: ConversationStatistics? = null,
     /**
-     * A list of Conversation Part objects for each part message in the conversation. This is only
-     * returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is
-     * a limit of 500 parts.
+     * A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts")
-    val conversationParts: ConversationParts? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts") val conversationParts: ConversationParts? = null,
     /**
-     * An object containing metadata about linked conversations and linked tickets. Up to 1000 can
-     * be returned.
+     * An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("linked_objects")
-    val linkedObjects: LinkedObjectList? = null,
-    /** Indicates whether the AI Agent participated in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent_participated")
-    val aiAgentParticipated: Boolean? = null,
-    /** Data related to AI Agent involvement in the conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("linked_objects") val linkedObjects: LinkedObjectList? = null,
+    /**
+     * Indicates whether the AI Agent participated in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent_participated") val aiAgentParticipated: Boolean? = null,
+    /**
+     * Data related to AI Agent involvement in the conversation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ai_agent") val aiAgent: AiAgent? = null,
-    /** Indicates whether the Sales Agent participated in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent_participated")
-    val salesAgentParticipated: Boolean? = null,
-    /** Data related to Sales Agent involvement in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent")
-    val salesAgent: SalesAgent? = null,
-    /** The channel through which the conversation was initiated and its current channel. */
+    /**
+     * Indicates whether the Sales Agent participated in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent_participated") val salesAgentParticipated: Boolean? = null,
+    /**
+     * Data related to Sales Agent involvement in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent") val salesAgent: SalesAgent? = null,
+    /**
+     * The channel through which the conversation was initiated and its current channel.
+     */
     val channel: ConversationChannel? = null,
     /**
-     * References linking this conversation to records in an external helpdesk or CRM system.
-     * Populated for Fin Standalone workspaces synced from an external platform; an empty array
-     * otherwise. Sorted alphabetically by `type` and capped at 20 entries.
+     * References linking this conversation to records in an external helpdesk or CRM system. Populated for Fin Standalone workspaces synced from an external platform; an empty array otherwise. Sorted alphabetically by `type` and capped at 20 entries.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_references")
-    val externalReferences: List<ConversationExternalReference>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("external_references") val externalReferences: List<ConversationExternalReference>? = null,
     /**
-     * QA monitor evaluations that flagged this conversation. Only included when
-     * `include_monitors=true` is passed as a query parameter.
+     * QA monitor evaluations that flagged this conversation. Only included when `include_monitors=true` is passed as a query parameter.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("monitor_evaluations")
-    val monitorEvaluations: List<ConversationMonitorEvaluation>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("monitor_evaluations") val monitorEvaluations: List<ConversationMonitorEvaluation>? = null,
     /**
-     * QA scorecard results for this conversation. Only included when `include_scorecards=true` is
-     * passed as a query parameter.
+     * QA scorecard results for this conversation. Only included when `include_scorecards=true` is passed as a query parameter.
      */
-    val scorecards: List<ConversationScorecard>? = null,
+    val scorecards: List<ConversationScorecard>? = null
 )
 
-/** The data returned about your conversations when you list or search them. */
+/**
+ * The data returned about your conversations when you list or search them.
+ */
 data class ConversationListItem(
-    /** Always conversation. */
+    /**
+     * Always conversation.
+     */
     val type: String? = null,
-    /** The id representing the conversation. */
+    /**
+     * The id representing the conversation.
+     */
     val id: String? = null,
-    /** The title given to the conversation. */
+    /**
+     * The title given to the conversation.
+     */
     val title: String? = null,
-    /** The time the conversation was created. */
+    /**
+     * The time the conversation was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The last time the conversation was updated. */
+    /**
+     * The last time the conversation was updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
     /**
-     * The last time a Contact responded to an Admin. In other words, the time a customer started
-     * waiting for a response. Set to null if last reply is from an Admin.
+     * The last time a Contact responded to an Admin. In other words, the time a customer started waiting for a response. Set to null if last reply is from an Admin.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("waiting_since") val waitingSince: Long? = null,
     /**
-     * If set this is the time in the future when this conversation will be marked as open. i.e. it
-     * will be in a snoozed state until this time. i.e. it will be in a snoozed state until this
-     * time.
+     * If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("snoozed_until") val snoozedUntil: Long? = null,
-    /** Indicates whether a conversation is open (true) or closed (false). */
+    /**
+     * Indicates whether a conversation is open (true) or closed (false).
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("open") val `open`: Boolean? = null,
-    /** Can be set to "open", "closed" or "snoozed". */
+    /**
+     * Can be set to "open", "closed" or "snoozed".
+     */
     val state: ConversationListItemStateEnum? = null,
-    /** Indicates whether a conversation has been read. */
+    /**
+     * Indicates whether a conversation has been read.
+     */
     val read: Boolean? = null,
     /**
      * The priority level of the conversation. Returns one of none, low, medium, high, or urgent.
      */
     val priority: ConversationListItemPriorityEnum? = null,
     /**
-     * The id of the admin assigned to the conversation. If it's not assigned to an admin it will
-     * return 0.
+     * The id of the admin assigned to the conversation. If it's not assigned to an admin it will return 0.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id")
-    val adminAssigneeId: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id") val adminAssigneeId: Long? = null,
     /**
-     * The id of the team assigned to the conversation. If it's not assigned to a team it will
-     * return 0.
+     * The id of the team assigned to the conversation. If it's not assigned to a team it will return 0.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id")
-    val teamAssigneeId: Long? = null,
-    /** The company associated with the conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id") val teamAssigneeId: Long? = null,
+    /**
+     * The company associated with the conversation.
+     */
     val company: Company? = null,
-    /** A list of tags objects associated with a conversation */
+    /**
+     * A list of tags objects associated with a conversation
+     */
     val tags: Tags? = null,
     /**
-     * The Conversation Rating object which contains information on the rating and/or remark added
-     * by a Contact and the Admin assigned to the conversation.
+     * The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_rating")
-    val conversationRating: ConversationRating? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_rating") val conversationRating: ConversationRating? = null,
     /**
-     * The type of the conversation part that started this conversation. Can be Contact, Admin,
-     * Campaign, Automated or Operator initiated.
+     * The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
      */
     val source: ConversationSource? = null,
     /**
-     * The list of contacts (users or leads) involved in this conversation. This will only contain
-     * one customer unless more were added via the group conversation feature.
+     * The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.
      */
     val contacts: ConversationContacts? = null,
     /**
-     * The list of teammates who participated in the conversation (wrote at least one conversation
-     * part).
+     * The list of teammates who participated in the conversation (wrote at least one conversation part).
      */
     val teammates: ConversationTeammates? = null,
     /**
-     * An object containing the different custom attributes associated to the conversation as
-     * key-value pairs. For relationship attributes the value will be a list of custom object
-     * instance models. Attributes that Intercom generates — such as "CX Score rating", "CX Score
-     * explanation", "AI Topic and Subtopic" and "CX Score reasons" — may also be included. Two of
-     * them, "AI Topic and Subtopic" and "CX Score reasons", carry lists of objects as their values,
-     * and are returned in…
+     * An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. Attributes that Intercom generates — such as "CX Score rating", "CX Score explanation", "AI Topic and Subtopic" and "CX Score reasons" — may also be included. Two of them, "AI Topic and Subtopic" and "CX Score reasons", carry lists of objects as their values, and are returned in…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: CustomAttributes? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: CustomAttributes? = null,
     /**
-     * An object containing information on the first users message. For a contact initiated message
-     * this will represent the users original message.
+     * An object containing information on the first users message. For a contact initiated message this will represent the users original message.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_contact_reply")
-    val firstContactReply: ConversationFirstContactReply? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("first_contact_reply") val firstContactReply: ConversationFirstContactReply? = null,
     /**
-     * The SLA Applied object contains the details for which SLA has been applied to this
-     * conversation. Important: if there are any canceled sla_events for the conversation - meaning
-     * an SLA has been manually removed from a conversation, the sla_status will always be returned
-     * as null.
+     * The SLA Applied object contains the details for which SLA has been applied to this conversation. Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("sla_applied")
-    val slaApplied: SlaApplied? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("sla_applied") val slaApplied: SlaApplied? = null,
     /**
-     * A Statistics object containing all information required for reporting, with timestamps and
-     * calculated metrics.
+     * A Statistics object containing all information required for reporting, with timestamps and calculated metrics.
      */
     val statistics: ConversationStatistics? = null,
     /**
-     * An object containing metadata about linked conversations and linked tickets. Up to 1000 can
-     * be returned.
+     * An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("linked_objects")
-    val linkedObjects: LinkedObjectList? = null,
-    /** Indicates whether the AI Agent participated in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent_participated")
-    val aiAgentParticipated: Boolean? = null,
-    /** Data related to AI Agent involvement in the conversation. */
+    @com.fasterxml.jackson.annotation.JsonProperty("linked_objects") val linkedObjects: LinkedObjectList? = null,
+    /**
+     * Indicates whether the AI Agent participated in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_agent_participated") val aiAgentParticipated: Boolean? = null,
+    /**
+     * Data related to AI Agent involvement in the conversation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ai_agent") val aiAgent: AiAgent? = null,
-    /** Indicates whether the Sales Agent participated in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent_participated")
-    val salesAgentParticipated: Boolean? = null,
-    /** Data related to Sales Agent involvement in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent")
-    val salesAgent: SalesAgent? = null,
-    /** The channel through which the conversation was initiated and its current channel. */
+    /**
+     * Indicates whether the Sales Agent participated in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent_participated") val salesAgentParticipated: Boolean? = null,
+    /**
+     * Data related to Sales Agent involvement in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sales_agent") val salesAgent: SalesAgent? = null,
+    /**
+     * The channel through which the conversation was initiated and its current channel.
+     */
     val channel: ConversationChannel? = null,
     /**
-     * References linking this conversation to records in an external helpdesk or CRM system.
-     * Populated for Fin Standalone workspaces synced from an external platform; an empty array
-     * otherwise. Sorted alphabetically by `type` and capped at 20 entries.
+     * References linking this conversation to records in an external helpdesk or CRM system. Populated for Fin Standalone workspaces synced from an external platform; an empty array otherwise. Sorted alphabetically by `type` and capped at 20 entries.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("external_references")
-    val externalReferences: List<ConversationExternalReference>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("external_references") val externalReferences: List<ConversationExternalReference>? = null,
     /**
-     * QA monitor evaluations that flagged this conversation. Only included when
-     * `include_monitors=true` is passed as a query parameter.
+     * QA monitor evaluations that flagged this conversation. Only included when `include_monitors=true` is passed as a query parameter.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("monitor_evaluations")
-    val monitorEvaluations: List<ConversationMonitorEvaluation>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("monitor_evaluations") val monitorEvaluations: List<ConversationMonitorEvaluation>? = null,
     /**
-     * QA scorecard results for this conversation. Only included when `include_scorecards=true` is
-     * passed as a query parameter.
+     * QA scorecard results for this conversation. Only included when `include_scorecards=true` is passed as a query parameter.
      */
-    val scorecards: List<ConversationScorecard>? = null,
+    val scorecards: List<ConversationScorecard>? = null
 )
 
 /**
- * A QA monitor evaluation that flagged this conversation. Returned in the `monitor_evaluations`
- * array on conversation responses when `include_monitors=true` is passed.
+ * A QA monitor evaluation that flagged this conversation. Returned in the `monitor_evaluations` array on conversation responses when `include_monitors=true` is passed.
  */
 data class ConversationMonitorEvaluation(
-    /** The unique identifier of the monitor that produced this evaluation. */
+    /**
+     * The unique identifier of the monitor that produced this evaluation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("monitor_id") val monitorId: String? = null,
     /**
-     * The name of the monitor at the time of evaluation. Null if the monitor has since been
-     * deleted.
+     * The name of the monitor at the time of evaluation. Null if the monitor has since been deleted.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("monitor_name") val monitorName: String? = null,
-    /** The type of the monitor. Null if the monitor has since been deleted. */
+    /**
+     * The type of the monitor. Null if the monitor has since been deleted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("monitor_type") val monitorType: String? = null,
-    /** The evaluation outcome reported by the monitor. */
+    /**
+     * The evaluation outcome reported by the monitor.
+     */
     val result: String? = null,
     /**
-     * The reasoning provided by the monitor for its result. May be null if no reasoning was
-     * generated.
+     * The reasoning provided by the monitor for its result. May be null if no reasoning was generated.
      */
     val explanation: String? = null,
     /**
-     * The time the monitor evaluated this conversation. Null in the rare case the underlying
-     * record's timestamp is not yet set.
+     * The time the monitor evaluated this conversation. Null in the rare case the underlying record's timestamp is not yet set.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("evaluated_at") val evaluatedAt: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("evaluated_at") val evaluatedAt: Long? = null
 )
 
 /**
- * A QA scorecard result for this conversation. Returned in the `scorecards` array on conversation
- * responses when `include_scorecards=true` is passed.
+ * A QA scorecard result for this conversation. Returned in the `scorecards` array on conversation responses when `include_scorecards=true` is passed.
  */
 data class ConversationScorecard(
-    /** The unique identifier of the scorecard definition. */
+    /**
+     * The unique identifier of the scorecard definition.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("scorecard_id") val scorecardId: String? = null,
-    /** The unique identifier of the specific scorecard version that produced this result. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scorecard_version_id")
-    val scorecardVersionId: String? = null,
-    /** The name of the scorecard. */
+    /**
+     * The unique identifier of the specific scorecard version that produced this result.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scorecard_version_id") val scorecardVersionId: String? = null,
+    /**
+     * The name of the scorecard.
+     */
     val name: String? = null,
-    /** The type of scorecard. */
-    @com.fasterxml.jackson.annotation.JsonProperty("scorecard_type")
-    val scorecardType: String? = null,
+    /**
+     * The type of scorecard.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("scorecard_type") val scorecardType: String? = null,
     /**
      * Whether the conversation passed the scorecard. Null when the scorecard has not been scored.
      */
     val passed: Boolean? = null,
-    /** The numeric score for the scorecard. Null when the scorecard has not been scored. */
+    /**
+     * The numeric score for the scorecard. Null when the scorecard has not been scored.
+     */
     val score: Double? = null,
-    /** The numeric score produced by AI evaluation, if applicable. Null when not AI-scored. */
+    /**
+     * The numeric score produced by AI evaluation, if applicable. Null when not AI-scored.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ai_score") val aiScore: Double? = null,
     /**
-     * The time the scorecard was last evaluated. Null in the rare case the underlying record's
-     * timestamp is not yet set.
+     * The time the scorecard was last evaluated. Null in the rare case the underlying record's timestamp is not yet set.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("evaluated_at") val evaluatedAt: Long? = null,
     /**
      * The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reviewed_teammate")
-    val reviewedTeammate: ConversationScorecardReviewedTeammate? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reviewed_teammate") val reviewedTeammate: ConversationScorecardReviewedTeammate? = null,
     /**
-     * Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin`
-     * when it is assigned to a teammate. Null when no review exists for this scorecard or the
-     * review is unassigned.
+     * Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.
      */
     val reviewer: ConversationScorecardReviewer? = null,
     /**
-     * The status of the review of this scorecard, as shown in the QA reviews list in Intercom.
-     * `unreviewed` while the review is waiting for a reviewer's verdict; `submitted` once the
-     * review has been submitted; `passed_review`, `needs_fix`, `wont_fix` or `fix_complete` when a
-     * teammate set a specific outcome. Null when no review exists for this scorecard.
+     * The status of the review of this scorecard, as shown in the QA reviews list in Intercom. `unreviewed` while the review is waiting for a reviewer's verdict; `submitted` once the review has been submitted; `passed_review`, `needs_fix`, `wont_fix` or `fix_complete` when a teammate set a specific outcome. Null when no review exists for this scorecard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("review_status")
-    val reviewStatus: ConversationScorecardReviewStatusEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("review_status") val reviewStatus: ConversationScorecardReviewStatusEnum? = null,
     /**
-     * Who last submitted the review of this scorecard, which can differ from the `reviewer` it is
-     * assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review
-     * is unreviewed or when no review exists for this scorecard.
+     * Who last submitted the review of this scorecard, which can differ from the `reviewer` it is assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review is unreviewed or when no review exists for this scorecard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("submitted_by")
-    val submittedBy: ConversationScorecardSubmittedBy? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("submitted_by") val submittedBy: ConversationScorecardSubmittedBy? = null,
     /**
-     * Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the
-     * change; `admin` when a teammate did. Null while the review is unreviewed, when it has not
-     * been changed since it was submitted, or when no review exists for this scorecard.
+     * Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("revised_by")
-    val revisedBy: ConversationScorecardRevisedBy? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("revised_by") val revisedBy: ConversationScorecardRevisedBy? = null,
     /**
-     * The notes teammates left on the QA review linked to this scorecard entry. Empty when the
-     * scorecard has no linked review.
+     * The notes teammates left on the QA review linked to this scorecard entry. Empty when the scorecard has no linked review.
      */
     val notes: List<ConversationScorecardNote>? = null,
-    /** Per-evaluator results within this scorecard. */
-    val evaluators: List<ConversationScorecardEvaluator>? = null,
+    /**
+     * Per-evaluator results within this scorecard.
+     */
+    val evaluators: List<ConversationScorecardEvaluator>? = null
 )
 
-/** A single evaluator within a scorecard, including its result for this conversation. */
+/**
+ * A single evaluator within a scorecard, including its result for this conversation.
+ */
 data class ConversationScorecardEvaluator(
-    /** The unique identifier of the evaluator (criterion) within the scorecard. */
+    /**
+     * The unique identifier of the evaluator (criterion) within the scorecard.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("evaluator_id") val evaluatorId: String? = null,
     /**
      * The name of the evaluator (criterion). Null if the evaluator's name could not be resolved.
      */
     val name: String? = null,
-    /** The evaluator's result for this conversation. Null if the evaluator was not scored. */
-    val result: ConversationScorecardEvaluatorResult? = null,
+    /**
+     * The evaluator's result for this conversation. Null if the evaluator was not scored.
+     */
+    val result: ConversationScorecardEvaluatorResult? = null
 )
 
-/** A single structured reason assigned to an evaluator's result. */
+/**
+ * A single structured reason assigned to an evaluator's result.
+ */
 data class ConversationScorecardEvaluatorReason(
-    /** The name of the reason. Null if the reason's name could not be resolved. */
+    /**
+     * The name of the reason. Null if the reason's name could not be resolved.
+     */
     val name: String? = null
 )
 
-/** The outcome of a single evaluator within a scorecard. */
+/**
+ * The outcome of a single evaluator within a scorecard.
+ */
 data class ConversationScorecardEvaluatorResult(
     /**
-     * The evaluator's selected value (typically a label such as `pass`, `fail`, or a category
-     * identifier).
+     * The evaluator's selected value (typically a label such as `pass`, `fail`, or a category identifier).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
     /**
-     * The label of the rating option matching `value` (for example `Needs improvement`). Omitted
-     * when the label could not be resolved.
+     * The label of the rating option matching `value` (for example `Needs improvement`). Omitted when the label could not be resolved.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("value_label") val valueLabel: String? = null,
-    /** The origin of the result (for example, `ai` or `human`). */
+    /**
+     * The origin of the result (for example, `ai` or `human`).
+     */
     val source: String? = null,
-    /** A free-text explanation of the result. */
+    /**
+     * A free-text explanation of the result.
+     */
     val reasoning: String? = null,
-    /** Identifiers for structured reasons assigned to the result, if any. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reason_ids")
-    val reasonIds: List<String>? = null,
-    /** The structured reasons chosen for this result. Omitted when none were chosen. */
+    /**
+     * Identifiers for structured reasons assigned to the result, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reason_ids") val reasonIds: List<String>? = null,
+    /**
+     * The structured reasons chosen for this result. Omitted when none were chosen.
+     */
     val reasons: List<ConversationScorecardEvaluatorReason>? = null,
     /**
-     * Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` —
-     * typically captured when the reviewer selects an "Other" option or adds a custom note. Null
-     * when not provided.
+     * Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` — typically captured when the reviewer selects an "Other" option or adds a custom note. Null when not provided.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("other_text") val otherText: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("other_text") val otherText: String? = null
 )
 
-/** A note a teammate left on the QA review of this scorecard. */
+/**
+ * A note a teammate left on the QA review of this scorecard.
+ */
 data class ConversationScorecardNote(
-    /** The id of the note. */
+    /**
+     * The id of the note.
+     */
     val id: String? = null,
-    /** The time the note was created. */
+    /**
+     * The time the note was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
     /**
      * The time the note was last edited. Equal to `created_at` when the note has never been edited.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /** Who wrote the note. Null when the teammate who wrote it has since been deleted. */
+    /**
+     * Who wrote the note. Null when the teammate who wrote it has since been deleted.
+     */
     val author: ConversationScorecardNoteAuthor? = null,
     /**
-     * The text of the note exactly as the teammate entered it. Plain text; it is not rendered as
-     * HTML.
+     * The text of the note exactly as the teammate entered it. Plain text; it is not rendered as HTML.
      */
-    val body: String? = null,
-)
-
-/** Who wrote the note. Null when the teammate who wrote it has since been deleted. */
-data class ConversationScorecardNoteAuthor(
-    /** The kind of author. `admin` when a teammate wrote the note; `ai` when Fin did. */
-    val type: ConversationScorecardNoteAuthorTypeEnum? = null,
-    /** The id of the admin who wrote the note. Present only when `type` is `admin`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
-)
-
-/** The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard. */
-data class ConversationScorecardReviewedTeammate(
-    /**
-     * The kind of reviewee. `ai` if the conversation was handled by Fin or scored without a
-     * specific teammate; `admin` if a specific teammate was reviewed.
-     */
-    val type: ConversationScorecardReviewedTeammateTypeEnum? = null,
-    /** The id of the admin who was reviewed. Present only when `type` is `admin`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
+    val body: String? = null
 )
 
 /**
- * Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it
- * is assigned to a teammate. Null when no review exists for this scorecard or the review is
- * unassigned.
+ * Who wrote the note. Null when the teammate who wrote it has since been deleted.
+ */
+data class ConversationScorecardNoteAuthor(
+    /**
+     * The kind of author. `admin` when a teammate wrote the note; `ai` when Fin did.
+     */
+    val type: ConversationScorecardNoteAuthorTypeEnum? = null,
+    /**
+     * The id of the admin who wrote the note. Present only when `type` is `admin`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null
+)
+
+/**
+ * The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.
+ */
+data class ConversationScorecardReviewedTeammate(
+    /**
+     * The kind of reviewee. `ai` if the conversation was handled by Fin or scored without a specific teammate; `admin` if a specific teammate was reviewed.
+     */
+    val type: ConversationScorecardReviewedTeammateTypeEnum? = null,
+    /**
+     * The id of the admin who was reviewed. Present only when `type` is `admin`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null
+)
+
+/**
+ * Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.
  */
 data class ConversationScorecardReviewer(
     /**
-     * The kind of reviewer. `ai` if the review is assigned to Fin; `admin` if it is assigned to a
-     * teammate.
+     * The kind of reviewer. `ai` if the review is assigned to Fin; `admin` if it is assigned to a teammate.
      */
     val type: ConversationScorecardReviewerTypeEnum? = null,
-    /** The id of the admin the review is assigned to. Present only when `type` is `admin`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
+    /**
+     * The id of the admin the review is assigned to. Present only when `type` is `admin`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null
 )
 
 /**
- * Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the
- * change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been
- * changed since it was submitted, or when no review exists for this scorecard.
+ * Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.
  */
 data class ConversationScorecardRevisedBy(
-    /** The kind of reviser. `ai` if Fin changed the review; `admin` if a teammate did. */
+    /**
+     * The kind of reviser. `ai` if Fin changed the review; `admin` if a teammate did.
+     */
     val type: ConversationScorecardRevisedByTypeEnum? = null,
-    /** The id of the admin who last changed the review. Present only when `type` is `admin`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
+    /**
+     * The id of the admin who last changed the review. Present only when `type` is `admin`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null
 )
 
 /**
- * Who last submitted the review of this scorecard, which can differ from the `reviewer` it is
- * assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review is
- * unreviewed or when no review exists for this scorecard.
+ * Who last submitted the review of this scorecard, which can differ from the `reviewer` it is assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review is unreviewed or when no review exists for this scorecard.
  */
 data class ConversationScorecardSubmittedBy(
-    /** The kind of submitter. `ai` if Fin submitted the review; `admin` if a teammate did. */
+    /**
+     * The kind of submitter. `ai` if Fin submitted the review; `admin` if a teammate did.
+     */
     val type: ConversationScorecardSubmittedByTypeEnum? = null,
-    /** The id of the admin who submitted the review. Present only when `type` is `admin`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
+    /**
+     * The id of the admin who submitted the review. Present only when `type` is `admin`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null
 )
 
-/** Payload to merge a secondary conversation into a primary conversation. */
+/**
+ * Payload to merge a secondary conversation into a primary conversation.
+ */
 data class MergeConversationsRequest(
-    /** The ID of the primary (target) conversation to merge into. */
-    @com.fasterxml.jackson.annotation.JsonProperty("merge_into_conversation_id")
-    val mergeIntoConversationId: Long
+    /**
+     * The ID of the primary (target) conversation to merge into.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("merge_into_conversation_id") val mergeIntoConversationId: Long
 )

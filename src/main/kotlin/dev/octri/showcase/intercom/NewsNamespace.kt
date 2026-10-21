@@ -3,151 +3,76 @@
 
 package dev.octri.showcase.intercom
 
+
 class NewsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists news items across the workspace in a paginated response. Use the cursor-based page
-     * metadata to navigate through the results. Each response includes a total count and an array
-     * of news item objects.
+     * Lists news items across the workspace in a paginated response. Use the cursor-based page metadata to navigate through the results. Each response includes a total count and an array of news item objects.
      *
      * You can fetch a list of all news items
      */
-    fun listItems(
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): PaginatedResponse {
-        return dev.octri.showcase.intercom.methods.News.listNewsItems(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun listItems(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): PaginatedResponse {
+        return dev.octri.showcase.intercom.methods.News.listNewsItems(clientConfig, intercomVersion, options)
     }
 
     /**
-     * Creates a news item that can announce updates, company news, promotions, or events. Supply
-     * `title` and `sender_id`; the sender must be a teammate, and `state` can be set to draft or
-     * live. Assign the item to newsfeeds with `newsfeed_assignments`.
+     * Creates a news item that can announce updates, company news, promotions, or events. Supply `title` and `sender_id`; the sender must be a teammate, and `state` can be set to draft or live. Assign the item to newsfeeds with `newsfeed_assignments`.
      *
      * You can create a news item
      */
-    fun createItem(
-        request: dev.octri.showcase.intercom.methods.News.CreateNewsItemRequest,
-        options: RequestOptions? = null,
-    ): NewsItem {
-        return dev.octri.showcase.intercom.methods.News.createNewsItem(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createItem(request: dev.octri.showcase.intercom.methods.News.CreateNewsItemRequest, options: RequestOptions? = null): NewsItem {
+        return dev.octri.showcase.intercom.methods.News.createNewsItem(clientConfig, request, options)
     }
 
     /**
-     * Retrieves the details of a single news item. Use its unique `news_item_id` to identify the
-     * item. The response includes the item's content, state, newsfeed assignments, and timestamps.
+     * Retrieves the details of a single news item. Use its unique `news_item_id` to identify the item. The response includes the item's content, state, newsfeed assignments, and timestamps.
      *
      * You can fetch the details of a single news item.
      */
-    fun retrieveItem(
-        newsItemId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): NewsItem {
-        return dev.octri.showcase.intercom.methods.News.retrieveNewsItem(
-            clientConfig,
-            newsItemId,
-            intercomVersion,
-            options,
-        )
+    fun retrieveItem(newsItemId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): NewsItem {
+        return dev.octri.showcase.intercom.methods.News.retrieveNewsItem(clientConfig, newsItemId, intercomVersion, options)
     }
 
     /**
-     * Replaces the details of an existing news item. Provide the item identifier in `news_item_id`
-     * and submit the news item fields you want set. When you provide a body, include `title` and
-     * `sender_id`.
+     * Replaces the details of an existing news item. Provide the item identifier in `news_item_id` and submit the news item fields you want set. When you provide a body, include `title` and `sender_id`.
      */
-    fun updateItem(
-        request: dev.octri.showcase.intercom.methods.News.UpdateNewsItemRequest,
-        options: RequestOptions? = null,
-    ): NewsItem {
-        return dev.octri.showcase.intercom.methods.News.updateNewsItem(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateItem(request: dev.octri.showcase.intercom.methods.News.UpdateNewsItemRequest, options: RequestOptions? = null): NewsItem {
+        return dev.octri.showcase.intercom.methods.News.updateNewsItem(clientConfig, request, options)
     }
 
     /**
-     * Deletes a single news item. Use `news_item_id` to identify the item to remove. The response
-     * confirms whether the item was deleted and identifies the deleted object.
+     * Deletes a single news item. Use `news_item_id` to identify the item to remove. The response confirms whether the item was deleted and identifies the deleted object.
      *
      * You can delete a single news item.
      */
-    fun deleteItem(
-        newsItemId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedObject {
-        return dev.octri.showcase.intercom.methods.News.deleteNewsItem(
-            clientConfig,
-            newsItemId,
-            intercomVersion,
-            options,
-        )
+    fun deleteItem(newsItemId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedObject {
+        return dev.octri.showcase.intercom.methods.News.deleteNewsItem(clientConfig, newsItemId, intercomVersion, options)
     }
 
     /**
-     * Lists the live news items assigned to a specific newsfeed. Supply `newsfeed_id` to select the
-     * feed whose items you want to retrieve. The response includes cursor-based page metadata and a
-     * total count.
+     * Lists the live news items assigned to a specific newsfeed. Supply `newsfeed_id` to select the feed whose items you want to retrieve. The response includes cursor-based page metadata and a total count.
      *
      * You can fetch a list of all news items that are live on a given newsfeed
      */
-    fun listLiveNewsfeedItems(
-        newsfeedId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): PaginatedResponse {
-        return dev.octri.showcase.intercom.methods.News.listLiveNewsfeedItems(
-            clientConfig,
-            newsfeedId,
-            intercomVersion,
-            options,
-        )
+    fun listLiveNewsfeedItems(newsfeedId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): PaginatedResponse {
+        return dev.octri.showcase.intercom.methods.News.listLiveNewsfeedItems(clientConfig, newsfeedId, intercomVersion, options)
     }
 
     /**
-     * Lists the newsfeeds available in the workspace. Use the cursor-based page metadata to
-     * navigate through the results. The response includes a total count and an array of newsfeed
-     * objects.
+     * Lists the newsfeeds available in the workspace. Use the cursor-based page metadata to navigate through the results. The response includes a total count and an array of newsfeed objects.
      *
      * You can fetch a list of all newsfeeds
      */
-    fun listNewsfeeds(
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): PaginatedResponse {
-        return dev.octri.showcase.intercom.methods.News.listNewsfeeds(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun listNewsfeeds(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): PaginatedResponse {
+        return dev.octri.showcase.intercom.methods.News.listNewsfeeds(clientConfig, intercomVersion, options)
     }
 
     /**
-     * Retrieves the details of a single newsfeed. Use `newsfeed_id` to identify the feed. Newsfeeds
-     * cannot be edited through the API.
+     * Retrieves the details of a single newsfeed. Use `newsfeed_id` to identify the feed. Newsfeeds cannot be edited through the API.
      *
      * You can fetch the details of a single newsfeed
      */
-    fun retrieveNewsfeed(
-        newsfeedId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Newsfeed {
-        return dev.octri.showcase.intercom.methods.News.retrieveNewsfeed(
-            clientConfig,
-            newsfeedId,
-            intercomVersion,
-            options,
-        )
+    fun retrieveNewsfeed(newsfeedId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Newsfeed {
+        return dev.octri.showcase.intercom.methods.News.retrieveNewsfeed(clientConfig, newsfeedId, intercomVersion, options)
     }
+
 }

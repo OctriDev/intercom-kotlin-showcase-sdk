@@ -3,39 +3,64 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Pagination metadata. */
+/**
+ * Pagination metadata.
+ */
 data class SideConversationListPages(
-    /** Optional enumerated value serialized in the `type` wire field. */
+    /**
+     * Optional enumerated value serialized in the `type` wire field.
+     */
     val type: SideConversationListPagesTypeEnum? = null,
-    /** The current page number. */
+    /**
+     * The current page number.
+     */
     val page: Long? = null,
-    /** The number of results per page. */
+    /**
+     * The number of results per page.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** The total number of pages. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null,
+    /**
+     * The total number of pages.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long? = null
 )
 
-/** A paginated list of side conversations for a conversation. */
+/**
+ * A paginated list of side conversations for a conversation.
+ */
 data class SideConversationList(
-    /** The type of the response object. */
+    /**
+     * The type of the response object.
+     */
     val type: SideConversationListTypeEnum? = null,
-    /** An array of side conversation objects. */
-    @com.fasterxml.jackson.annotation.JsonProperty("side_conversations")
-    val sideConversations: List<SideConversationSummary>? = null,
-    /** The total number of side conversations. */
+    /**
+     * An array of side conversation objects.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("side_conversations") val sideConversations: List<SideConversationSummary>? = null,
+    /**
+     * The total number of side conversations.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** Pagination metadata. */
-    val pages: SideConversationListPages? = null,
+    /**
+     * Pagination metadata.
+     */
+    val pages: SideConversationListPages? = null
 )
 
-/** A side conversation with its conversation parts. */
+/**
+ * A side conversation with its conversation parts.
+ */
 data class SideConversationSummary(
-    /** The unique identifier for the side conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("side_conversation_id")
-    val sideConversationId: String? = null,
-    /** The conversation parts (messages) in this side conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts")
-    val conversationParts: List<ConversationPart>? = null,
-    /** The total number of conversation parts in this side conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+    /**
+     * The unique identifier for the side conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("side_conversation_id") val sideConversationId: String? = null,
+    /**
+     * The conversation parts (messages) in this side conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_parts") val conversationParts: List<ConversationPart>? = null,
+    /**
+     * The total number of conversation parts in this side conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null
 )

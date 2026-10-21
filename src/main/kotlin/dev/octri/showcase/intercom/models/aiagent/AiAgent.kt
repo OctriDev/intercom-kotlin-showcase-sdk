@@ -8,38 +8,44 @@ import dev.octri.showcase.intercom.models.AiAgentResolutionStateEnum
 import dev.octri.showcase.intercom.models.AiAgentSourceTypeEnum
 import dev.octri.showcase.intercom.models.ContentSourcesList
 
-/** Data related to AI Agent involvement in the conversation. */
+/**
+ * Data related to AI Agent involvement in the conversation.
+ */
 data class AiAgent(
-    /** The type of the source that triggered AI Agent involvement in the conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("source_type")
-    val sourceType: AiAgentSourceTypeEnum? = null,
     /**
-     * The title of the source that triggered AI Agent involvement in the conversation. If this is
-     * `essentials_plan_setup` then it will return `null`.
+     * The type of the source that triggered AI Agent involvement in the conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("source_type") val sourceType: AiAgentSourceTypeEnum? = null,
+    /**
+     * The title of the source that triggered AI Agent involvement in the conversation. If this is `essentials_plan_setup` then it will return `null`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("source_title") val sourceTitle: String? = null,
     /**
-     * The type of the last answer delivered by AI Agent. If no answer was delivered then this will
-     * return `null`
+     * The type of the last answer delivered by AI Agent. If no answer was delivered then this will return `null`
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_answer_type")
-    val lastAnswerType: AiAgentLastAnswerTypeEnum? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("last_answer_type") val lastAnswerType: AiAgentLastAnswerTypeEnum? = null,
     /**
-     * The resolution state of AI Agent. If no AI or custom answer has been delivered then this will
-     * return `null`.
+     * The resolution state of AI Agent. If no AI or custom answer has been delivered then this will return `null`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("resolution_state")
-    val resolutionState: AiAgentResolutionStateEnum? = null,
-    /** The customer satisfaction rating given to AI Agent, from 1-5. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resolution_state") val resolutionState: AiAgentResolutionStateEnum? = null,
+    /**
+     * The customer satisfaction rating given to AI Agent, from 1-5.
+     */
     val rating: Long? = null,
-    /** The customer satisfaction rating remark given to AI Agent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("rating_remark")
-    val ratingRemark: String? = null,
-    /** The time when the AI agent rating was created. */
+    /**
+     * The customer satisfaction rating remark given to AI Agent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("rating_remark") val ratingRemark: String? = null,
+    /**
+     * The time when the AI agent rating was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time when the AI agent rating was last updated. */
+    /**
+     * The time when the AI agent rating was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /** Optional object value serialized in the `content_sources` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_sources")
-    val contentSources: ContentSourcesList? = null,
+    /**
+     * Optional object value serialized in the `content_sources` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_sources") val contentSources: ContentSourcesList? = null
 )

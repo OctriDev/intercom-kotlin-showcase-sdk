@@ -20,51 +20,37 @@ import java.time.LocalDate
 
 object OfficeHours {
 
-    data class DeleteOfficeHoursExceptionResponse(
-        val id: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-        val deleted: Boolean? = null,
-    )
+data class DeleteOfficeHoursExceptionResponse(
+    val id: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    val deleted: Boolean? = null
+)
 
-    data class DeleteOfficeHoursScheduleResponse(
-        val id: String? = null,
-        @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-        val deleted: Boolean? = null,
-    )
+data class DeleteOfficeHoursScheduleResponse(
+    val id: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    val deleted: Boolean? = null
+)
+
 
     /**
-     * Retrieves a single office hours exception for a schedule. Use the schedule and exception
-     * identifiers to locate the date-specific override to the schedule's regular hours.
+     * Retrieves a single office hours exception for a schedule. Use the schedule and exception identifiers to locate the date-specific override to the schedule's regular hours.
      *
      * You can fetch the details of a single office hours exception.
      *
-     * @param officeHoursScheduleId The unique identifier for the office hours schedule.
+     * @param officeHoursScheduleId The unique identifier for the office hours
+     *   schedule.
      * @param id The unique identifier for the office hours exception.
      */
-    fun getOfficeHoursException(
-        clientConfig: ClientConfig,
-        officeHoursScheduleId: String,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): OfficeHoursException {
-        return SdkClient.request<OfficeHoursException>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(officeHoursScheduleId)}/office_hours_exceptions/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "getOfficeHoursException",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun getOfficeHoursException(clientConfig: ClientConfig, officeHoursScheduleId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): OfficeHoursException {
+        return SdkClient.request<OfficeHoursException>(SdkClient.RequestSpec("GET", "/office_hours_schedules/${SdkClient.encodePathSegment(officeHoursScheduleId)}/office_hours_exceptions/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "getOfficeHoursException", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateOfficeHoursException]. */
     data class UpdateOfficeHoursExceptionParams(
@@ -75,141 +61,84 @@ object OfficeHours {
         val exceptionType: UpdateOfficeHoursExceptionRequestRequestExceptionTypeEnum? = null,
         val name: String? = null,
         val timeIntervals: SdkClient.SdkOptional<List<OfficeHoursTimeIntervalRequest>?>? = null,
-        val recurringAnnually: Boolean? = null,
+        val recurringAnnually: Boolean? = null
     )
 
     /**
-     * Updates an existing office hours exception, changing only the fields included in the request.
-     * Set `exception_type` to `closed` or `custom_hours`; custom hours require `time_intervals`,
-     * while closed exceptions omit them. Set `exception_date` in `YYYY-MM-DD` format and use
-     * `recurring_annually` to indicate whether the exception repeats each year.
+     * Updates an existing office hours exception, changing only the fields included in the request. Set `exception_type` to `closed` or `custom_hours`; custom hours require `time_intervals`, while closed exceptions omit them. Set `exception_date` in `YYYY-MM-DD` format and use `recurring_annually` to indicate whether the exception repeats each year.
      *
      * You can update an existing office hours exception.
      *
-     * @param officeHoursScheduleId The unique identifier for the office hours schedule.
+     * @param officeHoursScheduleId The unique identifier for the office hours
+     *   schedule.
      * @param id The unique identifier for the office hours exception.
-     * @param exceptionDate The date the exception applies to, in `YYYY-MM-DD` format.
+     * @param exceptionDate The date the exception applies to, in `YYYY-MM-DD`
+     *   format.
      * @param exceptionType The type of exception.
      * @param name An optional name for the exception.
-     * @param timeIntervals The open intervals for the exception date. Required for `custom_hours`;
-     *   omit for `closed`.
-     * @param recurringAnnually Whether the exception repeats every year on the same date.
+     * @param timeIntervals The open intervals for the exception date. Required for
+     *   `custom_hours`; omit for `closed`.
+     * @param recurringAnnually Whether the exception repeats every year on the same
+     *   date.
      */
-    fun updateOfficeHoursException(
-        clientConfig: ClientConfig,
-        request: UpdateOfficeHoursExceptionParams,
-        options: RequestOptions? = null,
-    ): OfficeHoursException {
+    fun updateOfficeHoursException(clientConfig: ClientConfig, request: UpdateOfficeHoursExceptionParams, options: RequestOptions? = null): OfficeHoursException {
         validateUpdateOfficeHoursExceptionRequest(request)
 
-        return SdkClient.request<OfficeHoursException>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(request.officeHoursScheduleId)}/office_hours_exceptions/${SdkClient.encodePathSegment(request.id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "exception_date" to (SdkClient.omitIfNull(request.exceptionDate)),
-                            "exception_type" to (SdkClient.omitIfNull(request.exceptionType)),
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "time_intervals" to
-                                (request.timeIntervals ?: SdkClient.SdkOptional.Omitted),
-                            "recurring_annually" to
-                                (SdkClient.omitIfNull(request.recurringAnnually)),
-                        ),
-                    operationId = "updateOfficeHoursException",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<OfficeHoursException>(SdkClient.RequestSpec("PUT", "/office_hours_schedules/${SdkClient.encodePathSegment(request.officeHoursScheduleId)}/office_hours_exceptions/${SdkClient.encodePathSegment(request.id)}", config = clientConfig, body = SdkClient.bodyMap("exception_date" to
+    (SdkClient.omitIfNull(request.exceptionDate)), "exception_type" to
+    (SdkClient.omitIfNull(request.exceptionType)), "name" to (SdkClient.omitIfNull(request.name)), "time_intervals" to
+    (request.timeIntervals ?: SdkClient.SdkOptional.Omitted), "recurring_annually" to
+    (SdkClient.omitIfNull(request.recurringAnnually))), operationId = "updateOfficeHoursException", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
 
-    private fun validateUpdateOfficeHoursExceptionRequest(
-        request: UpdateOfficeHoursExceptionParams
-    ) {
+
+    private fun validateUpdateOfficeHoursExceptionRequest(request: UpdateOfficeHoursExceptionParams) {
         if (request.exceptionDate != null) {
             Validation.validateDate("exception_date", request.exceptionDate)
-        }
+}
     }
 
+
+
+
+
+
     /**
-     * Deletes one office hours exception from a specific schedule. Use the schedule and exception
-     * identifiers to target the exception to remove. The response confirms deletion and includes
-     * the exception identifier.
+     * Deletes one office hours exception from a specific schedule. Use the schedule and exception identifiers to target the exception to remove. The response confirms deletion and includes the exception identifier.
      *
      * You can delete a single office hours exception.
      *
-     * @param officeHoursScheduleId The unique identifier for the office hours schedule.
+     * @param officeHoursScheduleId The unique identifier for the office hours
+     *   schedule.
      * @param id The unique identifier for the office hours exception.
      */
-    fun deleteOfficeHoursException(
-        clientConfig: ClientConfig,
-        officeHoursScheduleId: String,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeleteOfficeHoursExceptionResponse {
-        return SdkClient.request<DeleteOfficeHoursExceptionResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(officeHoursScheduleId)}/office_hours_exceptions/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "deleteOfficeHoursException",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteOfficeHoursException(clientConfig: ClientConfig, officeHoursScheduleId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeleteOfficeHoursExceptionResponse {
+        return SdkClient.request<DeleteOfficeHoursExceptionResponse>(SdkClient.RequestSpec("DELETE", "/office_hours_schedules/${SdkClient.encodePathSegment(officeHoursScheduleId)}/office_hours_exceptions/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteOfficeHoursException", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the exceptions for a specific office hours schedule. Use the schedule identifier to
-     * retrieve exceptions that override its regular hours on particular dates.
+     * Lists the exceptions for a specific office hours schedule. Use the schedule identifier to retrieve exceptions that override its regular hours on particular dates.
      *
      * You can fetch a list of all exceptions for an office hours schedule.
      *
-     * @param officeHoursScheduleId The unique identifier for the office hours schedule.
+     * @param officeHoursScheduleId The unique identifier for the office hours
+     *   schedule.
      */
-    fun listOfficeHoursExceptions(
-        clientConfig: ClientConfig,
-        officeHoursScheduleId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): OfficeHoursExceptionList {
-        return SdkClient.request<OfficeHoursExceptionList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(officeHoursScheduleId)}/office_hours_exceptions",
-                    config = clientConfig,
-                    operationId = "listOfficeHoursExceptions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listOfficeHoursExceptions(clientConfig: ClientConfig, officeHoursScheduleId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): OfficeHoursExceptionList {
+        return SdkClient.request<OfficeHoursExceptionList>(SdkClient.RequestSpec("GET", "/office_hours_schedules/${SdkClient.encodePathSegment(officeHoursScheduleId)}/office_hours_exceptions", config = clientConfig, operationId = "listOfficeHoursExceptions", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createOfficeHoursException]. */
     data class CreateOfficeHoursExceptionParams(
@@ -219,258 +148,131 @@ object OfficeHours {
         val intercomVersion: IntercomVersion? = null,
         val name: String? = null,
         val timeIntervals: SdkClient.SdkOptional<List<OfficeHoursTimeIntervalRequest>?>? = null,
-        val recurringAnnually: Boolean? = null,
+        val recurringAnnually: Boolean? = null
     )
 
     /**
-     * Creates an exception that overrides the regular hours for a specific date on an office hours
-     * schedule. Supply `exception_date` and choose `closed` or `custom_hours`; provide
-     * `time_intervals` for custom hours and omit it for a closed day. Set `recurring_annually` to
-     * repeat the exception on the same date each year.
+     * Creates an exception that overrides the regular hours for a specific date on an office hours schedule. Supply `exception_date` and choose `closed` or `custom_hours`; provide `time_intervals` for custom hours and omit it for a closed day. Set `recurring_annually` to repeat the exception on the same date each year.
      *
-     * You can create an exception for an office hours schedule. Use `closed` to mark the day closed
-     * (omit `time_intervals`) or `custom_hours` to supply replacement intervals.
+     * You can create an exception for an office hours schedule. Use `closed` to mark the day closed (omit `time_intervals`) or `custom_hours` to supply replacement intervals.
      *
-     * @param officeHoursScheduleId The unique identifier for the office hours schedule.
-     * @param exceptionDate The date the exception applies to, in `YYYY-MM-DD` format.
+     * @param officeHoursScheduleId The unique identifier for the office hours
+     *   schedule.
+     * @param exceptionDate The date the exception applies to, in `YYYY-MM-DD`
+     *   format.
      * @param exceptionType The type of exception.
      * @param name An optional name for the exception.
-     * @param timeIntervals The open intervals for the exception date. Required for `custom_hours`;
-     *   omit for `closed`.
-     * @param recurringAnnually Whether the exception repeats every year on the same date.
+     * @param timeIntervals The open intervals for the exception date. Required for
+     *   `custom_hours`; omit for `closed`.
+     * @param recurringAnnually Whether the exception repeats every year on the same
+     *   date.
      */
-    fun createOfficeHoursException(
-        clientConfig: ClientConfig,
-        request: CreateOfficeHoursExceptionParams,
-        options: RequestOptions? = null,
-    ): OfficeHoursException {
+    fun createOfficeHoursException(clientConfig: ClientConfig, request: CreateOfficeHoursExceptionParams, options: RequestOptions? = null): OfficeHoursException {
         validateCreateOfficeHoursExceptionRequest(request)
 
-        return SdkClient.request<OfficeHoursException>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(request.officeHoursScheduleId)}/office_hours_exceptions",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "exception_date" to (request.exceptionDate),
-                            "exception_type" to (request.exceptionType),
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "time_intervals" to
-                                (request.timeIntervals ?: SdkClient.SdkOptional.Omitted),
-                            "recurring_annually" to
-                                (SdkClient.omitIfNull(request.recurringAnnually)),
-                        ),
-                    operationId = "createOfficeHoursException",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<OfficeHoursException>(SdkClient.RequestSpec("POST", "/office_hours_schedules/${SdkClient.encodePathSegment(request.officeHoursScheduleId)}/office_hours_exceptions", config = clientConfig, body = SdkClient.bodyMap("exception_date" to (request.exceptionDate), "exception_type" to (request.exceptionType), "name" to (SdkClient.omitIfNull(request.name)), "time_intervals" to
+    (request.timeIntervals ?: SdkClient.SdkOptional.Omitted), "recurring_annually" to
+    (SdkClient.omitIfNull(request.recurringAnnually))), operationId = "createOfficeHoursException", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
 
-    private fun validateCreateOfficeHoursExceptionRequest(
-        request: CreateOfficeHoursExceptionParams
-    ) {
+
+    private fun validateCreateOfficeHoursExceptionRequest(request: CreateOfficeHoursExceptionParams) {
         Validation.validateDate("exception_date", request.exceptionDate)
     }
 
+
+
+
+
+
     /**
-     * Retrieves the details of a specific office hours schedule. Use the schedule identifier to
-     * view its recurring weekly hours and the time zone used to evaluate them.
+     * Retrieves the details of a specific office hours schedule. Use the schedule identifier to view its recurring weekly hours and the time zone used to evaluate them.
      *
      * You can fetch the details of a single office hours schedule.
      *
      * @param id The unique identifier for the office hours schedule.
      */
-    fun getOfficeHoursSchedule(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): OfficeHoursSchedule {
-        return SdkClient.request<OfficeHoursSchedule>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "getOfficeHoursSchedule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun getOfficeHoursSchedule(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): OfficeHoursSchedule {
+        return SdkClient.request<OfficeHoursSchedule>(SdkClient.RequestSpec("GET", "/office_hours_schedules/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "getOfficeHoursSchedule", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates the provided fields of an existing office hours schedule. Supply only the schedule
-     * properties you want to change; when updating `time_intervals`, set `start_minute` and
-     * `end_minute` on 15-minute boundaries.
+     * Updates the provided fields of an existing office hours schedule. Supply only the schedule properties you want to change; when updating `time_intervals`, set `start_minute` and `end_minute` on 15-minute boundaries.
      *
      * You can update an existing office hours schedule.
      *
      * @param id The unique identifier for the office hours schedule.
      * @param name The name of the office hours schedule.
      * @param timeZoneName The IANA time zone the schedule's hours are evaluated in.
-     * @param timeIntervals The open intervals for the schedule. `start_minute` and `end_minute`
-     *   must be on a 15-minute boundary.
+     * @param timeIntervals The open intervals for the schedule. `start_minute` and
+     *   `end_minute` must be on a 15-minute boundary.
      */
-    fun updateOfficeHoursSchedule(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        name: String? = null,
-        timeZoneName: String? = null,
-        timeIntervals: List<OfficeHoursTimeIntervalRequest>? = null,
-        options: RequestOptions? = null,
-    ): OfficeHoursSchedule {
-        return SdkClient.request<OfficeHoursSchedule>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "time_zone_name" to (SdkClient.omitIfNull(timeZoneName)),
-                            "time_intervals" to (SdkClient.omitIfNull(timeIntervals)),
-                        ),
-                    operationId = "updateOfficeHoursSchedule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateOfficeHoursSchedule(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, name: String? = null, timeZoneName: String? = null, timeIntervals: List<OfficeHoursTimeIntervalRequest>? = null, options: RequestOptions? = null): OfficeHoursSchedule {
+        return SdkClient.request<OfficeHoursSchedule>(SdkClient.RequestSpec("PUT", "/office_hours_schedules/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "time_zone_name" to (SdkClient.omitIfNull(timeZoneName)), "time_intervals" to (SdkClient.omitIfNull(timeIntervals))), operationId = "updateOfficeHoursSchedule", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a specific office hours schedule. Use its identifier to select the schedule to
-     * remove. The response confirms deletion and includes the schedule identifier.
+     * Deletes a specific office hours schedule. Use its identifier to select the schedule to remove. The response confirms deletion and includes the schedule identifier.
      *
      * You can delete a single office hours schedule.
      *
      * @param id The unique identifier for the office hours schedule.
      */
-    fun deleteOfficeHoursSchedule(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeleteOfficeHoursScheduleResponse {
-        return SdkClient.request<DeleteOfficeHoursScheduleResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/office_hours_schedules/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "deleteOfficeHoursSchedule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteOfficeHoursSchedule(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeleteOfficeHoursScheduleResponse {
+        return SdkClient.request<DeleteOfficeHoursScheduleResponse>(SdkClient.RequestSpec("DELETE", "/office_hours_schedules/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteOfficeHoursSchedule", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the office hours schedules configured for the workspace. Use this endpoint to view the
-     * recurring schedules and their weekly hours.
+     * Lists the office hours schedules configured for the workspace. Use this endpoint to view the recurring schedules and their weekly hours.
      *
      * You can fetch a list of all office hours schedules for the workspace.
      */
-    fun listOfficeHoursSchedules(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): OfficeHoursScheduleList {
-        return SdkClient.request<OfficeHoursScheduleList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/office_hours_schedules",
-                    config = clientConfig,
-                    operationId = "listOfficeHoursSchedules",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listOfficeHoursSchedules(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): OfficeHoursScheduleList {
+        return SdkClient.request<OfficeHoursScheduleList>(SdkClient.RequestSpec("GET", "/office_hours_schedules", config = clientConfig, operationId = "listOfficeHoursSchedules", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a recurring weekly office hours schedule for the workspace. Provide its `name`,
-     * `time_zone_name`, and `time_intervals`; set each interval's start and end on 15-minute
-     * boundaries. The response includes the created schedule and its identifier.
+     * Creates a recurring weekly office hours schedule for the workspace. Provide its `name`, `time_zone_name`, and `time_intervals`; set each interval's start and end on 15-minute boundaries. The response includes the created schedule and its identifier.
      *
      * You can create a new office hours schedule for the workspace.
      *
      * @param name The name of the office hours schedule.
      * @param timeZoneName The IANA time zone the schedule's hours are evaluated in.
-     * @param timeIntervals The open intervals for the schedule. `start_minute` and `end_minute`
-     *   must be on a 15-minute boundary.
+     * @param timeIntervals The open intervals for the schedule. `start_minute` and
+     *   `end_minute` must be on a 15-minute boundary.
      */
-    fun createOfficeHoursSchedule(
-        clientConfig: ClientConfig,
-        name: String,
-        timeZoneName: String,
-        timeIntervals: List<OfficeHoursTimeIntervalRequest>,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): OfficeHoursSchedule {
-        return SdkClient.request<OfficeHoursSchedule>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/office_hours_schedules",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "time_zone_name" to (timeZoneName),
-                            "time_intervals" to (timeIntervals),
-                        ),
-                    operationId = "createOfficeHoursSchedule",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
-                )
-            )
-            .data
+    fun createOfficeHoursSchedule(clientConfig: ClientConfig, name: String, timeZoneName: String, timeIntervals: List<OfficeHoursTimeIntervalRequest>, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): OfficeHoursSchedule {
+        return SdkClient.request<OfficeHoursSchedule>(SdkClient.RequestSpec("POST", "/office_hours_schedules", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "time_zone_name" to (timeZoneName), "time_intervals" to (timeIntervals)), operationId = "createOfficeHoursSchedule", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

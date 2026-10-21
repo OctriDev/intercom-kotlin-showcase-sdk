@@ -18,251 +18,315 @@ import dev.octri.showcase.intercom.models.FinAgentStatusUpdatedEventStatusEnum
 import java.time.OffsetDateTime
 
 /**
- * An attachment object representing a file or URL attachment included with a message. Attachments
- * can be used to provide additional context to Fin. Maximum of 10 attachments per request.
+ * An attachment object representing a file or URL attachment included with a message. Attachments can be used to provide additional context to Fin. Maximum of 10 attachments per request.
  */
 data class FinAgentAttachment(
-    /** The type of attachment. */
+    /**
+     * The type of attachment.
+     */
     val type: FinAgentAttachmentTypeEnum,
-    /** The URL of the attachment. Required when type is 'url'. Must be publicly accessible. */
+    /**
+     * The URL of the attachment. Required when type is 'url'. Must be publicly accessible.
+     */
     val url: String? = null,
-    /** The name of the file. Required when type is 'file'. */
+    /**
+     * The name of the file. Required when type is 'file'.
+     */
     val name: String? = null,
-    /** The MIME type of the file. Required when type is 'file'. */
+    /**
+     * The MIME type of the file. Required when type is 'file'.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String? = null,
-    /** Base64-encoded file data. Required when type is 'file'. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ByteArray? = null,
+    /**
+     * Base64-encoded file data. Required when type is 'file'.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ByteArray? = null
 )
 
-/** User-related attribute errors. */
+/**
+ * User-related attribute errors.
+ */
 data class FinAgentAttributeErrorsUser(
-    /** Map of user attribute names to error messages. */
+    /**
+     * Map of user attribute names to error messages.
+     */
     val attributes: Map<String, String>? = null
 )
 
-/** Conversation-related attribute errors. */
+/**
+ * Conversation-related attribute errors.
+ */
 data class FinAgentAttributeErrorsConversation(
-    /** Map of conversation attribute names to error messages. */
+    /**
+     * Map of conversation attribute names to error messages.
+     */
     val attributes: Map<String, String>? = null
 )
 
-/** Contains error details if any user or conversation attribute updates failed. */
+/**
+ * Contains error details if any user or conversation attribute updates failed.
+ */
 data class FinAgentAttributeErrors(
-    /** User-related attribute errors. */
+    /**
+     * User-related attribute errors.
+     */
     val user: FinAgentAttributeErrorsUser? = null,
-    /** Conversation-related attribute errors. */
-    val conversation: FinAgentAttributeErrorsConversation? = null,
+    /**
+     * Conversation-related attribute errors.
+     */
+    val conversation: FinAgentAttributeErrorsConversation? = null
 )
 
-/** Metadata about the conversation, including history and attributes. */
+/**
+ * Metadata about the conversation, including history and attributes.
+ */
 data class FinAgentConversationMetadata(
     /**
-     * An array of previous messages in the conversation before Fin is initialized. This data
-     * provides context to Fin and helps generate a better answer. Limit to the last 10 messages.
+     * An array of previous messages in the conversation before Fin is initialized. This data provides context to Fin and helps generate a better answer. Limit to the last 10 messages.
      */
     val history: List<FinAgentMessage>? = null,
     /**
-     * A hash of attributes associated with the conversation. These attributes can be used by Fin to
-     * provide more contextual responses. Limit to 20 attributes.
+     * A hash of attributes associated with the conversation. These attributes can be used by Fin to provide more contextual responses. Limit to 20 attributes.
      */
-    val attributes: Map<String, Any>? = null,
+    val attributes: Map<String, Any>? = null
 )
 
-/** Required object value serialized in the `options[]` wire field. */
+/**
+ * Required object value serialized in the `options[]` wire field.
+ */
 data class FinAgentCsatRequestedEventCsatOptionsItem(
-    /** The stable key to send back as 'rating' on POST /fin/csat. */
+    /**
+     * The stable key to send back as 'rating' on POST /fin/csat.
+     */
     val key: FinAgentCsatRequestedEventCsatOptionsItemKeyEnum,
-    /** The emoji representing this rating. */
+    /**
+     * The emoji representing this rating.
+     */
     val emoji: String,
     /**
-     * The human-readable label for this rating, localised to the conversation's detected language.
-     * Distinct from 'key' — display the label, but send back the key.
+     * The human-readable label for this rating, localised to the conversation's detected language. Distinct from 'key' — display the label, but send back the key.
      */
-    val label: String,
+    val label: String
 )
 
-/** The rating survey to present to the user. */
+/**
+ * The rating survey to present to the user.
+ */
 data class FinAgentCsatRequestedEventCsat(
-    /** The ordered rating options to show the user. */
+    /**
+     * The ordered rating options to show the user.
+     */
     val options: List<FinAgentCsatRequestedEventCsatOptionsItem>
 )
 
 /**
- * Event fired when Fin asks the user to rate the conversation. Delivered via webhooks or SSE.
- * Carries the rating options to present to the user; submit the user's choice with POST /fin/csat.
- * Unlike the reply events it has no message — a rating survey is a set of options to choose from,
- * not readable text. Over SSE this event arrives after Fin reaches 'complete'. Because a survey is
- * expected, 'complete' does not close the stream: the connection is held open so this event can be…
+ * Event fired when Fin asks the user to rate the conversation. Delivered via webhooks or SSE. Carries the rating options to present to the user; submit the user's choice with POST /fin/csat. Unlike the reply events it has no message — a rating survey is a set of options to choose from, not readable text. Over SSE this event arrives after Fin reaches 'complete'. Because a survey is expected, 'complete' does not close the stream: the connection is held open so this event can be…
  */
 data class FinAgentCsatRequestedEvent(
-    /** The name of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_name")
-    val eventName: FinAgentCsatRequestedEventEventNameEnum,
-    /** The ID of the conversation. */
+    /**
+     * The name of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: FinAgentCsatRequestedEventEventNameEnum,
+    /**
+     * The ID of the conversation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /** The ID of the user. */
+    /**
+     * The ID of the user.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** The rating survey to present to the user. */
+    /**
+     * The rating survey to present to the user.
+     */
     val csat: FinAgentCsatRequestedEventCsat,
-    /** The timestamp the event was created at, with millisecond precision. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime,
+    /**
+     * The timestamp the event was created at, with millisecond precision.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime
 )
 
-/** A message exchanged within a Fin Agent conversation. */
+/**
+ * A message exchanged within a Fin Agent conversation.
+ */
 data class FinAgentMessage(
-    /** The author that created the message. */
+    /**
+     * The author that created the message.
+     */
     val author: FinAgentMessageAuthorEnum,
     /**
-     * The body of the message. Accepts both plain text and HTML format. When sending a message to
-     * Fin, this should contain the user's message. Fin's response will be returned as HTML.
+     * The body of the message. Accepts both plain text and HTML format. When sending a message to Fin, this should contain the user's message. Fin's response will be returned as HTML.
      */
     val body: String,
     /**
-     * The timestamp when the message was created. Used to deduplicate messages sent within a 5
-     * minute window. Ideally should include milliseconds for higher precision.
+     * The timestamp when the message was created. Used to deduplicate messages sent within a 5 minute window. Ideally should include milliseconds for higher precision.
      */
     val timestamp: OffsetDateTime,
     /**
-     * The timestamp when the message was created, with millisecond precision. Only present in
-     * webhook event responses (fin_replied).
+     * The timestamp when the message was created, with millisecond precision. Only present in webhook event responses (fin_replied).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("timestamp_ms")
-    val timestampMs: OffsetDateTime? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("timestamp_ms") val timestampMs: OffsetDateTime? = null
 )
 
-/** Required object value serialized in the `sources[]` wire field. */
+/**
+ * Required object value serialized in the `sources[]` wire field.
+ */
 data class FinAgentRepliedEventMessageSourcesItem(
-    /** The title of the source. */
+    /**
+     * The title of the source.
+     */
     val title: String,
-    /** Whether the source is an Intercom article or external content. */
+    /**
+     * Whether the source is an Intercom article or external content.
+     */
     val type: FinAgentRepliedEventMessageSourcesItemTypeEnum,
-    /** The URL of the source. */
-    val url: String,
+    /**
+     * The URL of the source.
+     */
+    val url: String
 )
 
-/** Fin's answer to the user's query. */
+/**
+ * Fin's answer to the user's query.
+ */
 data class FinAgentRepliedEventMessage(
-    /** The author of the message (always 'fin' for this event). */
+    /**
+     * The author of the message (always 'fin' for this event).
+     */
     val author: FinAgentRepliedEventMessageAuthorEnum,
-    /** The HTML body of Fin's response. */
+    /**
+     * The HTML body of Fin's response.
+     */
     val body: String,
-    /** The timestamp the message was created at, with millisecond precision. */
+    /**
+     * The timestamp the message was created at, with millisecond precision.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("timestamp_ms") val timestampMs: OffsetDateTime,
-    /** A unique identifier for this message. */
+    /**
+     * A unique identifier for this message.
+     */
     val id: String? = null,
     /**
-     * The content sources Fin used to generate this reply, in the same order as the [n] citation
-     * markers in the body. Present only when Fin cited content.
+     * The content sources Fin used to generate this reply, in the same order as the [n] citation markers in the body. Present only when Fin cited content.
      */
-    val sources: List<FinAgentRepliedEventMessageSourcesItem>? = null,
+    val sources: List<FinAgentRepliedEventMessageSourcesItem>? = null
 )
 
 /**
- * Event fired when Fin replies to a user. Delivered via webhooks or SSE. The content of the
- * response will be contained in the message object. Intermediate replies have status 'replying'; a
- * separate fin_status_updated event with 'awaiting_user_reply' fires once Fin's reply is done.
+ * Event fired when Fin replies to a user. Delivered via webhooks or SSE. The content of the response will be contained in the message object. Intermediate replies have status 'replying'; a separate fin_status_updated event with 'awaiting_user_reply' fires once Fin's reply is done.
  */
 data class FinAgentRepliedEvent(
-    /** The name of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_name")
-    val eventName: FinAgentRepliedEventEventNameEnum,
-    /** The ID of the conversation. */
+    /**
+     * The name of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: FinAgentRepliedEventEventNameEnum,
+    /**
+     * The ID of the conversation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /** The ID of the user. */
+    /**
+     * The ID of the user.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** Fin's answer to the user's query. */
+    /**
+     * Fin's answer to the user's query.
+     */
     val message: FinAgentRepliedEventMessage,
     /**
-     * Fin's current status. - replying: Intermediate reply part; more parts may follow -
-     * awaiting_user_reply: Legacy status; instead use the fin_status_updated event with
-     * 'awaiting_user_reply', which fires once Fin's reply is done
+     * Fin's current status. - replying: Intermediate reply part; more parts may follow - awaiting_user_reply: Legacy status; instead use the fin_status_updated event with 'awaiting_user_reply', which fires once Fin's reply is done
      */
     val status: FinAgentRepliedEventStatusEnum,
-    /** The timestamp the event was created at, with millisecond precision. */
+    /**
+     * The timestamp the event was created at, with millisecond precision.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime,
     /**
-     * Optional. Present when the reply was generated via streaming. Correlates this event with the
-     * fin_reply_chunk events that preceded it. Use this to know when to replace streamed chunk_text
-     * with the final message body.
+     * Optional. Present when the reply was generated via streaming. Correlates this event with the fin_reply_chunk events that preceded it. Use this to know when to replace streamed chunk_text with the final message body.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String? = null
 )
 
 /**
- * SSE-only event fired during streaming reply generation. Each chunk contains the full accumulated
- * plain text of Fin's answer so far (cumulative, not a delta). Only delivered over SSE when
- * streaming is enabled. Not available via webhooks. When the fin_replied event arrives with the
- * same stream_id, replace streamed text with the final HTML body.
+ * SSE-only event fired during streaming reply generation. Each chunk contains the full accumulated plain text of Fin's answer so far (cumulative, not a delta). Only delivered over SSE when streaming is enabled. Not available via webhooks. When the fin_replied event arrives with the same stream_id, replace streamed text with the final HTML body.
  */
 data class FinAgentReplyChunkEvent(
-    /** The name of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_name")
-    val eventName: FinAgentReplyChunkEventEventNameEnum,
-    /** The ID of the conversation. */
+    /**
+     * The name of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: FinAgentReplyChunkEventEventNameEnum,
+    /**
+     * The ID of the conversation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
     /**
-     * A unique identifier for this streaming response. Correlates chunks with each other and with
-     * the eventual fin_replied event.
+     * A unique identifier for this streaming response. Correlates chunks with each other and with the eventual fin_replied event.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("stream_id") val streamId: String,
-    /** 0-based counter for this chunk within the stream. Contiguous. */
+    /**
+     * 0-based counter for this chunk within the stream. Contiguous.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("chunk_index") val chunkIndex: Long,
     /**
-     * The full accumulated plain text of Fin's answer so far. Each chunk supersedes the previous —
-     * replace rather than append.
+     * The full accumulated plain text of Fin's answer so far. Each chunk supersedes the previous — replace rather than append.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("chunk_text") val chunkText: String,
-    /** The timestamp the event was created at, with millisecond precision. */
+    /**
+     * The timestamp the event was created at, with millisecond precision.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime,
-    /** Fin's current status (always 'replying' for this event). */
-    val status: FinAgentReplyChunkEventStatusEnum? = null,
+    /**
+     * Fin's current status (always 'replying' for this event).
+     */
+    val status: FinAgentReplyChunkEventStatusEnum? = null
 )
 
 /**
- * Event fired when Fin's status changes during a conversation. Delivered via webhooks or SSE. Fin
- * will report its status to the client via this event.
+ * Event fired when Fin's status changes during a conversation. Delivered via webhooks or SSE. Fin will report its status to the client via this event.
  */
 data class FinAgentStatusUpdatedEvent(
-    /** The name of the event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("event_name")
-    val eventName: FinAgentStatusUpdatedEventEventNameEnum,
-    /** The ID of the conversation. */
+    /**
+     * The name of the event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("event_name") val eventName: FinAgentStatusUpdatedEventEventNameEnum,
+    /**
+     * The ID of the conversation.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /** The ID of the user. */
+    /**
+     * The ID of the user.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
     /**
-     * Fin's current status. - awaiting_user_reply: Fin has finished replying and is waiting for the
-     * user to respond - escalated: The conversation has been escalated to a human - resolved: The
-     * user's query has been resolved - complete: Fin has completed its workflow. When CSAT is
-     * enabled a csat_requested event may follow, in which case the SSE stream is held open past
-     * complete until it is delivered or the token expires
+     * Fin's current status. - awaiting_user_reply: Fin has finished replying and is waiting for the user to respond - escalated: The conversation has been escalated to a human - resolved: The user's query has been resolved - complete: Fin has completed its workflow. When CSAT is enabled a csat_requested event may follow, in which case the SSE stream is held open past complete until it is delivered or the token expires
      */
     val status: FinAgentStatusUpdatedEventStatusEnum,
-    /** The timestamp the event was created at, with millisecond precision. */
+    /**
+     * The timestamp the event was created at, with millisecond precision.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at_ms") val createdAtMs: OffsetDateTime,
     /**
-     * Optional. A human-readable explanation of why the conversation was escalated. Only present
-     * when status is 'escalated'. Possible values include: - "Escalation requested by user" -
-     * "Escalation rule: {rule_name}" - "Escalation rule matched" - "Routed to team" - "Conversation
-     * finished without resolution"
+     * Optional. A human-readable explanation of why the conversation was escalated. Only present when status is 'escalated'. Possible values include: - "Escalation requested by user" - "Escalation rule: {rule_name}" - "Escalation rule matched" - "Routed to team" - "Conversation finished without resolution"
      */
-    val reason: String? = null,
+    val reason: String? = null
 )
 
-/** A user object representing the user in a Fin Agent conversation. */
+/**
+ * A user object representing the user in a Fin Agent conversation.
+ */
 data class FinAgentUser(
     /**
-     * The ID of the user. This value will be used to uniquely identify the user during a
-     * conversation with Fin. Maps to the user_id field on the Intercom User object.
+     * The ID of the user. This value will be used to uniquely identify the user during a conversation with Fin. Maps to the user_id field on the Intercom User object.
      */
     val id: String,
-    /** The name of the user. */
+    /**
+     * The name of the user.
+     */
     val name: String? = null,
-    /** The email of the user. */
+    /**
+     * The email of the user.
+     */
     val email: String? = null,
     /**
-     * A hash of attributes associated with the user. Attributes can be used by Fin to target
-     * content and responses. Limit to 10 attributes.
+     * A hash of attributes associated with the user. Attributes can be used by Fin to target content and responses. Limit to 10 attributes.
      */
-    val attributes: Map<String, Any>? = null,
+    val attributes: Map<String, Any>? = null
 )

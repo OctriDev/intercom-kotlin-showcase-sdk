@@ -3,63 +3,86 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Payload of the request to assign a conversation */
+/**
+ * Payload of the request to assign a conversation
+ */
 data class AssignConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: AssignConversationRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: AssignConversationRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AssignConversationRequestTypeEnum,
-    /** The id of the admin who is performing the action. */
+    /**
+     * The id of the admin who is performing the action.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can
-     * be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team
-     * (ie. Unassigned).
+     * The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team (ie. Unassigned).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("assignee_id") val assigneeId: String,
-    /** Optionally you can send a response in the conversation when it is assigned. */
+    /**
+     * Optionally you can send a response in the conversation when it is assigned.
+     */
     val body: String? = null,
     /**
-     * When true, assigning a closed conversation leaves it closed instead of reopening it. No
-     * reopen event is recorded, so the conversation keeps its original close timestamp and the
-     * assignment does not count as a new closure in reporting.
+     * When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_reopen") val skipReopen: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_reopen") val skipReopen: Boolean? = null
 )
 
-/** Payload of the request to close a conversation */
+/**
+ * Payload of the request to close a conversation
+ */
 data class CloseConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: CloseConversationRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: CloseConversationRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: CloseConversationRequestTypeEnum,
-    /** The id of the admin who is performing the action. */
+    /**
+     * The id of the admin who is performing the action.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * Optionally you can leave a message in the conversation to provide additional context to the
-     * user and other teammates.
+     * Optionally you can leave a message in the conversation to provide additional context to the user and other teammates.
      */
-    val body: String? = null,
+    val body: String? = null
 )
 
-/** Payload of the request to open a conversation */
+/**
+ * Payload of the request to open a conversation
+ */
 data class OpenConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: OpenConversationRequestMessageTypeEnum,
-    /** The id of the admin who is performing the action. */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: OpenConversationRequestMessageTypeEnum,
+    /**
+     * The id of the admin who is performing the action.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String
 )
 
-/** Payload of the request to snooze a conversation */
+/**
+ * Payload of the request to snooze a conversation
+ */
 data class SnoozeConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: SnoozeConversationRequestMessageTypeEnum,
-    /** The id of the admin who is performing the action. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: SnoozeConversationRequestMessageTypeEnum,
+    /**
+     * The id of the admin who is performing the action.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
-    /** The time you want the conversation to reopen. */
-    @com.fasterxml.jackson.annotation.JsonProperty("snoozed_until") val snoozedUntil: Long,
+    /**
+     * The time you want the conversation to reopen.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("snoozed_until") val snoozedUntil: Long
 )

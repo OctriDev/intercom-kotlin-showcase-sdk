@@ -3,110 +3,98 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Payload of the request to assign a conversation */
+/**
+ * Payload of the request to assign a conversation
+ */
 data class AttachContactToConversationRequest(
-    /** The `id` of the admin who is adding the new participant. */
+    /**
+     * The `id` of the admin who is adding the new participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String? = null,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: AttachContactToConversationRequestCustomer? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: AttachContactToConversationRequestCustomer? = null
 )
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AttachContactToConversationRequestCustomerVariant0(
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: CustomerRequest? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: CustomerRequest? = null
 ) : AttachContactToConversationRequestCustomer
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AttachContactToConversationRequestCustomerVariant1(
-    /** The external_id you have defined for the contact who is being added as a participant. */
+    /**
+     * The external_id you have defined for the contact who is being added as a participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: CustomerRequest? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: CustomerRequest? = null
 ) : AttachContactToConversationRequestCustomer
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AttachContactToConversationRequestCustomerVariant2(
-    /** The email you have defined for the contact who is being added as a participant. */
+    /**
+     * The email you have defined for the contact who is being added as a participant.
+     */
     val email: String,
-    /** Optional object value serialized in the `customer` wire field. */
-    val customer: CustomerRequest? = null,
+    /**
+     * Optional object value serialized in the `customer` wire field.
+     */
+    val customer: CustomerRequest? = null
 ) : AttachContactToConversationRequestCustomer
 
-/** Optional object value serialized in the `customer` wire field. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Optional object value serialized in the `customer` wire field.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AttachContactToConversationRequestCustomerVariant0::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AttachContactToConversationRequestCustomerVariant1::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = AttachContactToConversationRequestCustomerVariant2::class
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AttachContactToConversationRequestCustomerVariant0::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AttachContactToConversationRequestCustomerVariant1::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = AttachContactToConversationRequestCustomerVariant2::class)
 )
 sealed interface AttachContactToConversationRequestCustomer
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CustomerRequestVariant0(
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String
 ) : CustomerRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CustomerRequestVariant1(
-    /** The external_id you have defined for the contact who is being added as a participant. */
+    /**
+     * The external_id you have defined for the contact who is being added as a participant.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String
 ) : CustomerRequest
 
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class CustomerRequestVariant2(
-    /** The email you have defined for the contact who is being added as a participant. */
+    /**
+     * The email you have defined for the contact who is being added as a participant.
+     */
     val email: String
 ) : CustomerRequest
 
-/** Typed representation of the `CustomerRequest` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Typed representation of the `CustomerRequest` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant0::class),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant1::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant2::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = CustomerRequestVariant2::class)
 )
 sealed interface CustomerRequest

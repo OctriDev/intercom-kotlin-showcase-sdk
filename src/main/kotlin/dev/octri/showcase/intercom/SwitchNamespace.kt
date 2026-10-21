@@ -3,29 +3,15 @@
 
 package dev.octri.showcase.intercom
 
+
 class SwitchNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Triggers a phone call redirect by sending an SMS with a Messenger link to the specified phone
-     * number. Supply `phone` in E.164 format; you can also include `custom_attributes` to add
-     * caller-set attributes to the contact or lead. The SMS directs the recipient to continue the
-     * conversation in Messenger.
+     * Triggers a phone call redirect by sending an SMS with a Messenger link to the specified phone number. Supply `phone` in E.164 format; you can also include `custom_attributes` to add caller-set attributes to the contact or lead. The SMS directs the recipient to continue the conversation in Messenger.
      *
-     * You can use the API to deflect phone calls to the Intercom Messenger. Calling this endpoint
-     * will send an SMS with a link to the Messenger to the phone number specified. If custom
-     * attributes are specified, they will be added to the user or lead's custom data attributes.
+     * You can use the API to deflect phone calls to the Intercom Messenger. Calling this endpoint will send an SMS with a link to the Messenger to the phone number specified. If custom attributes are specified, they will be added to the user or lead's custom data attributes.
      */
-    fun createPhone(
-        phone: String,
-        intercomVersion: IntercomVersion? = null,
-        customAttributes: CustomAttributesRequest? = null,
-        options: RequestOptions? = null,
-    ): PhoneSwitch {
-        return dev.octri.showcase.intercom.methods.Switch.createPhoneSwitch(
-            clientConfig,
-            phone,
-            intercomVersion,
-            customAttributes,
-            options,
-        )
+    fun createPhone(phone: String, intercomVersion: IntercomVersion? = null, customAttributes: CustomAttributesRequest? = null, options: RequestOptions? = null): PhoneSwitch {
+        return dev.octri.showcase.intercom.methods.Switch.createPhoneSwitch(clientConfig, phone, intercomVersion, customAttributes, options)
     }
+
 }

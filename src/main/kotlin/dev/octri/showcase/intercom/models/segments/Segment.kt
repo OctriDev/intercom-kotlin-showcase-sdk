@@ -6,24 +6,36 @@ package dev.octri.showcase.intercom.models.segments
 import dev.octri.showcase.intercom.models.SegmentPersonTypeEnum
 import dev.octri.showcase.intercom.models.SegmentTypeEnum
 
-/** A segment is a group of your contacts defined by the rules that you set. */
+/**
+ * A segment is a group of your contacts defined by the rules that you set.
+ */
 data class Segment(
-    /** The type of object. */
-    val type: SegmentTypeEnum? = null,
-    /** The unique identifier representing the segment. */
-    val id: String? = null,
-    /** The name of the segment. */
-    val name: String? = null,
-    /** The time the segment was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time the segment was updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /** Type of the contact: contact (lead) or user. */
-    @com.fasterxml.jackson.annotation.JsonProperty("person_type")
-    val personType: SegmentPersonTypeEnum? = null,
     /**
-     * The number of items in the user segment. It's returned when `include_count=true` is included
-     * in the request.
+     * The type of object.
      */
-    val count: Long? = null,
+    val type: SegmentTypeEnum? = null,
+    /**
+     * The unique identifier representing the segment.
+     */
+    val id: String? = null,
+    /**
+     * The name of the segment.
+     */
+    val name: String? = null,
+    /**
+     * The time the segment was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * The time the segment was updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    /**
+     * Type of the contact: contact (lead) or user.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("person_type") val personType: SegmentPersonTypeEnum? = null,
+    /**
+     * The number of items in the user segment. It's returned when `include_count=true` is included in the request.
+     */
+    val count: Long? = null
 )

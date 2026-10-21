@@ -3,42 +3,56 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Payload to create a contact */
+/**
+ * Payload to create a contact
+ */
 data class CreateContactRequest(
-    /** The role of the contact. */
+    /**
+     * The role of the contact.
+     */
     val role: String? = null,
-    /** A unique identifier for the contact which is given to Intercom */
+    /**
+     * A unique identifier for the contact which is given to Intercom
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
     /**
-     * Whether the contact has proved they own this email address, for example through a
-     * confirmation link or one-time code you sent. Send it together with `email`. `email_verified`
-     * without `email` is rejected. Changing a contact's email resets it to not verified. Intercom
-     * reuses leads with a verified email when an inbound email, conversation or ticket matches the
-     * address.
+     * Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_verified")
-    val emailVerified: Boolean? = null,
-    /** The contacts email */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_verified") val emailVerified: Boolean? = null,
+    /**
+     * The contacts email
+     */
     val email: String? = null,
-    /** The contacts phone */
+    /**
+     * The contacts phone
+     */
     val phone: String? = null,
-    /** The contacts name */
+    /**
+     * The contacts name
+     */
     val name: String? = null,
-    /** An image URL containing the avatar of a contact */
+    /**
+     * An image URL containing the avatar of a contact
+     */
     val avatar: String? = null,
-    /** (Unix timestamp in seconds) The time specified for when a contact signed up. */
+    /**
+     * (Unix timestamp in seconds) The time specified for when a contact signed up.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("signed_up_at") val signedUpAt: Long? = null,
     /**
-     * (Unix timestamp in seconds) The time when the contact was last seen (either where the
-     * Intercom Messenger was installed or when specified manually).
+     * (Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).
      */
     @com.fasterxml.jackson.annotation.JsonProperty("last_seen_at") val lastSeenAt: Long? = null,
-    /** The id of an admin that has been assigned account ownership of the contact */
+    /**
+     * The id of an admin that has been assigned account ownership of the contact
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: String? = null,
-    /** Whether the contact is unsubscribed from emails */
-    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails")
-    val unsubscribedFromEmails: Boolean? = null,
-    /** The custom attributes which are set for the contact */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: Map<String, Any>? = null,
+    /**
+     * Whether the contact is unsubscribed from emails
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails") val unsubscribedFromEmails: Boolean? = null,
+    /**
+     * The custom attributes which are set for the contact
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, Any>? = null
 )

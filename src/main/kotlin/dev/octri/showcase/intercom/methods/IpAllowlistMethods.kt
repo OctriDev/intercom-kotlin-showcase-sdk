@@ -12,82 +12,42 @@ import dev.octri.showcase.intercom.SdkClient
 
 object IpAllowlistMethods {
 
+
     /**
-     * Retrieves the current IP allowlist configuration for the workspace. Use the returned
-     * `enabled` value and `ip_allowlist` entries to inspect whether the allowlist is active and
-     * which IP addresses or ranges are allowed.
+     * Retrieves the current IP allowlist configuration for the workspace. Use the returned `enabled` value and `ip_allowlist` entries to inspect whether the allowlist is active and which IP addresses or ranges are allowed.
      *
      * Retrieve the current IP allowlist configuration for the workspace.
      */
-    fun getIpAllowlist(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): IpAllowlist {
-        return SdkClient.request<IpAllowlist>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ip_allowlist",
-                    config = clientConfig,
-                    operationId = "getIpAllowlist",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun getIpAllowlist(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): IpAllowlist {
+        return SdkClient.request<IpAllowlist>(SdkClient.RequestSpec("GET", "/ip_allowlist", config = clientConfig, operationId = "getIpAllowlist", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates the workspace's IP allowlist configuration. Supply `enabled` to control whether the
-     * allowlist is active and `ip_allowlist` to set allowed IP addresses or CIDR ranges. Include
-     * the caller's current IP address before enabling the allowlist to avoid locking out the
-     * caller.
+     * Updates the workspace's IP allowlist configuration. Supply `enabled` to control whether the allowlist is active and `ip_allowlist` to set allowed IP addresses or CIDR ranges. Include the caller's current IP address before enabling the allowlist to avoid locking out the caller.
      *
-     * Update the IP allowlist configuration for the workspace. {% admonition type="warning"
-     * name="Lockout Protection" %} The API will reject updates that would lock out the caller's IP
-     * address. Ensure your current IP is included in the allowlist when enabling the feature. {%
-     * /admonition %}
+     * Update the IP allowlist configuration for the workspace. {% admonition type="warning" name="Lockout Protection" %} The API will reject updates that would lock out the caller's IP address. Ensure your current IP is included in the allowlist when enabling the feature. {% /admonition %}
      *
-     * @param type String representing the object's type. Always has the value `ip_allowlist`.
+     * @param type String representing the object's type. Always has the value
+     *   `ip_allowlist`.
      * @param enabled Whether the IP allowlist is enabled for the workspace.
-     * @param ipAllowlist List of allowed IP addresses and/or IP ranges in CIDR notation.
-     *   Examples: - Single IP: `192.168.0.1` - IP range: `192.168.0.1/24` (allows 192.168.0.0 -
-     *   192.168.0.255)
+     * @param ipAllowlist List of allowed IP addresses and/or IP ranges in CIDR
+     *   notation. Examples: - Single IP: `192.168.0.1` - IP range: `192.168.0.1/24`
+     *   (allows 192.168.0.0 - 192.168.0.255)
      */
-    fun updateIpAllowlist(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        type: String? = null,
-        enabled: Boolean? = null,
-        ipAllowlist: List<String>? = null,
-        options: RequestOptions? = null,
-    ): IpAllowlist {
-        return SdkClient.request<IpAllowlist>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/ip_allowlist",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "type" to (SdkClient.omitIfNull(type)),
-                            "enabled" to (SdkClient.omitIfNull(enabled)),
-                            "ip_allowlist" to (SdkClient.omitIfNull(ipAllowlist)),
-                        ),
-                    operationId = "updateIpAllowlist",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateIpAllowlist(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, type: String? = null, enabled: Boolean? = null, ipAllowlist: List<String>? = null, options: RequestOptions? = null): IpAllowlist {
+        return SdkClient.request<IpAllowlist>(SdkClient.RequestSpec("PUT", "/ip_allowlist", config = clientConfig, body = SdkClient.bodyMap("type" to (SdkClient.omitIfNull(type)), "enabled" to (SdkClient.omitIfNull(enabled)), "ip_allowlist" to (SdkClient.omitIfNull(ipAllowlist))), operationId = "updateIpAllowlist", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -30,103 +30,111 @@ import dev.octri.showcase.intercom.Validation
 
 object DataConnectors {
 
-    /** Required object value serialized in the `headers[]` wire field. */
-    data class CreateDataConnectorRequestHeadersItem(
-        /** The header name. */
-        val name: String? = null,
-        /** The header value. Supports template variables. */
-        @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
-    )
+/**
+ * Required object value serialized in the `headers[]` wire field.
+ */
+data class CreateDataConnectorRequestHeadersItem(
+    /**
+     * The header name.
+     */
+    val name: String? = null,
+    /**
+     * The header value. Supports template variables.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
+)
 
-    /** Required object value serialized in the `data_inputs[]` wire field. */
-    data class CreateDataConnectorRequestDataInputsItem(
-        /** The parameter name. */
-        val name: String? = null,
-        /** The parameter type. */
-        val type: CreateDataConnectorRequestDataInputsItemTypeEnum? = null,
-        /** A description of the parameter. */
-        val description: String? = null,
-        /** Whether the parameter is required. */
-        val required: Boolean? = null,
-        /** The default value for the parameter. Defaults to an empty string if omitted. */
-        @com.fasterxml.jackson.annotation.JsonProperty("default_value")
-        val defaultValue: String? = null,
-    )
+/**
+ * Required object value serialized in the `data_inputs[]` wire field.
+ */
+data class CreateDataConnectorRequestDataInputsItem(
+    /**
+     * The parameter name.
+     */
+    val name: String? = null,
+    /**
+     * The parameter type.
+     */
+    val type: CreateDataConnectorRequestDataInputsItemTypeEnum? = null,
+    /**
+     * A description of the parameter.
+     */
+    val description: String? = null,
+    /**
+     * Whether the parameter is required.
+     */
+    val required: Boolean? = null,
+    /**
+     * The default value for the parameter. Defaults to an empty string if omitted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: String? = null
+)
 
-    /** Required object value serialized in the `headers[]` wire field. */
-    data class UpdateDataConnectorRequestHeadersItem(
-        /** The header name. */
-        val name: String? = null,
-        /** The header value. Supports template variables. */
-        @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
-    )
+/**
+ * Required object value serialized in the `headers[]` wire field.
+ */
+data class UpdateDataConnectorRequestHeadersItem(
+    /**
+     * The header name.
+     */
+    val name: String? = null,
+    /**
+     * The header value. Supports template variables.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
+)
 
-    /** Required object value serialized in the `data_inputs[]` wire field. */
-    data class UpdateDataConnectorRequestDataInputsItem(
-        /** The name of the input parameter. */
-        val name: String? = null,
-        /** The data type of the input. */
-        val type: UpdateDataConnectorRequestDataInputsItemTypeEnum? = null,
-        /** A description of the input parameter. Required for each input. */
-        val description: String? = null,
-        /** Whether this input is required. */
-        val required: Boolean? = null,
-        /** The default value for this input, if any. */
-        @com.fasterxml.jackson.annotation.JsonProperty("default_value")
-        val defaultValue: String? = null,
-    )
+/**
+ * Required object value serialized in the `data_inputs[]` wire field.
+ */
+data class UpdateDataConnectorRequestDataInputsItem(
+    /**
+     * The name of the input parameter.
+     */
+    val name: String? = null,
+    /**
+     * The data type of the input.
+     */
+    val type: UpdateDataConnectorRequestDataInputsItemTypeEnum? = null,
+    /**
+     * A description of the input parameter. Required for each input.
+     */
+    val description: String? = null,
+    /**
+     * Whether this input is required.
+     */
+    val required: Boolean? = null,
+    /**
+     * The default value for this input, if any.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_value") val defaultValue: String? = null
+)
+
 
     /**
-     * Lists the workspace's data connectors, ordered from most recently updated to least recently
-     * updated. Use `per_page` to set the page size and `starting_after` from
-     * `pages.next.starting_after` to continue through the results.
+     * Lists the workspace's data connectors, ordered from most recently updated to least recently updated. Use `per_page` to set the page size and `starting_after` from `pages.next.starting_after` to continue through the results.
      *
-     * Returns a paginated list of all data connectors for the workspace, ordered by most recently
-     * updated first. Data connectors allow workflows and AI agents to make HTTP requests to
-     * external APIs.
+     * Returns a paginated list of all data connectors for the workspace, ordered by most recently updated first. Data connectors allow workflows and AI agents to make HTTP requests to external APIs.
      *
-     * @param perPage The number of results to return per page. Defaults to 20, minimum 1,
-     *   maximum 50.
-     * @param startingAfter The cursor value from `pages.next.starting_after` in a previous
-     *   response. Used to paginate through results.
+     * @param perPage The number of results to return per page. Defaults to 20,
+     *   minimum 1, maximum 50.
+     * @param startingAfter The cursor value from `pages.next.starting_after` in a
+     *   previous response. Used to paginate through results.
      */
-    fun listDataConnectors(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        startingAfter: String? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataConnectorList {
+    fun listDataConnectors(clientConfig: ClientConfig, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 50.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 50.0))
+}
 
-        return SdkClient.request<DataConnectorList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_connectors",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "starting_after" to SdkClient.queryValue(startingAfter, "form", true),
-                        ),
-                    operationId = "listDataConnectors",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<DataConnectorList>(SdkClient.RequestSpec("GET", "/data_connectors", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "starting_after" to
+    SdkClient.queryValue(startingAfter, "form", true)), operationId = "listDataConnectors", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createDataConnector]. */
     data class CreateDataConnectorParams(
@@ -144,178 +152,115 @@ object DataConnectors {
         val bypassAuthentication: Boolean? = null,
         val validateMissingAttributes: Boolean? = null,
         val mockResponse: Map<String, Any>? = null,
-        val tokenIds: List<String>? = null,
+        val tokenIds: List<String>? = null
     )
 
     /**
-     * Creates a new data connector for calling an external API. Provide `name` and any
-     * configuration fields; the connector starts in `draft` state. Configure its settings before
-     * setting it to `live`.
+     * Creates a new data connector for calling an external API. Provide `name` and any configuration fields; the connector starts in `draft` state. Configure its settings before setting it to `live`.
      *
-     * Create a new data connector. The connector is created in `draft` state. Configure its URL,
-     * headers, data inputs, and other settings, then set it to `live` when ready.
+     * Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then set it to `live` when ready.
      *
      * @param name The name of the data connector.
      * @param description A description of what this data connector does.
      * @param httpMethod The HTTP method used when calling the external API.
-     * @param url The URL of the external API endpoint. Supports template variables like
-     *   `{{order_id}}`.
+     * @param url The URL of the external API endpoint. Supports template variables
+     *   like `{{order_id}}`.
      * @param body The request body template. Supports template variables.
-     * @param directFinUsage Whether the connector is used directly by Fin (true) or only in
-     *   workflows (false). Defaults to false.
+     * @param directFinUsage Whether the connector is used directly by Fin (true) or
+     *   only in workflows (false). Defaults to false.
      * @param audiences The user types this connector is available for.
      * @param headers HTTP headers to include in the request.
      * @param dataInputs Input parameters accepted by the connector.
-     * @param customerAuthentication Whether the connector requires customer authentication before
-     *   executing. Defaults to false.
-     * @param bypassAuthentication Whether authentication is bypassed entirely (public endpoint).
-     *   Defaults to false.
-     * @param validateMissingAttributes Whether to validate that all required data inputs have
-     *   values before executing.
-     * @param mockResponse A sample JSON response from the external API. Auto-generates
-     *   `response_fields` and sets `configuration_response_type` to `mock_response_type`.
+     * @param customerAuthentication Whether the connector requires customer
+     *   authentication before executing. Defaults to false.
+     * @param bypassAuthentication Whether authentication is bypassed entirely
+     *   (public endpoint). Defaults to false.
+     * @param validateMissingAttributes Whether to validate that all required data
+     *   inputs have values before executing.
+     * @param mockResponse A sample JSON response from the external API.
+     *   Auto-generates `response_fields` and sets `configuration_response_type` to
+     *   `mock_response_type`.
      * @param tokenIds IDs of authentication tokens to attach to this data connector.
      */
-    fun createDataConnector(
-        clientConfig: ClientConfig,
-        request: CreateDataConnectorParams,
-        options: RequestOptions? = null,
-    ): DataConnectorDetail {
-        return SdkClient.request<DataConnectorDetail>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/data_connectors",
-                    config = clientConfig,
-                    body = buildCreateDataConnectorBody(request),
-                    operationId = "createDataConnector",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
-                )
-            )
-            .data
+    fun createDataConnector(clientConfig: ClientConfig, request: CreateDataConnectorParams, options: RequestOptions? = null): DataConnectorDetail {
+        return SdkClient.request<DataConnectorDetail>(SdkClient.RequestSpec("POST", "/data_connectors", config = clientConfig, body = buildCreateDataConnectorBody(request), operationId = "createDataConnector", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java))).data
     }
 
-    private fun buildCreateDataConnectorBody(
-        request: CreateDataConnectorParams
-    ): Map<String, Any?> = buildMap {
-        putAll(buildCreateDataConnectorBodyPart1(request))
-        putAll(buildCreateDataConnectorBodyPart2(request))
-    }
 
-    private fun buildCreateDataConnectorBodyPart1(
-        request: CreateDataConnectorParams
-    ): Map<String, Any?> =
+
+
+    private fun buildCreateDataConnectorBody(request: CreateDataConnectorParams): Map<String, Any?> =
+        buildMap {
+            putAll(buildCreateDataConnectorBodyPart1(request))
+            putAll(buildCreateDataConnectorBodyPart2(request))
+        }
+
+    private fun buildCreateDataConnectorBodyPart1(request: CreateDataConnectorParams): Map<String, Any?> =
         SdkClient.bodyMap(
             "name" to (request.name),
             "description" to (SdkClient.omitIfNull(request.description)),
             "http_method" to (SdkClient.omitIfNull(request.httpMethod)),
             "url" to (SdkClient.omitIfNull(request.url)),
             "body" to (SdkClient.omitIfNull(request.body)),
-            "direct_fin_usage" to (SdkClient.omitIfNull(request.directFinUsage)),
+            "direct_fin_usage" to
+    (SdkClient.omitIfNull(request.directFinUsage)),
             "audiences" to (SdkClient.omitIfNull(request.audiences)),
             "headers" to (SdkClient.omitIfNull(request.headers)),
             "data_inputs" to (SdkClient.omitIfNull(request.dataInputs)),
-            "customer_authentication" to (SdkClient.omitIfNull(request.customerAuthentication)),
-            "bypass_authentication" to (SdkClient.omitIfNull(request.bypassAuthentication)),
+            "customer_authentication" to
+    (SdkClient.omitIfNull(request.customerAuthentication)),
+            "bypass_authentication" to
+    (SdkClient.omitIfNull(request.bypassAuthentication)),
             "validate_missing_attributes" to
-                (SdkClient.omitIfNull(request.validateMissingAttributes)),
+    (SdkClient.omitIfNull(request.validateMissingAttributes)),
         )
 
-    private fun buildCreateDataConnectorBodyPart2(
-        request: CreateDataConnectorParams
-    ): Map<String, Any?> =
+    private fun buildCreateDataConnectorBodyPart2(request: CreateDataConnectorParams): Map<String, Any?> =
         SdkClient.bodyMap(
-            "mock_response" to (SdkClient.omitIfNull(request.mockResponse)),
+            "mock_response" to
+    (SdkClient.omitIfNull(request.mockResponse)),
             "token_ids" to (SdkClient.omitIfNull(request.tokenIds)),
         )
 
-    /**
-     * Retrieves the full details of a data connector by its identifier. Use `state_version` to
-     * choose whether to retrieve its draft or live configuration; it defaults to the live version
-     * when omitted.
-     *
-     * You can retrieve the full detail of a single data connector by its ID. The response includes
-     * configuration, data inputs, response fields, and object mappings.
-     *
-     * @param id The unique identifier of the data connector.
-     * @param stateVersion Which version of the data connector to return. Defaults to live.
-     */
-    fun retrieveDataConnector(
-        clientConfig: ClientConfig,
-        id: String,
-        stateVersion: RetrieveDataConnectorParameterEnum? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataConnectorDetail {
-        return SdkClient.request<DataConnectorDetail>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_connectors/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    query =
-                        mapOf("state_version" to SdkClient.queryValue(stateVersion, "form", true)),
-                    operationId = "retrieveDataConnector",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
-    }
+
+
 
     /**
-     * Deletes an existing data connector. Use this operation only when the connector is in `draft`
-     * state and is not used by any workflows or AI agents. A successful response confirms whether
-     * the connector was deleted.
+     * Retrieves the full details of a data connector by its identifier. Use `state_version` to choose whether to retrieve its draft or live configuration; it defaults to the live version when omitted.
      *
-     * Delete an existing data connector. The connector must be in `draft` state and must not be in
-     * use by any workflows or AI agents.
+     * You can retrieve the full detail of a single data connector by its ID. The response includes configuration, data inputs, response fields, and object mappings.
+     *
+     * @param id The unique identifier of the data connector.
+     * @param stateVersion Which version of the data connector to return. Defaults to
+     *   live.
+     */
+    fun retrieveDataConnector(clientConfig: ClientConfig, id: String, stateVersion: RetrieveDataConnectorParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorDetail {
+        return SdkClient.request<DataConnectorDetail>(SdkClient.RequestSpec("GET", "/data_connectors/${SdkClient.encodePathSegment(id)}", config = clientConfig, query = mapOf("state_version" to
+    SdkClient.queryValue(stateVersion, "form", true)), operationId = "retrieveDataConnector", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Deletes an existing data connector. Use this operation only when the connector is in `draft` state and is not used by any workflows or AI agents. A successful response confirms whether the connector was deleted.
+     *
+     * Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
      *
      * @param id The unique identifier of the data connector
      */
-    fun deleteDataConnector(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedDataConnectorObject {
-        return SdkClient.request<DeletedDataConnectorObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/data_connectors/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "deleteDataConnector",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "409" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun deleteDataConnector(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedDataConnectorObject {
+        return SdkClient.request<DeletedDataConnectorObject>(SdkClient.RequestSpec("DELETE", "/data_connectors/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteDataConnector", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateDataConnector]. */
     data class UpdateDataConnectorParams(
@@ -335,79 +280,53 @@ object DataConnectors {
         val bypassAuthentication: Boolean? = null,
         val validateMissingAttributes: Boolean? = null,
         val mockResponse: Map<String, Any>? = null,
-        val tokenIds: List<String>? = null,
+        val tokenIds: List<String>? = null
     )
 
     /**
-     * Updates an existing data connector's configuration. Supply only the fields to change; set
-     * `state` to `live` or `draft` to change the connector's state. Updating `data_inputs` replaces
-     * all existing inputs.
+     * Updates an existing data connector's configuration. Supply only the fields to change; set `state` to `live` or `draft` to change the connector's state. Updating `data_inputs` replaces all existing inputs.
      *
-     * Update an existing data connector. Only provided fields are changed. Set `state` to `live` or
-     * `draft` to change the connector's state.
+     * Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector's state.
      *
      * @param id The unique identifier of the data connector.
      * @param name The name of the data connector.
      * @param description A description of what this data connector does.
      * @param state The desired state of the connector.
      * @param httpMethod The HTTP method used by the data connector.
-     * @param url The URL of the external API endpoint. Supports template variables like
-     *   `{{order_id}}`.
+     * @param url The URL of the external API endpoint. Supports template variables
+     *   like `{{order_id}}`.
      * @param body The request body template. Supports template variables.
      * @param directFinUsage Whether this connector is used directly by Fin.
      * @param audiences The audience types this connector targets.
      * @param headers HTTP headers to include in the request.
-     * @param dataInputs The input parameters accepted by this data connector. Replaces all existing
-     *   inputs.
-     * @param customerAuthentication Whether OTP authentication is enabled for this connector.
-     * @param bypassAuthentication Whether authentication is bypassed for this connector.
-     * @param validateMissingAttributes Whether to validate missing attributes before execution.
-     * @param mockResponse A sample JSON response from the external API. Auto-generates
-     *   `response_fields` and sets `configuration_response_type` to `mock_response_type`.
-     * @param tokenIds IDs of authentication tokens to attach to this data connector. An empty array
-     *   removes all tokens.
+     * @param dataInputs The input parameters accepted by this data connector.
+     *   Replaces all existing inputs.
+     * @param customerAuthentication Whether OTP authentication is enabled for this
+     *   connector.
+     * @param bypassAuthentication Whether authentication is bypassed for this
+     *   connector.
+     * @param validateMissingAttributes Whether to validate missing attributes before
+     *   execution.
+     * @param mockResponse A sample JSON response from the external API.
+     *   Auto-generates `response_fields` and sets `configuration_response_type` to
+     *   `mock_response_type`.
+     * @param tokenIds IDs of authentication tokens to attach to this data connector.
+     *   An empty array removes all tokens.
      */
-    fun updateDataConnector(
-        clientConfig: ClientConfig,
-        request: UpdateDataConnectorParams,
-        options: RequestOptions? = null,
-    ): DataConnectorDetail {
-        return SdkClient.request<DataConnectorDetail>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/data_connectors/${SdkClient.encodePathSegment(request.id)}",
-                    config = clientConfig,
-                    body = buildUpdateDataConnectorBody(request),
-                    operationId = "updateDataConnector",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "409" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateDataConnector(clientConfig: ClientConfig, request: UpdateDataConnectorParams, options: RequestOptions? = null): DataConnectorDetail {
+        return SdkClient.request<DataConnectorDetail>(SdkClient.RequestSpec("PATCH", "/data_connectors/${SdkClient.encodePathSegment(request.id)}", config = clientConfig, body = buildUpdateDataConnectorBody(request), operationId = "updateDataConnector", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "409" to Error2::class.java, "422" to Error2::class.java))).data
     }
 
-    private fun buildUpdateDataConnectorBody(
-        request: UpdateDataConnectorParams
-    ): Map<String, Any?> = buildMap {
-        putAll(buildUpdateDataConnectorBodyPart1(request))
-        putAll(buildUpdateDataConnectorBodyPart2(request))
-    }
 
-    private fun buildUpdateDataConnectorBodyPart1(
-        request: UpdateDataConnectorParams
-    ): Map<String, Any?> =
+
+
+    private fun buildUpdateDataConnectorBody(request: UpdateDataConnectorParams): Map<String, Any?> =
+        buildMap {
+            putAll(buildUpdateDataConnectorBodyPart1(request))
+            putAll(buildUpdateDataConnectorBodyPart2(request))
+        }
+
+    private fun buildUpdateDataConnectorBodyPart1(request: UpdateDataConnectorParams): Map<String, Any?> =
         SdkClient.bodyMap(
             "name" to (SdkClient.omitIfNull(request.name)),
             "description" to (SdkClient.omitIfNull(request.description)),
@@ -415,23 +334,28 @@ object DataConnectors {
             "http_method" to (SdkClient.omitIfNull(request.httpMethod)),
             "url" to (SdkClient.omitIfNull(request.url)),
             "body" to (SdkClient.omitIfNull(request.body)),
-            "direct_fin_usage" to (SdkClient.omitIfNull(request.directFinUsage)),
+            "direct_fin_usage" to
+    (SdkClient.omitIfNull(request.directFinUsage)),
             "audiences" to (SdkClient.omitIfNull(request.audiences)),
             "headers" to (SdkClient.omitIfNull(request.headers)),
             "data_inputs" to (SdkClient.omitIfNull(request.dataInputs)),
-            "customer_authentication" to (SdkClient.omitIfNull(request.customerAuthentication)),
-            "bypass_authentication" to (SdkClient.omitIfNull(request.bypassAuthentication)),
+            "customer_authentication" to
+    (SdkClient.omitIfNull(request.customerAuthentication)),
+            "bypass_authentication" to
+    (SdkClient.omitIfNull(request.bypassAuthentication)),
         )
 
-    private fun buildUpdateDataConnectorBodyPart2(
-        request: UpdateDataConnectorParams
-    ): Map<String, Any?> =
+    private fun buildUpdateDataConnectorBodyPart2(request: UpdateDataConnectorParams): Map<String, Any?> =
         SdkClient.bodyMap(
             "validate_missing_attributes" to
-                (SdkClient.omitIfNull(request.validateMissingAttributes)),
-            "mock_response" to (SdkClient.omitIfNull(request.mockResponse)),
+    (SdkClient.omitIfNull(request.validateMissingAttributes)),
+            "mock_response" to
+    (SdkClient.omitIfNull(request.mockResponse)),
             "token_ids" to (SdkClient.omitIfNull(request.tokenIds)),
         )
+
+
+
 
     /** Parameters for [listDataConnectorExecutionResults]. */
     data class ListDataConnectorExecutionResultsRequest(
@@ -443,266 +367,133 @@ object DataConnectors {
         val startTs: Long? = null,
         val endTs: Long? = null,
         val includeBodies: ListDataConnectorExecutionResultsParameterEnumce384deb? = null,
-        val intercomVersion: IntercomVersion? = null,
+        val intercomVersion: IntercomVersion? = null
     )
 
     /**
-     * Lists paginated execution results for a specific data connector. Results cover the last hour
-     * by default; use `start_ts` and `end_ts` to change the time range and the filters to narrow
-     * the results. Request and response bodies are excluded unless you set `include_bodies` to
-     * `true`.
+     * Lists paginated execution results for a specific data connector. Results cover the last hour by default; use `start_ts` and `end_ts` to change the time range and the filters to narrow the results. Request and response bodies are excluded unless you set `include_bodies` to `true`.
      *
-     * Retrieve paginated execution logs for a specific data connector. Results from the last hour
-     * are returned by default. Use `start_ts` and `end_ts` to customize the time range.
-     * Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
+     * Retrieve paginated execution logs for a specific data connector. Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range. Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
      *
      * @param dataConnectorId The unique identifier for the data connector.
      * @param perPage The number of results per page (1-30, default 10).
-     * @param startingAfter Cursor for pagination. Use the value from `pages.next.starting_after` in
-     *   a previous response.
+     * @param startingAfter Cursor for pagination. Use the value from
+     *   `pages.next.starting_after` in a previous response.
      * @param success Filter by success status. Use `true`, `false`, or omit for all.
      * @param errorType Filter by error type.
      * @param startTs Unix timestamp for start of time range (default 1 hour ago).
      * @param endTs Unix timestamp for end of time range (default now).
-     * @param includeBodies Include request/response bodies in the response (default false).
+     * @param includeBodies Include request/response bodies in the response (default
+     *   false).
      */
-    fun listDataConnectorExecutionResults(
-        clientConfig: ClientConfig,
-        request: ListDataConnectorExecutionResultsRequest,
-        options: RequestOptions? = null,
-    ): DataConnectorExecutionResultList {
+    fun listDataConnectorExecutionResults(clientConfig: ClientConfig, request: ListDataConnectorExecutionResultsRequest, options: RequestOptions? = null): DataConnectorExecutionResultList {
         validateListDataConnectorExecutionResultsRequest(request)
 
-        return SdkClient.request<DataConnectorExecutionResultList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_connectors/${SdkClient.encodePathSegment(request.dataConnectorId)}/execution_results",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                            "starting_after" to
-                                SdkClient.queryValue(request.startingAfter, "form", true),
-                            "success" to SdkClient.queryValue(request.success, "form", true),
-                            "error_type" to SdkClient.queryValue(request.errorType, "form", true),
-                            "start_ts" to SdkClient.queryValue(request.startTs, "form", true),
-                            "end_ts" to SdkClient.queryValue(request.endTs, "form", true),
-                            "include_bodies" to
-                                SdkClient.queryValue(request.includeBodies, "form", true),
-                        ),
-                    operationId = "listDataConnectorExecutionResults",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DataConnectorExecutionResultList>(SdkClient.RequestSpec("GET", "/data_connectors/${SdkClient.encodePathSegment(request.dataConnectorId)}/execution_results", config = clientConfig, query = mapOf("per_page" to
+    SdkClient.queryValue(request.perPage, "form", true), "starting_after" to
+    SdkClient.queryValue(request.startingAfter, "form", true), "success" to
+    SdkClient.queryValue(request.success, "form", true), "error_type" to
+    SdkClient.queryValue(request.errorType, "form", true), "start_ts" to
+    SdkClient.queryValue(request.startTs, "form", true), "end_ts" to
+    SdkClient.queryValue(request.endTs, "form", true), "include_bodies" to
+    SdkClient.queryValue(request.includeBodies, "form", true)), operationId = "listDataConnectorExecutionResults", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
-    private fun validateListDataConnectorExecutionResultsRequest(
-        request: ListDataConnectorExecutionResultsRequest
-    ) {
+
+    private fun validateListDataConnectorExecutionResultsRequest(request: ListDataConnectorExecutionResultsRequest) {
         if (request.perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                request.perPage,
-                Validation.RangeOpts(min = 1.0, max = 30.0),
-            )
-        }
+            Validation.validateRange("per_page", request.perPage, Validation.RangeOpts(min = 1.0, max = 30.0))
+}
     }
+
+
+
+
+
 
     /**
-     * Retrieves the details of a specific execution result for a data connector. The response
-     * always includes request and response bodies, as well as a sanitized request URL. Use the
-     * result to inspect the external API call and its outcome.
+     * Retrieves the details of a specific execution result for a data connector. The response always includes request and response bodies, as well as a sanitized request URL. Use the result to inspect the external API call and its outcome.
      *
-     * Retrieve details for a specific data connector execution result. Always includes
-     * request/response bodies and the sanitised request URL.
+     * Retrieve details for a specific data connector execution result. Always includes request/response bodies and the sanitised request URL.
      *
      * @param dataConnectorId The unique identifier for the data connector.
      * @param id The unique identifier for the execution result.
      */
-    fun showDataConnectorExecutionResult(
-        clientConfig: ClientConfig,
-        dataConnectorId: String,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataConnectorExecutionResult {
-        return SdkClient.request<DataConnectorExecutionResult>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_connectors/${SdkClient.encodePathSegment(dataConnectorId)}/execution_results/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "showDataConnectorExecutionResult",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun showDataConnectorExecutionResult(clientConfig: ClientConfig, dataConnectorId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorExecutionResult {
+        return SdkClient.request<DataConnectorExecutionResult>(SdkClient.RequestSpec("GET", "/data_connectors/${SdkClient.encodePathSegment(dataConnectorId)}/execution_results/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "showDataConnectorExecutionResult", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists a data connector's version history, with the newest version first. Each entry is a
-     * configuration snapshot with its current status and an optional note; connectors that have
-     * never been published return an empty `data` list. Use `starting_after` to paginate, and
-     * provide one of the required version-reading OAuth scopes.
+     * Lists a data connector's version history, with the newest version first. Each entry is a configuration snapshot with its current status and an optional note; connectors that have never been published return an empty `data` list. Use `starting_after` to paginate, and provide one of the required version-reading OAuth scopes.
      *
-     * Retrieve the version history of a data connector, newest first. Each entry is a point-in-time
-     * snapshot of the connector's configuration, with the status it has today and an optional note.
-     * Results are paginated. `pages.next` is omitted on the last page. A data connector that has
-     * never been published returns an empty `data` list. Requires the
-     * `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
+     * Retrieve the version history of a data connector, newest first. Each entry is a point-in-time snapshot of the connector's configuration, with the status it has today and an optional note. Results are paginated. `pages.next` is omitted on the last page. A data connector that has never been published returns an empty `data` list. Requires the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
      *
      * @param id The unique identifier for the data connector.
-     * @param perPage The number of results per page (1-50, default 20). Values outside this range
-     *   are clamped, so values below 1 are treated as 1. A non-integer value falls back to the
-     *   default of 20.
-     * @param startingAfter Cursor for pagination. Use the value from `pages.next.starting_after` in
-     *   a previous response.
+     * @param perPage The number of results per page (1-50, default 20). Values
+     *   outside this range are clamped, so values below 1 are treated as 1. A
+     *   non-integer value falls back to the default of 20.
+     * @param startingAfter Cursor for pagination. Use the value from
+     *   `pages.next.starting_after` in a previous response.
      */
-    fun listDataConnectorVersions(
-        clientConfig: ClientConfig,
-        id: String,
-        perPage: Long? = null,
-        startingAfter: String? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataConnectorVersionList {
+    fun listDataConnectorVersions(clientConfig: ClientConfig, id: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorVersionList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 50.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 50.0))
+}
 
-        return SdkClient.request<DataConnectorVersionList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_connectors/${SdkClient.encodePathSegment(id)}/versions",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "starting_after" to SdkClient.queryValue(startingAfter, "form", true),
-                        ),
-                    operationId = "listDataConnectorVersions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<DataConnectorVersionList>(SdkClient.RequestSpec("GET", "/data_connectors/${SdkClient.encodePathSegment(id)}/versions", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "starting_after" to
+    SdkClient.queryValue(startingAfter, "form", true)), operationId = "listDataConnectorVersions", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /**
-     * Retrieves a single version snapshot of a data connector, including the connector
-     * configuration as it was at that version. Use the version's `entity_version_id` as
-     * `version_id`. Access requires a version-reading OAuth scope.
+     * Retrieves a single version snapshot of a data connector, including the connector configuration as it was at that version. Use the version's `entity_version_id` as `version_id`. Access requires a version-reading OAuth scope.
      *
-     * Retrieve a single version of a data connector, including the connector configuration as it
-     * was at that version. Requires the `read_data_connector_versions` or
-     * `read_write_data_connector_versions` OAuth scope.
+     * Retrieve a single version of a data connector, including the connector configuration as it was at that version. Requires the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
      *
      * @param id The unique identifier for the data connector.
-     * @param versionId The `entity_version_id` of the version, as returned by List versions of a
-     *   data connector.
+     * @param versionId The `entity_version_id` of the version, as returned by List
+     *   versions of a data connector.
      */
-    fun retrieveDataConnectorVersion(
-        clientConfig: ClientConfig,
-        id: String,
-        versionId: Long,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataConnectorVersion {
-        return SdkClient.request<DataConnectorVersion>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_connectors/${SdkClient.encodePathSegment(id)}/versions/${SdkClient.encodePathSegment(versionId)}",
-                    config = clientConfig,
-                    operationId = "retrieveDataConnectorVersion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveDataConnectorVersion(clientConfig: ClientConfig, id: String, versionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorVersion {
+        return SdkClient.request<DataConnectorVersion>(SdkClient.RequestSpec("GET", "/data_connectors/${SdkClient.encodePathSegment(id)}/versions/${SdkClient.encodePathSegment(versionId)}", config = clientConfig, operationId = "retrieveDataConnectorVersion", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates the note on a data connector version; no other version field can be changed. Send an
-     * empty or whitespace-only string to clear the note. This operation does not publish the
-     * version or roll the connector back, and it requires the `read_write_data_connector_versions`
-     * OAuth scope.
+     * Updates the note on a data connector version; no other version field can be changed. Send an empty or whitespace-only string to clear the note. This operation does not publish the version or roll the connector back, and it requires the `read_write_data_connector_versions` OAuth scope.
      *
-     * Update the note on a data connector version. The note is the only field that can be changed.
-     * This does not publish the version or roll the connector back to it. Send an empty string to
-     * clear the note. Requires the `read_write_data_connector_versions` OAuth scope.
+     * Update the note on a data connector version. The note is the only field that can be changed. This does not publish the version or roll the connector back to it. Send an empty string to clear the note. Requires the `read_write_data_connector_versions` OAuth scope.
      *
      * @param id The unique identifier for the data connector.
-     * @param versionId The `entity_version_id` of the version, as returned by List versions of a
-     *   data connector.
-     * @param note The new note for the version. Sending `null`, an empty string, or a
-     *   whitespace-only string clears the note.
+     * @param versionId The `entity_version_id` of the version, as returned by List
+     *   versions of a data connector.
+     * @param note The new note for the version. Sending `null`, an empty string, or
+     *   a whitespace-only string clears the note.
      */
-    fun updateDataConnectorVersion(
-        clientConfig: ClientConfig,
-        id: String,
-        versionId: Long,
-        note: String?,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataConnectorVersion {
-        return SdkClient.request<DataConnectorVersion>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/data_connectors/${SdkClient.encodePathSegment(id)}/versions/${SdkClient.encodePathSegment(versionId)}",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("note" to (note)),
-                    operationId = "updateDataConnectorVersion",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateDataConnectorVersion(clientConfig: ClientConfig, id: String, versionId: Long, note: String?, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorVersion {
+        return SdkClient.request<DataConnectorVersion>(SdkClient.RequestSpec("PATCH", "/data_connectors/${SdkClient.encodePathSegment(id)}/versions/${SdkClient.encodePathSegment(versionId)}", config = clientConfig, body = SdkClient.bodyMap("note" to (note)), operationId = "updateDataConnectorVersion", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

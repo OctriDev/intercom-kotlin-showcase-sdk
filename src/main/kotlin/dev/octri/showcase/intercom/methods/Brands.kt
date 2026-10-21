@@ -13,67 +13,37 @@ import dev.octri.showcase.intercom.SdkClient
 
 object Brands {
 
-    /**
-     * Lists all brands configured for the workspace, including the default brand. Use this
-     * operation to retrieve brand identifiers and configuration details. The default brand's ID
-     * matches the workspace ID.
-     *
-     * Retrieves all brands for the workspace, including the default brand. The default brand id
-     * always matches the workspace
-     */
-    fun listBrands(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): BrandList {
-        return SdkClient.request<BrandList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/brands",
-                    config = clientConfig,
-                    operationId = "listBrands",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
-    }
 
     /**
-     * Retrieves a brand by its unique identifier. Use this operation to inspect a specific brand's
-     * configuration, including whether it is the workspace's default brand. The response includes
-     * the brand's associated help center and default email settings identifiers.
+     * Lists all brands configured for the workspace, including the default brand. Use this operation to retrieve brand identifiers and configuration details. The default brand's ID matches the workspace ID.
+     *
+     * Retrieves all brands for the workspace, including the default brand. The default brand id always matches the workspace
+     */
+    fun listBrands(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): BrandList {
+        return SdkClient.request<BrandList>(SdkClient.RequestSpec("GET", "/brands", config = clientConfig, operationId = "listBrands", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Retrieves a brand by its unique identifier. Use this operation to inspect a specific brand's configuration, including whether it is the workspace's default brand. The response includes the brand's associated help center and default email settings identifiers.
      *
      * Fetches a specific brand by its unique identifier
      *
      * @param id The unique identifier of the brand
      */
-    fun retrieveBrand(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Brand {
-        return SdkClient.request<Brand>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/brands/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "retrieveBrand",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveBrand(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Brand {
+        return SdkClient.request<Brand>(SdkClient.RequestSpec("GET", "/brands/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveBrand", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

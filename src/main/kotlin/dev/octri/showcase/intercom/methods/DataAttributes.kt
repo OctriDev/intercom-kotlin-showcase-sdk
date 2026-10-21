@@ -15,148 +15,70 @@ import dev.octri.showcase.intercom.SdkClient
 
 object DataAttributes {
 
-    /**
-     * Lists workspace data attributes for contacts or companies. Use `model` to select a model and
-     * `include_archived` to include archived attributes; conversation attributes are available from
-     * `GET /conversations/attributes` instead.
-     *
-     * You can fetch a list of all data attributes belonging to a workspace for contacts or
-     * companies. {% admonition type="warning" %} Conversation attributes are no longer returned by
-     * this endpoint. Calling without a `model` parameter no longer includes them, and
-     * `model=conversation` returns a `422` error. Use `GET /conversations/attributes` instead. {%
-     * /admonition %}
-     *
-     * @param model Specify the data attribute model to return. For conversation attributes, use GET
-     *   /conversations/attributes instead.
-     * @param includeArchived Include archived attributes in the list. By default we return only non
-     *   archived data attributes.
-     */
-    fun listDataAttributes(
-        clientConfig: ClientConfig,
-        model: ListDataAttributesParameterEnum? = null,
-        includeArchived: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DataAttributeList {
-        return SdkClient.request<DataAttributeList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/data_attributes",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "model" to SdkClient.queryValue(model, "form", true),
-                            "include_archived" to
-                                SdkClient.queryValue(includeArchived, "form", true),
-                        ),
-                    operationId = "listDataAttributes",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
-                )
-            )
-            .data
-    }
 
     /**
-     * Creates a data attribute for a contact or company model. Provide `name`, `model`, and
-     * `data_type`; for a list attribute, also supply `options` with at least two entries.
+     * Lists workspace data attributes for contacts or companies. Use `model` to select a model and `include_archived` to include archived attributes; conversation attributes are available from `GET /conversations/attributes` instead.
+     *
+     * You can fetch a list of all data attributes belonging to a workspace for contacts or companies. {% admonition type="warning" %} Conversation attributes are no longer returned by this endpoint. Calling without a `model` parameter no longer includes them, and `model=conversation` returns a `422` error. Use `GET /conversations/attributes` instead. {% /admonition %}
+     *
+     * @param model Specify the data attribute model to return. For conversation
+     *   attributes, use GET /conversations/attributes instead.
+     * @param includeArchived Include archived attributes in the list. By default we
+     *   return only non archived data attributes.
+     */
+    fun listDataAttributes(clientConfig: ClientConfig, model: ListDataAttributesParameterEnum? = null, includeArchived: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataAttributeList {
+        return SdkClient.request<DataAttributeList>(SdkClient.RequestSpec("GET", "/data_attributes", config = clientConfig, query = mapOf("model" to SdkClient.queryValue(model, "form", true), "include_archived" to
+    SdkClient.queryValue(includeArchived, "form", true)), operationId = "listDataAttributes", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Creates a data attribute for a contact or company model. Provide `name`, `model`, and `data_type`; for a list attribute, also supply `options` with at least two entries.
      *
      * You can create a data attributes for a `contact` or a `company`.
      *
      * @param name The name of the data attribute.
      * @param model The model that the data attribute belongs to.
-     * @param description The readable description you see in the UI for the attribute.
+     * @param description The readable description you see in the UI for the
+     *   attribute.
      * @param messengerWritable Can this attribute be updated by the Messenger
      */
-    fun createDataAttribute(
-        clientConfig: ClientConfig,
-        name: String,
-        model: CreateDataAttributeRequestModelEnum,
-        intercomVersion: IntercomVersion? = null,
-        description: String? = null,
-        messengerWritable: Boolean? = null,
-        options: RequestOptions? = null,
-    ): DataAttribute {
-        return SdkClient.request<DataAttribute>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/data_attributes",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "model" to (model),
-                            "description" to (SdkClient.omitIfNull(description)),
-                            "messenger_writable" to (SdkClient.omitIfNull(messengerWritable)),
-                        ),
-                    operationId = "createDataAttribute",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createDataAttribute(clientConfig: ClientConfig, name: String, model: CreateDataAttributeRequestModelEnum, intercomVersion: IntercomVersion? = null, description: String? = null, messengerWritable: Boolean? = null, options: RequestOptions? = null): DataAttribute {
+        return SdkClient.request<DataAttribute>(SdkClient.RequestSpec("POST", "/data_attributes", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "model" to (model), "description" to (SdkClient.omitIfNull(description)), "messenger_writable" to
+    (SdkClient.omitIfNull(messengerWritable))), operationId = "createDataAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates a data attribute's archived status, description, Messenger write access, or list
-     * options. You cannot change the attribute's data type through this API; use the UI to change
-     * it.
+     * Updates a data attribute's archived status, description, Messenger write access, or list options. You cannot change the attribute's data type through this API; use the UI to change it.
      *
-     * You can update a data attribute. > 🚧 Updating the data type is not possible > > It is
-     * currently a dangerous action to execute changing a data attribute's type via the API. You
-     * will need to update the type via the UI instead.
+     * You can update a data attribute. > 🚧 Updating the data type is not possible > > It is currently a dangerous action to execute changing a data attribute's type via the API. You will need to update the type via the UI instead.
      *
      * @param dataAttributeId The data attribute id
      * @param archived Whether the attribute is to be archived or not.
-     * @param description The readable description you see in the UI for the attribute.
+     * @param description The readable description you see in the UI for the
+     *   attribute.
      * @param messengerWritable Can this attribute be updated by the Messenger
      */
-    fun updateDataAttribute(
-        clientConfig: ClientConfig,
-        dataAttributeId: Long,
-        intercomVersion: IntercomVersion? = null,
-        archived: Boolean? = null,
-        description: String? = null,
-        messengerWritable: Boolean? = null,
-        options: RequestOptions? = null,
-    ): DataAttribute {
-        return SdkClient.request<DataAttribute>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/data_attributes/${SdkClient.encodePathSegment(dataAttributeId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "archived" to (SdkClient.omitIfNull(archived)),
-                            "description" to (SdkClient.omitIfNull(description)),
-                            "messenger_writable" to (SdkClient.omitIfNull(messengerWritable)),
-                        ),
-                    operationId = "updateDataAttribute",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun updateDataAttribute(clientConfig: ClientConfig, dataAttributeId: Long, intercomVersion: IntercomVersion? = null, archived: Boolean? = null, description: String? = null, messengerWritable: Boolean? = null, options: RequestOptions? = null): DataAttribute {
+        return SdkClient.request<DataAttribute>(SdkClient.RequestSpec("PUT", "/data_attributes/${SdkClient.encodePathSegment(dataAttributeId)}", config = clientConfig, body = SdkClient.bodyMap("archived" to (SdkClient.omitIfNull(archived)), "description" to (SdkClient.omitIfNull(description)), "messenger_writable" to
+    (SdkClient.omitIfNull(messengerWritable))), operationId = "updateDataAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -21,148 +21,78 @@ import dev.octri.showcase.intercom.UpdateExternalPageRequestLocaleEnum
 
 object AiContent {
 
+
     /**
-     * Lists the content import sources configured for the workspace. Use the pagination links in
-     * the response to navigate through the source list. Each source represents an external source
-     * added to the Fin Content Library.
+     * Lists the content import sources configured for the workspace. Use the pagination links in the response to navigate through the source list. Each source represents an external source added to the Fin Content Library.
      *
      * You can retrieve a list of all content import sources for a workspace.
      */
-    fun listContentImportSources(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContentImportSourcesList {
-        return SdkClient.request<ContentImportSourcesList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ai/content_import_sources",
-                    config = clientConfig,
-                    operationId = "listContentImportSources",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listContentImportSources(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContentImportSourcesList {
+        return SdkClient.request<ContentImportSourcesList>(SdkClient.RequestSpec("GET", "/ai/content_import_sources", config = clientConfig, operationId = "listContentImportSources", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a content import source for external pages in your Fin Content Library. Supply
-     * `sync_behavior` as `api` and provide the source `url`; you can also set its status and
-     * associate audiences.
+     * Creates a content import source for external pages in your Fin Content Library. Supply `sync_behavior` as `api` and provide the source `url`; you can also set its status and associate audiences.
      *
      * You can create a new content import source by sending a POST request to this endpoint.
      *
-     * @param syncBehavior If you intend to create or update External Pages via the API, this should
-     *   be set to `api`.
+     * @param syncBehavior If you intend to create or update External Pages via the
+     *   API, this should be set to `api`.
      * @param url The URL of the content import source.
      * @param status The status of the content import source.
-     * @param audienceIds The unique identifiers for the audiences to associate with this content
-     *   import source. Can be a single integer or an array of integers.
+     * @param audienceIds The unique identifiers for the audiences to associate with
+     *   this content import source. Can be a single integer or an array of integers.
      */
-    fun createContentImportSource(
-        clientConfig: ClientConfig,
-        syncBehavior: CreateContentImportSourceRequestSyncBehaviorEnum,
-        url: String,
-        intercomVersion: IntercomVersion? = null,
-        status: CreateContentImportSourceRequestStatusEnum? = null,
-        audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
-        options: RequestOptions? = null,
-    ): ContentImportSource {
-        return SdkClient.request<ContentImportSource>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/ai/content_import_sources",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "sync_behavior" to (syncBehavior),
-                            "url" to (url),
-                            "status" to (SdkClient.omitIfNull(status)),
-                            "audience_ids" to (audienceIds ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createContentImportSource",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createContentImportSource(clientConfig: ClientConfig, syncBehavior: CreateContentImportSourceRequestSyncBehaviorEnum, url: String, intercomVersion: IntercomVersion? = null, status: CreateContentImportSourceRequestStatusEnum? = null, audienceIds: SdkClient.SdkOptional<List<Long>?>? = null, options: RequestOptions? = null): ContentImportSource {
+        return SdkClient.request<ContentImportSource>(SdkClient.RequestSpec("POST", "/ai/content_import_sources", config = clientConfig, body = SdkClient.bodyMap("sync_behavior" to (syncBehavior), "url" to (url), "status" to (SdkClient.omitIfNull(status)), "audience_ids" to
+    (audienceIds ?: SdkClient.SdkOptional.Omitted)), operationId = "createContentImportSource", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
-    /**
-     * Deletes a content import source from your Fin Content Library. Deleting the source also
-     * deletes all external pages imported from it, so consider the effect on those pages before
-     * proceeding.
-     *
-     * You can delete a content import source by making a DELETE request this endpoint. This will
-     * also delete all external pages that were imported from this source.
-     *
-     * @param sourceId The unique identifier for the content import source which is given by
-     *   Intercom.
-     */
-    fun deleteContentImportSource(
-        clientConfig: ClientConfig,
-        sourceId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Unit {
-        SdkClient.request<Unit>(
-            SdkClient.RequestSpec(
-                "DELETE",
-                "/ai/content_import_sources/${SdkClient.encodePathSegment(sourceId)}",
-                config = clientConfig,
-                operationId = "deleteContentImportSource",
-                decoder = SdkClient.ResponseDecoder.EMPTY,
-                extraHeaders =
-                    SdkClient.headers(
-                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                    ),
-                options = options,
-                errors = mapOf("401" to Error2::class.java),
-            )
-        )
-    }
+
+
+
+
+
 
     /**
-     * Retrieves a content import source from your Fin Content Library by its identifier. Use the
-     * source ID to inspect its URL, status, sync behavior, and associated audiences.
+     * Deletes a content import source from your Fin Content Library. Deleting the source also deletes all external pages imported from it, so consider the effect on those pages before proceeding.
      *
-     * @param sourceId The unique identifier for the content import source which is given by
-     *   Intercom.
+     * You can delete a content import source by making a DELETE request this endpoint. This will also delete all external pages that were imported from this source.
+     *
+     * @param sourceId The unique identifier for the content import source which is
+     *   given by Intercom.
      */
-    fun getContentImportSource(
-        clientConfig: ClientConfig,
-        sourceId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContentImportSource {
-        return SdkClient.request<ContentImportSource>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ai/content_import_sources/${SdkClient.encodePathSegment(sourceId)}",
-                    config = clientConfig,
-                    operationId = "getContentImportSource",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteContentImportSource(clientConfig: ClientConfig, sourceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
+        SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/ai/content_import_sources/${SdkClient.encodePathSegment(sourceId)}", config = clientConfig, operationId = "deleteContentImportSource", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
     }
+
+
+
+
+
+
+
+    /**
+     * Retrieves a content import source from your Fin Content Library by its identifier. Use the source ID to inspect its URL, status, sync behavior, and associated audiences.
+     *
+     * @param sourceId The unique identifier for the content import source which is
+     *   given by Intercom.
+     */
+    fun getContentImportSource(clientConfig: ClientConfig, sourceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContentImportSource {
+        return SdkClient.request<ContentImportSource>(SdkClient.RequestSpec("GET", "/ai/content_import_sources/${SdkClient.encodePathSegment(sourceId)}", config = clientConfig, operationId = "getContentImportSource", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    }
+
+
+
+
+
+
 
     /** Parameters for [updateContentImportSource]. */
     data class UpdateContentImportSourceParams(
@@ -172,92 +102,53 @@ object AiContent {
         val intercomVersion: IntercomVersion? = null,
         val status: UpdateContentImportSourceRequestStatusEnum? = null,
         val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
-        val applyAudienceToExistingContent: Boolean? = null,
+        val applyAudienceToExistingContent: Boolean? = null
     )
 
     /**
-     * Replaces the settings for a content import source in your Fin Content Library. Provide
-     * `sync_behavior` and `url`; you can also change its status, update its audiences, and apply an
-     * audience to existing external pages.
+     * Replaces the settings for a content import source in your Fin Content Library. Provide `sync_behavior` and `url`; you can also change its status, update its audiences, and apply an audience to existing external pages.
      *
      * You can update an existing content import source.
      *
-     * @param sourceId The unique identifier for the content import source which is given by
-     *   Intercom.
-     * @param syncBehavior If you intend to create or update External Pages via the API, this should
-     *   be set to `api`. You can not change the value to or from api.
-     * @param url The URL of the content import source. This may only be different from the existing
-     *   value if the sync behavior is API.
+     * @param sourceId The unique identifier for the content import source which is
+     *   given by Intercom.
+     * @param syncBehavior If you intend to create or update External Pages via the
+     *   API, this should be set to `api`. You can not change the value to or from api.
+     * @param url The URL of the content import source. This may only be different
+     *   from the existing value if the sync behavior is API.
      * @param status The status of the content import source.
-     * @param audienceIds The unique identifiers for the audiences to associate with this content
-     *   import source. Can be a single integer or an array of integers. Set to null or an empty
-     *   array to remove all audiences.
-     * @param applyAudienceToExistingContent When true, the audience will be applied to all existing
-     *   external pages belonging to this content import source.
+     * @param audienceIds The unique identifiers for the audiences to associate with
+     *   this content import source. Can be a single integer or an array of integers.
+     *   Set to null or an empty array to remove all audiences.
+     * @param applyAudienceToExistingContent When true, the audience will be applied
+     *   to all existing external pages belonging to this content import source.
      */
-    fun updateContentImportSource(
-        clientConfig: ClientConfig,
-        request: UpdateContentImportSourceParams,
-        options: RequestOptions? = null,
-    ): ContentImportSource {
-        return SdkClient.request<ContentImportSource>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/ai/content_import_sources/${SdkClient.encodePathSegment(request.sourceId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "sync_behavior" to (request.syncBehavior),
-                            "url" to (request.url),
-                            "status" to (SdkClient.omitIfNull(request.status)),
-                            "audience_ids" to
-                                (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
-                            "apply_audience_to_existing_content" to
-                                (SdkClient.omitIfNull(request.applyAudienceToExistingContent)),
-                        ),
-                    operationId = "updateContentImportSource",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateContentImportSource(clientConfig: ClientConfig, request: UpdateContentImportSourceParams, options: RequestOptions? = null): ContentImportSource {
+        return SdkClient.request<ContentImportSource>(SdkClient.RequestSpec("PUT", "/ai/content_import_sources/${SdkClient.encodePathSegment(request.sourceId)}", config = clientConfig, body = SdkClient.bodyMap("sync_behavior" to (request.syncBehavior), "url" to (request.url), "status" to (SdkClient.omitIfNull(request.status)), "audience_ids" to
+    (request.audienceIds ?: SdkClient.SdkOptional.Omitted), "apply_audience_to_existing_content" to
+    (SdkClient.omitIfNull(request.applyAudienceToExistingContent))), operationId = "updateContentImportSource", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists external pages in your workspace's Fin Content Library. Use the returned page data to
-     * review each page and its source, while the pagination object provides links and details for
-     * navigating the results.
+     * Lists external pages in your workspace's Fin Content Library. Use the returned page data to review each page and its source, while the pagination object provides links and details for navigating the results.
      *
      * You can retrieve a list of all external pages for a workspace.
      */
-    fun listExternalPages(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ExternalPagesList {
-        return SdkClient.request<ExternalPagesList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ai/external_pages",
-                    config = clientConfig,
-                    operationId = "listExternalPages",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listExternalPages(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ExternalPagesList {
+        return SdkClient.request<ExternalPagesList>(SdkClient.RequestSpec("GET", "/ai/external_pages", config = clientConfig, operationId = "listExternalPages", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [createExternalPage]. */
     data class CreateExternalPageParams(
@@ -270,143 +161,89 @@ object AiContent {
         val url: String? = null,
         val aiAgentAvailability: Boolean? = null,
         val aiCopilotAvailability: Boolean? = null,
-        val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
+        val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null
     )
 
     /**
-     * Creates an external page in your Fin Content Library, or updates the existing page with the
-     * same source and external identifiers. Provide the page title, HTML body, locale, source ID,
-     * and source-assigned external ID.
+     * Creates an external page in your Fin Content Library, or updates the existing page with the same source and external identifiers. Provide the page title, HTML body, locale, source ID, and source-assigned external ID.
      *
-     * You can create a new external page by sending a POST request to this endpoint. If an external
-     * page already exists with the specified source_id and external_id, it will be updated instead.
+     * You can create a new external page by sending a POST request to this endpoint. If an external page already exists with the specified source_id and external_id, it will be updated instead.
      *
      * @param title The title of the external page.
      * @param html The body of the external page in HTML.
      * @param locale Always en
-     * @param sourceId The unique identifier for the source of the external page which was given by
-     *   Intercom. Every external page must be associated with a Content Import Source which
-     *   represents the place it comes from and from which it inherits a default audience
-     *   (configured in the UI). For a new source, make a POST request to the Content Import Source
-     *   endpoint and an ID for the source will be returned in the response.
-     * @param externalId The identifier for the external page which was given by the source. Must be
-     *   unique for the source.
-     * @param url The URL of the external page. This will be used by Fin to link end users to the
-     *   page it based its answer on. When a URL is not present, Fin will not reference the source.
-     * @param aiAgentAvailability Whether the external page should be used to answer questions by AI
-     *   Agent. Will not default when updating an existing external page.
-     * @param aiCopilotAvailability Whether the external page should be used to answer questions by
-     *   AI Copilot. Will not default when updating an existing external page.
-     * @param audienceIds The list of audience IDs to target this external page to for Fin AI Agent.
-     *   Omitting the field keeps the default audience inherited from the source. Pass `[]` to clear
-     *   all audience memberships, including the inherited ones. If an external page already exists
-     *   with the specified source_id and external_id, omitting the field leaves its audience
-     *   memberships unchanged. Unknown audience IDs return a `404` error.
+     * @param sourceId The unique identifier for the source of the external page
+     *   which was given by Intercom. Every external page must be associated with a
+     *   Content Import Source which represents the place it comes from and from which
+     *   it inherits a default audience (configured in the UI). For a new source, make
+     *   a POST request to the Content Import Source endpoint and an ID for the source
+     *   will be returned in the response.
+     * @param externalId The identifier for the external page which was given by the
+     *   source. Must be unique for the source.
+     * @param url The URL of the external page. This will be used by Fin to link end
+     *   users to the page it based its answer on. When a URL is not present, Fin will
+     *   not reference the source.
+     * @param aiAgentAvailability Whether the external page should be used to answer
+     *   questions by AI Agent. Will not default when updating an existing external
+     *   page.
+     * @param aiCopilotAvailability Whether the external page should be used to
+     *   answer questions by AI Copilot. Will not default when updating an existing
+     *   external page.
+     * @param audienceIds The list of audience IDs to target this external page to
+     *   for Fin AI Agent. Omitting the field keeps the default audience inherited from
+     *   the source. Pass `[]` to clear all audience memberships, including the
+     *   inherited ones. If an external page already exists with the specified
+     *   source_id and external_id, omitting the field leaves its audience memberships
+     *   unchanged. Unknown audience IDs return a `404` error.
      */
-    fun createExternalPage(
-        clientConfig: ClientConfig,
-        request: CreateExternalPageParams,
-        options: RequestOptions? = null,
-    ): ExternalPage {
-        return SdkClient.request<ExternalPage>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/ai/external_pages",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "title" to (request.title),
-                            "html" to (request.html),
-                            "locale" to (request.locale),
-                            "source_id" to (request.sourceId),
-                            "external_id" to (request.externalId),
-                            "url" to (SdkClient.omitIfNull(request.url)),
-                            "ai_agent_availability" to
-                                (SdkClient.omitIfNull(request.aiAgentAvailability)),
-                            "ai_copilot_availability" to
-                                (SdkClient.omitIfNull(request.aiCopilotAvailability)),
-                            "audience_ids" to
-                                (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "createExternalPage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createExternalPage(clientConfig: ClientConfig, request: CreateExternalPageParams, options: RequestOptions? = null): ExternalPage {
+        return SdkClient.request<ExternalPage>(SdkClient.RequestSpec("POST", "/ai/external_pages", config = clientConfig, body = SdkClient.bodyMap("title" to (request.title), "html" to (request.html), "locale" to (request.locale), "source_id" to (request.sourceId), "external_id" to (request.externalId), "url" to (SdkClient.omitIfNull(request.url)), "ai_agent_availability" to
+    (SdkClient.omitIfNull(request.aiAgentAvailability)), "ai_copilot_availability" to
+    (SdkClient.omitIfNull(request.aiCopilotAvailability)), "audience_ids" to
+    (request.audienceIds ?: SdkClient.SdkOptional.Omitted)), operationId = "createExternalPage", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
-    /**
-     * Deletes an external page from your Fin Content Library and removes it from use in AI answers.
-     * Use the page identifier to select the external page to remove.
-     *
-     * Sending a DELETE request for an external page will remove it from the content library UI and
-     * from being used for AI answers.
-     *
-     * @param pageId The unique identifier for the external page which is given by Intercom.
-     */
-    fun deleteExternalPage(
-        clientConfig: ClientConfig,
-        pageId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ExternalPage {
-        return SdkClient.request<ExternalPage>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/ai/external_pages/${SdkClient.encodePathSegment(pageId)}",
-                    config = clientConfig,
-                    operationId = "deleteExternalPage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
-    }
+
+
+
+
+
 
     /**
-     * Retrieves an external page from your Fin Content Library by its page identifier. Use this
-     * operation to inspect the page content, source association, availability settings, and
-     * audience targeting.
+     * Deletes an external page from your Fin Content Library and removes it from use in AI answers. Use the page identifier to select the external page to remove.
+     *
+     * Sending a DELETE request for an external page will remove it from the content library UI and from being used for AI answers.
+     *
+     * @param pageId The unique identifier for the external page which is given by
+     *   Intercom.
+     */
+    fun deleteExternalPage(clientConfig: ClientConfig, pageId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ExternalPage {
+        return SdkClient.request<ExternalPage>(SdkClient.RequestSpec("DELETE", "/ai/external_pages/${SdkClient.encodePathSegment(pageId)}", config = clientConfig, operationId = "deleteExternalPage", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Retrieves an external page from your Fin Content Library by its page identifier. Use this operation to inspect the page content, source association, availability settings, and audience targeting.
      *
      * You can retrieve an external page.
      *
-     * @param pageId The unique identifier for the external page which is given by Intercom.
+     * @param pageId The unique identifier for the external page which is given by
+     *   Intercom.
      */
-    fun getExternalPage(
-        clientConfig: ClientConfig,
-        pageId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ExternalPage {
-        return SdkClient.request<ExternalPage>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/ai/external_pages/${SdkClient.encodePathSegment(pageId)}",
-                    config = clientConfig,
-                    operationId = "getExternalPage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun getExternalPage(clientConfig: ClientConfig, pageId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ExternalPage {
+        return SdkClient.request<ExternalPage>(SdkClient.RequestSpec("GET", "/ai/external_pages/${SdkClient.encodePathSegment(pageId)}", config = clientConfig, operationId = "getExternalPage", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateExternalPage]. */
     data class UpdateExternalPageParams(
@@ -419,68 +256,46 @@ object AiContent {
         val intercomVersion: IntercomVersion? = null,
         val finAvailability: Boolean? = null,
         val externalId: String? = null,
-        val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null,
+        val audienceIds: SdkClient.SdkOptional<List<Long>?>? = null
     )
 
     /**
-     * Replaces the specified external page's details in your Fin Content Library; this operation
-     * applies to pages created through the API. Provide `title`, `html`, `url`, `locale`, and
-     * `source_id`, and include `audience_ids` to replace the existing audience memberships.
+     * Replaces the specified external page's details in your Fin Content Library; this operation applies to pages created through the API. Provide `title`, `html`, `url`, `locale`, and `source_id`, and include `audience_ids` to replace the existing audience memberships.
      *
      * You can update an existing external page (if it was created via the API).
      *
-     * @param pageId The unique identifier for the external page which is given by Intercom.
+     * @param pageId The unique identifier for the external page which is given by
+     *   Intercom.
      * @param title The title of the external page.
      * @param html The body of the external page in HTML.
-     * @param url The URL of the external page. This will be used by Fin to link end users to the
-     *   page it based its answer on.
+     * @param url The URL of the external page. This will be used by Fin to link end
+     *   users to the page it based its answer on.
      * @param locale Always en
-     * @param sourceId The unique identifier for the source of the external page which was given by
-     *   Intercom. Every external page must be associated with a Content Import Source which
-     *   represents the place it comes from and from which it inherits a default audience
-     *   (configured in the UI). For a new source, make a POST request to the Content Import Source
-     *   endpoint and an ID for the source will be returned in the response.
-     * @param finAvailability Whether the external page should be used to answer questions by Fin.
-     * @param externalId The identifier for the external page which was given by the source. Must be
-     *   unique for the source.
-     * @param audienceIds The list of audience IDs to target this external page to for Fin AI Agent.
-     *   Replaces all existing audience memberships. Omitting the field leaves existing audience
-     *   memberships unchanged. Pass `[]` to clear all audience memberships. Unknown audience IDs
-     *   return a `404` error.
+     * @param sourceId The unique identifier for the source of the external page
+     *   which was given by Intercom. Every external page must be associated with a
+     *   Content Import Source which represents the place it comes from and from which
+     *   it inherits a default audience (configured in the UI). For a new source, make
+     *   a POST request to the Content Import Source endpoint and an ID for the source
+     *   will be returned in the response.
+     * @param finAvailability Whether the external page should be used to answer
+     *   questions by Fin.
+     * @param externalId The identifier for the external page which was given by the
+     *   source. Must be unique for the source.
+     * @param audienceIds The list of audience IDs to target this external page to
+     *   for Fin AI Agent. Replaces all existing audience memberships. Omitting the
+     *   field leaves existing audience memberships unchanged. Pass `[]` to clear all
+     *   audience memberships. Unknown audience IDs return a `404` error.
      */
-    fun updateExternalPage(
-        clientConfig: ClientConfig,
-        request: UpdateExternalPageParams,
-        options: RequestOptions? = null,
-    ): ExternalPage {
-        return SdkClient.request<ExternalPage>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/ai/external_pages/${SdkClient.encodePathSegment(request.pageId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "title" to (request.title),
-                            "html" to (request.html),
-                            "url" to (request.url),
-                            "locale" to (request.locale),
-                            "source_id" to (request.sourceId),
-                            "fin_availability" to (SdkClient.omitIfNull(request.finAvailability)),
-                            "external_id" to (SdkClient.omitIfNull(request.externalId)),
-                            "audience_ids" to
-                                (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "updateExternalPage",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateExternalPage(clientConfig: ClientConfig, request: UpdateExternalPageParams, options: RequestOptions? = null): ExternalPage {
+        return SdkClient.request<ExternalPage>(SdkClient.RequestSpec("PUT", "/ai/external_pages/${SdkClient.encodePathSegment(request.pageId)}", config = clientConfig, body = SdkClient.bodyMap("title" to (request.title), "html" to (request.html), "url" to (request.url), "locale" to (request.locale), "source_id" to (request.sourceId), "fin_availability" to
+    (SdkClient.omitIfNull(request.finAvailability)), "external_id" to (SdkClient.omitIfNull(request.externalId)), "audience_ids" to
+    (request.audienceIds ?: SdkClient.SdkOptional.Omitted)), operationId = "updateExternalPage", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

@@ -11,60 +11,93 @@ import dev.octri.showcase.intercom.models.MacroVisibleToEnum
 import java.time.OffsetDateTime
 
 /**
- * A macro is a pre-defined response template (saved reply) that can be used to quickly reply to
- * conversations.
+ * A macro is a pre-defined response template (saved reply) that can be used to quickly reply to conversations.
  */
 data class Macro(
-    /** String representing the object's type. Always has the value `macro`. */
+    /**
+     * String representing the object's type. Always has the value `macro`.
+     */
     val type: MacroTypeEnum? = null,
-    /** The unique identifier for the macro. */
+    /**
+     * The unique identifier for the macro.
+     */
     val id: String? = null,
-    /** The name of the macro. */
+    /**
+     * The name of the macro.
+     */
     val name: String? = null,
-    /** The body of the macro in HTML format with placeholders transformed to XML-like format. */
+    /**
+     * The body of the macro in HTML format with placeholders transformed to XML-like format.
+     */
     val body: String? = null,
-    /** The plain text version of the macro body with original Intercom placeholder format. */
+    /**
+     * The plain text version of the macro body with original Intercom placeholder format.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("body_text") val bodyText: String? = null,
-    /** The time the macro was created in ISO 8601 format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The time the macro was last updated in ISO 8601 format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at")
-    val updatedAt: OffsetDateTime? = null,
-    /** Who can view this macro. */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_to")
-    val visibleTo: MacroVisibleToEnum? = null,
-    /** The team IDs that can view this macro when visible_to is set to specific_teams. */
-    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_team_ids")
-    val visibleToTeamIds: List<String>? = null,
-    /** Where the macro is available for use. */
-    @com.fasterxml.jackson.annotation.JsonProperty("available_on")
-    val availableOn: List<MacroAvailableOnItemEnum>? = null,
+    /**
+     * The time the macro was created in ISO 8601 format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The time the macro was last updated in ISO 8601 format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime? = null,
+    /**
+     * Who can view this macro.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_to") val visibleTo: MacroVisibleToEnum? = null,
+    /**
+     * The team IDs that can view this macro when visible_to is set to specific_teams.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("visible_to_team_ids") val visibleToTeamIds: List<String>? = null,
+    /**
+     * Where the macro is available for use.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("available_on") val availableOn: List<MacroAvailableOnItemEnum>? = null
 )
 
-/** Cursor for the next page */
+/**
+ * Cursor for the next page
+ */
 data class MacroListPagesNext(
-    /** Base64-encoded cursor containing \[updated_at, id\] for pagination */
-    @com.fasterxml.jackson.annotation.JsonProperty("starting_after")
-    val startingAfter: String? = null
+    /**
+     * Base64-encoded cursor containing \[updated_at, id\] for pagination
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("starting_after") val startingAfter: String? = null
 )
 
-/** Pagination information */
+/**
+ * Pagination information
+ */
 data class MacroListPages(
-    /** The type of pagination */
+    /**
+     * The type of pagination
+     */
     val type: MacroListPagesTypeEnum? = null,
-    /** Number of results per page */
+    /**
+     * Number of results per page
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long? = null,
-    /** Cursor for the next page */
-    val next: MacroListPagesNext? = null,
+    /**
+     * Cursor for the next page
+     */
+    val next: MacroListPagesNext? = null
 )
 
-/** A paginated list of macros (saved replies) in the workspace. */
+/**
+ * A paginated list of macros (saved replies) in the workspace.
+ */
 data class MacroList(
-    /** Always list */
+    /**
+     * Always list
+     */
     val type: MacroListTypeEnum? = null,
-    /** The list of macro objects */
+    /**
+     * The list of macro objects
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Macro?>? = null,
-    /** Pagination information */
-    val pages: MacroListPages? = null,
+    /**
+     * Pagination information
+     */
+    val pages: MacroListPages? = null
 )

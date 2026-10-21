@@ -3,47 +3,69 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyBaseRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Typed representation of the `ContactReplyBaseRequest` API schema. */
+/**
+ * Typed representation of the `ContactReplyBaseRequest` API schema.
+ */
 data class ContactReplyBaseRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyBaseRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: ContactReplyBaseRequestTypeEnum,
-    /** The text body of the comment. */
-    val body: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * Required enumerated value serialized in the `message_type` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyBaseRequestReplyOptionsItem>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyBaseRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ContactReplyBaseRequestTypeEnum,
+    /**
+     * The text body of the comment.
+     */
+    val body: String,
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyBaseRequestReplyOptionsItem>? = null
 )
 
 /**
  * An object containing Subscription Types meta data about the SubscriptionTypes that a contact has.
  */
 data class ContactSubscriptionTypes(
-    /** This object represents the subscriptions attached to a contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<AddressableList>? = null,
-    /** Url to get more subscription type resources for this contact */
+    /**
+     * This object represents the subscriptions attached to a contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<AddressableList>? = null,
+    /**
+     * Url to get more subscription type resources for this contact
+     */
     val url: String? = null,
-    /** Int representing the total number of subscription types attached to this contact */
+    /**
+     * Int representing the total number of subscription types attached to this contact
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /** Whether there's more Addressable Objects to be viewed. If true, use the url to view all */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Whether there's more Addressable Objects to be viewed. If true, use the url to view all
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null
 )

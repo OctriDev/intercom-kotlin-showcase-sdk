@@ -3,97 +3,127 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Required object value serialized in the `companies[]` wire field. */
+
+/**
+ * Required object value serialized in the `companies[]` wire field.
+ */
 data class BulkCreateContactsRequestContactsItemCompaniesItem(
-    /** The company ID you have defined for the company. */
+    /**
+     * The company ID you have defined for the company.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String,
-    /** The name of the company. */
-    val name: String? = null,
+    /**
+     * The name of the company.
+     */
+    val name: String? = null
 )
 
-/** Required object value serialized in the `add[]` wire field. */
+/**
+ * Required object value serialized in the `add[]` wire field.
+ */
 data class BulkCreateContactsRequestContactsItemTagsAddItem(
-    /** The ID of an existing tag to add to the contact. */
+    /**
+     * The ID of an existing tag to add to the contact.
+     */
     val id: String
 )
 
 /**
- * Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer
- * for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs
- * are skipped while the rest of the contact create still applies. Per-tag results are not yet
- * returned in the job status.
+ * Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
  */
 data class BulkCreateContactsRequestContactsItemTags(
-    /** Tags to add to the contact. */
+    /**
+     * Tags to add to the contact.
+     */
     val add: List<BulkCreateContactsRequestContactsItemTagsAddItem>? = null
 )
 
-/** Required object value serialized in the `contacts[]` wire field. */
+/**
+ * Required object value serialized in the `contacts[]` wire field.
+ */
 data class BulkCreateContactsRequestContactsItem(
-    /** A unique identifier for the contact which you have defined. */
+    /**
+     * A unique identifier for the contact which you have defined.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /** The contact's email address. */
+    /**
+     * The contact's email address.
+     */
     val email: String? = null,
     /**
-     * Whether the contact has proved they own this email address, for example through a
-     * confirmation link or one-time code you sent. Send it together with `email`. `email_verified`
-     * without `email` is rejected. Changing a contact's email resets it to not verified. Intercom
-     * reuses leads with a verified email when an inbound email, conversation or ticket matches the
-     * address.
+     * Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected. Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_verified")
-    val emailVerified: Boolean? = null,
-    /** The contact's name. */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_verified") val emailVerified: Boolean? = null,
+    /**
+     * The contact's name.
+     */
     val name: String? = null,
     /**
-     * The contact's role. One of `user` or `lead`. Leads are exempt from the uniqueness check
-     * described above.
+     * The contact's role. One of `user` or `lead`. Leads are exempt from the uniqueness check described above.
      */
     val role: String? = null,
-    /** The contact's phone number. */
-    val phone: String? = null,
-    /** An image URL containing the avatar of the contact. */
-    val avatar: String? = null,
-    /** A preferred language setting for the contact, used by the Intercom Messenger. */
-    @com.fasterxml.jackson.annotation.JsonProperty("language_override")
-    val languageOverride: String? = null,
-    /** Custom attributes to set on the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes")
-    val customAttributes: Map<String, Any>? = null,
-    /** The time the contact signed up, in Unix timestamp format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("signed_up_at") val signedUpAt: Long? = null,
-    /** The time the contact was last seen, in Unix timestamp format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_seen_at") val lastSeenAt: Long? = null,
-    /** The ID of an admin that has been assigned account ownership of the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: String? = null,
-    /** Whether the contact is unsubscribed from emails. */
-    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails")
-    val unsubscribedFromEmails: Boolean? = null,
     /**
-     * A list of companies to associate with the contact. Each company is identified by the
-     * `company_id` you have defined. A company that does not exist is created, and one that already
-     * exists has the supplied attributes applied to it.
+     * The contact's phone number.
+     */
+    val phone: String? = null,
+    /**
+     * An image URL containing the avatar of the contact.
+     */
+    val avatar: String? = null,
+    /**
+     * A preferred language setting for the contact, used by the Intercom Messenger.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("language_override") val languageOverride: String? = null,
+    /**
+     * Custom attributes to set on the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("custom_attributes") val customAttributes: Map<String, Any>? = null,
+    /**
+     * The time the contact signed up, in Unix timestamp format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("signed_up_at") val signedUpAt: Long? = null,
+    /**
+     * The time the contact was last seen, in Unix timestamp format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_seen_at") val lastSeenAt: Long? = null,
+    /**
+     * The ID of an admin that has been assigned account ownership of the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("owner_id") val ownerId: String? = null,
+    /**
+     * Whether the contact is unsubscribed from emails.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("unsubscribed_from_emails") val unsubscribedFromEmails: Boolean? = null,
+    /**
+     * A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it.
      */
     val companies: List<BulkCreateContactsRequestContactsItemCompaniesItem>? = null,
     /**
-     * Tags to add to the contact. Each tag is identified by its `id`, which must be a positive
-     * integer for a tag that already exists in your workspace. Tag application is best-effort:
-     * unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag
-     * results are not yet returned in the job status.
+     * Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
      */
-    val tags: BulkCreateContactsRequestContactsItemTags? = null,
+    val tags: BulkCreateContactsRequestContactsItemTags? = null
 )
 
-/** Optional. Include to append tasks to an existing job. */
+/**
+ * Optional. Include to append tasks to an existing job.
+ */
 data class BulkCreateContactsRequestJob(
-    /** The ID of an existing bulk job to append to. */
+    /**
+     * The ID of an existing bulk job to append to.
+     */
     val id: String? = null
 )
 
-/** Request body for bulk creating contacts. */
+/**
+ * Request body for bulk creating contacts.
+ */
 data class BulkCreateContactsRequest(
-    /** An array of contact objects to create. Maximum 100 contacts per request. */
+    /**
+     * An array of contact objects to create. Maximum 100 contacts per request.
+     */
     val contacts: List<BulkCreateContactsRequestContactsItem>,
-    /** Optional. Include to append tasks to an existing job. */
-    val job: BulkCreateContactsRequestJob? = null,
+    /**
+     * Optional. Include to append tasks to an existing job.
+     */
+    val job: BulkCreateContactsRequestJob? = null
 )

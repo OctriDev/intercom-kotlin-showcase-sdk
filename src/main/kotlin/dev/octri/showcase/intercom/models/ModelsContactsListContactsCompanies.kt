@@ -5,19 +5,24 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.models.companies.Company
 
-/** A list of Company Objects */
+/**
+ * A list of Company Objects
+ */
 data class ContactAttachedCompanies(
-    /** The type of object */
+    /**
+     * The type of object
+     */
     val type: ContactAttachedCompaniesTypeEnum? = null,
-    /** An array containing Company Objects */
+    /**
+     * An array containing Company Objects
+     */
     val companies: List<Company>? = null,
-    /** The total number of companies associated to this contact */
+    /**
+     * The total number of companies associated to this contact
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
     /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data
-     * over multiple requests. Their responses are likely to contain a pages object that hosts
-     * pagination links which a client can use to paginate through the data without having to
-     * construct a query. The link relations for the pages field are as follows.
+     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
      */
-    val pages: PagesLink? = null,
+    val pages: PagesLink? = null
 )

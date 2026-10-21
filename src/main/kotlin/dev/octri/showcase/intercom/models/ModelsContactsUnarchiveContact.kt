@@ -3,14 +3,24 @@
 
 package dev.octri.showcase.intercom.models
 
-/** unarchived contact object */
+/**
+ * unarchived contact object
+ */
 data class ContactUnarchived(
-    /** always contact */
+    /**
+     * always contact
+     */
     val type: ContactUnarchivedTypeEnum? = null,
-    /** The unique identifier for the contact which is given by Intercom. */
+    /**
+     * The unique identifier for the contact which is given by Intercom.
+     */
     val id: String? = null,
-    /** The unique identifier for the contact which is provided by the Client. */
+    /**
+     * The unique identifier for the contact which is provided by the Client.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /** Whether the contact is archived or not. */
-    val archived: Boolean? = null,
+    /**
+     * Whether the contact is archived or not.
+     */
+    val archived: Boolean? = null
 )

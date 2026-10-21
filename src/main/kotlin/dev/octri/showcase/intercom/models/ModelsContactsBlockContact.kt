@@ -3,14 +3,24 @@
 
 package dev.octri.showcase.intercom.models
 
-/** blocked contact object */
+/**
+ * blocked contact object
+ */
 data class ContactBlocked(
-    /** always contact */
+    /**
+     * always contact
+     */
     val type: ContactBlockedTypeEnum? = null,
-    /** The unique identifier for the contact which is given by Intercom. */
+    /**
+     * The unique identifier for the contact which is given by Intercom.
+     */
     val id: String? = null,
-    /** The unique identifier for the contact which is provided by the Client. */
+    /**
+     * The unique identifier for the contact which is provided by the Client.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("external_id") val externalId: String? = null,
-    /** Always true. */
-    val blocked: Boolean? = null,
+    /**
+     * Always true.
+     */
+    val blocked: Boolean? = null
 )

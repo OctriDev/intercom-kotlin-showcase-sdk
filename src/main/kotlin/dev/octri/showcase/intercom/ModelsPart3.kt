@@ -17,19 +17,15 @@ typealias CustomerRequestVariant1 = dev.octri.showcase.intercom.models.CustomerR
 
 typealias CustomerRequestVariant2 = dev.octri.showcase.intercom.models.CustomerRequestVariant2
 
-typealias CustomObjectInstance =
-    dev.octri.showcase.intercom.models.customobjectinstances.CustomObjectInstance
+typealias CustomObjectInstance = dev.octri.showcase.intercom.models.customobjectinstances.CustomObjectInstance
 
-typealias CustomObjectInstanceDeleted =
-    dev.octri.showcase.intercom.models.CustomObjectInstanceDeleted
+typealias CustomObjectInstanceDeleted = dev.octri.showcase.intercom.models.CustomObjectInstanceDeleted
 
 typealias CustomObjectInstanceList = dev.octri.showcase.intercom.models.CustomObjectInstanceList
 
-typealias CustomObjectInstancesPaginatedList =
-    dev.octri.showcase.intercom.models.customobjectinstances.CustomObjectInstancesPaginatedList
+typealias CustomObjectInstancesPaginatedList = dev.octri.showcase.intercom.models.customobjectinstances.CustomObjectInstancesPaginatedList
 
-typealias CustomObjectInstancesPaginatedListTypeEnum =
-    dev.octri.showcase.intercom.models.CustomObjectInstancesPaginatedListTypeEnum
+typealias CustomObjectInstancesPaginatedListTypeEnum = dev.octri.showcase.intercom.models.CustomObjectInstancesPaginatedListTypeEnum
 
 typealias CxScoreReasonList = dev.octri.showcase.intercom.models.CxScoreReasonList
 
@@ -49,95 +45,65 @@ typealias DataAttributeTypeEnum = dev.octri.showcase.intercom.models.DataAttribu
 
 typealias DataConnector = dev.octri.showcase.intercom.models.dataconnectors.DataConnector
 
-typealias DataConnectorDetail =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetail
+typealias DataConnectorDetail = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetail
 
-typealias DataConnectorDetailAudiencesItemEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailAudiencesItemEnum
+typealias DataConnectorDetailAudiencesItemEnum = dev.octri.showcase.intercom.models.DataConnectorDetailAudiencesItemEnum
 
-typealias DataConnectorDetailConfigurationResponseTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailConfigurationResponseTypeEnum
+typealias DataConnectorDetailConfigurationResponseTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailConfigurationResponseTypeEnum
 
-typealias DataConnectorDetailDataInputsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailDataInputsItem
+typealias DataConnectorDetailDataInputsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailDataInputsItem
 
-typealias DataConnectorDetailDataInputsItemTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailDataInputsItemTypeEnum
+typealias DataConnectorDetailDataInputsItemTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailDataInputsItemTypeEnum
 
-typealias DataConnectorDetailDataTransformationTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailDataTransformationTypeEnum
+typealias DataConnectorDetailDataTransformationTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailDataTransformationTypeEnum
 
-typealias DataConnectorDetailExecutionTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailExecutionTypeEnum
+typealias DataConnectorDetailExecutionTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailExecutionTypeEnum
 
-typealias DataConnectorDetailHeadersItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailHeadersItem
+typealias DataConnectorDetailHeadersItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailHeadersItem
 
-typealias DataConnectorDetailHttpMethodEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailHttpMethodEnum
+typealias DataConnectorDetailHttpMethodEnum = dev.octri.showcase.intercom.models.DataConnectorDetailHttpMethodEnum
 
-typealias DataConnectorDetailObjectMappingsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailObjectMappingsItem
+typealias DataConnectorDetailObjectMappingsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailObjectMappingsItem
 
-typealias DataConnectorDetailObjectMappingsItemAttributeMappingsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailObjectMappingsItemAttributeMappingsItem
+typealias DataConnectorDetailObjectMappingsItemAttributeMappingsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailObjectMappingsItemAttributeMappingsItem
 
-typealias DataConnectorDetailObjectMappingsItemAttributeMappingsItemMapX1453fe1b09 =
-    dev.octri.showcase.intercom.models.DataConnectorDetailObjectMappingsItemAttributeMappingsItemMapX1453fe1b09
+typealias DataConnectorDetailObjectMappingsItemAttributeMappingsItemMapX1453fe1b09 = dev.octri.showcase.intercom.models.DataConnectorDetailObjectMappingsItemAttributeMappingsItemMapX1453fe1b09
 
-typealias DataConnectorDetailObjectMappingsItemIntercomObjectTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailObjectMappingsItemIntercomObjectTypeEnum
+typealias DataConnectorDetailObjectMappingsItemIntercomObjectTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailObjectMappingsItemIntercomObjectTypeEnum
 
-typealias DataConnectorDetailObjectMappingsItemReferenceMappingsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailObjectMappingsItemReferenceMappingsItem
+typealias DataConnectorDetailObjectMappingsItemReferenceMappingsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailObjectMappingsItemReferenceMappingsItem
 
-typealias DataConnectorDetailObjectMappingsItemReferenceMappingsItemIntX192851a6c2 =
-    dev.octri.showcase.intercom.models.DataConnectorDetailObjectMappingsItemReferenceMappingsItemIntX192851a6c2
+typealias DataConnectorDetailObjectMappingsItemReferenceMappingsItemIntX192851a6c2 = dev.octri.showcase.intercom.models.DataConnectorDetailObjectMappingsItemReferenceMappingsItemIntX192851a6c2
 
-typealias DataConnectorDetailResponseFieldsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailResponseFieldsItem
+typealias DataConnectorDetailResponseFieldsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorDetailResponseFieldsItem
 
-typealias DataConnectorDetailResponseFieldsItemTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailResponseFieldsItemTypeEnum
+typealias DataConnectorDetailResponseFieldsItemTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailResponseFieldsItemTypeEnum
 
-typealias DataConnectorDetailStateEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailStateEnum
+typealias DataConnectorDetailStateEnum = dev.octri.showcase.intercom.models.DataConnectorDetailStateEnum
 
-typealias DataConnectorDetailTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorDetailTypeEnum
+typealias DataConnectorDetailTypeEnum = dev.octri.showcase.intercom.models.DataConnectorDetailTypeEnum
 
-typealias DataConnectorExecutionResult =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorExecutionResult
+typealias DataConnectorExecutionResult = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorExecutionResult
 
-typealias DataConnectorExecutionResultErrorTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultErrorTypeEnum
+typealias DataConnectorExecutionResultErrorTypeEnum = dev.octri.showcase.intercom.models.DataConnectorExecutionResultErrorTypeEnum
 
-typealias DataConnectorExecutionResultHttpMethodEnum =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultHttpMethodEnum
+typealias DataConnectorExecutionResultHttpMethodEnum = dev.octri.showcase.intercom.models.DataConnectorExecutionResultHttpMethodEnum
 
-typealias DataConnectorExecutionResultList =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultList
+typealias DataConnectorExecutionResultList = dev.octri.showcase.intercom.models.DataConnectorExecutionResultList
 
-typealias DataConnectorExecutionResultListPages =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultListPages
+typealias DataConnectorExecutionResultListPages = dev.octri.showcase.intercom.models.DataConnectorExecutionResultListPages
 
-typealias DataConnectorExecutionResultListPagesNext =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultListPagesNext
+typealias DataConnectorExecutionResultListPagesNext = dev.octri.showcase.intercom.models.DataConnectorExecutionResultListPagesNext
 
-typealias DataConnectorExecutionResultListPagesTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultListPagesTypeEnum
+typealias DataConnectorExecutionResultListPagesTypeEnum = dev.octri.showcase.intercom.models.DataConnectorExecutionResultListPagesTypeEnum
 
-typealias DataConnectorExecutionResultListTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultListTypeEnum
+typealias DataConnectorExecutionResultListTypeEnum = dev.octri.showcase.intercom.models.DataConnectorExecutionResultListTypeEnum
 
-typealias DataConnectorExecutionResultSourceTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultSourceTypeEnum
+typealias DataConnectorExecutionResultSourceTypeEnum = dev.octri.showcase.intercom.models.DataConnectorExecutionResultSourceTypeEnum
 
-typealias DataConnectorExecutionResultTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorExecutionResultTypeEnum
+typealias DataConnectorExecutionResultTypeEnum = dev.octri.showcase.intercom.models.DataConnectorExecutionResultTypeEnum
 
-typealias DataConnectorHttpMethodEnum =
-    dev.octri.showcase.intercom.models.DataConnectorHttpMethodEnum
+typealias DataConnectorHttpMethodEnum = dev.octri.showcase.intercom.models.DataConnectorHttpMethodEnum
 
 typealias DataConnectorList = dev.octri.showcase.intercom.models.DataConnectorList
 
@@ -145,8 +111,7 @@ typealias DataConnectorListPages = dev.octri.showcase.intercom.models.DataConnec
 
 typealias DataConnectorListPagesNext = dev.octri.showcase.intercom.models.DataConnectorListPagesNext
 
-typealias DataConnectorListPagesTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorListPagesTypeEnum
+typealias DataConnectorListPagesTypeEnum = dev.octri.showcase.intercom.models.DataConnectorListPagesTypeEnum
 
 typealias DataConnectorListTypeEnum = dev.octri.showcase.intercom.models.DataConnectorListTypeEnum
 
@@ -154,52 +119,37 @@ typealias DataConnectorStateEnum = dev.octri.showcase.intercom.models.DataConnec
 
 typealias DataConnectorTypeEnum = dev.octri.showcase.intercom.models.DataConnectorTypeEnum
 
-typealias DataConnectorVersion =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersion
+typealias DataConnectorVersion = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersion
 
-typealias DataConnectorVersionAuthor =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionAuthor
+typealias DataConnectorVersionAuthor = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionAuthor
 
-typealias DataConnectorVersionDefinition =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinition
+typealias DataConnectorVersionDefinition = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinition
 
-typealias DataConnectorVersionDefinitionDataInputsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionDataInputsItem
+typealias DataConnectorVersionDefinitionDataInputsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionDataInputsItem
 
-typealias DataConnectorVersionDefinitionHeadersItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionHeadersItem
+typealias DataConnectorVersionDefinitionHeadersItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionHeadersItem
 
-typealias DataConnectorVersionDefinitionObjectMappingsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionObjectMappingsItem
+typealias DataConnectorVersionDefinitionObjectMappingsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionObjectMappingsItem
 
-typealias DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem
+typealias DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem
 
-typealias DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem
+typealias DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem
 
-typealias DataConnectorVersionDefinitionResponseFieldsItem =
-    dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionResponseFieldsItem
+typealias DataConnectorVersionDefinitionResponseFieldsItem = dev.octri.showcase.intercom.models.dataconnectors.DataConnectorVersionDefinitionResponseFieldsItem
 
 typealias DataConnectorVersionList = dev.octri.showcase.intercom.models.DataConnectorVersionList
 
-typealias DataConnectorVersionListPages =
-    dev.octri.showcase.intercom.models.DataConnectorVersionListPages
+typealias DataConnectorVersionListPages = dev.octri.showcase.intercom.models.DataConnectorVersionListPages
 
-typealias DataConnectorVersionListPagesNext =
-    dev.octri.showcase.intercom.models.DataConnectorVersionListPagesNext
+typealias DataConnectorVersionListPagesNext = dev.octri.showcase.intercom.models.DataConnectorVersionListPagesNext
 
-typealias DataConnectorVersionListPagesTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorVersionListPagesTypeEnum
+typealias DataConnectorVersionListPagesTypeEnum = dev.octri.showcase.intercom.models.DataConnectorVersionListPagesTypeEnum
 
-typealias DataConnectorVersionListTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorVersionListTypeEnum
+typealias DataConnectorVersionListTypeEnum = dev.octri.showcase.intercom.models.DataConnectorVersionListTypeEnum
 
-typealias DataConnectorVersionStatusEnum =
-    dev.octri.showcase.intercom.models.DataConnectorVersionStatusEnum
+typealias DataConnectorVersionStatusEnum = dev.octri.showcase.intercom.models.DataConnectorVersionStatusEnum
 
-typealias DataConnectorVersionTypeEnum =
-    dev.octri.showcase.intercom.models.DataConnectorVersionTypeEnum
+typealias DataConnectorVersionTypeEnum = dev.octri.showcase.intercom.models.DataConnectorVersionTypeEnum
 
 typealias DataEvent = dev.octri.showcase.intercom.models.dataevents.DataEvent
 
@@ -229,18 +179,15 @@ typealias DateTimeDatetime = dev.octri.showcase.intercom.models.DateTimeDatetime
 
 typealias DeletedArticleObject = dev.octri.showcase.intercom.models.DeletedArticleObject
 
-typealias DeletedArticleObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedArticleObjectObjectEnum
+typealias DeletedArticleObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedArticleObjectObjectEnum
 
 typealias DeletedCollectionObject = dev.octri.showcase.intercom.models.DeletedCollectionObject
 
-typealias DeletedCollectionObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedCollectionObjectObjectEnum
+typealias DeletedCollectionObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedCollectionObjectObjectEnum
 
 typealias DeletedCompanyObject = dev.octri.showcase.intercom.models.DeletedCompanyObject
 
-typealias DeletedCompanyObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedCompanyObjectObjectEnum
+typealias DeletedCompanyObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedCompanyObjectObjectEnum
 
 typealias DeletedContact = dev.octri.showcase.intercom.models.DeletedContact
 
@@ -248,8 +195,7 @@ typealias DeletedContactList = dev.octri.showcase.intercom.models.DeletedContact
 
 typealias DeletedContactListPages = dev.octri.showcase.intercom.models.DeletedContactListPages
 
-typealias DeletedContactListPagesTypeEnum =
-    dev.octri.showcase.intercom.models.DeletedContactListPagesTypeEnum
+typealias DeletedContactListPagesTypeEnum = dev.octri.showcase.intercom.models.DeletedContactListPagesTypeEnum
 
 typealias DeletedContactListTypeEnum = dev.octri.showcase.intercom.models.DeletedContactListTypeEnum
 
@@ -259,32 +205,25 @@ typealias DeletedContactStatusEnum = dev.octri.showcase.intercom.models.DeletedC
 
 typealias DeletedContactTypeEnum = dev.octri.showcase.intercom.models.DeletedContactTypeEnum
 
-typealias DeletedConversationItem =
-    dev.octri.showcase.intercom.models.conversation.DeletedConversationItem
+typealias DeletedConversationItem = dev.octri.showcase.intercom.models.conversation.DeletedConversationItem
 
 typealias DeletedConversationList = dev.octri.showcase.intercom.models.DeletedConversationList
 
 typealias DeletedDataConnectorObject = dev.octri.showcase.intercom.models.DeletedDataConnectorObject
 
-typealias DeletedDataConnectorObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedDataConnectorObjectObjectEnum
+typealias DeletedDataConnectorObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedDataConnectorObjectObjectEnum
 
 typealias DeletedFolderObject = dev.octri.showcase.intercom.models.DeletedFolderObject
 
-typealias DeletedFolderObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedFolderObjectObjectEnum
+typealias DeletedFolderObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedFolderObjectObjectEnum
 
-typealias DeletedHelpCenterRedirectObject =
-    dev.octri.showcase.intercom.models.DeletedHelpCenterRedirectObject
+typealias DeletedHelpCenterRedirectObject = dev.octri.showcase.intercom.models.DeletedHelpCenterRedirectObject
 
-typealias DeletedHelpCenterRedirectObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedHelpCenterRedirectObjectObjectEnum
+typealias DeletedHelpCenterRedirectObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedHelpCenterRedirectObjectObjectEnum
 
-typealias DeletedInternalArticleObject =
-    dev.octri.showcase.intercom.models.DeletedInternalArticleObject
+typealias DeletedInternalArticleObject = dev.octri.showcase.intercom.models.DeletedInternalArticleObject
 
-typealias DeletedInternalArticleObjectObjectEnum =
-    dev.octri.showcase.intercom.models.DeletedInternalArticleObjectObjectEnum
+typealias DeletedInternalArticleObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedInternalArticleObjectObjectEnum
 
 typealias DeletedNoteObject = dev.octri.showcase.intercom.models.DeletedNoteObject
 
@@ -294,32 +233,25 @@ typealias DeletedObject = dev.octri.showcase.intercom.models.DeletedObject
 
 typealias DeletedObjectObjectEnum = dev.octri.showcase.intercom.models.DeletedObjectObjectEnum
 
-typealias DetachContactFromConversationRequest =
-    dev.octri.showcase.intercom.models.DetachContactFromConversationRequest
+typealias DetachContactFromConversationRequest = dev.octri.showcase.intercom.models.DetachContactFromConversationRequest
 
 typealias DynamicContent = dev.octri.showcase.intercom.models.dynamiccontent.DynamicContent
 
-typealias DynamicContentContentTypeEnum =
-    dev.octri.showcase.intercom.models.DynamicContentContentTypeEnum
+typealias DynamicContentContentTypeEnum = dev.octri.showcase.intercom.models.DynamicContentContentTypeEnum
 
-typealias DynamicContentCreateRequest =
-    dev.octri.showcase.intercom.models.DynamicContentCreateRequest
+typealias DynamicContentCreateRequest = dev.octri.showcase.intercom.models.DynamicContentCreateRequest
 
-typealias DynamicContentCreateRequestContentTypeEnum =
-    dev.octri.showcase.intercom.models.DynamicContentCreateRequestContentTypeEnum
+typealias DynamicContentCreateRequestContentTypeEnum = dev.octri.showcase.intercom.models.DynamicContentCreateRequestContentTypeEnum
 
 typealias DynamicContentList = dev.octri.showcase.intercom.models.DynamicContentList
 
 typealias DynamicContentListTypeEnum = dev.octri.showcase.intercom.models.DynamicContentListTypeEnum
 
-typealias DynamicContentUpdateRequest =
-    dev.octri.showcase.intercom.models.DynamicContentUpdateRequest
+typealias DynamicContentUpdateRequest = dev.octri.showcase.intercom.models.DynamicContentUpdateRequest
 
-typealias DynamicContentVariation =
-    dev.octri.showcase.intercom.models.dynamiccontent.DynamicContentVariation
+typealias DynamicContentVariation = dev.octri.showcase.intercom.models.dynamiccontent.DynamicContentVariation
 
-typealias DynamicContentVariationRequest =
-    dev.octri.showcase.intercom.models.DynamicContentVariationRequest
+typealias DynamicContentVariationRequest = dev.octri.showcase.intercom.models.DynamicContentVariationRequest
 
 typealias EmailAddressHeader = dev.octri.showcase.intercom.models.EmailAddressHeader
 
@@ -329,15 +261,13 @@ typealias EmailMessageMetadata = dev.octri.showcase.intercom.models.EmailMessage
 
 typealias EmailSetting = dev.octri.showcase.intercom.models.emails.EmailSetting
 
-typealias EnqueueCreateTicketChannelEnum =
-    dev.octri.showcase.intercom.models.EnqueueCreateTicketChannelEnum
+typealias EnqueueCreateTicketChannelEnum = dev.octri.showcase.intercom.models.EnqueueCreateTicketChannelEnum
 
 typealias Error2 = dev.octri.showcase.intercom.models.Error2
 
 typealias Error2ErrorsItem = dev.octri.showcase.intercom.models.Error2ErrorsItem
 
-typealias EscalateFinConversationResponseStatusEnum =
-    dev.octri.showcase.intercom.models.EscalateFinConversationResponseStatusEnum
+typealias EscalateFinConversationResponseStatusEnum = dev.octri.showcase.intercom.models.EscalateFinConversationResponseStatusEnum
 
 typealias EventDetails = dev.octri.showcase.intercom.models.EventDetails
 
@@ -357,32 +287,23 @@ typealias FinAgentAttachment = dev.octri.showcase.intercom.models.finagent.FinAg
 
 typealias FinAgentAttachmentTypeEnum = dev.octri.showcase.intercom.models.FinAgentAttachmentTypeEnum
 
-typealias FinAgentAttributeErrors =
-    dev.octri.showcase.intercom.models.finagent.FinAgentAttributeErrors
+typealias FinAgentAttributeErrors = dev.octri.showcase.intercom.models.finagent.FinAgentAttributeErrors
 
-typealias FinAgentAttributeErrorsConversation =
-    dev.octri.showcase.intercom.models.finagent.FinAgentAttributeErrorsConversation
+typealias FinAgentAttributeErrorsConversation = dev.octri.showcase.intercom.models.finagent.FinAgentAttributeErrorsConversation
 
-typealias FinAgentAttributeErrorsUser =
-    dev.octri.showcase.intercom.models.finagent.FinAgentAttributeErrorsUser
+typealias FinAgentAttributeErrorsUser = dev.octri.showcase.intercom.models.finagent.FinAgentAttributeErrorsUser
 
-typealias FinAgentConversationMetadata =
-    dev.octri.showcase.intercom.models.finagent.FinAgentConversationMetadata
+typealias FinAgentConversationMetadata = dev.octri.showcase.intercom.models.finagent.FinAgentConversationMetadata
 
-typealias FinAgentCsatRequestedEvent =
-    dev.octri.showcase.intercom.models.finagent.FinAgentCsatRequestedEvent
+typealias FinAgentCsatRequestedEvent = dev.octri.showcase.intercom.models.finagent.FinAgentCsatRequestedEvent
 
-typealias FinAgentCsatRequestedEventCsat =
-    dev.octri.showcase.intercom.models.finagent.FinAgentCsatRequestedEventCsat
+typealias FinAgentCsatRequestedEventCsat = dev.octri.showcase.intercom.models.finagent.FinAgentCsatRequestedEventCsat
 
-typealias FinAgentCsatRequestedEventCsatOptionsItem =
-    dev.octri.showcase.intercom.models.finagent.FinAgentCsatRequestedEventCsatOptionsItem
+typealias FinAgentCsatRequestedEventCsatOptionsItem = dev.octri.showcase.intercom.models.finagent.FinAgentCsatRequestedEventCsatOptionsItem
 
-typealias FinAgentCsatRequestedEventCsatOptionsItemKeyEnum =
-    dev.octri.showcase.intercom.models.FinAgentCsatRequestedEventCsatOptionsItemKeyEnum
+typealias FinAgentCsatRequestedEventCsatOptionsItemKeyEnum = dev.octri.showcase.intercom.models.FinAgentCsatRequestedEventCsatOptionsItemKeyEnum
 
-typealias FinAgentCsatRequestedEventEventNameEnum =
-    dev.octri.showcase.intercom.models.FinAgentCsatRequestedEventEventNameEnum
+typealias FinAgentCsatRequestedEventEventNameEnum = dev.octri.showcase.intercom.models.FinAgentCsatRequestedEventEventNameEnum
 
 typealias FinAgentMessage = dev.octri.showcase.intercom.models.finagent.FinAgentMessage
 
@@ -390,48 +311,35 @@ typealias FinAgentMessageAuthorEnum = dev.octri.showcase.intercom.models.FinAgen
 
 typealias FinAgentRepliedEvent = dev.octri.showcase.intercom.models.finagent.FinAgentRepliedEvent
 
-typealias FinAgentRepliedEventEventNameEnum =
-    dev.octri.showcase.intercom.models.FinAgentRepliedEventEventNameEnum
+typealias FinAgentRepliedEventEventNameEnum = dev.octri.showcase.intercom.models.FinAgentRepliedEventEventNameEnum
 
-typealias FinAgentRepliedEventMessage =
-    dev.octri.showcase.intercom.models.finagent.FinAgentRepliedEventMessage
+typealias FinAgentRepliedEventMessage = dev.octri.showcase.intercom.models.finagent.FinAgentRepliedEventMessage
 
-typealias FinAgentRepliedEventMessageAuthorEnum =
-    dev.octri.showcase.intercom.models.FinAgentRepliedEventMessageAuthorEnum
+typealias FinAgentRepliedEventMessageAuthorEnum = dev.octri.showcase.intercom.models.FinAgentRepliedEventMessageAuthorEnum
 
-typealias FinAgentRepliedEventMessageSourcesItem =
-    dev.octri.showcase.intercom.models.finagent.FinAgentRepliedEventMessageSourcesItem
+typealias FinAgentRepliedEventMessageSourcesItem = dev.octri.showcase.intercom.models.finagent.FinAgentRepliedEventMessageSourcesItem
 
-typealias FinAgentRepliedEventMessageSourcesItemTypeEnum =
-    dev.octri.showcase.intercom.models.FinAgentRepliedEventMessageSourcesItemTypeEnum
+typealias FinAgentRepliedEventMessageSourcesItemTypeEnum = dev.octri.showcase.intercom.models.FinAgentRepliedEventMessageSourcesItemTypeEnum
 
-typealias FinAgentRepliedEventStatusEnum =
-    dev.octri.showcase.intercom.models.FinAgentRepliedEventStatusEnum
+typealias FinAgentRepliedEventStatusEnum = dev.octri.showcase.intercom.models.FinAgentRepliedEventStatusEnum
 
-typealias FinAgentReplyChunkEvent =
-    dev.octri.showcase.intercom.models.finagent.FinAgentReplyChunkEvent
+typealias FinAgentReplyChunkEvent = dev.octri.showcase.intercom.models.finagent.FinAgentReplyChunkEvent
 
-typealias FinAgentReplyChunkEventEventNameEnum =
-    dev.octri.showcase.intercom.models.FinAgentReplyChunkEventEventNameEnum
+typealias FinAgentReplyChunkEventEventNameEnum = dev.octri.showcase.intercom.models.FinAgentReplyChunkEventEventNameEnum
 
-typealias FinAgentReplyChunkEventStatusEnum =
-    dev.octri.showcase.intercom.models.FinAgentReplyChunkEventStatusEnum
+typealias FinAgentReplyChunkEventStatusEnum = dev.octri.showcase.intercom.models.FinAgentReplyChunkEventStatusEnum
 
-typealias FinAgentStatusUpdatedEvent =
-    dev.octri.showcase.intercom.models.finagent.FinAgentStatusUpdatedEvent
+typealias FinAgentStatusUpdatedEvent = dev.octri.showcase.intercom.models.finagent.FinAgentStatusUpdatedEvent
 
-typealias FinAgentStatusUpdatedEventEventNameEnum =
-    dev.octri.showcase.intercom.models.FinAgentStatusUpdatedEventEventNameEnum
+typealias FinAgentStatusUpdatedEventEventNameEnum = dev.octri.showcase.intercom.models.FinAgentStatusUpdatedEventEventNameEnum
 
-typealias FinAgentStatusUpdatedEventStatusEnum =
-    dev.octri.showcase.intercom.models.FinAgentStatusUpdatedEventStatusEnum
+typealias FinAgentStatusUpdatedEventStatusEnum = dev.octri.showcase.intercom.models.FinAgentStatusUpdatedEventStatusEnum
 
 typealias FinAgentUser = dev.octri.showcase.intercom.models.finagent.FinAgentUser
 
 typealias Folder = dev.octri.showcase.intercom.models.folders.Folder
 
-typealias GetReportingData2ParameterEnum =
-    dev.octri.showcase.intercom.models.GetReportingData2ParameterEnum
+typealias GetReportingData2ParameterEnum = dev.octri.showcase.intercom.models.GetReportingData2ParameterEnum
 
 typealias GroupContent = dev.octri.showcase.intercom.models.GroupContent
 
@@ -439,8 +347,7 @@ typealias GroupContentTypeEnum = dev.octri.showcase.intercom.models.GroupContent
 
 typealias GroupTranslatedContent = dev.octri.showcase.intercom.models.GroupTranslatedContent
 
-typealias GroupTranslatedContentTypeEnum =
-    dev.octri.showcase.intercom.models.GroupTranslatedContentTypeEnum
+typealias GroupTranslatedContentTypeEnum = dev.octri.showcase.intercom.models.GroupTranslatedContentTypeEnum
 
 typealias HandlingEvent = dev.octri.showcase.intercom.models.HandlingEvent
 
@@ -458,11 +365,9 @@ typealias HelpCenterRedirect = dev.octri.showcase.intercom.models.helpcenter.Hel
 
 typealias HelpCenterRedirectList = dev.octri.showcase.intercom.models.HelpCenterRedirectList
 
-typealias HelpCenterRedirectListTypeEnum =
-    dev.octri.showcase.intercom.models.HelpCenterRedirectListTypeEnum
+typealias HelpCenterRedirectListTypeEnum = dev.octri.showcase.intercom.models.HelpCenterRedirectListTypeEnum
 
-typealias HelpCenterRedirectTargetTypeEnum =
-    dev.octri.showcase.intercom.models.HelpCenterRedirectTargetTypeEnum
+typealias HelpCenterRedirectTargetTypeEnum = dev.octri.showcase.intercom.models.HelpCenterRedirectTargetTypeEnum
 
 typealias HelpCenterRedirectTypeEnum = dev.octri.showcase.intercom.models.HelpCenterRedirectTypeEnum
 
@@ -470,8 +375,7 @@ typealias HitlEvent = dev.octri.showcase.intercom.models.HitlEvent
 
 typealias HitlEventData = dev.octri.showcase.intercom.models.HitlEventData
 
-typealias HitlEventDataApprovedDraftTypeEnum =
-    dev.octri.showcase.intercom.models.HitlEventDataApprovedDraftTypeEnum
+typealias HitlEventDataApprovedDraftTypeEnum = dev.octri.showcase.intercom.models.HitlEventDataApprovedDraftTypeEnum
 
 typealias HitlEventDataChannelEnum = dev.octri.showcase.intercom.models.HitlEventDataChannelEnum
 
@@ -489,23 +393,17 @@ typealias InternalArticle = dev.octri.showcase.intercom.models.articles.Internal
 
 typealias InternalArticleList = dev.octri.showcase.intercom.models.InternalArticleList
 
-typealias InternalArticleListItem =
-    dev.octri.showcase.intercom.models.internalarticles.InternalArticleListItem
+typealias InternalArticleListItem = dev.octri.showcase.intercom.models.internalarticles.InternalArticleListItem
 
-typealias InternalArticleListItemTypeEnum =
-    dev.octri.showcase.intercom.models.InternalArticleListItemTypeEnum
+typealias InternalArticleListItemTypeEnum = dev.octri.showcase.intercom.models.InternalArticleListItemTypeEnum
 
-typealias InternalArticleListTypeEnum =
-    dev.octri.showcase.intercom.models.InternalArticleListTypeEnum
+typealias InternalArticleListTypeEnum = dev.octri.showcase.intercom.models.InternalArticleListTypeEnum
 
-typealias InternalArticleSearchResponse =
-    dev.octri.showcase.intercom.models.internalarticles.InternalArticleSearchResponse
+typealias InternalArticleSearchResponse = dev.octri.showcase.intercom.models.internalarticles.InternalArticleSearchResponse
 
-typealias InternalArticleSearchResponseData =
-    dev.octri.showcase.intercom.models.internalarticles.InternalArticleSearchResponseData
+typealias InternalArticleSearchResponseData = dev.octri.showcase.intercom.models.internalarticles.InternalArticleSearchResponseData
 
-typealias InternalArticleSearchResponseTypeEnum =
-    dev.octri.showcase.intercom.models.InternalArticleSearchResponseTypeEnum
+typealias InternalArticleSearchResponseTypeEnum = dev.octri.showcase.intercom.models.InternalArticleSearchResponseTypeEnum
 
 typealias IpAllowlist = dev.octri.showcase.intercom.models.IpAllowlist
 
@@ -525,22 +423,16 @@ typealias LinkedObjectListTypeEnum = dev.octri.showcase.intercom.models.LinkedOb
 
 typealias LinkedObjectTypeEnum = dev.octri.showcase.intercom.models.LinkedObjectTypeEnum
 
-typealias ListContactMergeHistoryParameterEnum =
-    dev.octri.showcase.intercom.models.ListContactMergeHistoryParameterEnum
+typealias ListContactMergeHistoryParameterEnum = dev.octri.showcase.intercom.models.ListContactMergeHistoryParameterEnum
 
-typealias ListDataAttributesParameterEnum =
-    dev.octri.showcase.intercom.models.ListDataAttributesParameterEnum
+typealias ListDataAttributesParameterEnum = dev.octri.showcase.intercom.models.ListDataAttributesParameterEnum
 
-typealias ListDataConnectorExecutionResultsParameterEnum =
-    dev.octri.showcase.intercom.models.ListDataConnectorExecutionResultsParameterEnum
+typealias ListDataConnectorExecutionResultsParameterEnum = dev.octri.showcase.intercom.models.ListDataConnectorExecutionResultsParameterEnum
 
-typealias ListDataConnectorExecutionResultsParameterEnuma031c90d =
-    dev.octri.showcase.intercom.models.ListDataConnectorExecutionResultsParameterEnuma031c90d
+typealias ListDataConnectorExecutionResultsParameterEnuma031c90d = dev.octri.showcase.intercom.models.ListDataConnectorExecutionResultsParameterEnuma031c90d
 
-typealias ListDataConnectorExecutionResultsParameterEnumce384deb =
-    dev.octri.showcase.intercom.models.ListDataConnectorExecutionResultsParameterEnumce384deb
+typealias ListDataConnectorExecutionResultsParameterEnumce384deb = dev.octri.showcase.intercom.models.ListDataConnectorExecutionResultsParameterEnumce384deb
 
-typealias ListFoldersResponseTypeEnum =
-    dev.octri.showcase.intercom.models.ListFoldersResponseTypeEnum
+typealias ListFoldersResponseTypeEnum = dev.octri.showcase.intercom.models.ListFoldersResponseTypeEnum
 
 typealias LongDatetime = dev.octri.showcase.intercom.models.LongDatetime

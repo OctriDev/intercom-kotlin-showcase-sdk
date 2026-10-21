@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.intercom.models
 
-/** deleted conversation object */
+/**
+ * deleted conversation object
+ */
 data class ConversationDeleted(
-    /** The unique identifier for the conversation. */
+    /**
+     * The unique identifier for the conversation.
+     */
     val id: String? = null,
-    /** always conversation */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: ConversationDeletedObjectEnum? = null,
-    /** Whether the conversation is deleted or not. */
-    val deleted: Boolean? = null,
+    /**
+     * always conversation
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: ConversationDeletedObjectEnum? = null,
+    /**
+     * Whether the conversation is deleted or not.
+     */
+    val deleted: Boolean? = null
 )

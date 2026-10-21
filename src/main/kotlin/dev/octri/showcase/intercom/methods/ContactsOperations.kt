@@ -16,11 +16,11 @@ import dev.octri.showcase.intercom.ContactAttachedCompanies
 import dev.octri.showcase.intercom.ContactBlocked
 import dev.octri.showcase.intercom.ContactDeleted
 import dev.octri.showcase.intercom.ContactList
+import dev.octri.showcase.intercom.ContactsBulkJob
 import dev.octri.showcase.intercom.ContactSearchRequestQuery
 import dev.octri.showcase.intercom.ContactSearchRequestSort
 import dev.octri.showcase.intercom.ContactSegments
 import dev.octri.showcase.intercom.ContactUnarchived
-import dev.octri.showcase.intercom.ContactsBulkJob
 import dev.octri.showcase.intercom.CreateContactRequest
 import dev.octri.showcase.intercom.DeletedContactList
 import dev.octri.showcase.intercom.Error2
@@ -39,896 +39,336 @@ import dev.octri.showcase.intercom.Validation
 
 internal object ContactsListContactsCompaniesOperation {
     /**
-     * Lists the companies associated with a specific contact. Use the contact identifier to
-     * retrieve its attached companies; the response includes pagination metadata.
+     * Lists the companies associated with a specific contact. Use the contact identifier to retrieve its attached companies; the response includes pagination metadata.
      *
      * You can fetch a list of companies that are associated to a contact.
      *
-     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param contactId The unique identifier for the contact which is given by
+     *   Intercom
      */
-    fun listContactsCompanies(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactAttachedCompanies {
-        return SdkClient.request<ContactAttachedCompanies>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/companies",
-                    config = clientConfig,
-                    operationId = "listContactsCompanies",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listContactsCompanies(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactAttachedCompanies {
+        return SdkClient.request<ContactAttachedCompanies>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/companies", config = clientConfig, operationId = "listContactsCompanies", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 }
 
 internal object ContactsListContactsSegmentsOperation {
     /**
-     * Lists the segments associated with a contact. Use the `contact_id` path parameter to identify
-     * the contact whose segment associations you want to retrieve.
+     * Lists the segments associated with a contact. Use the `contact_id` path parameter to identify the contact whose segment associations you want to retrieve.
      *
      * You can fetch a list of segments that are associated to a contact.
      *
-     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param contactId The unique identifier for the contact which is given by
+     *   Intercom
      */
-    fun listContactsSegments(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactSegments {
-        return SdkClient.request<ContactSegments>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/segments",
-                    config = clientConfig,
-                    operationId = "listContactsSegments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listContactsSegments(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactSegments {
+        return SdkClient.request<ContactSegments>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/segments", config = clientConfig, operationId = "listContactsSegments", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 }
 
 internal object ContactsListContactsSubscriptionsOperation {
     /**
-     * Lists the subscription types associated with a contact where the contact has explicitly set a
-     * preference. Use this endpoint to retrieve both opt-in and opt-out choices; subscription types
-     * in their default state are not included.
+     * Lists the subscription types associated with a contact where the contact has explicitly set a preference. Use this endpoint to retrieve both opt-in and opt-out choices; subscription types in their default state are not included.
      *
-     * You can fetch a list of subscription types that are attached to a contact. These can be
-     * subscriptions that a user has 'opted-in' to or has 'opted-out' from, depending on the
-     * subscription type. This will return a list of Subscription Type objects that the contact is
-     * associated with. The data property will show a combined list of: 1.Opt-out subscription types
-     * that the user has opted-out from. 2.Opt-in subscription types that the user has opted-in to
-     * receiving. **Note:** This…
+     * You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has 'opted-in' to or has 'opted-out' from, depending on the subscription type. This will return a list of Subscription Type objects that the contact is associated with. The data property will show a combined list of: 1.Opt-out subscription types that the user has opted-out from. 2.Opt-in subscription types that the user has opted-in to receiving. **Note:** This…
      *
-     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param contactId The unique identifier for the contact which is given by
+     *   Intercom
      */
-    fun listContactsSubscriptions(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): SubscriptionTypeList {
-        return SdkClient.request<SubscriptionTypeList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/subscriptions",
-                    config = clientConfig,
-                    operationId = "listContactsSubscriptions",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listContactsSubscriptions(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionTypeList {
+        return SdkClient.request<SubscriptionTypeList>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/subscriptions", config = clientConfig, operationId = "listContactsSubscriptions", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 }
 
 internal object ContactsListContactsTagsOperation {
     /**
-     * Lists the tags attached to a contact. Use the `contact_id` path parameter to retrieve the
-     * contact's tag associations.
+     * Lists the tags attached to a contact. Use the `contact_id` path parameter to retrieve the contact's tag associations.
      *
      * You can fetch a list of all tags that are attached to a specific contact.
      *
-     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param contactId The unique identifier for the contact which is given by
+     *   Intercom
      */
-    fun listContactsTags(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): TagList {
-        return SdkClient.request<TagList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/tags",
-                    config = clientConfig,
-                    operationId = "listContactsTags",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listContactsTags(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TagList {
+        return SdkClient.request<TagList>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/tags", config = clientConfig, operationId = "listContactsTags", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 }
 
 internal object ContactsListDeletedContactsOperation {
     /**
-     * Lists contacts in the workspace that are no longer active, including their status and
-     * identifiers that can help you locate them for recovery or deletion. Use `page` and `per_page`
-     * to paginate the results.
+     * Lists contacts in the workspace that are no longer active, including their status and identifiers that can help you locate them for recovery or deletion. Use `page` and `per_page` to paginate the results.
      *
-     * Fetch a paginated list of the contacts in your workspace that are no longer active, so you
-     * can recover ones whose `id`, `email`, or `external_id` you no longer have and then
-     * permanently delete them. Each entry carries a `status` describing why the contact is
-     * inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.
-     * `merged_into_id` is present only when `status` is `merged`, and `external_id` and `email` are
-     * `null` for `permanently_deleted`…
+     * Fetch a paginated list of the contacts in your workspace that are no longer active, so you can recover ones whose `id`, `email`, or `external_id` you no longer have and then permanently delete them. Each entry carries a `status` describing why the contact is inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`. `merged_into_id` is present only when `status` is `merged`, and `external_id` and `email` are `null` for `permanently_deleted`…
      *
-     * @param perPage The number of results per page. Defaults to `10`, with a maximum of `150`.
+     * @param perPage The number of results per page. Defaults to `10`, with a
+     *   maximum of `150`.
      * @param page The page of results to fetch. Defaults to `1`.
      */
-    fun listDeletedContacts(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        page: Long? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedContactList {
+    fun listDeletedContacts(clientConfig: ClientConfig, perPage: Long? = null, page: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedContactList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 150.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 150.0))
+}
 
         if (page != null) {
             Validation.validateRange("page", page, Validation.RangeOpts(min = 1.0))
-        }
+}
 
-        return SdkClient.request<DeletedContactList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/deleted",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "page" to SdkClient.queryValue(page, "form", true),
-                        ),
-                    operationId = "listDeletedContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<DeletedContactList>(SdkClient.RequestSpec("GET", "/contacts/deleted", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "page" to SdkClient.queryValue(page, "form", true)), operationId = "listDeletedContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsUpdateContactOperation {
     /**
-     * Replaces the supplied fields on an existing contact, including a user or lead, and can update
-     * custom object associations. Send only the fields you want to change; when setting
-     * `email_verified`, include `email` in the same request. Use `include_merge_history` to request
-     * merge history for contacts with a `user` role.
+     * Replaces the supplied fields on an existing contact, including a user or lead, and can update custom object associations. Send only the fields you want to change; when setting `email_verified`, include `email` in the same request. Use `include_merge_history` to request merge history for contacts with a `user` role.
      *
-     * You can update an existing contact (ie. user or lead). {% admonition type="info" %} This
-     * endpoint handles both **contact updates** and **custom object associations**. See _`update a
-     * contact with an association to a custom object instance`_ in the request/response examples to
-     * see the custom object association format. {% /admonition %}
+     * You can update an existing contact (ie. user or lead). {% admonition type="info" %} This endpoint handles both **contact updates** and **custom object associations**. See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format. {% /admonition %}
      *
      * @param contactId id
-     * @param includeMergeHistory Pass `true` to include the contact's merge history in the
-     *   response. Only returned for contacts with a `user` role.
+     * @param includeMergeHistory Pass `true` to include the contact's merge history
+     *   in the response. Only returned for contacts with a `user` role.
      */
-    fun updateContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        includeMergeHistory: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        body: UpdateContactRequest? = null,
-        options: RequestOptions? = null,
-    ): Contacts.UpdateContactResponse {
-        return SdkClient.request<Contacts.UpdateContactResponse>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "include_merge_history" to
-                                SdkClient.queryValue(includeMergeHistory, "form", true)
-                        ),
-                    body = body,
-                    operationId = "updateContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateContact(clientConfig: ClientConfig, contactId: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, body: UpdateContactRequest? = null, options: RequestOptions? = null): Contacts.UpdateContactResponse {
+        return SdkClient.request<Contacts.UpdateContactResponse>(SdkClient.RequestSpec("PUT", "/contacts/${SdkClient.encodePathSegment(contactId)}", config = clientConfig, query = mapOf("include_merge_history" to
+    SdkClient.queryValue(includeMergeHistory, "form", true)), body = body, operationId = "updateContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsShowContactOperation {
     /**
-     * Retrieves a contact by its unique contact ID. Use `include_merge_history` to request merge
-     * history for contacts with a `user` role; merged contacts return a canonical-contact link
-     * instead of the original record.
+     * Retrieves a contact by its unique contact ID. Use `include_merge_history` to request merge history for contacts with a `user` role; merged contacts return a canonical-contact link instead of the original record.
      *
-     * You can fetch the details of a single contact. {% admonition type="info" name="Merged
-     * contacts return 410 Gone" %} If a contact has been merged into another contact via the Merge
-     * endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410
-     * Gone** with a `Link` header pointing to the canonical (merged-into) contact. **Response
-     * headers:** ``` Link: </contacts/{canonical_id}>; rel="canonical" ``` **Response
-     * body:** ```json { "type": "error.list",…
+     * You can fetch the details of a single contact. {% admonition type="info" name="Merged contacts return 410 Gone" %} If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. **Response headers:** ``` Link: </contacts/{canonical_id}>; rel="canonical" ``` **Response body:** ```json { "type": "error.list",…
      *
      * @param contactId contact_id
-     * @param includeMergeHistory Pass `true` to include the contact's merge history in the
-     *   response. Only returned for contacts with a `user` role.
+     * @param includeMergeHistory Pass `true` to include the contact's merge history
+     *   in the response. Only returned for contacts with a `user` role.
      */
-    fun showContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        includeMergeHistory: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Contacts.ShowContactResponse {
-        return SdkClient.request<Contacts.ShowContactResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "include_merge_history" to
-                                SdkClient.queryValue(includeMergeHistory, "form", true)
-                        ),
-                    operationId = "showContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "410" to Error2::class.java),
-                )
-            )
-            .data
+    fun showContact(clientConfig: ClientConfig, contactId: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Contacts.ShowContactResponse {
+        return SdkClient.request<Contacts.ShowContactResponse>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}", config = clientConfig, query = mapOf("include_merge_history" to
+    SdkClient.queryValue(includeMergeHistory, "form", true)), operationId = "showContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "410" to Error2::class.java))).data
     }
 }
 
 internal object ContactsDeleteContactOperation {
     /**
-     * Deletes a single contact from the workspace. Use the contact's ID to identify the record to
-     * remove. The response includes a contact reference and indicates whether the contact was
-     * deleted.
+     * Deletes a single contact from the workspace. Use the contact's ID to identify the record to remove. The response includes a contact reference and indicates whether the contact was deleted.
      *
      * You can delete a single contact.
      *
      * @param contactId contact_id
      */
-    fun deleteContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactDeleted {
-        return SdkClient.request<ContactDeleted>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}",
-                    config = clientConfig,
-                    operationId = "deleteContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun deleteContact(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactDeleted {
+        return SdkClient.request<ContactDeleted>(SdkClient.RequestSpec("DELETE", "/contacts/${SdkClient.encodePathSegment(contactId)}", config = clientConfig, operationId = "deleteContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsMergeContactOperation {
     /**
-     * Merges a contact with the `lead` role into a contact with the `user` role. Supply the source
-     * contact in `from` and the destination contact in `into`; set `skip_duplicate_validation` to
-     * true to merge contacts without a shared email or phone. The source contact is removed from
-     * the active contact list after the merge, so update stored IDs to the destination contact's
-     * ID.
+     * Merges a contact with the `lead` role into a contact with the `user` role. Supply the source contact in `from` and the destination contact in `into`; set `skip_duplicate_validation` to true to merge contacts without a shared email or phone. The source contact is removed from the active contact list after the merge, so update stored IDs to the destination contact's ID.
      *
-     * You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`. {%
-     * admonition type="warning" name="Merged contacts are not retrievable via the API" %} Once a
-     * merge is completed, the source contact (`from`) is permanently removed from the active
-     * contact list. This means: - **GET /contacts/{id}** — Requesting the source contact by its
-     * original ID will return a `404 Not Found` error. - **POST /contacts/search** — The source
-     * contact will not appear in…
+     * You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`. {% admonition type="warning" name="Merged contacts are not retrievable via the API" %} Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means: - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error. - **POST /contacts/search** — The source contact will not appear in…
      *
-     * @param from The unique identifier for the contact to merge away from. Must be a lead.
-     * @param into The unique identifier for the contact to merge into. Must be a user.
-     * @param includeMergeHistory Pass `true` to include the merge history of the resulting contact
-     *   in the response. Only returned for contacts with a `user` role.
-     * @param skipDuplicateValidation Set to `true` to merge two contacts that are not duplicates
-     *   (they share no matching email or phone).
+     * @param from The unique identifier for the contact to merge away from. Must be
+     *   a lead.
+     * @param into The unique identifier for the contact to merge into. Must be a
+     *   user.
+     * @param includeMergeHistory Pass `true` to include the merge history of the
+     *   resulting contact in the response. Only returned for contacts with a `user`
+     *   role.
+     * @param skipDuplicateValidation Set to `true` to merge two contacts that are
+     *   not duplicates (they share no matching email or phone).
      */
-    fun mergeContact(
-        clientConfig: ClientConfig,
-        from: String,
-        into: String,
-        includeMergeHistory: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        skipDuplicateValidation: Boolean? = null,
-        options: RequestOptions? = null,
-    ): Contacts.MergeContactResponse {
-        return SdkClient.request<Contacts.MergeContactResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/merge",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "include_merge_history" to
-                                SdkClient.queryValue(includeMergeHistory, "form", true)
-                        ),
-                    body =
-                        SdkClient.bodyMap(
-                            "from" to (from),
-                            "into" to (into),
-                            "skip_duplicate_validation" to
-                                (SdkClient.omitIfNull(skipDuplicateValidation)),
-                        ),
-                    operationId = "mergeContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun mergeContact(clientConfig: ClientConfig, from: String, into: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, skipDuplicateValidation: Boolean? = null, options: RequestOptions? = null): Contacts.MergeContactResponse {
+        return SdkClient.request<Contacts.MergeContactResponse>(SdkClient.RequestSpec("POST", "/contacts/merge", config = clientConfig, query = mapOf("include_merge_history" to
+    SdkClient.queryValue(includeMergeHistory, "form", true)), body = SdkClient.bodyMap("from" to (from), "into" to (into), "skip_duplicate_validation" to
+    (SdkClient.omitIfNull(skipDuplicateValidation))), operationId = "mergeContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsPreviewMergeContactOperation {
     /**
-     * Previews a contact merge without changing any contact data. Supply the source and destination
-     * IDs in `from` and `into`, and optionally set `custom_attribute_names` to include selected
-     * custom attributes in the preview. The result reports whether the merge is allowed and
-     * provides either a summary of changes or reasons it is not allowed.
+     * Previews a contact merge without changing any contact data. Supply the source and destination IDs in `from` and `into`, and optionally set `custom_attribute_names` to include selected custom attributes in the preview. The result reports whether the merge is allowed and provides either a summary of changes or reasons it is not allowed.
      *
-     * Preview the result of merging one contact into another without applying the merge. This is a
-     * read-only dry run: it reports whether the merge is allowed and, if so, exactly what would
-     * change, **without modifying any data**. Send the same `from` and `into` contact IDs you would
-     * pass to Merge two contacts. You can merge a contact with a `role` of `lead` into a contact
-     * with a `role` of `user`. You can optionally pass `custom_attribute_names` to include specific
-     * custom attributes…
+     * Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**. Send the same `from` and `into` contact IDs you would pass to Merge two contacts. You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`. You can optionally pass `custom_attribute_names` to include specific custom attributes…
      *
-     * @param from The unique identifier for the contact to merge away from (the source contact).
-     * @param into The unique identifier for the contact to merge into (the destination contact).
-     *   Must have a `role` of `user`.
-     * @param skipDuplicateValidation When `true`, previews the merge even if the contacts don't
-     *   share a common identifier. Must be a JSON boolean; the string `"true"` does not bypass the
-     *   check. Defaults to false.
-     * @param customAttributeNames Custom attribute names to include in the previewed attribute
-     *   changes.
+     * @param from The unique identifier for the contact to merge away from (the
+     *   source contact).
+     * @param into The unique identifier for the contact to merge into (the
+     *   destination contact). Must have a `role` of `user`.
+     * @param skipDuplicateValidation When `true`, previews the merge even if the
+     *   contacts don't share a common identifier. Must be a JSON boolean; the string
+     *   `"true"` does not bypass the check. Defaults to false.
+     * @param customAttributeNames Custom attribute names to include in the previewed
+     *   attribute changes.
      */
-    fun previewMergeContact(
-        clientConfig: ClientConfig,
-        from: String,
-        into: String,
-        intercomVersion: IntercomVersion? = null,
-        skipDuplicateValidation: Boolean? = null,
-        customAttributeNames: List<String>? = null,
-        options: RequestOptions? = null,
-    ): MergePreviewResponse {
-        return SdkClient.request<MergePreviewResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/merge/preview",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "from" to (from),
-                            "into" to (into),
-                            "skip_duplicate_validation" to
-                                (SdkClient.omitIfNull(skipDuplicateValidation)),
-                            "custom_attribute_names" to
-                                (SdkClient.omitIfNull(customAttributeNames)),
-                        ),
-                    operationId = "previewMergeContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun previewMergeContact(clientConfig: ClientConfig, from: String, into: String, intercomVersion: IntercomVersion? = null, skipDuplicateValidation: Boolean? = null, customAttributeNames: List<String>? = null, options: RequestOptions? = null): MergePreviewResponse {
+        return SdkClient.request<MergePreviewResponse>(SdkClient.RequestSpec("POST", "/contacts/merge/preview", config = clientConfig, body = SdkClient.bodyMap("from" to (from), "into" to (into), "skip_duplicate_validation" to
+    (SdkClient.omitIfNull(skipDuplicateValidation)), "custom_attribute_names" to
+    (SdkClient.omitIfNull(customAttributeNames))), operationId = "previewMergeContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsSearchContactsOperation {
     /**
-     * Searches contacts by matching their attributes against filters in the request body. Use
-     * `query` to define a single filter or combine filters with `AND` and `OR`, and use
-     * `pagination` to retrieve results in pages. Timestamp and date filters are evaluated by
-     * calendar day in the workspace's timezone, and recently created contacts may take a few
-     * minutes to appear.
+     * Searches contacts by matching their attributes against filters in the request body. Use `query` to define a single filter or combine filters with `AND` and `OR`, and use `pagination` to retrieve results in pages. Timestamp and date filters are evaluated by calendar day in the workspace's timezone, and recently created contacts may take a few minutes to appear.
      *
-     * You can search for multiple contacts by the value of their attributes in order to fetch
-     * exactly who you want. To search for contacts, you need to send a `POST` request to
-     * `api.intercom.io This will accept a query object in the body which will define your filters
-     * in order to search for contacts. {% admonition type="warning" name="Optimizing search
-     * queries" %} Search queries can be complex, so optimizing them can help the performance of
-     * your search. Use the `AND` and `OR`…
+     * You can search for multiple contacts by the value of their attributes in order to fetch exactly who you want. To search for contacts, you need to send a `POST` request to `api.intercom.io This will accept a query object in the body which will define your filters in order to search for contacts. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your search. Use the `AND` and `OR`…
      *
      * @param query Required API value serialized in the `query` wire field.
-     * @param includeMergeHistory Pass `true` to include a `merge_history` array on each contact in
-     *   the response. Only returned for contacts with a `user` role.
-     * @param pagination Optional object value serialized in the `pagination` wire field.
+     * @param includeMergeHistory Pass `true` to include a `merge_history` array on
+     *   each contact in the response. Only returned for contacts with a `user` role.
+     * @param pagination Optional object value serialized in the `pagination` wire
+     *   field.
      * @param sort An optional object to sort the results by.
      */
-    fun searchContacts(
-        clientConfig: ClientConfig,
-        query: ContactSearchRequestQuery,
-        includeMergeHistory: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
-        sort: Contacts.ContactSearchRequestSort? = null,
-        options: RequestOptions? = null,
-    ): ContactList {
-        return SdkClient.request<ContactList>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/search",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "include_merge_history" to
-                                SdkClient.queryValue(includeMergeHistory, "form", true)
-                        ),
-                    body =
-                        SdkClient.bodyMap(
-                            "query" to (query),
-                            "pagination" to (pagination ?: SdkClient.SdkOptional.Omitted),
-                            "sort" to (SdkClient.omitIfNull(sort)),
-                        ),
-                    operationId = "searchContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun searchContacts(clientConfig: ClientConfig, query: ContactSearchRequestQuery, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, sort: Contacts.ContactSearchRequestSort? = null, options: RequestOptions? = null): ContactList {
+        return SdkClient.request<ContactList>(SdkClient.RequestSpec("POST", "/contacts/search", config = clientConfig, query = mapOf("include_merge_history" to
+    SdkClient.queryValue(includeMergeHistory, "form", true)), body = SdkClient.bodyMap("query" to (query), "pagination" to
+    (pagination ?: SdkClient.SdkOptional.Omitted), "sort" to (SdkClient.omitIfNull(sort))), operationId = "searchContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsListContactActivitiesOperation {
     /**
-     * Lists contact activity events for the workspace, including contact creation, role updates,
-     * merges, and deletions. Results are ordered from oldest to newest. Use `starting_after` to
-     * continue from a previous page and `per_page` to control the page size, from 1 to 150.
+     * Lists contact activity events for the workspace, including contact creation, role updates, merges, and deletions. Results are ordered from oldest to newest. Use `starting_after` to continue from a previous page and `per_page` to control the page size, from 1 to 150.
      *
-     * You can fetch a list of contact activity events for your workspace, such as when contacts are
-     * created, role updated, merged, or deleted. Events are returned oldest first. {% admonition
-     * type="warning" name="Pagination" %} You can use pagination to limit the number of results
-     * returned. The default is `50` results per page, with a maximum of `150`. See the pagination
-     * section for more details on how to use the `starting_after` param. {% /admonition %}
+     * You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first. {% admonition type="warning" name="Pagination" %} You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`. See the pagination section for more details on how to use the `starting_after` param. {% /admonition %}
      *
-     * @param perPage The number of results to return per page. Defaults to 50, minimum 1,
-     *   maximum 150.
-     * @param startingAfter The cursor value from `pages.next.starting_after` in a previous
-     *   response. Used to paginate through results.
+     * @param perPage The number of results to return per page. Defaults to 50,
+     *   minimum 1, maximum 150.
+     * @param startingAfter The cursor value from `pages.next.starting_after` in a
+     *   previous response. Used to paginate through results.
      */
-    fun listContactActivities(
-        clientConfig: ClientConfig,
-        perPage: Long? = null,
-        startingAfter: String? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactActivityList {
+    fun listContactActivities(clientConfig: ClientConfig, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactActivityList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 150.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 150.0))
+}
 
-        return SdkClient.request<ContactActivityList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/activities",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "starting_after" to SdkClient.queryValue(startingAfter, "form", true),
-                        ),
-                    operationId = "listContactActivities",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<ContactActivityList>(SdkClient.RequestSpec("GET", "/contacts/activities", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "starting_after" to
+    SdkClient.queryValue(startingAfter, "form", true)), operationId = "listContactActivities", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsListContactsOperation {
     /**
-     * Lists contacts in the workspace, including users and leads. Contacts merged into other
-     * contacts are excluded; only the destination contact remains in the list. Results are
-     * paginated, with 10 contacts per page by default and a maximum of 150 per page.
+     * Lists contacts in the workspace, including users and leads. Contacts merged into other contacts are excluded; only the destination contact remains in the list. Results are paginated, with 10 contacts per page by default and a maximum of 150 per page.
      *
-     * You can fetch a list of all contacts (ie. users or leads) in your workspace. {% admonition
-     * type="info" name="Merged contacts" %} Contacts that have been merged (via POST
-     * /contacts/merge) will not appear in list results. Only the target contact from the merge
-     * remains accessible. {% /admonition %} {% admonition type="warning" name="Pagination" %} You
-     * can use pagination to limit the number of results returned. The default is `10` results per
-     * page, with a maximum of `150`. See…
+     * You can fetch a list of all contacts (ie. users or leads) in your workspace. {% admonition type="info" name="Merged contacts" %} Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible. {% /admonition %} {% admonition type="warning" name="Pagination" %} You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`. See…
      *
-     * @param includeMergeHistory Pass `true` to include a `merge_history` array on each contact in
-     *   the response. Only returned for contacts with a `user` role.
+     * @param includeMergeHistory Pass `true` to include a `merge_history` array on
+     *   each contact in the response. Only returned for contacts with a `user` role.
      */
-    fun listContacts(
-        clientConfig: ClientConfig,
-        includeMergeHistory: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactList {
-        return SdkClient.request<ContactList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "include_merge_history" to
-                                SdkClient.queryValue(includeMergeHistory, "form", true)
-                        ),
-                    operationId = "listContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listContacts(clientConfig: ClientConfig, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactList {
+        return SdkClient.request<ContactList>(SdkClient.RequestSpec("GET", "/contacts", config = clientConfig, query = mapOf("include_merge_history" to
+    SdkClient.queryValue(includeMergeHistory, "form", true)), operationId = "listContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsCreateContactOperation {
     /**
-     * Creates a new contact, such as a user or lead. Provide at least one of `email`,
-     * `external_id`, or `role` to identify the contact, and include `email` whenever you set
-     * `email_verified`. The response contains the created contact object.
+     * Creates a new contact, such as a user or lead. Provide at least one of `email`, `external_id`, or `role` to identify the contact, and include `email` whenever you set `email_verified`. The response contains the created contact object.
      *
      * You can create a new contact (ie. user or lead).
      */
-    fun createContact(
-        clientConfig: ClientConfig,
-        intercomVersion: IntercomVersion? = null,
-        body: CreateContactRequest? = null,
-        options: RequestOptions? = null,
-    ): Contacts.CreateContactResponse {
-        return SdkClient.request<Contacts.CreateContactResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "createContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createContact(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, body: CreateContactRequest? = null, options: RequestOptions? = null): Contacts.CreateContactResponse {
+        return SdkClient.request<Contacts.CreateContactResponse>(SdkClient.RequestSpec("POST", "/contacts", config = clientConfig, body = body, operationId = "createContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }
 
 internal object ContactsShowContactByExternalIdOperation {
     /**
-     * Retrieves a user contact by its external ID; this lookup does not support leads. Set
-     * `include_merge_history` to request merge history for the contact. If the contact has been
-     * merged, the response provides a link to the canonical contact.
+     * Retrieves a user contact by its external ID; this lookup does not support leads. Set `include_merge_history` to request merge history for the contact. If the contact has been merged, the response provides a link to the canonical contact.
      *
-     * You can fetch the details of a single contact by external ID. Note that this endpoint only
-     * supports users and not leads. {% admonition type="info" name="Merged contacts return 410
-     * Gone" %} If the contact with this external ID has been merged into another contact, the API
-     * returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into)
-     * contact. See `GET /contacts/{id}` for details on the response format. {% /admonition %}
+     * You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads. {% admonition type="info" name="Merged contacts return 410 Gone" %} If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format. {% /admonition %}
      *
      * @param externalId The external ID of the user that you want to retrieve
-     * @param includeMergeHistory Pass `true` to include the contact's merge history in the
-     *   response. Only returned for contacts with a `user` role.
+     * @param includeMergeHistory Pass `true` to include the contact's merge history
+     *   in the response. Only returned for contacts with a `user` role.
      */
-    fun showContactByExternalId(
-        clientConfig: ClientConfig,
-        externalId: String,
-        includeMergeHistory: Boolean? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Contacts.ShowContactByExternalIdResponse {
-        return SdkClient.request<Contacts.ShowContactByExternalIdResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/find_by_external_id/${SdkClient.encodePathSegment(externalId)}",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "include_merge_history" to
-                                SdkClient.queryValue(includeMergeHistory, "form", true)
-                        ),
-                    operationId = "showContactByExternalId",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "410" to Error2::class.java),
-                )
-            )
-            .data
+    fun showContactByExternalId(clientConfig: ClientConfig, externalId: String, includeMergeHistory: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Contacts.ShowContactByExternalIdResponse {
+        return SdkClient.request<Contacts.ShowContactByExternalIdResponse>(SdkClient.RequestSpec("GET", "/contacts/find_by_external_id/${SdkClient.encodePathSegment(externalId)}", config = clientConfig, query = mapOf("include_merge_history" to
+    SdkClient.queryValue(includeMergeHistory, "form", true)), operationId = "showContactByExternalId", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "410" to Error2::class.java))).data
     }
 }
 
 internal object ContactsArchiveContactOperation {
     /**
-     * Archives a single contact. Supply the `contact_id` of the contact to archive. The response
-     * includes the contact reference and an `archived` flag.
+     * Archives a single contact. Supply the `contact_id` of the contact to archive. The response includes the contact reference and an `archived` flag.
      *
      * You can archive a single contact.
      *
      * @param contactId contact_id
      */
-    fun archiveContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactArchived {
-        return SdkClient.request<ContactArchived>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/archive",
-                    config = clientConfig,
-                    operationId = "archiveContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+    fun archiveContact(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactArchived {
+        return SdkClient.request<ContactArchived>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/archive", config = clientConfig, operationId = "archiveContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
     }
 }
 
 internal object ContactsUnarchiveContactOperation {
     /**
-     * Unarchives a single contact. Supply the `contact_id` of the contact to restore from the
-     * archived state. The response includes the contact reference and an `archived` flag.
+     * Unarchives a single contact. Supply the `contact_id` of the contact to restore from the archived state. The response includes the contact reference and an `archived` flag.
      *
      * You can unarchive a single contact.
      *
      * @param contactId contact_id
      */
-    fun unarchiveContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactUnarchived {
-        return SdkClient.request<ContactUnarchived>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/unarchive",
-                    config = clientConfig,
-                    operationId = "unarchiveContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+    fun unarchiveContact(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactUnarchived {
+        return SdkClient.request<ContactUnarchived>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/unarchive", config = clientConfig, operationId = "unarchiveContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
     }
 }
 
 internal object ContactsBlockContactOperation {
     /**
-     * Blocks a single contact. Supply the `contact_id` of the contact to block. Blocking the
-     * contact also archives the contact's conversations.
+     * Blocks a single contact. Supply the `contact_id` of the contact to block. Blocking the contact also archives the contact's conversations.
      *
-     * Block a single contact. **Note:** conversations of the contact will also be archived during
-     * the process. More details in FAQ How do I block Inbox spam?
+     * Block a single contact. **Note:** conversations of the contact will also be archived during the process. More details in FAQ How do I block Inbox spam?
      *
      * @param contactId contact_id
      */
-    fun blockContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactBlocked {
-        return SdkClient.request<ContactBlocked>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/block",
-                    config = clientConfig,
-                    operationId = "blockContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+    fun blockContact(clientConfig: ClientConfig, contactId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactBlocked {
+        return SdkClient.request<ContactBlocked>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/block", config = clientConfig, operationId = "blockContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options)).data
     }
 }
 
 internal object ContactsListContactMergeHistoryOperation {
     /**
-     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor`
-     * to continue from a previous response and `per_page` and `order` to control the results. Merge
-     * history is available only for contacts with the `user` role.
+     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor` to continue from a previous response and `per_page` and `order` to control the results. Merge history is available only for contacts with the `user` role.
      *
-     * Retrieve the paginated list of contacts that have been merged into a given contact. Only
-     * available for contacts with a `user` role. Returns a `404` if the contact is not found or has
-     * a `lead` role.
+     * Retrieve the paginated list of contacts that have been merged into a given contact. Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
      *
      * @param id The id of the contact to fetch merge history for.
-     * @param cursor A cursor for pagination. Pass the `next_cursor` value from a previous response
-     *   to fetch the next page.
+     * @param cursor A cursor for pagination. Pass the `next_cursor` value from a
+     *   previous response to fetch the next page.
      * @param perPage The number of results to return per page (default 50, max 150).
      * @param order The order to return results in. Defaults to descending.
      */
-    fun listContactMergeHistory(
-        clientConfig: ClientConfig,
-        id: String,
-        cursor: String? = null,
-        perPage: Long? = null,
-        order: ListContactMergeHistoryParameterEnum? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): MergeHistoryList {
+    fun listContactMergeHistory(clientConfig: ClientConfig, id: String, cursor: String? = null, perPage: Long? = null, order: ListContactMergeHistoryParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): MergeHistoryList {
         if (perPage != null) {
-            Validation.validateRange(
-                "per_page",
-                perPage,
-                Validation.RangeOpts(min = 1.0, max = 150.0),
-            )
-        }
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(min = 1.0, max = 150.0))
+}
 
-        return SdkClient.request<MergeHistoryList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/${SdkClient.encodePathSegment(id)}/merge_history",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "cursor" to SdkClient.queryValue(cursor, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listContactMergeHistory",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+        return SdkClient.request<MergeHistoryList>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(id)}/merge_history", config = clientConfig, query = mapOf("cursor" to SdkClient.queryValue(cursor, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listContactMergeHistory", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
     /**
-     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor`
-     * to continue from a previous response and `per_page` and `order` to control the results. Merge
-     * history is available only for contacts with the `user` role.
+     * Lists the contacts merged into a given contact, with results returned in pages. Use `cursor` to continue from a previous response and `per_page` and `order` to control the results. Merge history is available only for contacts with the `user` role.
      *
-     * Retrieve the paginated list of contacts that have been merged into a given contact. Only
-     * available for contacts with a `user` role. Returns a `404` if the contact is not found or has
-     * a `lead` role.
+     * Retrieve the paginated list of contacts that have been merged into a given contact. Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
      *
      * @param id The id of the contact to fetch merge history for.
-     * @param cursor A cursor for pagination. Pass the `next_cursor` value from a previous response
-     *   to fetch the next page.
+     * @param cursor A cursor for pagination. Pass the `next_cursor` value from a
+     *   previous response to fetch the next page.
      * @param perPage The number of results to return per page (default 50, max 150).
      * @param order The order to return results in. Defaults to descending.
      */
-    fun listContactMergeHistoryPaginated(
-        clientConfig: ClientConfig,
-        id: String,
-        cursor: String? = null,
-        perPage: Long? = null,
-        order: ListContactMergeHistoryParameterEnum? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-        yieldFn: (MergeHistoryItem) -> Boolean,
-    ) {
+    fun listContactMergeHistoryPaginated(clientConfig: ClientConfig, id: String, cursor: String? = null, perPage: Long? = null, order: ListContactMergeHistoryParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldFn: (MergeHistoryItem) -> Boolean) {
         var cursor = cursor
         while (true) {
-            val page =
-                listContactMergeHistory(
-                    clientConfig,
-                    id,
-                    cursor,
-                    perPage,
-                    order,
-                    intercomVersion,
-                    options,
-                )
+            val page = listContactMergeHistory(clientConfig, id, cursor, perPage, order, intercomVersion, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             for (item in items) {
@@ -940,28 +380,12 @@ internal object ContactsListContactMergeHistoryOperation {
         }
     }
 
-    fun listContactMergeHistoryPages(
-        clientConfig: ClientConfig,
-        id: String,
-        cursor: String? = null,
-        perPage: Long? = null,
-        order: ListContactMergeHistoryParameterEnum? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-        yieldPage: (Contacts.ListContactMergeHistoryPage) -> Boolean,
-    ) {
+
+
+    fun listContactMergeHistoryPages(clientConfig: ClientConfig, id: String, cursor: String? = null, perPage: Long? = null, order: ListContactMergeHistoryParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null, yieldPage: (Contacts.ListContactMergeHistoryPage) -> Boolean) {
         var cursor = cursor
         while (true) {
-            val page =
-                listContactMergeHistory(
-                    clientConfig,
-                    id,
-                    cursor,
-                    perPage,
-                    order,
-                    intercomVersion,
-                    options,
-                )
+            val page = listContactMergeHistory(clientConfig, id, cursor, perPage, order, intercomVersion, options)
             val items = page.`data`.orEmpty()
             if (items.isEmpty()) return
             val nextCursor = page.nextCursor
@@ -975,207 +399,64 @@ internal object ContactsListContactMergeHistoryOperation {
 
 internal object ContactsBulkCreateContactsOperation {
     /**
-     * Creates contacts in bulk using an asynchronous job; this is a strict create operation and
-     * does not update existing contacts. Supply up to 100 contact objects in `contacts`; items that
-     * match an existing contact by `external_id` or `email` are rejected while other items can
-     * still be created. Use the returned job ID with GET /contacts/bulk/{id} to check progress and
-     * identify whether items were rejected.
+     * Creates contacts in bulk using an asynchronous job; this is a strict create operation and does not update existing contacts. Supply up to 100 contact objects in `contacts`; items that match an existing contact by `external_id` or `email` are rejected while other items can still be created. Use the returned job ID with GET /contacts/bulk/{id} to check progress and identify whether items were rejected.
      *
-     * You can bulk create contacts by submitting an array of contact objects. This is a **strict
-     * create** and never updates an existing contact. The endpoint creates an async job that
-     * processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}`
-     * to check the job status. Only the fields listed in the request schema below can be set. Any
-     * other fields in a contact object are ignored. {% admonition type="info" name="Handling
-     * existing contacts" %} If a…
+     * You can bulk create contacts by submitting an array of contact objects. This is a **strict create** and never updates an existing contact. The endpoint creates an async job that processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status. Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored. {% admonition type="info" name="Handling existing contacts" %} If a…
      *
-     * @param contacts An array of contact objects to create. Maximum 100 contacts per request.
+     * @param contacts An array of contact objects to create. Maximum 100 contacts
+     *   per request.
      * @param job Optional. Include to append tasks to an existing job.
      */
-    fun bulkCreateContacts(
-        clientConfig: ClientConfig,
-        contacts: List<Contacts.BulkCreateContactsRequestContactsItem>,
-        intercomVersion: IntercomVersion? = null,
-        job: Contacts.BulkCreateContactsRequestJob? = null,
-        options: RequestOptions? = null,
-    ): ContactsBulkJob {
+    fun bulkCreateContacts(clientConfig: ClientConfig, contacts: List<Contacts.BulkCreateContactsRequestContactsItem>, intercomVersion: IntercomVersion? = null, job: Contacts.BulkCreateContactsRequestJob? = null, options: RequestOptions? = null): ContactsBulkJob {
         Validation.validateItems("contacts", contacts, Validation.LengthOpts(max = 100))
 
-        return SdkClient.request<ContactsBulkJob>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/bulk",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "contacts" to (contacts),
-                            "job" to (SdkClient.omitIfNull(job)),
-                        ),
-                    operationId = "bulkCreateContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ContactsBulkJob>(SdkClient.RequestSpec("POST", "/contacts/bulk", config = clientConfig, body = SdkClient.bodyMap("contacts" to (contacts), "job" to (SdkClient.omitIfNull(job))), operationId = "bulkCreateContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
 }
 
 internal object ContactsBulkUpdateContactsOperation {
     /**
-     * Updates multiple contacts in an asynchronous job by applying the supplied fields to each
-     * identified contact. Include an `id` and the fields to change in each contact object, with no
-     * more than 100 objects in `contacts`. Use the returned job ID with GET /contacts/bulk/{id} to
-     * monitor progress; tag application is best-effort.
+     * Updates multiple contacts in an asynchronous job by applying the supplied fields to each identified contact. Include an `id` and the fields to change in each contact object, with no more than 100 objects in `contacts`. Use the returned job ID with GET /contacts/bulk/{id} to monitor progress; tag application is best-effort.
      *
-     * You can bulk update contacts by submitting an array of contact objects with the fields to
-     * update. Each contact must include an `id` field identifying the contact to update. You can
-     * also add or remove tags on each contact by including a `tags` object. Only the fields listed
-     * in the request schema below can be set. Any other fields in a contact object are ignored. The
-     * endpoint creates an async job that processes the updates in the background. Use the returned
-     * job ID with `GET…
+     * You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update. You can also add or remove tags on each contact by including a `tags` object. Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored. The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET…
      *
-     * @param contacts An array of contact objects to update. Each must include an `id` and the
-     *   fields to update. Maximum 100 contacts per request.
+     * @param contacts An array of contact objects to update. Each must include an
+     *   `id` and the fields to update. Maximum 100 contacts per request.
      * @param job Optional. Include to append tasks to an existing job.
      */
-    fun bulkUpdateContacts(
-        clientConfig: ClientConfig,
-        contacts: List<Contacts.BulkUpdateContactsRequestContactsItem>,
-        intercomVersion: IntercomVersion? = null,
-        job: Contacts.BulkUpdateContactsRequestJob? = null,
-        options: RequestOptions? = null,
-    ): ContactsBulkJob {
+    fun bulkUpdateContacts(clientConfig: ClientConfig, contacts: List<Contacts.BulkUpdateContactsRequestContactsItem>, intercomVersion: IntercomVersion? = null, job: Contacts.BulkUpdateContactsRequestJob? = null, options: RequestOptions? = null): ContactsBulkJob {
         Validation.validateItems("contacts", contacts, Validation.LengthOpts(max = 100))
 
-        return SdkClient.request<ContactsBulkJob>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/contacts/bulk",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "contacts" to (contacts),
-                            "job" to (SdkClient.omitIfNull(job)),
-                        ),
-                    operationId = "bulkUpdateContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ContactsBulkJob>(SdkClient.RequestSpec("PUT", "/contacts/bulk", config = clientConfig, body = SdkClient.bodyMap("contacts" to (contacts), "job" to (SdkClient.omitIfNull(job))), operationId = "bulkUpdateContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
 }
 
 internal object ContactsBulkDeleteContactsOperation {
     /**
-     * Deletes multiple contacts permanently through an asynchronous job. Include up to 100 contact
-     * identifiers in `contacts`; an item that cannot be deleted fails independently, while the job
-     * continues processing other items. Use the returned job ID with GET /contacts/bulk/{id} to
-     * monitor the job and check for item failures.
+     * Deletes multiple contacts permanently through an asynchronous job. Include up to 100 contact identifiers in `contacts`; an item that cannot be deleted fails independently, while the job continues processing other items. Use the returned job ID with GET /contacts/bulk/{id} to monitor the job and check for item failures.
      *
-     * You can delete contacts in bulk by submitting an array of contact `id`s. The endpoint creates
-     * an async job that processes the deletes in the background. Use the returned job ID with `GET
-     * /contacts/bulk/{id}` to check the job status. {% admonition type="warning" name="Permanent
-     * deletion" %} A contact that doesn't exist, or can't be deleted, fails that item and the job's
-     * `state` ends as `completed_with_errors` (visible via `GET /contacts/bulk/{id}`) without
-     * failing the rest of…
+     * You can delete contacts in bulk by submitting an array of contact `id`s. The endpoint creates an async job that processes the deletes in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status. {% admonition type="warning" name="Permanent deletion" %} A contact that doesn't exist, or can't be deleted, fails that item and the job's `state` ends as `completed_with_errors` (visible via `GET /contacts/bulk/{id}`) without failing the rest of…
      *
-     * @param contacts An array of contacts to delete, each identified by `id`. Maximum 100 contacts
-     *   per request.
+     * @param contacts An array of contacts to delete, each identified by `id`.
+     *   Maximum 100 contacts per request.
      * @param job Optional. Include to append tasks to an existing job.
      */
-    fun bulkDeleteContacts(
-        clientConfig: ClientConfig,
-        contacts: List<Contacts.BulkDeleteContactsRequestContactsItem>,
-        intercomVersion: IntercomVersion? = null,
-        job: Contacts.BulkDeleteContactsRequestJob? = null,
-        options: RequestOptions? = null,
-    ): ContactsBulkJob {
+    fun bulkDeleteContacts(clientConfig: ClientConfig, contacts: List<Contacts.BulkDeleteContactsRequestContactsItem>, intercomVersion: IntercomVersion? = null, job: Contacts.BulkDeleteContactsRequestJob? = null, options: RequestOptions? = null): ContactsBulkJob {
         Validation.validateItems("contacts", contacts, Validation.LengthOpts(max = 100))
 
-        return SdkClient.request<ContactsBulkJob>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/bulk/delete",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "contacts" to (contacts),
-                            "job" to (SdkClient.omitIfNull(job)),
-                        ),
-                    operationId = "bulkDeleteContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "401" to Error2::class.java,
-                            "403" to Error2::class.java,
-                            "404" to Error2::class.java,
-                            "422" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+        return SdkClient.request<ContactsBulkJob>(SdkClient.RequestSpec("POST", "/contacts/bulk/delete", config = clientConfig, body = SdkClient.bodyMap("contacts" to (contacts), "job" to (SdkClient.omitIfNull(job))), operationId = "bulkDeleteContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java))).data
     }
 }
 
 internal object ContactsShowBulkUpdateContactsJobOperation {
     /**
-     * Retrieves the status of an asynchronous bulk contact job. Supply the job's `id` to view its
-     * overall state, task details, and timestamps. Use the state to determine whether processing is
-     * pending, running, completed, or completed with errors.
+     * Retrieves the status of an asynchronous bulk contact job. Supply the job's `id` to view its overall state, task details, and timestamps. Use the state to determine whether processing is pending, running, completed, or completed with errors.
      *
-     * You can check the status of a bulk contact update job. The `state` field indicates the
-     * overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
+     * You can check the status of a bulk contact update job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
      *
      * @param id The unique identifier for the bulk job.
      */
-    fun showBulkUpdateContactsJob(
-        clientConfig: ClientConfig,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): ContactsBulkJob {
-        return SdkClient.request<ContactsBulkJob>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/contacts/bulk/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "showBulkUpdateContactsJob",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun showBulkUpdateContactsJob(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ContactsBulkJob {
+        return SdkClient.request<ContactsBulkJob>(SdkClient.RequestSpec("GET", "/contacts/bulk/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "showBulkUpdateContactsJob", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 }

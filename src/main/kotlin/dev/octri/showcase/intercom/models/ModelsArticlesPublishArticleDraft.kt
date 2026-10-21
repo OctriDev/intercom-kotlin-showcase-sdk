@@ -4,14 +4,11 @@
 package dev.octri.showcase.intercom.models
 
 /**
- * Optional body for publishing a staged article draft. On a single-language workspace the body can
- * be omitted. On a multilingual workspace, `locales` is required and lists which locales' drafts to
- * publish.
+ * Optional body for publishing a staged article draft. On a single-language workspace the body can be omitted. On a multilingual workspace, `locales` is required and lists which locales' drafts to publish.
  */
 data class PublishArticleDraftRequest(
     /**
-     * The locales whose staged drafts should be published. Required on multilingual workspaces;
-     * each locale must have a pending draft.
+     * The locales whose staged drafts should be published. Required on multilingual workspaces; each locale must have a pending draft.
      */
     val locales: List<String>? = null
 )

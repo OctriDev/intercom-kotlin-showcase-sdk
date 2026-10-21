@@ -10,98 +10,114 @@ import java.time.LocalDate
  * An exception overrides a schedule's regular hours on a specific date, such as a public holiday.
  */
 data class OfficeHoursException(
-    /** The type of the object - always `office_hours_exception`. */
-    val type: String? = null,
-    /** The unique identifier for the office hours exception. */
-    val id: String? = null,
-    /** The unique identifier for the schedule this exception belongs to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("office_hours_schedule_id")
-    val officeHoursScheduleId: String? = null,
-    /** The date the exception applies to, in `YYYY-MM-DD` format. */
-    @com.fasterxml.jackson.annotation.JsonProperty("exception_date")
-    val exceptionDate: LocalDate? = null,
     /**
-     * `closed` means the workspace is closed all day; `custom_hours` replaces the regular hours
-     * with `time_intervals`.
+     * The type of the object - always `office_hours_exception`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("exception_type")
-    val exceptionType: OfficeHoursExceptionExceptionTypeEnum? = null,
-    /** An optional name for the exception. */
+    val type: String? = null,
+    /**
+     * The unique identifier for the office hours exception.
+     */
+    val id: String? = null,
+    /**
+     * The unique identifier for the schedule this exception belongs to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("office_hours_schedule_id") val officeHoursScheduleId: String? = null,
+    /**
+     * The date the exception applies to, in `YYYY-MM-DD` format.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("exception_date") val exceptionDate: LocalDate? = null,
+    /**
+     * `closed` means the workspace is closed all day; `custom_hours` replaces the regular hours with `time_intervals`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("exception_type") val exceptionType: OfficeHoursExceptionExceptionTypeEnum? = null,
+    /**
+     * An optional name for the exception.
+     */
     val name: String? = null,
-    /** The open intervals for the exception date. `null` when `exception_type` is `closed`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals")
-    val timeIntervals: List<OfficeHoursTimeInterval>? = null,
-    /** Whether the exception repeats every year on the same date. */
-    @com.fasterxml.jackson.annotation.JsonProperty("recurring_annually")
-    val recurringAnnually: Boolean? = null,
-    /** The time the exception was created as a Unix timestamp. */
+    /**
+     * The open intervals for the exception date. `null` when `exception_type` is `closed`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals") val timeIntervals: List<OfficeHoursTimeInterval>? = null,
+    /**
+     * Whether the exception repeats every year on the same date.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("recurring_annually") val recurringAnnually: Boolean? = null,
+    /**
+     * The time the exception was created as a Unix timestamp.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time the exception was last updated as a Unix timestamp. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    /**
+     * The time the exception was last updated as a Unix timestamp.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
 )
 
 /**
  * An office hours schedule defines the recurring weekly hours during which the workspace is open.
  */
 data class OfficeHoursSchedule(
-    /** The type of the object - always `office_hours_schedule`. */
+    /**
+     * The type of the object - always `office_hours_schedule`.
+     */
     val type: String? = null,
-    /** The unique identifier for the office hours schedule. */
+    /**
+     * The unique identifier for the office hours schedule.
+     */
     val id: String? = null,
-    /** The name of the office hours schedule. */
+    /**
+     * The name of the office hours schedule.
+     */
     val name: String? = null,
-    /** The IANA time zone the schedule's hours are evaluated in. */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_zone_name")
-    val timeZoneName: String? = null,
-    /** The open intervals that make up the weekly schedule. */
-    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals")
-    val timeIntervals: List<OfficeHoursTimeInterval>? = null,
-    /** Whether the schedule is open 24/7. */
-    @com.fasterxml.jackson.annotation.JsonProperty("twenty_four_seven")
-    val twentyFourSeven: Boolean? = null,
-    /** The time the schedule was created as a Unix timestamp. */
+    /**
+     * The IANA time zone the schedule's hours are evaluated in.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_zone_name") val timeZoneName: String? = null,
+    /**
+     * The open intervals that make up the weekly schedule.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("time_intervals") val timeIntervals: List<OfficeHoursTimeInterval>? = null,
+    /**
+     * Whether the schedule is open 24/7.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("twenty_four_seven") val twentyFourSeven: Boolean? = null,
+    /**
+     * The time the schedule was created as a Unix timestamp.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The time the schedule was last updated as a Unix timestamp. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
+    /**
+     * The time the schedule was last updated as a Unix timestamp.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null
 )
 
 /**
- * A single open interval. For schedules, `start_minute` and `end_minute` are minute offsets from
- * the start of the week (Monday 00:00 = 0), in the range 0 to 10080. For exceptions, they are
- * minute offsets from midnight on `exception_date`, in the range 0 to 1440.
+ * A single open interval. For schedules, `start_minute` and `end_minute` are minute offsets from the start of the week (Monday 00:00 = 0), in the range 0 to 10080. For exceptions, they are minute offsets from midnight on `exception_date`, in the range 0 to 1440.
  */
 data class OfficeHoursTimeInterval(
     /**
-     * Minute the interval starts. For schedules, offset from the start of the week (Monday 00:00 =
-     * 0); for exceptions, offset from midnight on `exception_date`.
+     * Minute the interval starts. For schedules, offset from the start of the week (Monday 00:00 = 0); for exceptions, offset from midnight on `exception_date`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("start_minute") val startMinute: Long? = null,
     /**
-     * Minute the interval ends. For schedules, offset from the start of the week (Monday 00:00 =
-     * 0); for exceptions, offset from midnight on `exception_date`.
+     * Minute the interval ends. For schedules, offset from the start of the week (Monday 00:00 = 0); for exceptions, offset from midnight on `exception_date`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("end_minute") val endMinute: Long? = null,
     /**
-     * Derived day of the week the interval falls on (0 = Monday … 6 = Sunday). For exceptions, this
-     * is derived from `exception_date`.
+     * Derived day of the week the interval falls on (0 = Monday … 6 = Sunday). For exceptions, this is derived from `exception_date`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("day_of_week") val dayOfWeek: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("day_of_week") val dayOfWeek: Long? = null
 )
 
 /**
- * A single open interval. For schedules, `start_minute` and `end_minute` are minute offsets from
- * the start of the week (Monday 00:00 = 0), in the range 0 to 10080. For exceptions, they are
- * minute offsets from midnight on `exception_date`, in the range 0 to 1440.
+ * A single open interval. For schedules, `start_minute` and `end_minute` are minute offsets from the start of the week (Monday 00:00 = 0), in the range 0 to 10080. For exceptions, they are minute offsets from midnight on `exception_date`, in the range 0 to 1440.
  */
 data class OfficeHoursTimeIntervalRequest(
     /**
-     * Minute the interval starts. For schedules, offset from the start of the week (Monday 00:00 =
-     * 0); for exceptions, offset from midnight on `exception_date`.
+     * Minute the interval starts. For schedules, offset from the start of the week (Monday 00:00 = 0); for exceptions, offset from midnight on `exception_date`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("start_minute") val startMinute: Long? = null,
     /**
-     * Minute the interval ends. For schedules, offset from the start of the week (Monday 00:00 =
-     * 0); for exceptions, offset from midnight on `exception_date`.
+     * Minute the interval ends. For schedules, offset from the start of the week (Monday 00:00 = 0); for exceptions, offset from midnight on `exception_date`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("end_minute") val endMinute: Long? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("end_minute") val endMinute: Long? = null
 )

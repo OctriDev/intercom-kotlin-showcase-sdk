@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Response returned when an object is deleted */
+/**
+ * Response returned when an object is deleted
+ */
 data class DeletedArticleObject(
-    /** The unique identifier for the article which you provided in the URL. */
+    /**
+     * The unique identifier for the article which you provided in the URL.
+     */
     val id: String? = null,
-    /** The type of object which was deleted. - article */
-    @com.fasterxml.jackson.annotation.JsonProperty("object")
-    val `object`: DeletedArticleObjectObjectEnum? = null,
-    /** Whether the article was deleted successfully or not. */
-    val deleted: Boolean? = null,
+    /**
+     * The type of object which was deleted. - article
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: DeletedArticleObjectObjectEnum? = null,
+    /**
+     * Whether the article was deleted successfully or not.
+     */
+    val deleted: Boolean? = null
 )

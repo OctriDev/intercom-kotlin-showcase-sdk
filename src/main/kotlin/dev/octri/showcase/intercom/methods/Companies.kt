@@ -20,16 +20,20 @@ import dev.octri.showcase.intercom.StartingAfterPaging
 
 object Companies {
 
-    /** An optional object to sort the results by. */
-    data class CompanySearchRequestSort(
-        /** The field to sort the results on. */
-        @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String? = null,
-        /**
-         * The order to sort the results in. Defaults to `descending` when omitted. Values other
-         * than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
-         */
-        val order: CompanySearchRequestSortOrderEnum? = null,
-    )
+/**
+ * An optional object to sort the results by.
+ */
+data class CompanySearchRequestSort(
+    /**
+     * The field to sort the results on.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("field") val `field`: String? = null,
+    /**
+     * The order to sort the results in. Defaults to `descending` when omitted. Values other than `ascending` or `descending` return a `400` error with code `invalid_sort_order`.
+     */
+    val order: CompanySearchRequestSortOrderEnum? = null
+)
+
 
     /** Parameters for [createOrUpdateCompany]. */
     data class CreateOrUpdateCompanyParams(
@@ -43,73 +47,45 @@ object Companies {
         val customAttributes: Map<String, String>? = null,
         val remoteCreatedAt: Long? = null,
         val updateLastRequestAt: Boolean? = null,
-        val monthlySpend: Long? = null,
+        val monthlySpend: Long? = null
     )
 
     /**
-     * Creates a company or updates the existing company identified by `company_id`. Set a unique
-     * `company_id` when creating a company because it cannot be changed later; a company appears in
-     * Intercom only when it has at least one associated user.
+     * Creates a company or updates the existing company identified by `company_id`. Set a unique `company_id` when creating a company because it cannot be changed later; a company appears in Intercom only when it has at least one associated user.
      *
-     * You can create or update a company. Companies will be only visible in Intercom when there is
-     * at least one associated user. Companies are looked up via `company_id` in a `POST` request,
-     * if not found via `company_id`, the new company will be created, if found, that company will
-     * be updated. {% admonition type="warning" name="Using `company_id`" %} You can set a unique
-     * `company_id` value when creating a company. However, it is not possible to update
-     * `company_id`. Be sure to set…
+     * You can create or update a company. Companies will be only visible in Intercom when there is at least one associated user. Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated. {% admonition type="warning" name="Using `company_id`" %} You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set…
      *
      * @param name The name of the Company
-     * @param companyId The company id you have defined for the company. Can't be updated
+     * @param companyId The company id you have defined for the company. Can't be
+     *   updated
      * @param plan The name of the plan you have associated with the company.
      * @param size The number of employees in this company.
-     * @param website The URL for this company's website. Please note that the value specified here
-     *   is not validated. Accepts any string.
+     * @param website The URL for this company's website. Please note that the value
+     *   specified here is not validated. Accepts any string.
      * @param industry The industry that this company operates in.
-     * @param customAttributes A hash of key/value pairs containing any other data about the company
-     *   you want Intercom to store.
+     * @param customAttributes A hash of key/value pairs containing any other data
+     *   about the company you want Intercom to store.
      * @param remoteCreatedAt The time the company was created by you.
-     * @param updateLastRequestAt Set to true to update the company's last seen time to now.
-     * @param monthlySpend How much revenue the company generates for your business. Note that this
-     *   will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated
-     *   to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
+     * @param updateLastRequestAt Set to true to update the company's last seen time
+     *   to now.
+     * @param monthlySpend How much revenue the company generates for your business.
+     *   Note that this will truncate floats. i.e. it only allow for whole integers,
+     *   155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1
+     *   or 2147483647..
      */
-    fun createOrUpdateCompany(
-        clientConfig: ClientConfig,
-        request: CreateOrUpdateCompanyParams,
-        options: RequestOptions? = null,
-    ): Company {
-        return SdkClient.request<Company>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/companies",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "company_id" to (SdkClient.omitIfNull(request.companyId)),
-                            "plan" to (SdkClient.omitIfNull(request.plan)),
-                            "size" to (SdkClient.omitIfNull(request.size)),
-                            "website" to (SdkClient.omitIfNull(request.website)),
-                            "industry" to (SdkClient.omitIfNull(request.industry)),
-                            "custom_attributes" to (SdkClient.omitIfNull(request.customAttributes)),
-                            "remote_created_at" to (SdkClient.omitIfNull(request.remoteCreatedAt)),
-                            "update_last_request_at" to
-                                (SdkClient.omitIfNull(request.updateLastRequestAt)),
-                            "monthly_spend" to (SdkClient.omitIfNull(request.monthlySpend)),
-                        ),
-                    operationId = "createOrUpdateCompany",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun createOrUpdateCompany(clientConfig: ClientConfig, request: CreateOrUpdateCompanyParams, options: RequestOptions? = null): Company {
+        return SdkClient.request<Company>(SdkClient.RequestSpec("POST", "/companies", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "company_id" to (SdkClient.omitIfNull(request.companyId)), "plan" to (SdkClient.omitIfNull(request.plan)), "size" to (SdkClient.omitIfNull(request.size)), "website" to (SdkClient.omitIfNull(request.website)), "industry" to (SdkClient.omitIfNull(request.industry)), "custom_attributes" to
+    (SdkClient.omitIfNull(request.customAttributes)), "remote_created_at" to
+    (SdkClient.omitIfNull(request.remoteCreatedAt)), "update_last_request_at" to
+    (SdkClient.omitIfNull(request.updateLastRequestAt)), "monthly_spend" to
+    (SdkClient.omitIfNull(request.monthlySpend))), operationId = "createOrUpdateCompany", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [retrieveCompany]. */
     data class RetrieveCompanyRequest(
@@ -119,17 +95,13 @@ object Companies {
         val segmentId: String? = null,
         val page: Long? = null,
         val perPage: Long? = null,
-        val intercomVersion: IntercomVersion? = null,
+        val intercomVersion: IntercomVersion? = null
     )
 
     /**
-     * Lists companies, or retrieves a single company when you filter by `company_id` or `name`. Use
-     * `tag_id` or `segment_id` to filter the results, and use `page` and `per_page` to paginate the
-     * results.
+     * Lists companies, or retrieves a single company when you filter by `company_id` or `name`. Use `tag_id` or `segment_id` to filter the results, and use `page` and `per_page` to paginate the results.
      *
-     * You can fetch a single company by passing in `company_id` or `name`. `api.intercom.io
-     * `api.intercom.io You can fetch all companies and filter by `segment_id` or `tag_id` as a
-     * query parameter. `api.intercom.io `api.intercom.io
+     * You can fetch a single company by passing in `company_id` or `name`. `api.intercom.io `api.intercom.io You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter. `api.intercom.io `api.intercom.io
      *
      * @param name The `name` of the company to filter by.
      * @param companyId The `company_id` of the company to filter by.
@@ -138,70 +110,37 @@ object Companies {
      * @param page The page of results to fetch. Defaults to first page
      * @param perPage How many results to display per page. Defaults to 15
      */
-    fun retrieveCompany(
-        clientConfig: ClientConfig,
-        request: RetrieveCompanyRequest,
-        options: RequestOptions? = null,
-    ): CompanyList {
-        return SdkClient.request<CompanyList>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/companies",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "name" to SdkClient.queryValue(request.name, "form", true),
-                            "company_id" to SdkClient.queryValue(request.companyId, "form", true),
-                            "tag_id" to SdkClient.queryValue(request.tagId, "form", true),
-                            "segment_id" to SdkClient.queryValue(request.segmentId, "form", true),
-                            "page" to SdkClient.queryValue(request.page, "form", true),
-                            "per_page" to SdkClient.queryValue(request.perPage, "form", true),
-                        ),
-                    operationId = "retrieveCompany",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveCompany(clientConfig: ClientConfig, request: RetrieveCompanyRequest, options: RequestOptions? = null): CompanyList {
+        return SdkClient.request<CompanyList>(SdkClient.RequestSpec("GET", "/companies", config = clientConfig, query = mapOf("name" to SdkClient.queryValue(request.name, "form", true), "company_id" to
+    SdkClient.queryValue(request.companyId, "form", true), "tag_id" to
+    SdkClient.queryValue(request.tagId, "form", true), "segment_id" to
+    SdkClient.queryValue(request.segmentId, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
+    SdkClient.queryValue(request.perPage, "form", true)), operationId = "retrieveCompany", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a company by its Intercom-assigned identifier. Use the `company_id` path parameter
-     * to select the company whose details you need.
+     * Retrieves a company by its Intercom-assigned identifier. Use the `company_id` path parameter to select the company whose details you need.
      *
      * You can fetch a single company.
      *
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      */
-    fun retrieveCompaniesById(
-        clientConfig: ClientConfig,
-        companyId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Company {
-        return SdkClient.request<Company>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/companies/${SdkClient.encodePathSegment(companyId)}",
-                    config = clientConfig,
-                    operationId = "retrieveCompaniesById",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun retrieveCompaniesById(clientConfig: ClientConfig, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Company {
+        return SdkClient.request<Company>(SdkClient.RequestSpec("GET", "/companies/${SdkClient.encodePathSegment(companyId)}", config = clientConfig, operationId = "retrieveCompaniesById", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
 
     /** Parameters for [updateCompany]. */
     data class UpdateCompanyParams(
@@ -213,375 +152,189 @@ object Companies {
         val website: String? = null,
         val industry: String? = null,
         val customAttributes: Map<String, String>? = null,
-        val monthlySpend: Long? = null,
+        val monthlySpend: Long? = null
     )
 
     /**
-     * Replaces details for a company identified by its Intercom-assigned ID. Supply the company
-     * properties you want to update; `company_id` is set only when the company is created and
-     * cannot be changed.
+     * Replaces details for a company identified by its Intercom-assigned ID. Supply the company properties you want to update; `company_id` is set only when the company is created and cannot be changed.
      *
-     * You can update a single company using the Intercom provisioned `id`. {% admonition
-     * type="warning" name="Using `company_id`" %} When updating a company it is not possible to
-     * update `company_id`. This can only be set once upon creation of the company. {% /admonition
-     * %}
+     * You can update a single company using the Intercom provisioned `id`. {% admonition type="warning" name="Using `company_id`" %} When updating a company it is not possible to update `company_id`. This can only be set once upon creation of the company. {% /admonition %}
      *
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      * @param name The name of the Company
      * @param plan The name of the plan you have associated with the company.
      * @param size The number of employees in this company.
-     * @param website The URL for this company's website. Please note that the value specified here
-     *   is not validated. Accepts any string.
+     * @param website The URL for this company's website. Please note that the value
+     *   specified here is not validated. Accepts any string.
      * @param industry The industry that this company operates in.
-     * @param customAttributes A hash of key/value pairs containing any other data about the company
-     *   you want Intercom to store.
-     * @param monthlySpend How much revenue the company generates for your business. Note that this
-     *   will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated
-     *   to 155. Note that this has an upper limit of 2**31-1 or 2147483647..
+     * @param customAttributes A hash of key/value pairs containing any other data
+     *   about the company you want Intercom to store.
+     * @param monthlySpend How much revenue the company generates for your business.
+     *   Note that this will truncate floats. i.e. it only allow for whole integers,
+     *   155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1
+     *   or 2147483647..
      */
-    fun updateCompany(
-        clientConfig: ClientConfig,
-        request: UpdateCompanyParams,
-        options: RequestOptions? = null,
-    ): Company {
-        return SdkClient.request<Company>(
-                SdkClient.RequestSpec(
-                    "PUT",
-                    "/companies/${SdkClient.encodePathSegment(request.companyId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "plan" to (SdkClient.omitIfNull(request.plan)),
-                            "size" to (SdkClient.omitIfNull(request.size)),
-                            "website" to (SdkClient.omitIfNull(request.website)),
-                            "industry" to (SdkClient.omitIfNull(request.industry)),
-                            "custom_attributes" to (SdkClient.omitIfNull(request.customAttributes)),
-                            "monthly_spend" to (SdkClient.omitIfNull(request.monthlySpend)),
-                        ),
-                    operationId = "updateCompany",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to
-                                SdkClient.headerValue(request.intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun updateCompany(clientConfig: ClientConfig, request: UpdateCompanyParams, options: RequestOptions? = null): Company {
+        return SdkClient.request<Company>(SdkClient.RequestSpec("PUT", "/companies/${SdkClient.encodePathSegment(request.companyId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "plan" to (SdkClient.omitIfNull(request.plan)), "size" to (SdkClient.omitIfNull(request.size)), "website" to (SdkClient.omitIfNull(request.website)), "industry" to (SdkClient.omitIfNull(request.industry)), "custom_attributes" to
+    (SdkClient.omitIfNull(request.customAttributes)), "monthly_spend" to
+    (SdkClient.omitIfNull(request.monthlySpend))), operationId = "updateCompany", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
-    /**
-     * Deletes a company from the workspace and detaches its contacts without deleting the contact
-     * records. Contact detachment is permanent, and a `company.deleted` webhook is sent after
-     * deletion. A third-party integration may recreate the company on its next sync, so remove or
-     * filter it at the source before deleting it here.
-     *
-     * Delete a single company. The company record is kept in your workspace, but all contacts are
-     * detached. The contacts themselves are not deleted. Detaching contacts is permanent and can't
-     * be reversed. A `company.deleted` webhook is sent when the company is deleted. These changes
-     * may take some time to be reflected in your workspace. {% admonition type="warning" %}
-     * Third-party integrations that sync companies into Intercom (for example, Salesforce or
-     * Chargebee) will recreate any…
-     *
-     * @param companyId The unique identifier for the company which is given by Intercom
-     */
-    fun deleteCompany(
-        clientConfig: ClientConfig,
-        companyId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): DeletedCompanyObject {
-        return SdkClient.request<DeletedCompanyObject>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/companies/${SdkClient.encodePathSegment(companyId)}",
-                    config = clientConfig,
-                    operationId = "deleteCompany",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
-    }
+
+
+
+
+
 
     /**
-     * Lists the contacts associated with a specific company. Use the company identifier to retrieve
-     * its attached contacts; the response includes cursor-based pagination metadata.
+     * Deletes a company from the workspace and detaches its contacts without deleting the contact records. Contact detachment is permanent, and a `company.deleted` webhook is sent after deletion. A third-party integration may recreate the company on its next sync, so remove or filter it at the source before deleting it here.
+     *
+     * Delete a single company. The company record is kept in your workspace, but all contacts are detached. The contacts themselves are not deleted. Detaching contacts is permanent and can't be reversed. A `company.deleted` webhook is sent when the company is deleted. These changes may take some time to be reflected in your workspace. {% admonition type="warning" %} Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any…
+     *
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
+     */
+    fun deleteCompany(clientConfig: ClientConfig, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedCompanyObject {
+        return SdkClient.request<DeletedCompanyObject>(SdkClient.RequestSpec("DELETE", "/companies/${SdkClient.encodePathSegment(companyId)}", config = clientConfig, operationId = "deleteCompany", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
+    }
+
+
+
+
+
+
+
+    /**
+     * Lists the contacts associated with a specific company. Use the company identifier to retrieve its attached contacts; the response includes cursor-based pagination metadata.
      *
      * You can fetch a list of all contacts that belong to a company.
      *
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      */
-    fun listAttachedContacts(
-        clientConfig: ClientConfig,
-        companyId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CompanyAttachedContacts {
-        return SdkClient.request<CompanyAttachedContacts>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/companies/${SdkClient.encodePathSegment(companyId)}/contacts",
-                    config = clientConfig,
-                    operationId = "listAttachedContacts",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listAttachedContacts(clientConfig: ClientConfig, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyAttachedContacts {
+        return SdkClient.request<CompanyAttachedContacts>(SdkClient.RequestSpec("GET", "/companies/${SdkClient.encodePathSegment(companyId)}/contacts", config = clientConfig, operationId = "listAttachedContacts", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the segments associated with a specific company. Use the company identifier to retrieve
-     * the segments that belong to it.
+     * Lists the segments associated with a specific company. Use the company identifier to retrieve the segments that belong to it.
      *
      * You can fetch a list of all segments that belong to a company.
      *
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      */
-    fun listCompaniesAttachedSegments(
-        clientConfig: ClientConfig,
-        companyId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CompanyAttachedSegments {
-        return SdkClient.request<CompanyAttachedSegments>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/companies/${SdkClient.encodePathSegment(companyId)}/segments",
-                    config = clientConfig,
-                    operationId = "listCompaniesAttachedSegments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun listCompaniesAttachedSegments(clientConfig: ClientConfig, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyAttachedSegments {
+        return SdkClient.request<CompanyAttachedSegments>(SdkClient.RequestSpec("GET", "/companies/${SdkClient.encodePathSegment(companyId)}/segments", config = clientConfig, operationId = "listCompaniesAttachedSegments", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Searches companies by attribute filters in a request body. Use `query` to specify filters and
-     * optionally provide `pagination` and `sort`; companies without associated users are excluded
-     * from the results.
+     * Searches companies by attribute filters in a request body. Use `query` to specify filters and optionally provide `pagination` and `sort`; companies without associated users are excluded from the results.
      *
-     * You can search for companies by the value of their attributes in order to fetch exactly the
-     * companies you want. To search for companies, send a `POST` request to `api.intercom.io with a
-     * query object in the body defining your filters. Note that the API does not include companies
-     * who have no associated users in search results. {% admonition type="warning" name="Optimizing
-     * search queries" %} Search queries can be complex, so optimizing them can help the performance
-     * of your…
+     * You can search for companies by the value of their attributes in order to fetch exactly the companies you want. To search for companies, send a `POST` request to `api.intercom.io with a query object in the body defining your filters. Note that the API does not include companies who have no associated users in search results. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your…
      *
      * @param query Required API value serialized in the `query` wire field.
-     * @param pagination Optional object value serialized in the `pagination` wire field.
+     * @param pagination Optional object value serialized in the `pagination` wire
+     *   field.
      * @param sort An optional object to sort the results by.
      */
-    fun searchCompanies(
-        clientConfig: ClientConfig,
-        query: CompanySearchRequestQuery,
-        intercomVersion: IntercomVersion? = null,
-        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
-        sort: CompanySearchRequestSort? = null,
-        options: RequestOptions? = null,
-    ): CompanyList {
-        return SdkClient.request<CompanyList>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/companies/search",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "query" to (query),
-                            "pagination" to (pagination ?: SdkClient.SdkOptional.Omitted),
-                            "sort" to (SdkClient.omitIfNull(sort)),
-                        ),
-                    operationId = "searchCompanies",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
-                )
-            )
-            .data
+    fun searchCompanies(clientConfig: ClientConfig, query: CompanySearchRequestQuery, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, sort: CompanySearchRequestSort? = null, options: RequestOptions? = null): CompanyList {
+        return SdkClient.request<CompanyList>(SdkClient.RequestSpec("POST", "/companies/search", config = clientConfig, body = SdkClient.bodyMap("query" to (query), "pagination" to
+    (pagination ?: SdkClient.SdkOptional.Omitted), "sort" to (SdkClient.omitIfNull(sort))), operationId = "searchCompanies", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists companies, ordered by `last_request_at` and descending by default. Use the pagination
-     * parameters to retrieve results in pages; companies without associated users are excluded, and
-     * this endpoint can return at most 10,000 companies.
+     * Lists companies, ordered by `last_request_at` and descending by default. Use the pagination parameters to retrieve results in pages; companies without associated users are excluded, and this endpoint can return at most 10,000 companies.
      *
-     * You can list companies. The company list is sorted by the `last_request_at` field and by
-     * default is ordered descending, most recently requested first. Note that the API does not
-     * include companies who have no associated users in list responses. When using the Companies
-     * endpoint and the pages object to iterate through the returned companies, there is a limit of
-     * 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000
-     * Companies, please use the…
+     * You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first. Note that the API does not include companies who have no associated users in list responses. When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the…
      *
      * @param page The page of results to fetch. Defaults to first page
      * @param perPage How many results to return per page. Defaults to 15
-     * @param order `asc` or `desc`. Return the companies in ascending or descending order. Defaults
-     *   to desc
+     * @param order `asc` or `desc`. Return the companies in ascending or descending
+     *   order. Defaults to desc
      */
-    fun listAllCompanies(
-        clientConfig: ClientConfig,
-        page: Long? = null,
-        perPage: Long? = null,
-        order: String? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CompanyList {
-        return SdkClient.request<CompanyList>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/companies/list",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "page" to SdkClient.queryValue(page, "form", true),
-                            "per_page" to SdkClient.queryValue(perPage, "form", true),
-                            "order" to SdkClient.queryValue(order, "form", true),
-                        ),
-                    operationId = "listAllCompanies",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun listAllCompanies(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, order: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyList {
+        return SdkClient.request<CompanyList>(SdkClient.RequestSpec("POST", "/companies/list", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listAllCompanies", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists companies by using a cursor-based scroll to iterate through a large dataset. Omit
-     * `scroll_param` to start a scroll, then pass the returned value on subsequent requests; only
-     * one scroll can be open per app at a time, and an unused scroll expires after one minute.
+     * Lists companies by using a cursor-based scroll to iterate through a large dataset. Omit `scroll_param` to start a scroll, then pass the returned value on subsequent requests; only one scroll can be open per app at a time, and an unused scroll expires after one minute.
      *
-     * The `list all companies` functionality does not work well for huge datasets, and can result
-     * in errors and performance problems when paging deeply. The Scroll API provides an efficient
-     * mechanism for iterating over all companies in a dataset. - Each app can only have 1 scroll
-     * open at a time. You'll get an error message if you try to have more than one open per app. -
-     * If the scroll isn't used for 1 minute, it expires and calls with that scroll param will
-     * fail - If the end of…
+     * The `list all companies` functionality does not work well for huge datasets, and can result in errors and performance problems when paging deeply. The Scroll API provides an efficient mechanism for iterating over all companies in a dataset. - Each app can only have 1 scroll open at a time. You'll get an error message if you try to have more than one open per app. - If the scroll isn't used for 1 minute, it expires and calls with that scroll param will fail - If the end of…
      */
-    fun scrollOverAllCompanies(
-        clientConfig: ClientConfig,
-        scrollParam: String? = null,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): CompanyScroll {
-        return SdkClient.request<CompanyScroll>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/companies/scroll",
-                    config = clientConfig,
-                    query =
-                        mapOf("scroll_param" to SdkClient.queryValue(scrollParam, "form", true)),
-                    operationId = "scrollOverAllCompanies",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java),
-                )
-            )
-            .data
+    fun scrollOverAllCompanies(clientConfig: ClientConfig, scrollParam: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyScroll {
+        return SdkClient.request<CompanyScroll>(SdkClient.RequestSpec("GET", "/companies/scroll", config = clientConfig, query = mapOf("scroll_param" to
+    SdkClient.queryValue(scrollParam, "form", true)), operationId = "scrollOverAllCompanies", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Attaches a company to a specific contact. Include the company's Intercom identifier in the
-     * request body to create the association.
+     * Attaches a company to a specific contact. Include the company's Intercom identifier in the request body to create the association.
      *
      * You can attach a company to a single contact.
      *
-     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param contactId The unique identifier for the contact which is given by
+     *   Intercom
      * @param id The unique identifier for the company which is given by Intercom
      */
-    fun attachCompaniesContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        id: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Company {
-        return SdkClient.request<Company>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/companies",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("id" to (id)),
-                    operationId = "attachCompaniesContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors =
-                        mapOf(
-                            "400" to Error2::class.java,
-                            "401" to Error2::class.java,
-                            "404" to Error2::class.java,
-                        ),
-                )
-            )
-            .data
+    fun attachCompaniesContact(clientConfig: ClientConfig, contactId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Company {
+        return SdkClient.request<Company>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/companies", config = clientConfig, body = SdkClient.bodyMap("id" to (id)), operationId = "attachCompaniesContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
+
+
+
+
+
+
     /**
-     * Detaches a company from a specific contact. Provide both identifiers to remove the
-     * association between that contact and company.
+     * Detaches a company from a specific contact. Provide both identifiers to remove the association between that contact and company.
      *
      * You can detach a company from a single contact.
      *
-     * @param contactId The unique identifier for the contact which is given by Intercom
-     * @param companyId The unique identifier for the company which is given by Intercom
+     * @param contactId The unique identifier for the contact which is given by
+     *   Intercom
+     * @param companyId The unique identifier for the company which is given by
+     *   Intercom
      */
-    fun detachCompaniesContact(
-        clientConfig: ClientConfig,
-        contactId: String,
-        companyId: String,
-        intercomVersion: IntercomVersion? = null,
-        options: RequestOptions? = null,
-    ): Company {
-        return SdkClient.request<Company>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/contacts/${SdkClient.encodePathSegment(contactId)}/companies/${SdkClient.encodePathSegment(companyId)}",
-                    config = clientConfig,
-                    operationId = "detachCompaniesContact",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
-                        ),
-                    options = options,
-                    errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
-                )
-            )
-            .data
+    fun detachCompaniesContact(clientConfig: ClientConfig, contactId: String, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Company {
+        return SdkClient.request<Company>(SdkClient.RequestSpec("DELETE", "/contacts/${SdkClient.encodePathSegment(contactId)}/companies/${SdkClient.encodePathSegment(companyId)}", config = clientConfig, operationId = "detachCompaniesContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java))).data
     }
+
+
+
+
+
+
+
 }

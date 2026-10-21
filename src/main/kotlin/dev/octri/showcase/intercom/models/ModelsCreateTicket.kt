@@ -3,162 +3,146 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class AdminReplyTicketRequestReplyOptionsItem(
-    /** The text to display in this quick reply option. */
+    /**
+     * The text to display in this quick reply option.
+     */
     val text: String,
     /**
-     * A unique identifier for this quick reply option. This value will be available within the
-     * metadata of the comment ticket part that is created when a user clicks on this reply option.
+     * A unique identifier for this quick reply option. This value will be available within the metadata of the comment ticket part that is created when a user clicks on this reply option.
      */
-    val uuid: String,
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of an admin */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of an admin
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AdminReplyTicketRequest(
     /**
-     * The type of reply. Tracker tickets and back-office tickets that are not shared with the
-     * customer do not support `comment`; use `note` instead.
+     * The type of reply. Tracker tickets and back-office tickets that are not shared with the customer do not support `comment`; use `note` instead.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: AdminReplyTicketRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: AdminReplyTicketRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AdminReplyTicketRequestTypeEnum,
-    /** The id of the admin who is authoring the comment. */
+    /**
+     * The id of the admin who is authoring the comment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * The text body of the reply. Notes accept some HTML formatting. Must be present for comment
-     * and note message types.
+     * The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.
      */
     val body: String? = null,
-    /** The time the reply was created. If not provided, the current time will be used. */
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** The quick reply options to display. Must be present for quick_reply message types. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<AdminReplyTicketRequestReplyOptionsItem>? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * A list of files that will be added as attachments. You can include up to 10 files. If both
-     * attachment_files and attachment_urls are provided, attachment_files takes precedence.
+     * The quick reply options to display. Must be present for quick_reply message types.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<AdminReplyTicketRequestReplyOptionsItem>? = null,
     /**
-     * If set to true, the note will be cross-posted to all linked conversations. Only applicable to
-     * note message types on back-office tickets.
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("cross_post") val crossPost: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * A list of files that will be added as attachments. You can include up to 10 files. If both attachment_files and attachment_urls are provided, attachment_files takes precedence.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    /**
+     * If set to true, the note will be cross-posted to all linked conversations. Only applicable to note message types on back-office tickets.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("cross_post") val crossPost: Boolean? = null
 ) : CreateTicketReplyWithCommentRequest
 
-/** Typed representation of the `ContactReplyTicketRequest` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Typed representation of the `ContactReplyTicketRequest` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContactReplyTicketIntercomUserIdRequest::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContactReplyTicketUserIdRequest::class
-    ),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContactReplyTicketEmailRequest::class
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyTicketIntercomUserIdRequest::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyTicketUserIdRequest::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyTicketEmailRequest::class)
 )
 sealed interface ContactReplyTicketRequest : CreateTicketReplyWithCommentRequest
 
-/** Typed representation of the `CreateTicketReplyWithCommentRequest` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = CreateTicketReplyWithCommentRequest.Deserializer::class
-)
+/**
+ * Typed representation of the `CreateTicketReplyWithCommentRequest` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = CreateTicketReplyWithCommentRequest.Deserializer::class)
 sealed interface CreateTicketReplyWithCommentRequest {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<CreateTicketReplyWithCommentRequest>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<CreateTicketReplyWithCommentRequest>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): CreateTicketReplyWithCommentRequest {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out CreateTicketReplyWithCommentRequest>> =
-                listOf(AdminReplyTicketRequest::class.java, ContactReplyTicketRequest::class.java)
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out CreateTicketReplyWithCommentRequest>> = listOf(AdminReplyTicketRequest::class.java, ContactReplyTicketRequest::class.java)
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        CreateTicketReplyWithCommentRequest::class.java,
-                        "no CreateTicketReplyWithCommentRequest branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, CreateTicketReplyWithCommentRequest::class.java, "no CreateTicketReplyWithCommentRequest branch accepts this payload")
             }
         }
     }
 }
 
-/** Optional object value serialized in the `assignment` wire field. */
+/**
+ * Optional object value serialized in the `assignment` wire field.
+ */
 data class CreateTicketRequestAssignment(
     /**
-     * The ID of the admin to which the ticket is assigned. If not provided, the ticket will be
-     * unassigned.
+     * The ID of the admin to which the ticket is assigned. If not provided, the ticket will be unassigned.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id")
-    val adminAssigneeId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id") val adminAssigneeId: String? = null,
     /**
-     * The ID of the team to which the ticket is assigned. If not provided, the ticket will be
-     * unassigned.
+     * The ID of the team to which the ticket is assigned. If not provided, the ticket will be unassigned.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id")
-    val teamAssigneeId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id") val teamAssigneeId: String? = null
 )
 
-/** You can create a Ticket */
+/**
+ * You can create a Ticket
+ */
 data class CreateTicketRequest(
-    /** The ID of the type of ticket you want to create */
+    /**
+     * The ID of the type of ticket you want to create
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ticket_type_id") val ticketTypeId: String,
     /**
      * The list of contacts (users or leads) affected by this ticket. Currently only one is allowed
      */
     val contacts: List<CreateTicketRequestContactsItem>,
     /**
-     * The ID of the conversation you want to link to the ticket. Here are the valid ways of linking
-     * two tickets: - conversation | back-office ticket - customer tickets | non-shared back-office
-     * ticket - conversation | tracker ticket - customer ticket | tracker ticket
+     * The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets: - conversation | back-office ticket - customer tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket | tracker ticket
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_to_link_id")
-    val conversationToLinkId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_to_link_id") val conversationToLinkId: String? = null,
     /**
-     * The ID of the company that the ticket is associated with. The unique identifier for the
-     * company which is given by Intercom
+     * The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom
      */
     @com.fasterxml.jackson.annotation.JsonProperty("company_id") val companyId: String? = null,
-    /** The time the ticket was created. If not provided, the current time will be used. */
+    /**
+     * The time the ticket was created. If not provided, the current time will be used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
     /**
-     * The attributes set on the ticket. When setting the default title and description attributes,
-     * the attribute keys that should be used are `_default_title_` and `_default_description_`.
-     * When setting ticket type attributes of the list attribute type, the key should be the
-     * attribute name and the value of the attribute should be the list item id, obtainable by
-     * \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket type has an
-     * attribute called `priority` of…
+     * The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of…
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("ticket_attributes")
-    val ticketAttributes: TicketRequestCustomAttributes? = null,
-    /** Optional object value serialized in the `assignment` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ticket_attributes") val ticketAttributes: TicketRequestCustomAttributes? = null,
+    /**
+     * Optional object value serialized in the `assignment` wire field.
+     */
     val assignment: CreateTicketRequestAssignment? = null,
     /**
-     * The channel for the ticket. Only supported for customer ticket types. Defaults to messenger
-     * if not provided.
+     * The channel for the ticket. Only supported for customer ticket types. Defaults to messenger if not provided.
      */
-    val channel: CreateTicketRequestChannelEnum? = null,
+    val channel: CreateTicketRequestChannelEnum? = null
 )

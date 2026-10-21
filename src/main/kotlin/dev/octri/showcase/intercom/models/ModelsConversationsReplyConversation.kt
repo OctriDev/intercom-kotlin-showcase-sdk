@@ -3,222 +3,252 @@
 
 package dev.octri.showcase.intercom.models
 
-/** Payload of the request to reply on behalf of an admin */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+
+/**
+ * Payload of the request to reply on behalf of an admin
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class AdminReplyConversationRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: AdminReplyConversationRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: AdminReplyConversationRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: AdminReplyConversationRequestTypeEnum,
-    /** The id of the admin who is authoring the comment. */
+    /**
+     * The id of the admin who is authoring the comment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("admin_id") val adminId: String,
     /**
-     * The text body of the reply. Notes accept some HTML formatting. Must be present for comment
-     * and note message types.
+     * The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.
      */
     val body: String? = null,
-    /** The time the reply was created. If not provided, the current time will be used. */
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
     /**
-     * The quick reply options to display to the end user. Must be present for quick_reply message
-     * types.
+     * The quick reply options to display to the end user. Must be present for quick_reply message types.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<QuickReplyOption>? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
-    /** A list of files that will be added as attachments. You can include up to 10 files */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
-    /** Option to disable notifications when replying to a conversation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_notifications")
-    val skipNotifications: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<QuickReplyOption>? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * A list of files that will be added as attachments. You can include up to 10 files
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    /**
+     * Option to disable notifications when replying to a conversation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_notifications") val skipNotifications: Boolean? = null
 ) : ReplyConversationRequest
 
-/** Typed representation of the `ContactReplyConversationRequest` API schema. */
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION
-)
+/**
+ * Typed representation of the `ContactReplyConversationRequest` API schema.
+ */
+@com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION)
 @com.fasterxml.jackson.annotation.JsonSubTypes(
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(
-        value = ContactReplyIntercomUserIdRequest::class
-    ),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyIntercomUserIdRequest::class),
     com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyEmailRequest::class),
-    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyUserIdRequest::class),
+    com.fasterxml.jackson.annotation.JsonSubTypes.Type(value = ContactReplyUserIdRequest::class)
 )
 sealed interface ContactReplyConversationRequest : ReplyConversationRequest
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyEmailRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of a contact using their `email` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of a contact using their `email`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContactReplyEmailRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyEmailRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyEmailRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ContactReplyEmailRequestTypeEnum,
-    /** The text body of the comment. */
+    /**
+     * The text body of the comment.
+     */
     val body: String,
-    /** The email you have defined for the user. */
+    /**
+     * The email you have defined for the user.
+     */
     val email: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * The time the reply was created. If not provided, the current time will be used.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyEmailRequestReplyOptionsItem>? = null,
-    /** A list of files that will be added as attachments. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyEmailRequestReplyOptionsItem>? = null,
+    /**
+     * A list of files that will be added as attachments.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null
 ) : ContactReplyConversationRequest
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyIntercomUserIdRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of a contact using their `intercom_user_id` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of a contact using their `intercom_user_id`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContactReplyIntercomUserIdRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyIntercomUserIdRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `message_type` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyIntercomUserIdRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: ContactReplyIntercomUserIdRequestTypeEnum,
-    /** The text body of the comment. */
+    /**
+     * The text body of the comment.
+     */
     val body: String,
-    /** The identifier for the contact as given by Intercom. */
+    /**
+     * The identifier for the contact as given by Intercom.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("intercom_user_id") val intercomUserId: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * The time the reply was created. If not provided, the current time will be used.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyIntercomUserIdRequestReplyOptionsItem>? = null,
-    /** A list of files that will be added as attachments. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyIntercomUserIdRequestReplyOptionsItem>? = null,
+    /**
+     * A list of files that will be added as attachments.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null
 ) : ContactReplyConversationRequest
 
-/** Required object value serialized in the `reply_options[]` wire field. */
+/**
+ * Required object value serialized in the `reply_options[]` wire field.
+ */
 data class ContactReplyUserIdRequestReplyOptionsItem(
-    /** The text of the chosen reply option. */
+    /**
+     * The text of the chosen reply option.
+     */
     val text: String,
-    /** The unique identifier for the quick reply option selected. */
-    val uuid: String,
+    /**
+     * The unique identifier for the quick reply option selected.
+     */
+    val uuid: String
 )
 
-/** Payload of the request to reply on behalf of a contact using their `user_id` */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = com.fasterxml.jackson.databind.JsonDeserializer.None::class
-)
-@com.fasterxml.jackson.annotation.JsonTypeInfo(
-    use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE
-)
+/**
+ * Payload of the request to reply on behalf of a contact using their `user_id`
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
 data class ContactReplyUserIdRequest(
-    /** Required enumerated value serialized in the `message_type` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: ContactReplyUserIdRequestMessageTypeEnum,
-    /** Required enumerated value serialized in the `type` wire field. */
-    val type: ContactReplyUserIdRequestTypeEnum,
-    /** The text body of the comment. */
-    val body: String,
-    /** The external_id you have defined for the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
-    /** The time the reply was created. If not provided, the current time will be used. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** A list of image URLs that will be added as attachments. You can include up to 10 URLs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls")
-    val attachmentUrls: List<String>? = null,
     /**
-     * The quick reply selection the contact wishes to respond with. These map to buttons displayed
-     * in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     * Required enumerated value serialized in the `message_type` wire field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_options")
-    val replyOptions: List<ContactReplyUserIdRequestReplyOptionsItem>? = null,
-    /** A list of files that will be added as attachments. You can include up to 10 files. */
-    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files")
-    val attachmentFiles: List<ConversationAttachmentFiles>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: ContactReplyUserIdRequestMessageTypeEnum,
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
+    val type: ContactReplyUserIdRequestTypeEnum,
+    /**
+     * The text body of the comment.
+     */
+    val body: String,
+    /**
+     * The external_id you have defined for the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("user_id") val userId: String,
+    /**
+     * The time the reply was created. If not provided, the current time will be used.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
+    /**
+     * A list of image URLs that will be added as attachments. You can include up to 10 URLs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_urls") val attachmentUrls: List<String>? = null,
+    /**
+     * The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_options") val replyOptions: List<ContactReplyUserIdRequestReplyOptionsItem>? = null,
+    /**
+     * A list of files that will be added as attachments. You can include up to 10 files.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("attachment_files") val attachmentFiles: List<ConversationAttachmentFiles>? = null
 ) : ContactReplyConversationRequest
 
-/** Typed representation of the `QuickReplyOption` API schema. */
+/**
+ * Typed representation of the `QuickReplyOption` API schema.
+ */
 data class QuickReplyOption(
-    /** The text to display in this quick reply option. */
+    /**
+     * The text to display in this quick reply option.
+     */
     val text: String,
     /**
-     * A unique identifier for this quick reply option. This value will be available within the
-     * metadata of the comment conversation part that is created when a user clicks on this reply
-     * option.
+     * A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.
      */
-    val uuid: String,
+    val uuid: String
 )
 
-/** Typed representation of the `ReplyConversationRequest` API schema. */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(
-    using = ReplyConversationRequest.Deserializer::class
-)
+/**
+ * Typed representation of the `ReplyConversationRequest` API schema.
+ */
+@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = ReplyConversationRequest.Deserializer::class)
 sealed interface ReplyConversationRequest {
     /** Chooses the branch this payload is shaped like. */
-    class Deserializer :
-        com.fasterxml.jackson.databind.JsonDeserializer<ReplyConversationRequest>() {
+    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<ReplyConversationRequest>() {
         override fun deserialize(
             parser: com.fasterxml.jackson.core.JsonParser,
             context: com.fasterxml.jackson.databind.DeserializationContext,
         ): ReplyConversationRequest {
             val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
             val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            val objectTypes: List<Class<out ReplyConversationRequest>> =
-                listOf(
-                    AdminReplyConversationRequest::class.java,
-                    ContactReplyConversationRequest::class.java,
-                )
-            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let {
-                return it
-            }
+            val objectTypes: List<Class<out ReplyConversationRequest>> = listOf(AdminReplyConversationRequest::class.java, ContactReplyConversationRequest::class.java)
+            dev.octri.showcase.intercom.sdkObjectBranch(mapper, node, objectTypes)?.let { return it }
             return when {
-                else ->
-                    throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
-                        parser,
-                        ReplyConversationRequest::class.java,
-                        "no ReplyConversationRequest branch accepts this payload",
-                    )
+                else -> throw com.fasterxml.jackson.databind.exc.MismatchedInputException.from(
+                    parser, ReplyConversationRequest::class.java, "no ReplyConversationRequest branch accepts this payload")
             }
         }
     }

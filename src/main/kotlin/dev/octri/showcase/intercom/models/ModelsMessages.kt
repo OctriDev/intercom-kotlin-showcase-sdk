@@ -3,141 +3,224 @@
 
 package dev.octri.showcase.intercom.models
 
-/** The sender of the message. If not provided, the default sender will be used. */
+/**
+ * The sender of the message. If not provided, the default sender will be used.
+ */
 data class CreateMessageRequestFrom(
-    /** Always `admin`. */
+    /**
+     * Always `admin`.
+     */
     val type: CreateMessageRequestFromTypeEnum,
-    /** The identifier for the admin which is given by Intercom. */
-    val id: Long,
+    /**
+     * The identifier for the admin which is given by Intercom.
+     */
+    val id: Long
 )
 
-/** You can create a message */
+/**
+ * You can create a message
+ */
 data class CreateMessageRequest(
-    /** The kind of message being created. Values: `in_app`, `email` or `whatsapp`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type")
-    val messageType: CreateMessageRequestMessageTypeEnum? = null,
-    /** The title of the email. */
+    /**
+     * The kind of message being created. Values: `in_app`, `email` or `whatsapp`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: CreateMessageRequestMessageTypeEnum? = null,
+    /**
+     * The title of the email.
+     */
     val subject: String? = null,
-    /** The content of the message. HTML and plaintext are supported. */
+    /**
+     * The content of the message. HTML and plaintext are supported.
+     */
     val body: String? = null,
-    /** The style of the outgoing message. Possible values `plain` or `personal`. */
+    /**
+     * The style of the outgoing message. Possible values `plain` or `personal`.
+     */
     val template: String? = null,
-    /** The sender of the message. If not provided, the default sender will be used. */
+    /**
+     * The sender of the message. If not provided, the default sender will be used.
+     */
     val from: CreateMessageRequestFrom? = null,
-    /** Optional API value serialized in the `to` wire field. */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(
-        com.fasterxml.jackson.annotation.JsonSubTypes.Type(Recipient::class)
-    )
-    val to: Any? = null,
-    /** Optional API value serialized in the `cc` wire field. */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(
-        com.fasterxml.jackson.annotation.JsonSubTypes.Type(Recipient::class)
-    )
-    val cc: Any? = null,
-    /** Optional API value serialized in the `bcc` wire field. */
-    @com.fasterxml.jackson.annotation.JsonSubTypes(
-        com.fasterxml.jackson.annotation.JsonSubTypes.Type(Recipient::class)
-    )
-    val bcc: Any? = null,
-    /** The time the message was created. If not provided, the current time will be used. */
+    /**
+     * Optional API value serialized in the `to` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(Recipient::class)) val to: Any? = null,
+    /**
+     * Optional API value serialized in the `cc` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(Recipient::class)) val cc: Any? = null,
+    /**
+     * Optional API value serialized in the `bcc` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonSubTypes(com.fasterxml.jackson.annotation.JsonSubTypes.Type(Recipient::class)) val bcc: Any? = null,
+    /**
+     * The time the message was created. If not provided, the current time will be used.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
     /**
-     * Whether a conversation should be opened in the inbox for the message without the contact
-     * replying. Defaults to false if not provided.
+     * Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("create_conversation_without_contact_reply")
-    val createConversationWithoutContactReply: Boolean? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("create_conversation_without_contact_reply") val createConversationWithoutContactReply: Boolean? = null
 )
 
-/** A recipient of a message */
+/**
+ * A recipient of a message
+ */
 data class Recipient(
-    /** The role associated to the contact - `user` or `lead`. */
+    /**
+     * The role associated to the contact - `user` or `lead`.
+     */
     val type: RecipientTypeEnum,
-    /** The identifier for the contact which is given by Intercom. */
-    val id: String,
+    /**
+     * The identifier for the contact which is given by Intercom.
+     */
+    val id: String
 )
 
-/** Error details, present only when status is "failed" */
+/**
+ * Error details, present only when status is "failed"
+ */
 data class WhatsappMessageStatusError(
-    /** Error message */
+    /**
+     * Error message
+     */
     val message: String? = null,
-    /** Detailed error information */
-    val details: String? = null,
+    /**
+     * Detailed error information
+     */
+    val details: String? = null
 )
 
-/** The delivery status of a specific WhatsApp message. */
+/**
+ * The delivery status of a specific WhatsApp message.
+ */
 data class WhatsappMessageStatus(
-    /** ID of the conversation */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
-    val conversationId: String? = null,
-    /** Current delivery status of the message */
+    /**
+     * ID of the conversation
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String? = null,
+    /**
+     * Current delivery status of the message
+     */
     val status: WhatsappMessageStatusStatusEnum? = null,
-    /** Event type */
+    /**
+     * Event type
+     */
     val type: String? = null,
-    /** Creation timestamp */
+    /**
+     * Creation timestamp
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long? = null,
-    /** Last update timestamp */
+    /**
+     * Last update timestamp
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long? = null,
-    /** Name of the WhatsApp template used */
-    @com.fasterxml.jackson.annotation.JsonProperty("template_name")
-    val templateName: String? = null,
-    /** The WhatsApp message ID */
+    /**
+     * Name of the WhatsApp template used
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("template_name") val templateName: String? = null,
+    /**
+     * The WhatsApp message ID
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String? = null,
-    /** Error details, present only when status is "failed" */
-    val error: WhatsappMessageStatusError? = null,
+    /**
+     * Error details, present only when status is "failed"
+     */
+    val error: WhatsappMessageStatusError? = null
 )
 
-/** Information for fetching next page (null if no more pages) */
+/**
+ * Information for fetching next page (null if no more pages)
+ */
 data class WhatsappMessageStatusListPagesNext(
-    /** Cursor for the next page */
-    @com.fasterxml.jackson.annotation.JsonProperty("starting_after")
-    val startingAfter: String? = null
+    /**
+     * Cursor for the next page
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("starting_after") val startingAfter: String? = null
 )
 
-/** Required object value serialized in the `pages` wire field. */
+/**
+ * Required object value serialized in the `pages` wire field.
+ */
 data class WhatsappMessageStatusListPages(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: WhatsappMessageStatusListPagesTypeEnum,
-    /** Number of results per page */
+    /**
+     * Number of results per page
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("per_page") val perPage: Long,
-    /** Total number of pages */
+    /**
+     * Total number of pages
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_pages") val totalPages: Long,
-    /** Information for fetching next page (null if no more pages) */
-    val next: WhatsappMessageStatusListPagesNext? = null,
+    /**
+     * Information for fetching next page (null if no more pages)
+     */
+    val next: WhatsappMessageStatusListPagesNext? = null
 )
 
-/** Required object value serialized in the `events[]` wire field. */
+/**
+ * Required object value serialized in the `events[]` wire field.
+ */
 data class WhatsappMessageStatusListEventsItem(
-    /** Event ID */
+    /**
+     * Event ID
+     */
     val id: String,
-    /** ID of the conversation */
+    /**
+     * ID of the conversation
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /** Current status of the message */
+    /**
+     * Current status of the message
+     */
     val status: WhatsappMessageStatusListEventsItemStatusEnum,
-    /** Event type */
+    /**
+     * Event type
+     */
     val type: WhatsappMessageStatusListEventsItemTypeEnum,
-    /** Creation timestamp */
+    /**
+     * Creation timestamp
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /** Last update timestamp */
+    /**
+     * Last update timestamp
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: Long,
-    /** WhatsApp's message identifier */
-    @com.fasterxml.jackson.annotation.JsonProperty("whatsapp_message_id")
-    val whatsappMessageId: String,
-    /** Name of the WhatsApp template used */
-    @com.fasterxml.jackson.annotation.JsonProperty("template_name")
-    val templateName: String? = null,
+    /**
+     * WhatsApp's message identifier
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("whatsapp_message_id") val whatsappMessageId: String,
+    /**
+     * Name of the WhatsApp template used
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("template_name") val templateName: String? = null
 )
 
-/** Typed representation of the `WhatsappMessageStatusList` API schema. */
+/**
+ * Typed representation of the `WhatsappMessageStatusList` API schema.
+ */
 data class WhatsappMessageStatusList(
-    /** Required enumerated value serialized in the `type` wire field. */
+    /**
+     * Required enumerated value serialized in the `type` wire field.
+     */
     val type: WhatsappMessageStatusListTypeEnum,
-    /** The provided ruleset ID */
+    /**
+     * The provided ruleset ID
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("ruleset_id") val rulesetId: String,
-    /** Required object value serialized in the `pages` wire field. */
+    /**
+     * Required object value serialized in the `pages` wire field.
+     */
     val pages: WhatsappMessageStatusListPages,
-    /** Total number of events */
+    /**
+     * Total number of events
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long,
-    /** Required array value serialized in the `events` wire field. */
-    val events: List<WhatsappMessageStatusListEventsItem>,
+    /**
+     * Required array value serialized in the `events` wire field.
+     */
+    val events: List<WhatsappMessageStatusListEventsItem>
 )
