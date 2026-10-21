@@ -101,8 +101,8 @@ data class EnqueueCreateTicketAssignment(
      * @param id The unique identifier (given by Intercom) for the linked
      *   conversation or customer ticket to unlink.
      */
-    fun unlinkTicketsConversation(clientConfig: ClientConfig, ticketId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("DELETE", "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "unlinkTicketsConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
+    fun unlinkTicketConversation(clientConfig: ClientConfig, ticketId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
+        return SdkClient.request<Conversation>(SdkClient.RequestSpec("DELETE", "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "unlinkTicketConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java))).data
     }
 
 

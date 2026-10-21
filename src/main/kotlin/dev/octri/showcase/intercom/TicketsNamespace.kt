@@ -29,7 +29,7 @@ class TicketsNamespace(private val clientConfig: ClientConfig) {
      * Unlink a conversation (or converted customer ticket) from a tracker ticket it is currently linked to. The ticket in the path must be a tracker ticket. This returns the conversation that was unlinked. Requires the `write_tickets` OAuth scope.
      */
     fun unlinkConversation(ticketId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return dev.octri.showcase.intercom.methods.Tickets.unlinkTicketsConversation(clientConfig, ticketId, id, intercomVersion, options)
+        return dev.octri.showcase.intercom.methods.Tickets.unlinkTicketConversation(clientConfig, ticketId, id, intercomVersion, options)
     }
 
     /**
