@@ -70,7 +70,7 @@ class TicketsNamespace(private val clientConfig: ClientConfig) {
         intercomVersion: IntercomVersion? = null,
         options: RequestOptions? = null,
     ): Conversation {
-        return dev.octri.showcase.intercom.methods.Tickets.unlinkTicketsConversation(
+        return dev.octri.showcase.intercom.methods.Tickets.unlinkTicketConversation(
             clientConfig,
             ticketId,
             id,

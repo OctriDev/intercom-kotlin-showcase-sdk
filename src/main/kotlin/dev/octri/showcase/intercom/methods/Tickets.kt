@@ -160,7 +160,7 @@ object Tickets {
      * @param id The unique identifier (given by Intercom) for the linked conversation or customer
      *   ticket to unlink.
      */
-    fun unlinkTicketsConversation(
+    fun unlinkTicketConversation(
         clientConfig: ClientConfig,
         ticketId: String,
         id: String,
@@ -172,7 +172,7 @@ object Tickets {
                     "DELETE",
                     "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations/${SdkClient.encodePathSegment(id)}",
                     config = clientConfig,
-                    operationId = "unlinkTicketsConversation",
+                    operationId = "unlinkTicketConversation",
                     decoder = SdkClient.ResponseDecoder.JSON,
                     extraHeaders =
                         SdkClient.headers(
