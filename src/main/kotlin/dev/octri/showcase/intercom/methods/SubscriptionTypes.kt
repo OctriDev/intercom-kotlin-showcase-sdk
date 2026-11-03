@@ -15,75 +15,164 @@ import dev.octri.showcase.intercom.SubscriptionTypeList
 object SubscriptionTypes {
 
     /**
-     * Adds a subscription type preference to a contact. Provide the subscription type `id` and `consent_type` to opt the contact in or out of messages for that subscription. The response contains the subscription type added to the contact.
+     * Adds a subscription type preference to a contact. Provide the subscription type `id` and
+     * `consent_type` to opt the contact in or out of messages for that subscription. The response
+     * contains the subscription type added to the contact.
      *
-     * You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in: 1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type. 2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type. This will return a subscription type model for the subscription…
+     * You can add a specific subscription to a contact. In Intercom, we have two different
+     * subscription types based on user consent - opt-out and opt-in: 1.Attaching a contact to an
+     * opt-out subscription type will opt that user out from receiving messages related to that
+     * subscription type. 2.Attaching a contact to an opt-in subscription type will opt that user in
+     * to receiving messages related to that subscription type. This will return a subscription type
+     * model for the subscription…
      *
-     * @param contactId The unique identifier for the contact which is given by
-     *   Intercom
-     * @param id The unique identifier for the subscription which is given by
-     *   Intercom
+     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param id The unique identifier for the subscription which is given by Intercom
      * @param consentType The consent_type of a subscription, opt_out or opt_in.
      */
-    fun attachSubscriptionTypeToContact(clientConfig: ClientConfig, contactId: String, id: String, consentType: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionType {
-        return attachSubscriptionTypeToContactWithRawResponse(clientConfig, contactId, id, consentType, intercomVersion, options).data
+    fun attachSubscriptionTypeToContact(
+        clientConfig: ClientConfig,
+        contactId: String,
+        id: String,
+        consentType: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionType {
+        return attachSubscriptionTypeToContactWithRawResponse(
+                clientConfig,
+                contactId,
+                id,
+                consentType,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [attachSubscriptionTypeToContact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun attachSubscriptionTypeToContactWithRawResponse(clientConfig: ClientConfig, contactId: String, id: String, consentType: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SubscriptionType> {
-        return SdkClient.request<SubscriptionType>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/subscriptions", config = clientConfig, body = SdkClient.bodyMap("id" to (id), "consent_type" to (consentType)), operationId = "attachSubscriptionTypeToContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Removes a subscription type preference from a contact. Use `contact_id` and `subscription_id` to identify the contact and subscription to detach. The response contains the subscription type that was removed.
-     *
-     * You can remove a specific subscription from a contact. This will return a subscription type model for the subscription type that was removed from the contact.
-     *
-     * @param contactId The unique identifier for the contact which is given by
-     *   Intercom
-     * @param subscriptionId The unique identifier for the subscription type which is
-     *   given by Intercom
+     * [attachSubscriptionTypeToContact], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
      */
-    fun detachSubscriptionTypeToContact(clientConfig: ClientConfig, contactId: String, subscriptionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionType {
-        return detachSubscriptionTypeToContactWithRawResponse(clientConfig, contactId, subscriptionId, intercomVersion, options).data
+    fun attachSubscriptionTypeToContactWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        id: String,
+        consentType: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SubscriptionType> {
+        return SdkClient.request<SubscriptionType>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/subscriptions",
+                config = clientConfig,
+                body = SdkClient.bodyMap("id" to (id), "consent_type" to (consentType)),
+                operationId = "attachSubscriptionTypeToContact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-    /** [detachSubscriptionTypeToContact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun detachSubscriptionTypeToContactWithRawResponse(clientConfig: ClientConfig, contactId: String, subscriptionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SubscriptionType> {
-        return SdkClient.request<SubscriptionType>(SdkClient.RequestSpec("DELETE", "/contacts/${SdkClient.encodePathSegment(contactId)}/subscriptions/${SdkClient.encodePathSegment(subscriptionId)}", config = clientConfig, operationId = "detachSubscriptionTypeToContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Lists the subscription types associated with your workspace. Use this endpoint to retrieve the available communication consent types and their translations.
+     * Removes a subscription type preference from a contact. Use `contact_id` and `subscription_id`
+     * to identify the contact and subscription to detach. The response contains the subscription
+     * type that was removed.
+     *
+     * You can remove a specific subscription from a contact. This will return a subscription type
+     * model for the subscription type that was removed from the contact.
+     *
+     * @param contactId The unique identifier for the contact which is given by Intercom
+     * @param subscriptionId The unique identifier for the subscription type which is given by
+     *   Intercom
+     */
+    fun detachSubscriptionTypeToContact(
+        clientConfig: ClientConfig,
+        contactId: String,
+        subscriptionId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionType {
+        return detachSubscriptionTypeToContactWithRawResponse(
+                clientConfig,
+                contactId,
+                subscriptionId,
+                intercomVersion,
+                options,
+            )
+            .data
+    }
+
+    /**
+     * [detachSubscriptionTypeToContact], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun detachSubscriptionTypeToContactWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        subscriptionId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SubscriptionType> {
+        return SdkClient.request<SubscriptionType>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/subscriptions/${SdkClient.encodePathSegment(subscriptionId)}",
+                config = clientConfig,
+                operationId = "detachSubscriptionTypeToContact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Lists the subscription types associated with your workspace. Use this endpoint to retrieve
+     * the available communication consent types and their translations.
      *
      * You can list all subscription types. A list of subscription type objects will be returned.
      */
-    fun listSubscriptionTypes(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionTypeList {
+    fun listSubscriptionTypes(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionTypeList {
         return listSubscriptionTypesWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listSubscriptionTypes], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listSubscriptionTypesWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SubscriptionTypeList> {
-        return SdkClient.request<SubscriptionTypeList>(SdkClient.RequestSpec("GET", "/subscription_types", config = clientConfig, operationId = "listSubscriptionTypes", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listSubscriptionTypes], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun listSubscriptionTypesWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SubscriptionTypeList> {
+        return SdkClient.request<SubscriptionTypeList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/subscription_types",
+                config = clientConfig,
+                operationId = "listSubscriptionTypes",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

@@ -14,24 +14,42 @@ import dev.octri.showcase.intercom.TicketStateList
 object TicketStates {
 
     /**
-     * Lists the ticket states associated with ticket types in the workspace. Use the returned state details to see their labels, categories, and ticket type associations.
+     * Lists the ticket states associated with ticket types in the workspace. Use the returned state
+     * details to see their labels, categories, and ticket type associations.
      *
      * You can get a list of all ticket states for a workspace.
      */
-    fun listTicketStates(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketStateList {
+    fun listTicketStates(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TicketStateList {
         return listTicketStatesWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listTicketStates], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listTicketStatesWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<TicketStateList> {
-        return SdkClient.request<TicketStateList>(SdkClient.RequestSpec("GET", "/ticket_states", config = clientConfig, operationId = "listTicketStates", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listTicketStates], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun listTicketStatesWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TicketStateList> {
+        return SdkClient.request<TicketStateList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/ticket_states",
+                config = clientConfig,
+                operationId = "listTicketStates",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

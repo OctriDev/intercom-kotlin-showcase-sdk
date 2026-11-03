@@ -3,147 +3,266 @@
 
 package dev.octri.showcase.intercom.models
 
-/**
- * Optional enumerated value serialized in the `activity_type` wire field.
- */
-class ActivityLogActivityTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ActivityLogActivityTypeEnum && value == other.value
+/** Optional enumerated value serialized in the `activity_type` wire field. */
+class ActivityLogActivityTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ActivityLogActivityTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val ADMIN_CONVERSATION_ASSIGNMENT_LIMIT_CHANGE = ActivityLogActivityTypeEnum("admin_conversation_assignment_limit_change")
-        @JvmField val ADMIN_TICKET_ASSIGNMENT_LIMIT_CHANGE = ActivityLogActivityTypeEnum("admin_ticket_assignment_limit_change")
+        @JvmField
+        val ADMIN_CONVERSATION_ASSIGNMENT_LIMIT_CHANGE =
+            ActivityLogActivityTypeEnum("admin_conversation_assignment_limit_change")
+        @JvmField
+        val ADMIN_TICKET_ASSIGNMENT_LIMIT_CHANGE =
+            ActivityLogActivityTypeEnum("admin_ticket_assignment_limit_change")
         @JvmField val ADMIN_AVATAR_CHANGE = ActivityLogActivityTypeEnum("admin_avatar_change")
         @JvmField val ADMIN_AWAY_MODE_CHANGE = ActivityLogActivityTypeEnum("admin_away_mode_change")
         @JvmField val ADMIN_DELETION = ActivityLogActivityTypeEnum("admin_deletion")
         @JvmField val ADMIN_DEPROVISIONED = ActivityLogActivityTypeEnum("admin_deprovisioned")
-        @JvmField val ADMIN_IMPERSONATION_END = ActivityLogActivityTypeEnum("admin_impersonation_end")
-        @JvmField val ADMIN_IMPERSONATION_START = ActivityLogActivityTypeEnum("admin_impersonation_start")
-        @JvmField val ADMIN_IMPERSONATION_CONSENT_APPROVED = ActivityLogActivityTypeEnum("admin_impersonation_consent_approved")
-        @JvmField val ADMIN_IMPERSONATION_CONSENT_REVOKED = ActivityLogActivityTypeEnum("admin_impersonation_consent_revoked")
+        @JvmField
+        val ADMIN_IMPERSONATION_END = ActivityLogActivityTypeEnum("admin_impersonation_end")
+        @JvmField
+        val ADMIN_IMPERSONATION_START = ActivityLogActivityTypeEnum("admin_impersonation_start")
+        @JvmField
+        val ADMIN_IMPERSONATION_CONSENT_APPROVED =
+            ActivityLogActivityTypeEnum("admin_impersonation_consent_approved")
+        @JvmField
+        val ADMIN_IMPERSONATION_CONSENT_REVOKED =
+            ActivityLogActivityTypeEnum("admin_impersonation_consent_revoked")
         @JvmField val ADMIN_INVITE_CHANGE = ActivityLogActivityTypeEnum("admin_invite_change")
         @JvmField val ADMIN_INVITE_CREATION = ActivityLogActivityTypeEnum("admin_invite_creation")
         @JvmField val ADMIN_INVITE_DELETION = ActivityLogActivityTypeEnum("admin_invite_deletion")
         @JvmField val ADMIN_LOGIN_FAILURE = ActivityLogActivityTypeEnum("admin_login_failure")
         @JvmField val ADMIN_LOGIN_SUCCESS = ActivityLogActivityTypeEnum("admin_login_success")
         @JvmField val ADMIN_LOGOUT = ActivityLogActivityTypeEnum("admin_logout")
-        @JvmField val ADMIN_OCCUPANCY_SETTING_CHANGE = ActivityLogActivityTypeEnum("admin_occupancy_setting_change")
-        @JvmField val ADMIN_OCCUPANCY_STATE_CHANGE = ActivityLogActivityTypeEnum("admin_occupancy_state_change")
-        @JvmField val ADMIN_PASSWORD_RESET_REQUEST = ActivityLogActivityTypeEnum("admin_password_reset_request")
-        @JvmField val ADMIN_PASSWORD_RESET_SUCCESS = ActivityLogActivityTypeEnum("admin_password_reset_success")
-        @JvmField val ADMIN_PERMISSION_CHANGE = ActivityLogActivityTypeEnum("admin_permission_change")
+        @JvmField
+        val ADMIN_OCCUPANCY_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("admin_occupancy_setting_change")
+        @JvmField
+        val ADMIN_OCCUPANCY_STATE_CHANGE =
+            ActivityLogActivityTypeEnum("admin_occupancy_state_change")
+        @JvmField
+        val ADMIN_PASSWORD_RESET_REQUEST =
+            ActivityLogActivityTypeEnum("admin_password_reset_request")
+        @JvmField
+        val ADMIN_PASSWORD_RESET_SUCCESS =
+            ActivityLogActivityTypeEnum("admin_password_reset_success")
+        @JvmField
+        val ADMIN_PERMISSION_CHANGE = ActivityLogActivityTypeEnum("admin_permission_change")
         @JvmField val ADMIN_PROVISIONED = ActivityLogActivityTypeEnum("admin_provisioned")
-        @JvmField val ADMIN_TWO_FACTOR_AUTH_CHANGE = ActivityLogActivityTypeEnum("admin_two_factor_auth_change")
-        @JvmField val ADMIN_UNAUTHORIZED_SIGN_IN_METHOD = ActivityLogActivityTypeEnum("admin_unauthorized_sign_in_method")
+        @JvmField
+        val ADMIN_TWO_FACTOR_AUTH_CHANGE =
+            ActivityLogActivityTypeEnum("admin_two_factor_auth_change")
+        @JvmField
+        val ADMIN_UNAUTHORIZED_SIGN_IN_METHOD =
+            ActivityLogActivityTypeEnum("admin_unauthorized_sign_in_method")
         @JvmField val APP_ADMIN_JOIN = ActivityLogActivityTypeEnum("app_admin_join")
-        @JvmField val APP_AUTHENTICATION_METHOD_CHANGE = ActivityLogActivityTypeEnum("app_authentication_method_change")
+        @JvmField
+        val APP_AUTHENTICATION_METHOD_CHANGE =
+            ActivityLogActivityTypeEnum("app_authentication_method_change")
         @JvmField val APP_DATA_DELETION = ActivityLogActivityTypeEnum("app_data_deletion")
         @JvmField val APP_DATA_EXPORT = ActivityLogActivityTypeEnum("app_data_export")
-        @JvmField val APP_GOOGLE_SSO_DOMAIN_CHANGE = ActivityLogActivityTypeEnum("app_google_sso_domain_change")
-        @JvmField val APP_IDENTITY_VERIFICATION_CHANGE = ActivityLogActivityTypeEnum("app_identity_verification_change")
+        @JvmField
+        val APP_GOOGLE_SSO_DOMAIN_CHANGE =
+            ActivityLogActivityTypeEnum("app_google_sso_domain_change")
+        @JvmField
+        val APP_IDENTITY_VERIFICATION_CHANGE =
+            ActivityLogActivityTypeEnum("app_identity_verification_change")
         @JvmField val APP_NAME_CHANGE = ActivityLogActivityTypeEnum("app_name_change")
-        @JvmField val APP_OUTBOUND_ADDRESS_CHANGE = ActivityLogActivityTypeEnum("app_outbound_address_change")
-        @JvmField val APP_PACKAGE_INSTALLATION = ActivityLogActivityTypeEnum("app_package_installation")
-        @JvmField val APP_PACKAGE_TOKEN_REGENERATION = ActivityLogActivityTypeEnum("app_package_token_regeneration")
-        @JvmField val APP_PACKAGE_UNINSTALLATION = ActivityLogActivityTypeEnum("app_package_uninstallation")
+        @JvmField
+        val APP_OUTBOUND_ADDRESS_CHANGE = ActivityLogActivityTypeEnum("app_outbound_address_change")
+        @JvmField
+        val APP_PACKAGE_INSTALLATION = ActivityLogActivityTypeEnum("app_package_installation")
+        @JvmField
+        val APP_PACKAGE_TOKEN_REGENERATION =
+            ActivityLogActivityTypeEnum("app_package_token_regeneration")
+        @JvmField
+        val APP_PACKAGE_UNINSTALLATION = ActivityLogActivityTypeEnum("app_package_uninstallation")
         @JvmField val APP_TEAM_CREATION = ActivityLogActivityTypeEnum("app_team_creation")
         @JvmField val APP_TEAM_DELETION = ActivityLogActivityTypeEnum("app_team_deletion")
-        @JvmField val APP_TEAM_MEMBERSHIP_MODIFICATION = ActivityLogActivityTypeEnum("app_team_membership_modification")
+        @JvmField
+        val APP_TEAM_MEMBERSHIP_MODIFICATION =
+            ActivityLogActivityTypeEnum("app_team_membership_modification")
         @JvmField val APP_TIMEZONE_CHANGE = ActivityLogActivityTypeEnum("app_timezone_change")
         @JvmField val APP_WEBHOOK_CREATION = ActivityLogActivityTypeEnum("app_webhook_creation")
         @JvmField val APP_WEBHOOK_DELETION = ActivityLogActivityTypeEnum("app_webhook_deletion")
-        @JvmField val ARTICLES_IN_MESSENGER_ENABLED_CHANGE = ActivityLogActivityTypeEnum("articles_in_messenger_enabled_change")
-        @JvmField val AUTOMATIC_AWAY_MODE_SETTING_CHANGE = ActivityLogActivityTypeEnum("automatic_away_mode_setting_change")
+        @JvmField
+        val ARTICLES_IN_MESSENGER_ENABLED_CHANGE =
+            ActivityLogActivityTypeEnum("articles_in_messenger_enabled_change")
+        @JvmField
+        val AUTOMATIC_AWAY_MODE_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("automatic_away_mode_setting_change")
         @JvmField val BULK_DELETE = ActivityLogActivityTypeEnum("bulk_delete")
         @JvmField val BULK_EXPORT = ActivityLogActivityTypeEnum("bulk_export")
         @JvmField val CAMPAIGN_DELETION = ActivityLogActivityTypeEnum("campaign_deletion")
         @JvmField val CAMPAIGN_STATE_CHANGE = ActivityLogActivityTypeEnum("campaign_state_change")
-        @JvmField val CONVERSATION_DELETION_SCHEDULE_CREATION = ActivityLogActivityTypeEnum("conversation_deletion_schedule_creation")
-        @JvmField val CONVERSATION_DELETION_SCHEDULE_DELETION = ActivityLogActivityTypeEnum("conversation_deletion_schedule_deletion")
-        @JvmField val CONVERSATION_DELETION_SCHEDULE_STATE_CHANGE = ActivityLogActivityTypeEnum("conversation_deletion_schedule_state_change")
-        @JvmField val CONVERSATION_DELETION_SCHEDULE_UPDATE = ActivityLogActivityTypeEnum("conversation_deletion_schedule_update")
-        @JvmField val CONVERSATION_PART_DELETION = ActivityLogActivityTypeEnum("conversation_part_deletion")
-        @JvmField val CONVERSATION_PDF_EXPORT = ActivityLogActivityTypeEnum("conversation_pdf_export")
-        @JvmField val CONVERSATION_TOPIC_CHANGE = ActivityLogActivityTypeEnum("conversation_topic_change")
-        @JvmField val CONVERSATION_TOPIC_CREATION = ActivityLogActivityTypeEnum("conversation_topic_creation")
-        @JvmField val CONVERSATION_TOPIC_DELETION = ActivityLogActivityTypeEnum("conversation_topic_deletion")
-        @JvmField val CONTENT_REDACTION_RULE_CREATION = ActivityLogActivityTypeEnum("content_redaction_rule_creation")
-        @JvmField val CONTENT_REDACTION_RULE_DELETION = ActivityLogActivityTypeEnum("content_redaction_rule_deletion")
-        @JvmField val CONTENT_REDACTION_RULE_UPDATE = ActivityLogActivityTypeEnum("content_redaction_rule_update")
+        @JvmField
+        val CONVERSATION_DELETION_SCHEDULE_CREATION =
+            ActivityLogActivityTypeEnum("conversation_deletion_schedule_creation")
+        @JvmField
+        val CONVERSATION_DELETION_SCHEDULE_DELETION =
+            ActivityLogActivityTypeEnum("conversation_deletion_schedule_deletion")
+        @JvmField
+        val CONVERSATION_DELETION_SCHEDULE_STATE_CHANGE =
+            ActivityLogActivityTypeEnum("conversation_deletion_schedule_state_change")
+        @JvmField
+        val CONVERSATION_DELETION_SCHEDULE_UPDATE =
+            ActivityLogActivityTypeEnum("conversation_deletion_schedule_update")
+        @JvmField
+        val CONVERSATION_PART_DELETION = ActivityLogActivityTypeEnum("conversation_part_deletion")
+        @JvmField
+        val CONVERSATION_PDF_EXPORT = ActivityLogActivityTypeEnum("conversation_pdf_export")
+        @JvmField
+        val CONVERSATION_TOPIC_CHANGE = ActivityLogActivityTypeEnum("conversation_topic_change")
+        @JvmField
+        val CONVERSATION_TOPIC_CREATION = ActivityLogActivityTypeEnum("conversation_topic_creation")
+        @JvmField
+        val CONVERSATION_TOPIC_DELETION = ActivityLogActivityTypeEnum("conversation_topic_deletion")
+        @JvmField
+        val CONTENT_REDACTION_RULE_CREATION =
+            ActivityLogActivityTypeEnum("content_redaction_rule_creation")
+        @JvmField
+        val CONTENT_REDACTION_RULE_DELETION =
+            ActivityLogActivityTypeEnum("content_redaction_rule_deletion")
+        @JvmField
+        val CONTENT_REDACTION_RULE_UPDATE =
+            ActivityLogActivityTypeEnum("content_redaction_rule_update")
         @JvmField val CSV_IMPORT_COMPLETION = ActivityLogActivityTypeEnum("csv_import_completion")
         @JvmField val CSV_IMPORT_CREATION = ActivityLogActivityTypeEnum("csv_import_creation")
-        @JvmField val CUSTOM_AUTHENTICATION_TOKEN_CREATION = ActivityLogActivityTypeEnum("custom_authentication_token_creation")
-        @JvmField val HELP_CENTER_SETTINGS_CHANGE = ActivityLogActivityTypeEnum("help_center_settings_change")
-        @JvmField val INBOUND_CONVERSATIONS_CHANGE = ActivityLogActivityTypeEnum("inbound_conversations_change")
+        @JvmField
+        val CUSTOM_AUTHENTICATION_TOKEN_CREATION =
+            ActivityLogActivityTypeEnum("custom_authentication_token_creation")
+        @JvmField
+        val HELP_CENTER_SETTINGS_CHANGE = ActivityLogActivityTypeEnum("help_center_settings_change")
+        @JvmField
+        val INBOUND_CONVERSATIONS_CHANGE =
+            ActivityLogActivityTypeEnum("inbound_conversations_change")
         @JvmField val INBOX_ACCESS_CHANGE = ActivityLogActivityTypeEnum("inbox_access_change")
         @JvmField val INBOX_BULK_ACTION = ActivityLogActivityTypeEnum("inbox_bulk_action")
         @JvmField val MACRO_CREATION = ActivityLogActivityTypeEnum("macro_creation")
         @JvmField val MACRO_DELETION = ActivityLogActivityTypeEnum("macro_deletion")
         @JvmField val MACRO_UPDATE = ActivityLogActivityTypeEnum("macro_update")
         @JvmField val MACRO_USAGE_EXPORT = ActivityLogActivityTypeEnum("macro_usage_export")
-        @JvmField val MALICIOUS_DOMAINS_SETTING_CHANGE = ActivityLogActivityTypeEnum("malicious_domains_setting_change")
+        @JvmField
+        val MALICIOUS_DOMAINS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("malicious_domains_setting_change")
         @JvmField val MESSAGE_DELETION = ActivityLogActivityTypeEnum("message_deletion")
         @JvmField val MESSAGE_STATE_CHANGE = ActivityLogActivityTypeEnum("message_state_change")
-        @JvmField val MESSENGER_API_SECRET_CREATION = ActivityLogActivityTypeEnum("messenger_api_secret_creation")
-        @JvmField val MESSENGER_API_SECRET_DELETION = ActivityLogActivityTypeEnum("messenger_api_secret_deletion")
-        @JvmField val MESSENGER_LOOK_AND_FEEL_CHANGE = ActivityLogActivityTypeEnum("messenger_look_and_feel_change")
-        @JvmField val MESSENGER_SEARCH_REQUIRED_CHANGE = ActivityLogActivityTypeEnum("messenger_search_required_change")
-        @JvmField val MESSENGER_SPACES_CHANGE = ActivityLogActivityTypeEnum("messenger_spaces_change")
+        @JvmField
+        val MESSENGER_API_SECRET_CREATION =
+            ActivityLogActivityTypeEnum("messenger_api_secret_creation")
+        @JvmField
+        val MESSENGER_API_SECRET_DELETION =
+            ActivityLogActivityTypeEnum("messenger_api_secret_deletion")
+        @JvmField
+        val MESSENGER_LOOK_AND_FEEL_CHANGE =
+            ActivityLogActivityTypeEnum("messenger_look_and_feel_change")
+        @JvmField
+        val MESSENGER_SEARCH_REQUIRED_CHANGE =
+            ActivityLogActivityTypeEnum("messenger_search_required_change")
+        @JvmField
+        val MESSENGER_SPACES_CHANGE = ActivityLogActivityTypeEnum("messenger_spaces_change")
         @JvmField val OAUTH_TOKEN_REVOCATION = ActivityLogActivityTypeEnum("oauth_token_revocation")
         @JvmField val OFFICE_HOURS_CHANGE = ActivityLogActivityTypeEnum("office_hours_change")
         @JvmField val ROLE_CHANGE = ActivityLogActivityTypeEnum("role_change")
         @JvmField val ROLE_CREATION = ActivityLogActivityTypeEnum("role_creation")
         @JvmField val ROLE_DELETION = ActivityLogActivityTypeEnum("role_deletion")
-        @JvmField val RULESET_ACTIVATION_TITLE_PREVIEW = ActivityLogActivityTypeEnum("ruleset_activation_title_preview")
+        @JvmField
+        val RULESET_ACTIVATION_TITLE_PREVIEW =
+            ActivityLogActivityTypeEnum("ruleset_activation_title_preview")
         @JvmField val RULESET_CREATION = ActivityLogActivityTypeEnum("ruleset_creation")
         @JvmField val RULESET_DELETION = ActivityLogActivityTypeEnum("ruleset_deletion")
-        @JvmField val SEARCH_BROWSE_ENABLED_CHANGE = ActivityLogActivityTypeEnum("search_browse_enabled_change")
-        @JvmField val SEARCH_BROWSE_REQUIRED_CHANGE = ActivityLogActivityTypeEnum("search_browse_required_change")
+        @JvmField
+        val SEARCH_BROWSE_ENABLED_CHANGE =
+            ActivityLogActivityTypeEnum("search_browse_enabled_change")
+        @JvmField
+        val SEARCH_BROWSE_REQUIRED_CHANGE =
+            ActivityLogActivityTypeEnum("search_browse_required_change")
         @JvmField val SEAT_CHANGE = ActivityLogActivityTypeEnum("seat_change")
         @JvmField val SEAT_REVOKE = ActivityLogActivityTypeEnum("seat_revoke")
-        @JvmField val SECURITY_SETTINGS_CHANGE = ActivityLogActivityTypeEnum("security_settings_change")
+        @JvmField
+        val SECURITY_SETTINGS_CHANGE = ActivityLogActivityTypeEnum("security_settings_change")
         @JvmField val SERIES_CREATION = ActivityLogActivityTypeEnum("series_creation")
         @JvmField val SERIES_DELETION = ActivityLogActivityTypeEnum("series_deletion")
         @JvmField val SERIES_SETTINGS_UPDATE = ActivityLogActivityTypeEnum("series_settings_update")
         @JvmField val SERIES_STATUS_CHANGE = ActivityLogActivityTypeEnum("series_status_change")
         @JvmField val SERIES_UPDATE = ActivityLogActivityTypeEnum("series_update")
-        @JvmField val STRIP_INBOUND_EMAIL_LINKS_CHANGE = ActivityLogActivityTypeEnum("strip_inbound_email_links_change")
-        @JvmField val TEMPORARY_EXPECTATION_CHANGE = ActivityLogActivityTypeEnum("temporary_expectation_change")
-        @JvmField val TEAM_ASSIGNMENT_LIMIT_CHANGE = ActivityLogActivityTypeEnum("team_assignment_limit_change")
-        @JvmField val TRUSTED_DOMAINS_SETTING_CHANGE = ActivityLogActivityTypeEnum("trusted_domains_setting_change")
-        @JvmField val UNASSIGN_UNSNOOZED_AT_CAPACITY_SETTING_CHANGE = ActivityLogActivityTypeEnum("unassign_unsnoozed_at_capacity_setting_change")
-        @JvmField val UNASSIGN_UNSNOOZED_WHEN_AWAY_SETTING_CHANGE = ActivityLogActivityTypeEnum("unassign_unsnoozed_when_away_setting_change")
-        @JvmField val UPFRONT_EMAIL_COLLECTION_CHANGE = ActivityLogActivityTypeEnum("upfront_email_collection_change")
-        @JvmField val ALLOWED_ATTACHMENT_FILETYPES_SETTING_CHANGE = ActivityLogActivityTypeEnum("allowed_attachment_filetypes_setting_change")
-        @JvmField val ATTACH_UPLOADS_INLINE_SETTING_CHANGE = ActivityLogActivityTypeEnum("attach_uploads_inline_setting_change")
-        @JvmField val TEAMMATE_GIFS_SETTING_CHANGE = ActivityLogActivityTypeEnum("teammate_gifs_setting_change")
-        @JvmField val USER_CAMERA_ATTACHMENTS_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_camera_attachments_setting_change")
-        @JvmField val USER_CONVERSATION_ATTACHMENTS_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_conversation_attachments_setting_change")
-        @JvmField val USER_FILE_ATTACHMENTS_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_file_attachments_setting_change")
-        @JvmField val USER_GIFS_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_gifs_setting_change")
-        @JvmField val USER_MEDIA_ATTACHMENTS_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_media_attachments_setting_change")
-        @JvmField val USER_VOICE_NOTES_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_voice_notes_setting_change")
+        @JvmField
+        val STRIP_INBOUND_EMAIL_LINKS_CHANGE =
+            ActivityLogActivityTypeEnum("strip_inbound_email_links_change")
+        @JvmField
+        val TEMPORARY_EXPECTATION_CHANGE =
+            ActivityLogActivityTypeEnum("temporary_expectation_change")
+        @JvmField
+        val TEAM_ASSIGNMENT_LIMIT_CHANGE =
+            ActivityLogActivityTypeEnum("team_assignment_limit_change")
+        @JvmField
+        val TRUSTED_DOMAINS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("trusted_domains_setting_change")
+        @JvmField
+        val UNASSIGN_UNSNOOZED_AT_CAPACITY_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("unassign_unsnoozed_at_capacity_setting_change")
+        @JvmField
+        val UNASSIGN_UNSNOOZED_WHEN_AWAY_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("unassign_unsnoozed_when_away_setting_change")
+        @JvmField
+        val UPFRONT_EMAIL_COLLECTION_CHANGE =
+            ActivityLogActivityTypeEnum("upfront_email_collection_change")
+        @JvmField
+        val ALLOWED_ATTACHMENT_FILETYPES_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("allowed_attachment_filetypes_setting_change")
+        @JvmField
+        val ATTACH_UPLOADS_INLINE_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("attach_uploads_inline_setting_change")
+        @JvmField
+        val TEAMMATE_GIFS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("teammate_gifs_setting_change")
+        @JvmField
+        val USER_CAMERA_ATTACHMENTS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("user_camera_attachments_setting_change")
+        @JvmField
+        val USER_CONVERSATION_ATTACHMENTS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("user_conversation_attachments_setting_change")
+        @JvmField
+        val USER_FILE_ATTACHMENTS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("user_file_attachments_setting_change")
+        @JvmField
+        val USER_GIFS_SETTING_CHANGE = ActivityLogActivityTypeEnum("user_gifs_setting_change")
+        @JvmField
+        val USER_MEDIA_ATTACHMENTS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("user_media_attachments_setting_change")
+        @JvmField
+        val USER_VOICE_NOTES_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("user_voice_notes_setting_change")
         @JvmField val WELCOME_MESSAGE_CHANGE = ActivityLogActivityTypeEnum("welcome_message_change")
-        @JvmField val WORKSPACE_DELETION_REQUEST = ActivityLogActivityTypeEnum("workspace_deletion_request")
-        @JvmField val HIDE_CSAT_FROM_AGENTS_SETTING_CHANGE = ActivityLogActivityTypeEnum("hide_csat_from_agents_setting_change")
+        @JvmField
+        val WORKSPACE_DELETION_REQUEST = ActivityLogActivityTypeEnum("workspace_deletion_request")
+        @JvmField
+        val HIDE_CSAT_FROM_AGENTS_SETTING_CHANGE =
+            ActivityLogActivityTypeEnum("hide_csat_from_agents_setting_change")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ActivityLogActivityTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ActivityLogActivityTypeEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `message_type` wire field.
- */
-class AdminReplyConversationRequestMessageTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AdminReplyConversationRequestMessageTypeEnum && value == other.value
+/** Required enumerated value serialized in the `message_type` wire field. */
+class AdminReplyConversationRequestMessageTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AdminReplyConversationRequestMessageTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -152,38 +271,47 @@ class AdminReplyConversationRequestMessageTypeEnum private constructor(
         @JvmField val NOTE = AdminReplyConversationRequestMessageTypeEnum("note")
         @JvmField val QUICK_REPLY = AdminReplyConversationRequestMessageTypeEnum("quick_reply")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AdminReplyConversationRequestMessageTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AdminReplyConversationRequestMessageTypeEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
-class AdminReplyConversationRequestTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AdminReplyConversationRequestTypeEnum && value == other.value
+/** Required enumerated value serialized in the `type` wire field. */
+class AdminReplyConversationRequestTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AdminReplyConversationRequestTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ADMIN = AdminReplyConversationRequestTypeEnum("admin")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AdminReplyConversationRequestTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AdminReplyConversationRequestTypeEnum(value)
     }
 }
 
 /**
- * The type of reply. Tracker tickets and back-office tickets that are not shared with the customer do not support `comment`; use `note` instead.
+ * The type of reply. Tracker tickets and back-office tickets that are not shared with the customer
+ * do not support `comment`; use `note` instead.
  */
-class AdminReplyTicketRequestMessageTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AdminReplyTicketRequestMessageTypeEnum && value == other.value
+class AdminReplyTicketRequestMessageTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AdminReplyTicketRequestMessageTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -192,38 +320,47 @@ class AdminReplyTicketRequestMessageTypeEnum private constructor(
         @JvmField val NOTE = AdminReplyTicketRequestMessageTypeEnum("note")
         @JvmField val QUICK_REPLY = AdminReplyTicketRequestMessageTypeEnum("quick_reply")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AdminReplyTicketRequestMessageTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AdminReplyTicketRequestMessageTypeEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `type` wire field.
- */
-class AdminReplyTicketRequestTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AdminReplyTicketRequestTypeEnum && value == other.value
+/** Required enumerated value serialized in the `type` wire field. */
+class AdminReplyTicketRequestTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AdminReplyTicketRequestTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ADMIN = AdminReplyTicketRequestTypeEnum("admin")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AdminReplyTicketRequestTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AdminReplyTicketRequestTypeEnum(value)
     }
 }
 
 /**
- * The type of the last answer delivered by AI Agent. If no answer was delivered then this will return `null`
+ * The type of the last answer delivered by AI Agent. If no answer was delivered then this will
+ * return `null`
  */
-class AiAgentLastAnswerTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AiAgentLastAnswerTypeEnum && value == other.value
+class AiAgentLastAnswerTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AiAgentLastAnswerTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -231,19 +368,25 @@ class AiAgentLastAnswerTypeEnum private constructor(
         @JvmField val AI_ANSWER = AiAgentLastAnswerTypeEnum("ai_answer")
         @JvmField val CUSTOM_ANSWER = AiAgentLastAnswerTypeEnum("custom_answer")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AiAgentLastAnswerTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AiAgentLastAnswerTypeEnum(value)
     }
 }
 
 /**
- * The resolution state of AI Agent. If no AI or custom answer has been delivered then this will return `null`.
+ * The resolution state of AI Agent. If no AI or custom answer has been delivered then this will
+ * return `null`.
  */
-class AiAgentResolutionStateEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AiAgentResolutionStateEnum && value == other.value
+class AiAgentResolutionStateEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AiAgentResolutionStateEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -254,19 +397,22 @@ class AiAgentResolutionStateEnum private constructor(
         @JvmField val NEGATIVE_FEEDBACK = AiAgentResolutionStateEnum("negative_feedback")
         @JvmField val PROCEDURE_HANDOFF = AiAgentResolutionStateEnum("procedure_handoff")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AiAgentResolutionStateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AiAgentResolutionStateEnum(value)
     }
 }
 
-/**
- * The type of the source that triggered AI Agent involvement in the conversation.
- */
-class AiAgentSourceTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is AiAgentSourceTypeEnum && value == other.value
+/** The type of the source that triggered AI Agent involvement in the conversation. */
+class AiAgentSourceTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is AiAgentSourceTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -277,19 +423,26 @@ class AiAgentSourceTypeEnum private constructor(
         @JvmField val WORKFLOW_PREVIEW = AiAgentSourceTypeEnum("workflow_preview")
         @JvmField val FIN_PREVIEW = AiAgentSourceTypeEnum("fin_preview")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = AiAgentSourceTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = AiAgentSourceTypeEnum(value)
     }
 }
 
 /**
- * The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.
+ * The audience that can view this article in the Help Center. `everyone` means all users and
+ * visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual
+ * articles, this is the article-level audience.
  */
-class ArticleHelpCenterAudienceEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleHelpCenterAudienceEnum && value == other.value
+class ArticleHelpCenterAudienceEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleHelpCenterAudienceEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -298,22 +451,28 @@ class ArticleHelpCenterAudienceEnum private constructor(
         @JvmField val ALL_USERS = ArticleHelpCenterAudienceEnum("all_users")
         @JvmField val ALL_VISITORS = ArticleHelpCenterAudienceEnum("all_visitors")
         @JvmField val ALL_LEADS = ArticleHelpCenterAudienceEnum("all_leads")
-        @JvmField val ALL_VISITORS_AND_LEADS = ArticleHelpCenterAudienceEnum("all_visitors_and_leads")
+        @JvmField
+        val ALL_VISITORS_AND_LEADS = ArticleHelpCenterAudienceEnum("all_visitors_and_leads")
         @JvmField val RESTRICTED = ArticleHelpCenterAudienceEnum("restricted")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleHelpCenterAudienceEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleHelpCenterAudienceEnum(value)
     }
 }
 
 /**
- * Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language's content.
+ * Whether the article is `published` or is a `draft`. For multilingual articles, this will be the
+ * state of the default language's content.
  */
-class ArticleStateEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+class ArticleStateEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ArticleStateEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -321,38 +480,43 @@ class ArticleStateEnum private constructor(
         @JvmField val PUBLISHED = ArticleStateEnum("published")
         @JvmField val DRAFT = ArticleStateEnum("draft")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleStateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleStateEnum(value)
     }
 }
 
-/**
- * The type of object - `article`.
- */
-class ArticleTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** The type of object - `article`. */
+class ArticleTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ArticleTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ARTICLE = ArticleTypeEnum("article")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleTypeEnum(value)
     }
 }
 
-/**
- * Whether the article is `published` or is a `draft` .
- */
-class ArticleContentStateEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleContentStateEnum && value == other.value
+/** Whether the article is `published` or is a `draft` . */
+class ArticleContentStateEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleContentStateEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -360,38 +524,44 @@ class ArticleContentStateEnum private constructor(
         @JvmField val PUBLISHED = ArticleContentStateEnum("published")
         @JvmField val DRAFT = ArticleContentStateEnum("draft")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleContentStateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleContentStateEnum(value)
     }
 }
 
-/**
- * The type of object - `article_content` .
- */
-class ArticleContentTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleContentTypeEnum && value == other.value
+/** The type of object - `article_content` . */
+class ArticleContentTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleContentTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ARTICLE_CONTENT = ArticleContentTypeEnum("article_content")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleContentTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleContentTypeEnum(value)
     }
 }
 
-/**
- * Whether the article is `published` or is a `draft` .
- */
-class ArticleContentRequestStateEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleContentRequestStateEnum && value == other.value
+/** Whether the article is `published` or is a `draft` . */
+class ArticleContentRequestStateEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleContentRequestStateEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -399,57 +569,69 @@ class ArticleContentRequestStateEnum private constructor(
         @JvmField val PUBLISHED = ArticleContentRequestStateEnum("published")
         @JvmField val DRAFT = ArticleContentRequestStateEnum("draft")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleContentRequestStateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleContentRequestStateEnum(value)
     }
 }
 
-/**
- * The type of object - `article_content` .
- */
-class ArticleContentRequestTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleContentRequestTypeEnum && value == other.value
+/** The type of object - `article_content` . */
+class ArticleContentRequestTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleContentRequestTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ARTICLE_CONTENT = ArticleContentRequestTypeEnum("article_content")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleContentRequestTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleContentRequestTypeEnum(value)
     }
 }
 
-/**
- * The type of the object - `list`.
- */
-class ArticleListTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** The type of the object - `list`. */
+class ArticleListTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is ArticleListTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val LIST = ArticleListTypeEnum("list")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleListTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleListTypeEnum(value)
     }
 }
 
 /**
- * The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.
+ * The audience that can view this article in the Help Center. `everyone` means all users and
+ * visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual
+ * articles, this is the article-level audience.
  */
-class ArticleListItemHelpCenterAudienceEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleListItemHelpCenterAudienceEnum && value == other.value
+class ArticleListItemHelpCenterAudienceEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleListItemHelpCenterAudienceEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -458,22 +640,29 @@ class ArticleListItemHelpCenterAudienceEnum private constructor(
         @JvmField val ALL_USERS = ArticleListItemHelpCenterAudienceEnum("all_users")
         @JvmField val ALL_VISITORS = ArticleListItemHelpCenterAudienceEnum("all_visitors")
         @JvmField val ALL_LEADS = ArticleListItemHelpCenterAudienceEnum("all_leads")
-        @JvmField val ALL_VISITORS_AND_LEADS = ArticleListItemHelpCenterAudienceEnum("all_visitors_and_leads")
+        @JvmField
+        val ALL_VISITORS_AND_LEADS = ArticleListItemHelpCenterAudienceEnum("all_visitors_and_leads")
         @JvmField val RESTRICTED = ArticleListItemHelpCenterAudienceEnum("restricted")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleListItemHelpCenterAudienceEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleListItemHelpCenterAudienceEnum(value)
     }
 }
 
 /**
- * Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language's content.
+ * Whether the article is `published` or is a `draft`. For multilingual articles, this will be the
+ * state of the default language's content.
  */
-class ArticleListItemStateEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleListItemStateEnum && value == other.value
+class ArticleListItemStateEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleListItemStateEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -481,58 +670,69 @@ class ArticleListItemStateEnum private constructor(
         @JvmField val PUBLISHED = ArticleListItemStateEnum("published")
         @JvmField val DRAFT = ArticleListItemStateEnum("draft")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleListItemStateEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleListItemStateEnum(value)
     }
 }
 
-/**
- * The type of object - `article`.
- */
-class ArticleListItemTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleListItemTypeEnum && value == other.value
+/** The type of object - `article`. */
+class ArticleListItemTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleListItemTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ARTICLE = ArticleListItemTypeEnum("article")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleListItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleListItemTypeEnum(value)
     }
 }
 
-/**
- * The type of text - `highlight` or `plain`.
- */
-class ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum && value == other.value
+/** The type of text - `highlight` or `plain`. */
+class ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val HIGHLIGHT = ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum("highlight")
+        @JvmField
+        val HIGHLIGHT = ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum("highlight")
         @JvmField val PLAIN = ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum("plain")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            ArticleSearchHighlightsHighlightedSummaryItemItemTypeEnum(value)
     }
 }
 
-/**
- * The type of text - `highlight` or `plain`.
- */
-class ArticleSearchHighlightsHighlightedTitleItemTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleSearchHighlightsHighlightedTitleItemTypeEnum && value == other.value
+/** The type of text - `highlight` or `plain`. */
+class ArticleSearchHighlightsHighlightedTitleItemTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleSearchHighlightsHighlightedTitleItemTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -540,64 +740,78 @@ class ArticleSearchHighlightsHighlightedTitleItemTypeEnum private constructor(
         @JvmField val HIGHLIGHT = ArticleSearchHighlightsHighlightedTitleItemTypeEnum("highlight")
         @JvmField val PLAIN = ArticleSearchHighlightsHighlightedTitleItemTypeEnum("plain")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleSearchHighlightsHighlightedTitleItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleSearchHighlightsHighlightedTitleItemTypeEnum(value)
     }
 }
 
-/**
- * The type of the object - `list`.
- */
-class ArticleSearchResponseTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleSearchResponseTypeEnum && value == other.value
+/** The type of the object - `list`. */
+class ArticleSearchResponseTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleSearchResponseTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val LIST = ArticleSearchResponseTypeEnum("list")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleSearchResponseTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleSearchResponseTypeEnum(value)
     }
 }
 
-/**
- * The type of object - `article_statistics`.
- */
-class ArticleStatisticsTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleStatisticsTypeEnum && value == other.value
+/** The type of object - `article_statistics`. */
+class ArticleStatisticsTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleStatisticsTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val ARTICLE_STATISTICS = ArticleStatisticsTypeEnum("article_statistics")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleStatisticsTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleStatisticsTypeEnum(value)
     }
 }
 
-/**
- * The type of object - article_translated_content.
- */
-class ArticleTranslatedContentTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ArticleTranslatedContentTypeEnum && value == other.value
+/** The type of object - article_translated_content. */
+class ArticleTranslatedContentTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ArticleTranslatedContentTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val ARTICLE_TRANSLATED_CONTENT = ArticleTranslatedContentTypeEnum("article_translated_content")
+        @JvmField
+        val ARTICLE_TRANSLATED_CONTENT =
+            ArticleTranslatedContentTypeEnum("article_translated_content")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ArticleTranslatedContentTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ArticleTranslatedContentTypeEnum(value)
     }
 }

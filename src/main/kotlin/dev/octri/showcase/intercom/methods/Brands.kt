@@ -15,46 +15,89 @@ import dev.octri.showcase.intercom.SdkResponse
 object Brands {
 
     /**
-     * Lists all brands configured for the workspace, including the default brand. Use this operation to retrieve brand identifiers and configuration details. The default brand's ID matches the workspace ID.
+     * Lists all brands configured for the workspace, including the default brand. Use this
+     * operation to retrieve brand identifiers and configuration details. The default brand's ID
+     * matches the workspace ID.
      *
-     * Retrieves all brands for the workspace, including the default brand. The default brand id always matches the workspace
+     * Retrieves all brands for the workspace, including the default brand. The default brand id
+     * always matches the workspace
      */
-    fun listBrands(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): BrandList {
+    fun listBrands(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): BrandList {
         return listBrandsWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listBrands], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listBrandsWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<BrandList> {
-        return SdkClient.request<BrandList>(SdkClient.RequestSpec("GET", "/brands", config = clientConfig, operationId = "listBrands", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listBrands], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listBrandsWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<BrandList> {
+        return SdkClient.request<BrandList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/brands",
+                config = clientConfig,
+                operationId = "listBrands",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a brand by its unique identifier. Use `id` to select the brand; the response includes its display name, default status, and associated help center and email settings identifiers.
+     * Retrieves a brand by its unique identifier. Use `id` to select the brand; the response
+     * includes its display name, default status, and associated help center and email settings
+     * identifiers.
      *
      * Fetches a specific brand by its unique identifier
      *
      * @param id The unique identifier of the brand
      */
-    fun retrieveBrand(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Brand {
+    fun retrieveBrand(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Brand {
         return retrieveBrandWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [retrieveBrand], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveBrandWithRawResponse(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Brand> {
-        return SdkClient.request<Brand>(SdkClient.RequestSpec("GET", "/brands/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveBrand", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveBrand], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveBrandWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Brand> {
+        return SdkClient.request<Brand>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/brands/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "retrieveBrand",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

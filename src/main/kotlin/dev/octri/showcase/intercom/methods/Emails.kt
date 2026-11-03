@@ -15,46 +15,87 @@ import dev.octri.showcase.intercom.SdkResponse
 object Emails {
 
     /**
-     * Lists sender email address settings for the workspace. Use this operation to review configured sender addresses and their verification, domain, and forwarding details.
+     * Lists sender email address settings for the workspace. Use this operation to review
+     * configured sender addresses and their verification, domain, and forwarding details.
      *
      * Lists all sender email address settings for the workspace
      */
-    fun listEmails(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): EmailList {
+    fun listEmails(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): EmailList {
         return listEmailsWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listEmails], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listEmailsWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<EmailList> {
-        return SdkClient.request<EmailList>(SdkClient.RequestSpec("GET", "/emails", config = clientConfig, operationId = "listEmails", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listEmails], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listEmailsWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<EmailList> {
+        return SdkClient.request<EmailList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/emails",
+                config = clientConfig,
+                operationId = "listEmails",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a sender email setting by its unique identifier. Use the `id` path parameter to inspect its configured sender address, domain, verification state, forwarding settings, and associated brand.
+     * Retrieves a sender email setting by its unique identifier. Use the `id` path parameter to
+     * inspect its configured sender address, domain, verification state, forwarding settings, and
+     * associated brand.
      *
      * Fetches a specific email setting by its unique identifier
      *
      * @param id The unique identifier of the email setting
      */
-    fun retrieveEmail(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): EmailSetting {
+    fun retrieveEmail(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): EmailSetting {
         return retrieveEmailWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [retrieveEmail], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveEmailWithRawResponse(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<EmailSetting> {
-        return SdkClient.request<EmailSetting>(SdkClient.RequestSpec("GET", "/emails/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveEmail", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveEmail], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveEmailWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<EmailSetting> {
+        return SdkClient.request<EmailSetting>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/emails/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "retrieveEmail",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

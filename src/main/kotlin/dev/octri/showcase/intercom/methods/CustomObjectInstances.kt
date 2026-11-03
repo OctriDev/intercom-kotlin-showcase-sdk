@@ -17,25 +17,29 @@ import dev.octri.showcase.intercom.Validation
 object CustomObjectInstances {
 
     /**
-     * Creates or updates an instance of a custom object type. Supply `custom_attributes` and, when available, the instance's external identifier and external-system timestamps. The response contains the instance's Intercom-defined identifier and its custom attributes.
+     * Creates or updates an instance of a custom object type. Supply `custom_attributes` and, when
+     * available, the instance's external identifier and external-system timestamps. The response
+     * contains the instance's Intercom-defined identifier and its custom attributes.
      *
      * Create or update a custom object instance
      *
-     * @param customObjectTypeIdentifier The unique identifier of the custom object
-     *   type that defines the structure of the custom object instance.
-     * @param externalId A unique identifier for the Custom Object instance in the
+     * @param customObjectTypeIdentifier The unique identifier of the custom object type that
+     *   defines the structure of the custom object instance.
+     * @param externalId A unique identifier for the Custom Object instance in the external system
+     *   it originated from.
+     * @param externalCreatedAt The time when the Custom Object instance was created in the external
+     *   system it originated from.
+     * @param externalUpdatedAt The time when the Custom Object instance was last updated in the
      *   external system it originated from.
-     * @param externalCreatedAt The time when the Custom Object instance was created
-     *   in the external system it originated from.
-     * @param externalUpdatedAt The time when the Custom Object instance was last
-     *   updated in the external system it originated from.
-     * @param customAttributes The custom attributes which are set for the Custom
-     *   Object instance.
+     * @param customAttributes The custom attributes which are set for the Custom Object instance.
      */
-    fun createCustomObjectInstances(clientConfig: ClientConfig, request: CreateCustomObjectInstancesRequest, options: RequestOptions? = null): CustomObjectInstance {
+    fun createCustomObjectInstances(
+        clientConfig: ClientConfig,
+        request: CreateCustomObjectInstancesRequest,
+        options: RequestOptions? = null,
+    ): CustomObjectInstance {
         return createCustomObjectInstancesWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [createCustomObjectInstances]. */
     data class CreateCustomObjectInstancesRequest(
@@ -44,42 +48,73 @@ object CustomObjectInstances {
         val externalId: String? = null,
         val externalCreatedAt: SdkClient.SdkOptional<Long?>? = null,
         val externalUpdatedAt: SdkClient.SdkOptional<Long?>? = null,
-        val customAttributes: SdkClient.SdkOptional<Map<String, String>?>? = null
+        val customAttributes: SdkClient.SdkOptional<Map<String, String>?>? = null,
     )
 
-    /** [createCustomObjectInstances], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createCustomObjectInstancesWithRawResponse(clientConfig: ClientConfig, request: CreateCustomObjectInstancesRequest, options: RequestOptions? = null): SdkResponse<CustomObjectInstance> {
-        return SdkClient.request<CustomObjectInstance>(SdkClient.RequestSpec("POST", "/custom_object_instances/${SdkClient.encodePathSegment(request.customObjectTypeIdentifier)}", config = clientConfig, body = SdkClient.bodyMap("external_id" to (SdkClient.omitIfNull(request.externalId)), "external_created_at" to
-    (request.externalCreatedAt ?: SdkClient.SdkOptional.Omitted), "external_updated_at" to
-    (request.externalUpdatedAt ?: SdkClient.SdkOptional.Omitted), "custom_attributes" to
-    (request.customAttributes ?: SdkClient.SdkOptional.Omitted)), operationId = "createCustomObjectInstances", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [createCustomObjectInstances], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun createCustomObjectInstancesWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateCustomObjectInstancesRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<CustomObjectInstance> {
+        return SdkClient.request<CustomObjectInstance>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/custom_object_instances/${SdkClient.encodePathSegment(request.customObjectTypeIdentifier)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "external_id" to (SdkClient.omitIfNull(request.externalId)),
+                        "external_created_at" to
+                            (request.externalCreatedAt ?: SdkClient.SdkOptional.Omitted),
+                        "external_updated_at" to
+                            (request.externalUpdatedAt ?: SdkClient.SdkOptional.Omitted),
+                        "custom_attributes" to
+                            (request.customAttributes ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "createCustomObjectInstances",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists instances of a custom object type, with optional filtering by contact or conversation. Supply `references_contact_id` or `references_conversation_id` to return associated instances, or `external_id` to retrieve one matching instance instead of a list. Use `page` and `per_page` to paginate the results.
+     * Lists instances of a custom object type, with optional filtering by contact or conversation.
+     * Supply `references_contact_id` or `references_conversation_id` to return associated
+     * instances, or `external_id` to retrieve one matching instance instead of a list. Use `page`
+     * and `per_page` to paginate the results.
      *
-     * List instances of a custom object type. Three modes are supported: - **No filter** — returns all instances for the type. - **`references_contact_id`** — returns instances associated with the given contact. - **`references_conversation_id`** — returns instances associated with the given conversation. When **`external_id`** is provided, returns a single matching instance (not a list).
+     * List instances of a custom object type. Three modes are supported: - **No filter** — returns
+     * all instances for the type. - **`references_contact_id`** — returns instances associated with
+     * the given contact. - **`references_conversation_id`** — returns instances associated with the
+     * given conversation. When **`external_id`** is provided, returns a single matching instance
+     * (not a list).
      *
-     * @param customObjectTypeIdentifier The unique identifier of the custom object
-     *   type that defines the structure of the custom object instance.
-     * @param referencesContactId Return instances associated with the given contact
-     *   ID.
-     * @param referencesConversationId Return instances associated with the given
-     *   conversation ID.
-     * @param externalId Return the single instance with this external ID. When
-     *   provided, the response is a single object rather than a list.
+     * @param customObjectTypeIdentifier The unique identifier of the custom object type that
+     *   defines the structure of the custom object instance.
+     * @param referencesContactId Return instances associated with the given contact ID.
+     * @param referencesConversationId Return instances associated with the given conversation ID.
+     * @param externalId Return the single instance with this external ID. When provided, the
+     *   response is a single object rather than a list.
      * @param page Page number of results to fetch.
      * @param perPage Number of results per page. Maximum 150.
      */
-    fun listCustomObjectInstances(clientConfig: ClientConfig, request: ListCustomObjectInstancesRequest, options: RequestOptions? = null): CustomObjectInstancesPaginatedList {
+    fun listCustomObjectInstances(
+        clientConfig: ClientConfig,
+        request: ListCustomObjectInstancesRequest,
+        options: RequestOptions? = null,
+    ): CustomObjectInstancesPaginatedList {
         return listCustomObjectInstancesWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [listCustomObjectInstances]. */
     data class ListCustomObjectInstancesRequest(
@@ -89,104 +124,220 @@ object CustomObjectInstances {
         val externalId: String? = null,
         val page: Long? = null,
         val perPage: Long? = null,
-        val intercomVersion: IntercomVersion? = null
+        val intercomVersion: IntercomVersion? = null,
     )
 
-    /** [listCustomObjectInstances], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listCustomObjectInstancesWithRawResponse(clientConfig: ClientConfig, request: ListCustomObjectInstancesRequest, options: RequestOptions? = null): SdkResponse<CustomObjectInstancesPaginatedList> {
+    /**
+     * [listCustomObjectInstances], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listCustomObjectInstancesWithRawResponse(
+        clientConfig: ClientConfig,
+        request: ListCustomObjectInstancesRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<CustomObjectInstancesPaginatedList> {
         validateListCustomObjectInstancesRequest(request)
 
-        return SdkClient.request<CustomObjectInstancesPaginatedList>(SdkClient.RequestSpec("GET", "/custom_object_instances/${SdkClient.encodePathSegment(request.customObjectTypeIdentifier)}", config = clientConfig, query = mapOf("references_contact_id" to
-    SdkClient.queryValue(request.referencesContactId, "form", true), "references_conversation_id" to
-    SdkClient.queryValue(request.referencesConversationId, "form", true), "external_id" to
-    SdkClient.queryValue(request.externalId, "form", true), "page" to SdkClient.queryValue(request.page, "form", true), "per_page" to
-    SdkClient.queryValue(request.perPage, "form", true)), operationId = "listCustomObjectInstances", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+        return SdkClient.request<CustomObjectInstancesPaginatedList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/custom_object_instances/${SdkClient.encodePathSegment(request.customObjectTypeIdentifier)}",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "references_contact_id" to
+                            SdkClient.queryValue(request.referencesContactId, "form", true),
+                        "references_conversation_id" to
+                            SdkClient.queryValue(request.referencesConversationId, "form", true),
+                        "external_id" to SdkClient.queryValue(request.externalId, "form", true),
+                        "page" to SdkClient.queryValue(request.page, "form", true),
+                        "per_page" to SdkClient.queryValue(request.perPage, "form", true),
+                    ),
+                operationId = "listCustomObjectInstances",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-    private fun validateListCustomObjectInstancesRequest(request: ListCustomObjectInstancesRequest) {
+    private fun validateListCustomObjectInstancesRequest(
+        request: ListCustomObjectInstancesRequest
+    ) {
         if (request.perPage != null) {
             Validation.validateRange("per_page", request.perPage, Validation.RangeOpts(max = 150.0))
-}
+        }
     }
 
-
-
-
-
     /**
-     * Deletes a custom object instance using its external identifier. Supply the custom object type identifier and the instance's `external_id` to select the instance. The response confirms whether the instance was deleted.
+     * Deletes a custom object instance using its external identifier. Supply the custom object type
+     * identifier and the instance's `external_id` to select the instance. The response confirms
+     * whether the instance was deleted.
      *
      * Delete a single Custom Object instance by external_id.
      *
-     * @param customObjectTypeIdentifier The unique identifier of the custom object
-     *   type that defines the structure of the custom object instance.
+     * @param customObjectTypeIdentifier The unique identifier of the custom object type that
+     *   defines the structure of the custom object instance.
      */
-    fun deleteCustomObjectInstancesById(clientConfig: ClientConfig, customObjectTypeIdentifier: String, externalId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CustomObjectInstanceDeleted {
-        return deleteCustomObjectInstancesByIdWithRawResponse(clientConfig, customObjectTypeIdentifier, externalId, intercomVersion, options).data
+    fun deleteCustomObjectInstancesById(
+        clientConfig: ClientConfig,
+        customObjectTypeIdentifier: String,
+        externalId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CustomObjectInstanceDeleted {
+        return deleteCustomObjectInstancesByIdWithRawResponse(
+                clientConfig,
+                customObjectTypeIdentifier,
+                externalId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [deleteCustomObjectInstancesById], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteCustomObjectInstancesByIdWithRawResponse(clientConfig: ClientConfig, customObjectTypeIdentifier: String, externalId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CustomObjectInstanceDeleted> {
-        return SdkClient.request<CustomObjectInstanceDeleted>(SdkClient.RequestSpec("DELETE", "/custom_object_instances/${SdkClient.encodePathSegment(customObjectTypeIdentifier)}", config = clientConfig, query = mapOf("external_id" to
-    SdkClient.queryValue(externalId, "form", true)), operationId = "deleteCustomObjectInstancesById", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Retrieves a custom object instance by ID. Supply the custom object type identifier and an instance identifier to select the record. The instance identifier can be either the Intercom-defined ID or the external ID.
+     * [deleteCustomObjectInstancesById], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun deleteCustomObjectInstancesByIdWithRawResponse(
+        clientConfig: ClientConfig,
+        customObjectTypeIdentifier: String,
+        externalId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<CustomObjectInstanceDeleted> {
+        return SdkClient.request<CustomObjectInstanceDeleted>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/custom_object_instances/${SdkClient.encodePathSegment(customObjectTypeIdentifier)}",
+                config = clientConfig,
+                query = mapOf("external_id" to SdkClient.queryValue(externalId, "form", true)),
+                operationId = "deleteCustomObjectInstancesById",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Retrieves a custom object instance by ID. Supply the custom object type identifier and an
+     * instance identifier to select the record. The instance identifier can be either the
+     * Intercom-defined ID or the external ID.
      *
      * Fetch a Custom Object Instance by id.
      *
-     * @param customObjectTypeIdentifier The unique identifier of the custom object
-     *   type that defines the structure of the custom object instance.
-     * @param customObjectInstanceId The id or external_id of the custom object
-     *   instance
+     * @param customObjectTypeIdentifier The unique identifier of the custom object type that
+     *   defines the structure of the custom object instance.
+     * @param customObjectInstanceId The id or external_id of the custom object instance
      */
-    fun getCustomObjectInstancesById(clientConfig: ClientConfig, customObjectTypeIdentifier: String, customObjectInstanceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CustomObjectInstance {
-        return getCustomObjectInstancesByIdWithRawResponse(clientConfig, customObjectTypeIdentifier, customObjectInstanceId, intercomVersion, options).data
+    fun getCustomObjectInstancesById(
+        clientConfig: ClientConfig,
+        customObjectTypeIdentifier: String,
+        customObjectInstanceId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CustomObjectInstance {
+        return getCustomObjectInstancesByIdWithRawResponse(
+                clientConfig,
+                customObjectTypeIdentifier,
+                customObjectInstanceId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [getCustomObjectInstancesById], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getCustomObjectInstancesByIdWithRawResponse(clientConfig: ClientConfig, customObjectTypeIdentifier: String, customObjectInstanceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CustomObjectInstance> {
-        return SdkClient.request<CustomObjectInstance>(SdkClient.RequestSpec("GET", "/custom_object_instances/${SdkClient.encodePathSegment(customObjectTypeIdentifier)}/${SdkClient.encodePathSegment(customObjectInstanceId)}", config = clientConfig, operationId = "getCustomObjectInstancesById", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Deletes a custom object instance by its Intercom-defined ID. Supply the custom object type identifier and instance ID to identify the record to remove. The response confirms whether the instance was deleted.
+     * [getCustomObjectInstancesById], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun getCustomObjectInstancesByIdWithRawResponse(
+        clientConfig: ClientConfig,
+        customObjectTypeIdentifier: String,
+        customObjectInstanceId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<CustomObjectInstance> {
+        return SdkClient.request<CustomObjectInstance>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/custom_object_instances/${SdkClient.encodePathSegment(customObjectTypeIdentifier)}/${SdkClient.encodePathSegment(customObjectInstanceId)}",
+                config = clientConfig,
+                operationId = "getCustomObjectInstancesById",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Deletes a custom object instance by its Intercom-defined ID. Supply the custom object type
+     * identifier and instance ID to identify the record to remove. The response confirms whether
+     * the instance was deleted.
      *
      * Delete a single Custom Object instance using the Intercom defined id.
      *
-     * @param customObjectTypeIdentifier The unique identifier of the custom object
-     *   type that defines the structure of the custom object instance.
-     * @param customObjectInstanceId The Intercom defined id of the custom object
-     *   instance
+     * @param customObjectTypeIdentifier The unique identifier of the custom object type that
+     *   defines the structure of the custom object instance.
+     * @param customObjectInstanceId The Intercom defined id of the custom object instance
      */
-    fun deleteCustomObjectInstancesByExternalId(clientConfig: ClientConfig, customObjectTypeIdentifier: String, customObjectInstanceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CustomObjectInstanceDeleted {
-        return deleteCustomObjectInstancesByExternalIdWithRawResponse(clientConfig, customObjectTypeIdentifier, customObjectInstanceId, intercomVersion, options).data
+    fun deleteCustomObjectInstancesByExternalId(
+        clientConfig: ClientConfig,
+        customObjectTypeIdentifier: String,
+        customObjectInstanceId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CustomObjectInstanceDeleted {
+        return deleteCustomObjectInstancesByExternalIdWithRawResponse(
+                clientConfig,
+                customObjectTypeIdentifier,
+                customObjectInstanceId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [deleteCustomObjectInstancesByExternalId], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteCustomObjectInstancesByExternalIdWithRawResponse(clientConfig: ClientConfig, customObjectTypeIdentifier: String, customObjectInstanceId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CustomObjectInstanceDeleted> {
-        return SdkClient.request<CustomObjectInstanceDeleted>(SdkClient.RequestSpec("DELETE", "/custom_object_instances/${SdkClient.encodePathSegment(customObjectTypeIdentifier)}/${SdkClient.encodePathSegment(customObjectInstanceId)}", config = clientConfig, operationId = "deleteCustomObjectInstancesByExternalId", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [deleteCustomObjectInstancesByExternalId], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun deleteCustomObjectInstancesByExternalIdWithRawResponse(
+        clientConfig: ClientConfig,
+        customObjectTypeIdentifier: String,
+        customObjectInstanceId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<CustomObjectInstanceDeleted> {
+        return SdkClient.request<CustomObjectInstanceDeleted>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/custom_object_instances/${SdkClient.encodePathSegment(customObjectTypeIdentifier)}/${SdkClient.encodePathSegment(customObjectInstanceId)}",
+                config = clientConfig,
+                operationId = "deleteCustomObjectInstancesByExternalId",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

@@ -15,50 +15,94 @@ import dev.octri.showcase.intercom.SegmentList
 object Segments {
 
     /**
-     * Lists segments in the workspace, which group contacts according to configured rules. Set `include_count` to include the number of contacts in each segment. Use `page` and `per_page` to paginate the results.
+     * Lists segments in the workspace, which group contacts according to configured rules. Set
+     * `include_count` to include the number of contacts in each segment. Use `page` and `per_page`
+     * to paginate the results.
      *
      * You can fetch a list of all segments.
      *
-     * @param includeCount It includes the count of contacts that belong to each
-     *   segment.
+     * @param includeCount It includes the count of contacts that belong to each segment.
      */
-    fun listSegments(clientConfig: ClientConfig, includeCount: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SegmentList {
-        return listSegmentsWithRawResponse(clientConfig, includeCount, intercomVersion, options).data
+    fun listSegments(
+        clientConfig: ClientConfig,
+        includeCount: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SegmentList {
+        return listSegmentsWithRawResponse(clientConfig, includeCount, intercomVersion, options)
+            .data
     }
-
-
-    /** [listSegments], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listSegmentsWithRawResponse(clientConfig: ClientConfig, includeCount: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SegmentList> {
-        return SdkClient.request<SegmentList>(SdkClient.RequestSpec("GET", "/segments", config = clientConfig, query = mapOf("include_count" to
-    SdkClient.queryValue(includeCount, "form", true)), operationId = "listSegments", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Retrieves the details of a single contact segment. Use the `segment_id` path parameter to identify the segment you want to inspect.
+     * [listSegments], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listSegmentsWithRawResponse(
+        clientConfig: ClientConfig,
+        includeCount: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SegmentList> {
+        return SdkClient.request<SegmentList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/segments",
+                config = clientConfig,
+                query = mapOf("include_count" to SdkClient.queryValue(includeCount, "form", true)),
+                operationId = "listSegments",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Retrieves the details of a single contact segment. Use the `segment_id` path parameter to
+     * identify the segment you want to inspect.
      *
      * You can fetch the details of a single segment.
      *
      * @param segmentId The unique identified of a given segment.
      */
-    fun retrieveSegment(clientConfig: ClientConfig, segmentId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Segment {
-        return retrieveSegmentWithRawResponse(clientConfig, segmentId, intercomVersion, options).data
+    fun retrieveSegment(
+        clientConfig: ClientConfig,
+        segmentId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Segment {
+        return retrieveSegmentWithRawResponse(clientConfig, segmentId, intercomVersion, options)
+            .data
     }
 
-
-    /** [retrieveSegment], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveSegmentWithRawResponse(clientConfig: ClientConfig, segmentId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Segment> {
-        return SdkClient.request<Segment>(SdkClient.RequestSpec("GET", "/segments/${SdkClient.encodePathSegment(segmentId)}", config = clientConfig, operationId = "retrieveSegment", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveSegment], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveSegmentWithRawResponse(
+        clientConfig: ClientConfig,
+        segmentId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Segment> {
+        return SdkClient.request<Segment>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/segments/${SdkClient.encodePathSegment(segmentId)}",
+                config = clientConfig,
+                operationId = "retrieveSegment",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

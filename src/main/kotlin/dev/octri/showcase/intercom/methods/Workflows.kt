@@ -14,26 +14,49 @@ import dev.octri.showcase.intercom.WorkflowExport
 object Workflows {
 
     /**
-     * Retrieves a workflow configuration by its unique identifier. Use the `id` path parameter to export the complete workflow definition, including its steps, targeting rules, and attributes. Use this export for EU Data Act compliance.
+     * Retrieves a workflow configuration by its unique identifier. Use the `id` path parameter to
+     * export the complete workflow definition, including its steps, targeting rules, and
+     * attributes. Use this export for EU Data Act compliance.
      *
-     * Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes. This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.
+     * Export a workflow configuration by its ID. This endpoint returns the complete workflow
+     * definition including its steps, targeting rules, and attributes. This endpoint is designed
+     * for EU Data Act compliance, allowing customers to export their workflow configurations.
      *
      * @param id The unique identifier for the workflow
      */
-    fun exportWorkflow(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WorkflowExport {
+    fun exportWorkflow(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WorkflowExport {
         return exportWorkflowWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [exportWorkflow], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun exportWorkflowWithRawResponse(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<WorkflowExport> {
-        return SdkClient.request<WorkflowExport>(SdkClient.RequestSpec("GET", "/export/workflows/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "exportWorkflow", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("403" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [exportWorkflow], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun exportWorkflowWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<WorkflowExport> {
+        return SdkClient.request<WorkflowExport>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/export/workflows/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "exportWorkflow",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("403" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

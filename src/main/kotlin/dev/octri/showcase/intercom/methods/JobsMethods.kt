@@ -14,26 +14,46 @@ import dev.octri.showcase.intercom.SdkResponse
 object JobsMethods {
 
     /**
-     * Retrieves the execution status of a specific job. Use `job_id` to identify the job and check whether it is pending, successful, or failed.
+     * Retrieves the execution status of a specific job. Use `job_id` to identify the job and check
+     * whether it is pending, successful, or failed.
      *
      * Retrieve the status of job execution.
      *
      * @param jobId The unique identifier for the job which is given by Intercom
      */
-    fun jobsStatus(clientConfig: ClientConfig, jobId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Jobs {
+    fun jobsStatus(
+        clientConfig: ClientConfig,
+        jobId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Jobs {
         return jobsStatusWithRawResponse(clientConfig, jobId, intercomVersion, options).data
     }
 
-
-    /** [jobsStatus], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun jobsStatusWithRawResponse(clientConfig: ClientConfig, jobId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Jobs> {
-        return SdkClient.request<Jobs>(SdkClient.RequestSpec("GET", "/jobs/status/${SdkClient.encodePathSegment(jobId)}", config = clientConfig, operationId = "jobsStatus", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [jobsStatus], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun jobsStatusWithRawResponse(
+        clientConfig: ClientConfig,
+        jobId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Jobs> {
+        return SdkClient.request<Jobs>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/jobs/status/${SdkClient.encodePathSegment(jobId)}",
+                config = clientConfig,
+                operationId = "jobsStatus",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

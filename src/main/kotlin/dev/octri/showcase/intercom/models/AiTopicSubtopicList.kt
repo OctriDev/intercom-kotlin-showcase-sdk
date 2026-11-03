@@ -6,18 +6,13 @@ package dev.octri.showcase.intercom.models
 import dev.octri.showcase.intercom.SdkResource
 
 data class AiTopicSubtopicListItem(
-    /**
-     * The name of the topic.
-     */
+    /** The name of the topic. */
     @com.fasterxml.jackson.annotation.JsonProperty("topic_name") val topicName: String? = null,
-    /**
-     * The name of the subtopic, where the topic has one.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("subtopic_name") val subtopicName: String? = null,
-    /**
-     * The unique identifier for the subtopic.
-     */
-    val id: Long? = null
+    /** The name of the subtopic, where the topic has one. */
+    @com.fasterxml.jackson.annotation.JsonProperty("subtopic_name")
+    val subtopicName: String? = null,
+    /** The unique identifier for the subtopic. */
+    val id: Long? = null,
 ) : SdkResource()
 
 typealias AiTopicSubtopicList = List<AiTopicSubtopicListItem>

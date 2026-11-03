@@ -3,66 +3,162 @@
 
 package dev.octri.showcase.intercom
 
-
 class MessagesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an admin-initiated message for a recipient by email, in-app messaging, or WhatsApp. Supply the fields required for the selected `message_type`, including `body` for email and in-app messages. Use an admin in `from`; to create a contact-initiated conversation, use POST /conversations.
+     * Creates an admin-initiated message for a recipient by email, in-app messaging, or WhatsApp.
+     * Supply the fields required for the selected `message_type`, including `body` for email and
+     * in-app messages. Use an admin in `from`; to create a contact-initiated conversation, use POST
+     * /conversations.
      *
-     * You can create a message that has been initiated by an admin. The conversation can be either an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case. This will return the Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is a message, there…
+     * You can create a message that has been initiated by an admin. The conversation can be either
+     * an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short
+     * delay between when a contact is created and when a contact becomes available to be messaged
+     * through the API. A 404 Not Found error will be returned in this case. This will return the
+     * Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is
+     * a message, there…
      */
-    fun create(request: dev.octri.showcase.intercom.methods.Messages.CreateMessageParams, options: RequestOptions? = null): Message {
-        return dev.octri.showcase.intercom.methods.Messages.createMessage(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.intercom.methods.Messages.CreateMessageParams,
+        options: RequestOptions? = null,
+    ): Message {
+        return dev.octri.showcase.intercom.methods.Messages.createMessage(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves the delivery status and related details for a specific WhatsApp message. Use `message_id` to identify the message; failed deliveries include error information.
+     * Retrieves the delivery status and related details for a specific WhatsApp message. Use
+     * `message_id` to identify the message; failed deliveries include error information.
      *
-     * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the current status, conversation details, and any error information if the message failed to deliver.
+     * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the
+     * current status, conversation details, and any error information if the message failed to
+     * deliver.
      */
-    fun retrieveWhatsAppStatus(messageId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WhatsappMessageStatus {
-        return dev.octri.showcase.intercom.methods.Messages.retrieveWhatsAppMessageStatus(clientConfig, messageId, intercomVersion, options)
+    fun retrieveWhatsAppStatus(
+        messageId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WhatsappMessageStatus {
+        return dev.octri.showcase.intercom.methods.Messages.retrieveWhatsAppMessageStatus(
+            clientConfig,
+            messageId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists paginated status events for WhatsApp messages sent from the Outbound module. Use `ruleset_id` to select the messages and `starting_after` to continue from a pagination cursor.
+     * Lists paginated status events for WhatsApp messages sent from the Outbound module. Use
+     * `ruleset_id` to select the messages and `starting_after` to continue from a pagination
+     * cursor.
      *
-     * Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providing information about delivery state and related message details.
+     * Retrieves statuses of messages sent from the Outbound module. Currently, this API only
+     * supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp
+     * messages sent via the Outbound module, providing information about delivery state and related
+     * message details.
      */
-    fun getWhatsAppStatus(rulesetId: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): WhatsappMessageStatusList {
-        return dev.octri.showcase.intercom.methods.Messages.getWhatsAppMessageStatus(clientConfig, rulesetId, perPage, startingAfter, intercomVersion, options)
+    fun getWhatsAppStatus(
+        rulesetId: String,
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): WhatsappMessageStatusList {
+        return dev.octri.showcase.intercom.methods.Messages.getWhatsAppMessageStatus(
+            clientConfig,
+            rulesetId,
+            perPage,
+            startingAfter,
+            intercomVersion,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [MessagesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [MessagesNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Creates an admin-initiated message for a recipient by email, in-app messaging, or WhatsApp. Supply the fields required for the selected `message_type`, including `body` for email and in-app messages. Use an admin in `from`; to create a contact-initiated conversation, use POST /conversations.
+         * Creates an admin-initiated message for a recipient by email, in-app messaging, or
+         * WhatsApp. Supply the fields required for the selected `message_type`, including `body`
+         * for email and in-app messages. Use an admin in `from`; to create a contact-initiated
+         * conversation, use POST /conversations.
          *
-         * You can create a message that has been initiated by an admin. The conversation can be either an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case. This will return the Message model that has been created. > 🚧 Retrieving Associated Conversations > > As this is a message, there…
+         * You can create a message that has been initiated by an admin. The conversation can be
+         * either an in-app message, an email or whatsapp. > 🚧 Sending for visitors > > There can
+         * be a short delay between when a contact is created and when a contact becomes available
+         * to be messaged through the API. A 404 Not Found error will be returned in this case. This
+         * will return the Message model that has been created. > 🚧 Retrieving Associated
+         * Conversations > > As this is a message, there…
          */
-        fun create(request: dev.octri.showcase.intercom.methods.Messages.CreateMessageParams, options: RequestOptions? = null): SdkResponse<Message> {
-            return dev.octri.showcase.intercom.methods.Messages.createMessageWithRawResponse(clientConfig, request, options)
+        fun create(
+            request: dev.octri.showcase.intercom.methods.Messages.CreateMessageParams,
+            options: RequestOptions? = null,
+        ): SdkResponse<Message> {
+            return dev.octri.showcase.intercom.methods.Messages.createMessageWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Retrieves the delivery status and related details for a specific WhatsApp message. Use `message_id` to identify the message; failed deliveries include error information.
+         * Retrieves the delivery status and related details for a specific WhatsApp message. Use
+         * `message_id` to identify the message; failed deliveries include error information.
          *
-         * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns the current status, conversation details, and any error information if the message failed to deliver.
+         * Retrieves the delivery status of a specific WhatsApp message by its message ID. Returns
+         * the current status, conversation details, and any error information if the message failed
+         * to deliver.
          */
-        fun retrieveWhatsAppStatus(messageId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<WhatsappMessageStatus> {
-            return dev.octri.showcase.intercom.methods.Messages.retrieveWhatsAppMessageStatusWithRawResponse(clientConfig, messageId, intercomVersion, options)
+        fun retrieveWhatsAppStatus(
+            messageId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<WhatsappMessageStatus> {
+            return dev.octri.showcase.intercom.methods.Messages
+                .retrieveWhatsAppMessageStatusWithRawResponse(
+                    clientConfig,
+                    messageId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Lists paginated status events for WhatsApp messages sent from the Outbound module. Use `ruleset_id` to select the messages and `starting_after` to continue from a pagination cursor.
+         * Lists paginated status events for WhatsApp messages sent from the Outbound module. Use
+         * `ruleset_id` to select the messages and `starting_after` to continue from a pagination
+         * cursor.
          *
-         * Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providing information about delivery state and related message details.
+         * Retrieves statuses of messages sent from the Outbound module. Currently, this API only
+         * supports WhatsApp messages. This endpoint returns paginated status events for WhatsApp
+         * messages sent via the Outbound module, providing information about delivery state and
+         * related message details.
          */
-        fun getWhatsAppStatus(rulesetId: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<WhatsappMessageStatusList> {
-            return dev.octri.showcase.intercom.methods.Messages.getWhatsAppMessageStatusWithRawResponse(clientConfig, rulesetId, perPage, startingAfter, intercomVersion, options)
+        fun getWhatsAppStatus(
+            rulesetId: String,
+            perPage: Long? = null,
+            startingAfter: String? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<WhatsappMessageStatusList> {
+            return dev.octri.showcase.intercom.methods.Messages
+                .getWhatsAppMessageStatusWithRawResponse(
+                    clientConfig,
+                    rulesetId,
+                    perPage,
+                    startingAfter,
+                    intercomVersion,
+                    options,
+                )
         }
-
     }
 }

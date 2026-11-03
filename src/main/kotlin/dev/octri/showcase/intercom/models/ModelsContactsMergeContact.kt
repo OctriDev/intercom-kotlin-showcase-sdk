@@ -5,20 +5,16 @@ package dev.octri.showcase.intercom.models
 
 import dev.octri.showcase.intercom.SdkResource
 
-/**
- * Merge contact data.
- */
+/** Merge contact data. */
 data class MergeContactsRequest(
-    /**
-     * The unique identifier for the contact to merge away from. Must be a lead.
-     */
+    /** The unique identifier for the contact to merge away from. Must be a lead. */
     val from: String,
-    /**
-     * The unique identifier for the contact to merge into. Must be a user.
-     */
+    /** The unique identifier for the contact to merge into. Must be a user. */
     val into: String,
     /**
-     * Set to `true` to merge two contacts that are not duplicates (they share no matching email or phone).
+     * Set to `true` to merge two contacts that are not duplicates (they share no matching email or
+     * phone).
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("skip_duplicate_validation") val skipDuplicateValidation: Boolean? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("skip_duplicate_validation")
+    val skipDuplicateValidation: Boolean? = null,
 ) : SdkResource()

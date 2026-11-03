@@ -14,24 +14,44 @@ import dev.octri.showcase.intercom.SdkResponse
 object AwayStatusReasons {
 
     /**
-     * Lists the away status reasons configured for the workspace, including reasons marked as deleted. Use this endpoint to retrieve reason labels and their associated identifiers, ordering, and status information.
+     * Lists the away status reasons configured for the workspace, including reasons marked as
+     * deleted. Use this endpoint to retrieve reason labels and their associated identifiers,
+     * ordering, and status information.
      *
-     * Returns a list of all away status reasons configured for the workspace, including deleted ones.
+     * Returns a list of all away status reasons configured for the workspace, including deleted
+     * ones.
      */
-    fun listAwayStatusReasons(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): AwayStatusReasonList {
+    fun listAwayStatusReasons(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): AwayStatusReasonList {
         return listAwayStatusReasonsWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listAwayStatusReasons], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listAwayStatusReasonsWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<AwayStatusReasonList> {
-        return SdkClient.request<AwayStatusReasonList>(SdkClient.RequestSpec("GET", "/away_status_reasons", config = clientConfig, operationId = "listAwayStatusReasons", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listAwayStatusReasons], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun listAwayStatusReasonsWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<AwayStatusReasonList> {
+        return SdkClient.request<AwayStatusReasonList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/away_status_reasons",
+                config = clientConfig,
+                operationId = "listAwayStatusReasons",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

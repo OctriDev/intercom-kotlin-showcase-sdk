@@ -3,138 +3,401 @@
 
 package dev.octri.showcase.intercom
 
-
 class FinAgentNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Starts a Fin conversation with a user's message and optional conversation history, metadata, attachments, and user details. Supply `conversation_id`, `message`, and `user`; Fin then processes the conversation asynchronously and sends status updates through the configured webhook or event channel. Wait for the `complete` status before taking control of the conversation.
+     * Starts a Fin conversation with a user's message and optional conversation history, metadata,
+     * attachments, and user details. Supply `conversation_id`, `message`, and `user`; Fin then
+     * processes the conversation asynchronously and sends status updates through the configured
+     * webhook or event channel. Wait for the `complete` status before taking control of the
+     * conversation.
      *
-     * Initialize Fin by passing it the user's message along with conversation history and user details. These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {%…
+     * Initialize Fin by passing it the user's message along with conversation history and user
+     * details. These additional pieces of context will be used by Fin to provide a better and more
+     * contextual answer to the user. {% admonition type="warning" %} To request access to the Fin
+     * Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us
+     * about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent >
+     * Deploy**. {%…
      */
-    fun startFinConversation(request: dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationRequest, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationResponse {
-        return dev.octri.showcase.intercom.methods.FinAgent.startFinConversation(clientConfig, request, options)
+    fun startFinConversation(
+        request: dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationRequest,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationResponse {
+        return dev.octri.showcase.intercom.methods.FinAgent.startFinConversation(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Sends a user's reply to an existing Fin conversation after Fin has returned a response and the conversation is awaiting a user reply. Supply the conversation ID, the new message, and the user details, with optional attachments for additional context. Fin continues the conversation and reports its status through the configured event channel.
+     * Sends a user's reply to an existing Fin conversation after Fin has returned a response and
+     * the conversation is awaiting a user reply. Supply the conversation ID, the new message, and
+     * the user details, with optional attachments for additional context. Fin continues the
+     * conversation and reports its status through the configured event channel.
      *
-     * Once Fin has returned a response to a user's message, its status will be `awaiting_user_reply`. If a user replies, use this endpoint to send this response to Fin. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {% /admonition %}
+     * Once Fin has returned a response to a user's message, its status will be
+     * `awaiting_user_reply`. If a user replies, use this endpoint to send this response to Fin. {%
+     * admonition type="warning" %} To request access to the Fin Agent API, go to **Settings >
+     * Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access
+     * is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {% /admonition %}
      */
-    fun replyToFin(conversationId: String, message: FinAgentMessage, user: FinAgentUser, intercomVersion: IntercomVersion? = null, attachments: List<FinAgentAttachment>? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.ReplyToFinResponse {
-        return dev.octri.showcase.intercom.methods.FinAgent.replyToFin(clientConfig, conversationId, message, user, intercomVersion, attachments, options)
+    fun replyToFin(
+        conversationId: String,
+        message: FinAgentMessage,
+        user: FinAgentUser,
+        intercomVersion: IntercomVersion? = null,
+        attachments: List<FinAgentAttachment>? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.ReplyToFinResponse {
+        return dev.octri.showcase.intercom.methods.FinAgent.replyToFin(
+            clientConfig,
+            conversationId,
+            message,
+            user,
+            intercomVersion,
+            attachments,
+            options,
+        )
     }
 
     /**
-     * Submits a customer's satisfaction rating for a conversation, with an optional free-text remark. Use the rating option provided in Fin's `csat_requested` event; submitting a remark locks the rating against further changes.
+     * Submits a customer's satisfaction rating for a conversation, with an optional free-text
+     * remark. Use the rating option provided in Fin's `csat_requested` event; submitting a remark
+     * locks the rating against further changes.
      *
-     * Record a customer's satisfaction rating for a conversation, with an optional free-text remark. Fin decides *when* to ask for a rating — this reuses the CSAT settings on your Fin workflow, not this API. When Fin asks, it fires a `csat_requested` event over webhooks or SSE carrying the rating options to show the user. Present those options, then submit the user's choice here. Submitting the same rating again, with no new remark, is a no-op and stays successful, so an…
+     * Record a customer's satisfaction rating for a conversation, with an optional free-text
+     * remark. Fin decides *when* to ask for a rating — this reuses the CSAT settings on your Fin
+     * workflow, not this API. When Fin asks, it fires a `csat_requested` event over webhooks or SSE
+     * carrying the rating options to show the user. Present those options, then submit the user's
+     * choice here. Submitting the same rating again, with no new remark, is a no-op and stays
+     * successful, so an…
      */
-    fun submitFinCsat(conversationId: String, rating: SubmitFinCsatRatingEnum, intercomVersion: IntercomVersion? = null, remark: String? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.SubmitFinCsatResponse {
-        return dev.octri.showcase.intercom.methods.FinAgent.submitFinCsat(clientConfig, conversationId, rating, intercomVersion, remark, options)
+    fun submitFinCsat(
+        conversationId: String,
+        rating: SubmitFinCsatRatingEnum,
+        intercomVersion: IntercomVersion? = null,
+        remark: String? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.SubmitFinCsatResponse {
+        return dev.octri.showcase.intercom.methods.FinAgent.submitFinCsat(
+            clientConfig,
+            conversationId,
+            rating,
+            intercomVersion,
+            remark,
+            options,
+        )
     }
 
     /**
-     * Lists the Fin capabilities available to a specific user so an orchestrating agent can choose which Fin action to call. Supply the user object with its required `id`; Fin matches available procedures to that user and creates or updates the user record using the supplied details. Use the returned capabilities to select an appropriate endpoint for the next action.
+     * Lists the Fin capabilities available to a specific user so an orchestrating agent can choose
+     * which Fin action to call. Supply the user object with its required `id`; Fin matches
+     * available procedures to that user and creates or updates the user record using the supplied
+     * details. Use the returned capabilities to select an appropriate endpoint for the next action.
      *
-     * Return a machine-readable, per-user list of what Fin can do for a given end user, so an orchestrating agent can decide which endpoint to call. The response is audience-matched to the supplied user: each live, API-triggerable procedure is checked against that user before being included, alongside the static `reply` and `ask` actions. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and…
+     * Return a machine-readable, per-user list of what Fin can do for a given end user, so an
+     * orchestrating agent can decide which endpoint to call. The response is audience-matched to
+     * the supplied user: each live, API-triggerable procedure is checked against that user before
+     * being included, alongside the static `reply` and `ask` actions. {% admonition type="warning"
+     * %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API**
+     * in your workspace and…
      */
-    fun listFinCapabilities(user: FinAgentUser, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.ListFinCapabilitiesResponse {
-        return dev.octri.showcase.intercom.methods.FinAgent.listFinCapabilities(clientConfig, user, intercomVersion, options)
+    fun listFinCapabilities(
+        user: FinAgentUser,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.ListFinCapabilitiesResponse {
+        return dev.octri.showcase.intercom.methods.FinAgent.listFinCapabilities(
+            clientConfig,
+            user,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Submits a single, self-contained question to Fin and starts a one-shot, non-conversational interaction. Provide `conversation_id`, `message`, and `user`; Fin does not ask follow-up questions or run procedures, and the answer is delivered asynchronously through the `fin_replied` event. The conversation ends with a `complete` status, with no awaiting-user-reply cycle.
+     * Submits a single, self-contained question to Fin and starts a one-shot, non-conversational
+     * interaction. Provide `conversation_id`, `message`, and `user`; Fin does not ask follow-up
+     * questions or run procedures, and the answer is delivered asynchronously through the
+     * `fin_replied` event. The conversation ends with a `complete` status, with no
+     * awaiting-user-reply cycle.
      *
-     * Ask Fin a single, self-contained question and receive one informational answer. Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up questions, will not run procedures, and will not escalate to a human on its own. You can still escalate one yourself with `POST /fin/escalate`; the ask conversation is already closed after its one-shot answer, and escalation leaves it closed while routing the handoff separately. Fin's answer is delivered…
+     * Ask Fin a single, self-contained question and receive one informational answer. Unlike a
+     * conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up questions, will
+     * not run procedures, and will not escalate to a human on its own. You can still escalate one
+     * yourself with `POST /fin/escalate`; the ask conversation is already closed after its one-shot
+     * answer, and escalation leaves it closed while routing the handoff separately. Fin's answer is
+     * delivered…
      */
-    fun askFin(request: dev.octri.showcase.intercom.methods.FinAgent.AskFinRequest, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.AskFinResponse {
+    fun askFin(
+        request: dev.octri.showcase.intercom.methods.FinAgent.AskFinRequest,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.AskFinResponse {
         return dev.octri.showcase.intercom.methods.FinAgent.askFin(clientConfig, request, options)
     }
 
     /**
-     * Triggers a specified Fin procedure on a new conversation, guaranteeing that Fin runs the named procedure rather than routing the request among procedures. Provide `procedure_id`, `conversation_id`, and `user`; the message is optional. Fin reports progress asynchronously through events or Server-Sent Events, and you can send a user's reply through `/fin/reply` if the procedure pauses for input.
+     * Triggers a specified Fin procedure on a new conversation, guaranteeing that Fin runs the
+     * named procedure rather than routing the request among procedures. Provide `procedure_id`,
+     * `conversation_id`, and `user`; the message is optional. Fin reports progress asynchronously
+     * through events or Server-Sent Events, and you can send a user's reply through `/fin/reply` if
+     * the procedure pauses for input.
      *
-     * Deterministically run a specific procedure on a new conversation. Calling this endpoint guarantees that the named procedure runs — there is no non-deterministic routing. Fin's progress is delivered asynchronously via events or Server-Sent Events. If the procedure pauses for user input, the conversation status becomes `awaiting_user_reply` — send the user's response with `/fin/reply`. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings >…
+     * Deterministically run a specific procedure on a new conversation. Calling this endpoint
+     * guarantees that the named procedure runs — there is no non-deterministic routing. Fin's
+     * progress is delivered asynchronously via events or Server-Sent Events. If the procedure
+     * pauses for user input, the conversation status becomes `awaiting_user_reply` — send the
+     * user's response with `/fin/reply`. {% admonition type="warning" %} To request access to the
+     * Fin Agent API, go to **Settings >…
      */
-    fun runFinProcedure(request: dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureRequest, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureResponse {
-        return dev.octri.showcase.intercom.methods.FinAgent.runFinProcedure(clientConfig, request, options)
+    fun runFinProcedure(
+        request: dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureRequest,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureResponse {
+        return dev.octri.showcase.intercom.methods.FinAgent.runFinProcedure(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Escalates an existing Fin conversation or requests a handoff on behalf of a user to a human teammate. Supply either `conversation_id` or `user`, and optionally provide `context` for the receiving teammate; on Fin for Platforms, use `conversation_id` because `user` is not supported. Fin reports the escalation asynchronously with an `escalated` status followed by `complete`.
+     * Escalates an existing Fin conversation or requests a handoff on behalf of a user to a human
+     * teammate. Supply either `conversation_id` or `user`, and optionally provide `context` for the
+     * receiving teammate; on Fin for Platforms, use `conversation_id` because `user` is not
+     * supported. Fin reports the escalation asynchronously with an `escalated` status followed by
+     * `complete`.
      *
-     * Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the handoff lands in your team inbox. Provide either `conversation_id` or `user`: - `conversation_id` — escalate an existing agent conversation, including one started with `/fin/ask`. On the Intercom Helpdesk, Fin by default summarises the conversation and opens a new Helpdesk conversation that carries the summary as an internal note. Escalation does not change the original agent conversation's…
+     * Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the handoff
+     * lands in your team inbox. Provide either `conversation_id` or `user`: - `conversation_id` —
+     * escalate an existing agent conversation, including one started with `/fin/ask`. On the
+     * Intercom Helpdesk, Fin by default summarises the conversation and opens a new Helpdesk
+     * conversation that carries the summary as an internal note. Escalation does not change the
+     * original agent conversation's…
      */
-    fun escalateFinConversation(intercomVersion: IntercomVersion? = null, conversationId: String? = null, user: FinAgentUser? = null, context: String? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.FinAgent.EscalateFinConversationResponse {
-        return dev.octri.showcase.intercom.methods.FinAgent.escalateFinConversation(clientConfig, intercomVersion, conversationId, user, context, options)
+    fun escalateFinConversation(
+        intercomVersion: IntercomVersion? = null,
+        conversationId: String? = null,
+        user: FinAgentUser? = null,
+        context: String? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.FinAgent.EscalateFinConversationResponse {
+        return dev.octri.showcase.intercom.methods.FinAgent.escalateFinConversation(
+            clientConfig,
+            intercomVersion,
+            conversationId,
+            user,
+            context,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [FinAgentNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [FinAgentNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Starts a Fin conversation with a user's message and optional conversation history, metadata, attachments, and user details. Supply `conversation_id`, `message`, and `user`; Fin then processes the conversation asynchronously and sends status updates through the configured webhook or event channel. Wait for the `complete` status before taking control of the conversation.
+         * Starts a Fin conversation with a user's message and optional conversation history,
+         * metadata, attachments, and user details. Supply `conversation_id`, `message`, and `user`;
+         * Fin then processes the conversation asynchronously and sends status updates through the
+         * configured webhook or event channel. Wait for the `complete` status before taking control
+         * of the conversation.
          *
-         * Initialize Fin by passing it the user's message along with conversation history and user details. These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {%…
+         * Initialize Fin by passing it the user's message along with conversation history and user
+         * details. These additional pieces of context will be used by Fin to provide a better and
+         * more contextual answer to the user. {% admonition type="warning" %} To request access to
+         * the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace
+         * and tell us about your use case. Once access is granted, **Fin Agent API** appears under
+         * **Fin AI Agent > Deploy**. {%…
          */
-        fun startFinConversation(request: dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationRequest, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.startFinConversationWithRawResponse(clientConfig, request, options)
+        fun startFinConversation(
+            request: dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.StartFinConversationResponse> {
+            return dev.octri.showcase.intercom.methods.FinAgent.startFinConversationWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Sends a user's reply to an existing Fin conversation after Fin has returned a response and the conversation is awaiting a user reply. Supply the conversation ID, the new message, and the user details, with optional attachments for additional context. Fin continues the conversation and reports its status through the configured event channel.
+         * Sends a user's reply to an existing Fin conversation after Fin has returned a response
+         * and the conversation is awaiting a user reply. Supply the conversation ID, the new
+         * message, and the user details, with optional attachments for additional context. Fin
+         * continues the conversation and reports its status through the configured event channel.
          *
-         * Once Fin has returned a response to a user's message, its status will be `awaiting_user_reply`. If a user replies, use this endpoint to send this response to Fin. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**. {% /admonition %}
+         * Once Fin has returned a response to a user's message, its status will be
+         * `awaiting_user_reply`. If a user replies, use this endpoint to send this response to Fin.
+         * {% admonition type="warning" %} To request access to the Fin Agent API, go to
+         * **Settings > Integrations > Fin Agent API** in your workspace and tell us about your use
+         * case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent > Deploy**.
+         * {% /admonition %}
          */
-        fun replyToFin(conversationId: String, message: FinAgentMessage, user: FinAgentUser, intercomVersion: IntercomVersion? = null, attachments: List<FinAgentAttachment>? = null, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.ReplyToFinResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.replyToFinWithRawResponse(clientConfig, conversationId, message, user, intercomVersion, attachments, options)
+        fun replyToFin(
+            conversationId: String,
+            message: FinAgentMessage,
+            user: FinAgentUser,
+            intercomVersion: IntercomVersion? = null,
+            attachments: List<FinAgentAttachment>? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.ReplyToFinResponse> {
+            return dev.octri.showcase.intercom.methods.FinAgent.replyToFinWithRawResponse(
+                clientConfig,
+                conversationId,
+                message,
+                user,
+                intercomVersion,
+                attachments,
+                options,
+            )
         }
 
         /**
-         * Submits a customer's satisfaction rating for a conversation, with an optional free-text remark. Use the rating option provided in Fin's `csat_requested` event; submitting a remark locks the rating against further changes.
+         * Submits a customer's satisfaction rating for a conversation, with an optional free-text
+         * remark. Use the rating option provided in Fin's `csat_requested` event; submitting a
+         * remark locks the rating against further changes.
          *
-         * Record a customer's satisfaction rating for a conversation, with an optional free-text remark. Fin decides *when* to ask for a rating — this reuses the CSAT settings on your Fin workflow, not this API. When Fin asks, it fires a `csat_requested` event over webhooks or SSE carrying the rating options to show the user. Present those options, then submit the user's choice here. Submitting the same rating again, with no new remark, is a no-op and stays successful, so an…
+         * Record a customer's satisfaction rating for a conversation, with an optional free-text
+         * remark. Fin decides *when* to ask for a rating — this reuses the CSAT settings on your
+         * Fin workflow, not this API. When Fin asks, it fires a `csat_requested` event over
+         * webhooks or SSE carrying the rating options to show the user. Present those options, then
+         * submit the user's choice here. Submitting the same rating again, with no new remark, is a
+         * no-op and stays successful, so an…
          */
-        fun submitFinCsat(conversationId: String, rating: SubmitFinCsatRatingEnum, intercomVersion: IntercomVersion? = null, remark: String? = null, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.SubmitFinCsatResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.submitFinCsatWithRawResponse(clientConfig, conversationId, rating, intercomVersion, remark, options)
+        fun submitFinCsat(
+            conversationId: String,
+            rating: SubmitFinCsatRatingEnum,
+            intercomVersion: IntercomVersion? = null,
+            remark: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.SubmitFinCsatResponse> {
+            return dev.octri.showcase.intercom.methods.FinAgent.submitFinCsatWithRawResponse(
+                clientConfig,
+                conversationId,
+                rating,
+                intercomVersion,
+                remark,
+                options,
+            )
         }
 
         /**
-         * Lists the Fin capabilities available to a specific user so an orchestrating agent can choose which Fin action to call. Supply the user object with its required `id`; Fin matches available procedures to that user and creates or updates the user record using the supplied details. Use the returned capabilities to select an appropriate endpoint for the next action.
+         * Lists the Fin capabilities available to a specific user so an orchestrating agent can
+         * choose which Fin action to call. Supply the user object with its required `id`; Fin
+         * matches available procedures to that user and creates or updates the user record using
+         * the supplied details. Use the returned capabilities to select an appropriate endpoint for
+         * the next action.
          *
-         * Return a machine-readable, per-user list of what Fin can do for a given end user, so an orchestrating agent can decide which endpoint to call. The response is audience-matched to the supplied user: each live, API-triggerable procedure is checked against that user before being included, alongside the static `reply` and `ask` actions. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings > Integrations > Fin Agent API** in your workspace and…
+         * Return a machine-readable, per-user list of what Fin can do for a given end user, so an
+         * orchestrating agent can decide which endpoint to call. The response is audience-matched
+         * to the supplied user: each live, API-triggerable procedure is checked against that user
+         * before being included, alongside the static `reply` and `ask` actions. {% admonition
+         * type="warning" %} To request access to the Fin Agent API, go to **Settings >
+         * Integrations > Fin Agent API** in your workspace and…
          */
-        fun listFinCapabilities(user: FinAgentUser, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.ListFinCapabilitiesResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.listFinCapabilitiesWithRawResponse(clientConfig, user, intercomVersion, options)
+        fun listFinCapabilities(
+            user: FinAgentUser,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.ListFinCapabilitiesResponse> {
+            return dev.octri.showcase.intercom.methods.FinAgent.listFinCapabilitiesWithRawResponse(
+                clientConfig,
+                user,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Submits a single, self-contained question to Fin and starts a one-shot, non-conversational interaction. Provide `conversation_id`, `message`, and `user`; Fin does not ask follow-up questions or run procedures, and the answer is delivered asynchronously through the `fin_replied` event. The conversation ends with a `complete` status, with no awaiting-user-reply cycle.
+         * Submits a single, self-contained question to Fin and starts a one-shot,
+         * non-conversational interaction. Provide `conversation_id`, `message`, and `user`; Fin
+         * does not ask follow-up questions or run procedures, and the answer is delivered
+         * asynchronously through the `fin_replied` event. The conversation ends with a `complete`
+         * status, with no awaiting-user-reply cycle.
          *
-         * Ask Fin a single, self-contained question and receive one informational answer. Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up questions, will not run procedures, and will not escalate to a human on its own. You can still escalate one yourself with `POST /fin/escalate`; the ask conversation is already closed after its one-shot answer, and escalation leaves it closed while routing the handoff separately. Fin's answer is delivered…
+         * Ask Fin a single, self-contained question and receive one informational answer. Unlike a
+         * conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up questions,
+         * will not run procedures, and will not escalate to a human on its own. You can still
+         * escalate one yourself with `POST /fin/escalate`; the ask conversation is already closed
+         * after its one-shot answer, and escalation leaves it closed while routing the handoff
+         * separately. Fin's answer is delivered…
          */
-        fun askFin(request: dev.octri.showcase.intercom.methods.FinAgent.AskFinRequest, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.AskFinResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.askFinWithRawResponse(clientConfig, request, options)
+        fun askFin(
+            request: dev.octri.showcase.intercom.methods.FinAgent.AskFinRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.AskFinResponse> {
+            return dev.octri.showcase.intercom.methods.FinAgent.askFinWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Triggers a specified Fin procedure on a new conversation, guaranteeing that Fin runs the named procedure rather than routing the request among procedures. Provide `procedure_id`, `conversation_id`, and `user`; the message is optional. Fin reports progress asynchronously through events or Server-Sent Events, and you can send a user's reply through `/fin/reply` if the procedure pauses for input.
+         * Triggers a specified Fin procedure on a new conversation, guaranteeing that Fin runs the
+         * named procedure rather than routing the request among procedures. Provide `procedure_id`,
+         * `conversation_id`, and `user`; the message is optional. Fin reports progress
+         * asynchronously through events or Server-Sent Events, and you can send a user's reply
+         * through `/fin/reply` if the procedure pauses for input.
          *
-         * Deterministically run a specific procedure on a new conversation. Calling this endpoint guarantees that the named procedure runs — there is no non-deterministic routing. Fin's progress is delivered asynchronously via events or Server-Sent Events. If the procedure pauses for user input, the conversation status becomes `awaiting_user_reply` — send the user's response with `/fin/reply`. {% admonition type="warning" %} To request access to the Fin Agent API, go to **Settings >…
+         * Deterministically run a specific procedure on a new conversation. Calling this endpoint
+         * guarantees that the named procedure runs — there is no non-deterministic routing. Fin's
+         * progress is delivered asynchronously via events or Server-Sent Events. If the procedure
+         * pauses for user input, the conversation status becomes `awaiting_user_reply` — send the
+         * user's response with `/fin/reply`. {% admonition type="warning" %} To request access to
+         * the Fin Agent API, go to **Settings >…
          */
-        fun runFinProcedure(request: dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureRequest, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.runFinProcedureWithRawResponse(clientConfig, request, options)
+        fun runFinProcedure(
+            request: dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.RunFinProcedureResponse> {
+            return dev.octri.showcase.intercom.methods.FinAgent.runFinProcedureWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Escalates an existing Fin conversation or requests a handoff on behalf of a user to a human teammate. Supply either `conversation_id` or `user`, and optionally provide `context` for the receiving teammate; on Fin for Platforms, use `conversation_id` because `user` is not supported. Fin reports the escalation asynchronously with an `escalated` status followed by `complete`.
+         * Escalates an existing Fin conversation or requests a handoff on behalf of a user to a
+         * human teammate. Supply either `conversation_id` or `user`, and optionally provide
+         * `context` for the receiving teammate; on Fin for Platforms, use `conversation_id` because
+         * `user` is not supported. Fin reports the escalation asynchronously with an `escalated`
+         * status followed by `complete`.
          *
-         * Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the handoff lands in your team inbox. Provide either `conversation_id` or `user`: - `conversation_id` — escalate an existing agent conversation, including one started with `/fin/ask`. On the Intercom Helpdesk, Fin by default summarises the conversation and opens a new Helpdesk conversation that carries the summary as an internal note. Escalation does not change the original agent conversation's…
+         * Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the
+         * handoff lands in your team inbox. Provide either `conversation_id` or `user`: -
+         * `conversation_id` — escalate an existing agent conversation, including one started with
+         * `/fin/ask`. On the Intercom Helpdesk, Fin by default summarises the conversation and
+         * opens a new Helpdesk conversation that carries the summary as an internal note.
+         * Escalation does not change the original agent conversation's…
          */
-        fun escalateFinConversation(intercomVersion: IntercomVersion? = null, conversationId: String? = null, user: FinAgentUser? = null, context: String? = null, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.FinAgent.EscalateFinConversationResponse> {
-            return dev.octri.showcase.intercom.methods.FinAgent.escalateFinConversationWithRawResponse(clientConfig, intercomVersion, conversationId, user, context, options)
+        fun escalateFinConversation(
+            intercomVersion: IntercomVersion? = null,
+            conversationId: String? = null,
+            user: FinAgentUser? = null,
+            context: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<
+            dev.octri.showcase.intercom.methods.FinAgent.EscalateFinConversationResponse
+        > {
+            return dev.octri.showcase.intercom.methods.FinAgent
+                .escalateFinConversationWithRawResponse(
+                    clientConfig,
+                    intercomVersion,
+                    conversationId,
+                    user,
+                    context,
+                    options,
+                )
         }
-
     }
 }

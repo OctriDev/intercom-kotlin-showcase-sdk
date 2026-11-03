@@ -17,168 +17,300 @@ import dev.octri.showcase.intercom.SdkResponse
 
 object Folders {
 
-data class ListFoldersResponse(
-    val type: ListFoldersResponseTypeEnum? = null,
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Folder>? = null,
-    /**
-     * Total number of folders
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
-    /**
-     * The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests. Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.
-     */
-    val pages: PagesLink? = null
-) : SdkResource()
+    data class ListFoldersResponse(
+        val type: ListFoldersResponseTypeEnum? = null,
+        @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Folder>? = null,
+        /** Total number of folders */
+        @com.fasterxml.jackson.annotation.JsonProperty("total_count") val totalCount: Long? = null,
+        /**
+         * The majority of list resources in the API are paginated to allow clients to traverse data
+         * over multiple requests. Their responses are likely to contain a pages object that hosts
+         * pagination links which a client can use to paginate through the data without having to
+         * construct a query. The link relations for the pages field are as follows.
+         */
+        val pages: PagesLink? = null,
+    ) : SdkResource()
 
-data class CreateFolderFolder(
-    /**
-     * The name of the folder
-     */
-    val name: String,
-    /**
-     * The description of the folder
-     */
-    val description: String? = null,
-    /**
-     * An emoji for the folder
-     */
-    val emoji: String? = null,
-    /**
-     * The ID of the parent folder
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id") val parentFolderId: Long? = null
-) : SdkResource()
+    data class CreateFolderFolder(
+        /** The name of the folder */
+        val name: String,
+        /** The description of the folder */
+        val description: String? = null,
+        /** An emoji for the folder */
+        val emoji: String? = null,
+        /** The ID of the parent folder */
+        @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id")
+        val parentFolderId: Long? = null,
+    ) : SdkResource()
 
-data class UpdateFolderFolder(
-    /**
-     * The name of the folder
-     */
-    val name: String? = null,
-    /**
-     * The description of the folder
-     */
-    val description: String? = null,
-    /**
-     * An emoji for the folder
-     */
-    val emoji: String? = null,
-    /**
-     * The ID of the parent folder
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id") val parentFolderId: Long? = null
-) : SdkResource()
+    data class UpdateFolderFolder(
+        /** The name of the folder */
+        val name: String? = null,
+        /** The description of the folder */
+        val description: String? = null,
+        /** An emoji for the folder */
+        val emoji: String? = null,
+        /** The ID of the parent folder */
+        @com.fasterxml.jackson.annotation.JsonProperty("parent_folder_id")
+        val parentFolderId: Long? = null,
+    ) : SdkResource()
 
     /**
-     * Lists folders used to organize content. Use `parent_folder_id` to list only the direct children of a specific folder, and use `page` and `per_page` to paginate the results.
+     * Lists folders used to organize content. Use `parent_folder_id` to list only the direct
+     * children of a specific folder, and use `page` and `per_page` to paginate the results.
      *
-     * You can fetch a list of all folders for organizing content by making a GET request to `api.intercom.io
+     * You can fetch a list of all folders for organizing content by making a GET request to
+     * `api.intercom.io
      *
      * @param page The page number
      * @param perPage Number of results per page
-     * @param parentFolderId Filter folders by parent folder ID. Use this to list
-     *   only direct children of a specific folder.
+     * @param parentFolderId Filter folders by parent folder ID. Use this to list only direct
+     *   children of a specific folder.
      */
-    fun listFolders(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, parentFolderId: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ListFoldersResponse {
-        return listFoldersWithRawResponse(clientConfig, page, perPage, parentFolderId, intercomVersion, options).data
+    fun listFolders(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        parentFolderId: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ListFoldersResponse {
+        return listFoldersWithRawResponse(
+                clientConfig,
+                page,
+                perPage,
+                parentFolderId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [listFolders], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listFoldersWithRawResponse(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, parentFolderId: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ListFoldersResponse> {
-        return SdkClient.request<ListFoldersResponse>(SdkClient.RequestSpec("GET", "/folders", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "parent_folder_id" to
-    SdkClient.queryValue(parentFolderId, "form", true)), operationId = "listFolders", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Creates a folder for organizing content. Supply a `folder` object with a `name`, and optionally include its description, emoji, or parent folder ID. The response includes the new folder's identifier and content count.
-     *
-     * You can create a new folder for organizing content by making a POST request to `api.intercom.io
+     * [listFolders], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
      */
-    fun createFolder(clientConfig: ClientConfig, folder: CreateFolderFolder, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Folder {
+    fun listFoldersWithRawResponse(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        parentFolderId: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListFoldersResponse> {
+        return SdkClient.request<ListFoldersResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/folders",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "parent_folder_id" to SdkClient.queryValue(parentFolderId, "form", true),
+                    ),
+                operationId = "listFolders",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Creates a folder for organizing content. Supply a `folder` object with a `name`, and
+     * optionally include its description, emoji, or parent folder ID. The response includes the new
+     * folder's identifier and content count.
+     *
+     * You can create a new folder for organizing content by making a POST request to
+     * `api.intercom.io
+     */
+    fun createFolder(
+        clientConfig: ClientConfig,
+        folder: CreateFolderFolder,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Folder {
         return createFolderWithRawResponse(clientConfig, folder, intercomVersion, options).data
     }
 
-
-    /** [createFolder], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createFolderWithRawResponse(clientConfig: ClientConfig, folder: CreateFolderFolder, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Folder> {
-        return SdkClient.request<Folder>(SdkClient.RequestSpec("POST", "/folders", config = clientConfig, body = SdkClient.bodyMap("folder" to (folder)), operationId = "createFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java)))
+    /**
+     * [createFolder], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createFolderWithRawResponse(
+        clientConfig: ClientConfig,
+        folder: CreateFolderFolder,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Folder> {
+        return SdkClient.request<Folder>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/folders",
+                config = clientConfig,
+                body = SdkClient.bodyMap("folder" to (folder)),
+                operationId = "createFolder",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves the details of a folder used to organize content. Use the folder's unique `id` to identify the folder. The response includes its name, description, parent folder, content count, and timestamps.
+     * Retrieves the details of a folder used to organize content. Use the folder's unique `id` to
+     * identify the folder. The response includes its name, description, parent folder, content
+     * count, and timestamps.
      *
      * You can fetch the details of a single folder by making a GET request to `api.intercom.io
      *
      * @param id The unique identifier for the folder
      */
-    fun retrieveFolder(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Folder {
+    fun retrieveFolder(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Folder {
         return retrieveFolderWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [retrieveFolder], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveFolderWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Folder> {
-        return SdkClient.request<Folder>(SdkClient.RequestSpec("GET", "/folders/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "retrieveFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveFolder], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveFolderWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Folder> {
+        return SdkClient.request<Folder>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/folders/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "retrieveFolder",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Updates a folder's name, description, emoji, or parent folder. Supply the `folder` object with the properties you want to change; `company_id` is not applicable to folders. The response contains the updated folder details.
+     * Updates a folder's name, description, emoji, or parent folder. Supply the `folder` object
+     * with the properties you want to change; `company_id` is not applicable to folders. The
+     * response contains the updated folder details.
      *
      * You can update a folder by making a PUT request to `api.intercom.io
      *
      * @param id The unique identifier for the folder
      */
-    fun updateFolder(clientConfig: ClientConfig, id: Long, folder: UpdateFolderFolder, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Folder {
+    fun updateFolder(
+        clientConfig: ClientConfig,
+        id: Long,
+        folder: UpdateFolderFolder,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Folder {
         return updateFolderWithRawResponse(clientConfig, id, folder, intercomVersion, options).data
     }
 
-
-    /** [updateFolder], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateFolderWithRawResponse(clientConfig: ClientConfig, id: Long, folder: UpdateFolderFolder, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Folder> {
-        return SdkClient.request<Folder>(SdkClient.RequestSpec("PUT", "/folders/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("folder" to (folder)), operationId = "updateFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [updateFolder], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun updateFolderWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        folder: UpdateFolderFolder,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Folder> {
+        return SdkClient.request<Folder>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/folders/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("folder" to (folder)),
+                operationId = "updateFolder",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a folder that contains no content. Use the folder's unique `id` to identify the folder to remove. The response confirms whether deletion succeeded.
+     * Deletes a folder that contains no content. Use the folder's unique `id` to identify the
+     * folder to remove. The response confirms whether deletion succeeded.
      *
-     * You can delete a folder (if it contains no content) by making a DELETE request to `api.intercom.io
+     * You can delete a folder (if it contains no content) by making a DELETE request to
+     * `api.intercom.io
      *
      * @param id The unique identifier for the folder
      */
-    fun deleteFolder(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedFolderObject {
+    fun deleteFolder(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedFolderObject {
         return deleteFolderWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [deleteFolder], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteFolderWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DeletedFolderObject> {
-        return SdkClient.request<DeletedFolderObject>(SdkClient.RequestSpec("DELETE", "/folders/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteFolder", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
+    /**
+     * [deleteFolder], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun deleteFolderWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedFolderObject> {
+        return SdkClient.request<DeletedFolderObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/folders/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "deleteFolder",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

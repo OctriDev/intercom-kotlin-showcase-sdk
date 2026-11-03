@@ -3,228 +3,575 @@
 
 package dev.octri.showcase.intercom
 
-
 class CompaniesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a company or updates the company matched by `company_id`. Set `company_id` when creating a company because it cannot be changed after creation; a company is visible in the workspace only when it has at least one associated user. The response contains the created or updated company object.
+     * Creates a company or updates the company matched by `company_id`. Set `company_id` when
+     * creating a company because it cannot be changed after creation; a company is visible in the
+     * workspace only when it has at least one associated user. The response contains the created or
+     * updated company object.
      *
-     * You can create or update a company. Companies will be only visible in Intercom when there is at least one associated user. Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated. {% admonition type="warning" name="Using `company_id`" %} You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set…
+     * You can create or update a company. Companies will be only visible in Intercom when there is
+     * at least one associated user. Companies are looked up via `company_id` in a `POST` request,
+     * if not found via `company_id`, the new company will be created, if found, that company will
+     * be updated. {% admonition type="warning" name="Using `company_id`" %} You can set a unique
+     * `company_id` value when creating a company. However, it is not possible to update
+     * `company_id`. Be sure to set…
      */
-    fun createOrUpdate(request: dev.octri.showcase.intercom.methods.Companies.CreateOrUpdateCompanyParams, options: RequestOptions? = null): Company {
-        return dev.octri.showcase.intercom.methods.Companies.createOrUpdateCompany(clientConfig, request, options)
+    fun createOrUpdate(
+        request: dev.octri.showcase.intercom.methods.Companies.CreateOrUpdateCompanyParams,
+        options: RequestOptions? = null,
+    ): Company {
+        return dev.octri.showcase.intercom.methods.Companies.createOrUpdateCompany(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists companies or retrieves a company matching the supplied filters. Use `company_id` or `name` to look up a single company, or use `tag_id` or `segment_id` to filter the company list. Use `page` and `per_page` to paginate the results.
+     * Lists companies or retrieves a company matching the supplied filters. Use `company_id` or
+     * `name` to look up a single company, or use `tag_id` or `segment_id` to filter the company
+     * list. Use `page` and `per_page` to paginate the results.
      *
-     * You can fetch a single company by passing in `company_id` or `name`. `api.intercom.io `api.intercom.io You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter. `api.intercom.io `api.intercom.io
+     * You can fetch a single company by passing in `company_id` or `name`. `api.intercom.io
+     * `api.intercom.io You can fetch all companies and filter by `segment_id` or `tag_id` as a
+     * query parameter. `api.intercom.io `api.intercom.io
      */
-    fun retrieve(request: dev.octri.showcase.intercom.methods.Companies.RetrieveCompanyRequest, options: RequestOptions? = null): CompanyList {
-        return dev.octri.showcase.intercom.methods.Companies.retrieveCompany(clientConfig, request, options)
+    fun retrieve(
+        request: dev.octri.showcase.intercom.methods.Companies.RetrieveCompanyRequest,
+        options: RequestOptions? = null,
+    ): CompanyList {
+        return dev.octri.showcase.intercom.methods.Companies.retrieveCompany(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves a company by its Intercom-provisioned identifier. Use `company_id` to identify the company whose details you need. The response includes company information such as its name, custom attributes, plan, and associated segments.
+     * Retrieves a company by its Intercom-provisioned identifier. Use `company_id` to identify the
+     * company whose details you need. The response includes company information such as its name,
+     * custom attributes, plan, and associated segments.
      *
      * You can fetch a single company.
      */
-    fun retrieveById(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Company {
-        return dev.octri.showcase.intercom.methods.Companies.retrieveCompaniesById(clientConfig, companyId, intercomVersion, options)
+    fun retrieveById(
+        companyId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Company {
+        return dev.octri.showcase.intercom.methods.Companies.retrieveCompaniesById(
+            clientConfig,
+            companyId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Replaces the submitted properties on a company identified by its Intercom-provisioned ID. Supply only the company fields you want to update; `company_id` cannot be changed after creation. The response contains the updated company object.
+     * Replaces the submitted properties on a company identified by its Intercom-provisioned ID.
+     * Supply only the company fields you want to update; `company_id` cannot be changed after
+     * creation. The response contains the updated company object.
      *
-     * You can update a single company using the Intercom provisioned `id`. {% admonition type="warning" name="Using `company_id`" %} When updating a company it is not possible to update `company_id`. This can only be set once upon creation of the company. {% /admonition %}
+     * You can update a single company using the Intercom provisioned `id`. {% admonition
+     * type="warning" name="Using `company_id`" %} When updating a company it is not possible to
+     * update `company_id`. This can only be set once upon creation of the company. {% /admonition
+     * %}
      */
-    fun update(request: dev.octri.showcase.intercom.methods.Companies.UpdateCompanyParams, options: RequestOptions? = null): Company {
-        return dev.octri.showcase.intercom.methods.Companies.updateCompany(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.intercom.methods.Companies.UpdateCompanyParams,
+        options: RequestOptions? = null,
+    ): Company {
+        return dev.octri.showcase.intercom.methods.Companies.updateCompany(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes a company while keeping its record in the workspace and detaching all of its contacts. Contact detachment is permanent, and the contacts themselves are not deleted. Remove or filter the company from any syncing third-party integration before deletion if you want to prevent it from being recreated.
+     * Deletes a company while keeping its record in the workspace and detaching all of its
+     * contacts. Contact detachment is permanent, and the contacts themselves are not deleted.
+     * Remove or filter the company from any syncing third-party integration before deletion if you
+     * want to prevent it from being recreated.
      *
-     * Delete a single company. The company record is kept in your workspace, but all contacts are detached. The contacts themselves are not deleted. Detaching contacts is permanent and can't be reversed. A `company.deleted` webhook is sent when the company is deleted. These changes may take some time to be reflected in your workspace. {% admonition type="warning" %} Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any…
+     * Delete a single company. The company record is kept in your workspace, but all contacts are
+     * detached. The contacts themselves are not deleted. Detaching contacts is permanent and can't
+     * be reversed. A `company.deleted` webhook is sent when the company is deleted. These changes
+     * may take some time to be reflected in your workspace. {% admonition type="warning" %}
+     * Third-party integrations that sync companies into Intercom (for example, Salesforce or
+     * Chargebee) will recreate any…
      */
-    fun delete(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedCompanyObject {
-        return dev.octri.showcase.intercom.methods.Companies.deleteCompany(clientConfig, companyId, intercomVersion, options)
+    fun delete(
+        companyId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedCompanyObject {
+        return dev.octri.showcase.intercom.methods.Companies.deleteCompany(
+            clientConfig,
+            companyId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the contacts associated with a company identified by `company_id`. Use this endpoint to retrieve the company's attached contacts; the response includes contact records and cursor-based page metadata.
+     * Lists the contacts associated with a company identified by `company_id`. Use this endpoint to
+     * retrieve the company's attached contacts; the response includes contact records and
+     * cursor-based page metadata.
      *
      * You can fetch a list of all contacts that belong to a company.
      */
-    fun listAttachedContacts(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyAttachedContacts {
-        return dev.octri.showcase.intercom.methods.Companies.listAttachedContacts(clientConfig, companyId, intercomVersion, options)
+    fun listAttachedContacts(
+        companyId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CompanyAttachedContacts {
+        return dev.octri.showcase.intercom.methods.Companies.listAttachedContacts(
+            clientConfig,
+            companyId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists the segments associated with a company identified by `company_id`. Use this endpoint to inspect the company's attached segments; the response includes segment records.
+     * Lists the segments associated with a company identified by `company_id`. Use this endpoint to
+     * inspect the company's attached segments; the response includes segment records.
      *
      * You can fetch a list of all segments that belong to a company.
      */
-    fun listAttachedSegments(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyAttachedSegments {
-        return dev.octri.showcase.intercom.methods.Companies.listCompaniesAttachedSegments(clientConfig, companyId, intercomVersion, options)
+    fun listAttachedSegments(
+        companyId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CompanyAttachedSegments {
+        return dev.octri.showcase.intercom.methods.Companies.listCompaniesAttachedSegments(
+            clientConfig,
+            companyId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Searches companies by their attributes using filters in the request body. Use `query` to combine filters, `sort` to order results, and `pagination` to retrieve subsequent pages; filter groups support up to two nested levels and 15 filters per AND or OR group. Search results exclude companies without associated users.
+     * Searches companies by their attributes using filters in the request body. Use `query` to
+     * combine filters, `sort` to order results, and `pagination` to retrieve subsequent pages;
+     * filter groups support up to two nested levels and 15 filters per AND or OR group. Search
+     * results exclude companies without associated users.
      *
-     * You can search for companies by the value of their attributes in order to fetch exactly the companies you want. To search for companies, send a `POST` request to `api.intercom.io with a query object in the body defining your filters. Note that the API does not include companies who have no associated users in search results. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your…
+     * You can search for companies by the value of their attributes in order to fetch exactly the
+     * companies you want. To search for companies, send a `POST` request to `api.intercom.io with a
+     * query object in the body defining your filters. Note that the API does not include companies
+     * who have no associated users in search results. {% admonition type="warning" name="Optimizing
+     * search queries" %} Search queries can be complex, so optimizing them can help the performance
+     * of your…
      */
-    fun search(query: CompanySearchRequestQuery, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, sort: dev.octri.showcase.intercom.methods.Companies.CompanySearchRequestSort? = null, options: RequestOptions? = null): CompanyList {
-        return dev.octri.showcase.intercom.methods.Companies.searchCompanies(clientConfig, query, intercomVersion, pagination, sort, options)
+    fun search(
+        query: CompanySearchRequestQuery,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        sort: dev.octri.showcase.intercom.methods.Companies.CompanySearchRequestSort? = null,
+        options: RequestOptions? = null,
+    ): CompanyList {
+        return dev.octri.showcase.intercom.methods.Companies.searchCompanies(
+            clientConfig,
+            query,
+            intercomVersion,
+            pagination,
+            sort,
+            options,
+        )
     }
 
     /**
-     * Lists companies, ordered by `last_request_at` and descending by default. Use the pagination parameters to retrieve results in pages; companies without associated users are excluded, and this endpoint can return at most 10,000 companies.
+     * Lists companies, ordered by `last_request_at` and descending by default. Use the pagination
+     * parameters to retrieve results in pages; companies without associated users are excluded, and
+     * this endpoint can return at most 10,000 companies.
      *
-     * You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first. Note that the API does not include companies who have no associated users in list responses. When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the…
+     * You can list companies. The company list is sorted by the `last_request_at` field and by
+     * default is ordered descending, most recently requested first. Note that the API does not
+     * include companies who have no associated users in list responses. When using the Companies
+     * endpoint and the pages object to iterate through the returned companies, there is a limit of
+     * 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000
+     * Companies, please use the…
      */
-    fun listAll(page: Long? = null, perPage: Long? = null, order: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyList {
-        return dev.octri.showcase.intercom.methods.Companies.listAllCompanies(clientConfig, page, perPage, order, intercomVersion, options)
+    fun listAll(
+        page: Long? = null,
+        perPage: Long? = null,
+        order: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CompanyList {
+        return dev.octri.showcase.intercom.methods.Companies.listAllCompanies(
+            clientConfig,
+            page,
+            perPage,
+            order,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists companies by using a cursor-based scroll to iterate through a large dataset. Omit `scroll_param` to start a scroll, then pass the returned value on subsequent requests; only one scroll can be open per app at a time, and an unused scroll expires after one minute.
+     * Lists companies by using a cursor-based scroll to iterate through a large dataset. Omit
+     * `scroll_param` to start a scroll, then pass the returned value on subsequent requests; only
+     * one scroll can be open per app at a time, and an unused scroll expires after one minute.
      *
-     * The `list all companies` functionality does not work well for huge datasets, and can result in errors and performance problems when paging deeply. The Scroll API provides an efficient mechanism for iterating over all companies in a dataset. - Each app can only have 1 scroll open at a time. You'll get an error message if you try to have more than one open per app. - If the scroll isn't used for 1 minute, it expires and calls with that scroll param will fail - If the end of…
+     * The `list all companies` functionality does not work well for huge datasets, and can result
+     * in errors and performance problems when paging deeply. The Scroll API provides an efficient
+     * mechanism for iterating over all companies in a dataset. - Each app can only have 1 scroll
+     * open at a time. You'll get an error message if you try to have more than one open per app. -
+     * If the scroll isn't used for 1 minute, it expires and calls with that scroll param will
+     * fail - If the end of…
      */
-    fun scrollOverAll(scrollParam: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CompanyScroll {
-        return dev.octri.showcase.intercom.methods.Companies.scrollOverAllCompanies(clientConfig, scrollParam, intercomVersion, options)
+    fun scrollOverAll(
+        scrollParam: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CompanyScroll {
+        return dev.octri.showcase.intercom.methods.Companies.scrollOverAllCompanies(
+            clientConfig,
+            scrollParam,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Attaches a company to a contact identified by `contact_id`. Supply the company's Intercom identifier in the body field `id`. The response returns the attached company object.
+     * Attaches a company to a contact identified by `contact_id`. Supply the company's Intercom
+     * identifier in the body field `id`. The response returns the attached company object.
      *
      * You can attach a company to a single contact.
      */
-    fun attachContact(contactId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Company {
-        return dev.octri.showcase.intercom.methods.Companies.attachCompaniesContact(clientConfig, contactId, id, intercomVersion, options)
+    fun attachContact(
+        contactId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Company {
+        return dev.octri.showcase.intercom.methods.Companies.attachCompaniesContact(
+            clientConfig,
+            contactId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Removes the association between a contact and a company. Identify both records with `contact_id` and `company_id` to detach the company from the contact. The response returns the company object.
+     * Removes the association between a contact and a company. Identify both records with
+     * `contact_id` and `company_id` to detach the company from the contact. The response returns
+     * the company object.
      *
      * You can detach a company from a single contact.
      */
-    fun detachContact(contactId: String, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Company {
-        return dev.octri.showcase.intercom.methods.Companies.detachCompaniesContact(clientConfig, contactId, companyId, intercomVersion, options)
+    fun detachContact(
+        contactId: String,
+        companyId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Company {
+        return dev.octri.showcase.intercom.methods.Companies.detachCompaniesContact(
+            clientConfig,
+            contactId,
+            companyId,
+            intercomVersion,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [CompaniesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [CompaniesNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Creates a company or updates the company matched by `company_id`. Set `company_id` when creating a company because it cannot be changed after creation; a company is visible in the workspace only when it has at least one associated user. The response contains the created or updated company object.
+         * Creates a company or updates the company matched by `company_id`. Set `company_id` when
+         * creating a company because it cannot be changed after creation; a company is visible in
+         * the workspace only when it has at least one associated user. The response contains the
+         * created or updated company object.
          *
-         * You can create or update a company. Companies will be only visible in Intercom when there is at least one associated user. Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated. {% admonition type="warning" name="Using `company_id`" %} You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set…
+         * You can create or update a company. Companies will be only visible in Intercom when there
+         * is at least one associated user. Companies are looked up via `company_id` in a `POST`
+         * request, if not found via `company_id`, the new company will be created, if found, that
+         * company will be updated. {% admonition type="warning" name="Using `company_id`" %} You
+         * can set a unique `company_id` value when creating a company. However, it is not possible
+         * to update `company_id`. Be sure to set…
          */
-        fun createOrUpdate(request: dev.octri.showcase.intercom.methods.Companies.CreateOrUpdateCompanyParams, options: RequestOptions? = null): SdkResponse<Company> {
-            return dev.octri.showcase.intercom.methods.Companies.createOrUpdateCompanyWithRawResponse(clientConfig, request, options)
+        fun createOrUpdate(
+            request: dev.octri.showcase.intercom.methods.Companies.CreateOrUpdateCompanyParams,
+            options: RequestOptions? = null,
+        ): SdkResponse<Company> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .createOrUpdateCompanyWithRawResponse(clientConfig, request, options)
         }
 
         /**
-         * Lists companies or retrieves a company matching the supplied filters. Use `company_id` or `name` to look up a single company, or use `tag_id` or `segment_id` to filter the company list. Use `page` and `per_page` to paginate the results.
+         * Lists companies or retrieves a company matching the supplied filters. Use `company_id` or
+         * `name` to look up a single company, or use `tag_id` or `segment_id` to filter the company
+         * list. Use `page` and `per_page` to paginate the results.
          *
-         * You can fetch a single company by passing in `company_id` or `name`. `api.intercom.io `api.intercom.io You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter. `api.intercom.io `api.intercom.io
+         * You can fetch a single company by passing in `company_id` or `name`. `api.intercom.io
+         * `api.intercom.io You can fetch all companies and filter by `segment_id` or `tag_id` as a
+         * query parameter. `api.intercom.io `api.intercom.io
          */
-        fun retrieve(request: dev.octri.showcase.intercom.methods.Companies.RetrieveCompanyRequest, options: RequestOptions? = null): SdkResponse<CompanyList> {
-            return dev.octri.showcase.intercom.methods.Companies.retrieveCompanyWithRawResponse(clientConfig, request, options)
+        fun retrieve(
+            request: dev.octri.showcase.intercom.methods.Companies.RetrieveCompanyRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<CompanyList> {
+            return dev.octri.showcase.intercom.methods.Companies.retrieveCompanyWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Retrieves a company by its Intercom-provisioned identifier. Use `company_id` to identify the company whose details you need. The response includes company information such as its name, custom attributes, plan, and associated segments.
+         * Retrieves a company by its Intercom-provisioned identifier. Use `company_id` to identify
+         * the company whose details you need. The response includes company information such as its
+         * name, custom attributes, plan, and associated segments.
          *
          * You can fetch a single company.
          */
-        fun retrieveById(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Company> {
-            return dev.octri.showcase.intercom.methods.Companies.retrieveCompaniesByIdWithRawResponse(clientConfig, companyId, intercomVersion, options)
+        fun retrieveById(
+            companyId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Company> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .retrieveCompaniesByIdWithRawResponse(
+                    clientConfig,
+                    companyId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Replaces the submitted properties on a company identified by its Intercom-provisioned ID. Supply only the company fields you want to update; `company_id` cannot be changed after creation. The response contains the updated company object.
+         * Replaces the submitted properties on a company identified by its Intercom-provisioned ID.
+         * Supply only the company fields you want to update; `company_id` cannot be changed after
+         * creation. The response contains the updated company object.
          *
-         * You can update a single company using the Intercom provisioned `id`. {% admonition type="warning" name="Using `company_id`" %} When updating a company it is not possible to update `company_id`. This can only be set once upon creation of the company. {% /admonition %}
+         * You can update a single company using the Intercom provisioned `id`. {% admonition
+         * type="warning" name="Using `company_id`" %} When updating a company it is not possible to
+         * update `company_id`. This can only be set once upon creation of the company. {%
+         * /admonition %}
          */
-        fun update(request: dev.octri.showcase.intercom.methods.Companies.UpdateCompanyParams, options: RequestOptions? = null): SdkResponse<Company> {
-            return dev.octri.showcase.intercom.methods.Companies.updateCompanyWithRawResponse(clientConfig, request, options)
+        fun update(
+            request: dev.octri.showcase.intercom.methods.Companies.UpdateCompanyParams,
+            options: RequestOptions? = null,
+        ): SdkResponse<Company> {
+            return dev.octri.showcase.intercom.methods.Companies.updateCompanyWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
         }
 
         /**
-         * Deletes a company while keeping its record in the workspace and detaching all of its contacts. Contact detachment is permanent, and the contacts themselves are not deleted. Remove or filter the company from any syncing third-party integration before deletion if you want to prevent it from being recreated.
+         * Deletes a company while keeping its record in the workspace and detaching all of its
+         * contacts. Contact detachment is permanent, and the contacts themselves are not deleted.
+         * Remove or filter the company from any syncing third-party integration before deletion if
+         * you want to prevent it from being recreated.
          *
-         * Delete a single company. The company record is kept in your workspace, but all contacts are detached. The contacts themselves are not deleted. Detaching contacts is permanent and can't be reversed. A `company.deleted` webhook is sent when the company is deleted. These changes may take some time to be reflected in your workspace. {% admonition type="warning" %} Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any…
+         * Delete a single company. The company record is kept in your workspace, but all contacts
+         * are detached. The contacts themselves are not deleted. Detaching contacts is permanent
+         * and can't be reversed. A `company.deleted` webhook is sent when the company is deleted.
+         * These changes may take some time to be reflected in your workspace. {% admonition
+         * type="warning" %} Third-party integrations that sync companies into Intercom (for
+         * example, Salesforce or Chargebee) will recreate any…
          */
-        fun delete(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DeletedCompanyObject> {
-            return dev.octri.showcase.intercom.methods.Companies.deleteCompanyWithRawResponse(clientConfig, companyId, intercomVersion, options)
+        fun delete(
+            companyId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DeletedCompanyObject> {
+            return dev.octri.showcase.intercom.methods.Companies.deleteCompanyWithRawResponse(
+                clientConfig,
+                companyId,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Lists the contacts associated with a company identified by `company_id`. Use this endpoint to retrieve the company's attached contacts; the response includes contact records and cursor-based page metadata.
+         * Lists the contacts associated with a company identified by `company_id`. Use this
+         * endpoint to retrieve the company's attached contacts; the response includes contact
+         * records and cursor-based page metadata.
          *
          * You can fetch a list of all contacts that belong to a company.
          */
-        fun listAttachedContacts(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CompanyAttachedContacts> {
-            return dev.octri.showcase.intercom.methods.Companies.listAttachedContactsWithRawResponse(clientConfig, companyId, intercomVersion, options)
+        fun listAttachedContacts(
+            companyId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CompanyAttachedContacts> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .listAttachedContactsWithRawResponse(
+                    clientConfig,
+                    companyId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Lists the segments associated with a company identified by `company_id`. Use this endpoint to inspect the company's attached segments; the response includes segment records.
+         * Lists the segments associated with a company identified by `company_id`. Use this
+         * endpoint to inspect the company's attached segments; the response includes segment
+         * records.
          *
          * You can fetch a list of all segments that belong to a company.
          */
-        fun listAttachedSegments(companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CompanyAttachedSegments> {
-            return dev.octri.showcase.intercom.methods.Companies.listCompaniesAttachedSegmentsWithRawResponse(clientConfig, companyId, intercomVersion, options)
+        fun listAttachedSegments(
+            companyId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CompanyAttachedSegments> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .listCompaniesAttachedSegmentsWithRawResponse(
+                    clientConfig,
+                    companyId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Searches companies by their attributes using filters in the request body. Use `query` to combine filters, `sort` to order results, and `pagination` to retrieve subsequent pages; filter groups support up to two nested levels and 15 filters per AND or OR group. Search results exclude companies without associated users.
+         * Searches companies by their attributes using filters in the request body. Use `query` to
+         * combine filters, `sort` to order results, and `pagination` to retrieve subsequent pages;
+         * filter groups support up to two nested levels and 15 filters per AND or OR group. Search
+         * results exclude companies without associated users.
          *
-         * You can search for companies by the value of their attributes in order to fetch exactly the companies you want. To search for companies, send a `POST` request to `api.intercom.io with a query object in the body defining your filters. Note that the API does not include companies who have no associated users in search results. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your…
+         * You can search for companies by the value of their attributes in order to fetch exactly
+         * the companies you want. To search for companies, send a `POST` request to
+         * `api.intercom.io with a query object in the body defining your filters. Note that the API
+         * does not include companies who have no associated users in search results. {% admonition
+         * type="warning" name="Optimizing search queries" %} Search queries can be complex, so
+         * optimizing them can help the performance of your…
          */
-        fun search(query: CompanySearchRequestQuery, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, sort: dev.octri.showcase.intercom.methods.Companies.CompanySearchRequestSort? = null, options: RequestOptions? = null): SdkResponse<CompanyList> {
-            return dev.octri.showcase.intercom.methods.Companies.searchCompaniesWithRawResponse(clientConfig, query, intercomVersion, pagination, sort, options)
+        fun search(
+            query: CompanySearchRequestQuery,
+            intercomVersion: IntercomVersion? = null,
+            pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+            sort: dev.octri.showcase.intercom.methods.Companies.CompanySearchRequestSort? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CompanyList> {
+            return dev.octri.showcase.intercom.methods.Companies.searchCompaniesWithRawResponse(
+                clientConfig,
+                query,
+                intercomVersion,
+                pagination,
+                sort,
+                options,
+            )
         }
 
         /**
-         * Lists companies, ordered by `last_request_at` and descending by default. Use the pagination parameters to retrieve results in pages; companies without associated users are excluded, and this endpoint can return at most 10,000 companies.
+         * Lists companies, ordered by `last_request_at` and descending by default. Use the
+         * pagination parameters to retrieve results in pages; companies without associated users
+         * are excluded, and this endpoint can return at most 10,000 companies.
          *
-         * You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first. Note that the API does not include companies who have no associated users in list responses. When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the…
+         * You can list companies. The company list is sorted by the `last_request_at` field and by
+         * default is ordered descending, most recently requested first. Note that the API does not
+         * include companies who have no associated users in list responses. When using the
+         * Companies endpoint and the pages object to iterate through the returned companies, there
+         * is a limit of 10,000 Companies that can be returned. If you need to list or iterate on
+         * more than 10,000 Companies, please use the…
          */
-        fun listAll(page: Long? = null, perPage: Long? = null, order: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CompanyList> {
-            return dev.octri.showcase.intercom.methods.Companies.listAllCompaniesWithRawResponse(clientConfig, page, perPage, order, intercomVersion, options)
+        fun listAll(
+            page: Long? = null,
+            perPage: Long? = null,
+            order: String? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CompanyList> {
+            return dev.octri.showcase.intercom.methods.Companies.listAllCompaniesWithRawResponse(
+                clientConfig,
+                page,
+                perPage,
+                order,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Lists companies by using a cursor-based scroll to iterate through a large dataset. Omit `scroll_param` to start a scroll, then pass the returned value on subsequent requests; only one scroll can be open per app at a time, and an unused scroll expires after one minute.
+         * Lists companies by using a cursor-based scroll to iterate through a large dataset. Omit
+         * `scroll_param` to start a scroll, then pass the returned value on subsequent requests;
+         * only one scroll can be open per app at a time, and an unused scroll expires after one
+         * minute.
          *
-         * The `list all companies` functionality does not work well for huge datasets, and can result in errors and performance problems when paging deeply. The Scroll API provides an efficient mechanism for iterating over all companies in a dataset. - Each app can only have 1 scroll open at a time. You'll get an error message if you try to have more than one open per app. - If the scroll isn't used for 1 minute, it expires and calls with that scroll param will fail - If the end of…
+         * The `list all companies` functionality does not work well for huge datasets, and can
+         * result in errors and performance problems when paging deeply. The Scroll API provides an
+         * efficient mechanism for iterating over all companies in a dataset. - Each app can only
+         * have 1 scroll open at a time. You'll get an error message if you try to have more than
+         * one open per app. - If the scroll isn't used for 1 minute, it expires and calls with that
+         * scroll param will fail - If the end of…
          */
-        fun scrollOverAll(scrollParam: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CompanyScroll> {
-            return dev.octri.showcase.intercom.methods.Companies.scrollOverAllCompaniesWithRawResponse(clientConfig, scrollParam, intercomVersion, options)
+        fun scrollOverAll(
+            scrollParam: String? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CompanyScroll> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .scrollOverAllCompaniesWithRawResponse(
+                    clientConfig,
+                    scrollParam,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Attaches a company to a contact identified by `contact_id`. Supply the company's Intercom identifier in the body field `id`. The response returns the attached company object.
+         * Attaches a company to a contact identified by `contact_id`. Supply the company's Intercom
+         * identifier in the body field `id`. The response returns the attached company object.
          *
          * You can attach a company to a single contact.
          */
-        fun attachContact(contactId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Company> {
-            return dev.octri.showcase.intercom.methods.Companies.attachCompaniesContactWithRawResponse(clientConfig, contactId, id, intercomVersion, options)
+        fun attachContact(
+            contactId: String,
+            id: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Company> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .attachCompaniesContactWithRawResponse(
+                    clientConfig,
+                    contactId,
+                    id,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Removes the association between a contact and a company. Identify both records with `contact_id` and `company_id` to detach the company from the contact. The response returns the company object.
+         * Removes the association between a contact and a company. Identify both records with
+         * `contact_id` and `company_id` to detach the company from the contact. The response
+         * returns the company object.
          *
          * You can detach a company from a single contact.
          */
-        fun detachContact(contactId: String, companyId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Company> {
-            return dev.octri.showcase.intercom.methods.Companies.detachCompaniesContactWithRawResponse(clientConfig, contactId, companyId, intercomVersion, options)
+        fun detachContact(
+            contactId: String,
+            companyId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Company> {
+            return dev.octri.showcase.intercom.methods.Companies
+                .detachCompaniesContactWithRawResponse(
+                    clientConfig,
+                    contactId,
+                    companyId,
+                    intercomVersion,
+                    options,
+                )
         }
-
     }
 }

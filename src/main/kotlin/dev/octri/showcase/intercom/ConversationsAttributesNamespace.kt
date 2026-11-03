@@ -3,156 +3,327 @@
 
 package dev.octri.showcase.intercom
 
-
 class ConversationsAttributesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists conversation attributes belonging to the workspace. Set `include_archived` to include archived attributes; it defaults to false when omitted.
+     * Lists conversation attributes belonging to the workspace. Set `include_archived` to include
+     * archived attributes; it defaults to false when omitted.
      *
      * You can fetch a list of all conversation attributes for your workspace.
      */
-    fun list(includeArchived: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttributeList {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.listConversationAttributes(clientConfig, includeArchived, intercomVersion, options)
+    fun list(
+        includeArchived: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttributeList {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .listConversationAttributes(clientConfig, includeArchived, intercomVersion, options)
     }
 
     /**
-     * Creates a conversation attribute for the workspace. Provide the required `name` and `data_type`; the payload can also include attribute details such as its description, team visibility, and type-specific configuration.
+     * Creates a conversation attribute for the workspace. Provide the required `name` and
+     * `data_type`; the payload can also include attribute details such as its description, team
+     * visibility, and type-specific configuration.
      *
      * Create a new conversation attribute.
      */
-    fun create(body: CreateConversationAttributeRequest, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.createConversationAttribute(clientConfig, body, intercomVersion, options)
+    fun create(
+        body: CreateConversationAttributeRequest,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .createConversationAttribute(clientConfig, body, intercomVersion, options)
     }
 
     /**
-     * Retrieves a conversation attribute by ID. Use this operation to fetch one attribute from the workspace.
+     * Retrieves a conversation attribute by ID. Use this operation to fetch one attribute from the
+     * workspace.
      *
      * Retrieve a single conversation attribute by ID.
      */
-    fun get(id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.getConversationAttribute(clientConfig, id, intercomVersion, options)
+    fun get(
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes.getConversationAttribute(
+            clientConfig,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Updates an existing conversation attribute. Provide the fields to change, including type-specific settings when applicable; for relationship configuration, `reference.type` must be `one` or `many`.
+     * Updates an existing conversation attribute. Provide the fields to change, including
+     * type-specific settings when applicable; for relationship configuration, `reference.type` must
+     * be `one` or `many`.
      *
      * Update an existing conversation attribute.
      */
-    fun update(request: dev.octri.showcase.intercom.methods.ConversationsAttributes.UpdateConversationAttributeParams, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.updateConversationAttribute(clientConfig, request, options)
+    fun update(
+        request:
+            dev.octri.showcase.intercom.methods.ConversationsAttributes.UpdateConversationAttributeParams,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .updateConversationAttribute(clientConfig, request, options)
     }
 
     /**
-     * Archives a conversation attribute without permanently deleting it. Supply the attribute's `id` to select the attribute to archive.
+     * Archives a conversation attribute without permanently deleting it. Supply the attribute's
+     * `id` to select the attribute to archive.
      *
-     * Archive a conversation attribute (soft delete). The attribute is marked as archived but not permanently deleted.
+     * Archive a conversation attribute (soft delete). The attribute is marked as archived but not
+     * permanently deleted.
      */
-    fun delete(id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.deleteConversationAttribute(clientConfig, id, intercomVersion, options)
+    fun delete(
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .deleteConversationAttribute(clientConfig, id, intercomVersion, options)
     }
 
     /**
-     * Adds an option to a list-type conversation attribute and returns the attribute with its updated options. Supply `label` for the new option.
+     * Adds an option to a list-type conversation attribute and returns the attribute with its
+     * updated options. Supply `label` for the new option.
      *
-     * Add a new option to a list-type conversation attribute. Returns the full attribute with the updated options array.
+     * Add a new option to a list-type conversation attribute. Returns the full attribute with the
+     * updated options array.
      */
-    fun createOption(id: Long, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.createConversationAttributeOption(clientConfig, id, label, intercomVersion, options)
+    fun createOption(
+        id: Long,
+        label: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .createConversationAttributeOption(clientConfig, id, label, intercomVersion, options)
     }
 
     /**
-     * Updates the label of one option on a list-type conversation attribute. Supply the new `label`; the response includes the full attribute and its updated options array. Use the attribute and option identifiers to target the option to change.
+     * Updates the label of one option on a list-type conversation attribute. Supply the new
+     * `label`; the response includes the full attribute and its updated options array. Use the
+     * attribute and option identifiers to target the option to change.
      *
-     * Update the label of a single option on a list-type conversation attribute. Returns the full attribute with the updated options array.
+     * Update the label of a single option on a list-type conversation attribute. Returns the full
+     * attribute with the updated options array.
      */
-    fun updateOption(id: Long, optionId: String, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.updateConversationAttributeOption(clientConfig, id, optionId, label, intercomVersion, options)
+    fun updateOption(
+        id: Long,
+        optionId: String,
+        label: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .updateConversationAttributeOption(
+                clientConfig,
+                id,
+                optionId,
+                label,
+                intercomVersion,
+                options,
+            )
     }
 
     /**
-     * Archives an option on a list-type conversation attribute without permanently deleting it. The option remains in the attribute response with `archived` set to true, and the response includes the updated options array.
+     * Archives an option on a list-type conversation attribute without permanently deleting it. The
+     * option remains in the attribute response with `archived` set to true, and the response
+     * includes the updated options array.
      *
-     * Archive a single option on a list-type conversation attribute (soft delete). The option remains in the response with `archived: true`. Returns the full attribute with the updated options array.
+     * Archive a single option on a list-type conversation attribute (soft delete). The option
+     * remains in the response with `archived: true`. Returns the full attribute with the updated
+     * options array.
      */
-    fun deleteOption(id: Long, optionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return dev.octri.showcase.intercom.methods.ConversationsAttributes.deleteConversationAttributeOption(clientConfig, id, optionId, intercomVersion, options)
+    fun deleteOption(
+        id: Long,
+        optionId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return dev.octri.showcase.intercom.methods.ConversationsAttributes
+            .deleteConversationAttributeOption(clientConfig, id, optionId, intercomVersion, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [ConversationsAttributesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [ConversationsAttributesNamespace], returning the [SdkResponse] envelope
+     * around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Lists conversation attributes belonging to the workspace. Set `include_archived` to include archived attributes; it defaults to false when omitted.
+         * Lists conversation attributes belonging to the workspace. Set `include_archived` to
+         * include archived attributes; it defaults to false when omitted.
          *
          * You can fetch a list of all conversation attributes for your workspace.
          */
-        fun list(includeArchived: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttributeList> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.listConversationAttributesWithRawResponse(clientConfig, includeArchived, intercomVersion, options)
+        fun list(
+            includeArchived: Boolean? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttributeList> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .listConversationAttributesWithRawResponse(
+                    clientConfig,
+                    includeArchived,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Creates a conversation attribute for the workspace. Provide the required `name` and `data_type`; the payload can also include attribute details such as its description, team visibility, and type-specific configuration.
+         * Creates a conversation attribute for the workspace. Provide the required `name` and
+         * `data_type`; the payload can also include attribute details such as its description, team
+         * visibility, and type-specific configuration.
          *
          * Create a new conversation attribute.
          */
-        fun create(body: CreateConversationAttributeRequest, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.createConversationAttributeWithRawResponse(clientConfig, body, intercomVersion, options)
+        fun create(
+            body: CreateConversationAttributeRequest,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .createConversationAttributeWithRawResponse(
+                    clientConfig,
+                    body,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Retrieves a conversation attribute by ID. Use this operation to fetch one attribute from the workspace.
+         * Retrieves a conversation attribute by ID. Use this operation to fetch one attribute from
+         * the workspace.
          *
          * Retrieve a single conversation attribute by ID.
          */
-        fun get(id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.getConversationAttributeWithRawResponse(clientConfig, id, intercomVersion, options)
+        fun get(
+            id: Long,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .getConversationAttributeWithRawResponse(clientConfig, id, intercomVersion, options)
         }
 
         /**
-         * Updates an existing conversation attribute. Provide the fields to change, including type-specific settings when applicable; for relationship configuration, `reference.type` must be `one` or `many`.
+         * Updates an existing conversation attribute. Provide the fields to change, including
+         * type-specific settings when applicable; for relationship configuration, `reference.type`
+         * must be `one` or `many`.
          *
          * Update an existing conversation attribute.
          */
-        fun update(request: dev.octri.showcase.intercom.methods.ConversationsAttributes.UpdateConversationAttributeParams, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.updateConversationAttributeWithRawResponse(clientConfig, request, options)
+        fun update(
+            request:
+                dev.octri.showcase.intercom.methods.ConversationsAttributes.UpdateConversationAttributeParams,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .updateConversationAttributeWithRawResponse(clientConfig, request, options)
         }
 
         /**
-         * Archives a conversation attribute without permanently deleting it. Supply the attribute's `id` to select the attribute to archive.
+         * Archives a conversation attribute without permanently deleting it. Supply the attribute's
+         * `id` to select the attribute to archive.
          *
-         * Archive a conversation attribute (soft delete). The attribute is marked as archived but not permanently deleted.
+         * Archive a conversation attribute (soft delete). The attribute is marked as archived but
+         * not permanently deleted.
          */
-        fun delete(id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.deleteConversationAttributeWithRawResponse(clientConfig, id, intercomVersion, options)
+        fun delete(
+            id: Long,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .deleteConversationAttributeWithRawResponse(
+                    clientConfig,
+                    id,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Adds an option to a list-type conversation attribute and returns the attribute with its updated options. Supply `label` for the new option.
+         * Adds an option to a list-type conversation attribute and returns the attribute with its
+         * updated options. Supply `label` for the new option.
          *
-         * Add a new option to a list-type conversation attribute. Returns the full attribute with the updated options array.
+         * Add a new option to a list-type conversation attribute. Returns the full attribute with
+         * the updated options array.
          */
-        fun createOption(id: Long, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.createConversationAttributeOptionWithRawResponse(clientConfig, id, label, intercomVersion, options)
+        fun createOption(
+            id: Long,
+            label: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .createConversationAttributeOptionWithRawResponse(
+                    clientConfig,
+                    id,
+                    label,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Updates the label of one option on a list-type conversation attribute. Supply the new `label`; the response includes the full attribute and its updated options array. Use the attribute and option identifiers to target the option to change.
+         * Updates the label of one option on a list-type conversation attribute. Supply the new
+         * `label`; the response includes the full attribute and its updated options array. Use the
+         * attribute and option identifiers to target the option to change.
          *
-         * Update the label of a single option on a list-type conversation attribute. Returns the full attribute with the updated options array.
+         * Update the label of a single option on a list-type conversation attribute. Returns the
+         * full attribute with the updated options array.
          */
-        fun updateOption(id: Long, optionId: String, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.updateConversationAttributeOptionWithRawResponse(clientConfig, id, optionId, label, intercomVersion, options)
+        fun updateOption(
+            id: Long,
+            optionId: String,
+            label: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .updateConversationAttributeOptionWithRawResponse(
+                    clientConfig,
+                    id,
+                    optionId,
+                    label,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Archives an option on a list-type conversation attribute without permanently deleting it. The option remains in the attribute response with `archived` set to true, and the response includes the updated options array.
+         * Archives an option on a list-type conversation attribute without permanently deleting it.
+         * The option remains in the attribute response with `archived` set to true, and the
+         * response includes the updated options array.
          *
-         * Archive a single option on a list-type conversation attribute (soft delete). The option remains in the response with `archived: true`. Returns the full attribute with the updated options array.
+         * Archive a single option on a list-type conversation attribute (soft delete). The option
+         * remains in the response with `archived: true`. Returns the full attribute with the
+         * updated options array.
          */
-        fun deleteOption(id: Long, optionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-            return dev.octri.showcase.intercom.methods.ConversationsAttributes.deleteConversationAttributeOptionWithRawResponse(clientConfig, id, optionId, intercomVersion, options)
+        fun deleteOption(
+            id: Long,
+            optionId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ConversationAttribute> {
+            return dev.octri.showcase.intercom.methods.ConversationsAttributes
+                .deleteConversationAttributeOptionWithRawResponse(
+                    clientConfig,
+                    id,
+                    optionId,
+                    intercomVersion,
+                    options,
+                )
         }
-
     }
 }

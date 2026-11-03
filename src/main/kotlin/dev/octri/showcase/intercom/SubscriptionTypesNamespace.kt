@@ -3,66 +3,156 @@
 
 package dev.octri.showcase.intercom
 
-
 class SubscriptionTypesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Adds a subscription type preference to a contact. Provide the subscription type `id` and `consent_type` to opt the contact in or out of messages for that subscription. The response contains the subscription type added to the contact.
+     * Adds a subscription type preference to a contact. Provide the subscription type `id` and
+     * `consent_type` to opt the contact in or out of messages for that subscription. The response
+     * contains the subscription type added to the contact.
      *
-     * You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in: 1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type. 2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type. This will return a subscription type model for the subscription…
+     * You can add a specific subscription to a contact. In Intercom, we have two different
+     * subscription types based on user consent - opt-out and opt-in: 1.Attaching a contact to an
+     * opt-out subscription type will opt that user out from receiving messages related to that
+     * subscription type. 2.Attaching a contact to an opt-in subscription type will opt that user in
+     * to receiving messages related to that subscription type. This will return a subscription type
+     * model for the subscription…
      */
-    fun attachToContact(contactId: String, id: String, consentType: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionType {
-        return dev.octri.showcase.intercom.methods.SubscriptionTypes.attachSubscriptionTypeToContact(clientConfig, contactId, id, consentType, intercomVersion, options)
+    fun attachToContact(
+        contactId: String,
+        id: String,
+        consentType: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionType {
+        return dev.octri.showcase.intercom.methods.SubscriptionTypes
+            .attachSubscriptionTypeToContact(
+                clientConfig,
+                contactId,
+                id,
+                consentType,
+                intercomVersion,
+                options,
+            )
     }
 
     /**
-     * Removes a subscription type preference from a contact. Use `contact_id` and `subscription_id` to identify the contact and subscription to detach. The response contains the subscription type that was removed.
+     * Removes a subscription type preference from a contact. Use `contact_id` and `subscription_id`
+     * to identify the contact and subscription to detach. The response contains the subscription
+     * type that was removed.
      *
-     * You can remove a specific subscription from a contact. This will return a subscription type model for the subscription type that was removed from the contact.
+     * You can remove a specific subscription from a contact. This will return a subscription type
+     * model for the subscription type that was removed from the contact.
      */
-    fun detachToContact(contactId: String, subscriptionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionType {
-        return dev.octri.showcase.intercom.methods.SubscriptionTypes.detachSubscriptionTypeToContact(clientConfig, contactId, subscriptionId, intercomVersion, options)
+    fun detachToContact(
+        contactId: String,
+        subscriptionId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionType {
+        return dev.octri.showcase.intercom.methods.SubscriptionTypes
+            .detachSubscriptionTypeToContact(
+                clientConfig,
+                contactId,
+                subscriptionId,
+                intercomVersion,
+                options,
+            )
     }
 
     /**
-     * Lists the subscription types associated with your workspace. Use this endpoint to retrieve the available communication consent types and their translations.
+     * Lists the subscription types associated with your workspace. Use this endpoint to retrieve
+     * the available communication consent types and their translations.
      *
      * You can list all subscription types. A list of subscription type objects will be returned.
      */
-    fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SubscriptionTypeList {
-        return dev.octri.showcase.intercom.methods.SubscriptionTypes.listSubscriptionTypes(clientConfig, intercomVersion, options)
+    fun list(
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SubscriptionTypeList {
+        return dev.octri.showcase.intercom.methods.SubscriptionTypes.listSubscriptionTypes(
+            clientConfig,
+            intercomVersion,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [SubscriptionTypesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [SubscriptionTypesNamespace], returning the [SdkResponse] envelope around
+     * each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Adds a subscription type preference to a contact. Provide the subscription type `id` and `consent_type` to opt the contact in or out of messages for that subscription. The response contains the subscription type added to the contact.
+         * Adds a subscription type preference to a contact. Provide the subscription type `id` and
+         * `consent_type` to opt the contact in or out of messages for that subscription. The
+         * response contains the subscription type added to the contact.
          *
-         * You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in: 1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type. 2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type. This will return a subscription type model for the subscription…
+         * You can add a specific subscription to a contact. In Intercom, we have two different
+         * subscription types based on user consent - opt-out and opt-in: 1.Attaching a contact to
+         * an opt-out subscription type will opt that user out from receiving messages related to
+         * that subscription type. 2.Attaching a contact to an opt-in subscription type will opt
+         * that user in to receiving messages related to that subscription type. This will return a
+         * subscription type model for the subscription…
          */
-        fun attachToContact(contactId: String, id: String, consentType: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SubscriptionType> {
-            return dev.octri.showcase.intercom.methods.SubscriptionTypes.attachSubscriptionTypeToContactWithRawResponse(clientConfig, contactId, id, consentType, intercomVersion, options)
+        fun attachToContact(
+            contactId: String,
+            id: String,
+            consentType: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<SubscriptionType> {
+            return dev.octri.showcase.intercom.methods.SubscriptionTypes
+                .attachSubscriptionTypeToContactWithRawResponse(
+                    clientConfig,
+                    contactId,
+                    id,
+                    consentType,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Removes a subscription type preference from a contact. Use `contact_id` and `subscription_id` to identify the contact and subscription to detach. The response contains the subscription type that was removed.
+         * Removes a subscription type preference from a contact. Use `contact_id` and
+         * `subscription_id` to identify the contact and subscription to detach. The response
+         * contains the subscription type that was removed.
          *
-         * You can remove a specific subscription from a contact. This will return a subscription type model for the subscription type that was removed from the contact.
+         * You can remove a specific subscription from a contact. This will return a subscription
+         * type model for the subscription type that was removed from the contact.
          */
-        fun detachToContact(contactId: String, subscriptionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SubscriptionType> {
-            return dev.octri.showcase.intercom.methods.SubscriptionTypes.detachSubscriptionTypeToContactWithRawResponse(clientConfig, contactId, subscriptionId, intercomVersion, options)
+        fun detachToContact(
+            contactId: String,
+            subscriptionId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<SubscriptionType> {
+            return dev.octri.showcase.intercom.methods.SubscriptionTypes
+                .detachSubscriptionTypeToContactWithRawResponse(
+                    clientConfig,
+                    contactId,
+                    subscriptionId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Lists the subscription types associated with your workspace. Use this endpoint to retrieve the available communication consent types and their translations.
+         * Lists the subscription types associated with your workspace. Use this endpoint to
+         * retrieve the available communication consent types and their translations.
          *
-         * You can list all subscription types. A list of subscription type objects will be returned.
+         * You can list all subscription types. A list of subscription type objects will be
+         * returned.
          */
-        fun list(intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SubscriptionTypeList> {
-            return dev.octri.showcase.intercom.methods.SubscriptionTypes.listSubscriptionTypesWithRawResponse(clientConfig, intercomVersion, options)
+        fun list(
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<SubscriptionTypeList> {
+            return dev.octri.showcase.intercom.methods.SubscriptionTypes
+                .listSubscriptionTypesWithRawResponse(clientConfig, intercomVersion, options)
         }
-
     }
 }

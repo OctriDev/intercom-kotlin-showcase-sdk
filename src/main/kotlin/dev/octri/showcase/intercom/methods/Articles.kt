@@ -39,7 +39,7 @@ object Articles {
         val aiCopilotAvailability: Boolean? = null,
         val aiSalesAgentAvailability: Boolean? = null,
         val scheduledPublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null,
-        val scheduledUnpublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null
+        val scheduledUnpublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null,
     )
 
     /** Parameters for [updateArticle]. */
@@ -61,7 +61,7 @@ object Articles {
         val aiCopilotAvailability: Boolean? = null,
         val aiSalesAgentAvailability: Boolean? = null,
         val scheduledPublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null,
-        val scheduledUnpublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null
+        val scheduledUnpublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null,
     )
 
     /** Parameters for [stageArticleDraft]. */
@@ -83,13 +83,18 @@ object Articles {
         val aiCopilotAvailability: Boolean? = null,
         val aiSalesAgentAvailability: Boolean? = null,
         val scheduledPublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null,
-        val scheduledUnpublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null
+        val scheduledUnpublishAt: SdkClient.SdkOptional<OffsetDateTime?>? = null,
     )
 
     /**
-     * Lists articles, ordered by `updated_at` with the most recently updated articles first. Use cursor-based pagination to retrieve additional pages of results.
+     * Lists articles, ordered by `updated_at` with the most recently updated articles first. Use
+     * cursor-based pagination to retrieve additional pages of results.
      */
-    fun listArticles(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleList =
+    fun listArticles(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleList =
         dev.octri.showcase.intercom.methods.ArticlesListArticlesOperation.listArticles(
             clientConfig,
             intercomVersion,
@@ -97,19 +102,31 @@ object Articles {
         )
 
     /**
-     * Lists articles, ordered by `updated_at` with the most recently updated articles first. Use cursor-based pagination to retrieve additional pages of results.
+     * Lists articles, ordered by `updated_at` with the most recently updated articles first. Use
+     * cursor-based pagination to retrieve additional pages of results.
      */
-    fun listArticlesWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleList> =
-        dev.octri.showcase.intercom.methods.ArticlesListArticlesOperation.listArticlesWithRawResponse(
-            clientConfig,
-            intercomVersion,
-            options,
-        )
+    fun listArticlesWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleList> =
+        dev.octri.showcase.intercom.methods.ArticlesListArticlesOperation
+            .listArticlesWithRawResponse(
+                clientConfig,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Creates a new article in the help center. Supply `title` and `author_id`; choose either `body` or `body_markdown` for the article content, and set `state` to control whether the article is published or saved as a draft.
+     * Creates a new article in the help center. Supply `title` and `author_id`; choose either
+     * `body` or `body_markdown` for the article content, and set `state` to control whether the
+     * article is published or saved as a draft.
      */
-    fun createArticle(clientConfig: ClientConfig, request: CreateArticleParams, options: RequestOptions? = null): Article =
+    fun createArticle(
+        clientConfig: ClientConfig,
+        request: CreateArticleParams,
+        options: RequestOptions? = null,
+    ): Article =
         dev.octri.showcase.intercom.methods.ArticlesCreateArticleOperation.createArticle(
             clientConfig,
             request,
@@ -117,19 +134,32 @@ object Articles {
         )
 
     /**
-     * Creates a new article in the help center. Supply `title` and `author_id`; choose either `body` or `body_markdown` for the article content, and set `state` to control whether the article is published or saved as a draft.
+     * Creates a new article in the help center. Supply `title` and `author_id`; choose either
+     * `body` or `body_markdown` for the article content, and set `state` to control whether the
+     * article is published or saved as a draft.
      */
-    fun createArticleWithRawResponse(clientConfig: ClientConfig, request: CreateArticleParams, options: RequestOptions? = null): SdkResponse<Article> =
-        dev.octri.showcase.intercom.methods.ArticlesCreateArticleOperation.createArticleWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateArticleParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> =
+        dev.octri.showcase.intercom.methods.ArticlesCreateArticleOperation
+            .createArticleWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Retrieves a single article from the help center. Use `article_id` to identify the article whose details you need. The response includes article data and its statistics.
+     * Retrieves a single article from the help center. Use `article_id` to identify the article
+     * whose details you need. The response includes article data and its statistics.
      */
-    fun retrieveArticle(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Article =
+    fun retrieveArticle(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Article =
         dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleOperation.retrieveArticle(
             clientConfig,
             articleId,
@@ -138,20 +168,33 @@ object Articles {
         )
 
     /**
-     * Retrieves a single article from the help center. Use `article_id` to identify the article whose details you need. The response includes article data and its statistics.
+     * Retrieves a single article from the help center. Use `article_id` to identify the article
+     * whose details you need. The response includes article data and its statistics.
      */
-    fun retrieveArticleWithRawResponse(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Article> =
-        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleOperation.retrieveArticleWithRawResponse(
-            clientConfig,
-            articleId,
-            intercomVersion,
-            options,
-        )
+    fun retrieveArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> =
+        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleOperation
+            .retrieveArticleWithRawResponse(
+                clientConfig,
+                articleId,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Updates the details of a specific article in the help center. Identify the article with `article_id` and provide the fields to change; `state` can be used to set the article to `published` or `draft`. Article tags are read-only through this operation.
+     * Updates the details of a specific article in the help center. Identify the article with
+     * `article_id` and provide the fields to change; `state` can be used to set the article to
+     * `published` or `draft`. Article tags are read-only through this operation.
      */
-    fun updateArticle(clientConfig: ClientConfig, request: UpdateArticleParams, options: RequestOptions? = null): Article =
+    fun updateArticle(
+        clientConfig: ClientConfig,
+        request: UpdateArticleParams,
+        options: RequestOptions? = null,
+    ): Article =
         dev.octri.showcase.intercom.methods.ArticlesUpdateArticleOperation.updateArticle(
             clientConfig,
             request,
@@ -159,19 +202,33 @@ object Articles {
         )
 
     /**
-     * Updates the details of a specific article in the help center. Identify the article with `article_id` and provide the fields to change; `state` can be used to set the article to `published` or `draft`. Article tags are read-only through this operation.
+     * Updates the details of a specific article in the help center. Identify the article with
+     * `article_id` and provide the fields to change; `state` can be used to set the article to
+     * `published` or `draft`. Article tags are read-only through this operation.
      */
-    fun updateArticleWithRawResponse(clientConfig: ClientConfig, request: UpdateArticleParams, options: RequestOptions? = null): SdkResponse<Article> =
-        dev.octri.showcase.intercom.methods.ArticlesUpdateArticleOperation.updateArticleWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateArticleParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> =
+        dev.octri.showcase.intercom.methods.ArticlesUpdateArticleOperation
+            .updateArticleWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Deletes a specific article from the help center. Use the article's unique `article_id` to identify the article to remove. A successful response confirms whether the article was deleted.
+     * Deletes a specific article from the help center. Use the article's unique `article_id` to
+     * identify the article to remove. A successful response confirms whether the article was
+     * deleted.
      */
-    fun deleteArticle(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedArticleObject =
+    fun deleteArticle(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedArticleObject =
         dev.octri.showcase.intercom.methods.ArticlesDeleteArticleOperation.deleteArticle(
             clientConfig,
             articleId,
@@ -180,42 +237,72 @@ object Articles {
         )
 
     /**
-     * Deletes a specific article from the help center. Use the article's unique `article_id` to identify the article to remove. A successful response confirms whether the article was deleted.
+     * Deletes a specific article from the help center. Use the article's unique `article_id` to
+     * identify the article to remove. A successful response confirms whether the article was
+     * deleted.
      */
-    fun deleteArticleWithRawResponse(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DeletedArticleObject> =
-        dev.octri.showcase.intercom.methods.ArticlesDeleteArticleOperation.deleteArticleWithRawResponse(
-            clientConfig,
-            articleId,
-            intercomVersion,
-            options,
-        )
+    fun deleteArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedArticleObject> =
+        dev.octri.showcase.intercom.methods.ArticlesDeleteArticleOperation
+            .deleteArticleWithRawResponse(
+                clientConfig,
+                articleId,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Retrieves the staged draft content for a published article without changing the live article. Use this operation to inspect unpublished changes before publishing them. A staged draft exists only when unpublished changes have been saved for a published article.
+     * Retrieves the staged draft content for a published article without changing the live article.
+     * Use this operation to inspect unpublished changes before publishing them. A staged draft
+     * exists only when unpublished changes have been saved for a published article.
      */
-    fun retrieveArticleDraft(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Article =
-        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleDraftOperation.retrieveArticleDraft(
-            clientConfig,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun retrieveArticleDraft(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Article =
+        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleDraftOperation
+            .retrieveArticleDraft(
+                clientConfig,
+                id,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Retrieves the staged draft content for a published article without changing the live article. Use this operation to inspect unpublished changes before publishing them. A staged draft exists only when unpublished changes have been saved for a published article.
+     * Retrieves the staged draft content for a published article without changing the live article.
+     * Use this operation to inspect unpublished changes before publishing them. A staged draft
+     * exists only when unpublished changes have been saved for a published article.
      */
-    fun retrieveArticleDraftWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Article> =
-        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleDraftOperation.retrieveArticleDraftWithRawResponse(
-            clientConfig,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun retrieveArticleDraftWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> =
+        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleDraftOperation
+            .retrieveArticleDraftWithRawResponse(
+                clientConfig,
+                id,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Stages changes to a published article as a draft, leaving the live article unchanged until publication. Supply versioned content such as `title` or `body`; non-versioned fields, including AI availability settings, are ignored. The article must already be published.
+     * Stages changes to a published article as a draft, leaving the live article unchanged until
+     * publication. Supply versioned content such as `title` or `body`; non-versioned fields,
+     * including AI availability settings, are ignored. The article must already be published.
      */
-    fun stageArticleDraft(clientConfig: ClientConfig, request: StageArticleDraftRequest, options: RequestOptions? = null): Article =
+    fun stageArticleDraft(
+        clientConfig: ClientConfig,
+        request: StageArticleDraftRequest,
+        options: RequestOptions? = null,
+    ): Article =
         dev.octri.showcase.intercom.methods.ArticlesStageArticleDraftOperation.stageArticleDraft(
             clientConfig,
             request,
@@ -223,43 +310,77 @@ object Articles {
         )
 
     /**
-     * Stages changes to a published article as a draft, leaving the live article unchanged until publication. Supply versioned content such as `title` or `body`; non-versioned fields, including AI availability settings, are ignored. The article must already be published.
+     * Stages changes to a published article as a draft, leaving the live article unchanged until
+     * publication. Supply versioned content such as `title` or `body`; non-versioned fields,
+     * including AI availability settings, are ignored. The article must already be published.
      */
-    fun stageArticleDraftWithRawResponse(clientConfig: ClientConfig, request: StageArticleDraftRequest, options: RequestOptions? = null): SdkResponse<Article> =
-        dev.octri.showcase.intercom.methods.ArticlesStageArticleDraftOperation.stageArticleDraftWithRawResponse(
-            clientConfig,
-            request,
-            options,
-        )
+    fun stageArticleDraftWithRawResponse(
+        clientConfig: ClientConfig,
+        request: StageArticleDraftRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> =
+        dev.octri.showcase.intercom.methods.ArticlesStageArticleDraftOperation
+            .stageArticleDraftWithRawResponse(
+                clientConfig,
+                request,
+                options,
+            )
 
     /**
-     * Publishes the staged draft for an article, promoting its draft content to live. On a single-language workspace, you can omit the request body; on a multilingual workspace, specify the locales to publish in `locales`. Each requested locale must have pending changes.
+     * Publishes the staged draft for an article, promoting its draft content to live. On a
+     * single-language workspace, you can omit the request body; on a multilingual workspace,
+     * specify the locales to publish in `locales`. Each requested locale must have pending changes.
      */
-    fun publishArticleDraft(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, locales: List<String>? = null, options: RequestOptions? = null): Article =
-        dev.octri.showcase.intercom.methods.ArticlesPublishArticleDraftOperation.publishArticleDraft(
-            clientConfig,
-            id,
-            intercomVersion,
-            locales,
-            options,
-        )
+    fun publishArticleDraft(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        locales: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Article =
+        dev.octri.showcase.intercom.methods.ArticlesPublishArticleDraftOperation
+            .publishArticleDraft(
+                clientConfig,
+                id,
+                intercomVersion,
+                locales,
+                options,
+            )
 
     /**
-     * Publishes the staged draft for an article, promoting its draft content to live. On a single-language workspace, you can omit the request body; on a multilingual workspace, specify the locales to publish in `locales`. Each requested locale must have pending changes.
+     * Publishes the staged draft for an article, promoting its draft content to live. On a
+     * single-language workspace, you can omit the request body; on a multilingual workspace,
+     * specify the locales to publish in `locales`. Each requested locale must have pending changes.
      */
-    fun publishArticleDraftWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, locales: List<String>? = null, options: RequestOptions? = null): SdkResponse<Article> =
-        dev.octri.showcase.intercom.methods.ArticlesPublishArticleDraftOperation.publishArticleDraftWithRawResponse(
-            clientConfig,
-            id,
-            intercomVersion,
-            locales,
-            options,
-        )
+    fun publishArticleDraftWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        locales: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> =
+        dev.octri.showcase.intercom.methods.ArticlesPublishArticleDraftOperation
+            .publishArticleDraftWithRawResponse(
+                clientConfig,
+                id,
+                intercomVersion,
+                locales,
+                options,
+            )
 
     /**
-     * Applies an existing tag to an article. Supply the tag ID in the request body, and the authenticating teammate must have the `manage_knowledge_base_content` permission. The operation requires the `read_write_articles_scope` OAuth scope.
+     * Applies an existing tag to an article. Supply the tag ID in the request body, and the
+     * authenticating teammate must have the `manage_knowledge_base_content` permission. The
+     * operation requires the `read_write_articles_scope` OAuth scope.
      */
-    fun attachArticlesTag(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, adminId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Tag =
+    fun attachArticlesTag(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Tag =
         dev.octri.showcase.intercom.methods.ArticlesAttachArticlesTagOperation.attachArticlesTag(
             clientConfig,
             articleId,
@@ -270,22 +391,40 @@ object Articles {
         )
 
     /**
-     * Applies an existing tag to an article. Supply the tag ID in the request body, and the authenticating teammate must have the `manage_knowledge_base_content` permission. The operation requires the `read_write_articles_scope` OAuth scope.
+     * Applies an existing tag to an article. Supply the tag ID in the request body, and the
+     * authenticating teammate must have the `manage_knowledge_base_content` permission. The
+     * operation requires the `read_write_articles_scope` OAuth scope.
      */
-    fun attachArticlesTagWithRawResponse(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, adminId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<Tag> =
-        dev.octri.showcase.intercom.methods.ArticlesAttachArticlesTagOperation.attachArticlesTagWithRawResponse(
-            clientConfig,
-            articleId,
-            id,
-            intercomVersion,
-            adminId,
-            options,
-        )
+    fun attachArticlesTagWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> =
+        dev.octri.showcase.intercom.methods.ArticlesAttachArticlesTagOperation
+            .attachArticlesTagWithRawResponse(
+                clientConfig,
+                articleId,
+                id,
+                intercomVersion,
+                adminId,
+                options,
+            )
 
     /**
-     * Removes a tag from an article. Use `article_id` and `id` to identify the article and tag to detach. The authenticating teammate must have the `manage_knowledge_base_content` permission, and the operation requires the `read_write_articles_scope` OAuth scope.
+     * Removes a tag from an article. Use `article_id` and `id` to identify the article and tag to
+     * detach. The authenticating teammate must have the `manage_knowledge_base_content` permission,
+     * and the operation requires the `read_write_articles_scope` OAuth scope.
      */
-    fun detachArticlesTag(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag =
+    fun detachArticlesTag(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag =
         dev.octri.showcase.intercom.methods.ArticlesDetachArticlesTagOperation.detachArticlesTag(
             clientConfig,
             articleId,
@@ -295,75 +434,138 @@ object Articles {
         )
 
     /**
-     * Removes a tag from an article. Use `article_id` and `id` to identify the article and tag to detach. The authenticating teammate must have the `manage_knowledge_base_content` permission, and the operation requires the `read_write_articles_scope` OAuth scope.
+     * Removes a tag from an article. Use `article_id` and `id` to identify the article and tag to
+     * detach. The authenticating teammate must have the `manage_knowledge_base_content` permission,
+     * and the operation requires the `read_write_articles_scope` OAuth scope.
      */
-    fun detachArticlesTagWithRawResponse(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> =
-        dev.octri.showcase.intercom.methods.ArticlesDetachArticlesTagOperation.detachArticlesTagWithRawResponse(
-            clientConfig,
-            articleId,
-            id,
-            intercomVersion,
-            options,
-        )
+    fun detachArticlesTagWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> =
+        dev.octri.showcase.intercom.methods.ArticlesDetachArticlesTagOperation
+            .detachArticlesTagWithRawResponse(
+                clientConfig,
+                articleId,
+                id,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Lists version history for an article as paginated metadata, with the newest versions first. Use `locale` to filter the history to a workspace locale, and `page` and `per_page` to navigate the results. Retrieve an individual version to access its full content.
+     * Lists version history for an article as paginated metadata, with the newest versions first.
+     * Use `locale` to filter the history to a workspace locale, and `page` and `per_page` to
+     * navigate the results. Retrieve an individual version to access its full content.
      */
-    fun listArticleVersions(clientConfig: ClientConfig, articleId: Long, page: Long? = null, perPage: Long? = null, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleVersionList =
-        dev.octri.showcase.intercom.methods.ArticlesListArticleVersionsOperation.listArticleVersions(
-            clientConfig,
-            articleId,
-            page,
-            perPage,
-            locale,
-            intercomVersion,
-            options,
-        )
+    fun listArticleVersions(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        page: Long? = null,
+        perPage: Long? = null,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleVersionList =
+        dev.octri.showcase.intercom.methods.ArticlesListArticleVersionsOperation
+            .listArticleVersions(
+                clientConfig,
+                articleId,
+                page,
+                perPage,
+                locale,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Lists version history for an article as paginated metadata, with the newest versions first. Use `locale` to filter the history to a workspace locale, and `page` and `per_page` to navigate the results. Retrieve an individual version to access its full content.
+     * Lists version history for an article as paginated metadata, with the newest versions first.
+     * Use `locale` to filter the history to a workspace locale, and `page` and `per_page` to
+     * navigate the results. Retrieve an individual version to access its full content.
      */
-    fun listArticleVersionsWithRawResponse(clientConfig: ClientConfig, articleId: Long, page: Long? = null, perPage: Long? = null, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleVersionList> =
-        dev.octri.showcase.intercom.methods.ArticlesListArticleVersionsOperation.listArticleVersionsWithRawResponse(
-            clientConfig,
-            articleId,
-            page,
-            perPage,
-            locale,
-            intercomVersion,
-            options,
-        )
+    fun listArticleVersionsWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        page: Long? = null,
+        perPage: Long? = null,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleVersionList> =
+        dev.octri.showcase.intercom.methods.ArticlesListArticleVersionsOperation
+            .listArticleVersionsWithRawResponse(
+                clientConfig,
+                articleId,
+                page,
+                perPage,
+                locale,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Retrieves a prior version of an article, including the content saved in that version. Use `article_id` and `id` to select the article and version, and `locale` to request content for a specific locale. The live article remains unchanged, and access requires the `read_articles_scope` OAuth scope.
+     * Retrieves a prior version of an article, including the content saved in that version. Use
+     * `article_id` and `id` to select the article and version, and `locale` to request content for
+     * a specific locale. The live article remains unchanged, and access requires the
+     * `read_articles_scope` OAuth scope.
      */
-    fun retrieveArticleVersion(clientConfig: ClientConfig, articleId: Long, id: String, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleVersion =
-        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleVersionOperation.retrieveArticleVersion(
-            clientConfig,
-            articleId,
-            id,
-            locale,
-            intercomVersion,
-            options,
-        )
+    fun retrieveArticleVersion(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleVersion =
+        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleVersionOperation
+            .retrieveArticleVersion(
+                clientConfig,
+                articleId,
+                id,
+                locale,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Retrieves a prior version of an article, including the content saved in that version. Use `article_id` and `id` to select the article and version, and `locale` to request content for a specific locale. The live article remains unchanged, and access requires the `read_articles_scope` OAuth scope.
+     * Retrieves a prior version of an article, including the content saved in that version. Use
+     * `article_id` and `id` to select the article and version, and `locale` to request content for
+     * a specific locale. The live article remains unchanged, and access requires the
+     * `read_articles_scope` OAuth scope.
      */
-    fun retrieveArticleVersionWithRawResponse(clientConfig: ClientConfig, articleId: Long, id: String, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleVersion> =
-        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleVersionOperation.retrieveArticleVersionWithRawResponse(
-            clientConfig,
-            articleId,
-            id,
-            locale,
-            intercomVersion,
-            options,
-        )
+    fun retrieveArticleVersionWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleVersion> =
+        dev.octri.showcase.intercom.methods.ArticlesRetrieveArticleVersionOperation
+            .retrieveArticleVersionWithRawResponse(
+                clientConfig,
+                articleId,
+                id,
+                locale,
+                intercomVersion,
+                options,
+            )
 
     /**
-     * Searches articles by phrase, with optional filters for article state and Help Center. Use `highlight` to request highlighted matching content; results include pagination details and the total number of matching articles.
+     * Searches articles by phrase, with optional filters for article state and Help Center. Use
+     * `highlight` to request highlighted matching content; results include pagination details and
+     * the total number of matching articles.
      */
-    fun searchArticles(clientConfig: ClientConfig, phrase: String? = null, state: String? = null, helpCenterId: Long? = null, highlight: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleSearchResponse =
+    fun searchArticles(
+        clientConfig: ClientConfig,
+        phrase: String? = null,
+        state: String? = null,
+        helpCenterId: Long? = null,
+        highlight: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleSearchResponse =
         dev.octri.showcase.intercom.methods.ArticlesSearchArticlesOperation.searchArticles(
             clientConfig,
             phrase,
@@ -375,16 +577,27 @@ object Articles {
         )
 
     /**
-     * Searches articles by phrase, with optional filters for article state and Help Center. Use `highlight` to request highlighted matching content; results include pagination details and the total number of matching articles.
+     * Searches articles by phrase, with optional filters for article state and Help Center. Use
+     * `highlight` to request highlighted matching content; results include pagination details and
+     * the total number of matching articles.
      */
-    fun searchArticlesWithRawResponse(clientConfig: ClientConfig, phrase: String? = null, state: String? = null, helpCenterId: Long? = null, highlight: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleSearchResponse> =
-        dev.octri.showcase.intercom.methods.ArticlesSearchArticlesOperation.searchArticlesWithRawResponse(
-            clientConfig,
-            phrase,
-            state,
-            helpCenterId,
-            highlight,
-            intercomVersion,
-            options,
-        )
+    fun searchArticlesWithRawResponse(
+        clientConfig: ClientConfig,
+        phrase: String? = null,
+        state: String? = null,
+        helpCenterId: Long? = null,
+        highlight: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleSearchResponse> =
+        dev.octri.showcase.intercom.methods.ArticlesSearchArticlesOperation
+            .searchArticlesWithRawResponse(
+                clientConfig,
+                phrase,
+                state,
+                helpCenterId,
+                highlight,
+                intercomVersion,
+                options,
+            )
 }

@@ -20,110 +20,152 @@ import dev.octri.showcase.intercom.Validation
 
 internal object ArticlesListArticlesOperation {
     /**
-     * Lists articles, ordered by `updated_at` with the most recently updated articles first. Use cursor-based pagination to retrieve additional pages of results.
+     * Lists articles, ordered by `updated_at` with the most recently updated articles first. Use
+     * cursor-based pagination to retrieve additional pages of results.
      *
-     * You can fetch a list of all articles by making a GET request to `api.intercom.io > 📘 How are the articles sorted and ordered? > > Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated articles first.
+     * You can fetch a list of all articles by making a GET request to `api.intercom.io > 📘 How are
+     * the articles sorted and ordered? > > Articles will be returned in descending order on the
+     * `updated_at` attribute. This means if you need to iterate through results then we'll show the
+     * most recently updated articles first.
      */
-    fun listArticles(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleList {
+    fun listArticles(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleList {
         return listArticlesWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listArticles], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listArticlesWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleList> {
-        return SdkClient.request<ArticleList>(SdkClient.RequestSpec("GET", "/articles", config = clientConfig, operationId = "listArticles", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listArticles], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listArticlesWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleList> {
+        return SdkClient.request<ArticleList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/articles",
+                config = clientConfig,
+                operationId = "listArticles",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 }
 
 internal object ArticlesCreateArticleOperation {
     /**
-     * Creates a new article in the help center. Supply `title` and `author_id`; choose either `body` or `body_markdown` for the article content, and set `state` to control whether the article is published or saved as a draft.
+     * Creates a new article in the help center. Supply `title` and `author_id`; choose either
+     * `body` or `body_markdown` for the article content, and set `state` to control whether the
+     * article is published or saved as a draft.
      *
-     * You can create a new article by making a POST request to `api.intercom.io > 📘 Tags cannot be managed via the Articles API > > Article tags are read-only in responses. To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
+     * You can create a new article by making a POST request to `api.intercom.io > 📘 Tags cannot be
+     * managed via the Articles API > > Article tags are read-only in responses. To create, update,
+     * or delete tags, use the Intercom UI or the Tags API endpoints.
      *
-     * @param title The title of the article.For multilingual articles, this will be
-     *   the title of the default language's content.
-     * @param authorId The id of the author of the article. For multilingual
-     *   articles, this will be the id of the author of the default language's content.
-     *   Must be a teammate on the help center's workspace.
-     * @param description The description of the article. For multilingual articles,
-     *   this will be the description of the default language's content.
-     * @param body The content of the article in HTML. For multilingual articles,
-     *   this will be the body of the default language's content. Mutually exclusive
-     *   with `body_markdown`.
-     * @param bodyMarkdown The content of the article in markdown. For multilingual
-     *   articles, this will be the body of the default language's content. An
-     *   alternative to `body` — you can provide content as markdown instead of HTML.
-     *   Mutually exclusive with `body`.
-     * @param state Whether the article will be `published` or will be a `draft`.
-     *   Defaults to draft. For multilingual articles, this will be the state of the
-     *   default language's content.
-     * @param parentId The id of the article's parent collection or section. An
-     *   article without this field stands alone.
-     * @param parentType The type of parent, which can either be a `collection` or
-     *   `section`.
-     * @param translatedContent The Translated Content of an Article. The keys are
-     *   the locale codes and the values are the translated content of the article.
-     * @param folderId The ID of the folder to place this article in, or null to
-     *   leave it without a folder.
-     * @param audienceIds The list of audience IDs to assign to this article for Fin
-     *   AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set
-     *   to every locale. For per-locale targeting, use
-     *   `translated_content.<locale>.audience_ids` instead. Sending both top-level and
-     *   per-locale in the same request causes top-level to win. Unknown audience IDs
+     * @param title The title of the article.For multilingual articles, this will be the title of
+     *   the default language's content.
+     * @param authorId The id of the author of the article. For multilingual articles, this will be
+     *   the id of the author of the default language's content. Must be a teammate on the help
+     *   center's workspace.
+     * @param description The description of the article. For multilingual articles, this will be
+     *   the description of the default language's content.
+     * @param body The content of the article in HTML. For multilingual articles, this will be the
+     *   body of the default language's content. Mutually exclusive with `body_markdown`.
+     * @param bodyMarkdown The content of the article in markdown. For multilingual articles, this
+     *   will be the body of the default language's content. An alternative to `body` — you can
+     *   provide content as markdown instead of HTML. Mutually exclusive with `body`.
+     * @param state Whether the article will be `published` or will be a `draft`. Defaults to draft.
+     *   For multilingual articles, this will be the state of the default language's content.
+     * @param parentId The id of the article's parent collection or section. An article without this
+     *   field stands alone.
+     * @param parentType The type of parent, which can either be a `collection` or `section`.
+     * @param translatedContent The Translated Content of an Article. The keys are the locale codes
+     *   and the values are the translated content of the article.
+     * @param folderId The ID of the folder to place this article in, or null to leave it without a
+     *   folder.
+     * @param audienceIds The list of audience IDs to assign to this article for Fin AI Agent
+     *   targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. For
+     *   per-locale targeting, use `translated_content.<locale>.audience_ids` instead. Sending both
+     *   top-level and per-locale in the same request causes top-level to win. Unknown audience IDs
      *   return a 404 error. No partial commit occurs.
-     * @param aiChatbotAvailability Whether the article should be available for AI
-     *   Chatbot (Fin). For multilingual articles, this sets the default language's
-     *   availability.
-     * @param aiCopilotAvailability Whether the article should be available for AI
-     *   Copilot. For multilingual articles, this sets the default language's
-     *   availability.
-     * @param aiSalesAgentAvailability Whether the article should be available for AI
-     *   Sales Agent. For multilingual articles, this sets the default language's
-     *   availability.
-     * @param scheduledPublishAt ISO 8601 timestamp at which to schedule a future
-     *   publish of the article. When set together with `state: "published"`, the
-     *   article is scheduled instead of published immediately. Setting `null` cancels
-     *   a pending publish schedule. Timestamps in the past or equal to the current
-     *   time are rejected with 400 `parameter_invalid` — the value must be strictly in
-     *   the future. Combining with `state: "draft"` returns 400 `parameter_invalid`.
-     *   Sending in the same request as…
-     * @param scheduledUnpublishAt ISO 8601 timestamp at which to schedule a future
-     *   unpublish of the article. Setting `null` cancels a pending unpublish schedule.
-     *   Timestamps in the past or equal to the current time are rejected with 400
-     *   `parameter_invalid` — the value must be strictly in the future. Rejected with
-     *   400 `parameter_invalid` if the article has never been published. Sending in
-     *   the same request as `scheduled_publish_at` returns 400 — only one pending
-     *   schedule per article. Empty string returns 400…
+     * @param aiChatbotAvailability Whether the article should be available for AI Chatbot (Fin).
+     *   For multilingual articles, this sets the default language's availability.
+     * @param aiCopilotAvailability Whether the article should be available for AI Copilot. For
+     *   multilingual articles, this sets the default language's availability.
+     * @param aiSalesAgentAvailability Whether the article should be available for AI Sales Agent.
+     *   For multilingual articles, this sets the default language's availability.
+     * @param scheduledPublishAt ISO 8601 timestamp at which to schedule a future publish of the
+     *   article. When set together with `state: "published"`, the article is scheduled instead of
+     *   published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the
+     *   past or equal to the current time are rejected with 400 `parameter_invalid` — the value
+     *   must be strictly in the future. Combining with `state: "draft"` returns 400
+     *   `parameter_invalid`. Sending in the same request as…
+     * @param scheduledUnpublishAt ISO 8601 timestamp at which to schedule a future unpublish of the
+     *   article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or
+     *   equal to the current time are rejected with 400 `parameter_invalid` — the value must be
+     *   strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been
+     *   published. Sending in the same request as `scheduled_publish_at` returns 400 — only one
+     *   pending schedule per article. Empty string returns 400…
      */
-    fun createArticle(clientConfig: ClientConfig, request: Articles.CreateArticleParams, options: RequestOptions? = null): Article {
+    fun createArticle(
+        clientConfig: ClientConfig,
+        request: Articles.CreateArticleParams,
+        options: RequestOptions? = null,
+    ): Article {
         return createArticleWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [createArticle], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createArticleWithRawResponse(clientConfig: ClientConfig, request: Articles.CreateArticleParams, options: RequestOptions? = null): SdkResponse<Article> {
+    /**
+     * [createArticle], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        request: Articles.CreateArticleParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> {
         validateCreateArticleRequest(request)
 
-        return SdkClient.request<Article>(SdkClient.RequestSpec("POST", "/articles", config = clientConfig, body = buildCreateArticleBody(request), operationId = "createArticle", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java)))
+        return SdkClient.request<Article>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/articles",
+                config = clientConfig,
+                body = buildCreateArticleBody(request),
+                operationId = "createArticle",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+            )
+        )
     }
-
 
     private fun validateCreateArticleRequest(request: Articles.CreateArticleParams) {
         val scheduledPublishAtValue = request.scheduledPublishAt?.getOrNull()
-if (scheduledPublishAtValue != null) {
+        if (scheduledPublishAtValue != null) {
             Validation.validateDateTime("scheduled_publish_at", scheduledPublishAtValue)
-}
+        }
 
         val scheduledUnpublishAtValue = request.scheduledUnpublishAt?.getOrNull()
-if (scheduledUnpublishAtValue != null) {
+        if (scheduledUnpublishAtValue != null) {
             Validation.validateDateTime("scheduled_unpublish_at", scheduledUnpublishAtValue)
-}
+        }
     }
-
-
 
     private fun buildCreateArticleBody(request: Articles.CreateArticleParams): Map<String, Any?> =
         buildMap {
@@ -131,156 +173,193 @@ if (scheduledUnpublishAtValue != null) {
             putAll(buildCreateArticleBodyPart2(request))
         }
 
-    private fun buildCreateArticleBodyPart1(request: Articles.CreateArticleParams): Map<String, Any?> =
+    private fun buildCreateArticleBodyPart1(
+        request: Articles.CreateArticleParams
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "title" to (request.title),
             "author_id" to (request.authorId),
             "description" to (SdkClient.omitIfNull(request.description)),
             "body" to (SdkClient.omitIfNull(request.body)),
-            "body_markdown" to
-    (SdkClient.omitIfNull(request.bodyMarkdown)),
+            "body_markdown" to (SdkClient.omitIfNull(request.bodyMarkdown)),
             "state" to (SdkClient.omitIfNull(request.state)),
             "parent_id" to (SdkClient.omitIfNull(request.parentId)),
             "parent_type" to (SdkClient.omitIfNull(request.parentType)),
-            "translated_content" to
-    (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
-            "folder_id" to
-    (request.folderId ?: SdkClient.SdkOptional.Omitted),
-            "audience_ids" to
-    (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
-            "ai_chatbot_availability" to
-    (SdkClient.omitIfNull(request.aiChatbotAvailability)),
+            "translated_content" to (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
+            "folder_id" to (request.folderId ?: SdkClient.SdkOptional.Omitted),
+            "audience_ids" to (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
+            "ai_chatbot_availability" to (SdkClient.omitIfNull(request.aiChatbotAvailability)),
         )
 
-    private fun buildCreateArticleBodyPart2(request: Articles.CreateArticleParams): Map<String, Any?> =
+    private fun buildCreateArticleBodyPart2(
+        request: Articles.CreateArticleParams
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "ai_copilot_availability" to
-    (SdkClient.omitIfNull(request.aiCopilotAvailability)),
+            "ai_copilot_availability" to (SdkClient.omitIfNull(request.aiCopilotAvailability)),
             "ai_sales_agent_availability" to
-    (SdkClient.omitIfNull(request.aiSalesAgentAvailability)),
-            "scheduled_publish_at" to
-    (request.scheduledPublishAt ?: SdkClient.SdkOptional.Omitted),
+                (SdkClient.omitIfNull(request.aiSalesAgentAvailability)),
+            "scheduled_publish_at" to (request.scheduledPublishAt ?: SdkClient.SdkOptional.Omitted),
             "scheduled_unpublish_at" to
-    (request.scheduledUnpublishAt ?: SdkClient.SdkOptional.Omitted),
+                (request.scheduledUnpublishAt ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object ArticlesRetrieveArticleOperation {
     /**
-     * Retrieves a single article from the help center. Use `article_id` to identify the article whose details you need. The response includes article data and its statistics.
+     * Retrieves a single article from the help center. Use `article_id` to identify the article
+     * whose details you need. The response includes article data and its statistics.
      *
      * You can fetch the details of a single article by making a GET request to `api.intercom.io
      *
-     * @param articleId The unique identifier for the article which is given by
-     *   Intercom.
+     * @param articleId The unique identifier for the article which is given by Intercom.
      */
-    fun retrieveArticle(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Article {
-        return retrieveArticleWithRawResponse(clientConfig, articleId, intercomVersion, options).data
+    fun retrieveArticle(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Article {
+        return retrieveArticleWithRawResponse(clientConfig, articleId, intercomVersion, options)
+            .data
     }
 
-
-    /** [retrieveArticle], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveArticleWithRawResponse(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Article> {
-        return SdkClient.request<Article>(SdkClient.RequestSpec("GET", "/articles/${SdkClient.encodePathSegment(articleId)}", config = clientConfig, operationId = "retrieveArticle", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveArticle], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun retrieveArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> {
+        return SdkClient.request<Article>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/articles/${SdkClient.encodePathSegment(articleId)}",
+                config = clientConfig,
+                operationId = "retrieveArticle",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 }
 
 internal object ArticlesUpdateArticleOperation {
     /**
-     * Updates the details of a specific article in the help center. Identify the article with `article_id` and provide the fields to change; `state` can be used to set the article to `published` or `draft`. Article tags are read-only through this operation.
+     * Updates the details of a specific article in the help center. Identify the article with
+     * `article_id` and provide the fields to change; `state` can be used to set the article to
+     * `published` or `draft`. Article tags are read-only through this operation.
      *
-     * You can update the details of a single article by making a PUT request to `api.intercom.io > 📘 Tags cannot be managed via the Articles API > > Article tags are read-only in responses. To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
+     * You can update the details of a single article by making a PUT request to `api.intercom.io >
+     * 📘 Tags cannot be managed via the Articles API > > Article tags are read-only in responses.
+     * To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
      *
-     * @param articleId The unique identifier for the article which is given by
-     *   Intercom.
-     * @param title The title of the article.For multilingual articles, this will be
-     *   the title of the default language's content.
-     * @param description The description of the article. For multilingual articles,
-     *   this will be the description of the default language's content.
-     * @param body The content of the article in HTML. For multilingual articles,
-     *   this will be the body of the default language's content. Mutually exclusive
-     *   with `body_markdown`.
-     * @param bodyMarkdown The content of the article in markdown. For multilingual
-     *   articles, this will be the body of the default language's content. An
-     *   alternative to `body` — you can provide content as markdown instead of HTML.
-     *   Mutually exclusive with `body`.
-     * @param authorId The id of the author of the article. For multilingual
-     *   articles, this will be the id of the author of the default language's content.
-     *   Must be a teammate on the help center's workspace.
-     * @param state Whether the article will be `published` or will be a `draft`.
-     *   Omitting this field leaves the publish state unchanged, so a draft stays a
-     *   draft and an edit to a published article goes live immediately unless that
-     *   article already has a pending draft or a scheduled publish time is set in the
-     *   same request. The `PUT /articles/{id}/draft` endpoint ignores this field and
-     *   always stages a draft. For multilingual articles, this will be the state of
+     * @param articleId The unique identifier for the article which is given by Intercom.
+     * @param title The title of the article.For multilingual articles, this will be the title of
      *   the default language's content.
-     * @param parentId The id of the article's parent collection or section. An
-     *   article without this field stands alone.
-     * @param parentType The type of parent, which can either be a `collection` or
-     *   `section`.
-     * @param translatedContent The Translated Content of an Article. The keys are
-     *   the locale codes and the values are the translated content of the article.
-     * @param folderId The ID of the folder to place this article in, or null to
-     *   remove it from its folder.
-     * @param audienceIds The list of audience IDs to assign to this article for Fin
-     *   AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set
-     *   to every locale. Sending `audience_ids: \[\]` clears all audience memberships
-     *   from every locale. For per-locale targeting, use
-     *   `translated_content.<locale>.audience_ids` instead. Sending both top-level and
-     *   per-locale in the same request causes top-level to win. Unknown audience IDs
+     * @param description The description of the article. For multilingual articles, this will be
+     *   the description of the default language's content.
+     * @param body The content of the article in HTML. For multilingual articles, this will be the
+     *   body of the default language's content. Mutually exclusive with `body_markdown`.
+     * @param bodyMarkdown The content of the article in markdown. For multilingual articles, this
+     *   will be the body of the default language's content. An alternative to `body` — you can
+     *   provide content as markdown instead of HTML. Mutually exclusive with `body`.
+     * @param authorId The id of the author of the article. For multilingual articles, this will be
+     *   the id of the author of the default language's content. Must be a teammate on the help
+     *   center's workspace.
+     * @param state Whether the article will be `published` or will be a `draft`. Omitting this
+     *   field leaves the publish state unchanged, so a draft stays a draft and an edit to a
+     *   published article goes live immediately unless that article already has a pending draft or
+     *   a scheduled publish time is set in the same request. The `PUT /articles/{id}/draft`
+     *   endpoint ignores this field and always stages a draft. For multilingual articles, this will
+     *   be the state of the default language's content.
+     * @param parentId The id of the article's parent collection or section. An article without this
+     *   field stands alone.
+     * @param parentType The type of parent, which can either be a `collection` or `section`.
+     * @param translatedContent The Translated Content of an Article. The keys are the locale codes
+     *   and the values are the translated content of the article.
+     * @param folderId The ID of the folder to place this article in, or null to remove it from its
+     *   folder.
+     * @param audienceIds The list of audience IDs to assign to this article for Fin AI Agent
+     *   targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale.
+     *   Sending `audience_ids: \[\]` clears all audience memberships from every locale. For
+     *   per-locale targeting, use `translated_content.<locale>.audience_ids` instead. Sending both
+     *   top-level and per-locale in the same request causes top-level to win. Unknown audience IDs
      *   return a 404 error. No partial commit occurs.
-     * @param aiChatbotAvailability Whether the article should be available for AI
-     *   Chatbot (Fin). For multilingual articles, this sets the default language's
-     *   availability.
-     * @param aiCopilotAvailability Whether the article should be available for AI
-     *   Copilot. For multilingual articles, this sets the default language's
-     *   availability.
-     * @param aiSalesAgentAvailability Whether the article should be available for AI
-     *   Sales Agent. For multilingual articles, this sets the default language's
-     *   availability.
-     * @param scheduledPublishAt ISO 8601 timestamp at which to schedule a future
-     *   publish of the article. When set together with `state: "published"`, the
-     *   article is scheduled instead of published immediately. Setting `null` cancels
-     *   a pending publish schedule. Timestamps in the past or equal to the current
-     *   time are rejected with 400 `parameter_invalid` — the value must be strictly in
-     *   the future. Combining with `state: "draft"` returns 400 `parameter_invalid`.
-     *   Sending in the same request as…
-     * @param scheduledUnpublishAt ISO 8601 timestamp at which to schedule a future
-     *   unpublish of the article. Setting `null` cancels a pending unpublish schedule.
-     *   Timestamps in the past or equal to the current time are rejected with 400
-     *   `parameter_invalid` — the value must be strictly in the future. Rejected with
-     *   400 `parameter_invalid` if the article has never been published. Sending in
-     *   the same request as `scheduled_publish_at` returns 400 — only one pending
-     *   schedule per article. Empty string returns 400…
+     * @param aiChatbotAvailability Whether the article should be available for AI Chatbot (Fin).
+     *   For multilingual articles, this sets the default language's availability.
+     * @param aiCopilotAvailability Whether the article should be available for AI Copilot. For
+     *   multilingual articles, this sets the default language's availability.
+     * @param aiSalesAgentAvailability Whether the article should be available for AI Sales Agent.
+     *   For multilingual articles, this sets the default language's availability.
+     * @param scheduledPublishAt ISO 8601 timestamp at which to schedule a future publish of the
+     *   article. When set together with `state: "published"`, the article is scheduled instead of
+     *   published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the
+     *   past or equal to the current time are rejected with 400 `parameter_invalid` — the value
+     *   must be strictly in the future. Combining with `state: "draft"` returns 400
+     *   `parameter_invalid`. Sending in the same request as…
+     * @param scheduledUnpublishAt ISO 8601 timestamp at which to schedule a future unpublish of the
+     *   article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or
+     *   equal to the current time are rejected with 400 `parameter_invalid` — the value must be
+     *   strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been
+     *   published. Sending in the same request as `scheduled_publish_at` returns 400 — only one
+     *   pending schedule per article. Empty string returns 400…
      */
-    fun updateArticle(clientConfig: ClientConfig, request: Articles.UpdateArticleParams, options: RequestOptions? = null): Article {
+    fun updateArticle(
+        clientConfig: ClientConfig,
+        request: Articles.UpdateArticleParams,
+        options: RequestOptions? = null,
+    ): Article {
         return updateArticleWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [updateArticle], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateArticleWithRawResponse(clientConfig: ClientConfig, request: Articles.UpdateArticleParams, options: RequestOptions? = null): SdkResponse<Article> {
+    /**
+     * [updateArticle], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun updateArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        request: Articles.UpdateArticleParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> {
         validateUpdateArticleRequest(request)
 
-        return SdkClient.request<Article>(SdkClient.RequestSpec("PUT", "/articles/${SdkClient.encodePathSegment(request.articleId)}", config = clientConfig, body = buildUpdateArticleBody(request), operationId = "updateArticle", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+        return SdkClient.request<Article>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/articles/${SdkClient.encodePathSegment(request.articleId)}",
+                config = clientConfig,
+                body = buildUpdateArticleBody(request),
+                operationId = "updateArticle",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
 
     private fun validateUpdateArticleRequest(request: Articles.UpdateArticleParams) {
         val scheduledPublishAtValue = request.scheduledPublishAt?.getOrNull()
-if (scheduledPublishAtValue != null) {
+        if (scheduledPublishAtValue != null) {
             Validation.validateDateTime("scheduled_publish_at", scheduledPublishAtValue)
-}
+        }
 
         val scheduledUnpublishAtValue = request.scheduledUnpublishAt?.getOrNull()
-if (scheduledUnpublishAtValue != null) {
+        if (scheduledUnpublishAtValue != null) {
             Validation.validateDateTime("scheduled_unpublish_at", scheduledUnpublishAtValue)
-}
+        }
     }
-
-
 
     private fun buildUpdateArticleBody(request: Articles.UpdateArticleParams): Map<String, Any?> =
         buildMap {
@@ -288,348 +367,718 @@ if (scheduledUnpublishAtValue != null) {
             putAll(buildUpdateArticleBodyPart2(request))
         }
 
-    private fun buildUpdateArticleBodyPart1(request: Articles.UpdateArticleParams): Map<String, Any?> =
+    private fun buildUpdateArticleBodyPart1(
+        request: Articles.UpdateArticleParams
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "title" to (SdkClient.omitIfNull(request.title)),
             "description" to (SdkClient.omitIfNull(request.description)),
             "body" to (SdkClient.omitIfNull(request.body)),
-            "body_markdown" to
-    (SdkClient.omitIfNull(request.bodyMarkdown)),
+            "body_markdown" to (SdkClient.omitIfNull(request.bodyMarkdown)),
             "author_id" to (SdkClient.omitIfNull(request.authorId)),
             "state" to (SdkClient.omitIfNull(request.state)),
             "parent_id" to (SdkClient.omitIfNull(request.parentId)),
             "parent_type" to (SdkClient.omitIfNull(request.parentType)),
-            "translated_content" to
-    (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
-            "folder_id" to
-    (request.folderId ?: SdkClient.SdkOptional.Omitted),
-            "audience_ids" to
-    (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
-            "ai_chatbot_availability" to
-    (SdkClient.omitIfNull(request.aiChatbotAvailability)),
+            "translated_content" to (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
+            "folder_id" to (request.folderId ?: SdkClient.SdkOptional.Omitted),
+            "audience_ids" to (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
+            "ai_chatbot_availability" to (SdkClient.omitIfNull(request.aiChatbotAvailability)),
         )
 
-    private fun buildUpdateArticleBodyPart2(request: Articles.UpdateArticleParams): Map<String, Any?> =
+    private fun buildUpdateArticleBodyPart2(
+        request: Articles.UpdateArticleParams
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "ai_copilot_availability" to
-    (SdkClient.omitIfNull(request.aiCopilotAvailability)),
+            "ai_copilot_availability" to (SdkClient.omitIfNull(request.aiCopilotAvailability)),
             "ai_sales_agent_availability" to
-    (SdkClient.omitIfNull(request.aiSalesAgentAvailability)),
-            "scheduled_publish_at" to
-    (request.scheduledPublishAt ?: SdkClient.SdkOptional.Omitted),
+                (SdkClient.omitIfNull(request.aiSalesAgentAvailability)),
+            "scheduled_publish_at" to (request.scheduledPublishAt ?: SdkClient.SdkOptional.Omitted),
             "scheduled_unpublish_at" to
-    (request.scheduledUnpublishAt ?: SdkClient.SdkOptional.Omitted),
+                (request.scheduledUnpublishAt ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object ArticlesDeleteArticleOperation {
     /**
-     * Deletes a specific article from the help center. Use the article's unique `article_id` to identify the article to remove. A successful response confirms whether the article was deleted.
+     * Deletes a specific article from the help center. Use the article's unique `article_id` to
+     * identify the article to remove. A successful response confirms whether the article was
+     * deleted.
      *
      * You can delete a single article by making a DELETE request to `api.intercom.io
      *
-     * @param articleId The unique identifier for the article which is given by
-     *   Intercom.
+     * @param articleId The unique identifier for the article which is given by Intercom.
      */
-    fun deleteArticle(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedArticleObject {
+    fun deleteArticle(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedArticleObject {
         return deleteArticleWithRawResponse(clientConfig, articleId, intercomVersion, options).data
     }
 
-
-    /** [deleteArticle], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteArticleWithRawResponse(clientConfig: ClientConfig, articleId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DeletedArticleObject> {
-        return SdkClient.request<DeletedArticleObject>(SdkClient.RequestSpec("DELETE", "/articles/${SdkClient.encodePathSegment(articleId)}", config = clientConfig, operationId = "deleteArticle", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [deleteArticle], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun deleteArticleWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedArticleObject> {
+        return SdkClient.request<DeletedArticleObject>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/articles/${SdkClient.encodePathSegment(articleId)}",
+                config = clientConfig,
+                operationId = "deleteArticle",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 }
 
 internal object ArticlesRetrieveArticleDraftOperation {
     /**
-     * Retrieves the staged draft content for a published article without changing the live article. Use this operation to inspect unpublished changes before publishing them. A staged draft exists only when unpublished changes have been saved for a published article.
+     * Retrieves the staged draft content for a published article without changing the live article.
+     * Use this operation to inspect unpublished changes before publishing them. A staged draft
+     * exists only when unpublished changes have been saved for a published article.
      *
-     * Fetch the staged draft of a published article by making a GET request to `api.intercom.io The response is the article rendered with its draft content, leaving the live article untouched. A draft exists only when a published article has unpublished changes staged on top of it. Returns `404` when the article has no staged draft. Requires the `read_articles_scope` OAuth scope.
+     * Fetch the staged draft of a published article by making a GET request to `api.intercom.io The
+     * response is the article rendered with its draft content, leaving the live article untouched.
+     * A draft exists only when a published article has unpublished changes staged on top of it.
+     * Returns `404` when the article has no staged draft. Requires the `read_articles_scope` OAuth
+     * scope.
      *
      * @param id The unique identifier for the article which is given by Intercom.
      */
-    fun retrieveArticleDraft(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Article {
+    fun retrieveArticleDraft(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Article {
         return retrieveArticleDraftWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [retrieveArticleDraft], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveArticleDraftWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Article> {
-        return SdkClient.request<Article>(SdkClient.RequestSpec("GET", "/articles/${SdkClient.encodePathSegment(id)}/draft", config = clientConfig, operationId = "retrieveArticleDraft", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveArticleDraft], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun retrieveArticleDraftWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> {
+        return SdkClient.request<Article>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/articles/${SdkClient.encodePathSegment(id)}/draft",
+                config = clientConfig,
+                operationId = "retrieveArticleDraft",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 }
 
 internal object ArticlesStageArticleDraftOperation {
     /**
-     * Stages changes to a published article as a draft, leaving the live article unchanged until publication. Supply versioned content such as `title` or `body`; non-versioned fields, including AI availability settings, are ignored. The article must already be published.
+     * Stages changes to a published article as a draft, leaving the live article unchanged until
+     * publication. Supply versioned content such as `title` or `body`; non-versioned fields,
+     * including AI availability settings, are ignored. The article must already be published.
      *
-     * Stage changes to a published article as a draft by making a PUT request to `api.intercom.io The live article remains unchanged until the draft is published. The article must already be published; staging a draft on an article that has never been published returns `422`. Only versioned text content (such as `title` and `body`) is staged. Non-versioned fields like AI availability are ignored, leaving the live values untouched. Requires the `read_write_articles_scope` OAuth…
+     * Stage changes to a published article as a draft by making a PUT request to `api.intercom.io
+     * The live article remains unchanged until the draft is published. The article must already be
+     * published; staging a draft on an article that has never been published returns `422`. Only
+     * versioned text content (such as `title` and `body`) is staged. Non-versioned fields like AI
+     * availability are ignored, leaving the live values untouched. Requires the
+     * `read_write_articles_scope` OAuth…
      *
      * @param id The unique identifier for the article which is given by Intercom.
-     * @param title The title of the article.For multilingual articles, this will be
-     *   the title of the default language's content.
-     * @param description The description of the article. For multilingual articles,
-     *   this will be the description of the default language's content.
-     * @param body The content of the article in HTML. For multilingual articles,
-     *   this will be the body of the default language's content. Mutually exclusive
-     *   with `body_markdown`.
-     * @param bodyMarkdown The content of the article in markdown. For multilingual
-     *   articles, this will be the body of the default language's content. An
-     *   alternative to `body` — you can provide content as markdown instead of HTML.
-     *   Mutually exclusive with `body`.
-     * @param authorId The id of the author of the article. For multilingual
-     *   articles, this will be the id of the author of the default language's content.
-     *   Must be a teammate on the help center's workspace.
-     * @param state Whether the article will be `published` or will be a `draft`.
-     *   Omitting this field leaves the publish state unchanged, so a draft stays a
-     *   draft and an edit to a published article goes live immediately unless that
-     *   article already has a pending draft or a scheduled publish time is set in the
-     *   same request. The `PUT /articles/{id}/draft` endpoint ignores this field and
-     *   always stages a draft. For multilingual articles, this will be the state of
+     * @param title The title of the article.For multilingual articles, this will be the title of
      *   the default language's content.
-     * @param parentId The id of the article's parent collection or section. An
-     *   article without this field stands alone.
-     * @param parentType The type of parent, which can either be a `collection` or
-     *   `section`.
-     * @param translatedContent The Translated Content of an Article. The keys are
-     *   the locale codes and the values are the translated content of the article.
-     * @param folderId The ID of the folder to place this article in, or null to
-     *   remove it from its folder.
-     * @param audienceIds The list of audience IDs to assign to this article for Fin
-     *   AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set
-     *   to every locale. Sending `audience_ids: \[\]` clears all audience memberships
-     *   from every locale. For per-locale targeting, use
-     *   `translated_content.<locale>.audience_ids` instead. Sending both top-level and
-     *   per-locale in the same request causes top-level to win. Unknown audience IDs
+     * @param description The description of the article. For multilingual articles, this will be
+     *   the description of the default language's content.
+     * @param body The content of the article in HTML. For multilingual articles, this will be the
+     *   body of the default language's content. Mutually exclusive with `body_markdown`.
+     * @param bodyMarkdown The content of the article in markdown. For multilingual articles, this
+     *   will be the body of the default language's content. An alternative to `body` — you can
+     *   provide content as markdown instead of HTML. Mutually exclusive with `body`.
+     * @param authorId The id of the author of the article. For multilingual articles, this will be
+     *   the id of the author of the default language's content. Must be a teammate on the help
+     *   center's workspace.
+     * @param state Whether the article will be `published` or will be a `draft`. Omitting this
+     *   field leaves the publish state unchanged, so a draft stays a draft and an edit to a
+     *   published article goes live immediately unless that article already has a pending draft or
+     *   a scheduled publish time is set in the same request. The `PUT /articles/{id}/draft`
+     *   endpoint ignores this field and always stages a draft. For multilingual articles, this will
+     *   be the state of the default language's content.
+     * @param parentId The id of the article's parent collection or section. An article without this
+     *   field stands alone.
+     * @param parentType The type of parent, which can either be a `collection` or `section`.
+     * @param translatedContent The Translated Content of an Article. The keys are the locale codes
+     *   and the values are the translated content of the article.
+     * @param folderId The ID of the folder to place this article in, or null to remove it from its
+     *   folder.
+     * @param audienceIds The list of audience IDs to assign to this article for Fin AI Agent
+     *   targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale.
+     *   Sending `audience_ids: \[\]` clears all audience memberships from every locale. For
+     *   per-locale targeting, use `translated_content.<locale>.audience_ids` instead. Sending both
+     *   top-level and per-locale in the same request causes top-level to win. Unknown audience IDs
      *   return a 404 error. No partial commit occurs.
-     * @param aiChatbotAvailability Whether the article should be available for AI
-     *   Chatbot (Fin). For multilingual articles, this sets the default language's
-     *   availability.
-     * @param aiCopilotAvailability Whether the article should be available for AI
-     *   Copilot. For multilingual articles, this sets the default language's
-     *   availability.
-     * @param aiSalesAgentAvailability Whether the article should be available for AI
-     *   Sales Agent. For multilingual articles, this sets the default language's
-     *   availability.
-     * @param scheduledPublishAt ISO 8601 timestamp at which to schedule a future
-     *   publish of the article. When set together with `state: "published"`, the
-     *   article is scheduled instead of published immediately. Setting `null` cancels
-     *   a pending publish schedule. Timestamps in the past or equal to the current
-     *   time are rejected with 400 `parameter_invalid` — the value must be strictly in
-     *   the future. Combining with `state: "draft"` returns 400 `parameter_invalid`.
-     *   Sending in the same request as…
-     * @param scheduledUnpublishAt ISO 8601 timestamp at which to schedule a future
-     *   unpublish of the article. Setting `null` cancels a pending unpublish schedule.
-     *   Timestamps in the past or equal to the current time are rejected with 400
-     *   `parameter_invalid` — the value must be strictly in the future. Rejected with
-     *   400 `parameter_invalid` if the article has never been published. Sending in
-     *   the same request as `scheduled_publish_at` returns 400 — only one pending
-     *   schedule per article. Empty string returns 400…
+     * @param aiChatbotAvailability Whether the article should be available for AI Chatbot (Fin).
+     *   For multilingual articles, this sets the default language's availability.
+     * @param aiCopilotAvailability Whether the article should be available for AI Copilot. For
+     *   multilingual articles, this sets the default language's availability.
+     * @param aiSalesAgentAvailability Whether the article should be available for AI Sales Agent.
+     *   For multilingual articles, this sets the default language's availability.
+     * @param scheduledPublishAt ISO 8601 timestamp at which to schedule a future publish of the
+     *   article. When set together with `state: "published"`, the article is scheduled instead of
+     *   published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the
+     *   past or equal to the current time are rejected with 400 `parameter_invalid` — the value
+     *   must be strictly in the future. Combining with `state: "draft"` returns 400
+     *   `parameter_invalid`. Sending in the same request as…
+     * @param scheduledUnpublishAt ISO 8601 timestamp at which to schedule a future unpublish of the
+     *   article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or
+     *   equal to the current time are rejected with 400 `parameter_invalid` — the value must be
+     *   strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been
+     *   published. Sending in the same request as `scheduled_publish_at` returns 400 — only one
+     *   pending schedule per article. Empty string returns 400…
      */
-    fun stageArticleDraft(clientConfig: ClientConfig, request: Articles.StageArticleDraftRequest, options: RequestOptions? = null): Article {
+    fun stageArticleDraft(
+        clientConfig: ClientConfig,
+        request: Articles.StageArticleDraftRequest,
+        options: RequestOptions? = null,
+    ): Article {
         return stageArticleDraftWithRawResponse(clientConfig, request, options).data
     }
 
-
-
-
-    /** [stageArticleDraft], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun stageArticleDraftWithRawResponse(clientConfig: ClientConfig, request: Articles.StageArticleDraftRequest, options: RequestOptions? = null): SdkResponse<Article> {
+    /**
+     * [stageArticleDraft], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun stageArticleDraftWithRawResponse(
+        clientConfig: ClientConfig,
+        request: Articles.StageArticleDraftRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> {
         validateStageArticleDraftRequest(request)
 
-        return SdkClient.request<Article>(SdkClient.RequestSpec("PUT", "/articles/${SdkClient.encodePathSegment(request.id)}/draft", config = clientConfig, body = buildStageArticleDraftBody(request), operationId = "stageArticleDraft", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
+        return SdkClient.request<Article>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/articles/${SdkClient.encodePathSegment(request.id)}/draft",
+                config = clientConfig,
+                body = buildStageArticleDraftBody(request),
+                operationId = "stageArticleDraft",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
 
     private fun validateStageArticleDraftRequest(request: Articles.StageArticleDraftRequest) {
         val scheduledPublishAtValue = request.scheduledPublishAt?.getOrNull()
-if (scheduledPublishAtValue != null) {
+        if (scheduledPublishAtValue != null) {
             Validation.validateDateTime("scheduled_publish_at", scheduledPublishAtValue)
-}
-
-        val scheduledUnpublishAtValue = request.scheduledUnpublishAt?.getOrNull()
-if (scheduledUnpublishAtValue != null) {
-            Validation.validateDateTime("scheduled_unpublish_at", scheduledUnpublishAtValue)
-}
-    }
-
-
-
-    private fun buildStageArticleDraftBody(request: Articles.StageArticleDraftRequest): Map<String, Any?> =
-        buildMap {
-            putAll(buildStageArticleDraftBodyPart1(request))
-            putAll(buildStageArticleDraftBodyPart2(request))
         }
 
-    private fun buildStageArticleDraftBodyPart1(request: Articles.StageArticleDraftRequest): Map<String, Any?> =
+        val scheduledUnpublishAtValue = request.scheduledUnpublishAt?.getOrNull()
+        if (scheduledUnpublishAtValue != null) {
+            Validation.validateDateTime("scheduled_unpublish_at", scheduledUnpublishAtValue)
+        }
+    }
+
+    private fun buildStageArticleDraftBody(
+        request: Articles.StageArticleDraftRequest
+    ): Map<String, Any?> = buildMap {
+        putAll(buildStageArticleDraftBodyPart1(request))
+        putAll(buildStageArticleDraftBodyPart2(request))
+    }
+
+    private fun buildStageArticleDraftBodyPart1(
+        request: Articles.StageArticleDraftRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
             "title" to (SdkClient.omitIfNull(request.title)),
             "description" to (SdkClient.omitIfNull(request.description)),
             "body" to (SdkClient.omitIfNull(request.body)),
-            "body_markdown" to
-    (SdkClient.omitIfNull(request.bodyMarkdown)),
+            "body_markdown" to (SdkClient.omitIfNull(request.bodyMarkdown)),
             "author_id" to (SdkClient.omitIfNull(request.authorId)),
             "state" to (SdkClient.omitIfNull(request.state)),
             "parent_id" to (SdkClient.omitIfNull(request.parentId)),
             "parent_type" to (SdkClient.omitIfNull(request.parentType)),
-            "translated_content" to
-    (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
-            "folder_id" to
-    (request.folderId ?: SdkClient.SdkOptional.Omitted),
-            "audience_ids" to
-    (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
-            "ai_chatbot_availability" to
-    (SdkClient.omitIfNull(request.aiChatbotAvailability)),
+            "translated_content" to (request.translatedContent ?: SdkClient.SdkOptional.Omitted),
+            "folder_id" to (request.folderId ?: SdkClient.SdkOptional.Omitted),
+            "audience_ids" to (request.audienceIds ?: SdkClient.SdkOptional.Omitted),
+            "ai_chatbot_availability" to (SdkClient.omitIfNull(request.aiChatbotAvailability)),
         )
 
-    private fun buildStageArticleDraftBodyPart2(request: Articles.StageArticleDraftRequest): Map<String, Any?> =
+    private fun buildStageArticleDraftBodyPart2(
+        request: Articles.StageArticleDraftRequest
+    ): Map<String, Any?> =
         SdkClient.bodyMap(
-            "ai_copilot_availability" to
-    (SdkClient.omitIfNull(request.aiCopilotAvailability)),
+            "ai_copilot_availability" to (SdkClient.omitIfNull(request.aiCopilotAvailability)),
             "ai_sales_agent_availability" to
-    (SdkClient.omitIfNull(request.aiSalesAgentAvailability)),
-            "scheduled_publish_at" to
-    (request.scheduledPublishAt ?: SdkClient.SdkOptional.Omitted),
+                (SdkClient.omitIfNull(request.aiSalesAgentAvailability)),
+            "scheduled_publish_at" to (request.scheduledPublishAt ?: SdkClient.SdkOptional.Omitted),
             "scheduled_unpublish_at" to
-    (request.scheduledUnpublishAt ?: SdkClient.SdkOptional.Omitted),
+                (request.scheduledUnpublishAt ?: SdkClient.SdkOptional.Omitted),
         )
 }
 
 internal object ArticlesPublishArticleDraftOperation {
     /**
-     * Publishes the staged draft for an article, promoting its draft content to live. On a single-language workspace, you can omit the request body; on a multilingual workspace, specify the locales to publish in `locales`. Each requested locale must have pending changes.
+     * Publishes the staged draft for an article, promoting its draft content to live. On a
+     * single-language workspace, you can omit the request body; on a multilingual workspace,
+     * specify the locales to publish in `locales`. Each requested locale must have pending changes.
      *
-     * Publish a staged draft by making a POST request to `api.intercom.io promoting the draft content to live. On a single-language workspace no body is required. On a multilingual workspace you must list which locales to publish via the `locales` array; omitting it returns `422`. Returns `422` when there is no staged draft to publish, or when a requested locale has no pending changes. Requires the `read_write_articles_scope` OAuth scope.
+     * Publish a staged draft by making a POST request to `api.intercom.io promoting the draft
+     * content to live. On a single-language workspace no body is required. On a multilingual
+     * workspace you must list which locales to publish via the `locales` array; omitting it returns
+     * `422`. Returns `422` when there is no staged draft to publish, or when a requested locale has
+     * no pending changes. Requires the `read_write_articles_scope` OAuth scope.
      *
      * @param id The unique identifier for the article which is given by Intercom.
-     * @param locales The locales whose staged drafts should be published. Required
-     *   on multilingual workspaces; each locale must have a pending draft.
+     * @param locales The locales whose staged drafts should be published. Required on multilingual
+     *   workspaces; each locale must have a pending draft.
      */
-    fun publishArticleDraft(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, locales: List<String>? = null, options: RequestOptions? = null): Article {
-        return publishArticleDraftWithRawResponse(clientConfig, id, intercomVersion, locales, options).data
+    fun publishArticleDraft(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        locales: List<String>? = null,
+        options: RequestOptions? = null,
+    ): Article {
+        return publishArticleDraftWithRawResponse(
+                clientConfig,
+                id,
+                intercomVersion,
+                locales,
+                options,
+            )
+            .data
     }
 
-
-    /** [publishArticleDraft], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun publishArticleDraftWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, locales: List<String>? = null, options: RequestOptions? = null): SdkResponse<Article> {
-        return SdkClient.request<Article>(SdkClient.RequestSpec("POST", "/articles/${SdkClient.encodePathSegment(id)}/draft/publish", config = clientConfig, body = SdkClient.bodyMap("locales" to (SdkClient.omitIfNull(locales))), operationId = "publishArticleDraft", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
+    /**
+     * [publishArticleDraft], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun publishArticleDraftWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        locales: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Article> {
+        return SdkClient.request<Article>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/articles/${SdkClient.encodePathSegment(id)}/draft/publish",
+                config = clientConfig,
+                body = SdkClient.bodyMap("locales" to (SdkClient.omitIfNull(locales))),
+                operationId = "publishArticleDraft",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ArticlesAttachArticlesTagOperation {
     /**
-     * Applies an existing tag to an article. Supply the tag ID in the request body, and the authenticating teammate must have the `manage_knowledge_base_content` permission. The operation requires the `read_write_articles_scope` OAuth scope.
+     * Applies an existing tag to an article. Supply the tag ID in the request body, and the
+     * authenticating teammate must have the `manage_knowledge_base_content` permission. The
+     * operation requires the `read_write_articles_scope` OAuth scope.
      *
-     * Apply an existing tag to an article. Returns the tag that was applied. The tag must already exist in the workspace (create tags with the Tags API), and the authenticating teammate must have the `manage_knowledge_base_content` permission. Requires the `read_write_articles_scope` OAuth scope.
+     * Apply an existing tag to an article. Returns the tag that was applied. The tag must already
+     * exist in the workspace (create tags with the Tags API), and the authenticating teammate must
+     * have the `manage_knowledge_base_content` permission. Requires the `read_write_articles_scope`
+     * OAuth scope.
      *
-     * @param articleId The unique identifier for the article which is given by
-     *   Intercom.
+     * @param articleId The unique identifier for the article which is given by Intercom.
      * @param id The unique identifier of the tag to apply, as given by Intercom.
-     * @param adminId Optional id of the teammate to attribute the tagging to.
-     *   Defaults to the authenticating teammate. Does not affect authorization.
+     * @param adminId Optional id of the teammate to attribute the tagging to. Defaults to the
+     *   authenticating teammate. Does not affect authorization.
      */
-    fun attachArticlesTag(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, adminId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): Tag {
-        return attachArticlesTagWithRawResponse(clientConfig, articleId, id, intercomVersion, adminId, options).data
+    fun attachArticlesTag(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return attachArticlesTagWithRawResponse(
+                clientConfig,
+                articleId,
+                id,
+                intercomVersion,
+                adminId,
+                options,
+            )
+            .data
     }
 
-
-    /** [attachArticlesTag], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun attachArticlesTagWithRawResponse(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, adminId: SdkClient.SdkOptional<String?>? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("POST", "/articles/${SdkClient.encodePathSegment(articleId)}/tags", config = clientConfig, body = SdkClient.bodyMap("id" to (id), "admin_id" to (adminId ?: SdkClient.SdkOptional.Omitted)), operationId = "attachArticlesTag", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [attachArticlesTag], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun attachArticlesTagWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: SdkClient.SdkOptional<String?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/articles/${SdkClient.encodePathSegment(articleId)}/tags",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "id" to (id),
+                        "admin_id" to (adminId ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "attachArticlesTag",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ArticlesDetachArticlesTagOperation {
     /**
-     * Removes a tag from an article. Use `article_id` and `id` to identify the article and tag to detach. The authenticating teammate must have the `manage_knowledge_base_content` permission, and the operation requires the `read_write_articles_scope` OAuth scope.
+     * Removes a tag from an article. Use `article_id` and `id` to identify the article and tag to
+     * detach. The authenticating teammate must have the `manage_knowledge_base_content` permission,
+     * and the operation requires the `read_write_articles_scope` OAuth scope.
      *
-     * Remove a tag from an article. Returns the tag that was removed, with null `applied_at` and `applied_by`. The authenticating teammate must have the `manage_knowledge_base_content` permission. Requires the `read_write_articles_scope` OAuth scope.
+     * Remove a tag from an article. Returns the tag that was removed, with null `applied_at` and
+     * `applied_by`. The authenticating teammate must have the `manage_knowledge_base_content`
+     * permission. Requires the `read_write_articles_scope` OAuth scope.
      *
-     * @param articleId The unique identifier for the article which is given by
-     *   Intercom.
+     * @param articleId The unique identifier for the article which is given by Intercom.
      * @param id The unique identifier of the tag to remove, as given by Intercom.
      */
-    fun detachArticlesTag(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return detachArticlesTagWithRawResponse(clientConfig, articleId, id, intercomVersion, options).data
+    fun detachArticlesTag(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return detachArticlesTagWithRawResponse(
+                clientConfig,
+                articleId,
+                id,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [detachArticlesTag], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun detachArticlesTagWithRawResponse(clientConfig: ClientConfig, articleId: Long, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("DELETE", "/articles/${SdkClient.encodePathSegment(articleId)}/tags/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "detachArticlesTag", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [detachArticlesTag], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun detachArticlesTagWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/articles/${SdkClient.encodePathSegment(articleId)}/tags/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "detachArticlesTag",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ArticlesListArticleVersionsOperation {
     /**
-     * Lists version history for an article as paginated metadata, with the newest versions first. Use `locale` to filter the history to a workspace locale, and `page` and `per_page` to navigate the results. Retrieve an individual version to access its full content.
+     * Lists version history for an article as paginated metadata, with the newest versions first.
+     * Use `locale` to filter the history to a workspace locale, and `page` and `per_page` to
+     * navigate the results. Retrieve an individual version to access its full content.
      *
-     * Fetch the version history of an article by making a GET request to `api.intercom.io Versions are returned newest-first as a paginated list of metadata. Use `GET /articles/{article_id}/versions/{id}` to retrieve a single version with its full content. Requires the `read_articles_scope` OAuth scope.
+     * Fetch the version history of an article by making a GET request to `api.intercom.io Versions
+     * are returned newest-first as a paginated list of metadata. Use `GET
+     * /articles/{article_id}/versions/{id}` to retrieve a single version with its full content.
+     * Requires the `read_articles_scope` OAuth scope.
      *
-     * @param articleId The unique identifier for the article whose versions you are
-     *   listing.
+     * @param articleId The unique identifier for the article whose versions you are listing.
      * @param page The page of results to fetch. Defaults to the first page.
      * @param perPage The number of results to return per page.
-     * @param locale Filter versions to a specific locale. Use the locale identifier
-     *   (for example `en`, `fr`). If the locale is not configured for the workspace, a
-     *   `400` is returned.
+     * @param locale Filter versions to a specific locale. Use the locale identifier (for example
+     *   `en`, `fr`). If the locale is not configured for the workspace, a `400` is returned.
      */
-    fun listArticleVersions(clientConfig: ClientConfig, articleId: Long, page: Long? = null, perPage: Long? = null, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleVersionList {
-        return listArticleVersionsWithRawResponse(clientConfig, articleId, page, perPage, locale, intercomVersion, options).data
+    fun listArticleVersions(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        page: Long? = null,
+        perPage: Long? = null,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleVersionList {
+        return listArticleVersionsWithRawResponse(
+                clientConfig,
+                articleId,
+                page,
+                perPage,
+                locale,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [listArticleVersions], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listArticleVersionsWithRawResponse(clientConfig: ClientConfig, articleId: Long, page: Long? = null, perPage: Long? = null, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleVersionList> {
-        return SdkClient.request<ArticleVersionList>(SdkClient.RequestSpec("GET", "/articles/${SdkClient.encodePathSegment(articleId)}/versions", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "locale" to SdkClient.queryValue(locale, "form", true)), operationId = "listArticleVersions", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [listArticleVersions], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun listArticleVersionsWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        page: Long? = null,
+        perPage: Long? = null,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleVersionList> {
+        return SdkClient.request<ArticleVersionList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/articles/${SdkClient.encodePathSegment(articleId)}/versions",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "locale" to SdkClient.queryValue(locale, "form", true),
+                    ),
+                operationId = "listArticleVersions",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ArticlesRetrieveArticleVersionOperation {
     /**
-     * Retrieves a prior version of an article, including the content saved in that version. Use `article_id` and `id` to select the article and version, and `locale` to request content for a specific locale. The live article remains unchanged, and access requires the `read_articles_scope` OAuth scope.
+     * Retrieves a prior version of an article, including the content saved in that version. Use
+     * `article_id` and `id` to select the article and version, and `locale` to request content for
+     * a specific locale. The live article remains unchanged, and access requires the
+     * `read_articles_scope` OAuth scope.
      *
-     * Fetch a single prior version of an article, including its body content, by making a GET request to `api.intercom.io Returns the version's full content; the live article remains untouched. Requires the `read_articles_scope` OAuth scope.
+     * Fetch a single prior version of an article, including its body content, by making a GET
+     * request to `api.intercom.io Returns the version's full content; the live article remains
+     * untouched. Requires the `read_articles_scope` OAuth scope.
      *
      * @param articleId The unique identifier for the article.
      * @param id The unique identifier for the version.
-     * @param locale Return the version's content for a specific locale. If the
-     *   locale is not configured for the workspace, a `400` is returned.
+     * @param locale Return the version's content for a specific locale. If the locale is not
+     *   configured for the workspace, a `400` is returned.
      */
-    fun retrieveArticleVersion(clientConfig: ClientConfig, articleId: Long, id: String, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleVersion {
-        return retrieveArticleVersionWithRawResponse(clientConfig, articleId, id, locale, intercomVersion, options).data
+    fun retrieveArticleVersion(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleVersion {
+        return retrieveArticleVersionWithRawResponse(
+                clientConfig,
+                articleId,
+                id,
+                locale,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [retrieveArticleVersion], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveArticleVersionWithRawResponse(clientConfig: ClientConfig, articleId: Long, id: String, locale: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleVersion> {
-        return SdkClient.request<ArticleVersion>(SdkClient.RequestSpec("GET", "/articles/${SdkClient.encodePathSegment(articleId)}/versions/${SdkClient.encodePathSegment(id)}", config = clientConfig, query = mapOf("locale" to SdkClient.queryValue(locale, "form", true)), operationId = "retrieveArticleVersion", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveArticleVersion], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun retrieveArticleVersionWithRawResponse(
+        clientConfig: ClientConfig,
+        articleId: Long,
+        id: String,
+        locale: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleVersion> {
+        return SdkClient.request<ArticleVersion>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/articles/${SdkClient.encodePathSegment(articleId)}/versions/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                query = mapOf("locale" to SdkClient.queryValue(locale, "form", true)),
+                operationId = "retrieveArticleVersion",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 }
 
 internal object ArticlesSearchArticlesOperation {
     /**
-     * Searches articles by phrase, with optional filters for article state and Help Center. Use `highlight` to request highlighted matching content; results include pagination details and the total number of matching articles.
+     * Searches articles by phrase, with optional filters for article state and Help Center. Use
+     * `highlight` to request highlighted matching content; results include pagination details and
+     * the total number of matching articles.
      *
      * You can search for articles by making a GET request to `api.intercom.io
      *
      * @param phrase The phrase within your articles to search for.
-     * @param state The state of the Articles returned. One of `published`, `draft`
-     *   or `all`.
+     * @param state The state of the Articles returned. One of `published`, `draft` or `all`.
      * @param helpCenterId The ID of the Help Center to search in.
-     * @param highlight Return a highlighted version of the matching content within
-     *   your articles. Refer to the response schema for more details.
+     * @param highlight Return a highlighted version of the matching content within your articles.
+     *   Refer to the response schema for more details.
      */
-    fun searchArticles(clientConfig: ClientConfig, phrase: String? = null, state: String? = null, helpCenterId: Long? = null, highlight: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ArticleSearchResponse {
-        return searchArticlesWithRawResponse(clientConfig, phrase, state, helpCenterId, highlight, intercomVersion, options).data
+    fun searchArticles(
+        clientConfig: ClientConfig,
+        phrase: String? = null,
+        state: String? = null,
+        helpCenterId: Long? = null,
+        highlight: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ArticleSearchResponse {
+        return searchArticlesWithRawResponse(
+                clientConfig,
+                phrase,
+                state,
+                helpCenterId,
+                highlight,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [searchArticles], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun searchArticlesWithRawResponse(clientConfig: ClientConfig, phrase: String? = null, state: String? = null, helpCenterId: Long? = null, highlight: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ArticleSearchResponse> {
-        return SdkClient.request<ArticleSearchResponse>(SdkClient.RequestSpec("GET", "/articles/search", config = clientConfig, query = mapOf("phrase" to SdkClient.queryValue(phrase, "form", true), "state" to SdkClient.queryValue(state, "form", true), "help_center_id" to
-    SdkClient.queryValue(helpCenterId, "form", true), "highlight" to SdkClient.queryValue(highlight, "form", true)), operationId = "searchArticles", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [searchArticles], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun searchArticlesWithRawResponse(
+        clientConfig: ClientConfig,
+        phrase: String? = null,
+        state: String? = null,
+        helpCenterId: Long? = null,
+        highlight: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ArticleSearchResponse> {
+        return SdkClient.request<ArticleSearchResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/articles/search",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "phrase" to SdkClient.queryValue(phrase, "form", true),
+                        "state" to SdkClient.queryValue(state, "form", true),
+                        "help_center_id" to SdkClient.queryValue(helpCenterId, "form", true),
+                        "highlight" to SdkClient.queryValue(highlight, "form", true),
+                    ),
+                operationId = "searchArticles",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 }

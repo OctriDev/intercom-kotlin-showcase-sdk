@@ -32,108 +32,143 @@ import dev.octri.showcase.intercom.Validation
 
 object Conversations {
 
-/**
- * Required object value serialized in the `from` wire field.
- */
-data class CreateConversationRequestFrom(
-    /**
-     * The role associated to the contact - user or lead.
-     */
-    val type: CreateConversationRequestFromTypeEnum,
-    /**
-     * The identifier for the contact which is given by Intercom.
-     */
-    val id: String
-) : SdkResource()
+    /** Required object value serialized in the `from` wire field. */
+    data class CreateConversationRequestFrom(
+        /** The role associated to the contact - user or lead. */
+        val type: CreateConversationRequestFromTypeEnum,
+        /** The identifier for the contact which is given by Intercom. */
+        val id: String,
+    ) : SdkResource()
 
-data class CreateConversationResponse(
-    /**
-     * The type of the message
-     */
-    val type: String,
-    /**
-     * The id representing the message.
-     */
-    val id: String,
-    /**
-     * The time the conversation was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
-    /**
-     * The message body, which may contain HTML.
-     */
-    val body: String,
-    /**
-     * The type of message that was sent. Can be email, inapp, facebook or twitter.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_type") val messageType: CreateConversationResponseMessageTypeEnum,
-    /**
-     * The associated conversation_id
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("conversation_id") val conversationId: String,
-    /**
-     * The subject of the message. Only present if message_type: email.
-     */
-    val subject: String? = null
-) : SdkResource()
+    data class CreateConversationResponse(
+        /** The type of the message */
+        val type: String,
+        /** The id representing the message. */
+        val id: String,
+        /** The time the conversation was created. */
+        @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: Long,
+        /** The message body, which may contain HTML. */
+        val body: String,
+        /** The type of message that was sent. Can be email, inapp, facebook or twitter. */
+        @com.fasterxml.jackson.annotation.JsonProperty("message_type")
+        val messageType: CreateConversationResponseMessageTypeEnum,
+        /** The associated conversation_id */
+        @com.fasterxml.jackson.annotation.JsonProperty("conversation_id")
+        val conversationId: String,
+        /** The subject of the message. Only present if message_type: email. */
+        val subject: String? = null,
+    ) : SdkResource()
 
     /**
-     * Lists conversations with cursor-based pagination. Use `per_page` to set the page size and `starting_after` to continue from a cursor; you can also request QA monitor evaluations or scorecards for each conversation.
+     * Lists conversations with cursor-based pagination. Use `per_page` to set the page size and
+     * `starting_after` to continue from a cursor; you can also request QA monitor evaluations or
+     * scorecards for each conversation.
      *
-     * You can fetch a list of all conversations. You can optionally request the result page size and the cursor to start after to fetch the result. {% admonition type="warning" name="Pagination" %} You can use pagination to limit the number of results returned. The default is `20` results per page. See the pagination section for more details on how to use the `starting_after` param. {% /admonition %}
+     * You can fetch a list of all conversations. You can optionally request the result page size
+     * and the cursor to start after to fetch the result. {% admonition type="warning"
+     * name="Pagination" %} You can use pagination to limit the number of results returned. The
+     * default is `20` results per page. See the pagination section for more details on how to use
+     * the `starting_after` param. {% /admonition %}
      *
      * @param perPage How many results per page
      * @param startingAfter String used to get the next page of conversations.
-     * @param includeMonitors If set to true, the response will include a
-     *   `monitor_evaluations` array on each conversation with any QA monitor results
-     *   that flagged it.
-     * @param includeScorecards If set to true, the response will include a
-     *   `scorecards` array on each conversation with any QA scorecard results.
+     * @param includeMonitors If set to true, the response will include a `monitor_evaluations`
+     *   array on each conversation with any QA monitor results that flagged it.
+     * @param includeScorecards If set to true, the response will include a `scorecards` array on
+     *   each conversation with any QA scorecard results.
      */
-    fun listConversations(clientConfig: ClientConfig, perPage: Long? = null, startingAfter: String? = null, includeMonitors: Boolean? = null, includeScorecards: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationList {
-        return listConversationsWithRawResponse(clientConfig, perPage, startingAfter, includeMonitors, includeScorecards, intercomVersion, options).data
+    fun listConversations(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        includeMonitors: Boolean? = null,
+        includeScorecards: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationList {
+        return listConversationsWithRawResponse(
+                clientConfig,
+                perPage,
+                startingAfter,
+                includeMonitors,
+                includeScorecards,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [listConversations], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listConversationsWithRawResponse(clientConfig: ClientConfig, perPage: Long? = null, startingAfter: String? = null, includeMonitors: Boolean? = null, includeScorecards: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationList> {
-        if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 150.0))
-}
-
-        return SdkClient.request<ConversationList>(SdkClient.RequestSpec("GET", "/conversations", config = clientConfig, query = mapOf("per_page" to SdkClient.queryValue(perPage, "form", true), "starting_after" to
-    SdkClient.queryValue(startingAfter, "form", true), "include_monitors" to
-    SdkClient.queryValue(includeMonitors, "form", true), "include_scorecards" to
-    SdkClient.queryValue(includeScorecards, "form", true)), operationId = "listConversations", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Creates a conversation initiated by a contact and returns the message created for it. Provide `from` and `body`; the message can be an in-app message, and using a visitor identifier in `from` converts that visitor to a lead contact.
+     * [listConversations], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun listConversationsWithRawResponse(
+        clientConfig: ClientConfig,
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        includeMonitors: Boolean? = null,
+        includeScorecards: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationList> {
+        if (perPage != null) {
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 150.0))
+        }
+
+        return SdkClient.request<ConversationList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "starting_after" to SdkClient.queryValue(startingAfter, "form", true),
+                        "include_monitors" to SdkClient.queryValue(includeMonitors, "form", true),
+                        "include_scorecards" to
+                            SdkClient.queryValue(includeScorecards, "form", true),
+                    ),
+                operationId = "listConversations",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Creates a conversation initiated by a contact and returns the message created for it. Provide
+     * `from` and `body`; the message can be an in-app message, and using a visitor identifier in
+     * `from` converts that visitor to a lead contact.
      *
-     * You can create a conversation that has been initiated by a contact (ie. user or lead). The conversation can be an in-app message only. {% admonition type="info" name="Sending for visitors" %} You can also send a message from a visitor by specifying their `user_id` or `id` value in the `from` field, along with a `type` field value of `contact`. This visitor will be automatically converted to a contact with a lead role once the conversation is created. {% /admonition %} This…
+     * You can create a conversation that has been initiated by a contact (ie. user or lead). The
+     * conversation can be an in-app message only. {% admonition type="info" name="Sending for
+     * visitors" %} You can also send a message from a visitor by specifying their `user_id` or `id`
+     * value in the `from` field, along with a `type` field value of `contact`. This visitor will be
+     * automatically converted to a contact with a lead role once the conversation is created. {%
+     * /admonition %} This…
      *
      * @param from Required object value serialized in the `from` wire field.
      * @param body The content of the message. HTML is not supported.
-     * @param subject The title of the email. Only applicable if the message type is
-     *   email.
-     * @param attachmentUrls A list of image URLs that will be added as attachments.
-     *   You can include up to 10 URLs.
-     * @param createdAt The time the conversation was created as a UTC Unix
-     *   timestamp. If not provided, the current time will be used. This field is only
-     *   recommneded for migrating past conversations from another source into
-     *   Intercom.
-     * @param brandId The unique identifier of the brand to associate with this
-     *   conversation.
+     * @param subject The title of the email. Only applicable if the message type is email.
+     * @param attachmentUrls A list of image URLs that will be added as attachments. You can include
+     *   up to 10 URLs.
+     * @param createdAt The time the conversation was created as a UTC Unix timestamp. If not
+     *   provided, the current time will be used. This field is only recommneded for migrating past
+     *   conversations from another source into Intercom.
+     * @param brandId The unique identifier of the brand to associate with this conversation.
      */
-    fun createConversation(clientConfig: ClientConfig, request: CreateConversationParams, options: RequestOptions? = null): CreateConversationResponse {
+    fun createConversation(
+        clientConfig: ClientConfig,
+        request: CreateConversationParams,
+        options: RequestOptions? = null,
+    ): CreateConversationResponse {
         return createConversationWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [createConversation]. */
     data class CreateConversationParams(
@@ -143,49 +178,91 @@ data class CreateConversationResponse(
         val subject: String? = null,
         val attachmentUrls: List<String>? = null,
         val createdAt: Long? = null,
-        val brandId: String? = null
+        val brandId: String? = null,
     )
 
-    /** [createConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createConversationWithRawResponse(clientConfig: ClientConfig, request: CreateConversationParams, options: RequestOptions? = null): SdkResponse<CreateConversationResponse> {
+    /**
+     * [createConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun createConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateConversationParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateConversationResponse> {
         validateCreateConversationRequest(request)
 
-        return SdkClient.request<CreateConversationResponse>(SdkClient.RequestSpec("POST", "/conversations", config = clientConfig, body = SdkClient.bodyMap("from" to (request.from), "body" to (request.body), "subject" to (SdkClient.omitIfNull(request.subject)), "attachment_urls" to
-    (SdkClient.omitIfNull(request.attachmentUrls)), "created_at" to (SdkClient.omitIfNull(request.createdAt)), "brand_id" to (SdkClient.omitIfNull(request.brandId))), operationId = "createConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
+        return SdkClient.request<CreateConversationResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "from" to (request.from),
+                        "body" to (request.body),
+                        "subject" to (SdkClient.omitIfNull(request.subject)),
+                        "attachment_urls" to (SdkClient.omitIfNull(request.attachmentUrls)),
+                        "created_at" to (SdkClient.omitIfNull(request.createdAt)),
+                        "brand_id" to (SdkClient.omitIfNull(request.brandId)),
+                    ),
+                operationId = "createConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
 
     private fun validateCreateConversationRequest(request: CreateConversationParams) {
         if (request.attachmentUrls != null) {
-            Validation.validateItems("attachment_urls", request.attachmentUrls, Validation.LengthOpts(max = 10))
-}
+            Validation.validateItems(
+                "attachment_urls",
+                request.attachmentUrls,
+                Validation.LengthOpts(max = 10),
+            )
+        }
     }
-
-
-
-
 
     /**
-     * Retrieves a conversation and its conversation parts. The response includes at most the 500 most recent parts; use the optional query parameters to request plaintext, translations, QA monitor evaluations, or scorecards.
+     * Retrieves a conversation and its conversation parts. The response includes at most the 500
+     * most recent parts; use the optional query parameters to request plaintext, translations, QA
+     * monitor evaluations, or scorecards.
      *
-     * You can fetch the details of a single conversation. This will return a single Conversation model with all its conversation parts. {% admonition type="warning" name="Hard limit of 500 parts" %} The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. {% /admonition %} For AI agent conversation metadata, please note that you need to have the agent enabled in your…
+     * You can fetch the details of a single conversation. This will return a single Conversation
+     * model with all its conversation parts. {% admonition type="warning" name="Hard limit of 500
+     * parts" %} The maximum number of conversation parts that can be returned via the API is 500.
+     * If you have more than that we will return the 500 most recent conversation parts. {%
+     * /admonition %} For AI agent conversation metadata, please note that you need to have the
+     * agent enabled in your…
      *
      * @param conversationId The id of the conversation to target
-     * @param displayAs Set to plaintext to retrieve conversation messages in plain
-     *   text. This affects both the body and subject fields. Inline links are rendered
-     *   as `label (url)`, preserving the link URL alongside the visible text.
-     * @param includeTranslations If set to true, conversation parts will be
-     *   translated to the detected language of the conversation.
-     * @param includeMonitors If set to true, the response will include a
-     *   `monitor_evaluations` array with any QA monitor results that flagged this
-     *   conversation.
-     * @param includeScorecards If set to true, the response will include a
-     *   `scorecards` array with any QA scorecard results for this conversation.
+     * @param displayAs Set to plaintext to retrieve conversation messages in plain text. This
+     *   affects both the body and subject fields. Inline links are rendered as `label (url)`,
+     *   preserving the link URL alongside the visible text.
+     * @param includeTranslations If set to true, conversation parts will be translated to the
+     *   detected language of the conversation.
+     * @param includeMonitors If set to true, the response will include a `monitor_evaluations`
+     *   array with any QA monitor results that flagged this conversation.
+     * @param includeScorecards If set to true, the response will include a `scorecards` array with
+     *   any QA scorecard results for this conversation.
      */
-    fun retrieveConversation(clientConfig: ClientConfig, request: RetrieveConversationRequest, options: RequestOptions? = null): Conversation {
+    fun retrieveConversation(
+        clientConfig: ClientConfig,
+        request: RetrieveConversationRequest,
+        options: RequestOptions? = null,
+    ): Conversation {
         return retrieveConversationWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [retrieveConversation]. */
     data class RetrieveConversationRequest(
@@ -194,46 +271,83 @@ data class CreateConversationResponse(
         val includeTranslations: Boolean? = null,
         val includeMonitors: Boolean? = null,
         val includeScorecards: Boolean? = null,
-        val intercomVersion: IntercomVersion? = null
+        val intercomVersion: IntercomVersion? = null,
     )
 
-    /** [retrieveConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun retrieveConversationWithRawResponse(clientConfig: ClientConfig, request: RetrieveConversationRequest, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(request.conversationId)}", config = clientConfig, query = mapOf("display_as" to
-    SdkClient.queryValue(request.displayAs, "form", true), "include_translations" to
-    SdkClient.queryValue(request.includeTranslations, "form", true), "include_monitors" to
-    SdkClient.queryValue(request.includeMonitors, "form", true), "include_scorecards" to
-    SdkClient.queryValue(request.includeScorecards, "form", true)), operationId = "retrieveConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [retrieveConversation], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun retrieveConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        request: RetrieveConversationRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/${SdkClient.encodePathSegment(request.conversationId)}",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "display_as" to SdkClient.queryValue(request.displayAs, "form", true),
+                        "include_translations" to
+                            SdkClient.queryValue(request.includeTranslations, "form", true),
+                        "include_monitors" to
+                            SdkClient.queryValue(request.includeMonitors, "form", true),
+                        "include_scorecards" to
+                            SdkClient.queryValue(request.includeScorecards, "form", true),
+                    ),
+                operationId = "retrieveConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
 
     /**
-     * Updates an existing conversation, including its title, read state, company association, and writable custom attributes. Supply only the fields you want to change; set `company_id` to null to remove the company association. Use the reply or manage conversation endpoints to send messages or change assignment and conversation state.
+     * Updates an existing conversation, including its title, read state, company association, and
+     * writable custom attributes. Supply only the fields you want to change; set `company_id` to
+     * null to remove the company association. Use the reply or manage conversation endpoints to
+     * send messages or change assignment and conversation state.
      *
-     * You can update an existing conversation. {% admonition type="info" name="Replying and other actions" %} If you want to reply to a coveration or take an action such as assign, unassign, open, close or snooze, take a look at the reply and manage endpoints. {% /admonition %} {% admonition type="info" %} This endpoint handles both **conversation updates** and **custom object associations**. See _`update a conversation with an association to a custom object instance`_ in the…
+     * You can update an existing conversation. {% admonition type="info" name="Replying and other
+     * actions" %} If you want to reply to a coveration or take an action such as assign, unassign,
+     * open, close or snooze, take a look at the reply and manage endpoints. {% /admonition %} {%
+     * admonition type="info" %} This endpoint handles both **conversation updates** and **custom
+     * object associations**. See _`update a conversation with an association to a custom object
+     * instance`_ in the…
      *
      * @param conversationId The id of the conversation to target
-     * @param displayAs Set to plaintext to retrieve conversation messages in plain
-     *   text. This affects both the body and subject fields. Inline links are rendered
-     *   as `label (url)`, preserving the link URL alongside the visible text.
+     * @param displayAs Set to plaintext to retrieve conversation messages in plain text. This
+     *   affects both the body and subject fields. Inline links are rendered as `label (url)`,
+     *   preserving the link URL alongside the visible text.
      * @param read Mark a conversation as read within Intercom.
      * @param title The title given to the conversation
-     * @param customAttributes The custom attributes which are set on this object, as
-     *   key-value pairs. For relationship attributes the value should be a list of
-     *   custom object instance models. Only attributes a caller may set are accepted
-     *   here — attributes Intercom generates are returned in responses only.
-     * @param companyId The ID of the company that the conversation is associated
-     *   with. The unique identifier for the company which is given by Intercom. Set to
-     *   nil to remove company.
+     * @param customAttributes The custom attributes which are set on this object, as key-value
+     *   pairs. For relationship attributes the value should be a list of custom object instance
+     *   models. Only attributes a caller may set are accepted here — attributes Intercom generates
+     *   are returned in responses only.
+     * @param companyId The ID of the company that the conversation is associated with. The unique
+     *   identifier for the company which is given by Intercom. Set to nil to remove company.
      */
-    fun updateConversation(clientConfig: ClientConfig, request: UpdateConversationParams, options: RequestOptions? = null): Conversation {
+    fun updateConversation(
+        clientConfig: ClientConfig,
+        request: UpdateConversationParams,
+        options: RequestOptions? = null,
+    ): Conversation {
         return updateConversationWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [updateConversation]. */
     data class UpdateConversationParams(
@@ -243,354 +357,894 @@ data class CreateConversationResponse(
         val read: Boolean? = null,
         val title: String? = null,
         val customAttributes: CustomAttributesRequest? = null,
-        val companyId: String? = null
+        val companyId: String? = null,
     )
 
-    /** [updateConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateConversationWithRawResponse(clientConfig: ClientConfig, request: UpdateConversationParams, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("PUT", "/conversations/${SdkClient.encodePathSegment(request.conversationId)}", config = clientConfig, query = mapOf("display_as" to
-    SdkClient.queryValue(request.displayAs, "form", true)), body = SdkClient.bodyMap("read" to (SdkClient.omitIfNull(request.read)), "title" to (SdkClient.omitIfNull(request.title)), "custom_attributes" to
-    (SdkClient.omitIfNull(request.customAttributes)), "company_id" to (SdkClient.omitIfNull(request.companyId))), operationId = "updateConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [updateConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun updateConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateConversationParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/conversations/${SdkClient.encodePathSegment(request.conversationId)}",
+                config = clientConfig,
+                query =
+                    mapOf("display_as" to SdkClient.queryValue(request.displayAs, "form", true)),
+                body =
+                    SdkClient.bodyMap(
+                        "read" to (SdkClient.omitIfNull(request.read)),
+                        "title" to (SdkClient.omitIfNull(request.title)),
+                        "custom_attributes" to (SdkClient.omitIfNull(request.customAttributes)),
+                        "company_id" to (SdkClient.omitIfNull(request.companyId)),
+                    ),
+                operationId = "updateConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a conversation permanently, with reporting-data retention controlled by `retain_metrics`. When `retain_metrics` is `false`, the authenticated user must have the `delete_conversations_and_metrics` OAuth scope; this also deletes the conversation's associated reporting data.
+     * Deletes a conversation permanently, with reporting-data retention controlled by
+     * `retain_metrics`. When `retain_metrics` is `false`, the authenticated user must have the
+     * `delete_conversations_and_metrics` OAuth scope; this also deletes the conversation's
+     * associated reporting data.
      *
-     * {% admonition type="warning" name="Irreversible operation" %} Deleting a conversation is permanent and cannot be reversed. {% /admonition %} You can delete a single conversation. The behavior depends on the `retain_metrics` parameter: - **With `retain_metrics=true` (default)**: Deletes the conversation while retaining reporting data. The conversation will still appear in reporting, though some data may be incomplete due to the deletion. - **With `retain_metrics=false`**:…
+     * {% admonition type="warning" name="Irreversible operation" %} Deleting a conversation is
+     * permanent and cannot be reversed. {% /admonition %} You can delete a single conversation. The
+     * behavior depends on the `retain_metrics` parameter: - **With `retain_metrics=true`
+     * (default)**: Deletes the conversation while retaining reporting data. The conversation will
+     * still appear in reporting, though some data may be incomplete due to the deletion. - **With
+     * `retain_metrics=false`**:…
      *
      * @param conversationId id
-     * @param retainMetrics If true (default), deletes the conversation while
-     *   retaining reporting data. If false, deletes the conversation and all
-     *   associated reporting data. Setting to false requires the
-     *   `delete_conversations_and_metrics` OAuth scope.
+     * @param retainMetrics If true (default), deletes the conversation while retaining reporting
+     *   data. If false, deletes the conversation and all associated reporting data. Setting to
+     *   false requires the `delete_conversations_and_metrics` OAuth scope.
      */
-    fun deleteConversation(clientConfig: ClientConfig, conversationId: Long, retainMetrics: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationDeleted {
-        return deleteConversationWithRawResponse(clientConfig, conversationId, retainMetrics, intercomVersion, options).data
+    fun deleteConversation(
+        clientConfig: ClientConfig,
+        conversationId: Long,
+        retainMetrics: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationDeleted {
+        return deleteConversationWithRawResponse(
+                clientConfig,
+                conversationId,
+                retainMetrics,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [deleteConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteConversationWithRawResponse(clientConfig: ClientConfig, conversationId: Long, retainMetrics: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationDeleted> {
-        return SdkClient.request<ConversationDeleted>(SdkClient.RequestSpec("DELETE", "/conversations/${SdkClient.encodePathSegment(conversationId)}", config = clientConfig, query = mapOf("retain_metrics" to
-    SdkClient.queryValue(retainMetrics, "form", true)), operationId = "deleteConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Searches conversations using filters on searchable conversation attributes. Provide a `query` with a filter or a group of filters, and use `pagination` to control the result page. You can combine filters with AND and OR operators, nest up to two filter levels, and include up to 15 filters in each group.
+     * [deleteConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun deleteConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: Long,
+        retainMetrics: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationDeleted> {
+        return SdkClient.request<ConversationDeleted>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}",
+                config = clientConfig,
+                query =
+                    mapOf("retain_metrics" to SdkClient.queryValue(retainMetrics, "form", true)),
+                operationId = "deleteConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Searches conversations using filters on searchable conversation attributes. Provide a `query`
+     * with a filter or a group of filters, and use `pagination` to control the result page. You can
+     * combine filters with AND and OR operators, nest up to two filter levels, and include up to 15
+     * filters in each group.
      *
-     * You can search for multiple conversations by the value of their attributes in order to fetch exactly which ones you want. To search for conversations, you need to send a `POST` request to `api.intercom.io This will accept a query object in the body which will define your filters in order to search for conversations. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your search. Use…
+     * You can search for multiple conversations by the value of their attributes in order to fetch
+     * exactly which ones you want. To search for conversations, you need to send a `POST` request
+     * to `api.intercom.io This will accept a query object in the body which will define your
+     * filters in order to search for conversations. {% admonition type="warning" name="Optimizing
+     * search queries" %} Search queries can be complex, so optimizing them can help the performance
+     * of your search. Use…
      *
      * @param query Required API value serialized in the `query` wire field.
-     * @param includeMonitors If set to true, the response will include a
-     *   `monitor_evaluations` array on each conversation with any QA monitor results
-     *   that flagged it.
-     * @param includeScorecards If set to true, the response will include a
-     *   `scorecards` array on each conversation with any QA scorecard results.
-     * @param pagination Optional object value serialized in the `pagination` wire
-     *   field.
+     * @param includeMonitors If set to true, the response will include a `monitor_evaluations`
+     *   array on each conversation with any QA monitor results that flagged it.
+     * @param includeScorecards If set to true, the response will include a `scorecards` array on
+     *   each conversation with any QA scorecard results.
+     * @param pagination Optional object value serialized in the `pagination` wire field.
      */
-    fun searchConversations(clientConfig: ClientConfig, query: SearchRequestQuery, includeMonitors: Boolean? = null, includeScorecards: Boolean? = null, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, options: RequestOptions? = null): ConversationList {
-        return searchConversationsWithRawResponse(clientConfig, query, includeMonitors, includeScorecards, intercomVersion, pagination, options).data
+    fun searchConversations(
+        clientConfig: ClientConfig,
+        query: SearchRequestQuery,
+        includeMonitors: Boolean? = null,
+        includeScorecards: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        options: RequestOptions? = null,
+    ): ConversationList {
+        return searchConversationsWithRawResponse(
+                clientConfig,
+                query,
+                includeMonitors,
+                includeScorecards,
+                intercomVersion,
+                pagination,
+                options,
+            )
+            .data
     }
-
-
-    /** [searchConversations], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun searchConversationsWithRawResponse(clientConfig: ClientConfig, query: SearchRequestQuery, includeMonitors: Boolean? = null, includeScorecards: Boolean? = null, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, options: RequestOptions? = null): SdkResponse<ConversationList> {
-        return SdkClient.request<ConversationList>(SdkClient.RequestSpec("POST", "/conversations/search", config = clientConfig, query = mapOf("include_monitors" to
-    SdkClient.queryValue(includeMonitors, "form", true), "include_scorecards" to
-    SdkClient.queryValue(includeScorecards, "form", true)), body = SdkClient.bodyMap("query" to (query), "pagination" to
-    (pagination ?: SdkClient.SdkOptional.Omitted)), operationId = "searchConversations", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options))
-    }
-
-
-
-
-
 
     /**
-     * Submits a reply to a conversation as an admin or on behalf of a contact, or adds an admin note. Choose a contact identifier or provide the admin reply fields, including `message_type` and `admin_id` for an admin reply. Bot replies to inbound email conversations are not sent to customers by default; contact your accounts team to enable the email-reply feature.
-     *
-     * You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins. {% admonition type="warning" name="Bot replies to inbound email" %} By default, bot or Operator replies to an inbound email conversation aren't sent to your customer. The reply is stored as an unnotifiable bot comment, and no `seen` receipt is generated until an email is actually delivered. To send these replies as outbound emails, reach out to your accounts…
-     *
-     * @param conversationId The Intercom provisioned identifier for the conversation
-     *   or the string "last" to reply to the last part of the conversation
+     * [searchConversations], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun replyConversation(clientConfig: ClientConfig, conversationId: String, intercomVersion: IntercomVersion? = null, body: ReplyConversationRequest? = null, options: RequestOptions? = null): Conversation {
-        return replyConversationWithRawResponse(clientConfig, conversationId, intercomVersion, body, options).data
+    fun searchConversationsWithRawResponse(
+        clientConfig: ClientConfig,
+        query: SearchRequestQuery,
+        includeMonitors: Boolean? = null,
+        includeScorecards: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationList> {
+        return SdkClient.request<ConversationList>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/search",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "include_monitors" to SdkClient.queryValue(includeMonitors, "form", true),
+                        "include_scorecards" to
+                            SdkClient.queryValue(includeScorecards, "form", true),
+                    ),
+                body =
+                    SdkClient.bodyMap(
+                        "query" to (query),
+                        "pagination" to (pagination ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "searchConversations",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+            )
+        )
     }
-
-
-    /** [replyConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun replyConversationWithRawResponse(clientConfig: ClientConfig, conversationId: String, intercomVersion: IntercomVersion? = null, body: ReplyConversationRequest? = null, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}/reply", config = clientConfig, body = body, operationId = "replyConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Triggers an action to close, snooze, open, or assign a conversation. Provide the action-specific fields, including `admin_id` and the appropriate `message_type`; snoozing also requires `snoozed_until`. Use the reply endpoint to send a comment, note, or quick reply.
+     * Submits a reply to a conversation as an admin or on behalf of a contact, or adds an admin
+     * note. Choose a contact identifier or provide the admin reply fields, including `message_type`
+     * and `admin_id` for an admin reply. Bot replies to inbound email conversations are not sent to
+     * customers by default; contact your accounts team to enable the email-reply feature.
      *
-     * For managing conversations you can: - Close a conversation - Snooze a conversation to reopen on a future date - Open a conversation which is `snoozed` or `closed` - Assign a conversation to an admin and/or team. {% admonition type="info" name="Sending messages" %} To send a comment, note or quick reply, use Reply to a conversation. {% /admonition %}
+     * You can reply to a conversation with a message from an admin or on behalf of a contact, or
+     * with a note for admins. {% admonition type="warning" name="Bot replies to inbound email" %}
+     * By default, bot or Operator replies to an inbound email conversation aren't sent to your
+     * customer. The reply is stored as an unnotifiable bot comment, and no `seen` receipt is
+     * generated until an email is actually delivered. To send these replies as outbound emails,
+     * reach out to your accounts…
      *
-     * @param conversationId The identifier for the conversation as given by
-     *   Intercom.
+     * @param conversationId The Intercom provisioned identifier for the conversation or the string
+     *   "last" to reply to the last part of the conversation
      */
-    fun manageConversation(clientConfig: ClientConfig, conversationId: String, intercomVersion: IntercomVersion? = null, body: Any? = null, options: RequestOptions? = null): Conversation {
-        return manageConversationWithRawResponse(clientConfig, conversationId, intercomVersion, body, options).data
+    fun replyConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        body: ReplyConversationRequest? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return replyConversationWithRawResponse(
+                clientConfig,
+                conversationId,
+                intercomVersion,
+                body,
+                options,
+            )
+            .data
     }
-
-
-    /** [manageConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun manageConversationWithRawResponse(clientConfig: ClientConfig, conversationId: String, intercomVersion: IntercomVersion? = null, body: Any? = null, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}/parts", config = clientConfig, body = body, operationId = "manageConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Adds a contact as a participant in a conversation on behalf of an admin or another contact. Provide a contact identifier in `customer` to select the participant; if you identify the contact by email and no matching user or lead exists, the API creates a lead. The response lists the conversation participants after the change.
+     * [replyConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun replyConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        body: ReplyConversationRequest? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/reply",
+                config = clientConfig,
+                body = body,
+                operationId = "replyConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Triggers an action to close, snooze, open, or assign a conversation. Provide the
+     * action-specific fields, including `admin_id` and the appropriate `message_type`; snoozing
+     * also requires `snoozed_until`. Use the reply endpoint to send a comment, note, or quick
+     * reply.
      *
-     * You can add participants who are contacts to a conversation, on behalf of either another contact or an admin. {% admonition type="warning" name="Contacts without an email" %} If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`. {% /admonition %}
+     * For managing conversations you can: - Close a conversation - Snooze a conversation to reopen
+     * on a future date - Open a conversation which is `snoozed` or `closed` - Assign a conversation
+     * to an admin and/or team. {% admonition type="info" name="Sending messages" %} To send a
+     * comment, note or quick reply, use Reply to a conversation. {% /admonition %}
      *
-     * @param conversationId The identifier for the conversation as given by
-     *   Intercom.
+     * @param conversationId The identifier for the conversation as given by Intercom.
+     */
+    fun manageConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return manageConversationWithRawResponse(
+                clientConfig,
+                conversationId,
+                intercomVersion,
+                body,
+                options,
+            )
+            .data
+    }
+
+    /**
+     * [manageConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun manageConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/parts",
+                config = clientConfig,
+                body = body,
+                operationId = "manageConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Adds a contact as a participant in a conversation on behalf of an admin or another contact.
+     * Provide a contact identifier in `customer` to select the participant; if you identify the
+     * contact by email and no matching user or lead exists, the API creates a lead. The response
+     * lists the conversation participants after the change.
+     *
+     * You can add participants who are contacts to a conversation, on behalf of either another
+     * contact or an admin. {% admonition type="warning" name="Contacts without an email" %} If you
+     * add a contact via the email parameter and there is no user/lead found on that workspace with
+     * he given email, then we will create a new contact with `role` set to `lead`. {% /admonition
+     * %}
+     *
+     * @param conversationId The identifier for the conversation as given by Intercom.
      * @param adminId The `id` of the admin who is adding the new participant.
      * @param customer Optional object value serialized in the `customer` wire field.
      */
-    fun attachConversationsContact(clientConfig: ClientConfig, conversationId: String, intercomVersion: IntercomVersion? = null, adminId: String? = null, customer: AttachContactToConversationRequestCustomer? = null, options: RequestOptions? = null): ConversationParticipantsResponse {
-        return attachConversationsContactWithRawResponse(clientConfig, conversationId, intercomVersion, adminId, customer, options).data
+    fun attachConversationsContact(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: String? = null,
+        customer: AttachContactToConversationRequestCustomer? = null,
+        options: RequestOptions? = null,
+    ): ConversationParticipantsResponse {
+        return attachConversationsContactWithRawResponse(
+                clientConfig,
+                conversationId,
+                intercomVersion,
+                adminId,
+                customer,
+                options,
+            )
+            .data
     }
-
-
-    /** [attachConversationsContact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun attachConversationsContactWithRawResponse(clientConfig: ClientConfig, conversationId: String, intercomVersion: IntercomVersion? = null, adminId: String? = null, customer: AttachContactToConversationRequestCustomer? = null, options: RequestOptions? = null): SdkResponse<ConversationParticipantsResponse> {
-        return SdkClient.request<ConversationParticipantsResponse>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}/customers", config = clientConfig, body = SdkClient.bodyMap("admin_id" to (SdkClient.omitIfNull(adminId)), "customer" to (SdkClient.omitIfNull(customer))), operationId = "attachConversationsContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Removes a contact from a group conversation on behalf of an admin. Provide the conversation and contact identifiers, along with the `admin_id` in the request body. You cannot remove the last remaining contact from a conversation.
+     * [attachConversationsContact], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun attachConversationsContactWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        adminId: String? = null,
+        customer: AttachContactToConversationRequestCustomer? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationParticipantsResponse> {
+        return SdkClient.request<ConversationParticipantsResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/customers",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "admin_id" to (SdkClient.omitIfNull(adminId)),
+                        "customer" to (SdkClient.omitIfNull(customer)),
+                    ),
+                operationId = "attachConversationsContact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Removes a contact from a group conversation on behalf of an admin. Provide the conversation
+     * and contact identifiers, along with the `admin_id` in the request body. You cannot remove the
+     * last remaining contact from a conversation.
      *
-     * You can remove participants who are contacts from a group conversation, on behalf of an admin. {% admonition type="warning" name="Removing the last participant" %} You cannot remove the last remaining contact from a conversation. {% /admonition %}
+     * You can remove participants who are contacts from a group conversation, on behalf of an
+     * admin. {% admonition type="warning" name="Removing the last participant" %} You cannot remove
+     * the last remaining contact from a conversation. {% /admonition %}
      *
-     * @param conversationId The identifier for the conversation as given by
-     *   Intercom.
+     * @param conversationId The identifier for the conversation as given by Intercom.
      * @param contactId The identifier for the contact as given by Intercom.
      * @param adminId The `id` of the admin who is performing the action.
      */
-    fun detachConversationsContact(clientConfig: ClientConfig, conversationId: String, contactId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationParticipantsResponse {
-        return detachConversationsContactWithRawResponse(clientConfig, conversationId, contactId, adminId, intercomVersion, options).data
+    fun detachConversationsContact(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        contactId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationParticipantsResponse {
+        return detachConversationsContactWithRawResponse(
+                clientConfig,
+                conversationId,
+                contactId,
+                adminId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [detachConversationsContact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun detachConversationsContactWithRawResponse(clientConfig: ClientConfig, conversationId: String, contactId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationParticipantsResponse> {
-        return SdkClient.request<ConversationParticipantsResponse>(SdkClient.RequestSpec("DELETE", "/conversations/${SdkClient.encodePathSegment(conversationId)}/customers/${SdkClient.encodePathSegment(contactId)}", config = clientConfig, body = SdkClient.bodyMap("admin_id" to (adminId)), operationId = "detachConversationsContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Lists pause and resume events recorded for a conversation, showing when teammates paused or resumed handling it. Use this operation when you need the handling history for a conversation. Your access token must include the `read_conversations` OAuth scope.
+     * [detachConversationsContact], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun detachConversationsContactWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        contactId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationParticipantsResponse> {
+        return SdkClient.request<ConversationParticipantsResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/customers/${SdkClient.encodePathSegment(contactId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("admin_id" to (adminId)),
+                operationId = "detachConversationsContact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Lists pause and resume events recorded for a conversation, showing when teammates paused or
+     * resumed handling it. Use this operation when you need the handling history for a
+     * conversation. Your access token must include the `read_conversations` OAuth scope.
      *
-     * List all pause/resume events for a conversation. These events track when teammates paused or resumed handling a conversation. Requires the `read_conversations` OAuth scope.
+     * List all pause/resume events for a conversation. These events track when teammates paused or
+     * resumed handling a conversation. Requires the `read_conversations` OAuth scope.
      *
      * @param id The identifier for the conversation as given by Intercom.
      */
-    fun listHandlingEvents(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HandlingEventList {
+    fun listHandlingEvents(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): HandlingEventList {
         return listHandlingEventsWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [listHandlingEvents], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listHandlingEventsWithRawResponse(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<HandlingEventList> {
-        return SdkClient.request<HandlingEventList>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(id)}/handling_events", config = clientConfig, operationId = "listHandlingEvents", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [listHandlingEvents], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun listHandlingEventsWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<HandlingEventList> {
+        return SdkClient.request<HandlingEventList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/${SdkClient.encodePathSegment(id)}/handling_events",
+                config = clientConfig,
+                operationId = "listHandlingEvents",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists human-in-the-loop events from Fin consultations on a conversation, ordered from oldest to newest. Use the event type to interpret the fields in each event's `data`; consultations appear only after they have ended, and redacting a conversation removes or nulls this event data. Your access token must include the `read_conversations` OAuth scope, and you must be able to access the conversation.
+     * Lists human-in-the-loop events from Fin consultations on a conversation, ordered from oldest
+     * to newest. Use the event type to interpret the fields in each event's `data`; consultations
+     * appear only after they have ended, and redacting a conversation removes or nulls this event
+     * data. Your access token must include the `read_conversations` OAuth scope, and you must be
+     * able to access the conversation.
      *
-     * List the human-in-the-loop (HITL) events for a conversation. When Fin is unsure of an answer it can consult a teammate before replying, proposing a draft that the teammate approves, steers with free-text feedback, or takes over. Each consultation is returned as a series of events, oldest first, across every consultation on the conversation. Requires the `read_conversations` OAuth scope, and the caller must be able to access the conversation. Events are only recorded once a…
+     * List the human-in-the-loop (HITL) events for a conversation. When Fin is unsure of an answer
+     * it can consult a teammate before replying, proposing a draft that the teammate approves,
+     * steers with free-text feedback, or takes over. Each consultation is returned as a series of
+     * events, oldest first, across every consultation on the conversation. Requires the
+     * `read_conversations` OAuth scope, and the caller must be able to access the conversation.
+     * Events are only recorded once a…
      *
      * @param id The identifier for the conversation as given by Intercom.
      */
-    fun listHitlEvents(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): HitlEventList {
+    fun listHitlEvents(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): HitlEventList {
         return listHitlEventsWithRawResponse(clientConfig, id, intercomVersion, options).data
     }
 
-
-    /** [listHitlEvents], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listHitlEventsWithRawResponse(clientConfig: ClientConfig, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<HitlEventList> {
-        return SdkClient.request<HitlEventList>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(id)}/hitl_events", config = clientConfig, operationId = "listHitlEvents", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [listHitlEvents], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listHitlEventsWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<HitlEventList> {
+        return SdkClient.request<HitlEventList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/${SdkClient.encodePathSegment(id)}/hitl_events",
+                config = clientConfig,
+                operationId = "listHitlEvents",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists the internal side conversations created by teammates within a conversation, including their conversation parts. Use `page` and `per_page` to paginate the results. Your access token must include the `read_conversations` OAuth scope.
+     * Lists the internal side conversations created by teammates within a conversation, including
+     * their conversation parts. Use `page` and `per_page` to paginate the results. Your access
+     * token must include the `read_conversations` OAuth scope.
      *
-     * List side conversations for a given conversation. Side conversations are internal threads created by teammates from within a conversation. Each side conversation includes its conversation parts (messages). Results are paginated. Requires the `read_conversations` OAuth scope.
+     * List side conversations for a given conversation. Side conversations are internal threads
+     * created by teammates from within a conversation. Each side conversation includes its
+     * conversation parts (messages). Results are paginated. Requires the `read_conversations` OAuth
+     * scope.
      *
      * @param id The identifier for the conversation as given by Intercom.
      * @param page The page number of results to return (starting from 1).
      * @param perPage The number of side conversations to return per page (max 50).
      */
-    fun listSideConversations(clientConfig: ClientConfig, id: String, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SideConversationList {
-        return listSideConversationsWithRawResponse(clientConfig, id, page, perPage, intercomVersion, options).data
+    fun listSideConversations(
+        clientConfig: ClientConfig,
+        id: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SideConversationList {
+        return listSideConversationsWithRawResponse(
+                clientConfig,
+                id,
+                page,
+                perPage,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [listSideConversations], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listSideConversationsWithRawResponse(clientConfig: ClientConfig, id: String, page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<SideConversationList> {
-        if (perPage != null) {
-            Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 50.0))
-}
-
-        return SdkClient.request<SideConversationList>(SdkClient.RequestSpec("GET", "/conversations/${SdkClient.encodePathSegment(id)}/side_conversations", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true)), operationId = "listSideConversations", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Redacts a conversation part or the source message of a conversation. Choose the resource with `type` and provide the corresponding conversation and resource identifiers. A conversation part must have a body to be redactable, and a source message must have been created by a contact.
-     *
-     * You can redact a conversation part or the source message of a conversation (as seen in the source object). {% admonition type="info" name="Redacting parts and messages" %} If you are redacting a conversation part, it must have a `body`. If you are redacting a source message, it must have been created by a contact. We will return a `conversation_part_not_redactable` error if these criteria are not met. {% /admonition %}
+     * [listSideConversations], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
      */
-    fun redactConversation(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, body: RedactConversationRequest? = null, options: RequestOptions? = null): Conversation {
+    fun listSideConversationsWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<SideConversationList> {
+        if (perPage != null) {
+            Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 50.0))
+        }
+
+        return SdkClient.request<SideConversationList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/${SdkClient.encodePathSegment(id)}/side_conversations",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                    ),
+                operationId = "listSideConversations",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Redacts a conversation part or the source message of a conversation. Choose the resource with
+     * `type` and provide the corresponding conversation and resource identifiers. A conversation
+     * part must have a body to be redactable, and a source message must have been created by a
+     * contact.
+     *
+     * You can redact a conversation part or the source message of a conversation (as seen in the
+     * source object). {% admonition type="info" name="Redacting parts and messages" %} If you are
+     * redacting a conversation part, it must have a `body`. If you are redacting a source message,
+     * it must have been created by a contact. We will return a `conversation_part_not_redactable`
+     * error if these criteria are not met. {% /admonition %}
+     */
+    fun redactConversation(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        body: RedactConversationRequest? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
         return redactConversationWithRawResponse(clientConfig, intercomVersion, body, options).data
     }
 
-
-    /** [redactConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun redactConversationWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, body: RedactConversationRequest? = null, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("POST", "/conversations/redact", config = clientConfig, body = body, operationId = "redactConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
-
     /**
-     * Merges a secondary conversation into a primary conversation, closing and linking the secondary while the primary remains the surviving thread. Supply `merge_into_conversation_id` to identify the primary conversation; the authenticated user needs the `write_conversations` OAuth scope, and also needs `write_tickets` when the secondary conversation is a ticket.
-     *
-     * Merge a secondary (source) conversation into a primary (target) conversation. The secondary conversation is closed and linked to the primary, which becomes the surviving thread. Returns the primary conversation on success. Requires `write_conversations` OAuth scope. When the secondary is a ticket, `write_tickets` scope is also required.
-     *
-     * @param id The identifier for the secondary (source) conversation to merge
-     *   away.
-     * @param mergeIntoConversationId The ID of the primary (target) conversation to
-     *   merge into.
+     * [redactConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun mergeConversation(clientConfig: ClientConfig, id: String, mergeIntoConversationId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return mergeConversationWithRawResponse(clientConfig, id, mergeIntoConversationId, intercomVersion, options).data
+    fun redactConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        body: RedactConversationRequest? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/redact",
+                config = clientConfig,
+                body = body,
+                operationId = "redactConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-    /** [mergeConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun mergeConversationWithRawResponse(clientConfig: ClientConfig, id: String, mergeIntoConversationId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(id)}/merge", config = clientConfig, body = SdkClient.bodyMap("merge_into_conversation_id" to (mergeIntoConversationId)), operationId = "mergeConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "403" to Error2::class.java, "422" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Converts a conversation into a ticket. Supply `ticket_type_id` to select the ticket type, and optionally provide ticket attributes or a ticket state.
+     * Merges a secondary conversation into a primary conversation, closing and linking the
+     * secondary while the primary remains the surviving thread. Supply `merge_into_conversation_id`
+     * to identify the primary conversation; the authenticated user needs the `write_conversations`
+     * OAuth scope, and also needs `write_tickets` when the secondary conversation is a ticket.
+     *
+     * Merge a secondary (source) conversation into a primary (target) conversation. The secondary
+     * conversation is closed and linked to the primary, which becomes the surviving thread. Returns
+     * the primary conversation on success. Requires `write_conversations` OAuth scope. When the
+     * secondary is a ticket, `write_tickets` scope is also required.
+     *
+     * @param id The identifier for the secondary (source) conversation to merge away.
+     * @param mergeIntoConversationId The ID of the primary (target) conversation to merge into.
+     */
+    fun mergeConversation(
+        clientConfig: ClientConfig,
+        id: String,
+        mergeIntoConversationId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return mergeConversationWithRawResponse(
+                clientConfig,
+                id,
+                mergeIntoConversationId,
+                intercomVersion,
+                options,
+            )
+            .data
+    }
+
+    /**
+     * [mergeConversation], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun mergeConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        mergeIntoConversationId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/${SdkClient.encodePathSegment(id)}/merge",
+                config = clientConfig,
+                body = SdkClient.bodyMap("merge_into_conversation_id" to (mergeIntoConversationId)),
+                operationId = "mergeConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Converts a conversation into a ticket. Supply `ticket_type_id` to select the ticket type, and
+     * optionally provide ticket attributes or a ticket state.
      *
      * You can convert a conversation to a ticket.
      *
      * @param conversationId The id of the conversation to target
-     * @param ticketTypeId The ID of the type of ticket you want to convert the
-     *   conversation to
-     * @param ticketStateId The ID of the ticket state associated with the ticket
-     *   type.
-     * @param attributes The attributes set on the ticket. When setting the default
-     *   title and description attributes, the attribute keys that should be used are
-     *   `_default_title_` and `_default_description_`. When setting ticket type
-     *   attributes of the list attribute type, the key should be the attribute name
-     *   and the value of the attribute should be the list item id, obtainable by
-     *   \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket
-     *   type has an attribute called `priority` of…
+     * @param ticketTypeId The ID of the type of ticket you want to convert the conversation to
+     * @param ticketStateId The ID of the ticket state associated with the ticket type.
+     * @param attributes The attributes set on the ticket. When setting the default title and
+     *   description attributes, the attribute keys that should be used are `_default_title_` and
+     *   `_default_description_`. When setting ticket type attributes of the list attribute type,
+     *   the key should be the attribute name and the value of the attribute should be the list item
+     *   id, obtainable by \[listing the ticket type\](ref:get_ticket-types). For example, if the
+     *   ticket type has an attribute called `priority` of…
      */
-    fun convertConversationToTicket(clientConfig: ClientConfig, conversationId: Long, ticketTypeId: String, intercomVersion: IntercomVersion? = null, ticketStateId: String? = null, attributes: TicketRequestCustomAttributes? = null, options: RequestOptions? = null): Ticket {
-        return convertConversationToTicketWithRawResponse(clientConfig, conversationId, ticketTypeId, intercomVersion, ticketStateId, attributes, options).data
+    fun convertConversationToTicket(
+        clientConfig: ClientConfig,
+        conversationId: Long,
+        ticketTypeId: String,
+        intercomVersion: IntercomVersion? = null,
+        ticketStateId: String? = null,
+        attributes: TicketRequestCustomAttributes? = null,
+        options: RequestOptions? = null,
+    ): Ticket {
+        return convertConversationToTicketWithRawResponse(
+                clientConfig,
+                conversationId,
+                ticketTypeId,
+                intercomVersion,
+                ticketStateId,
+                attributes,
+                options,
+            )
+            .data
     }
-
-
-    /** [convertConversationToTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun convertConversationToTicketWithRawResponse(clientConfig: ClientConfig, conversationId: Long, ticketTypeId: String, intercomVersion: IntercomVersion? = null, ticketStateId: String? = null, attributes: TicketRequestCustomAttributes? = null, options: RequestOptions? = null): SdkResponse<Ticket> {
-        return SdkClient.request<Ticket>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}/convert", config = clientConfig, body = SdkClient.bodyMap("ticket_type_id" to (ticketTypeId), "ticket_state_id" to (SdkClient.omitIfNull(ticketStateId)), "attributes" to (SdkClient.omitIfNull(attributes))), operationId = "convertConversationToTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Lists deleted conversation IDs, with deletion timestamps and whether metrics were retained. Use `page` and `per_page` to paginate the results; `order` controls the sort direction and defaults to descending.
+     * [convertConversationToTicket], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun convertConversationToTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: Long,
+        ticketTypeId: String,
+        intercomVersion: IntercomVersion? = null,
+        ticketStateId: String? = null,
+        attributes: TicketRequestCustomAttributes? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Ticket> {
+        return SdkClient.request<Ticket>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/convert",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "ticket_type_id" to (ticketTypeId),
+                        "ticket_state_id" to (SdkClient.omitIfNull(ticketStateId)),
+                        "attributes" to (SdkClient.omitIfNull(attributes)),
+                    ),
+                operationId = "convertConversationToTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("400" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Lists deleted conversation IDs, with deletion timestamps and whether metrics were retained.
+     * Use `page` and `per_page` to paginate the results; `order` controls the sort direction and
+     * defaults to descending.
      *
-     * List all deleted conversation IDs. {% admonition type="warning" name="Pagination" %} You can use pagination to limit the number of results returned. The default is `20` results per page. You can navigate to next pages using the `page` param. {% /admonition %}
+     * List all deleted conversation IDs. {% admonition type="warning" name="Pagination" %} You can
+     * use pagination to limit the number of results returned. The default is `20` results per page.
+     * You can navigate to next pages using the `page` param. {% /admonition %}
      *
      * @param page The page of results to fetch. Defaults to first page
      * @param perPage How many results per page
-     * @param order `asc` or `desc`. Returns the conversation IDs in ascending or
-     *   descending order. Defaults to desc
+     * @param order `asc` or `desc`. Returns the conversation IDs in ascending or descending order.
+     *   Defaults to desc
      */
-    fun listDeletedConversationIds(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, order: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedConversationList {
-        return listDeletedConversationIdsWithRawResponse(clientConfig, page, perPage, order, intercomVersion, options).data
+    fun listDeletedConversationIds(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        order: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedConversationList {
+        return listDeletedConversationIdsWithRawResponse(
+                clientConfig,
+                page,
+                perPage,
+                order,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [listDeletedConversationIds], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listDeletedConversationIdsWithRawResponse(clientConfig: ClientConfig, page: Long? = null, perPage: Long? = null, order: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DeletedConversationList> {
+    /**
+     * [listDeletedConversationIds], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listDeletedConversationIdsWithRawResponse(
+        clientConfig: ClientConfig,
+        page: Long? = null,
+        perPage: Long? = null,
+        order: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeletedConversationList> {
         if (perPage != null) {
             Validation.validateRange("per_page", perPage, Validation.RangeOpts(max = 60.0))
-}
+        }
 
-        return SdkClient.request<DeletedConversationList>(SdkClient.RequestSpec("GET", "/conversations/deleted", config = clientConfig, query = mapOf("page" to SdkClient.queryValue(page, "form", true), "per_page" to SdkClient.queryValue(perPage, "form", true), "order" to SdkClient.queryValue(order, "form", true)), operationId = "listDeletedConversationIds", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java)))
+        return SdkClient.request<DeletedConversationList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/deleted",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "page" to SdkClient.queryValue(page, "form", true),
+                        "per_page" to SdkClient.queryValue(perPage, "form", true),
+                        "order" to SdkClient.queryValue(order, "form", true),
+                    ),
+                operationId = "listDeletedConversationIds",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

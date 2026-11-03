@@ -3,192 +3,476 @@
 
 package dev.octri.showcase.intercom
 
-
 class DataConnectorsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists the workspace's data connectors, ordered by most recently updated first. Use `per_page` to control the page size and `starting_after` to continue from a previous response's pagination cursor. Data connectors let workflows and AI agents make HTTP requests to external APIs.
+     * Lists the workspace's data connectors, ordered by most recently updated first. Use `per_page`
+     * to control the page size and `starting_after` to continue from a previous response's
+     * pagination cursor. Data connectors let workflows and AI agents make HTTP requests to external
+     * APIs.
      *
-     * Returns a paginated list of all data connectors for the workspace, ordered by most recently updated first. Data connectors allow workflows and AI agents to make HTTP requests to external APIs.
+     * Returns a paginated list of all data connectors for the workspace, ordered by most recently
+     * updated first. Data connectors allow workflows and AI agents to make HTTP requests to
+     * external APIs.
      */
-    fun list(perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorList {
-        return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectors(clientConfig, perPage, startingAfter, intercomVersion, options)
+    fun list(
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataConnectorList {
+        return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectors(
+            clientConfig,
+            perPage,
+            startingAfter,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Creates a new data connector in `draft` state. Provide its `name` and configure fields such as `url`, `http_method`, `headers`, and `data_inputs` as needed. Set the connector to `live` after you finish configuring it.
+     * Creates a new data connector in `draft` state. Provide its `name` and configure fields such
+     * as `url`, `http_method`, `headers`, and `data_inputs` as needed. Set the connector to `live`
+     * after you finish configuring it.
      *
-     * Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then set it to `live` when ready.
+     * Create a new data connector. The connector is created in `draft` state. Configure its URL,
+     * headers, data inputs, and other settings, then set it to `live` when ready.
      */
-    fun create(request: dev.octri.showcase.intercom.methods.DataConnectors.CreateDataConnectorParams, options: RequestOptions? = null): DataConnectorDetail {
-        return dev.octri.showcase.intercom.methods.DataConnectors.createDataConnector(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.intercom.methods.DataConnectors.CreateDataConnectorParams,
+        options: RequestOptions? = null,
+    ): DataConnectorDetail {
+        return dev.octri.showcase.intercom.methods.DataConnectors.createDataConnector(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves the full details of a data connector by its identifier. Use `state_version` to select the `draft` or `live` configuration; it defaults to `live` when omitted. The response includes configuration, data inputs, response fields, and object mappings.
+     * Retrieves the full details of a data connector by its identifier. Use `state_version` to
+     * select the `draft` or `live` configuration; it defaults to `live` when omitted. The response
+     * includes configuration, data inputs, response fields, and object mappings.
      *
-     * You can retrieve the full detail of a single data connector by its ID. The response includes configuration, data inputs, response fields, and object mappings.
+     * You can retrieve the full detail of a single data connector by its ID. The response includes
+     * configuration, data inputs, response fields, and object mappings.
      */
-    fun retrieve(id: String, stateVersion: RetrieveDataConnectorParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorDetail {
-        return dev.octri.showcase.intercom.methods.DataConnectors.retrieveDataConnector(clientConfig, id, stateVersion, intercomVersion, options)
+    fun retrieve(
+        id: String,
+        stateVersion: RetrieveDataConnectorParameterEnum? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataConnectorDetail {
+        return dev.octri.showcase.intercom.methods.DataConnectors.retrieveDataConnector(
+            clientConfig,
+            id,
+            stateVersion,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Deletes an existing data connector. The connector must be in `draft` state and must not be used by any workflows or AI agents. Use the returned `deleted` value to confirm the deletion.
+     * Deletes an existing data connector. The connector must be in `draft` state and must not be
+     * used by any workflows or AI agents. Use the returned `deleted` value to confirm the deletion.
      *
-     * Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
+     * Delete an existing data connector. The connector must be in `draft` state and must not be in
+     * use by any workflows or AI agents.
      */
-    fun delete(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DeletedDataConnectorObject {
-        return dev.octri.showcase.intercom.methods.DataConnectors.deleteDataConnector(clientConfig, id, intercomVersion, options)
+    fun delete(
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DeletedDataConnectorObject {
+        return dev.octri.showcase.intercom.methods.DataConnectors.deleteDataConnector(
+            clientConfig,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Updates an existing data connector, changing only the fields you provide. Use `state` to set the connector to `draft` or `live`; fields such as `data_inputs` and `token_ids` update their associated configuration. An empty `token_ids` array removes all attached tokens.
+     * Updates an existing data connector, changing only the fields you provide. Use `state` to set
+     * the connector to `draft` or `live`; fields such as `data_inputs` and `token_ids` update their
+     * associated configuration. An empty `token_ids` array removes all attached tokens.
      *
-     * Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector's state.
+     * Update an existing data connector. Only provided fields are changed. Set `state` to `live` or
+     * `draft` to change the connector's state.
      */
-    fun update(request: dev.octri.showcase.intercom.methods.DataConnectors.UpdateDataConnectorParams, options: RequestOptions? = null): DataConnectorDetail {
-        return dev.octri.showcase.intercom.methods.DataConnectors.updateDataConnector(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.intercom.methods.DataConnectors.UpdateDataConnectorParams,
+        options: RequestOptions? = null,
+    ): DataConnectorDetail {
+        return dev.octri.showcase.intercom.methods.DataConnectors.updateDataConnector(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists paginated execution results for a data connector. Results cover the last hour by default; use `start_ts` and `end_ts` to set another time range, and `include_bodies` to include request and response bodies. Use `starting_after` to continue from a previous page.
+     * Lists paginated execution results for a data connector. Results cover the last hour by
+     * default; use `start_ts` and `end_ts` to set another time range, and `include_bodies` to
+     * include request and response bodies. Use `starting_after` to continue from a previous page.
      *
-     * Retrieve paginated execution logs for a specific data connector. Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range. Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
+     * Retrieve paginated execution logs for a specific data connector. Results from the last hour
+     * are returned by default. Use `start_ts` and `end_ts` to customize the time range.
+     * Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
      */
-    fun listExecutionResults(request: dev.octri.showcase.intercom.methods.DataConnectors.ListDataConnectorExecutionResultsRequest, options: RequestOptions? = null): DataConnectorExecutionResultList {
-        return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorExecutionResults(clientConfig, request, options)
+    fun listExecutionResults(
+        request:
+            dev.octri.showcase.intercom.methods.DataConnectors.ListDataConnectorExecutionResultsRequest,
+        options: RequestOptions? = null,
+    ): DataConnectorExecutionResultList {
+        return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorExecutionResults(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves details for one execution result belonging to a data connector. The response always includes request and response bodies, along with the sanitized request URL. Use the two identifiers to select the connector and its execution result.
+     * Retrieves details for one execution result belonging to a data connector. The response always
+     * includes request and response bodies, along with the sanitized request URL. Use the two
+     * identifiers to select the connector and its execution result.
      *
-     * Retrieve details for a specific data connector execution result. Always includes request/response bodies and the sanitised request URL.
+     * Retrieve details for a specific data connector execution result. Always includes
+     * request/response bodies and the sanitised request URL.
      */
-    fun showExecutionResult(dataConnectorId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorExecutionResult {
-        return dev.octri.showcase.intercom.methods.DataConnectors.showDataConnectorExecutionResult(clientConfig, dataConnectorId, id, intercomVersion, options)
+    fun showExecutionResult(
+        dataConnectorId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataConnectorExecutionResult {
+        return dev.octri.showcase.intercom.methods.DataConnectors.showDataConnectorExecutionResult(
+            clientConfig,
+            dataConnectorId,
+            id,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists a data connector's version history, with the newest snapshots first. Use `starting_after` to continue through the paginated results; a connector that has never been published returns an empty `data` list. You need the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope to access this operation.
+     * Lists a data connector's version history, with the newest snapshots first. Use
+     * `starting_after` to continue through the paginated results; a connector that has never been
+     * published returns an empty `data` list. You need the `read_data_connector_versions` or
+     * `read_write_data_connector_versions` OAuth scope to access this operation.
      *
-     * Retrieve the version history of a data connector, newest first. Each entry is a point-in-time snapshot of the connector's configuration, with the status it has today and an optional note. Results are paginated. `pages.next` is omitted on the last page. A data connector that has never been published returns an empty `data` list. Requires the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
+     * Retrieve the version history of a data connector, newest first. Each entry is a point-in-time
+     * snapshot of the connector's configuration, with the status it has today and an optional note.
+     * Results are paginated. `pages.next` is omitted on the last page. A data connector that has
+     * never been published returns an empty `data` list. Requires the
+     * `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
      */
-    fun listVersions(id: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorVersionList {
-        return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorVersions(clientConfig, id, perPage, startingAfter, intercomVersion, options)
+    fun listVersions(
+        id: String,
+        perPage: Long? = null,
+        startingAfter: String? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataConnectorVersionList {
+        return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorVersions(
+            clientConfig,
+            id,
+            perPage,
+            startingAfter,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Retrieves a point-in-time snapshot of a data connector's configuration, including the version's current status and optional note. Use `version_id` from the connector's version history to select the snapshot. You need the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope to access this operation.
+     * Retrieves a point-in-time snapshot of a data connector's configuration, including the
+     * version's current status and optional note. Use `version_id` from the connector's version
+     * history to select the snapshot. You need the `read_data_connector_versions` or
+     * `read_write_data_connector_versions` OAuth scope to access this operation.
      *
-     * Retrieve a single version of a data connector, including the connector configuration as it was at that version. Requires the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
+     * Retrieve a single version of a data connector, including the connector configuration as it
+     * was at that version. Requires the `read_data_connector_versions` or
+     * `read_write_data_connector_versions` OAuth scope.
      */
-    fun retrieveVersion(id: String, versionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorVersion {
-        return dev.octri.showcase.intercom.methods.DataConnectors.retrieveDataConnectorVersion(clientConfig, id, versionId, intercomVersion, options)
+    fun retrieveVersion(
+        id: String,
+        versionId: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataConnectorVersion {
+        return dev.octri.showcase.intercom.methods.DataConnectors.retrieveDataConnectorVersion(
+            clientConfig,
+            id,
+            versionId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Updates the note on a data connector version; the note is the only field you can change. Send an empty or whitespace-only string to clear the note, which does not publish the version or roll the connector back. You need the `read_write_data_connector_versions` OAuth scope to use this operation.
+     * Updates the note on a data connector version; the note is the only field you can change. Send
+     * an empty or whitespace-only string to clear the note, which does not publish the version or
+     * roll the connector back. You need the `read_write_data_connector_versions` OAuth scope to use
+     * this operation.
      *
-     * Update the note on a data connector version. The note is the only field that can be changed. This does not publish the version or roll the connector back to it. Send an empty string to clear the note. Requires the `read_write_data_connector_versions` OAuth scope.
+     * Update the note on a data connector version. The note is the only field that can be changed.
+     * This does not publish the version or roll the connector back to it. Send an empty string to
+     * clear the note. Requires the `read_write_data_connector_versions` OAuth scope.
      */
-    fun updateVersion(id: String, versionId: Long, note: String?, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): DataConnectorVersion {
-        return dev.octri.showcase.intercom.methods.DataConnectors.updateDataConnectorVersion(clientConfig, id, versionId, note, intercomVersion, options)
+    fun updateVersion(
+        id: String,
+        versionId: Long,
+        note: String?,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): DataConnectorVersion {
+        return dev.octri.showcase.intercom.methods.DataConnectors.updateDataConnectorVersion(
+            clientConfig,
+            id,
+            versionId,
+            note,
+            intercomVersion,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [DataConnectorsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [DataConnectorsNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Lists the workspace's data connectors, ordered by most recently updated first. Use `per_page` to control the page size and `starting_after` to continue from a previous response's pagination cursor. Data connectors let workflows and AI agents make HTTP requests to external APIs.
+         * Lists the workspace's data connectors, ordered by most recently updated first. Use
+         * `per_page` to control the page size and `starting_after` to continue from a previous
+         * response's pagination cursor. Data connectors let workflows and AI agents make HTTP
+         * requests to external APIs.
          *
-         * Returns a paginated list of all data connectors for the workspace, ordered by most recently updated first. Data connectors allow workflows and AI agents to make HTTP requests to external APIs.
+         * Returns a paginated list of all data connectors for the workspace, ordered by most
+         * recently updated first. Data connectors allow workflows and AI agents to make HTTP
+         * requests to external APIs.
          */
-        fun list(perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DataConnectorList> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorsWithRawResponse(clientConfig, perPage, startingAfter, intercomVersion, options)
+        fun list(
+            perPage: Long? = null,
+            startingAfter: String? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorList> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .listDataConnectorsWithRawResponse(
+                    clientConfig,
+                    perPage,
+                    startingAfter,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Creates a new data connector in `draft` state. Provide its `name` and configure fields such as `url`, `http_method`, `headers`, and `data_inputs` as needed. Set the connector to `live` after you finish configuring it.
+         * Creates a new data connector in `draft` state. Provide its `name` and configure fields
+         * such as `url`, `http_method`, `headers`, and `data_inputs` as needed. Set the connector
+         * to `live` after you finish configuring it.
          *
-         * Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then set it to `live` when ready.
+         * Create a new data connector. The connector is created in `draft` state. Configure its
+         * URL, headers, data inputs, and other settings, then set it to `live` when ready.
          */
-        fun create(request: dev.octri.showcase.intercom.methods.DataConnectors.CreateDataConnectorParams, options: RequestOptions? = null): SdkResponse<DataConnectorDetail> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.createDataConnectorWithRawResponse(clientConfig, request, options)
+        fun create(
+            request: dev.octri.showcase.intercom.methods.DataConnectors.CreateDataConnectorParams,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorDetail> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .createDataConnectorWithRawResponse(clientConfig, request, options)
         }
 
         /**
-         * Retrieves the full details of a data connector by its identifier. Use `state_version` to select the `draft` or `live` configuration; it defaults to `live` when omitted. The response includes configuration, data inputs, response fields, and object mappings.
+         * Retrieves the full details of a data connector by its identifier. Use `state_version` to
+         * select the `draft` or `live` configuration; it defaults to `live` when omitted. The
+         * response includes configuration, data inputs, response fields, and object mappings.
          *
-         * You can retrieve the full detail of a single data connector by its ID. The response includes configuration, data inputs, response fields, and object mappings.
+         * You can retrieve the full detail of a single data connector by its ID. The response
+         * includes configuration, data inputs, response fields, and object mappings.
          */
-        fun retrieve(id: String, stateVersion: RetrieveDataConnectorParameterEnum? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DataConnectorDetail> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.retrieveDataConnectorWithRawResponse(clientConfig, id, stateVersion, intercomVersion, options)
+        fun retrieve(
+            id: String,
+            stateVersion: RetrieveDataConnectorParameterEnum? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorDetail> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .retrieveDataConnectorWithRawResponse(
+                    clientConfig,
+                    id,
+                    stateVersion,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Deletes an existing data connector. The connector must be in `draft` state and must not be used by any workflows or AI agents. Use the returned `deleted` value to confirm the deletion.
+         * Deletes an existing data connector. The connector must be in `draft` state and must not
+         * be used by any workflows or AI agents. Use the returned `deleted` value to confirm the
+         * deletion.
          *
-         * Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
+         * Delete an existing data connector. The connector must be in `draft` state and must not be
+         * in use by any workflows or AI agents.
          */
-        fun delete(id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DeletedDataConnectorObject> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.deleteDataConnectorWithRawResponse(clientConfig, id, intercomVersion, options)
+        fun delete(
+            id: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DeletedDataConnectorObject> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .deleteDataConnectorWithRawResponse(clientConfig, id, intercomVersion, options)
         }
 
         /**
-         * Updates an existing data connector, changing only the fields you provide. Use `state` to set the connector to `draft` or `live`; fields such as `data_inputs` and `token_ids` update their associated configuration. An empty `token_ids` array removes all attached tokens.
+         * Updates an existing data connector, changing only the fields you provide. Use `state` to
+         * set the connector to `draft` or `live`; fields such as `data_inputs` and `token_ids`
+         * update their associated configuration. An empty `token_ids` array removes all attached
+         * tokens.
          *
-         * Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector's state.
+         * Update an existing data connector. Only provided fields are changed. Set `state` to
+         * `live` or `draft` to change the connector's state.
          */
-        fun update(request: dev.octri.showcase.intercom.methods.DataConnectors.UpdateDataConnectorParams, options: RequestOptions? = null): SdkResponse<DataConnectorDetail> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.updateDataConnectorWithRawResponse(clientConfig, request, options)
+        fun update(
+            request: dev.octri.showcase.intercom.methods.DataConnectors.UpdateDataConnectorParams,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorDetail> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .updateDataConnectorWithRawResponse(clientConfig, request, options)
         }
 
         /**
-         * Lists paginated execution results for a data connector. Results cover the last hour by default; use `start_ts` and `end_ts` to set another time range, and `include_bodies` to include request and response bodies. Use `starting_after` to continue from a previous page.
+         * Lists paginated execution results for a data connector. Results cover the last hour by
+         * default; use `start_ts` and `end_ts` to set another time range, and `include_bodies` to
+         * include request and response bodies. Use `starting_after` to continue from a previous
+         * page.
          *
-         * Retrieve paginated execution logs for a specific data connector. Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range. Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
+         * Retrieve paginated execution logs for a specific data connector. Results from the last
+         * hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.
+         * Request/response bodies are excluded by default. Use `include_bodies=true` to include
+         * them.
          */
-        fun listExecutionResults(request: dev.octri.showcase.intercom.methods.DataConnectors.ListDataConnectorExecutionResultsRequest, options: RequestOptions? = null): SdkResponse<DataConnectorExecutionResultList> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorExecutionResultsWithRawResponse(clientConfig, request, options)
+        fun listExecutionResults(
+            request:
+                dev.octri.showcase.intercom.methods.DataConnectors.ListDataConnectorExecutionResultsRequest,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorExecutionResultList> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .listDataConnectorExecutionResultsWithRawResponse(clientConfig, request, options)
         }
 
         /**
-         * Retrieves details for one execution result belonging to a data connector. The response always includes request and response bodies, along with the sanitized request URL. Use the two identifiers to select the connector and its execution result.
+         * Retrieves details for one execution result belonging to a data connector. The response
+         * always includes request and response bodies, along with the sanitized request URL. Use
+         * the two identifiers to select the connector and its execution result.
          *
-         * Retrieve details for a specific data connector execution result. Always includes request/response bodies and the sanitised request URL.
+         * Retrieve details for a specific data connector execution result. Always includes
+         * request/response bodies and the sanitised request URL.
          */
-        fun showExecutionResult(dataConnectorId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DataConnectorExecutionResult> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.showDataConnectorExecutionResultWithRawResponse(clientConfig, dataConnectorId, id, intercomVersion, options)
+        fun showExecutionResult(
+            dataConnectorId: String,
+            id: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorExecutionResult> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .showDataConnectorExecutionResultWithRawResponse(
+                    clientConfig,
+                    dataConnectorId,
+                    id,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Lists a data connector's version history, with the newest snapshots first. Use `starting_after` to continue through the paginated results; a connector that has never been published returns an empty `data` list. You need the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope to access this operation.
+         * Lists a data connector's version history, with the newest snapshots first. Use
+         * `starting_after` to continue through the paginated results; a connector that has never
+         * been published returns an empty `data` list. You need the `read_data_connector_versions`
+         * or `read_write_data_connector_versions` OAuth scope to access this operation.
          *
-         * Retrieve the version history of a data connector, newest first. Each entry is a point-in-time snapshot of the connector's configuration, with the status it has today and an optional note. Results are paginated. `pages.next` is omitted on the last page. A data connector that has never been published returns an empty `data` list. Requires the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
+         * Retrieve the version history of a data connector, newest first. Each entry is a
+         * point-in-time snapshot of the connector's configuration, with the status it has today and
+         * an optional note. Results are paginated. `pages.next` is omitted on the last page. A data
+         * connector that has never been published returns an empty `data` list. Requires the
+         * `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
          */
-        fun listVersions(id: String, perPage: Long? = null, startingAfter: String? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DataConnectorVersionList> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.listDataConnectorVersionsWithRawResponse(clientConfig, id, perPage, startingAfter, intercomVersion, options)
+        fun listVersions(
+            id: String,
+            perPage: Long? = null,
+            startingAfter: String? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorVersionList> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .listDataConnectorVersionsWithRawResponse(
+                    clientConfig,
+                    id,
+                    perPage,
+                    startingAfter,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Retrieves a point-in-time snapshot of a data connector's configuration, including the version's current status and optional note. Use `version_id` from the connector's version history to select the snapshot. You need the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope to access this operation.
+         * Retrieves a point-in-time snapshot of a data connector's configuration, including the
+         * version's current status and optional note. Use `version_id` from the connector's version
+         * history to select the snapshot. You need the `read_data_connector_versions` or
+         * `read_write_data_connector_versions` OAuth scope to access this operation.
          *
-         * Retrieve a single version of a data connector, including the connector configuration as it was at that version. Requires the `read_data_connector_versions` or `read_write_data_connector_versions` OAuth scope.
+         * Retrieve a single version of a data connector, including the connector configuration as
+         * it was at that version. Requires the `read_data_connector_versions` or
+         * `read_write_data_connector_versions` OAuth scope.
          */
-        fun retrieveVersion(id: String, versionId: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DataConnectorVersion> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.retrieveDataConnectorVersionWithRawResponse(clientConfig, id, versionId, intercomVersion, options)
+        fun retrieveVersion(
+            id: String,
+            versionId: Long,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorVersion> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .retrieveDataConnectorVersionWithRawResponse(
+                    clientConfig,
+                    id,
+                    versionId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Updates the note on a data connector version; the note is the only field you can change. Send an empty or whitespace-only string to clear the note, which does not publish the version or roll the connector back. You need the `read_write_data_connector_versions` OAuth scope to use this operation.
+         * Updates the note on a data connector version; the note is the only field you can change.
+         * Send an empty or whitespace-only string to clear the note, which does not publish the
+         * version or roll the connector back. You need the `read_write_data_connector_versions`
+         * OAuth scope to use this operation.
          *
-         * Update the note on a data connector version. The note is the only field that can be changed. This does not publish the version or roll the connector back to it. Send an empty string to clear the note. Requires the `read_write_data_connector_versions` OAuth scope.
+         * Update the note on a data connector version. The note is the only field that can be
+         * changed. This does not publish the version or roll the connector back to it. Send an
+         * empty string to clear the note. Requires the `read_write_data_connector_versions` OAuth
+         * scope.
          */
-        fun updateVersion(id: String, versionId: Long, note: String?, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<DataConnectorVersion> {
-            return dev.octri.showcase.intercom.methods.DataConnectors.updateDataConnectorVersionWithRawResponse(clientConfig, id, versionId, note, intercomVersion, options)
+        fun updateVersion(
+            id: String,
+            versionId: Long,
+            note: String?,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<DataConnectorVersion> {
+            return dev.octri.showcase.intercom.methods.DataConnectors
+                .updateDataConnectorVersionWithRawResponse(
+                    clientConfig,
+                    id,
+                    versionId,
+                    note,
+                    intercomVersion,
+                    options,
+                )
         }
-
     }
 }

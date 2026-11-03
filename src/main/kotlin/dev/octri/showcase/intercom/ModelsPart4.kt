@@ -23,11 +23,13 @@ typealias MacroVisibleToEnum = dev.octri.showcase.intercom.models.MacroVisibleTo
 
 typealias MergeContactsRequest = dev.octri.showcase.intercom.models.MergeContactsRequest
 
-typealias MergeConversationsRequest = dev.octri.showcase.intercom.models.conversations.MergeConversationsRequest
+typealias MergeConversationsRequest =
+    dev.octri.showcase.intercom.models.conversations.MergeConversationsRequest
 
 typealias MergeHistoryItem = dev.octri.showcase.intercom.models.MergeHistoryItem
 
-typealias MergeHistoryItemSourceContactRoleEnum = dev.octri.showcase.intercom.models.MergeHistoryItemSourceContactRoleEnum
+typealias MergeHistoryItemSourceContactRoleEnum =
+    dev.octri.showcase.intercom.models.MergeHistoryItemSourceContactRoleEnum
 
 typealias MergeHistoryList = dev.octri.showcase.intercom.models.MergeHistoryList
 
@@ -35,17 +37,22 @@ typealias MergeHistoryListTypeEnum = dev.octri.showcase.intercom.models.MergeHis
 
 typealias MergePreviewAllowed = dev.octri.showcase.intercom.models.MergePreviewAllowed
 
-typealias MergePreviewAllowedAllowedEnum = dev.octri.showcase.intercom.models.MergePreviewAllowedAllowedEnum
+typealias MergePreviewAllowedAllowedEnum =
+    dev.octri.showcase.intercom.models.MergePreviewAllowedAllowedEnum
 
-typealias MergePreviewAttributeChange = dev.octri.showcase.intercom.models.MergePreviewAttributeChange
+typealias MergePreviewAttributeChange =
+    dev.octri.showcase.intercom.models.MergePreviewAttributeChange
 
-typealias MergePreviewAttributeChangeOutcomeEnum = dev.octri.showcase.intercom.models.MergePreviewAttributeChangeOutcomeEnum
+typealias MergePreviewAttributeChangeOutcomeEnum =
+    dev.octri.showcase.intercom.models.MergePreviewAttributeChangeOutcomeEnum
 
-typealias MergePreviewAttributeChanges = dev.octri.showcase.intercom.models.MergePreviewAttributeChanges
+typealias MergePreviewAttributeChanges =
+    dev.octri.showcase.intercom.models.MergePreviewAttributeChanges
 
 typealias MergePreviewBlocked = dev.octri.showcase.intercom.models.MergePreviewBlocked
 
-typealias MergePreviewBlockedAllowedEnum = dev.octri.showcase.intercom.models.MergePreviewBlockedAllowedEnum
+typealias MergePreviewBlockedAllowedEnum =
+    dev.octri.showcase.intercom.models.MergePreviewBlockedAllowedEnum
 
 typealias MergePreviewReason = dev.octri.showcase.intercom.models.MergePreviewReason
 
@@ -53,15 +60,20 @@ typealias MergePreviewReasonCodeEnum = dev.octri.showcase.intercom.models.MergeP
 
 typealias MergePreviewReassignments = dev.octri.showcase.intercom.models.MergePreviewReassignments
 
-typealias MergePreviewReassignmentsConversations = dev.octri.showcase.intercom.models.MergePreviewReassignmentsConversations
+typealias MergePreviewReassignmentsConversations =
+    dev.octri.showcase.intercom.models.MergePreviewReassignmentsConversations
 
-typealias MergePreviewReassignmentsNotes = dev.octri.showcase.intercom.models.MergePreviewReassignmentsNotes
+typealias MergePreviewReassignmentsNotes =
+    dev.octri.showcase.intercom.models.MergePreviewReassignmentsNotes
 
-typealias MergePreviewReassignmentsPhoneCalls = dev.octri.showcase.intercom.models.MergePreviewReassignmentsPhoneCalls
+typealias MergePreviewReassignmentsPhoneCalls =
+    dev.octri.showcase.intercom.models.MergePreviewReassignmentsPhoneCalls
 
-typealias MergePreviewReassignmentsTags = dev.octri.showcase.intercom.models.MergePreviewReassignmentsTags
+typealias MergePreviewReassignmentsTags =
+    dev.octri.showcase.intercom.models.MergePreviewReassignmentsTags
 
-typealias MergePreviewReassignmentsTickets = dev.octri.showcase.intercom.models.MergePreviewReassignmentsTickets
+typealias MergePreviewReassignmentsTickets =
+    dev.octri.showcase.intercom.models.MergePreviewReassignmentsTickets
 
 typealias MergePreviewRequest = dev.octri.showcase.intercom.models.MergePreviewRequest
 
@@ -75,9 +87,11 @@ typealias MessageMessageTypeEnum = dev.octri.showcase.intercom.models.MessageMes
 
 typealias Metadata = dev.octri.showcase.intercom.models.Metadata
 
-typealias MultipleFilterSearchRequest = dev.octri.showcase.intercom.models.MultipleFilterSearchRequest
+typealias MultipleFilterSearchRequest =
+    dev.octri.showcase.intercom.models.MultipleFilterSearchRequest
 
-typealias MultipleFilterSearchRequestOperatorEnum = dev.octri.showcase.intercom.models.MultipleFilterSearchRequestOperatorEnum
+typealias MultipleFilterSearchRequestOperatorEnum =
+    dev.octri.showcase.intercom.models.MultipleFilterSearchRequestOperatorEnum
 
 typealias Newsfeed = dev.octri.showcase.intercom.models.Newsfeed
 
@@ -105,7 +119,8 @@ typealias NoteList = dev.octri.showcase.intercom.models.NoteList
 
 typealias OfficeHoursException = dev.octri.showcase.intercom.models.officehours.OfficeHoursException
 
-typealias OfficeHoursExceptionExceptionTypeEnum = dev.octri.showcase.intercom.models.OfficeHoursExceptionExceptionTypeEnum
+typealias OfficeHoursExceptionExceptionTypeEnum =
+    dev.octri.showcase.intercom.models.OfficeHoursExceptionExceptionTypeEnum
 
 typealias OfficeHoursExceptionList = dev.octri.showcase.intercom.models.OfficeHoursExceptionList
 
@@ -113,19 +128,23 @@ typealias OfficeHoursSchedule = dev.octri.showcase.intercom.models.officehours.O
 
 typealias OfficeHoursScheduleList = dev.octri.showcase.intercom.models.OfficeHoursScheduleList
 
-typealias OfficeHoursTimeInterval = dev.octri.showcase.intercom.models.officehours.OfficeHoursTimeInterval
+typealias OfficeHoursTimeInterval =
+    dev.octri.showcase.intercom.models.officehours.OfficeHoursTimeInterval
 
-typealias OfficeHoursTimeIntervalRequest = dev.octri.showcase.intercom.models.officehours.OfficeHoursTimeIntervalRequest
+typealias OfficeHoursTimeIntervalRequest =
+    dev.octri.showcase.intercom.models.officehours.OfficeHoursTimeIntervalRequest
 
 typealias OpenConversationRequest = dev.octri.showcase.intercom.models.OpenConversationRequest
 
-typealias OpenConversationRequestMessageTypeEnum = dev.octri.showcase.intercom.models.OpenConversationRequestMessageTypeEnum
+typealias OpenConversationRequestMessageTypeEnum =
+    dev.octri.showcase.intercom.models.OpenConversationRequestMessageTypeEnum
 
 typealias OperatorWorkflowEvent = dev.octri.showcase.intercom.models.OperatorWorkflowEvent
 
 typealias OperatorWorkflowEventEvent = dev.octri.showcase.intercom.models.OperatorWorkflowEventEvent
 
-typealias OperatorWorkflowEventWorkflow = dev.octri.showcase.intercom.models.OperatorWorkflowEventWorkflow
+typealias OperatorWorkflowEventWorkflow =
+    dev.octri.showcase.intercom.models.OperatorWorkflowEventWorkflow
 
 typealias PagesLink = dev.octri.showcase.intercom.models.PagesLink
 
@@ -155,27 +174,36 @@ typealias RecipientTypeEnum = dev.octri.showcase.intercom.models.RecipientTypeEn
 
 typealias RedactConversationRequest = dev.octri.showcase.intercom.models.RedactConversationRequest
 
-typealias RedactConversationRequestVariant0 = dev.octri.showcase.intercom.models.RedactConversationRequestVariant0
+typealias RedactConversationRequestVariant0 =
+    dev.octri.showcase.intercom.models.RedactConversationRequestVariant0
 
-typealias RedactConversationRequestVariant0TypeEnum = dev.octri.showcase.intercom.models.RedactConversationRequestVariant0TypeEnum
+typealias RedactConversationRequestVariant0TypeEnum =
+    dev.octri.showcase.intercom.models.RedactConversationRequestVariant0TypeEnum
 
-typealias RedactConversationRequestVariant1 = dev.octri.showcase.intercom.models.RedactConversationRequestVariant1
+typealias RedactConversationRequestVariant1 =
+    dev.octri.showcase.intercom.models.RedactConversationRequestVariant1
 
-typealias RedactConversationRequestVariant1TypeEnum = dev.octri.showcase.intercom.models.RedactConversationRequestVariant1TypeEnum
+typealias RedactConversationRequestVariant1TypeEnum =
+    dev.octri.showcase.intercom.models.RedactConversationRequestVariant1TypeEnum
 
 typealias Reference = dev.octri.showcase.intercom.models.Reference
 
-typealias RegisterFinVoiceCallRequest = dev.octri.showcase.intercom.models.RegisterFinVoiceCallRequest
+typealias RegisterFinVoiceCallRequest =
+    dev.octri.showcase.intercom.models.RegisterFinVoiceCallRequest
 
-typealias RegisterFinVoiceCallRequestSourceEnum = dev.octri.showcase.intercom.models.RegisterFinVoiceCallRequestSourceEnum
+typealias RegisterFinVoiceCallRequestSourceEnum =
+    dev.octri.showcase.intercom.models.RegisterFinVoiceCallRequestSourceEnum
 
 typealias ReplyConversationRequest = dev.octri.showcase.intercom.models.ReplyConversationRequest
 
-typealias ReplyToFinResponseStatusEnum = dev.octri.showcase.intercom.models.ReplyToFinResponseStatusEnum
+typealias ReplyToFinResponseStatusEnum =
+    dev.octri.showcase.intercom.models.ReplyToFinResponseStatusEnum
 
-typealias RetrieveDataConnectorParameterEnum = dev.octri.showcase.intercom.models.RetrieveDataConnectorParameterEnum
+typealias RetrieveDataConnectorParameterEnum =
+    dev.octri.showcase.intercom.models.RetrieveDataConnectorParameterEnum
 
-typealias RunFinProcedureResponseStatusEnum = dev.octri.showcase.intercom.models.RunFinProcedureResponseStatusEnum
+typealias RunFinProcedureResponseStatusEnum =
+    dev.octri.showcase.intercom.models.RunFinProcedureResponseStatusEnum
 
 typealias SalesAgent = dev.octri.showcase.intercom.models.salesagent.SalesAgent
 
@@ -183,17 +211,23 @@ typealias SalesAgentOutcomeEnum = dev.octri.showcase.intercom.models.SalesAgentO
 
 typealias SearchContentParameterEnum = dev.octri.showcase.intercom.models.SearchContentParameterEnum
 
-typealias SearchContentParameterEnum78150152 = dev.octri.showcase.intercom.models.SearchContentParameterEnum78150152
+typealias SearchContentParameterEnum78150152 =
+    dev.octri.showcase.intercom.models.SearchContentParameterEnum78150152
 
-typealias SearchContentParameterEnuma0a1ebd4 = dev.octri.showcase.intercom.models.SearchContentParameterEnuma0a1ebd4
+typealias SearchContentParameterEnuma0a1ebd4 =
+    dev.octri.showcase.intercom.models.SearchContentParameterEnuma0a1ebd4
 
-typealias SearchContentParameterEnumc3d616a1 = dev.octri.showcase.intercom.models.SearchContentParameterEnumc3d616a1
+typealias SearchContentParameterEnumc3d616a1 =
+    dev.octri.showcase.intercom.models.SearchContentParameterEnumc3d616a1
 
-typealias SearchContentParameterEnume870c63a = dev.octri.showcase.intercom.models.SearchContentParameterEnume870c63a
+typealias SearchContentParameterEnume870c63a =
+    dev.octri.showcase.intercom.models.SearchContentParameterEnume870c63a
 
-typealias SearchContentParameterItemEnum = dev.octri.showcase.intercom.models.SearchContentParameterItemEnum
+typealias SearchContentParameterItemEnum =
+    dev.octri.showcase.intercom.models.SearchContentParameterItemEnum
 
-typealias SearchContentParameterItemEnum999af085 = dev.octri.showcase.intercom.models.SearchContentParameterItemEnum999af085
+typealias SearchContentParameterItemEnum999af085 =
+    dev.octri.showcase.intercom.models.SearchContentParameterItemEnum999af085
 
 typealias SearchRequest = dev.octri.showcase.intercom.models.SearchRequest
 
@@ -213,15 +247,18 @@ typealias SideConversationList = dev.octri.showcase.intercom.models.SideConversa
 
 typealias SideConversationListPages = dev.octri.showcase.intercom.models.SideConversationListPages
 
-typealias SideConversationListPagesTypeEnum = dev.octri.showcase.intercom.models.SideConversationListPagesTypeEnum
+typealias SideConversationListPagesTypeEnum =
+    dev.octri.showcase.intercom.models.SideConversationListPagesTypeEnum
 
-typealias SideConversationListTypeEnum = dev.octri.showcase.intercom.models.SideConversationListTypeEnum
+typealias SideConversationListTypeEnum =
+    dev.octri.showcase.intercom.models.SideConversationListTypeEnum
 
 typealias SideConversationSummary = dev.octri.showcase.intercom.models.SideConversationSummary
 
 typealias SingleFilterSearchRequest = dev.octri.showcase.intercom.models.SingleFilterSearchRequest
 
-typealias SingleFilterSearchRequestOperatorEnum = dev.octri.showcase.intercom.models.SingleFilterSearchRequestOperatorEnum
+typealias SingleFilterSearchRequestOperatorEnum =
+    dev.octri.showcase.intercom.models.SingleFilterSearchRequestOperatorEnum
 
 typealias SlaApplied = dev.octri.showcase.intercom.models.SlaApplied
 
@@ -229,31 +266,38 @@ typealias SlaAppliedSlaStatusEnum = dev.octri.showcase.intercom.models.SlaApplie
 
 typealias SnoozeConversationRequest = dev.octri.showcase.intercom.models.SnoozeConversationRequest
 
-typealias SnoozeConversationRequestMessageTypeEnum = dev.octri.showcase.intercom.models.SnoozeConversationRequestMessageTypeEnum
+typealias SnoozeConversationRequestMessageTypeEnum =
+    dev.octri.showcase.intercom.models.SnoozeConversationRequestMessageTypeEnum
 
 typealias SocialProfile = dev.octri.showcase.intercom.models.SocialProfile
 
 typealias SourceEmailMessageMetadata = dev.octri.showcase.intercom.models.SourceEmailMessageMetadata
 
-typealias StartFinConversationResponseStatusEnum = dev.octri.showcase.intercom.models.StartFinConversationResponseStatusEnum
+typealias StartFinConversationResponseStatusEnum =
+    dev.octri.showcase.intercom.models.StartFinConversationResponseStatusEnum
 
 typealias StartingAfterPaging = dev.octri.showcase.intercom.models.StartingAfterPaging
 
 typealias SubmitFinCsatRatingEnum = dev.octri.showcase.intercom.models.SubmitFinCsatRatingEnum
 
-typealias SubmitFinCsatResponseRatingEnum = dev.octri.showcase.intercom.models.SubmitFinCsatResponseRatingEnum
+typealias SubmitFinCsatResponseRatingEnum =
+    dev.octri.showcase.intercom.models.SubmitFinCsatResponseRatingEnum
 
-typealias SubmitFinCsatResponseStatusEnum = dev.octri.showcase.intercom.models.SubmitFinCsatResponseStatusEnum
+typealias SubmitFinCsatResponseStatusEnum =
+    dev.octri.showcase.intercom.models.SubmitFinCsatResponseStatusEnum
 
 typealias SubscriptionType = dev.octri.showcase.intercom.models.subscriptiontypes.SubscriptionType
 
-typealias SubscriptionTypeConsentTypeEnum = dev.octri.showcase.intercom.models.SubscriptionTypeConsentTypeEnum
+typealias SubscriptionTypeConsentTypeEnum =
+    dev.octri.showcase.intercom.models.SubscriptionTypeConsentTypeEnum
 
-typealias SubscriptionTypeContentTypesItemEnum = dev.octri.showcase.intercom.models.SubscriptionTypeContentTypesItemEnum
+typealias SubscriptionTypeContentTypesItemEnum =
+    dev.octri.showcase.intercom.models.SubscriptionTypeContentTypesItemEnum
 
 typealias SubscriptionTypeList = dev.octri.showcase.intercom.models.SubscriptionTypeList
 
-typealias SubscriptionTypeListTypeEnum = dev.octri.showcase.intercom.models.SubscriptionTypeListTypeEnum
+typealias SubscriptionTypeListTypeEnum =
+    dev.octri.showcase.intercom.models.SubscriptionTypeListTypeEnum
 
 typealias SubscriptionTypeStateEnum = dev.octri.showcase.intercom.models.SubscriptionTypeStateEnum
 
@@ -263,13 +307,16 @@ typealias TagBasic = dev.octri.showcase.intercom.models.tags.TagBasic
 
 typealias TagCompanyRequest = dev.octri.showcase.intercom.models.TagCompanyRequest
 
-typealias TagCompanyRequestCompaniesItem = dev.octri.showcase.intercom.models.TagCompanyRequestCompaniesItem
+typealias TagCompanyRequestCompaniesItem =
+    dev.octri.showcase.intercom.models.TagCompanyRequestCompaniesItem
 
 typealias TagCreateResponse = dev.octri.showcase.intercom.models.TagCreateResponse
 
-typealias TagCreateResponseVariant1CompaniesItem = dev.octri.showcase.intercom.models.TagCreateResponseVariant1CompaniesItem
+typealias TagCreateResponseVariant1CompaniesItem =
+    dev.octri.showcase.intercom.models.TagCreateResponseVariant1CompaniesItem
 
-typealias TagCreateResponseVariant1UsersItem = dev.octri.showcase.intercom.models.TagCreateResponseVariant1UsersItem
+typealias TagCreateResponseVariant1UsersItem =
+    dev.octri.showcase.intercom.models.TagCreateResponseVariant1UsersItem
 
 typealias TagList = dev.octri.showcase.intercom.models.TagList
 
@@ -277,7 +324,8 @@ typealias TagListTypeEnum = dev.octri.showcase.intercom.models.TagListTypeEnum
 
 typealias TagMultipleUsersRequest = dev.octri.showcase.intercom.models.TagMultipleUsersRequest
 
-typealias TagMultipleUsersRequestUsersItem = dev.octri.showcase.intercom.models.TagMultipleUsersRequestUsersItem
+typealias TagMultipleUsersRequestUsersItem =
+    dev.octri.showcase.intercom.models.TagMultipleUsersRequestUsersItem
 
 typealias Tags = dev.octri.showcase.intercom.models.Tags
 
@@ -323,7 +371,8 @@ typealias TicketPartAuthor = dev.octri.showcase.intercom.models.TicketPartAuthor
 
 typealias TicketPartAuthorTypeEnum = dev.octri.showcase.intercom.models.TicketPartAuthorTypeEnum
 
-typealias TicketPartPreviousTicketStateEnum = dev.octri.showcase.intercom.models.TicketPartPreviousTicketStateEnum
+typealias TicketPartPreviousTicketStateEnum =
+    dev.octri.showcase.intercom.models.TicketPartPreviousTicketStateEnum
 
 typealias TicketParts = dev.octri.showcase.intercom.models.TicketParts
 
@@ -333,15 +382,20 @@ typealias TicketPartTicketStateEnum = dev.octri.showcase.intercom.models.TicketP
 
 typealias TicketPartTranslations = dev.octri.showcase.intercom.models.tickets.TicketPartTranslations
 
-typealias TicketPartUpdatedAttributeData = dev.octri.showcase.intercom.models.tickets.TicketPartUpdatedAttributeData
+typealias TicketPartUpdatedAttributeData =
+    dev.octri.showcase.intercom.models.tickets.TicketPartUpdatedAttributeData
 
-typealias TicketPartUpdatedAttributeDataAttribute = dev.octri.showcase.intercom.models.tickets.TicketPartUpdatedAttributeDataAttribute
+typealias TicketPartUpdatedAttributeDataAttribute =
+    dev.octri.showcase.intercom.models.tickets.TicketPartUpdatedAttributeDataAttribute
 
-typealias TicketPartUpdatedAttributeDataAttributeTypeEnum = dev.octri.showcase.intercom.models.TicketPartUpdatedAttributeDataAttributeTypeEnum
+typealias TicketPartUpdatedAttributeDataAttributeTypeEnum =
+    dev.octri.showcase.intercom.models.TicketPartUpdatedAttributeDataAttributeTypeEnum
 
-typealias TicketPartUpdatedAttributeDataValue = dev.octri.showcase.intercom.models.tickets.TicketPartUpdatedAttributeDataValue
+typealias TicketPartUpdatedAttributeDataValue =
+    dev.octri.showcase.intercom.models.tickets.TicketPartUpdatedAttributeDataValue
 
-typealias TicketPartUpdatedAttributeDataValueTypeEnum = dev.octri.showcase.intercom.models.TicketPartUpdatedAttributeDataValueTypeEnum
+typealias TicketPartUpdatedAttributeDataValueTypeEnum =
+    dev.octri.showcase.intercom.models.TicketPartUpdatedAttributeDataValueTypeEnum
 
 typealias TicketReply = dev.octri.showcase.intercom.models.TicketReply
 
@@ -351,7 +405,8 @@ typealias TicketReplyTranslations = dev.octri.showcase.intercom.models.TicketRep
 
 typealias TicketReplyTypeEnum = dev.octri.showcase.intercom.models.TicketReplyTypeEnum
 
-typealias TicketRequestCustomAttributes = dev.octri.showcase.intercom.models.TicketRequestCustomAttributes
+typealias TicketRequestCustomAttributes =
+    dev.octri.showcase.intercom.models.TicketRequestCustomAttributes
 
 typealias TicketState = dev.octri.showcase.intercom.models.tickets.TicketState
 
@@ -359,9 +414,11 @@ typealias TicketStateCategoryEnum = dev.octri.showcase.intercom.models.TicketSta
 
 typealias TicketStateDetailed = dev.octri.showcase.intercom.models.tickets.TicketStateDetailed
 
-typealias TicketStateDetailedCategoryEnum = dev.octri.showcase.intercom.models.TicketStateDetailedCategoryEnum
+typealias TicketStateDetailedCategoryEnum =
+    dev.octri.showcase.intercom.models.TicketStateDetailedCategoryEnum
 
-typealias TicketStateDetailedTicketTypes = dev.octri.showcase.intercom.models.tickets.TicketStateDetailedTicketTypes
+typealias TicketStateDetailedTicketTypes =
+    dev.octri.showcase.intercom.models.tickets.TicketStateDetailedTicketTypes
 
 typealias TicketStateList = dev.octri.showcase.intercom.models.TicketStateList
 
@@ -383,21 +440,27 @@ typealias Translation = dev.octri.showcase.intercom.models.Translation
 
 typealias UnknownContentSearchResult = dev.octri.showcase.intercom.models.UnknownContentSearchResult
 
-typealias UnknownConversationAttribute = dev.octri.showcase.intercom.models.conversationsattributes.UnknownConversationAttribute
+typealias UnknownConversationAttribute =
+    dev.octri.showcase.intercom.models.conversationsattributes.UnknownConversationAttribute
 
-typealias UnknownCreateConversationAttributeRequest = dev.octri.showcase.intercom.models.UnknownCreateConversationAttributeRequest
+typealias UnknownCreateConversationAttributeRequest =
+    dev.octri.showcase.intercom.models.UnknownCreateConversationAttributeRequest
 
 typealias UntagCompanyRequest = dev.octri.showcase.intercom.models.UntagCompanyRequest
 
-typealias UntagCompanyRequestCompaniesItem = dev.octri.showcase.intercom.models.UntagCompanyRequestCompaniesItem
+typealias UntagCompanyRequestCompaniesItem =
+    dev.octri.showcase.intercom.models.UntagCompanyRequestCompaniesItem
 
 typealias UpdateArticleRequest = dev.octri.showcase.intercom.models.UpdateArticleRequest
 
-typealias UpdateArticleRequestRequest = dev.octri.showcase.intercom.models.UpdateArticleRequestRequest
+typealias UpdateArticleRequestRequest =
+    dev.octri.showcase.intercom.models.UpdateArticleRequestRequest
 
-typealias UpdateArticleRequestRequestStateEnum = dev.octri.showcase.intercom.models.UpdateArticleRequestRequestStateEnum
+typealias UpdateArticleRequestRequestStateEnum =
+    dev.octri.showcase.intercom.models.UpdateArticleRequestRequestStateEnum
 
-typealias UpdateArticleRequestStateEnum = dev.octri.showcase.intercom.models.UpdateArticleRequestStateEnum
+typealias UpdateArticleRequestStateEnum =
+    dev.octri.showcase.intercom.models.UpdateArticleRequestStateEnum
 
 typealias UpdateAudienceRequest = dev.octri.showcase.intercom.models.UpdateAudienceRequest
 
@@ -407,32 +470,44 @@ typealias UpdateCompanyRequest = dev.octri.showcase.intercom.models.UpdateCompan
 
 typealias UpdateContactRequest = dev.octri.showcase.intercom.models.UpdateContactRequest
 
-typealias UpdateContentImportSourceRequest = dev.octri.showcase.intercom.models.UpdateContentImportSourceRequest
+typealias UpdateContentImportSourceRequest =
+    dev.octri.showcase.intercom.models.UpdateContentImportSourceRequest
 
-typealias UpdateContentImportSourceRequestStatusEnum = dev.octri.showcase.intercom.models.UpdateContentImportSourceRequestStatusEnum
+typealias UpdateContentImportSourceRequestStatusEnum =
+    dev.octri.showcase.intercom.models.UpdateContentImportSourceRequestStatusEnum
 
-typealias UpdateContentImportSourceRequestSyncBehaviorEnum = dev.octri.showcase.intercom.models.UpdateContentImportSourceRequestSyncBehaviorEnum
+typealias UpdateContentImportSourceRequestSyncBehaviorEnum =
+    dev.octri.showcase.intercom.models.UpdateContentImportSourceRequestSyncBehaviorEnum
 
-typealias UpdateConversationAttributeOptionRequest = dev.octri.showcase.intercom.models.UpdateConversationAttributeOptionRequest
+typealias UpdateConversationAttributeOptionRequest =
+    dev.octri.showcase.intercom.models.UpdateConversationAttributeOptionRequest
 
-typealias UpdateConversationAttributeRequest = dev.octri.showcase.intercom.models.UpdateConversationAttributeRequest
+typealias UpdateConversationAttributeRequest =
+    dev.octri.showcase.intercom.models.UpdateConversationAttributeRequest
 
-typealias UpdateConversationAttributeRequestReference = dev.octri.showcase.intercom.models.UpdateConversationAttributeRequestReference
+typealias UpdateConversationAttributeRequestReference =
+    dev.octri.showcase.intercom.models.UpdateConversationAttributeRequestReference
 
-typealias UpdateConversationAttributeRequestReferenceTypeEnum = dev.octri.showcase.intercom.models.UpdateConversationAttributeRequestReferenceTypeEnum
+typealias UpdateConversationAttributeRequestReferenceTypeEnum =
+    dev.octri.showcase.intercom.models.UpdateConversationAttributeRequestReferenceTypeEnum
 
 typealias UpdateConversationRequest = dev.octri.showcase.intercom.models.UpdateConversationRequest
 
 typealias UpdateDataAttributeRequest = dev.octri.showcase.intercom.models.UpdateDataAttributeRequest
 
-typealias UpdateDataAttributeRequestVariant0 = dev.octri.showcase.intercom.models.UpdateDataAttributeRequestVariant0
+typealias UpdateDataAttributeRequestVariant0 =
+    dev.octri.showcase.intercom.models.UpdateDataAttributeRequestVariant0
 
-typealias UpdateDataAttributeRequestVariant0OptionsItem = dev.octri.showcase.intercom.models.UpdateDataAttributeRequestVariant0OptionsItem
+typealias UpdateDataAttributeRequestVariant0OptionsItem =
+    dev.octri.showcase.intercom.models.UpdateDataAttributeRequestVariant0OptionsItem
 
 typealias UpdateDataConnectorRequest = dev.octri.showcase.intercom.models.UpdateDataConnectorRequest
 
-typealias UpdateDataConnectorRequestAudiencesItemEnum = dev.octri.showcase.intercom.models.UpdateDataConnectorRequestAudiencesItemEnum
+typealias UpdateDataConnectorRequestAudiencesItemEnum =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorRequestAudiencesItemEnum
 
-typealias UpdateDataConnectorRequestDataInputsItem = dev.octri.showcase.intercom.models.UpdateDataConnectorRequestDataInputsItem
+typealias UpdateDataConnectorRequestDataInputsItem =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorRequestDataInputsItem
 
-typealias UpdateDataConnectorRequestDataInputsItemTypeEnum = dev.octri.showcase.intercom.models.UpdateDataConnectorRequestDataInputsItemTypeEnum
+typealias UpdateDataConnectorRequestDataInputsItemTypeEnum =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorRequestDataInputsItemTypeEnum

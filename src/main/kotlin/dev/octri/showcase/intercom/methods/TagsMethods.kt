@@ -17,232 +17,537 @@ import dev.octri.showcase.intercom.TagList
 object TagsMethods {
 
     /**
-     * Attaches a tag to a specific contact. Provide the tag's `id` in the request body and use `contact_id` to identify the contact. The response contains the tag that was added.
+     * Attaches a tag to a specific contact. Provide the tag's `id` in the request body and use
+     * `contact_id` to identify the contact. The response contains the tag that was added.
      *
-     * You can tag a specific contact. This will return a tag object for the tag that was added to the contact.
+     * You can tag a specific contact. This will return a tag object for the tag that was added to
+     * the contact.
      *
-     * @param contactId The unique identifier for the contact which is given by
-     *   Intercom
+     * @param contactId The unique identifier for the contact which is given by Intercom
      * @param id The unique identifier for the tag which is given by Intercom
      */
-    fun attachTagToContact(clientConfig: ClientConfig, contactId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return attachTagToContactWithRawResponse(clientConfig, contactId, id, intercomVersion, options).data
+    fun attachTagToContact(
+        clientConfig: ClientConfig,
+        contactId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return attachTagToContactWithRawResponse(
+                clientConfig,
+                contactId,
+                id,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [attachTagToContact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun attachTagToContactWithRawResponse(clientConfig: ClientConfig, contactId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/tags", config = clientConfig, body = SdkClient.bodyMap("id" to (id)), operationId = "attachTagToContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Removes a tag from a specific contact. Use `contact_id` and `tag_id` to identify the contact and the tag to detach. The response contains the tag that was removed.
+     * [attachTagToContact], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun attachTagToContactWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/tags",
+                config = clientConfig,
+                body = SdkClient.bodyMap("id" to (id)),
+                operationId = "attachTagToContact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Removes a tag from a specific contact. Use `contact_id` and `tag_id` to identify the contact
+     * and the tag to detach. The response contains the tag that was removed.
      *
-     * You can remove tag from a specific contact. This will return a tag object for the tag that was removed from the contact.
+     * You can remove tag from a specific contact. This will return a tag object for the tag that
+     * was removed from the contact.
      *
-     * @param contactId The unique identifier for the contact which is given by
-     *   Intercom
+     * @param contactId The unique identifier for the contact which is given by Intercom
      * @param tagId The unique identifier for the tag which is given by Intercom
      */
-    fun detachTagFromContact(clientConfig: ClientConfig, contactId: String, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return detachTagFromContactWithRawResponse(clientConfig, contactId, tagId, intercomVersion, options).data
+    fun detachTagFromContact(
+        clientConfig: ClientConfig,
+        contactId: String,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return detachTagFromContactWithRawResponse(
+                clientConfig,
+                contactId,
+                tagId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [detachTagFromContact], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun detachTagFromContactWithRawResponse(clientConfig: ClientConfig, contactId: String, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("DELETE", "/contacts/${SdkClient.encodePathSegment(contactId)}/tags/${SdkClient.encodePathSegment(tagId)}", config = clientConfig, operationId = "detachTagFromContact", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Attaches a tag to a conversation and returns the tag that was added. Provide the tag identifier and the identifier of the admin performing the operation in the request body.
+     * [detachTagFromContact], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun detachTagFromContactWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/tags/${SdkClient.encodePathSegment(tagId)}",
+                config = clientConfig,
+                operationId = "detachTagFromContact",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Attaches a tag to a conversation and returns the tag that was added. Provide the tag
+     * identifier and the identifier of the admin performing the operation in the request body.
      *
-     * You can tag a specific conversation. This will return a tag object for the tag that was added to the conversation.
+     * You can tag a specific conversation. This will return a tag object for the tag that was added
+     * to the conversation.
      *
      * @param conversationId conversation_id
      * @param id The unique identifier for the tag which is given by Intercom
      * @param adminId The unique identifier for the admin which is given by Intercom.
      */
-    fun attachTagToConversation(clientConfig: ClientConfig, conversationId: String, id: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return attachTagToConversationWithRawResponse(clientConfig, conversationId, id, adminId, intercomVersion, options).data
+    fun attachTagToConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        id: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return attachTagToConversationWithRawResponse(
+                clientConfig,
+                conversationId,
+                id,
+                adminId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [attachTagToConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun attachTagToConversationWithRawResponse(clientConfig: ClientConfig, conversationId: String, id: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("POST", "/conversations/${SdkClient.encodePathSegment(conversationId)}/tags", config = clientConfig, body = SdkClient.bodyMap("id" to (id), "admin_id" to (adminId)), operationId = "attachTagToConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Removes a tag from a specific conversation and returns the tag that was removed. Provide the conversation and tag identifiers, and include the admin identifier in the request body when sending one.
+     * [attachTagToConversation], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun attachTagToConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        id: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/tags",
+                config = clientConfig,
+                body = SdkClient.bodyMap("id" to (id), "admin_id" to (adminId)),
+                operationId = "attachTagToConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Removes a tag from a specific conversation and returns the tag that was removed. Provide the
+     * conversation and tag identifiers, and include the admin identifier in the request body when
+     * sending one.
      *
-     * You can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.
+     * You can remove tag from a specific conversation. This will return a tag object for the tag
+     * that was removed from the conversation.
      *
      * @param conversationId conversation_id
      * @param tagId tag_id
      * @param adminId The unique identifier for the admin which is given by Intercom.
      */
-    fun detachTagFromConversation(clientConfig: ClientConfig, conversationId: String, tagId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return detachTagFromConversationWithRawResponse(clientConfig, conversationId, tagId, adminId, intercomVersion, options).data
+    fun detachTagFromConversation(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        tagId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return detachTagFromConversationWithRawResponse(
+                clientConfig,
+                conversationId,
+                tagId,
+                adminId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [detachTagFromConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun detachTagFromConversationWithRawResponse(clientConfig: ClientConfig, conversationId: String, tagId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("DELETE", "/conversations/${SdkClient.encodePathSegment(conversationId)}/tags/${SdkClient.encodePathSegment(tagId)}", config = clientConfig, body = SdkClient.bodyMap("admin_id" to (adminId)), operationId = "detachTagFromConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Lists tags in the workspace. Use this endpoint to retrieve the tags available for labeling contacts, companies, and conversations.
+     * [detachTagFromConversation], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun detachTagFromConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        conversationId: String,
+        tagId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/conversations/${SdkClient.encodePathSegment(conversationId)}/tags/${SdkClient.encodePathSegment(tagId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("admin_id" to (adminId)),
+                operationId = "detachTagFromConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Lists tags in the workspace. Use this endpoint to retrieve the tags available for labeling
+     * contacts, companies, and conversations.
      *
      * You can fetch a list of all tags for a given workspace.
      */
-    fun listTags(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TagList {
+    fun listTags(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TagList {
         return listTagsWithRawResponse(clientConfig, intercomVersion, options).data
     }
 
-
-    /** [listTags], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listTagsWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<TagList> {
-        return SdkClient.request<TagList>(SdkClient.RequestSpec("GET", "/tags", config = clientConfig, operationId = "listTags", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [listTags], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun listTagsWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TagList> {
+        return SdkClient.request<TagList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/tags",
+                config = clientConfig,
+                operationId = "listTags",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Creates or updates a tag, or applies or removes tags from companies and users. Supply `name` to create or update a tag, and include the relevant company details to tag or untag companies. Each operation returns a tag object with the affected entities when applicable.
+     * Creates or updates a tag, or applies or removes tags from companies and users. Supply `name`
+     * to create or update a tag, and include the relevant company details to tag or untag
+     * companies. Each operation returns a tag object with the affected entities when applicable.
      *
-     * You can use this endpoint to perform the following operations: **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in "Create or Update Tag Request Payload" described below. **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in "Create or Update Tag Request Payload" described below. **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by…
+     * You can use this endpoint to perform the following operations: **1. Create a new tag:** You
+     * can create a new tag by passing in the tag name as specified in "Create or Update Tag Request
+     * Payload" described below. **2. Update an existing tag:** You can update an existing tag by
+     * passing the id of the tag as specified in "Create or Update Tag Request Payload" described
+     * below. **3. Tag Companies:** You can tag single company or a list of companies. You can tag a
+     * company by…
      */
-    fun createTag(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, body: Any? = null, options: RequestOptions? = null): TagCreateResponse {
+    fun createTag(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): TagCreateResponse {
         return createTagWithRawResponse(clientConfig, intercomVersion, body, options).data
     }
 
-
-    /** [createTag], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createTagWithRawResponse(clientConfig: ClientConfig, intercomVersion: IntercomVersion? = null, body: Any? = null, options: RequestOptions? = null): SdkResponse<TagCreateResponse> {
-        return SdkClient.request<TagCreateResponse>(SdkClient.RequestSpec("POST", "/tags", config = clientConfig, body = body, operationId = "createTag", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java)))
+    /**
+     * [createTag], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createTagWithRawResponse(
+        clientConfig: ClientConfig,
+        intercomVersion: IntercomVersion? = null,
+        body: Any? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TagCreateResponse> {
+        return SdkClient.request<TagCreateResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tags",
+                config = clientConfig,
+                body = body,
+                operationId = "createTag",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a tag from the workspace by its identifier. Use this operation to fetch the tag's details, including its name and identifier.
+     * Retrieves a tag from the workspace by its identifier. Use this operation to fetch the tag's
+     * details, including its name and identifier.
      *
-     * You can fetch the details of tags that are on the workspace by their id. This will return a tag object.
+     * You can fetch the details of tags that are on the workspace by their id. This will return a
+     * tag object.
      *
      * @param tagId The unique identifier of a given tag
      */
-    fun findTag(clientConfig: ClientConfig, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TagBasic {
+    fun findTag(
+        clientConfig: ClientConfig,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TagBasic {
         return findTagWithRawResponse(clientConfig, tagId, intercomVersion, options).data
     }
 
-
-    /** [findTag], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun findTagWithRawResponse(clientConfig: ClientConfig, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<TagBasic> {
-        return SdkClient.request<TagBasic>(SdkClient.RequestSpec("GET", "/tags/${SdkClient.encodePathSegment(tagId)}", config = clientConfig, operationId = "findTag", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [findTag], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun findTagWithRawResponse(
+        clientConfig: ClientConfig,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TagBasic> {
+        return SdkClient.request<TagBasic>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/tags/${SdkClient.encodePathSegment(tagId)}",
+                config = clientConfig,
+                operationId = "findTag",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a tag from the workspace using its identifier. Use this operation to remove a tag that is no longer needed; tags with dependent objects cannot be deleted.
+     * Deletes a tag from the workspace using its identifier. Use this operation to remove a tag
+     * that is no longer needed; tags with dependent objects cannot be deleted.
      *
      * You can delete the details of tags that are on the workspace by passing in the id.
      *
      * @param tagId The unique identifier of a given tag
      */
-    fun deleteTag(clientConfig: ClientConfig, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Unit {
+    fun deleteTag(
+        clientConfig: ClientConfig,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Unit {
         return deleteTagWithRawResponse(clientConfig, tagId, intercomVersion, options).data
     }
 
-
-    /** [deleteTag], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteTagWithRawResponse(clientConfig: ClientConfig, tagId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Unit> {
-        return SdkClient.request<Unit>(SdkClient.RequestSpec("DELETE", "/tags/${SdkClient.encodePathSegment(tagId)}", config = clientConfig, operationId = "deleteTag", decoder = SdkClient.ResponseDecoder.EMPTY, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [deleteTag], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun deleteTagWithRawResponse(
+        clientConfig: ClientConfig,
+        tagId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Unit> {
+        return SdkClient.request<Unit>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/tags/${SdkClient.encodePathSegment(tagId)}",
+                config = clientConfig,
+                operationId = "deleteTag",
+                decoder = SdkClient.ResponseDecoder.EMPTY,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Adds a tag to a specific ticket and returns the tag that was applied. Supply the tag and admin identifiers in the body, and use the ticket's internal API identifier in the path.
+     * Adds a tag to a specific ticket and returns the tag that was applied. Supply the tag and
+     * admin identifiers in the body, and use the ticket's internal API identifier in the path.
      *
-     * You can tag a specific ticket. This will return a tag object for the tag that was added to the ticket.
+     * You can tag a specific ticket. This will return a tag object for the tag that was added to
+     * the ticket.
      *
      * @param ticketId ticket_id
      * @param id The unique identifier for the tag which is given by Intercom
      * @param adminId The unique identifier for the admin which is given by Intercom.
      */
-    fun attachTagToTicket(clientConfig: ClientConfig, ticketId: String, id: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return attachTagToTicketWithRawResponse(clientConfig, ticketId, id, adminId, intercomVersion, options).data
+    fun attachTagToTicket(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        id: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return attachTagToTicketWithRawResponse(
+                clientConfig,
+                ticketId,
+                id,
+                adminId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [attachTagToTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun attachTagToTicketWithRawResponse(clientConfig: ClientConfig, ticketId: String, id: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("POST", "/tickets/${SdkClient.encodePathSegment(ticketId)}/tags", config = clientConfig, body = SdkClient.bodyMap("id" to (id), "admin_id" to (adminId)), operationId = "attachTagToTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Removes a tag from a specific ticket and returns the tag that was removed. Provide the ticket and tag identifiers in the path, and identify the admin performing the removal in the body.
+     * [attachTagToTicket], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun attachTagToTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        id: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}/tags",
+                config = clientConfig,
+                body = SdkClient.bodyMap("id" to (id), "admin_id" to (adminId)),
+                operationId = "attachTagToTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Removes a tag from a specific ticket and returns the tag that was removed. Provide the ticket
+     * and tag identifiers in the path, and identify the admin performing the removal in the body.
      *
-     * You can remove tag from a specific ticket. This will return a tag object for the tag that was removed from the ticket.
+     * You can remove tag from a specific ticket. This will return a tag object for the tag that was
+     * removed from the ticket.
      *
      * @param ticketId ticket_id
      * @param tagId The unique identifier for the tag which is given by Intercom
      * @param adminId The unique identifier for the admin which is given by Intercom.
      */
-    fun detachTagFromTicket(clientConfig: ClientConfig, ticketId: String, tagId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Tag {
-        return detachTagFromTicketWithRawResponse(clientConfig, ticketId, tagId, adminId, intercomVersion, options).data
+    fun detachTagFromTicket(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        tagId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Tag {
+        return detachTagFromTicketWithRawResponse(
+                clientConfig,
+                ticketId,
+                tagId,
+                adminId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [detachTagFromTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun detachTagFromTicketWithRawResponse(clientConfig: ClientConfig, ticketId: String, tagId: String, adminId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Tag> {
-        return SdkClient.request<Tag>(SdkClient.RequestSpec("DELETE", "/tickets/${SdkClient.encodePathSegment(ticketId)}/tags/${SdkClient.encodePathSegment(tagId)}", config = clientConfig, body = SdkClient.bodyMap("admin_id" to (adminId)), operationId = "detachTagFromTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [detachTagFromTicket], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun detachTagFromTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        tagId: String,
+        adminId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Tag> {
+        return SdkClient.request<Tag>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}/tags/${SdkClient.encodePathSegment(tagId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("admin_id" to (adminId)),
+                operationId = "detachTagFromTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

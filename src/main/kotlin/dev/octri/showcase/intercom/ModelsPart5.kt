@@ -3,43 +3,58 @@
 
 package dev.octri.showcase.intercom
 
-typealias UpdateDataConnectorRequestHeadersItem = dev.octri.showcase.intercom.models.UpdateDataConnectorRequestHeadersItem
+typealias UpdateDataConnectorRequestHeadersItem =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorRequestHeadersItem
 
-typealias UpdateDataConnectorRequestHttpMethodEnum = dev.octri.showcase.intercom.models.UpdateDataConnectorRequestHttpMethodEnum
+typealias UpdateDataConnectorRequestHttpMethodEnum =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorRequestHttpMethodEnum
 
-typealias UpdateDataConnectorRequestStateEnum = dev.octri.showcase.intercom.models.UpdateDataConnectorRequestStateEnum
+typealias UpdateDataConnectorRequestStateEnum =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorRequestStateEnum
 
-typealias UpdateDataConnectorVersionRequest = dev.octri.showcase.intercom.models.UpdateDataConnectorVersionRequest
+typealias UpdateDataConnectorVersionRequest =
+    dev.octri.showcase.intercom.models.UpdateDataConnectorVersionRequest
 
 typealias UpdateExternalPageRequest = dev.octri.showcase.intercom.models.UpdateExternalPageRequest
 
-typealias UpdateExternalPageRequestLocaleEnum = dev.octri.showcase.intercom.models.UpdateExternalPageRequestLocaleEnum
+typealias UpdateExternalPageRequestLocaleEnum =
+    dev.octri.showcase.intercom.models.UpdateExternalPageRequestLocaleEnum
 
-typealias UpdateInternalArticleRequest = dev.octri.showcase.intercom.models.UpdateInternalArticleRequest
+typealias UpdateInternalArticleRequest =
+    dev.octri.showcase.intercom.models.UpdateInternalArticleRequest
 
-typealias UpdateOfficeHoursExceptionRequest = dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequest
+typealias UpdateOfficeHoursExceptionRequest =
+    dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequest
 
-typealias UpdateOfficeHoursExceptionRequestExceptionTypeEnum = dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequestExceptionTypeEnum
+typealias UpdateOfficeHoursExceptionRequestExceptionTypeEnum =
+    dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequestExceptionTypeEnum
 
-typealias UpdateOfficeHoursExceptionRequestRequest = dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequestRequest
+typealias UpdateOfficeHoursExceptionRequestRequest =
+    dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequestRequest
 
-typealias UpdateOfficeHoursExceptionRequestRequestExceptionTypeEnum = dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequestRequestExceptionTypeEnum
+typealias UpdateOfficeHoursExceptionRequestRequestExceptionTypeEnum =
+    dev.octri.showcase.intercom.models.UpdateOfficeHoursExceptionRequestRequestExceptionTypeEnum
 
-typealias UpdateOfficeHoursScheduleRequest = dev.octri.showcase.intercom.models.UpdateOfficeHoursScheduleRequest
+typealias UpdateOfficeHoursScheduleRequest =
+    dev.octri.showcase.intercom.models.UpdateOfficeHoursScheduleRequest
 
-typealias UpdateOfficeHoursScheduleRequestRequest = dev.octri.showcase.intercom.models.UpdateOfficeHoursScheduleRequestRequest
+typealias UpdateOfficeHoursScheduleRequestRequest =
+    dev.octri.showcase.intercom.models.UpdateOfficeHoursScheduleRequestRequest
 
 typealias UpdateTicketRequest = dev.octri.showcase.intercom.models.UpdateTicketRequest
 
-typealias UpdateTicketTypeAttributeRequest = dev.octri.showcase.intercom.models.UpdateTicketTypeAttributeRequest
+typealias UpdateTicketTypeAttributeRequest =
+    dev.octri.showcase.intercom.models.UpdateTicketTypeAttributeRequest
 
 typealias UpdateTicketTypeRequest = dev.octri.showcase.intercom.models.UpdateTicketTypeRequest
 
-typealias UpdateTicketTypeRequestCategoryEnum = dev.octri.showcase.intercom.models.UpdateTicketTypeRequestCategoryEnum
+typealias UpdateTicketTypeRequestCategoryEnum =
+    dev.octri.showcase.intercom.models.UpdateTicketTypeRequestCategoryEnum
 
 typealias UpdateVisitorRequest = dev.octri.showcase.intercom.models.UpdateVisitorRequest
 
-typealias ValueUpdateDataAttributeRequest = dev.octri.showcase.intercom.models.ValueUpdateDataAttributeRequest
+typealias ValueUpdateDataAttributeRequest =
+    dev.octri.showcase.intercom.models.ValueUpdateDataAttributeRequest
 
 typealias Visitor = dev.octri.showcase.intercom.models.Visitor
 
@@ -51,7 +66,8 @@ typealias VisitorCompaniesTypeEnum = dev.octri.showcase.intercom.models.VisitorC
 
 typealias VisitorDeletedObject = dev.octri.showcase.intercom.models.VisitorDeletedObject
 
-typealias VisitorDeletedObjectTypeEnum = dev.octri.showcase.intercom.models.VisitorDeletedObjectTypeEnum
+typealias VisitorDeletedObjectTypeEnum =
+    dev.octri.showcase.intercom.models.VisitorDeletedObjectTypeEnum
 
 typealias VisitorLocationData = dev.octri.showcase.intercom.models.VisitorLocationData
 
@@ -61,13 +77,15 @@ typealias VisitorSegmentsTypeEnum = dev.octri.showcase.intercom.models.VisitorSe
 
 typealias VisitorSocialProfiles = dev.octri.showcase.intercom.models.VisitorSocialProfiles
 
-typealias VisitorSocialProfilesTypeEnum = dev.octri.showcase.intercom.models.VisitorSocialProfilesTypeEnum
+typealias VisitorSocialProfilesTypeEnum =
+    dev.octri.showcase.intercom.models.VisitorSocialProfilesTypeEnum
 
 typealias VisitorTags = dev.octri.showcase.intercom.models.VisitorTags
 
 typealias VisitorTagsTagsItem = dev.octri.showcase.intercom.models.VisitorTagsTagsItem
 
-typealias VisitorTagsTagsItemTypeEnum = dev.octri.showcase.intercom.models.VisitorTagsTagsItemTypeEnum
+typealias VisitorTagsTagsItemTypeEnum =
+    dev.octri.showcase.intercom.models.VisitorTagsTagsItemTypeEnum
 
 typealias VisitorTagsTypeEnum = dev.octri.showcase.intercom.models.VisitorTagsTypeEnum
 
@@ -77,24 +95,33 @@ typealias WhatsappMessageStatusError = dev.octri.showcase.intercom.models.Whatsa
 
 typealias WhatsappMessageStatusList = dev.octri.showcase.intercom.models.WhatsappMessageStatusList
 
-typealias WhatsappMessageStatusListEventsItem = dev.octri.showcase.intercom.models.WhatsappMessageStatusListEventsItem
+typealias WhatsappMessageStatusListEventsItem =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListEventsItem
 
-typealias WhatsappMessageStatusListEventsItemStatusEnum = dev.octri.showcase.intercom.models.WhatsappMessageStatusListEventsItemStatusEnum
+typealias WhatsappMessageStatusListEventsItemStatusEnum =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListEventsItemStatusEnum
 
-typealias WhatsappMessageStatusListEventsItemTypeEnum = dev.octri.showcase.intercom.models.WhatsappMessageStatusListEventsItemTypeEnum
+typealias WhatsappMessageStatusListEventsItemTypeEnum =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListEventsItemTypeEnum
 
-typealias WhatsappMessageStatusListPages = dev.octri.showcase.intercom.models.WhatsappMessageStatusListPages
+typealias WhatsappMessageStatusListPages =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListPages
 
-typealias WhatsappMessageStatusListPagesNext = dev.octri.showcase.intercom.models.WhatsappMessageStatusListPagesNext
+typealias WhatsappMessageStatusListPagesNext =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListPagesNext
 
-typealias WhatsappMessageStatusListPagesTypeEnum = dev.octri.showcase.intercom.models.WhatsappMessageStatusListPagesTypeEnum
+typealias WhatsappMessageStatusListPagesTypeEnum =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListPagesTypeEnum
 
-typealias WhatsappMessageStatusListTypeEnum = dev.octri.showcase.intercom.models.WhatsappMessageStatusListTypeEnum
+typealias WhatsappMessageStatusListTypeEnum =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusListTypeEnum
 
-typealias WhatsappMessageStatusStatusEnum = dev.octri.showcase.intercom.models.WhatsappMessageStatusStatusEnum
+typealias WhatsappMessageStatusStatusEnum =
+    dev.octri.showcase.intercom.models.WhatsappMessageStatusStatusEnum
 
 typealias WorkflowExport = dev.octri.showcase.intercom.models.WorkflowExport
 
 typealias WorkflowExportWorkflow = dev.octri.showcase.intercom.models.WorkflowExportWorkflow
 
-typealias WorkflowExportWorkflowStateEnum = dev.octri.showcase.intercom.models.WorkflowExportWorkflowStateEnum
+typealias WorkflowExportWorkflowStateEnum =
+    dev.octri.showcase.intercom.models.WorkflowExportWorkflowStateEnum

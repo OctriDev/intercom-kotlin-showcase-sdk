@@ -3,172 +3,362 @@
 
 package dev.octri.showcase.intercom
 
-
 class CallsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists calls in a paginated result set. Use `page` and `per_page` to paginate the results; `per_page` defaults to 25 and cannot exceed 25.
+     * Lists calls in a paginated result set. Use `page` and `per_page` to paginate the results;
+     * `per_page` defaults to 25 and cannot exceed 25.
      *
      * Retrieve a paginated list of calls.
      */
-    fun list(page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): CallList {
-        return dev.octri.showcase.intercom.methods.Calls.listCalls(clientConfig, page, perPage, intercomVersion, options)
+    fun list(
+        page: Long? = null,
+        perPage: Long? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): CallList {
+        return dev.octri.showcase.intercom.methods.Calls.listCalls(
+            clientConfig,
+            page,
+            perPage,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Retrieves a single call by its identifier. Use the `call_id` path parameter to select the call you want to inspect.
+     * Retrieves a single call by its identifier. Use the `call_id` path parameter to select the
+     * call you want to inspect.
      *
      * Retrieve a single call by id.
      */
-    fun show(callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Call {
-        return dev.octri.showcase.intercom.methods.Calls.showCall(clientConfig, callId, intercomVersion, options)
+    fun show(
+        callId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Call {
+        return dev.octri.showcase.intercom.methods.Calls.showCall(
+            clientConfig,
+            callId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Retrieves a call recording when one is available. Use the `call_id` path parameter to identify the call; the response redirects to a signed recording URL.
+     * Retrieves a call recording when one is available. Use the `call_id` path parameter to
+     * identify the call; the response redirects to a signed recording URL.
      *
      * Redirects to a signed URL for the call's recording if it exists.
      */
-    fun showRecording(callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Any {
-        return dev.octri.showcase.intercom.methods.Calls.showCallRecording(clientConfig, callId, intercomVersion, options)
+    fun showRecording(
+        callId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Any {
+        return dev.octri.showcase.intercom.methods.Calls.showCallRecording(
+            clientConfig,
+            callId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Retrieves the transcript for a call as a downloadable text file. Use `call_id` to identify the call whose transcript you need.
+     * Retrieves the transcript for a call as a downloadable text file. Use `call_id` to identify
+     * the call whose transcript you need.
      *
      * Returns the transcript for the specified call as a downloadable text file.
      */
-    fun showTranscript(callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): String {
-        return dev.octri.showcase.intercom.methods.Calls.showCallTranscript(clientConfig, callId, intercomVersion, options)
+    fun showTranscript(
+        callId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): String {
+        return dev.octri.showcase.intercom.methods.Calls.showCallTranscript(
+            clientConfig,
+            callId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Lists calls associated with the supplied conversation identifiers and includes transcripts when available. Provide between 1 and 20 identifiers in `conversation_ids`; the response can include calls without transcripts when none are available.
+     * Lists calls associated with the supplied conversation identifiers and includes transcripts
+     * when available. Provide between 1 and 20 identifiers in `conversation_ids`; the response can
+     * include calls without transcripts when none are available.
      *
-     * Retrieve calls by a list of conversation ids and include transcripts when available. A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.
+     * Retrieve calls by a list of conversation ids and include transcripts when available. A
+     * maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are
+     * provided, a 400 error is returned.
      */
-    fun listWithTranscripts(conversationIds: List<String>, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): dev.octri.showcase.intercom.methods.Calls.ListCallsWithTranscriptsResponse {
-        return dev.octri.showcase.intercom.methods.Calls.listCallsWithTranscripts(clientConfig, conversationIds, intercomVersion, options)
+    fun listWithTranscripts(
+        conversationIds: List<String>,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): dev.octri.showcase.intercom.methods.Calls.ListCallsWithTranscriptsResponse {
+        return dev.octri.showcase.intercom.methods.Calls.listCallsWithTranscripts(
+            clientConfig,
+            conversationIds,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Register a Fin Voice call with Intercom. This endpoint creates an external reference that links an external call identifier to an Intercom call and conversation. The call can be from different sources: - AWS Connect (default) - Five9 - Zoom Phone
+     * Register a Fin Voice call with Intercom. This endpoint creates an external reference that
+     * links an external call identifier to an Intercom call and conversation. The call can be from
+     * different sources: - AWS Connect (default) - Five9 - Zoom Phone
      */
-    fun registerFinVoice(phoneNumber: String, callId: String, source: RegisterFinVoiceCallRequestSourceEnum? = null, data: SdkClient.SdkOptional<Map<String, Any>?>? = null, options: RequestOptions? = null): AiCallResponse {
-        return dev.octri.showcase.intercom.methods.Calls.registerFinVoiceCall(clientConfig, phoneNumber, callId, source, data, options)
+    fun registerFinVoice(
+        phoneNumber: String,
+        callId: String,
+        source: RegisterFinVoiceCallRequestSourceEnum? = null,
+        data: SdkClient.SdkOptional<Map<String, Any>?>? = null,
+        options: RequestOptions? = null,
+    ): AiCallResponse {
+        return dev.octri.showcase.intercom.methods.Calls.registerFinVoiceCall(
+            clientConfig,
+            phoneNumber,
+            callId,
+            source,
+            data,
+            options,
+        )
     }
 
-    /**
-     * Retrieve information about a Fin Voice call using the external reference ID.
-     */
+    /** Retrieve information about a Fin Voice call using the external reference ID. */
     fun collectFinVoiceById(id: Long, options: RequestOptions? = null): AiCallResponse {
-        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallById(clientConfig, id, options)
+        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallById(
+            clientConfig,
+            id,
+            options,
+        )
+    }
+
+    /** Retrieve information about a Fin Voice call using the external call identifier. */
+    fun collectFinVoiceByExternalId(
+        externalId: String,
+        options: RequestOptions? = null,
+    ): AiCallResponse {
+        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByExternalId(
+            clientConfig,
+            externalId,
+            options,
+        )
     }
 
     /**
-     * Retrieve information about a Fin Voice call using the external call identifier.
+     * Retrieve information about a Fin Voice call using the phone number. Returns the most recent
+     * matched call for the given phone number, ordered by creation date.
      */
-    fun collectFinVoiceByExternalId(externalId: String, options: RequestOptions? = null): AiCallResponse {
-        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByExternalId(clientConfig, externalId, options)
+    fun collectFinVoiceByPhoneNumber(
+        phoneNumber: String,
+        options: RequestOptions? = null,
+    ): AiCallResponse {
+        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByPhoneNumber(
+            clientConfig,
+            phoneNumber,
+            options,
+        )
     }
 
     /**
-     * Retrieve information about a Fin Voice call using the phone number. Returns the most recent matched call for the given phone number, ordered by creation date.
+     * Retrieve information about Fin Voice calls associated with a conversation. Returns all
+     * matched calls for the given conversation ID. A conversation may have multiple associated
+     * calls.
      */
-    fun collectFinVoiceByPhoneNumber(phoneNumber: String, options: RequestOptions? = null): AiCallResponse {
-        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByPhoneNumber(clientConfig, phoneNumber, options)
+    fun collectFinVoiceByConversationId(
+        conversationId: String,
+        options: RequestOptions? = null,
+    ): List<AiCallResponse> {
+        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallsByConversationId(
+            clientConfig,
+            conversationId,
+            options,
+        )
     }
 
     /**
-     * Retrieve information about Fin Voice calls associated with a conversation. Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
      */
-    fun collectFinVoiceByConversationId(conversationId: String, options: RequestOptions? = null): List<AiCallResponse> {
-        return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallsByConversationId(clientConfig, conversationId, options)
-    }
-
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [CallsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [CallsNamespace], returning the [SdkResponse] envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Lists calls in a paginated result set. Use `page` and `per_page` to paginate the results; `per_page` defaults to 25 and cannot exceed 25.
+         * Lists calls in a paginated result set. Use `page` and `per_page` to paginate the results;
+         * `per_page` defaults to 25 and cannot exceed 25.
          *
          * Retrieve a paginated list of calls.
          */
-        fun list(page: Long? = null, perPage: Long? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<CallList> {
-            return dev.octri.showcase.intercom.methods.Calls.listCallsWithRawResponse(clientConfig, page, perPage, intercomVersion, options)
+        fun list(
+            page: Long? = null,
+            perPage: Long? = null,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CallList> {
+            return dev.octri.showcase.intercom.methods.Calls.listCallsWithRawResponse(
+                clientConfig,
+                page,
+                perPage,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Retrieves a single call by its identifier. Use the `call_id` path parameter to select the call you want to inspect.
+         * Retrieves a single call by its identifier. Use the `call_id` path parameter to select the
+         * call you want to inspect.
          *
          * Retrieve a single call by id.
          */
-        fun show(callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Call> {
-            return dev.octri.showcase.intercom.methods.Calls.showCallWithRawResponse(clientConfig, callId, intercomVersion, options)
+        fun show(
+            callId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Call> {
+            return dev.octri.showcase.intercom.methods.Calls.showCallWithRawResponse(
+                clientConfig,
+                callId,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Retrieves a call recording when one is available. Use the `call_id` path parameter to identify the call; the response redirects to a signed recording URL.
+         * Retrieves a call recording when one is available. Use the `call_id` path parameter to
+         * identify the call; the response redirects to a signed recording URL.
          *
          * Redirects to a signed URL for the call's recording if it exists.
          */
-        fun showRecording(callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Any> {
-            return dev.octri.showcase.intercom.methods.Calls.showCallRecordingWithRawResponse(clientConfig, callId, intercomVersion, options)
+        fun showRecording(
+            callId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Any> {
+            return dev.octri.showcase.intercom.methods.Calls.showCallRecordingWithRawResponse(
+                clientConfig,
+                callId,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Retrieves the transcript for a call as a downloadable text file. Use `call_id` to identify the call whose transcript you need.
+         * Retrieves the transcript for a call as a downloadable text file. Use `call_id` to
+         * identify the call whose transcript you need.
          *
          * Returns the transcript for the specified call as a downloadable text file.
          */
-        fun showTranscript(callId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<String> {
-            return dev.octri.showcase.intercom.methods.Calls.showCallTranscriptWithRawResponse(clientConfig, callId, intercomVersion, options)
+        fun showTranscript(
+            callId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<String> {
+            return dev.octri.showcase.intercom.methods.Calls.showCallTranscriptWithRawResponse(
+                clientConfig,
+                callId,
+                intercomVersion,
+                options,
+            )
         }
 
         /**
-         * Lists calls associated with the supplied conversation identifiers and includes transcripts when available. Provide between 1 and 20 identifiers in `conversation_ids`; the response can include calls without transcripts when none are available.
+         * Lists calls associated with the supplied conversation identifiers and includes
+         * transcripts when available. Provide between 1 and 20 identifiers in `conversation_ids`;
+         * the response can include calls without transcripts when none are available.
          *
-         * Retrieve calls by a list of conversation ids and include transcripts when available. A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.
+         * Retrieve calls by a list of conversation ids and include transcripts when available. A
+         * maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20
+         * are provided, a 400 error is returned.
          */
-        fun listWithTranscripts(conversationIds: List<String>, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<dev.octri.showcase.intercom.methods.Calls.ListCallsWithTranscriptsResponse> {
-            return dev.octri.showcase.intercom.methods.Calls.listCallsWithTranscriptsWithRawResponse(clientConfig, conversationIds, intercomVersion, options)
+        fun listWithTranscripts(
+            conversationIds: List<String>,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<dev.octri.showcase.intercom.methods.Calls.ListCallsWithTranscriptsResponse> {
+            return dev.octri.showcase.intercom.methods.Calls
+                .listCallsWithTranscriptsWithRawResponse(
+                    clientConfig,
+                    conversationIds,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Register a Fin Voice call with Intercom. This endpoint creates an external reference that links an external call identifier to an Intercom call and conversation. The call can be from different sources: - AWS Connect (default) - Five9 - Zoom Phone
+         * Register a Fin Voice call with Intercom. This endpoint creates an external reference that
+         * links an external call identifier to an Intercom call and conversation. The call can be
+         * from different sources: - AWS Connect (default) - Five9 - Zoom Phone
          */
-        fun registerFinVoice(phoneNumber: String, callId: String, source: RegisterFinVoiceCallRequestSourceEnum? = null, data: SdkClient.SdkOptional<Map<String, Any>?>? = null, options: RequestOptions? = null): SdkResponse<AiCallResponse> {
-            return dev.octri.showcase.intercom.methods.Calls.registerFinVoiceCallWithRawResponse(clientConfig, phoneNumber, callId, source, data, options)
+        fun registerFinVoice(
+            phoneNumber: String,
+            callId: String,
+            source: RegisterFinVoiceCallRequestSourceEnum? = null,
+            data: SdkClient.SdkOptional<Map<String, Any>?>? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<AiCallResponse> {
+            return dev.octri.showcase.intercom.methods.Calls.registerFinVoiceCallWithRawResponse(
+                clientConfig,
+                phoneNumber,
+                callId,
+                source,
+                data,
+                options,
+            )
+        }
+
+        /** Retrieve information about a Fin Voice call using the external reference ID. */
+        fun collectFinVoiceById(
+            id: Long,
+            options: RequestOptions? = null,
+        ): SdkResponse<AiCallResponse> {
+            return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByIdWithRawResponse(
+                clientConfig,
+                id,
+                options,
+            )
+        }
+
+        /** Retrieve information about a Fin Voice call using the external call identifier. */
+        fun collectFinVoiceByExternalId(
+            externalId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<AiCallResponse> {
+            return dev.octri.showcase.intercom.methods.Calls
+                .collectFinVoiceCallByExternalIdWithRawResponse(clientConfig, externalId, options)
         }
 
         /**
-         * Retrieve information about a Fin Voice call using the external reference ID.
+         * Retrieve information about a Fin Voice call using the phone number. Returns the most
+         * recent matched call for the given phone number, ordered by creation date.
          */
-        fun collectFinVoiceById(id: Long, options: RequestOptions? = null): SdkResponse<AiCallResponse> {
-            return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByIdWithRawResponse(clientConfig, id, options)
+        fun collectFinVoiceByPhoneNumber(
+            phoneNumber: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<AiCallResponse> {
+            return dev.octri.showcase.intercom.methods.Calls
+                .collectFinVoiceCallByPhoneNumberWithRawResponse(clientConfig, phoneNumber, options)
         }
 
         /**
-         * Retrieve information about a Fin Voice call using the external call identifier.
+         * Retrieve information about Fin Voice calls associated with a conversation. Returns all
+         * matched calls for the given conversation ID. A conversation may have multiple associated
+         * calls.
          */
-        fun collectFinVoiceByExternalId(externalId: String, options: RequestOptions? = null): SdkResponse<AiCallResponse> {
-            return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByExternalIdWithRawResponse(clientConfig, externalId, options)
+        fun collectFinVoiceByConversationId(
+            conversationId: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<List<AiCallResponse>> {
+            return dev.octri.showcase.intercom.methods.Calls
+                .collectFinVoiceCallsByConversationIdWithRawResponse(
+                    clientConfig,
+                    conversationId,
+                    options,
+                )
         }
-
-        /**
-         * Retrieve information about a Fin Voice call using the phone number. Returns the most recent matched call for the given phone number, ordered by creation date.
-         */
-        fun collectFinVoiceByPhoneNumber(phoneNumber: String, options: RequestOptions? = null): SdkResponse<AiCallResponse> {
-            return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallByPhoneNumberWithRawResponse(clientConfig, phoneNumber, options)
-        }
-
-        /**
-         * Retrieve information about Fin Voice calls associated with a conversation. Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.
-         */
-        fun collectFinVoiceByConversationId(conversationId: String, options: RequestOptions? = null): SdkResponse<List<AiCallResponse>> {
-            return dev.octri.showcase.intercom.methods.Calls.collectFinVoiceCallsByConversationIdWithRawResponse(clientConfig, conversationId, options)
-        }
-
     }
 }

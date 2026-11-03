@@ -17,106 +17,186 @@ import dev.octri.showcase.intercom.UpdateConversationAttributeRequestReferenceTy
 
 object ConversationsAttributes {
 
-/**
- * (Relationship data type only) Reference configuration for related objects.
- */
-data class UpdateConversationAttributeRequestReference(
-    /**
-     * The cardinality of the relationship: `one` or `many`.
-     */
-    val type: UpdateConversationAttributeRequestReferenceTypeEnum,
-    /**
-     * The ID of the related custom object type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object_type_id") val objectTypeId: String? = null
-) : SdkResource()
+    /** (Relationship data type only) Reference configuration for related objects. */
+    data class UpdateConversationAttributeRequestReference(
+        /** The cardinality of the relationship: `one` or `many`. */
+        val type: UpdateConversationAttributeRequestReferenceTypeEnum,
+        /** The ID of the related custom object type. */
+        @com.fasterxml.jackson.annotation.JsonProperty("object_type_id")
+        val objectTypeId: String? = null,
+    ) : SdkResource()
 
     /**
-     * Lists conversation attributes belonging to the workspace. Set `include_archived` to include archived attributes; it defaults to false when omitted.
+     * Lists conversation attributes belonging to the workspace. Set `include_archived` to include
+     * archived attributes; it defaults to false when omitted.
      *
      * You can fetch a list of all conversation attributes for your workspace.
      *
-     * @param includeArchived Include archived attributes in the list. Default
-     *   `false`.
+     * @param includeArchived Include archived attributes in the list. Default `false`.
      */
-    fun listConversationAttributes(clientConfig: ClientConfig, includeArchived: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttributeList {
-        return listConversationAttributesWithRawResponse(clientConfig, includeArchived, intercomVersion, options).data
+    fun listConversationAttributes(
+        clientConfig: ClientConfig,
+        includeArchived: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttributeList {
+        return listConversationAttributesWithRawResponse(
+                clientConfig,
+                includeArchived,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [listConversationAttributes], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun listConversationAttributesWithRawResponse(clientConfig: ClientConfig, includeArchived: Boolean? = null, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttributeList> {
-        return SdkClient.request<ConversationAttributeList>(SdkClient.RequestSpec("GET", "/conversations/attributes", config = clientConfig, query = mapOf("include_archived" to
-    SdkClient.queryValue(includeArchived, "form", true)), operationId = "listConversationAttributes", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Creates a conversation attribute for the workspace. Provide the required `name` and `data_type`; the payload can also include attribute details such as its description, team visibility, and type-specific configuration.
+     * [listConversationAttributes], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun listConversationAttributesWithRawResponse(
+        clientConfig: ClientConfig,
+        includeArchived: Boolean? = null,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttributeList> {
+        return SdkClient.request<ConversationAttributeList>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/attributes",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "include_archived" to SdkClient.queryValue(includeArchived, "form", true)
+                    ),
+                operationId = "listConversationAttributes",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Creates a conversation attribute for the workspace. Provide the required `name` and
+     * `data_type`; the payload can also include attribute details such as its description, team
+     * visibility, and type-specific configuration.
      *
      * Create a new conversation attribute.
      */
-    fun createConversationAttribute(clientConfig: ClientConfig, body: CreateConversationAttributeRequest, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return createConversationAttributeWithRawResponse(clientConfig, body, intercomVersion, options).data
+    fun createConversationAttribute(
+        clientConfig: ClientConfig,
+        body: CreateConversationAttributeRequest,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return createConversationAttributeWithRawResponse(
+                clientConfig,
+                body,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [createConversationAttribute], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createConversationAttributeWithRawResponse(clientConfig: ClientConfig, body: CreateConversationAttributeRequest, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("POST", "/conversations/attributes", config = clientConfig, body = body, operationId = "createConversationAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Retrieves a conversation attribute by ID. Use this operation to fetch one attribute from the workspace.
+     * [createConversationAttribute], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun createConversationAttributeWithRawResponse(
+        clientConfig: ClientConfig,
+        body: CreateConversationAttributeRequest,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/attributes",
+                config = clientConfig,
+                body = body,
+                operationId = "createConversationAttribute",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "422" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Retrieves a conversation attribute by ID. Use this operation to fetch one attribute from the
+     * workspace.
      *
      * Retrieve a single conversation attribute by ID.
      *
      * @param id The conversation attribute id
      */
-    fun getConversationAttribute(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return getConversationAttributeWithRawResponse(clientConfig, id, intercomVersion, options).data
+    fun getConversationAttribute(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return getConversationAttributeWithRawResponse(clientConfig, id, intercomVersion, options)
+            .data
     }
-
-
-    /** [getConversationAttribute], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getConversationAttributeWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("GET", "/conversations/attributes/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "getConversationAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Updates an existing conversation attribute. Provide the fields to change, including type-specific settings when applicable; for relationship configuration, `reference.type` must be `one` or `many`.
+     * [getConversationAttribute], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun getConversationAttributeWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/conversations/attributes/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "getConversationAttribute",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Updates an existing conversation attribute. Provide the fields to change, including
+     * type-specific settings when applicable; for relationship configuration, `reference.type` must
+     * be `one` or `many`.
      *
      * Update an existing conversation attribute.
      *
      * @param id The conversation attribute id
      * @param name Name of the attribute.
      * @param description Readable description of the attribute.
-     * @param multiline (String data type only) Whether this string attribute is
-     *   multiline.
+     * @param multiline (String data type only) Whether this string attribute is multiline.
      * @param required Whether this attribute is required.
-     * @param visibleToTeamIds Team IDs that can see this attribute. Empty array
-     *   means all teams.
-     * @param reference (Relationship data type only) Reference configuration for
-     *   related objects.
+     * @param visibleToTeamIds Team IDs that can see this attribute. Empty array means all teams.
+     * @param reference (Relationship data type only) Reference configuration for related objects.
      */
-    fun updateConversationAttribute(clientConfig: ClientConfig, request: UpdateConversationAttributeParams, options: RequestOptions? = null): ConversationAttribute {
+    fun updateConversationAttribute(
+        clientConfig: ClientConfig,
+        request: UpdateConversationAttributeParams,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
         return updateConversationAttributeWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [updateConversationAttribute]. */
     data class UpdateConversationAttributeParams(
@@ -127,113 +207,283 @@ data class UpdateConversationAttributeRequestReference(
         val multiline: Boolean? = null,
         val required: Boolean? = null,
         val visibleToTeamIds: List<String>? = null,
-        val reference: UpdateConversationAttributeRequestReference? = null
+        val reference: UpdateConversationAttributeRequestReference? = null,
     )
 
-    /** [updateConversationAttribute], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateConversationAttributeWithRawResponse(clientConfig: ClientConfig, request: UpdateConversationAttributeParams, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("PUT", "/conversations/attributes/${SdkClient.encodePathSegment(request.id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "description" to (SdkClient.omitIfNull(request.description)), "multiline" to (SdkClient.omitIfNull(request.multiline)), "required" to (SdkClient.omitIfNull(request.required)), "visible_to_team_ids" to
-    (SdkClient.omitIfNull(request.visibleToTeamIds)), "reference" to (SdkClient.omitIfNull(request.reference))), operationId = "updateConversationAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
+    /**
+     * [updateConversationAttribute], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun updateConversationAttributeWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateConversationAttributeParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/conversations/attributes/${SdkClient.encodePathSegment(request.id)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (SdkClient.omitIfNull(request.name)),
+                        "description" to (SdkClient.omitIfNull(request.description)),
+                        "multiline" to (SdkClient.omitIfNull(request.multiline)),
+                        "required" to (SdkClient.omitIfNull(request.required)),
+                        "visible_to_team_ids" to (SdkClient.omitIfNull(request.visibleToTeamIds)),
+                        "reference" to (SdkClient.omitIfNull(request.reference)),
+                    ),
+                operationId = "updateConversationAttribute",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Archives a conversation attribute without permanently deleting it. Supply the attribute's `id` to select the attribute to archive.
+     * Archives a conversation attribute without permanently deleting it. Supply the attribute's
+     * `id` to select the attribute to archive.
      *
-     * Archive a conversation attribute (soft delete). The attribute is marked as archived but not permanently deleted.
+     * Archive a conversation attribute (soft delete). The attribute is marked as archived but not
+     * permanently deleted.
      *
      * @param id The conversation attribute id
      */
-    fun deleteConversationAttribute(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return deleteConversationAttributeWithRawResponse(clientConfig, id, intercomVersion, options).data
+    fun deleteConversationAttribute(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return deleteConversationAttributeWithRawResponse(
+                clientConfig,
+                id,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [deleteConversationAttribute], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteConversationAttributeWithRawResponse(clientConfig: ClientConfig, id: Long, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("DELETE", "/conversations/attributes/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "deleteConversationAttribute", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Adds an option to a list-type conversation attribute and returns the attribute with its updated options. Supply `label` for the new option.
+     * [deleteConversationAttribute], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun deleteConversationAttributeWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/conversations/attributes/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "deleteConversationAttribute",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java),
+            )
+        )
+    }
+
+    /**
+     * Adds an option to a list-type conversation attribute and returns the attribute with its
+     * updated options. Supply `label` for the new option.
      *
-     * Add a new option to a list-type conversation attribute. Returns the full attribute with the updated options array.
+     * Add a new option to a list-type conversation attribute. Returns the full attribute with the
+     * updated options array.
      *
      * @param id The conversation attribute id
      * @param label The label for the new option.
      */
-    fun createConversationAttributeOption(clientConfig: ClientConfig, id: Long, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return createConversationAttributeOptionWithRawResponse(clientConfig, id, label, intercomVersion, options).data
+    fun createConversationAttributeOption(
+        clientConfig: ClientConfig,
+        id: Long,
+        label: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return createConversationAttributeOptionWithRawResponse(
+                clientConfig,
+                id,
+                label,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [createConversationAttributeOption], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createConversationAttributeOptionWithRawResponse(clientConfig: ClientConfig, id: Long, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("POST", "/conversations/attributes/${SdkClient.encodePathSegment(id)}/options", config = clientConfig, body = SdkClient.bodyMap("label" to (label)), operationId = "createConversationAttributeOption", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Updates the label of one option on a list-type conversation attribute. Supply the new `label`; the response includes the full attribute and its updated options array. Use the attribute and option identifiers to target the option to change.
+     * [createConversationAttributeOption], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun createConversationAttributeOptionWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        label: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/conversations/attributes/${SdkClient.encodePathSegment(id)}/options",
+                config = clientConfig,
+                body = SdkClient.bodyMap("label" to (label)),
+                operationId = "createConversationAttributeOption",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Updates the label of one option on a list-type conversation attribute. Supply the new
+     * `label`; the response includes the full attribute and its updated options array. Use the
+     * attribute and option identifiers to target the option to change.
      *
-     * Update the label of a single option on a list-type conversation attribute. Returns the full attribute with the updated options array.
+     * Update the label of a single option on a list-type conversation attribute. Returns the full
+     * attribute with the updated options array.
      *
      * @param id The conversation attribute id
-     * @param optionId The UUID of the list option to update (from the `id` field in
-     *   the options array)
+     * @param optionId The UUID of the list option to update (from the `id` field in the options
+     *   array)
      * @param label The updated label for the option.
      */
-    fun updateConversationAttributeOption(clientConfig: ClientConfig, id: Long, optionId: String, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return updateConversationAttributeOptionWithRawResponse(clientConfig, id, optionId, label, intercomVersion, options).data
+    fun updateConversationAttributeOption(
+        clientConfig: ClientConfig,
+        id: Long,
+        optionId: String,
+        label: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return updateConversationAttributeOptionWithRawResponse(
+                clientConfig,
+                id,
+                optionId,
+                label,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [updateConversationAttributeOption], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateConversationAttributeOptionWithRawResponse(clientConfig: ClientConfig, id: Long, optionId: String, label: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("PUT", "/conversations/attributes/${SdkClient.encodePathSegment(id)}/options/${SdkClient.encodePathSegment(optionId)}", config = clientConfig, body = SdkClient.bodyMap("label" to (label)), operationId = "updateConversationAttributeOption", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Archives an option on a list-type conversation attribute without permanently deleting it. The option remains in the attribute response with `archived` set to true, and the response includes the updated options array.
+     * [updateConversationAttributeOption], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun updateConversationAttributeOptionWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        optionId: String,
+        label: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/conversations/attributes/${SdkClient.encodePathSegment(id)}/options/${SdkClient.encodePathSegment(optionId)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("label" to (label)),
+                operationId = "updateConversationAttributeOption",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Archives an option on a list-type conversation attribute without permanently deleting it. The
+     * option remains in the attribute response with `archived` set to true, and the response
+     * includes the updated options array.
      *
-     * Archive a single option on a list-type conversation attribute (soft delete). The option remains in the response with `archived: true`. Returns the full attribute with the updated options array.
+     * Archive a single option on a list-type conversation attribute (soft delete). The option
+     * remains in the response with `archived: true`. Returns the full attribute with the updated
+     * options array.
      *
      * @param id The conversation attribute id
-     * @param optionId The UUID of the list option to archive (from the `id` field in
-     *   the options array)
+     * @param optionId The UUID of the list option to archive (from the `id` field in the options
+     *   array)
      */
-    fun deleteConversationAttributeOption(clientConfig: ClientConfig, id: Long, optionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): ConversationAttribute {
-        return deleteConversationAttributeOptionWithRawResponse(clientConfig, id, optionId, intercomVersion, options).data
+    fun deleteConversationAttributeOption(
+        clientConfig: ClientConfig,
+        id: Long,
+        optionId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): ConversationAttribute {
+        return deleteConversationAttributeOptionWithRawResponse(
+                clientConfig,
+                id,
+                optionId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
 
-
-    /** [deleteConversationAttributeOption], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteConversationAttributeOptionWithRawResponse(clientConfig: ClientConfig, id: Long, optionId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<ConversationAttribute> {
-        return SdkClient.request<ConversationAttribute>(SdkClient.RequestSpec("DELETE", "/conversations/attributes/${SdkClient.encodePathSegment(id)}/options/${SdkClient.encodePathSegment(optionId)}", config = clientConfig, operationId = "deleteConversationAttributeOption", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "404" to Error2::class.java, "422" to Error2::class.java)))
+    /**
+     * [deleteConversationAttributeOption], returning the [SdkResponse] envelope: status code,
+     * headers, request ID and latency.
+     */
+    fun deleteConversationAttributeOptionWithRawResponse(
+        clientConfig: ClientConfig,
+        id: Long,
+        optionId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ConversationAttribute> {
+        return SdkClient.request<ConversationAttribute>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/conversations/attributes/${SdkClient.encodePathSegment(id)}/options/${SdkClient.encodePathSegment(optionId)}",
+                config = clientConfig,
+                operationId = "deleteConversationAttributeOption",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                        "422" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-
-
-
-
-
 }

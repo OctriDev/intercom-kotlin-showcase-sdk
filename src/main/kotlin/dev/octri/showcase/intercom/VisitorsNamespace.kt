@@ -3,66 +3,171 @@
 
 package dev.octri.showcase.intercom
 
-
 class VisitorsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Updates an existing visitor's name or custom attributes. Identify the visitor with `id` or `user_id` in the request body, and provide only the fields you want to update. The response returns the updated visitor.
+     * Updates an existing visitor's name or custom attributes. Identify the visitor with `id` or
+     * `user_id` in the request body, and provide only the fields you want to update. The response
+     * returns the updated visitor.
      *
-     * Sending a PUT request to `/visitors` will result in an update of an existing Visitor. **Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body. **Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.
+     * Sending a PUT request to `/visitors` will result in an update of an existing Visitor.
+     * **Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the
+     * Request body. **Option 2.** You can update a visitor by passing in the `id` of the visitor in
+     * the Request body.
      */
-    fun update(intercomVersion: IntercomVersion? = null, id: String? = null, userId: String? = null, name: String? = null, customAttributes: Map<String, String>? = null, options: RequestOptions? = null): Visitor {
-        return dev.octri.showcase.intercom.methods.Visitors.updateVisitor(clientConfig, intercomVersion, id, userId, name, customAttributes, options)
+    fun update(
+        intercomVersion: IntercomVersion? = null,
+        id: String? = null,
+        userId: String? = null,
+        name: String? = null,
+        customAttributes: Map<String, String>? = null,
+        options: RequestOptions? = null,
+    ): Visitor {
+        return dev.octri.showcase.intercom.methods.Visitors.updateVisitor(
+            clientConfig,
+            intercomVersion,
+            id,
+            userId,
+            name,
+            customAttributes,
+            options,
+        )
     }
 
     /**
-     * Retrieves a visitor by the user identifier you provide. Use `user_id` to look up the visitor; the response includes visitor identity, custom attributes, and associated metadata.
+     * Retrieves a visitor by the user identifier you provide. Use `user_id` to look up the visitor;
+     * the response includes visitor identity, custom attributes, and associated metadata.
      *
      * You can fetch the details of a single visitor.
      */
-    fun retrieveWithUserId(userId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Visitor {
-        return dev.octri.showcase.intercom.methods.Visitors.retrieveVisitorWithUserId(clientConfig, userId, intercomVersion, options)
+    fun retrieveWithUserId(
+        userId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Visitor {
+        return dev.octri.showcase.intercom.methods.Visitors.retrieveVisitorWithUserId(
+            clientConfig,
+            userId,
+            intercomVersion,
+            options,
+        )
     }
 
     /**
-     * Converts a visitor into a contact with the `lead` or `user` role. Provide the visitor's identifier and the identifiers to retain for the resulting contact; if the contact already exists, the visitor is merged into it and deleted. If the contact does not exist, the visitor is converted into a contact.
+     * Converts a visitor into a contact with the `lead` or `user` role. Provide the visitor's
+     * identifier and the identifiers to retain for the resulting contact; if the contact already
+     * exists, the visitor is merged into it and deleted. If the contact does not exist, the visitor
+     * is converted into a contact.
      *
-     * You can merge a Visitor to a Contact of role type `lead` or `user`. > 📘 What happens upon a visitor being converted? > > If the User exists, then the Visitor will be merged into it, the Visitor deleted and the User returned. If the User does not exist, the Visitor will be converted to a User, with the User identifiers replacing it's Visitor identifiers.
+     * You can merge a Visitor to a Contact of role type `lead` or `user`. > 📘 What happens upon a
+     * visitor being converted? > > If the User exists, then the Visitor will be merged into it, the
+     * Visitor deleted and the User returned. If the User does not exist, the Visitor will be
+     * converted to a User, with the User identifiers replacing it's Visitor identifiers.
      */
-    fun convert(type: String, user: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestUser, visitor: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestVisitor, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Contact {
-        return dev.octri.showcase.intercom.methods.Visitors.convertVisitor(clientConfig, type, user, visitor, intercomVersion, options)
+    fun convert(
+        type: String,
+        user: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestUser,
+        visitor: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestVisitor,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Contact {
+        return dev.octri.showcase.intercom.methods.Visitors.convertVisitor(
+            clientConfig,
+            type,
+            user,
+            visitor,
+            intercomVersion,
+            options,
+        )
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [VisitorsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [VisitorsNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Updates an existing visitor's name or custom attributes. Identify the visitor with `id` or `user_id` in the request body, and provide only the fields you want to update. The response returns the updated visitor.
+         * Updates an existing visitor's name or custom attributes. Identify the visitor with `id`
+         * or `user_id` in the request body, and provide only the fields you want to update. The
+         * response returns the updated visitor.
          *
-         * Sending a PUT request to `/visitors` will result in an update of an existing Visitor. **Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body. **Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.
+         * Sending a PUT request to `/visitors` will result in an update of an existing Visitor.
+         * **Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the
+         * Request body. **Option 2.** You can update a visitor by passing in the `id` of the
+         * visitor in the Request body.
          */
-        fun update(intercomVersion: IntercomVersion? = null, id: String? = null, userId: String? = null, name: String? = null, customAttributes: Map<String, String>? = null, options: RequestOptions? = null): SdkResponse<Visitor> {
-            return dev.octri.showcase.intercom.methods.Visitors.updateVisitorWithRawResponse(clientConfig, intercomVersion, id, userId, name, customAttributes, options)
+        fun update(
+            intercomVersion: IntercomVersion? = null,
+            id: String? = null,
+            userId: String? = null,
+            name: String? = null,
+            customAttributes: Map<String, String>? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Visitor> {
+            return dev.octri.showcase.intercom.methods.Visitors.updateVisitorWithRawResponse(
+                clientConfig,
+                intercomVersion,
+                id,
+                userId,
+                name,
+                customAttributes,
+                options,
+            )
         }
 
         /**
-         * Retrieves a visitor by the user identifier you provide. Use `user_id` to look up the visitor; the response includes visitor identity, custom attributes, and associated metadata.
+         * Retrieves a visitor by the user identifier you provide. Use `user_id` to look up the
+         * visitor; the response includes visitor identity, custom attributes, and associated
+         * metadata.
          *
          * You can fetch the details of a single visitor.
          */
-        fun retrieveWithUserId(userId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Visitor> {
-            return dev.octri.showcase.intercom.methods.Visitors.retrieveVisitorWithUserIdWithRawResponse(clientConfig, userId, intercomVersion, options)
+        fun retrieveWithUserId(
+            userId: String,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Visitor> {
+            return dev.octri.showcase.intercom.methods.Visitors
+                .retrieveVisitorWithUserIdWithRawResponse(
+                    clientConfig,
+                    userId,
+                    intercomVersion,
+                    options,
+                )
         }
 
         /**
-         * Converts a visitor into a contact with the `lead` or `user` role. Provide the visitor's identifier and the identifiers to retain for the resulting contact; if the contact already exists, the visitor is merged into it and deleted. If the contact does not exist, the visitor is converted into a contact.
+         * Converts a visitor into a contact with the `lead` or `user` role. Provide the visitor's
+         * identifier and the identifiers to retain for the resulting contact; if the contact
+         * already exists, the visitor is merged into it and deleted. If the contact does not exist,
+         * the visitor is converted into a contact.
          *
-         * You can merge a Visitor to a Contact of role type `lead` or `user`. > 📘 What happens upon a visitor being converted? > > If the User exists, then the Visitor will be merged into it, the Visitor deleted and the User returned. If the User does not exist, the Visitor will be converted to a User, with the User identifiers replacing it's Visitor identifiers.
+         * You can merge a Visitor to a Contact of role type `lead` or `user`. > 📘 What happens
+         * upon a visitor being converted? > > If the User exists, then the Visitor will be merged
+         * into it, the Visitor deleted and the User returned. If the User does not exist, the
+         * Visitor will be converted to a User, with the User identifiers replacing it's Visitor
+         * identifiers.
          */
-        fun convert(type: String, user: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestUser, visitor: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestVisitor, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Contact> {
-            return dev.octri.showcase.intercom.methods.Visitors.convertVisitorWithRawResponse(clientConfig, type, user, visitor, intercomVersion, options)
+        fun convert(
+            type: String,
+            user: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestUser,
+            visitor: dev.octri.showcase.intercom.methods.Visitors.ConvertVisitorRequestVisitor,
+            intercomVersion: IntercomVersion? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<Contact> {
+            return dev.octri.showcase.intercom.methods.Visitors.convertVisitorWithRawResponse(
+                clientConfig,
+                type,
+                user,
+                visitor,
+                intercomVersion,
+                options,
+            )
         }
-
     }
 }

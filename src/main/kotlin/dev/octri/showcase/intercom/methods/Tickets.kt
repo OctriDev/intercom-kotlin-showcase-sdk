@@ -25,142 +25,270 @@ import dev.octri.showcase.intercom.TicketRequestCustomAttributes
 
 object Tickets {
 
-/**
- * Optional object value serialized in the `assignment` wire field.
- */
-data class CreateTicketAssignment(
-    /**
-     * The ID of the admin to which the ticket is assigned. If not provided, the ticket will be unassigned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id") val adminAssigneeId: String? = null,
-    /**
-     * The ID of the team to which the ticket is assigned. If not provided, the ticket will be unassigned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id") val teamAssigneeId: String? = null
-) : SdkResource()
+    /** Optional object value serialized in the `assignment` wire field. */
+    data class CreateTicketAssignment(
+        /**
+         * The ID of the admin to which the ticket is assigned. If not provided, the ticket will be
+         * unassigned.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id")
+        val adminAssigneeId: String? = null,
+        /**
+         * The ID of the team to which the ticket is assigned. If not provided, the ticket will be
+         * unassigned.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id")
+        val teamAssigneeId: String? = null,
+    ) : SdkResource()
 
-/**
- * Optional object value serialized in the `assignment` wire field.
- */
-data class EnqueueCreateTicketAssignment(
-    /**
-     * The ID of the admin to which the ticket is assigned. If not provided, the ticket will be unassigned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id") val adminAssigneeId: String? = null,
-    /**
-     * The ID of the team to which the ticket is assigned. If not provided, the ticket will be unassigned.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id") val teamAssigneeId: String? = null
-) : SdkResource()
+    /** Optional object value serialized in the `assignment` wire field. */
+    data class EnqueueCreateTicketAssignment(
+        /**
+         * The ID of the admin to which the ticket is assigned. If not provided, the ticket will be
+         * unassigned.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("admin_assignee_id")
+        val adminAssigneeId: String? = null,
+        /**
+         * The ID of the team to which the ticket is assigned. If not provided, the ticket will be
+         * unassigned.
+         */
+        @com.fasterxml.jackson.annotation.JsonProperty("team_assignee_id")
+        val teamAssigneeId: String? = null,
+    ) : SdkResource()
 
     /**
-     * Submits a reply to a ticket as an admin or on behalf of a contact, or adds an admin note. Choose a supported `message_type` and provide the author details for the corresponding reply type. Include `body` for comments and notes, or `reply_options` for quick replies.
+     * Submits a reply to a ticket as an admin or on behalf of a contact, or adds an admin note.
+     * Choose a supported `message_type` and provide the author details for the corresponding reply
+     * type. Include `body` for comments and notes, or `reply_options` for quick replies.
      *
-     * You can reply to a ticket with a message from an admin or on behalf of a contact, or with a note for admins.
+     * You can reply to a ticket with a message from an admin or on behalf of a contact, or with a
+     * note for admins.
      *
-     * @param skipNotifications Option to disable notifications when replying to a
-     *   Ticket.
+     * @param skipNotifications Option to disable notifications when replying to a Ticket.
      */
-    fun replyTicket(clientConfig: ClientConfig, ticketId: String, intercomVersion: IntercomVersion? = null, skipNotifications: Boolean? = null, options: RequestOptions? = null): TicketReply {
-        return replyTicketWithRawResponse(clientConfig, ticketId, intercomVersion, skipNotifications, options).data
+    fun replyTicket(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        skipNotifications: Boolean? = null,
+        options: RequestOptions? = null,
+    ): TicketReply {
+        return replyTicketWithRawResponse(
+                clientConfig,
+                ticketId,
+                intercomVersion,
+                skipNotifications,
+                options,
+            )
+            .data
     }
 
-
-    /** [replyTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun replyTicketWithRawResponse(clientConfig: ClientConfig, ticketId: String, intercomVersion: IntercomVersion? = null, skipNotifications: Boolean? = null, options: RequestOptions? = null): SdkResponse<TicketReply> {
-        return SdkClient.request<TicketReply>(SdkClient.RequestSpec("POST", "/tickets/${SdkClient.encodePathSegment(ticketId)}/reply", config = clientConfig, body = SdkClient.bodyMap("skip_notifications" to
-    (SdkClient.omitIfNull(skipNotifications))), operationId = "replyTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
-
     /**
-     * Links a conversation or customer ticket to an existing tracker ticket. Use this when a related conversation surfaces after the tracker ticket has been created, and provide its identifier in `conversation_id`. A tracker ticket can have up to 2,500 linked conversations, and the request requires the `write_tickets` OAuth scope.
-     *
-     * Link a conversation to an existing tracker ticket. The conversation can be a regular conversation or one that has been converted into a customer ticket. Use this when related conversations surface after a tracker ticket has already been created. The ticket in the path must be a tracker ticket, and `conversation_id` in the body is the conversation (or customer ticket) to link to it. This returns the linked conversation. A tracker ticket can have up to 2,500 linked…
-     *
-     * @param ticketId The unique identifier for the tracker ticket which is given by
-     *   Intercom.
-     * @param conversationId The unique identifier (given by Intercom) for the
-     *   conversation or customer ticket to link to the tracker ticket.
+     * [replyTicket], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
      */
-    fun linkTicketsConversation(clientConfig: ClientConfig, ticketId: String, conversationId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return linkTicketsConversationWithRawResponse(clientConfig, ticketId, conversationId, intercomVersion, options).data
+    fun replyTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        skipNotifications: Boolean? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TicketReply> {
+        return SdkClient.request<TicketReply>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}/reply",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "skip_notifications" to (SdkClient.omitIfNull(skipNotifications))
+                    ),
+                operationId = "replyTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-    /** [linkTicketsConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun linkTicketsConversationWithRawResponse(clientConfig: ClientConfig, ticketId: String, conversationId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("POST", "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations", config = clientConfig, body = SdkClient.bodyMap("conversation_id" to (conversationId)), operationId = "linkTicketsConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Unlinks a conversation or converted customer ticket from the tracker ticket it is currently linked to. Use the identifiers in the path to select the tracker ticket and linked item. The request requires the `write_tickets` OAuth scope.
+     * Links a conversation or customer ticket to an existing tracker ticket. Use this when a
+     * related conversation surfaces after the tracker ticket has been created, and provide its
+     * identifier in `conversation_id`. A tracker ticket can have up to 2,500 linked conversations,
+     * and the request requires the `write_tickets` OAuth scope.
      *
-     * Unlink a conversation (or converted customer ticket) from a tracker ticket it is currently linked to. The ticket in the path must be a tracker ticket. This returns the conversation that was unlinked. Requires the `write_tickets` OAuth scope.
+     * Link a conversation to an existing tracker ticket. The conversation can be a regular
+     * conversation or one that has been converted into a customer ticket. Use this when related
+     * conversations surface after a tracker ticket has already been created. The ticket in the path
+     * must be a tracker ticket, and `conversation_id` in the body is the conversation (or customer
+     * ticket) to link to it. This returns the linked conversation. A tracker ticket can have up to
+     * 2,500 linked…
      *
-     * @param ticketId The unique identifier for the tracker ticket which is given by
-     *   Intercom.
-     * @param id The unique identifier (given by Intercom) for the linked
-     *   conversation or customer ticket to unlink.
+     * @param ticketId The unique identifier for the tracker ticket which is given by Intercom.
+     * @param conversationId The unique identifier (given by Intercom) for the conversation or
+     *   customer ticket to link to the tracker ticket.
      */
-    fun unlinkTicketConversation(clientConfig: ClientConfig, ticketId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Conversation {
-        return unlinkTicketConversationWithRawResponse(clientConfig, ticketId, id, intercomVersion, options).data
+    fun linkTicketsConversation(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return linkTicketsConversationWithRawResponse(
+                clientConfig,
+                ticketId,
+                conversationId,
+                intercomVersion,
+                options,
+            )
+            .data
     }
-
-
-    /** [unlinkTicketConversation], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun unlinkTicketConversationWithRawResponse(clientConfig: ClientConfig, ticketId: String, id: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Conversation> {
-        return SdkClient.request<Conversation>(SdkClient.RequestSpec("DELETE", "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "unlinkTicketConversation", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Creates a ticket using a ticket type and one or more affected contacts. Provide `ticket_type_id` and `contacts`, and optionally set assignment, ticket attributes, or a conversation to link. The channel is available only for customer ticket types and defaults to messenger when omitted.
+     * [linkTicketsConversation], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun linkTicketsConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        conversationId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations",
+                config = clientConfig,
+                body = SdkClient.bodyMap("conversation_id" to (conversationId)),
+                operationId = "linkTicketsConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Unlinks a conversation or converted customer ticket from the tracker ticket it is currently
+     * linked to. Use the identifiers in the path to select the tracker ticket and linked item. The
+     * request requires the `write_tickets` OAuth scope.
+     *
+     * Unlink a conversation (or converted customer ticket) from a tracker ticket it is currently
+     * linked to. The ticket in the path must be a tracker ticket. This returns the conversation
+     * that was unlinked. Requires the `write_tickets` OAuth scope.
+     *
+     * @param ticketId The unique identifier for the tracker ticket which is given by Intercom.
+     * @param id The unique identifier (given by Intercom) for the linked conversation or customer
+     *   ticket to unlink.
+     */
+    fun unlinkTicketConversation(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Conversation {
+        return unlinkTicketConversationWithRawResponse(
+                clientConfig,
+                ticketId,
+                id,
+                intercomVersion,
+                options,
+            )
+            .data
+    }
+
+    /**
+     * [unlinkTicketConversation], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun unlinkTicketConversationWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        id: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Conversation> {
+        return SdkClient.request<Conversation>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}/linked_conversations/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "unlinkTicketConversation",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Creates a ticket using a ticket type and one or more affected contacts. Provide
+     * `ticket_type_id` and `contacts`, and optionally set assignment, ticket attributes, or a
+     * conversation to link. The channel is available only for customer ticket types and defaults to
+     * messenger when omitted.
      *
      * You can create a new ticket.
      *
      * @param ticketTypeId The ID of the type of ticket you want to create
-     * @param contacts The list of contacts (users or leads) affected by this ticket.
-     *   Currently only one is allowed
-     * @param conversationToLinkId The ID of the conversation you want to link to the
-     *   ticket. Here are the valid ways of linking two tickets: - conversation |
-     *   back-office ticket - customer tickets | non-shared back-office ticket -
-     *   conversation | tracker ticket - customer ticket | tracker ticket
-     * @param companyId The ID of the company that the ticket is associated with. The
-     *   unique identifier for the company which is given by Intercom
-     * @param createdAt The time the ticket was created. If not provided, the current
-     *   time will be used.
-     * @param ticketAttributes The attributes set on the ticket. When setting the
-     *   default title and description attributes, the attribute keys that should be
-     *   used are `_default_title_` and `_default_description_`. When setting ticket
-     *   type attributes of the list attribute type, the key should be the attribute
-     *   name and the value of the attribute should be the list item id, obtainable by
-     *   \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket
-     *   type has an attribute called `priority` of…
-     * @param assignment Optional object value serialized in the `assignment` wire
-     *   field.
-     * @param channel The channel for the ticket. Only supported for customer ticket
-     *   types. Defaults to messenger if not provided.
-     * @param skipNotifications Option to disable notifications when a Ticket is
-     *   created.
+     * @param contacts The list of contacts (users or leads) affected by this ticket. Currently only
+     *   one is allowed
+     * @param conversationToLinkId The ID of the conversation you want to link to the ticket. Here
+     *   are the valid ways of linking two tickets: - conversation | back-office ticket - customer
+     *   tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket |
+     *   tracker ticket
+     * @param companyId The ID of the company that the ticket is associated with. The unique
+     *   identifier for the company which is given by Intercom
+     * @param createdAt The time the ticket was created. If not provided, the current time will be
+     *   used.
+     * @param ticketAttributes The attributes set on the ticket. When setting the default title and
+     *   description attributes, the attribute keys that should be used are `_default_title_` and
+     *   `_default_description_`. When setting ticket type attributes of the list attribute type,
+     *   the key should be the attribute name and the value of the attribute should be the list item
+     *   id, obtainable by \[listing the ticket type\](ref:get_ticket-types). For example, if the
+     *   ticket type has an attribute called `priority` of…
+     * @param assignment Optional object value serialized in the `assignment` wire field.
+     * @param channel The channel for the ticket. Only supported for customer ticket types. Defaults
+     *   to messenger if not provided.
+     * @param skipNotifications Option to disable notifications when a Ticket is created.
      */
-    fun createTicket(clientConfig: ClientConfig, request: CreateTicketParams, options: RequestOptions? = null): Ticket {
+    fun createTicket(
+        clientConfig: ClientConfig,
+        request: CreateTicketParams,
+        options: RequestOptions? = null,
+    ): Ticket {
         return createTicketWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [createTicket]. */
     data class CreateTicketParams(
@@ -173,56 +301,87 @@ data class EnqueueCreateTicketAssignment(
         val ticketAttributes: TicketRequestCustomAttributes? = null,
         val assignment: CreateTicketAssignment? = null,
         val channel: CreateTicketChannelEnum? = null,
-        val skipNotifications: Boolean? = null
+        val skipNotifications: Boolean? = null,
     )
 
-    /** [createTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun createTicketWithRawResponse(clientConfig: ClientConfig, request: CreateTicketParams, options: RequestOptions? = null): SdkResponse<Ticket> {
-        return SdkClient.request<Ticket>(SdkClient.RequestSpec("POST", "/tickets", config = clientConfig, body = SdkClient.bodyMap("ticket_type_id" to (request.ticketTypeId), "contacts" to (request.contacts), "conversation_to_link_id" to
-    (SdkClient.omitIfNull(request.conversationToLinkId)), "company_id" to (SdkClient.omitIfNull(request.companyId)), "created_at" to (SdkClient.omitIfNull(request.createdAt)), "ticket_attributes" to
-    (SdkClient.omitIfNull(request.ticketAttributes)), "assignment" to (SdkClient.omitIfNull(request.assignment)), "channel" to (SdkClient.omitIfNull(request.channel)), "skip_notifications" to
-    (SdkClient.omitIfNull(request.skipNotifications))), operationId = "createTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [createTicket], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun createTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        request: CreateTicketParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Ticket> {
+        return SdkClient.request<Ticket>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "ticket_type_id" to (request.ticketTypeId),
+                        "contacts" to (request.contacts),
+                        "conversation_to_link_id" to
+                            (SdkClient.omitIfNull(request.conversationToLinkId)),
+                        "company_id" to (SdkClient.omitIfNull(request.companyId)),
+                        "created_at" to (SdkClient.omitIfNull(request.createdAt)),
+                        "ticket_attributes" to (SdkClient.omitIfNull(request.ticketAttributes)),
+                        "assignment" to (SdkClient.omitIfNull(request.assignment)),
+                        "channel" to (SdkClient.omitIfNull(request.channel)),
+                        "skip_notifications" to (SdkClient.omitIfNull(request.skipNotifications)),
+                    ),
+                operationId = "createTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
-
-
-
-
-
 
     /**
-     * Submits a ticket creation job for asynchronous processing. Provide `ticket_type_id` and `contacts`; the API validates inputs on a best-effort basis and does not enqueue the job when they are incorrect. Use the returned job details to check processing status and retrieve the created ticket.
+     * Submits a ticket creation job for asynchronous processing. Provide `ticket_type_id` and
+     * `contacts`; the API validates inputs on a best-effort basis and does not enqueue the job when
+     * they are incorrect. Use the returned job details to check processing status and retrieve the
+     * created ticket.
      *
-     * Enqueues ticket creation for asynchronous processing, returning if the job was enqueued successfully to be processed. We attempt to perform a best-effort validation on inputs before tasks are enqueued. If the given parameters are incorrect, we won't enqueue the job.
+     * Enqueues ticket creation for asynchronous processing, returning if the job was enqueued
+     * successfully to be processed. We attempt to perform a best-effort validation on inputs before
+     * tasks are enqueued. If the given parameters are incorrect, we won't enqueue the job.
      *
      * @param ticketTypeId The ID of the type of ticket you want to create
-     * @param contacts The list of contacts (users or leads) affected by this ticket.
-     *   Currently only one is allowed
-     * @param conversationToLinkId The ID of the conversation you want to link to the
-     *   ticket. Here are the valid ways of linking two tickets: - conversation |
-     *   back-office ticket - customer tickets | non-shared back-office ticket -
-     *   conversation | tracker ticket - customer ticket | tracker ticket
-     * @param companyId The ID of the company that the ticket is associated with. The
-     *   unique identifier for the company which is given by Intercom
-     * @param createdAt The time the ticket was created. If not provided, the current
-     *   time will be used.
-     * @param ticketAttributes The attributes set on the ticket. When setting the
-     *   default title and description attributes, the attribute keys that should be
-     *   used are `_default_title_` and `_default_description_`. When setting ticket
-     *   type attributes of the list attribute type, the key should be the attribute
-     *   name and the value of the attribute should be the list item id, obtainable by
-     *   \[listing the ticket type\](ref:get_ticket-types). For example, if the ticket
-     *   type has an attribute called `priority` of…
-     * @param assignment Optional object value serialized in the `assignment` wire
-     *   field.
-     * @param channel The channel for the ticket. Only supported for customer ticket
-     *   types. Defaults to messenger if not provided.
-     * @param skipNotifications Option to disable notifications when a Ticket is
-     *   created.
+     * @param contacts The list of contacts (users or leads) affected by this ticket. Currently only
+     *   one is allowed
+     * @param conversationToLinkId The ID of the conversation you want to link to the ticket. Here
+     *   are the valid ways of linking two tickets: - conversation | back-office ticket - customer
+     *   tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket |
+     *   tracker ticket
+     * @param companyId The ID of the company that the ticket is associated with. The unique
+     *   identifier for the company which is given by Intercom
+     * @param createdAt The time the ticket was created. If not provided, the current time will be
+     *   used.
+     * @param ticketAttributes The attributes set on the ticket. When setting the default title and
+     *   description attributes, the attribute keys that should be used are `_default_title_` and
+     *   `_default_description_`. When setting ticket type attributes of the list attribute type,
+     *   the key should be the attribute name and the value of the attribute should be the list item
+     *   id, obtainable by \[listing the ticket type\](ref:get_ticket-types). For example, if the
+     *   ticket type has an attribute called `priority` of…
+     * @param assignment Optional object value serialized in the `assignment` wire field.
+     * @param channel The channel for the ticket. Only supported for customer ticket types. Defaults
+     *   to messenger if not provided.
+     * @param skipNotifications Option to disable notifications when a Ticket is created.
      */
-    fun enqueueCreateTicket(clientConfig: ClientConfig, request: EnqueueCreateTicketRequest, options: RequestOptions? = null): Jobs {
+    fun enqueueCreateTicket(
+        clientConfig: ClientConfig,
+        request: EnqueueCreateTicketRequest,
+        options: RequestOptions? = null,
+    ): Jobs {
         return enqueueCreateTicketWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [enqueueCreateTicket]. */
     data class EnqueueCreateTicketRequest(
@@ -235,53 +394,80 @@ data class EnqueueCreateTicketAssignment(
         val ticketAttributes: TicketRequestCustomAttributes? = null,
         val assignment: EnqueueCreateTicketAssignment? = null,
         val channel: EnqueueCreateTicketChannelEnum? = null,
-        val skipNotifications: Boolean? = null
+        val skipNotifications: Boolean? = null,
     )
 
-    /** [enqueueCreateTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun enqueueCreateTicketWithRawResponse(clientConfig: ClientConfig, request: EnqueueCreateTicketRequest, options: RequestOptions? = null): SdkResponse<Jobs> {
-        return SdkClient.request<Jobs>(SdkClient.RequestSpec("POST", "/tickets/enqueue", config = clientConfig, body = SdkClient.bodyMap("ticket_type_id" to (request.ticketTypeId), "contacts" to (request.contacts), "conversation_to_link_id" to
-    (SdkClient.omitIfNull(request.conversationToLinkId)), "company_id" to (SdkClient.omitIfNull(request.companyId)), "created_at" to (SdkClient.omitIfNull(request.createdAt)), "ticket_attributes" to
-    (SdkClient.omitIfNull(request.ticketAttributes)), "assignment" to (SdkClient.omitIfNull(request.assignment)), "channel" to (SdkClient.omitIfNull(request.channel)), "skip_notifications" to
-    (SdkClient.omitIfNull(request.skipNotifications))), operationId = "enqueueCreateTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java)))
+    /**
+     * [enqueueCreateTicket], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun enqueueCreateTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        request: EnqueueCreateTicketRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<Jobs> {
+        return SdkClient.request<Jobs>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets/enqueue",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "ticket_type_id" to (request.ticketTypeId),
+                        "contacts" to (request.contacts),
+                        "conversation_to_link_id" to
+                            (SdkClient.omitIfNull(request.conversationToLinkId)),
+                        "company_id" to (SdkClient.omitIfNull(request.companyId)),
+                        "created_at" to (SdkClient.omitIfNull(request.createdAt)),
+                        "ticket_attributes" to (SdkClient.omitIfNull(request.ticketAttributes)),
+                        "assignment" to (SdkClient.omitIfNull(request.assignment)),
+                        "channel" to (SdkClient.omitIfNull(request.channel)),
+                        "skip_notifications" to (SdkClient.omitIfNull(request.skipNotifications)),
+                    ),
+                operationId = "enqueueCreateTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Replaces the supplied fields on an existing ticket. Send the fields you want to change, such as `open`, `assignee_id`, or `ticket_attributes`; setting `open` to false also unsnoozes the ticket. Use `skip_notifications` to disable notifications for the update.
+     * Replaces the supplied fields on an existing ticket. Send the fields you want to change, such
+     * as `open`, `assignee_id`, or `ticket_attributes`; setting `open` to false also unsnoozes the
+     * ticket. Use `skip_notifications` to disable notifications for the update.
      *
      * You can update a ticket.
      *
-     * @param ticketId The unique identifier for the ticket which is given by
-     *   Intercom. {% admonition type="info" name="Not the Inbox ticket ID" %} This is
-     *   the internal `id` field from the API response, not the `ticket_id` displayed
-     *   in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket
-     *   object returned by the API. {% /admonition %}
+     * @param ticketId The unique identifier for the ticket which is given by Intercom. {%
+     *   admonition type="info" name="Not the Inbox ticket ID" %} This is the internal `id` field
+     *   from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345).
+     *   Use the `id` value from the ticket object returned by the API. {% /admonition %}
      * @param ticketAttributes The attributes set on the ticket.
-     * @param ticketStateId The ID of the ticket state associated with the ticket
-     *   type.
-     * @param companyId The ID of the company that the ticket is associated with. The
-     *   unique identifier for the company which is given by Intercom. Set to nil to
-     *   remove company.
-     * @param open Specify if a ticket is open. Set to false to close a ticket.
-     *   Closing a ticket will also unsnooze it.
+     * @param ticketStateId The ID of the ticket state associated with the ticket type.
+     * @param companyId The ID of the company that the ticket is associated with. The unique
+     *   identifier for the company which is given by Intercom. Set to nil to remove company.
+     * @param open Specify if a ticket is open. Set to false to close a ticket. Closing a ticket
+     *   will also unsnooze it.
      * @param isShared Specify whether the ticket is visible to users.
      * @param snoozedUntil The time you want the ticket to reopen.
-     * @param adminId The ID of the admin performing ticket update. Needed for
-     *   workflows execution and attributing actions to specific admins.
-     * @param assigneeId The ID of the admin or team to which the ticket is assigned.
-     *   Set this 0 to unassign it.
-     * @param skipNotifications Option to disable notifications when a Ticket is
-     *   updated.
+     * @param adminId The ID of the admin performing ticket update. Needed for workflows execution
+     *   and attributing actions to specific admins.
+     * @param assigneeId The ID of the admin or team to which the ticket is assigned. Set this 0 to
+     *   unassign it.
+     * @param skipNotifications Option to disable notifications when a Ticket is updated.
      */
-    fun updateTicket(clientConfig: ClientConfig, request: UpdateTicketParams, options: RequestOptions? = null): Ticket {
+    fun updateTicket(
+        clientConfig: ClientConfig,
+        request: UpdateTicketParams,
+        options: RequestOptions? = null,
+    ): Ticket {
         return updateTicketWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [updateTicket]. */
     data class UpdateTicketParams(
@@ -295,129 +481,295 @@ data class EnqueueCreateTicketAssignment(
         val snoozedUntil: Long? = null,
         val adminId: Long? = null,
         val assigneeId: String? = null,
-        val skipNotifications: Boolean? = null
+        val skipNotifications: Boolean? = null,
     )
 
-    /** [updateTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun updateTicketWithRawResponse(clientConfig: ClientConfig, request: UpdateTicketParams, options: RequestOptions? = null): SdkResponse<Ticket> {
-        return SdkClient.request<Ticket>(SdkClient.RequestSpec("PUT", "/tickets/${SdkClient.encodePathSegment(request.ticketId)}", config = clientConfig, body = SdkClient.bodyMap("ticket_attributes" to
-    (SdkClient.omitIfNull(request.ticketAttributes)), "ticket_state_id" to
-    (SdkClient.omitIfNull(request.ticketStateId)), "company_id" to (SdkClient.omitIfNull(request.companyId)), "open" to (SdkClient.omitIfNull(request.open)), "is_shared" to (SdkClient.omitIfNull(request.isShared)), "snoozed_until" to
-    (SdkClient.omitIfNull(request.snoozedUntil)), "admin_id" to (SdkClient.omitIfNull(request.adminId)), "assignee_id" to (SdkClient.omitIfNull(request.assigneeId)), "skip_notifications" to
-    (SdkClient.omitIfNull(request.skipNotifications))), operationId = "updateTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [updateTicket], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun updateTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        request: UpdateTicketParams,
+        options: RequestOptions? = null,
+    ): SdkResponse<Ticket> {
+        return SdkClient.request<Ticket>(
+            SdkClient.RequestSpec(
+                "PUT",
+                "/tickets/${SdkClient.encodePathSegment(request.ticketId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "ticket_attributes" to (SdkClient.omitIfNull(request.ticketAttributes)),
+                        "ticket_state_id" to (SdkClient.omitIfNull(request.ticketStateId)),
+                        "company_id" to (SdkClient.omitIfNull(request.companyId)),
+                        "open" to (SdkClient.omitIfNull(request.open)),
+                        "is_shared" to (SdkClient.omitIfNull(request.isShared)),
+                        "snoozed_until" to (SdkClient.omitIfNull(request.snoozedUntil)),
+                        "admin_id" to (SdkClient.omitIfNull(request.adminId)),
+                        "assignee_id" to (SdkClient.omitIfNull(request.assigneeId)),
+                        "skip_notifications" to (SdkClient.omitIfNull(request.skipNotifications)),
+                    ),
+                operationId = "updateTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(request.intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves the details of a single ticket. Use `ticket_id` to look up a ticket by its internal API ID, rather than the ticket number displayed in the Inbox. The response includes ticket status, assignments, attributes, and ticket parts.
+     * Retrieves the details of a single ticket. Use `ticket_id` to look up a ticket by its internal
+     * API ID, rather than the ticket number displayed in the Inbox. The response includes ticket
+     * status, assignments, attributes, and ticket parts.
      *
      * You can fetch the details of a single ticket.
      *
-     * @param ticketId The unique identifier for the ticket which is given by
-     *   Intercom. {% admonition type="info" name="Not the Inbox ticket ID" %} This is
-     *   the internal `id` field from the API response, not the `ticket_id` displayed
-     *   in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket
-     *   object returned by the API. {% /admonition %}
+     * @param ticketId The unique identifier for the ticket which is given by Intercom. {%
+     *   admonition type="info" name="Not the Inbox ticket ID" %} This is the internal `id` field
+     *   from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345).
+     *   Use the `id` value from the ticket object returned by the API. {% /admonition %}
      */
-    fun getTicket(clientConfig: ClientConfig, ticketId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): Ticket {
+    fun getTicket(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): Ticket {
         return getTicketWithRawResponse(clientConfig, ticketId, intercomVersion, options).data
     }
 
-
-    /** [getTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun getTicketWithRawResponse(clientConfig: ClientConfig, ticketId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<Ticket> {
-        return SdkClient.request<Ticket>(SdkClient.RequestSpec("GET", "/tickets/${SdkClient.encodePathSegment(ticketId)}", config = clientConfig, operationId = "getTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java)))
+    /**
+     * [getTicket], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun getTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Ticket> {
+        return SdkClient.request<Ticket>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}",
+                config = clientConfig,
+                operationId = "getTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors = mapOf("401" to Error2::class.java),
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a ticket permanently from the inbox, including its replies, attributes, uploads, and related content. Use `ticket_id` to identify the ticket by its internal API ID, not the number displayed in the Inbox. Deletion cannot be reversed, and the ticket may still appear in reporting with incomplete data.
+     * Deletes a ticket permanently from the inbox, including its replies, attributes, uploads, and
+     * related content. Use `ticket_id` to identify the ticket by its internal API ID, not the
+     * number displayed in the Inbox. Deletion cannot be reversed, and the ticket may still appear
+     * in reporting with incomplete data.
      *
-     * {% admonition type="warning" name="Irreversible operation" %} Deleting a ticket is permanent and cannot be reversed. {% /admonition %} Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.
+     * {% admonition type="warning" name="Irreversible operation" %} Deleting a ticket is permanent
+     * and cannot be reversed. {% /admonition %} Deleting a ticket permanently removes it from the
+     * inbox. All sensitive data is deleted, including admin and user replies, ticket attributes,
+     * uploads, and related content. The ticket will still appear in reporting, though some data may
+     * be incomplete due to the deletion.
      *
-     * @param ticketId The unique identifier for the ticket which is given by
-     *   Intercom. {% admonition type="info" name="Not the Inbox ticket ID" %} This is
-     *   the internal `id` field from the API response, not the `ticket_id` displayed
-     *   in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket
-     *   object returned by the API. {% /admonition %}
+     * @param ticketId The unique identifier for the ticket which is given by Intercom. {%
+     *   admonition type="info" name="Not the Inbox ticket ID" %} This is the internal `id` field
+     *   from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345).
+     *   Use the `id` value from the ticket object returned by the API. {% /admonition %}
      */
-    fun deleteTicket(clientConfig: ClientConfig, ticketId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): TicketDeleted {
+    fun deleteTicket(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): TicketDeleted {
         return deleteTicketWithRawResponse(clientConfig, ticketId, intercomVersion, options).data
     }
 
-
-    /** [deleteTicket], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun deleteTicketWithRawResponse(clientConfig: ClientConfig, ticketId: String, intercomVersion: IntercomVersion? = null, options: RequestOptions? = null): SdkResponse<TicketDeleted> {
-        return SdkClient.request<TicketDeleted>(SdkClient.RequestSpec("DELETE", "/tickets/${SdkClient.encodePathSegment(ticketId)}", config = clientConfig, operationId = "deleteTicket", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("401" to Error2::class.java, "403" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
-
     /**
-     * Changes the type of a ticket and sets its state for the new type. Supply `ticket_type_id` and `ticket_state_id`; the new type must be in the same category as the current type. Attributes with matching names and types transfer automatically, and supplied `ticket_attributes` override transferred values.
-     *
-     * You can change the type of a ticket. The new ticket type must be in the same category as the current type. Attributes matching by name and type are automatically transferred from the old type; values provided in ticket_attributes override transferred values.
-     *
-     * @param ticketId The unique identifier for the ticket which is given by
-     *   Intercom.
-     * @param ticketTypeId The ID of the new ticket type. Must be in the same
-     *   category as the current type.
-     * @param ticketStateId The ID of the ticket state for the new ticket type.
-     * @param ticketAttributes The attributes to set on the ticket for the new type.
-     *   Attributes matching by name and type are transferred automatically from the
-     *   old type; values provided here override the transferred values.
+     * [deleteTicket], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
      */
-    fun changeTicketType(clientConfig: ClientConfig, ticketId: String, ticketTypeId: String, ticketStateId: String, intercomVersion: IntercomVersion? = null, ticketAttributes: Map<String, Any>? = null, options: RequestOptions? = null): Ticket {
-        return changeTicketTypeWithRawResponse(clientConfig, ticketId, ticketTypeId, ticketStateId, intercomVersion, ticketAttributes, options).data
+    fun deleteTicketWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        intercomVersion: IntercomVersion? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TicketDeleted> {
+        return SdkClient.request<TicketDeleted>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}",
+                config = clientConfig,
+                operationId = "deleteTicket",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "401" to Error2::class.java,
+                        "403" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
     }
-
-
-    /** [changeTicketType], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun changeTicketTypeWithRawResponse(clientConfig: ClientConfig, ticketId: String, ticketTypeId: String, ticketStateId: String, intercomVersion: IntercomVersion? = null, ticketAttributes: Map<String, Any>? = null, options: RequestOptions? = null): SdkResponse<Ticket> {
-        return SdkClient.request<Ticket>(SdkClient.RequestSpec("POST", "/tickets/${SdkClient.encodePathSegment(ticketId)}/change_type", config = clientConfig, body = SdkClient.bodyMap("ticket_type_id" to (ticketTypeId), "ticket_state_id" to (ticketStateId), "ticket_attributes" to
-    (SdkClient.omitIfNull(ticketAttributes))), operationId = "changeTicketType", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options, errors = mapOf("400" to Error2::class.java, "401" to Error2::class.java, "404" to Error2::class.java)))
-    }
-
-
-
-
-
 
     /**
-     * Searches tickets by their attributes and other searchable fields. Supply a `query` filter using values and operators compatible with the selected field, and combine filters with `AND` or `OR` within the documented nesting and group limits. Use `pagination.starting_after` to retrieve subsequent result pages; the default page size is 20.
+     * Changes the type of a ticket and sets its state for the new type. Supply `ticket_type_id` and
+     * `ticket_state_id`; the new type must be in the same category as the current type. Attributes
+     * with matching names and types transfer automatically, and supplied `ticket_attributes`
+     * override transferred values.
      *
-     * You can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want. To search for tickets, you send a `POST` request to `api.intercom.io This will accept a query object in the body which will define your filters. {% admonition type="warning" name="Optimizing search queries" %} Search queries can be complex, so optimizing them can help the performance of your search. Use the `AND` and `OR` operators to combine multiple filters…
+     * You can change the type of a ticket. The new ticket type must be in the same category as the
+     * current type. Attributes matching by name and type are automatically transferred from the old
+     * type; values provided in ticket_attributes override transferred values.
+     *
+     * @param ticketId The unique identifier for the ticket which is given by Intercom.
+     * @param ticketTypeId The ID of the new ticket type. Must be in the same category as the
+     *   current type.
+     * @param ticketStateId The ID of the ticket state for the new ticket type.
+     * @param ticketAttributes The attributes to set on the ticket for the new type. Attributes
+     *   matching by name and type are transferred automatically from the old type; values provided
+     *   here override the transferred values.
+     */
+    fun changeTicketType(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        ticketTypeId: String,
+        ticketStateId: String,
+        intercomVersion: IntercomVersion? = null,
+        ticketAttributes: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): Ticket {
+        return changeTicketTypeWithRawResponse(
+                clientConfig,
+                ticketId,
+                ticketTypeId,
+                ticketStateId,
+                intercomVersion,
+                ticketAttributes,
+                options,
+            )
+            .data
+    }
+
+    /**
+     * [changeTicketType], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun changeTicketTypeWithRawResponse(
+        clientConfig: ClientConfig,
+        ticketId: String,
+        ticketTypeId: String,
+        ticketStateId: String,
+        intercomVersion: IntercomVersion? = null,
+        ticketAttributes: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<Ticket> {
+        return SdkClient.request<Ticket>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets/${SdkClient.encodePathSegment(ticketId)}/change_type",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "ticket_type_id" to (ticketTypeId),
+                        "ticket_state_id" to (ticketStateId),
+                        "ticket_attributes" to (SdkClient.omitIfNull(ticketAttributes)),
+                    ),
+                operationId = "changeTicketType",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+                errors =
+                    mapOf(
+                        "400" to Error2::class.java,
+                        "401" to Error2::class.java,
+                        "404" to Error2::class.java,
+                    ),
+            )
+        )
+    }
+
+    /**
+     * Searches tickets by their attributes and other searchable fields. Supply a `query` filter
+     * using values and operators compatible with the selected field, and combine filters with `AND`
+     * or `OR` within the documented nesting and group limits. Use `pagination.starting_after` to
+     * retrieve subsequent result pages; the default page size is 20.
+     *
+     * You can search for multiple tickets by the value of their attributes in order to fetch
+     * exactly which ones you want. To search for tickets, you send a `POST` request to
+     * `api.intercom.io This will accept a query object in the body which will define your filters.
+     * {% admonition type="warning" name="Optimizing search queries" %} Search queries can be
+     * complex, so optimizing them can help the performance of your search. Use the `AND` and `OR`
+     * operators to combine multiple filters…
      *
      * @param query Required API value serialized in the `query` wire field.
-     * @param pagination Optional object value serialized in the `pagination` wire
-     *   field.
+     * @param pagination Optional object value serialized in the `pagination` wire field.
      */
-    fun searchTickets(clientConfig: ClientConfig, query: SearchRequestQuery, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, options: RequestOptions? = null): TicketList {
-        return searchTicketsWithRawResponse(clientConfig, query, intercomVersion, pagination, options).data
+    fun searchTickets(
+        clientConfig: ClientConfig,
+        query: SearchRequestQuery,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        options: RequestOptions? = null,
+    ): TicketList {
+        return searchTicketsWithRawResponse(
+                clientConfig,
+                query,
+                intercomVersion,
+                pagination,
+                options,
+            )
+            .data
     }
 
-
-    /** [searchTickets], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun searchTicketsWithRawResponse(clientConfig: ClientConfig, query: SearchRequestQuery, intercomVersion: IntercomVersion? = null, pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null, options: RequestOptions? = null): SdkResponse<TicketList> {
-        return SdkClient.request<TicketList>(SdkClient.RequestSpec("POST", "/tickets/search", config = clientConfig, body = SdkClient.bodyMap("query" to (query), "pagination" to
-    (pagination ?: SdkClient.SdkOptional.Omitted)), operationId = "searchTickets", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Intercom-Version" to SdkClient.headerValue(intercomVersion, false)), options = options))
+    /**
+     * [searchTickets], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun searchTicketsWithRawResponse(
+        clientConfig: ClientConfig,
+        query: SearchRequestQuery,
+        intercomVersion: IntercomVersion? = null,
+        pagination: SdkClient.SdkOptional<StartingAfterPaging?>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<TicketList> {
+        return SdkClient.request<TicketList>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/tickets/search",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "query" to (query),
+                        "pagination" to (pagination ?: SdkClient.SdkOptional.Omitted),
+                    ),
+                operationId = "searchTickets",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                extraHeaders =
+                    SdkClient.headers(
+                        "Intercom-Version" to SdkClient.headerValue(intercomVersion, false)
+                    ),
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }
